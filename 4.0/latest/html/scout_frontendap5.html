@@ -1,0 +1,1334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>E Java Basics</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,info --> 
+<meta name="src" content="scout_frontend.tex"> 
+<meta name="date" content="2015-03-04 17:09:00"> 
+<link rel="stylesheet" type="text/css" href="scout_frontend.css"> 
+</head><body 
+>
+    <!--l. 16--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendap6.html" >next</a>] [<a 
+href="scout_frontendap4.html" >prev</a>] [<a 
+href="scout_frontendap4.html#tailscout_frontendap4.html" >prev-tail</a>] [<a 
+href="#tailscout_frontendap5.html">tail</a>] [<a 
+href="scout_frontendpa1.html#scout_frontendap5.html" >up</a>] </p></div>
+    <h2 class="appendixHead"><span class="titlemark">Appendix&#x00A0;E</span><br /><a 
+ id="x94-156000E"></a>Java Basics</h2>
+    <h3 class="sectionHead"><span class="titlemark">E.1   </span> <a 
+ id="x94-157000E.1"></a>Java SE Basics</h3>
+    <div class="fbox"> Section waiting for contribution (2&#8217;000-3&#8217;000 words)
+ The goal of this section is to provide the reader with a solid overview of the
+ non-trivial Java concepts relevant for scout applications and central aspects of
+ the framework itself. The focus of this section is on the Java Standard Edition
+ (Java SE). Where appropriate, provide links to high quality online material,
+ that is likely to exist for at least the next year or two.                                </div>
+<!--l. 34--><p class="noindent" >
+    <h4 class="subsectionHead"><span class="titlemark">E.1.1   </span> <a 
+ id="x94-158000E.1.1"></a>Learning Java</h4>
+<!--l. 36--><p class="noindent" >To progam Scout applications you need to have a solid understanding of the Java language. Scout will
+only work for you if you have achieved a certain proficiency level in Java.
+<!--l. 39--><p class="indent" >    Luckily, free online tutorials to learn Java are offered in many places. A good starting point is the official Java
+documentation site<span class="footnote-mark"><a 
+href="scout_frontend95.html#fn1x24"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x94-158001f1"></a> .
+If you prefer to work with video tutorials we recommend &#8220;Eclipse and Java for Total
+Beginners&#8221;<span class="footnote-mark"><a 
+href="scout_frontend96.html#fn2x24"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x94-158002f2"></a> ,
+although the installation used is somewhat out of date. As for printed books, we suggest to start with
+either &#8220;Head First Java&#8221;<span class="cite">[<a 
+href="scout_frontendli2.html#Xbatessierra05">1</a>]</span> or &#8220;Thinking in Java&#8221;<span class="cite">[<a 
+href="scout_frontendli2.html#Xeckel06">3</a>]</span>. Highly recommended but slightly more advanced is
+&#8220;Effective Java&#8221;<span class="cite">[<a 
+href="scout_frontendli2.html#Xbloch08">2</a>]</span>.
+<!--l. 48--><p class="indent" >    To solve really tricky Java problems there is often no way around the Java
+specification<span class="footnote-mark"><a 
+href="scout_frontend97.html#fn3x24"><sup class="textsuperscript">3</sup></a></span><a 
+ id="x94-158003f3"></a> 
+itself. Just make sure to pick the right Java version for your context.
+    <h4 class="subsectionHead"><span class="titlemark">E.1.2   </span> <a 
+ id="x94-159000E.1.2"></a>Advanced Java SE Concepts</h4>
+                                                                                 
+
+                                                                                 
+<!--l. 54--><p class="noindent" >* say which non-trivial things are vital to good understanding * threading * generics * annotations
+<!--l. 59--><p class="noindent" >
+    <h4 class="subsectionHead"><span class="titlemark">E.1.3   </span> <a 
+ id="x94-160000E.1.3"></a>JAR Files</h4>
+<!--l. 61--><p class="noindent" >* purpose * directory structure * example
+<!--l. 66--><p class="noindent" >
+    <h3 class="sectionHead"><span class="titlemark">E.2   </span> <a 
+ id="x94-161000E.2"></a>Java EE Basics</h3>
+    <div class="fbox"> Section waiting for contribution (2&#8217;000-5&#8217;000 words)
+ The  goal  of  this  section  is  to  provide  the  reader  with  a  solid  overview  of
+ the non-trivial Java enterprise concepts relevant for scout applications and
+ central aspects of the framework itself. The focus of this section is on the Java
+ Enterprise Edition (Java EE) Where appropriate, provide links to high quality
+ online material, that is likely to exist for at least the next year or two.           </div>
+<!--l. 80--><p class="indent" >    needs text
+<!--l. 82--><p class="indent" >    * maybe the same as for java foundation, maybe not * jaas * http comm * servlet * servlet
+filters
+<!--l. 88--><p class="noindent" >
+    <h4 class="subsectionHead"><span class="titlemark">E.2.1   </span> <a 
+ id="x94-162000E.2.1"></a>Servlets</h4>
+<!--l. 90--><p class="noindent" >A very comprehensive and detailed step to step description has been written by Chua
+Hock-Chuan<span class="footnote-mark"><a 
+href="scout_frontend98.html#fn4x24"><sup class="textsuperscript">4</sup></a></span><a 
+ id="x94-162001f4"></a> .
+<!--l. 94--><p class="indent" >    may be found online do servlet stuff with annotations (JEE6) not JEE5?
+    <!--l. 102--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 102--><p class="indent" >    <a 
+ id="x94-162002r1"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x94-162003"></a>
+
+  <div class="caption" 
+><span class="id">Listing&#x00A0;E.1:
+  </span><span  
+class="content">The
+  <span 
+class="cmtt-10">index.html</span>
+  start
+  page
+  for
+  the
+  tiny
+  servlet
+  application.</span></div><!--tex4ht:label?: x94-162002rE.2 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162004r1"></a></span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssbx-10">html</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162005r2"></a></span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssbx-10">head</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162006r3"></a></span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssbx-10">title</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmssi-10">tiny</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">servlet</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">title</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmssbx-10">title</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162007r4"></a></span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmssbx-10">head</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162008r5"></a></span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssbx-10">body</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">style</span><span 
+class="cmss-10">=</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">color</span><span 
+class="cmbx-10">:</span><span 
+class="cmbx-10">green</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162009r6"></a></span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">!</span><span 
+class="cmsy-10">-</span><span 
+class="cmsy-10">-</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmssbx-10">link</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">must</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">correspond</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">to</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">url</span><span 
+class="cmsy-10">-</span><span 
+class="cmti-10">pattern</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">in</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">servlet</span><span 
+class="cmsy-10">-</span><span 
+class="cmti-10">mapping</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">of</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">web</span><span 
+class="cmti-10">.</span><span 
+class="cmti-10">xml</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmsy-10">-</span><span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162010r7"></a></span><span 
+class="cmssi-10">go</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">to</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssbx-10">a</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">href</span><span 
+class="cmss-10">=</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">servlets</span><span 
+class="cmbx-10">/</span><span 
+class="cmbx-10">Tiny</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmssi-10">tiny</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">servlet</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmssbx-10">a</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162011r8"></a></span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmssbx-10">body</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162012r9"></a></span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmssbx-10">html</span><span 
+class="cmmi-10">&#x003E;</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+    <!--l. 110--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 110--><p class="indent" >    <a 
+ id="x94-162013r2"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x94-162014"></a>
+
+  <div class="caption" 
+><span class="id">Listing&#x00A0;E.2:
+  </span><span  
+class="content">The
+  <span 
+class="cmtt-10">web.xml</span>
+  file
+  of
+  the
+  tiny
+  servlet
+  application.</span></div><!--tex4ht:label?: x94-162013rE.2 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162015r1"></a></span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">?</span><span 
+class="cmss-10">xml</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">version</span><span 
+class="cmss-10">=&#8221;1.0&#8221;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">encoding</span><span 
+class="cmss-10">=&#8221;</span><span 
+class="cmss-10">UTF</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">8&#8221;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">?</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162016r2"></a></span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">!</span><span 
+class="cmss-10">DOCTYPE</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">web</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">app</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">PUBLIC</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#8221;</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">//</span><span 
+class="cmss-10">Sun</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">Microsystems</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">Inc</span><span 
+class="cmss-10">.//</span><span 
+class="cmss-10">DTD</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">Web</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">Application</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">2.3//</span><span 
+class="cmss-10">EN</span><span 
+class="cmss-10">&#8221;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#8221;</span><span 
+class="cmss-10">http</span><span 
+class="cmss-10">://</span><span 
+class="cmss-10">java</span><span 
+class="cmss-10">.</span><span 
+class="cmss-10">sun</span><span 
+class="cmss-10">.</span><span 
+class="cmss-10">com</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">dtd</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">web</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">app</span><span 
+class="cmss-10">_2</span><span 
+class="cmss-10">_3</span><span 
+class="cmss-10">.</span><span 
+class="cmss-10">dtd</span><span 
+class="cmss-10">&#8221;</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162017r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162018r4"></a></span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">web</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">app</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162019r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">display</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">name</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">tiny</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">servlet</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">app</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">display</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">name</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162020r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162021r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">!</span><span 
+class="cmsy-10">-</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">declaration</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">of</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">servlet</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">for</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">this</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">app</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">-</span><span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162022r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">servlet</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162023r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">!</span><span 
+class="cmsy-10">-</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">unique</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">servlet</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">symbolic</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">name</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">-</span><span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162024r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">servlet</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">name</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">Tiny</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">servlet</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">name</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162025r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">!</span><span 
+class="cmsy-10">-</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">full</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">path</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">to</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">(</span><span 
+class="cmss-10">relative</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">from</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">WEB</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">INF</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">classes</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">-</span><span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162026r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">servlet</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">class</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">TinyServlet</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">servlet</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">class</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162027r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">servlet</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162028r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162029r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">!</span><span 
+class="cmsy-10">-</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">mapping</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">of</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">url</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">to</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">servlet</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">defined</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">above</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">-</span><span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162030r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">servlet</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">mapping</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162031r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">servlet</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">name</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">Tiny</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">servlet</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">name</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162032r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">url</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">pattern</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">servlets</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">Tiny</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">url</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">pattern</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162033r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">servlet</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">mapping</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162034r20"></a></span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">web</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">app</span><span 
+class="cmmi-10">&#x003E;</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+    <!--l. 117--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 117--><p class="indent" >    <a 
+ id="x94-162035r3"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x94-162036"></a>
+
+  <div class="caption" 
+><span class="id">Listing&#x00A0;E.3:
+  </span><span  
+class="content">The
+  complete
+  <span 
+class="cmtt-10">TinyServlet</span>
+  source
+  code.</span></div><!--tex4ht:label?: x94-162035rE.2 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162037r1"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">servlet</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">browser</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">link</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">http</span><span 
+class="cmti-10">://</span><span 
+class="cmti-10">localhost</span><span 
+class="cmti-10">:8080/</span><span 
+class="cmti-10">tinyservlet</span><span 
+class="cmti-10">/</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162038r2"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">direct</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">link</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">to</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">servlet</span><span 
+class="cmti-10">:</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">http</span><span 
+class="cmti-10">://</span><span 
+class="cmti-10">localhost</span><span 
+class="cmti-10">:8080/</span><span 
+class="cmti-10">tinyservlet</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">servlets</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">Tiny</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162039r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162040r4"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">tomcat</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">overview</span><span 
+class="cmti-10">:</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">http</span><span 
+class="cmti-10">://</span><span 
+class="cmti-10">localhost</span><span 
+class="cmti-10">:8080/</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162041r5"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">application</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">admin</span><span 
+class="cmti-10">:</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">http</span><span 
+class="cmti-10">://</span><span 
+class="cmti-10">localhost</span><span 
+class="cmti-10">:8080/</span><span 
+class="cmti-10">manager</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">html</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">list</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162042r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162043r7"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">compiling</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162044r8"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">servlet</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">jar</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">has</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">to</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">be</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">found</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">in</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">WEB</span><span 
+class="cmsy-10">-</span><span 
+class="cmti-10">INF</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">lib</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">(</span><span 
+class="cmti-10">to</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">be</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">found</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">in</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">apache</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">servlet</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">container</span><span 
+class="cmti-10">,</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">as</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">well</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">for</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">compiling</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">above</span><span 
+class="cmti-10">)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162045r9"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">mzi@bsim013</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">~/</span><span 
+class="cmti-10">Desktop</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">jee</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">servlet1</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">WEB</span><span 
+class="cmsy-10">-</span><span 
+class="cmti-10">INF</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">sources</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162046r10"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">(0)</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">cd</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">cygdrive</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">C</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">Documents</span><span 
+class="cmsy-10">\</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">and</span><span 
+class="cmsy-10">\</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">Settings</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">mzi</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">Desktop</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">jee</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">tinyservlet</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">WEB</span><span 
+class="cmsy-10">-</span><span 
+class="cmti-10">INF</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">sources</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162047r11"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">(1)</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">cygdrive</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">C</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">java</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">jdk1</span><span 
+class="cmti-10">.5.0</span><span 
+class="cmti-10">_16</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">bin</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">javac</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmsy-10">-</span><span 
+class="cmti-10">classpath</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">&#8221;../</span><span 
+class="cmti-10">lib</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">javax</span><span 
+class="cmti-10">.</span><span 
+class="cmti-10">servlet</span><span 
+class="cmti-10">_2</span><span 
+class="cmti-10">.4.0.</span><span 
+class="cmti-10">v200806031604</span><span 
+class="cmti-10">.</span><span 
+class="cmti-10">jar</span><span 
+class="cmti-10">;.&#8221;</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">TinyServlet</span><span 
+class="cmti-10">.</span><span 
+class="cmti-10">java</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162048r12"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">(2)</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">mv</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">TinyServlet</span><span 
+class="cmti-10">.</span><span 
+class="cmti-10">class</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">../</span><span 
+class="cmti-10">classes</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162049r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162050r14"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">deploying</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162051r15"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">servlet</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">jar</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">has</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">to</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">be</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">found</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">in</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">WEB</span><span 
+class="cmsy-10">-</span><span 
+class="cmti-10">INF</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">lib</span><span 
+class="cmti-10">/</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">(</span><span 
+class="cmti-10">to</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">be</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">found</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">in</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">apache</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">servlet</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">container</span><span 
+class="cmti-10">,</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">as</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">well</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">for</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">compiling</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">above</span><span 
+class="cmti-10">)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162052r16"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">(1</span><span 
+class="cmti-10">a</span><span 
+class="cmti-10">)</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">zip</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">contents</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">of</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">C</span><span 
+class="cmti-10">:</span><span 
+class="cmsy-10">\</span><span 
+class="cmti-10">Documents</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">and</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">Settings</span><span 
+class="cmsy-10">\</span><span 
+class="cmti-10">mzi</span><span 
+class="cmsy-10">\</span><span 
+class="cmti-10">Desktop</span><span 
+class="cmsy-10">\</span><span 
+class="cmti-10">jee</span><span 
+class="cmsy-10">\</span><span 
+class="cmti-10">tinyservlet</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162053r17"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">(1</span><span 
+class="cmti-10">b</span><span 
+class="cmti-10">)</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">rename</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">to</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">tinyservlet</span><span 
+class="cmti-10">.</span><span 
+class="cmti-10">zip</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">to</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">tinyservlet</span><span 
+class="cmti-10">.</span><span 
+class="cmti-10">war</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162054r18"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">(2)</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">copy</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">war</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">to</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">C</span><span 
+class="cmti-10">:</span><span 
+class="cmsy-10">\</span><span 
+class="cmti-10">tomcat</span><span 
+class="cmsy-10">\</span><span 
+class="cmti-10">tomcat70</span><span 
+class="cmsy-10">\</span><span 
+class="cmti-10">webapps</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162055r19"></a></span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">(3)</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">restart</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">tomcat</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">(</span><span 
+class="cmti-10">or</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">remove</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">folder</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">tinyservlet</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">from</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">webapps</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">and</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">restart</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">with</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">war</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">file</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">only</span><span 
+class="cmti-10">)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162056r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162057r21"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">java</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">util</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">Date</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162058r22"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">java</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">io</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">IOException</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162059r23"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162060r24"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">javax</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">servlet</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">http</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">HttpServlet</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162061r25"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">javax</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">servlet</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">http</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">HttpServletRequest</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162062r26"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">javax</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">servlet</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">http</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">HttpServletResponse</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162063r27"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">javax</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">servlet</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">ServletException</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162064r28"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162065r29"></a></span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TinyServlet</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162066r30"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">HttpServlet</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162067r31"></a></span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162068r32"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">void</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">service</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">HttpServletRequest</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">request</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">HttpServletResponse</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">response</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162069r33"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">IOException</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ServletException</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162070r34"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162071r35"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">response</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">setContentType</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">text</span><span 
+class="cmbx-10">/</span><span 
+class="cmbx-10">html</span><span 
+class="cmbx-10">;</span><span 
+class="cmbx-10">charset</span><span 
+class="cmbx-10">=</span><span 
+class="cmbx-10">ISO</span><span 
+class="cmsy-10">-</span><span 
+class="cmbx-10">8859</span><span 
+class="cmsy-10">-</span><span 
+class="cmbx-10">1</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162072r36"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">response</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">getWriter</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">println</span><span 
+class="cmss-10">(</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162073r37"></a></span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmmib-10">&#x003C;</span><span 
+class="cmbx-10">html</span><span 
+class="cmmib-10">&#x003E;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">+</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162074r38"></a></span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmmib-10">&#x003C;</span><span 
+class="cmbx-10">head</span><span 
+class="cmmib-10">&#x003E;&#x003C;</span><span 
+class="cmbx-10">title</span><span 
+class="cmmib-10">&#x003E;</span><span 
+class="cmbx-10">tiny</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">servlet</span><span 
+class="cmmib-10">&#x003C;</span><span 
+class="cmbx-10">/</span><span 
+class="cmbx-10">title</span><span 
+class="cmmib-10">&#x003E;&#x003C;</span><span 
+class="cmbx-10">/</span><span 
+class="cmbx-10">head</span><span 
+class="cmmib-10">&#x003E;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">+</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162075r39"></a></span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmmib-10">&#x003C;</span><span 
+class="cmbx-10">body</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">style</span><span 
+class="cmbx-10">=</span><span 
+class="cmbsy-10">\</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">text</span><span 
+class="cmsy-10">-</span><span 
+class="cmbx-10">align</span><span 
+class="cmbx-10">:</span><span 
+class="cmbx-10">center</span><span 
+class="cmbsy-10">\</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmmib-10">&#x003E;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">+</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162076r40"></a></span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">TinyServlet</span><span 
+class="cmbx-10">&#8217;</span><span 
+class="cmbx-10">s</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">server</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">time</span><span 
+class="cmbx-10">:</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">+</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">new</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Date</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">+</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162077r41"></a></span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmmib-10">&#x003C;</span><span 
+class="cmbx-10">/</span><span 
+class="cmbx-10">body</span><span 
+class="cmmib-10">&#x003E;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">+</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162078r42"></a></span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#x00A0;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmmib-10">&#x003C;</span><span 
+class="cmbx-10">/</span><span 
+class="cmbx-10">html</span><span 
+class="cmmib-10">&#x003E;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162079r43"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162080r44"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x94-162081r45"></a></span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 119--><p class="indent" >    DONT include servlet jar inside of war file (tomcat doesn&#8217;t like it)
+    <h4 class="subsectionHead"><span class="titlemark">E.2.2   </span> <a 
+ id="x94-163000E.2.2"></a>Servlet Filters</h4>
+<!--l. 123--><p class="noindent" >hello world example (JEE6)
+<!--l. 125--><p class="noindent" >
+    <h4 class="subsectionHead"><span class="titlemark">E.2.3   </span> <a 
+ id="x94-164000E.2.3"></a>WAR Files</h4>
+<!--l. 127--><p class="noindent" >war file organisation: <a 
+href="http://documentation.progress.com/output/Iona/orbix/6.1/tutorials/fnb/dev_intro/j2ee_overview8.html" class="url" ><span 
+class="cmtt-10">http://documentation.progress.com/output/Iona/orbix/6.1/tutorials/fnb/dev_intro/j2ee_overview8.html</span></a>
+                                                                                 
+
+                                                                                 
+                                                                                 
+
+                                                                                 
+                                                                                 
+
+                                                                                 
+    <!--l. 16--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendap6.html" >next</a>] [<a 
+href="scout_frontendap4.html" >prev</a>] [<a 
+href="scout_frontendap4.html#tailscout_frontendap4.html" >prev-tail</a>] [<a 
+href="scout_frontendap5.html" >front</a>] [<a 
+href="scout_frontendpa1.html#scout_frontendap5.html" >up</a>] </p></div>
+<!--l. 16--><p class="indent" >    <a 
+ id="tailscout_frontendap5.html"></a>    
+</body></html> 

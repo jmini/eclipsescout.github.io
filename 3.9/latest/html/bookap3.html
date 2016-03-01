@@ -1,0 +1,394 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>C Apache Tomcat Installation</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,info --> 
+<meta name="src" content="book.tex"> 
+<meta name="date" content="2014-02-26 16:18:00"> 
+<link rel="stylesheet" type="text/css" href="book.css"> 
+</head><body 
+>
+    <!--l. 272--><div class="crosslinks"><p class="noindent">[<a 
+href="bookli2.html" >next</a>] [<a 
+href="bookap2.html" >prev</a>] [<a 
+href="bookap2.html#tailbookap2.html" >prev-tail</a>] [<a 
+href="#tailbookap3.html">tail</a>] [<a 
+href="bookpa2.html#bookap3.html" >up</a>] </p></div>
+    <h2 class="appendixHead"><span class="titlemark">Appendix&#x00A0;C</span><br /><a 
+ id="x105-95000C"></a>Apache Tomcat Installation</h2>
+<!--l. 275--><p class="noindent" >Apache Tomcat is an open source web server that is a widely used implementation of the Java Servlet
+Specification. Specifically, Tomcat works very well to run the server part of Scout client server applications. In
+case you are interested in getting some general context around Tomcat you could start with the Wikipedia
+article<span class="footnote-mark"><a 
+href="book106.html#fn1x10"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x105-95001f1"></a> .
+Then get introduced to its core component &#8221;Tomcat
+Catalina&#8221;<span class="footnote-mark"><a 
+href="book107.html#fn2x10"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x105-95002f2"></a>  before you switch to
+the official Tomcat homepage<span class="footnote-mark"><a 
+href="book108.html#fn3x10"><sup class="textsuperscript">3</sup></a></span><a 
+ id="x105-95003f3"></a> .
+<!--l. 287--><p class="indent" >    This section is not really a step by step download and installation guide. Rather, it points you to the proper
+places for downloading and installing Tomcat. We recommend to work with Tomcat version 7.0 but in case
+you already have version 6.0 running that should be good too. Start your download from the official download
+site<span class="footnote-mark"><a 
+href="book109.html#fn4x10"><sup class="textsuperscript">4</sup></a></span><a 
+ id="x105-95004f4"></a> .
+<!--l. 294--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x105-950051"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 295--><p class="noindent" ><img 
+src="ScoutInstallation/figures/tomcat_install.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;C.1: </span><span  
+class="content">A successful Tomcat 7 installation.</span></div><!--tex4ht:label?: x105-950051 -->
+                                                                                 
+
+                                                                                 
+<!--l. 298--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 300--><p class="indent" >    Once you have downloaded and installed Tomcat 7 (see the sections below for plattform
+specific guidelines) you can start the corresponding service or deamon. To verify that Tomcat is
+actually running open a web browser of your choice and type <a 
+href="http://localhost:8080" class="url" ><span 
+class="cmtt-10">http://localhost:8080</span></a> into the
+address bar. You should then see a confirmation of the successful installation according to
+Figure&#x00A0;<a 
+href="#x105-950051">C.1<!--tex4ht:ref: fig:tomcat_install --></a>.
+    <h3 class="sectionHead"><span class="titlemark">C.1   </span> <a 
+ id="x105-96000C.1"></a>Windows Installation</h3>
+<!--l. 307--><p class="noindent" >According to the Tomcat setup installation for
+Windows<span class="footnote-mark"><a 
+href="book110.html#fn5x10"><sup class="textsuperscript">5</sup></a></span><a 
+ id="x105-96001f5"></a> 
+download the package &#8221;32-bit/64-bit Windows Service Installer&#8221; from the <a 
+href="http://tomcat.apache.org/download-70.cgi" >Tomcat 7 download site</a>. Then,
+start the installer and accept the proposed default settings.
+<!--l. 313--><p class="indent" >    For installing Tomcat on OS X systems download the &#8221;tar.gz&#8221; package from the <a 
+href="http://tomcat.apache.org/download-70.cgi" >Tomcat 7 download site</a>. Then, follow
+the installation guide<span class="footnote-mark"><a 
+href="book111.html#fn6x10"><sup class="textsuperscript">6</sup></a></span><a 
+ id="x105-96002f6"></a> 
+provided by Wolf Paulus.
+<!--l. 318--><p class="indent" >    For Linux systems download the &#8221;tar.gz&#8221; package from the <a 
+href="http://tomcat.apache.org/download-70.cgi" >Tomcat 7 download site</a>. Then, follow the description
+of the Unix setup<span class="footnote-mark"><a 
+href="book112.html#fn7x10"><sup class="textsuperscript">7</sup></a></span><a 
+ id="x105-96003f7"></a> 
+to run Tomcat as a deamon. If you use Ubuntu, you may want to follow the
+tutorial<span class="footnote-mark"><a 
+href="book113.html#fn8x10"><sup class="textsuperscript">8</sup></a></span><a 
+ id="x105-96004f8"></a>  for
+downloading and installing Tomcat provided by Lars Vogel.
+    <h3 class="sectionHead"><span class="titlemark">C.2   </span> <a 
+ id="x105-97000C.2"></a>Directories and Files</h3>
+<!--l. 333--><p class="noindent" >Tomcat&#8217;s installation directory follows the same organisation on all platforms. Here, we will
+only introduce the most important aspects of the Tomcat installation for the purpose of this
+book.
+<!--l. 336--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x105-970012"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 337--><p class="noindent" ><img 
+src="ScoutInstallation/figures/tomcat_install_dir.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;C.2: </span><span  
+class="content">The organisation of a Tomcat installation including specific files of interest. As an
+example, the &#8221;Hello World&#8221; server application is contained in subdirectory <span 
+class="cmtt-10">webapps</span>. </span></div><!--tex4ht:label?: x105-970012 -->
+                                                                                 
+
+                                                                                 
+<!--l. 342--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 344--><p class="indent" >    Note that some folders and many files of a Tomcat installation are not represented in Figure&#x00A0;<a 
+href="#x105-970012">C.2<!--tex4ht:ref: fig:tomcat_install_dir --></a>. We
+just want to provide a basic understanding of the most important parts to operate the web server in the
+context of this book. In the <span class="path"><span 
+class="cmtt-10">bin</span></span> folder, the executable programs are contained, including scripts to start
+and stop the Tomcat instance.
+<!--l. 348--><p class="indent" >    The <span class="path"><span 
+class="cmtt-10">conf</span></span> folder contains a set of XML and property configuration file. The file <span class="path"><span 
+class="cmtt-10">server.xml</span></span>
+represents Tomcat&#8217;s main configuration file. It is used to configure general web server aspects such as the
+port number of its connectors for the client server communication. For the default setup, port
+number 8080 is used for the communication between clients applications and the web server.
+The file <span class="path"><span 
+class="cmtt-10">tomcat-users.xml</span></span> contains a database of users, passwords and associated roles.
+Folder <span class="path"><span 
+class="cmtt-10">logs</span></span> contains various logfiles of Tomcat itself as well as host and web application log
+files.
+<!--l. 356--><p class="indent" >    The folder needed for deploying web applications into a Tomcat instance is called <span class="path"><span 
+class="cmtt-10">webapps</span></span>. It can be
+used as the target for copying WAR files into the web server. The installation of the WAR file then
+extracts its content into the corresponding directory structure as shown in Figure&#x00A0;<a 
+href="#x105-970012">C.2<!--tex4ht:ref: fig:tomcat_install_dir --></a> in the case of the
+file <span class="path"><span 
+class="cmtt-10">helloworld_server.war</span></span>.
+<!--l. 360--><p class="indent" >    Finally, folder <span class="path"><span 
+class="cmtt-10">work</span></span> contains Tomcat&#8217;s runtime &#8221;cache&#8221; for the deployed web applications. It is
+organized according to the hierarchy of the engine (Catalina), the host (localhost), and the web
+application (helloworld&#x02D9;server).
+    <h3 class="sectionHead"><span class="titlemark">C.3   </span> <a 
+ id="x105-98000C.3"></a>The Tomcat Manager Application</h3>
+<!--l. 367--><p class="noindent" >Tomcat comes with the pre installed &#8221;Manager App&#8221;. This application is useful to manage web applications
+and perform tasks such as deploying a web application from a WAR file, or starting and stopping installed
+web applications. A comprehensive documentation for the &#8221;Manager App&#8221; can be found under the Tomcat
+homepage<span class="footnote-mark"><a 
+href="book114.html#fn9x10"><sup class="textsuperscript">9</sup></a></span><a 
+ id="x105-98001f9"></a> .
+Here we only show how to start this application from the hompage of a running Tomcat
+installation.
+<!--l. 374--><p class="indent" >    To access this application you can switch to the &#8221;Manager App&#8221; with a click on the corresponding
+button on the right hand side. The button can be found on the right hand side of Figure&#x00A0;<a 
+href="#x105-950051">C.1<!--tex4ht:ref: fig:tomcat_install --></a>. Before you
+are allowed to start this application, you need to provide username and password credentials of a user
+associated with Tomcats&#8217;s <span 
+class="cmtt-10">manager-gui </span>role.
+    <!--l. 378-->
+                                                                                 
+
+                                                                                 
+<!--l. 382--><p class="indent" >    <a 
+ id="x105-98002r1"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x105-98003"></a>
+
+    <div class="caption" 
+><span class="id">Listing&#x00A0;C.1:
+    </span><span  
+class="content">Example
+    content
+    for
+    a
+    <span 
+class="cmtt-10">tomcat-users.xml</span>
+    file</span></div><!--tex4ht:label?: x105-98002rC.3 --><div class="lstlisting" id="listing-12"><span class="label"><a 
+ id="x105-98004r1"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x003C;</span><span 
+class="cmtt-9">tomcat</span><span 
+class="cmtt-9">-</span><span 
+class="cmtt-9">users</span><span 
+class="cmtt-9">&#x003E;</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x105-98005r2"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x003C;</span><span 
+class="cmtt-9">!--</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x105-98006r3"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">NOTE</span><span 
+class="cmtt-9">:</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">By</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">default</span><span 
+class="cmtt-9">,</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">no</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">user</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">is</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">included</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">in</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">the</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">manager</span><span 
+class="cmtt-9">-</span><span 
+class="cmtt-9">gui</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">role</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">required</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x105-98007r4"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">to</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">operate</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">the</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">/</span><span 
+class="cmtt-9">manager</span><span 
+class="cmtt-9">/</span><span 
+class="cmtt-9">html</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">web</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">application</span><span 
+class="cmtt-9">.</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">If</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">you</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">wish</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">to</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">use</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">it</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x105-98008r5"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">you</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">must</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">define</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">such</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">a</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">user</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">-</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">the</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">username</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">and</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">password</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">are</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">arbitrary</span><span 
+class="cmtt-9">.</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x105-98009r6"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">--</span><span 
+class="cmtt-9">&#x003E;</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x105-98010r7"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x003C;</span><span 
+class="cmtt-9">user</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">name</span><span 
+class="cmtt-9">=</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">admin</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">password</span><span 
+class="cmtt-9">=</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">s3cret</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">roles</span><span 
+class="cmtt-9">=</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">manager</span><span 
+class="cmtt-9">-</span><span 
+class="cmtt-9">gui</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">/</span><span 
+class="cmtt-9">&#x003E;</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x105-98011r8"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x003C;</span><span 
+class="cmtt-9">/</span><span 
+class="cmtt-9">tomcat</span><span 
+class="cmtt-9">-</span><span 
+class="cmtt-9">users</span><span 
+class="cmtt-9">&#x003E;</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 393--><p class="indent" >    To get at user names and passwords you can open file <span class="path"><span 
+class="cmtt-10">tomcat-users.xml</span></span> located in Tomcat&#8217;s <span class="path"><span 
+class="cmtt-10">conf</span></span>
+directory. In this file the active users with their passwords and associated roles are stored. See
+Listing&#x00A0;<a 
+href="#x105-98002r1">C.1<!--tex4ht:ref: lst:tomcat.users --></a> for an example. From the content of this file, we see that user <span 
+class="cmtt-10">admin </span>has password
+<span 
+class="cmtt-10">s3cret </span>and also posesses the necessary role <span 
+class="cmtt-10">manager-gui </span>to access the &#8221;Manager App&#8221;. If file
+<span class="path"><span 
+class="cmtt-10">tomcat-users.xml</span></span> does not contain any user with this role, you can simply add new user
+with this role to the existing users. Alternatively, you also can add the necessary role to an
+existing user. Just append a comma to the existing right(s) followed by the string <span 
+class="cmtt-10">manager-gui</span>.
+Note that you will need to restart your Tomcat application after adapting the content of file
+<span class="path"><span 
+class="cmtt-10">tomcat-users.xml</span></span>.
+<!--l. 402--><p class="indent" >    With working credentials you can now start the &#8221;Manager App&#8221; as described the &#8221;Hello World&#8221;
+tutorial in Section&#x00A0;<a 
+href="bookch3.html#x31-310002.8">2.8<!--tex4ht:ref: sec:helloworld_deploy --></a>.
+                                                                                 
+
+                                                                                 
+                                                                                 
+
+                                                                                 
+                                                                                 
+
+                                                                                 
+    <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="bookli2.html" >next</a>] [<a 
+href="bookap2.html" >prev</a>] [<a 
+href="bookap2.html#tailbookap2.html" >prev-tail</a>] [<a 
+href="bookap3.html" >front</a>] [<a 
+href="bookpa2.html#bookap3.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent" >    <a 
+ id="tailbookap3.html"></a>   
+</body></html> 

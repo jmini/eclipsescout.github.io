@@ -1,0 +1,531 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>1 Introduction</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,info --> 
+<meta name="src" content="scout_frontend.tex"> 
+<meta name="date" content="2015-03-04 17:09:00"> 
+<link rel="stylesheet" type="text/css" href="scout_frontend.css"> 
+</head><body 
+>
+    <!--l. 16--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendch3.html" >next</a>] [<a 
+href="scout_frontendch1.html" >prev</a>] [<a 
+href="scout_frontendch1.html#tailscout_frontendch1.html" >prev-tail</a>] [<a 
+href="#tailscout_frontendch2.html">tail</a>] [<a 
+href="scout_frontend.html#scout_frontendch2.html" >up</a>] </p></div>
+    <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;1</span><br /><a 
+ id="x4-30001"></a>Introduction</h2>
+    <h3 class="sectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x4-40001.1"></a>What is Scout?</h3>
+<!--l. 22--><p class="noindent" >Scout is an open source framework for building business applications. The Scout framework covers most
+recurring aspects of a classical client server architecture with a strong focus on the application&#8217;s
+front-end. With its multi-device capability, a Scout client applications may run simultaneously as a rich
+client, in the browser and on mobile and tablet devices.
+<!--l. 26--><p class="indent" >    To different groups of people, Scout means different things. End users are interested in a
+good usability, the management cares about the benefits a new framework can offers to the
+organisation and developers want to know if a framework is simple to use and helps them to solve
+practical issues. This is why the text below describes Scout from the perspective of these three
+roles.
+<!--l. 31--><p class="noindent" >
+    <h4 class="subsectionHead"><span class="titlemark">1.1.1   </span> <a 
+ id="x4-50001.1.1"></a>End User Perspective</h4>
+<!--l. 33--><p class="noindent" >End users of enterprise applications care about friendly user interfaces (UI) and well designed
+functionality that support them in their everyday work. Depending on the current context/location of an
+end user, either desktop, web or mobile clients work best. If working in the office, a good integration of
+the enterprise software with Lotus Notes or Microsoft Office often help to boost the users productivity. As
+office software is typically installed locally on the users PC, integrating this software also requires a
+desktop client for the enterprise application. When a user is working on a computer outside of his
+company where the enterprise client is not installed (or the user lacks the permissions to install
+any software), the natural choice is to work with a web application. And when the user is
+on the move or sitting in a meeting, the only meaningful option is to work with a mobile
+device.
+<!--l. 40--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x4-50011"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 41--><p class="noindent" ><img 
+src="Introduction/figures/bsi_crm_desktop.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1.1: </span><span  
+class="content">The desktop client of a Scout enterprise application.</span></div><!--tex4ht:label?: x4-50011 -->
+                                                                                 
+
+                                                                                 
+<!--l. 44--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 46--><p class="indent" >    To provide a concrete example, we briefly describe a real world enterprise application based on
+Scout. A first screenshot of a Scout desktop client is provided in Figure&#x00A0;<a 
+href="#x4-50011">1.1<!--tex4ht:ref: fig:bsi_crm_desktop --></a>. The screenshot
+provides an overview of the layout of a customer relationship management (CRM) solution. On
+the left hand side, an entity class such as companies can be selected. Once an entity such is
+selected, a form is presented on the right hand side to enter the search criteria. After entering
+&#8221;eclipse&#8221; into the company search field, the list of matching companies is presented. Using the
+context menu on a specific company, the corresponding company dialog can be opened for
+editing.
+<!--l. 54--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x4-50022"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 55--><p class="noindent" ><img 
+src="Introduction/figures/bsi_crm_web.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1.2: </span><span  
+class="content">A Scout enterprise application running in a web browser.</span></div><!--tex4ht:label?: x4-50022 -->
+                                                                                 
+
+                                                                                 
+<!--l. 58--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 60--><p class="indent" >    In Figure&#x00A0;<a 
+href="#x4-50022">1.2<!--tex4ht:ref: fig:bsi_crm_web --></a> a screenshot of the web client of the CRM Scout application is shown. When
+comparing the screenshots of the desktop client with the web application it is interesting to note how
+Scout applications offer a consistent look and feel for the two clients. This is important as it makes the
+end user feel &#8221;at home&#8221; on the web client.
+<!--l. 64--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x4-50033"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 65--><p class="noindent" ><img 
+src="Introduction/figures/bsi_crm_mobile_galaxy.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1.3: </span><span  
+class="content">The same Scout enterprise application running on a mobile device.</span></div><!--tex4ht:label?: x4-50033 -->
+                                                                                 
+
+                                                                                 
+<!--l. 68--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 70--><p class="indent" >    Finally, Figure&#x00A0;<a 
+href="#x4-50033">1.3<!--tex4ht:ref: fig:bsi_crm_mobile --></a> provides a screenshot of the now familiar CRM application. In contrast to
+desktop and web applications, most tablets and mobile phones are controlled using touch features instead
+of mouse clicks. In addition, less elements may be presented on a single screen compared to desktop
+devices. These two aspects makes it impractical to directly reuse the desktop user interface on mobile
+devices. The look and feel still relates to the desktop and web clients but is optimized to the different
+form factor of the mobile device. And the end user benefits from the identical behaviour and the the
+known functionality of the application.
+<!--l. 77--><p class="indent" >    Comparing the company table shown in the background of Figure&#x00A0;<a 
+href="#x4-50011">1.1<!--tex4ht:ref: fig:bsi_crm_desktop --></a> with Figure&#x00A0;<a 
+href="#x4-50033">1.3<!--tex4ht:ref: fig:bsi_crm_mobile --></a> it can be
+observed that the multi-column table of the desktop client has been transformed into a list on the mobile
+device. In addition, the context menu &#8221;New company&#8221; is now provided as a touch button. As the
+navigation in the application and the offered choices remain the same for Scout desktop and
+mobile applications, the end user feels immediately comfortable working with Scout mobile
+applications.
+    <h4 class="subsectionHead"><span class="titlemark">1.1.2   </span> <a 
+ id="x4-60001.1.2"></a>Management Perspective</h4>
+<!--l. 84--><p class="noindent" >For the management, Scout is best explained in terms of benefits it brings to the organisation in question.
+This is why we are going to concentrate on a (typical) application migration scenario here. Let us assume
+that to support the company&#8217;s business, a fairly large landscape of multi-tier applications has to be
+maintained and developed. Including host systems, client server applications with desktop clients, as well
+as applications with a web based front-end.
+<!--l. 89--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x4-60014"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 90--><p class="noindent" ><img 
+src="ScoutRuntime/figures/scout_with_other_apps.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1.4: </span><span  
+class="content">A typical application landscape including a service bus and a Scout application.</span></div><!--tex4ht:label?: x4-60014 -->
+                                                                                 
+
+                                                                                 
+<!--l. 93--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 95--><p class="indent" >    Usually, these applications interact with each other through a service bus as shown in Figure&#x00A0;<a 
+href="#x4-60014">1.4<!--tex4ht:ref: fig:scout_with_other_apps --></a>.
+Often, some of the applications that are vital to the organisation&#8217;s core business have grown historically
+and are based on legacy technologies. And for technologies that are no longer under active development it
+can get difficult to find staff having the necessary expertise or motivation. Sometimes, the
+organisation is no longer willing to accept the costs and technology risks of such mission critical
+applications.
+<!--l. 100--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x4-60025"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 101--><p class="noindent" ><img 
+src="ScoutRuntime/figures/scout_integration.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1.5: </span><span  
+class="content">The integration of a Scout application in a typical enterprise setup.</span></div><!--tex4ht:label?: x4-60025 -->
+                                                                                 
+
+                                                                                 
+<!--l. 104--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 106--><p class="indent" >    In this situation, the company needs to evaluate if it should buy a new standard product or if the old
+application has to be migrated to a new technology stack. Now let us assume, that available products do
+not fit the company&#8217;s requirements well enough and we have to settle for the migration scenario.
+In the target architecture, a clean layering similar to the one shown in Figure&#x00A0;<a 
+href="#x4-60025">1.5<!--tex4ht:ref: fig:scout_integration --></a> is often
+desirable.
+<!--l. 110--><p class="indent" >    While a number of modern and established technologies exist that address the backend side (data
+bases, data access and business services), the situation is different for the UI layer and the
+application layer. The number of frameworks to develop web applications with Java is excessively
+large<span class="footnote-mark"><a 
+href="scout_frontend5.html#fn1x3"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x4-6003f1"></a> ,
+but the choice between desktop application technologies in the Java domain is restricted to three options
+only. Swing, SWT and JavaFX. Both Eclipse SWT and Java Swing are mature and well established but
+Swing is moving into &#8217;maintenance only&#8217; mode and will be replaced by JavaFX. However, the maturity of
+the new JavaFX technology in large complex enterprise applications is not yet established. Obviously,
+deciding for the right UI technology is a challenge and needs to be made very carefully. Reverting this
+decision late in a project or after going into production can get very expensive and time
+consuming.
+<!--l. 121--><p class="indent" >    Once the organisation has decided for a specific UI technology, additional components and
+frameworks need to be evaluated to cover client server communication, requirements for the application
+layer, and integration into the existing application landscape. To avoid drowning in the integration effort
+for all the elements necessary to cover the UI and the application layer a &#8217;lightweight&#8217; framework is
+frequently developed. When available, this framework initially leads to desirable gains in productivity.
+Unfortunately, such frameworks often become legacy by themselves. Setting up a dedicated team to
+actively maintain the framework and adapt to new technologies can reduce this risk. But then again, such
+a strategy is expensive and developing business application frameworks is usually not the core business of
+a company.
+<!--l. 128--><p class="indent" >    Can we do better? To implement a business application that covers the UI and the application layer
+as shown in Figure&#x00A0;<a 
+href="#x4-60025">1.5<!--tex4ht:ref: fig:scout_integration --></a>, Eclipse Scout substantially reduces both risk and costs compared to the inhouse
+development presented above. First or all, Scout is completely based on Java and Eclipse. Chances are,
+that developers are already familiar with some of these technologies. This helps in getting developers up
+to speed and keeping training costs low.
+<!--l. 134--><p class="indent" >    On the UI side, Scout&#8217;s multi-device support almost allows to skip the decision for a specific UI
+technology. Should a particular web framework become the de-facto standard in the next years, it
+will be the responsibility of the Scout framework to provide the necessary support. Existing
+Scout applications can then switch to this new technology with only minimal effort. This is
+possible because the Scout developers are designing and building the UI of an application using
+Scout&#8217;s client model. And this client model is not linked to any specific UI technology. Rather,
+specific UI renderers provided by the Scout framework are responsible to draw the UI at
+runtime.
+<!--l. 141--><p class="indent" >    As Scout is an open source project, no licence fees are collected. Taking advantage of the growing
+popularity of Scout, free community support is available via a dedicated forum. At the same time,
+professional support is available if the organisation decides for it.
+                                                                                 
+
+                                                                                 
+<!--l. 145--><p class="indent" >    As the migration of aging applications to current technology is always a challenge, it surely helps to
+have Scout in the technology portfolio. Not only is it a low risk choice, but also boosts developer
+productivity and helps to motivate the development team. Additional reasons on why Scout helps to drive
+down cost and risks are discussed in Section&#x00A0;<a 
+href="#x4-80001.2">1.2<!--tex4ht:ref: sec:why_scout --></a>.
+    <h4 class="subsectionHead"><span class="titlemark">1.1.3   </span> <a 
+ id="x4-70001.1.3"></a>Developer Perspective</h4>
+<!--l. 152--><p class="noindent" >From the perspective of application developers, Scout offers a Java based framework that covers the
+complete client server architecture. This implies that &#8211; once familiar with the Scout framework &#8211; the
+developer can concentrate on a single framework language (Java) and a single set of development
+tools.
+<!--l. 155--><p class="indent" >    As Scout is completely based on Java and Eclipse, Scout developers can take full advantage of
+existing knowledge and experience in these domains. And to make learning Scout as simple as possible,
+Scout includes a comprehensive software development kit (SDK), the Scout SDK. The Scout SDK helps
+to create a robust initial project setup for client server applications and includes a large set of wizards for
+repetitive and error prone tasks.
+<!--l. 159--><p class="indent" >    On the client-side Scout&#8217;s flexible client model allows the developer to create a good user experience
+without having to care about specific UI technologies. The reason for this can be found in Scout&#8217;s
+client architecture that cleanly separates the UI model from the UI technology. In Scout
+(almost) every UI component is implemented four times. First the implementation of the UI
+model component and then, three rendering components for each UI technology supported by
+Scout. For desktop clients these are the Swing and the SWT technologies, and for the web
+and mobile support this is Eclipse RAP which in turn takes care of the necessary JavaScript
+parts.
+<!--l. 165--><p class="indent" >    Not having to worry about Swing, SWT or JavaScript can significantly boost the productivity. With
+one exception. If a specific UI widget is missing for the user story to be implemented, the Scout developer
+first needs to implement such a widget. Initially, this task is slightly more complex than not
+working with Scout. For custom widgets the Scout developer needs to implement both a model
+component and a rendering component for a specific UI technology. But as soon as the client
+application needs to be available on more than a single frontend, the investment already pays off.
+The developer already did implement the model component and only needs to provide an
+additional rendering component for the new UI technology. In most situations the large set of
+Scouts UI components provided out-of-the box are sufficient and user friendly applications are
+straight forward to implement. Even if the application needs to run on different target devices
+simultaneously.
+<!--l. 175--><p class="indent" >    Client-server communication is an additional aspect where the developers is supported by Scout.
+Calling remote services in the client application that are provided by the Scout server looks identical to
+the invocation of local services. The complete communication including the transfer of parameter objects
+is handled fully transparent by the Scout framework. In addition, the Scout SDK can completely manage
+the necessary transfer objects to fetch data from the Scout server that is to be shown in dialog forms
+on the Scout client. The binding of the transferred data to the form fields is done by the
+framework.
+<!--l. 181--><p class="indent" >    Although the Scout SDK wizards can generate a significant amount of code, there
+is no one-way code generation and no meta data in a Scout application. Just the Java
+                                                                                 
+
+                                                                                 
+code<span class="footnote-mark"><a 
+href="scout_frontend6.html#fn2x3"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x4-7001f2"></a> .
+Developers preferring to write the necessary code manually, may do so. The Scout SDK parses the
+application&#8217;s Java code in the background to present the updated Scout application model to the
+developers preferring to work with the Scout SDK.
+<!--l. 188--><p class="indent" >    Finally, Scout is an open source framework hosted at the Eclipse foundation. This provides a number
+of interesting options to developers that are not available for closed source frameworks. First of all,
+it is simple to get all the source code of Scout and the underlying Eclipse platform. This
+allows for complete debugging of all problems and errors found in Scout applications. Starting
+from the application code, including the Scout framework, Eclipse and down to the Java
+platform.
+<!--l. 194--><p class="indent" >    Scout developer can also profit from an increasing amount of free and publicly available
+documentation, such as this book or the Scout Wiki pages. And problems with Scout or questions that
+are not clearly addressed by existing documentation can be discussed in the Scout forum. The
+forum is also a great place for Scout developers to help out in tricky situation and learn from
+others. Ideally, answered questions lead to improved or additional documentation in the Scout
+Wiki.
+<!--l. 199--><p class="indent" >    At times, framework bugs can be identified from questions asked in the forum. As all other
+enhancement requests and issues, such bugs can be reported in Bugzilla by the Scout developer. Using
+Bugzilla, Scout developers can also contribute bug analysis and patch proposals to solve the reported
+issue. With this process, Scout developers can actively contribute to the code base of Eclipse Scout. This
+has the advantage, that workarounds in existing Scout applications can be removed when an upgrade of
+the Scout framework is made.
+<!--l. 205--><p class="indent" >    Having provided a significant number of high quality patches and a meaningful involvement in the Scout
+community, the Scout project can nominate a Scout developer as a new Scout committer. Fundamentally,
+such a nomination is based on the trust of Scout committers in the candidate. To quote the official
+guidelines<span class="footnote-mark"><a 
+href="scout_frontend7.html#fn3x3"><sup class="textsuperscript">3</sup></a></span><a 
+ id="x4-7002f3"></a> 
+for nominating and electing a new committer:
+        <div class="quotation">
+     <!--l. 214--><p class="indent" >    <i><span 
+class="cmti-10">A Committer gains voting rights allowing them to affect the future of the Project.</span>
+     <span 
+class="cmti-10">Becoming a Committer is a privilege that is earned by contributing and showing discipline and</span>
+     <span 
+class="cmti-10">good judgment. It is a responsibility that should be neither given nor taken lightly, nor is it a</span>
+     <span 
+class="cmti-10">right based on employment by an Eclipse Member company or any company employing existing</span>
+     <span 
+class="cmti-10">committers. </span></i>
+     </div>
+<!--l. 222--><p class="noindent" >After a successful election process (existing committers voting for and not against the candidate) the
+                                                                                 
+
+                                                                                 
+Scout developer effectively becomes a Scout committer. With this new status, the Scout developer then
+gets write access to the Eclipse Scout repositories and gains voting rights and the possibility to shape the
+future of Scout.
+    <h3 class="sectionHead"><span class="titlemark">1.2   </span> <a 
+ id="x4-80001.2"></a>Why Scout?</h3>
+<!--l. 229--><p class="noindent" >Most large organizations develop and maintain enterprise applications that have a direct impact on the
+success of the ongoing business. And at the same time, those responsible for the development and
+maintenance of these applications struggle with this task. It is a big challenge to adapt to
+changing business demands and complying with the latest legal requirements in time. And the
+increasing pressure to lower recurring maintenance costs does not make the situation any
+easier.
+<!--l. 234--><p class="indent" >    It often seems that too many resources are required to keep a heterogeneous set of legacy
+technologies alive. In this situation, modernizing mission critical applications can help to improve over the
+current situation. For the target platform stack, Java is a natural choice as it is mature, widely adopted
+by in the industries and unlikely to become legacy in the foreseeable future. While for the back-end side
+of enterprise applications well-known and proven frameworks do exist, the situation on the client
+side is less clear. Unfortunately, user interface (UI) technologies often have lifetimes that are
+substantially shorter than the lifetimes of larger mission critical applications. This is particularly true
+for the web, where many of today&#8217;s frameworks will no longer be relevant in five or more
+years.
+<!--l. 241--><p class="indent" >    Enter Eclipse Scout. This open source framework covers most of the recurring needs that are relevant
+to the front-end development of business applications. And Scout forces a clean separation between the
+user interface and the specific UI technology used for rendering. This has two major benefits. First, Scout
+developers implement the user interface against an abstraction layer, which helps to focus on the business
+functionality and saves development time. And second, long term maintenance costs are lower, as the
+Scout code remains valid even when the rendering technology needs to be exchanged. Therefore, Scout
+helps to improve the productivity of the development teams and reduces the risk of major application
+rewrites.
+<!--l. 248--><p class="indent" >    To provide a first impression on the scope and goals of the Scout framework, a number of scenarios
+where Scout typically contributes to your projects success are listed below .
+     <ul class="itemize1">
+     <li class="itemize">You are looking for a reasonable client side framework for your business application.
+     </li>
+     <li class="itemize">You need an application that works on the desktop, in browsers and on mobiles devices.
+     </li>
+     <li class="itemize">You don&#8217;t have the time to evaluate and learn a new UI technology.
+     </li>
+     <li class="itemize">You need a working prototype application by the end of the week.
+     </li>
+     <li class="itemize">Your application&#8217;s expected lifespan is 10 years or more.</li></ul>
+                                                                                 
+
+                                                                                 
+<!--l. 258--><p class="noindent" >That Scout should help in the last two situations mentioned above seems to be contradictory at first but
+is just based on a simple principle. Where possible, the Scout framework provides abstractions for
+areas/topics<span class="footnote-mark"><a 
+href="scout_frontend8.html#fn4x3"><sup class="textsuperscript">4</sup></a></span><a 
+ id="x4-8001f4"></a> 
+that need to be implemented for business applications again and again. And for each of these
+abstractions Scout provides a default implementation out of the box. Typically, the default
+implementation of such an abstraction integrates a framework or technology that is commonly
+used.
+<!--l. 266--><p class="indent" >    When needing a working prototype application by the end of the week, the developer just
+needs to care about the desired functionality. The necessary default implementations are then
+automatically included by the Scout tooling into the Scout project setup. The provided Scout SDK
+tooling also helps to get started quickly with Scout. It also allows to efficiently implement
+application components such as user interface components, server services or connections to
+databases.
+<!--l. 271--><p class="indent" >    In the case of applications with long lifespans, the abstractions provided by Scout help the developer
+to stay productive and concentrate on the actual business functionality. At the same time, this keeps the
+code base as independent of specific technologies and frameworks as possible. This is a big advantage
+when individual technologies incorporated in the application reach their end of life. As all the
+implemented business functionality is written against abstractions only, no big rewrite of the application
+is necessary. Instead, it is sufficient to exchange the implementation for the legacy technology with a new
+one. And often, an implementation for a new technology/framework is already provided by a more recent
+version of Scout.
+    <h3 class="sectionHead"><span class="titlemark">1.3   </span> <a 
+ id="x4-90001.3"></a>What should I read?</h3>
+<!--l. 282--><p class="noindent" >The text below provides guidelines on what to read (or what to skip) depending on your
+existing background. We first address the needs of junior Java developers that like to learn
+more about developing enterprise applications. Then, we suggest a list of sections relevant for
+software wizards that already have a solid understanding of the Eclipse platform, Java enterprise
+technologies, and real world applications. Finally, the information needs of IT managers are
+considered.
+<!--l. 288--><p class="noindent" >
+    <h4 class="subsectionHead"><span class="titlemark">1.3.1   </span> <a 
+ id="x4-100001.3.1"></a>I know Java</h4>
+<!--l. 290--><p class="noindent" >The good news first. This book is written for you! For the purpose of this book we
+do not assume any significant understanding of the Java Enterprise Edition (Java
+                                                                                 
+
+                                                                                 
+EE)<span class="footnote-mark"><a 
+href="scout_frontend9.html#fn5x3"><sup class="textsuperscript">5</sup></a></span><a 
+ id="x4-10001f5"></a>  and the
+Eclipse Platform<span class="footnote-mark"><a 
+href="scout_frontend10.html#fn6x3"><sup class="textsuperscript">6</sup></a></span><a 
+ id="x4-10002f6"></a> .
+<!--l. 299--><p class="indent" >    Of course, having prior experience in client server programming with Java is helpful. And having
+used the Eclipse IDE for Java development before &#8212; please do not mistake the IDE with the Eclipse
+platform<span class="footnote-mark"><a 
+href="scout_frontend11.html#fn7x3"><sup class="textsuperscript">7</sup></a></span><a 
+ id="x4-10003f7"></a>  is
+certainly of benefit.
+<!--l. 305--><p class="indent" >    The &#8220;bad&#8221; news is, that writing Scout applications requires a solid understanding
+of Java. To properly benefit from this book, we assume that you have been developing
+software for a year or more. And you should have mastered the Java Standard Edition (Java
+SE)<span class="footnote-mark"><a 
+href="scout_frontend12.html#fn8x3"><sup class="textsuperscript">8</sup></a></span><a 
+ id="x4-10004f8"></a>  to a significant
+extent. To be more explicit, you are expected to be comfortable with all material required for the Java Programmer Level I
+Exam<span class="footnote-mark"><a 
+href="scout_frontend13.html#fn9x3"><sup class="textsuperscript">9</sup></a></span><a 
+ id="x4-10005f9"></a>  and most of the
+material required for Level II<span class="footnote-mark"><a 
+href="scout_frontend14.html#fn10x3"><sup class="textsuperscript">10</sup></a></span><a 
+ id="x4-10006f10"></a> .
+<!--l. 321--><p class="indent" >    We now propose to start downloading and installing Scout as described in Appendix&#x00A0;<a 
+href="scout_frontendap2.html#x71-142000B">B<!--tex4ht:ref: apx:install_scout --></a> and do some
+actual coding. To do so, please continue with the &#8220;Hello World&#8221; example provided in Chapter&#x00A0;<a 
+href="scout_frontendch3.html#x19-130002">2<!--tex4ht:ref: cha:helloworld --></a>. You
+can expect to complete this example in less than one hour including the necessary download
+and installation steps. Afterwards, you might want to continue with the remaining material
+in &#8220;Getting Started&#8221;. Working through the complete book should take no more than two
+days.
+<!--l. 327--><p class="indent" >    Once you work with the Scout framework on a regular basis, you might want to ask questions in the Scout
+                                                                                 
+
+                                                                                 
+forum<span class="footnote-mark"><a 
+href="scout_frontend15.html#fn11x3"><sup class="textsuperscript">11</sup></a></span><a 
+ id="x4-10007f11"></a> .
+When your question gets answered, please ask yourself if your initial problem could have been solved by better
+documentation. In that case, you might want to help the Scout community by fixing or amending the Scout wiki
+pages<span class="footnote-mark"><a 
+href="scout_frontend16.html#fn12x3"><sup class="textsuperscript">12</sup></a></span><a 
+ id="x4-10008f12"></a> .
+Or this book. If you find a bug in Eclipse Scout that makes your life miserable you can report it or even
+propose a patch. And when your bug is fixed, you can test the fix. All of these actions will add to the
+healthy grow of the Scout community.
+    <h4 class="subsectionHead"><span class="titlemark">1.3.2   </span> <a 
+ id="x4-110001.3.2"></a>I know tons of both Java and Eclipse</h4>
+<!--l. 343--><p class="noindent" >This means that you are one of these software wizards that get easily bored. You prefer to get a quick
+impression before deciding to dig deeper and hate going through lengthy descriptions. In that case let us
+assume that you are prepared to spend two hours to grasp the scope of Eclipse Scout and get an
+impression of its strengths and limitations. The list below suggests a sequence of sections to digest
+including a brief motivation for each one.
+     <ul class="itemize1">
+     <li class="itemize">Chapter&#x00A0;<a 
+href="scout_frontendch3.html#x19-130002">2<!--tex4ht:ref: cha:helloworld --></a> &#8221;Hello World&#8221; Tutorial. Download and installation of the Scout package should
+     take less than 30 minutes, going through the &#8221;Hello World&#8221; takes another 15 minutes.
+     </li>
+     <li class="itemize">Section&#x00A0;<a 
+href="scout_frontendch4.html#x27-240003.2">3.2<!--tex4ht:ref: sec:initial_helloworld --></a> &#8220;Walking through the Initial Application&#8221; Read about some key elements used
+     in every Scout client application including integration of server services and data binding.
+     </li>
+     <li class="itemize">Chapter&#x00A0;<span 
+class="cmbx-10">??</span> &#8220;Scout Tooling&#8221;. Browse through the tooling chapter to get an impression on the
+     tooling provided with Scout. Make sure you understand that the Scout SDK is supporting
+     the developer without restricting the developer.
+     </li>
+     <li class="itemize">Chapter&#x00A0;<span 
+class="cmbx-10">??</span> &#8220;The My Contacts Application&#8221;. Check out the slightly larger demo application.
+     In case you are not yet running out of time, download the demo app as described in the Scout
+     wiki<span class="footnote-mark"><a 
+href="scout_frontend17.html#fn13x3"><sup class="textsuperscript">13</sup></a></span><a 
+ id="x4-11001f13"></a>.</li></ul>
+<!--l. 364--><p class="noindent" >
+                                                                                 
+
+                                                                                 
+    <h4 class="subsectionHead"><span class="titlemark">1.3.3   </span> <a 
+ id="x4-120001.3.3"></a>I am a manager</h4>
+<!--l. 366--><p class="noindent" >Being a manager and actually reading this book may indicate one of the following situations:
+     <ul class="itemize1">
+     <li class="itemize">Your developer tried to convince you that Eclipse Scout can help you with implementing
+     business applications in a shorter time and for less money. And you did not understand why
+     (again) a new technology should work better than the ones you already use.
+     </li>
+     <li class="itemize">Your are a product manager of a valuable product that is based on legacy technology. And
+     you are now evaluating options to modernize your product.
+     </li>
+     <li class="itemize">Think about your current situation. There must be a reason why you are checking out this
+     book.</li></ul>
+<!--l. 376--><p class="indent" >    To learn about Scout and about its benefits first go through Section&#x00A0;<a 
+href="#x4-40001.1">1.1<!--tex4ht:ref: sec:what_is_scout --></a> and Section&#x00A0;<a 
+href="#x4-80001.2">1.2<!--tex4ht:ref: sec:why_scout --></a>. Then, flip
+through Section&#x00A0;<span 
+class="cmbx-10">??</span> to get an impression of the &#8221;My Contacts&#8221; application. In case you like the idea that
+your developers should be able to build such an application in a single day, you might want to talk to
+us<span class="footnote-mark"><a 
+href="scout_frontend18.html#fn14x3"><sup class="textsuperscript">14</sup></a></span><a 
+ id="x4-12001f14"></a> .
+                                                                                 
+
+                                                                                 
+    <!--l. 384--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendch3.html" >next</a>] [<a 
+href="scout_frontendch1.html" >prev</a>] [<a 
+href="scout_frontendch1.html#tailscout_frontendch1.html" >prev-tail</a>] [<a 
+href="scout_frontendch2.html" >front</a>] [<a 
+href="scout_frontend.html#scout_frontendch2.html" >up</a>] </p></div>
+<!--l. 384--><p class="indent" >    <a 
+ id="tailscout_frontendch2.html"></a>    
+</body></html> 

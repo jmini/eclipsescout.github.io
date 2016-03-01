@@ -1,0 +1,4021 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>7 Simple Widgets</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,info --> 
+<meta name="src" content="scout_frontend.tex"> 
+<meta name="date" content="2015-03-04 17:09:00"> 
+<link rel="stylesheet" type="text/css" href="scout_frontend.css"> 
+</head><body 
+>
+    <!--l. 633--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendch9.html" >next</a>] [<a 
+href="scout_frontendch7.html" >prev</a>] [<a 
+href="scout_frontendch7.html#tailscout_frontendch7.html" >prev-tail</a>] [<a 
+href="#tailscout_frontendch8.html">tail</a>] [<a 
+href="scout_frontend.html#scout_frontendch8.html" >up</a>] </p></div>
+    <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;7</span><br /><a 
+ id="x57-820007"></a>Simple Widgets</h2>
+<!--l. 636--><p class="noindent" >This chapter presents the most commonly used Scout widgets based on the widget demo application
+introduced above. For each widget the most frequently observed use cases are presented and illustrated
+with the widget specific example forms. And exemplary code snippets taken from the widget application
+help to close the loop to the actual implementation of these widgets in the applications source
+code.
+    <h3 class="sectionHead"><span class="titlemark">7.1   </span> <a 
+ id="x57-830007.1"></a>Label Fields</h3>
+<!--l. 643--><p class="noindent" >Label fields are used to place a read only text anywhere in a Scout form. As shown in the configuration
+section of Figure&#x00A0;<a 
+href="#x57-830011">7.1<!--tex4ht:ref: fig:labelfield --></a> such texts can occupy the typical area assigned to a label field on the left, the area
+typically assigned to data entry on the right or on both sides. The form shown in Figure&#x00A0;<a 
+href="#x57-830011">7.1<!--tex4ht:ref: fig:labelfield --></a> is
+implemented in class <span 
+class="cmtt-10">LabelFieldForm </span>of the Scout widget application.
+<!--l. 647--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-830011"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 648--><p class="noindent" ><img 
+src="ScoutClient/figures/labelfield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;7.1: </span><span  
+class="content">Scout fields and example use cases. In the examples section of the form the standard
+usage of label fields is shown. To display text over the whole width of a column or in the area right
+to the label use method <span 
+class="cmtt-10">setValue </span>as shown in the configuration section of the form.</span></div><!--tex4ht:label?: x57-830011 -->
+                                                                                 
+
+                                                                                 
+<!--l. 653--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 655--><p class="indent" >    To set the label text in the default area method <span 
+class="cmtt-10">getConfiguredLabel </span>is used. If the label text is too
+long for the reserved area the label gets truncated with trailing &#x2026;. The complete label text is then shown
+in a tooltip.
+<!--l. 659--><p class="indent" >    As for any form field derived from <span 
+class="cmtt-10">AbstractFormField</span>, a number of <span 
+class="cmtt-10">getConfigured* </span>styling
+properties exist for label fields. Most of these styling properties can directly be set in the Scout Object
+Properties view. A subset of these properties are shown in the list below.
+     <ul class="itemize1">
+     <li class="itemize">Label Position
+     </li>
+     <li class="itemize">Label Horizontal Alignment
+     </li>
+     <li class="itemize">Label Foreground Color
+     </li>
+     <li class="itemize">Label Background Color
+     </li>
+     <li class="itemize">Label Font</li></ul>
+    <!--l. 678--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 678--><p class="indent" >    <a 
+ id="x57-83002r1"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-83003"></a>
+
+       <div class="caption" 
+><span class="id">Listing&#x00A0;7.1:
+       </span><span  
+class="content">A
+       simple
+       LabelField.</span></div><!--tex4ht:label?: x57-83002r7.1 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83004r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(10.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83005r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx57-83006"></a><span 
+class="cmssi-10">LabelField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx57-83007"></a><span 
+class="cmssi-10">AbstractLabelField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83008r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83009r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83010r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83011r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Default</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83012r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83013r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 680--><p class="indent" >    To display text in the right hand area an empty string can be used as label text and the text for the
+value area of the label field can be set with method <span 
+class="cmtt-10">setValue </span>in method <span 
+class="cmtt-10">execInitField </span>according to
+Listing&#x00A0;<a 
+href="#x57-83002r1">7.1<!--tex4ht:ref: lst:field.label.value --></a>.
+    <!--l. 689--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 689--><p class="indent" >    <a 
+ id="x57-83014r2"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-83015"></a>
+
+       <div class="caption" 
+><span class="id">Listing&#x00A0;7.2:
+       </span><span  
+class="content">A
+       label
+       field
+       displaying
+       multi-line
+       text
+       that
+       covers
+       the
+       whole
+       width
+       of
+       a
+       column.</span></div><!--tex4ht:label?: x57-83014r7.1 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83016r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(40.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83017r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">VeryLongLabelTextField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx57-83018"></a><span 
+class="cmssi-10">AbstractLabelField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83019r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83020r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83021r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">int</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredGridH</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83022r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">2;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83023r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83024r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83025r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83026r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabelVisible</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83027r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">false</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83028r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83029r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83030r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83031r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredWrapText</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83032r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">true</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83033r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83034r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83035r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83036r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">void</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">execInitField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83037r21"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">if</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">UserAgentUtility</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">isSwingUi</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83038r22"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">setValue</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmmib-10">&#x003C;</span><span 
+class="cmbx-10">html</span><span 
+class="cmmib-10">&#x003E;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">+</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Lorem</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">+</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmmib-10">&#x003C;</span><span 
+class="cmbx-10">/</span><span 
+class="cmbx-10">html</span><span 
+class="cmmib-10">&#x003E;</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83039r23"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83040r24"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">else</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83041r25"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">setValue</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Lorem</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83042r26"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83043r27"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-83044r28"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 691--><p class="indent" >    To display multiline text across both the label and the value area a combination of label field
+properties has to be used. See Listing&#x00A0;<a 
+href="#x57-83014r2">7.2<!--tex4ht:ref: lst:field.label.multiline --></a> for the configuration used in the last label field shown in
+Figure&#x00A0;<a 
+href="#x57-830011">7.1<!--tex4ht:ref: fig:labelfield --></a>.
+    <h3 class="sectionHead"><span class="titlemark">7.2   </span> <a 
+ id="x57-840007.2"></a>String Fields</h3>
+<!--l. 697--><p class="noindent" >String fields are used to enter simple text strings. In addition, string fields are also useful to enter
+multiline text or capture masked input. The form shown in Figure&#x00A0;<a 
+href="#x57-840012">7.2<!--tex4ht:ref: fig:stringfield --></a> is implemented in class
+<span 
+class="cmtt-10">StringFieldForm </span>of the Scout widget application.
+<!--l. 701--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-840012"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 702--><p class="noindent" ><img 
+src="ScoutClient/figures/stringfield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;7.2: </span><span  
+class="content">String fields and example use cases. Text content shown in disabled fields can be read
+and copied to the clipboard, but not edited. In multi line string fields the text can be displayed as
+entered or the text may be wrapped to fit into the available column with.</span></div><!--tex4ht:label?: x57-840012 -->
+                                                                                 
+
+                                                                                 
+<!--l. 707--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 709--><p class="indent" >    Some of the most typical use cases for string fields are represented in the examples section of
+Figure&#x00A0;<a 
+href="#x57-840012">7.2<!--tex4ht:ref: fig:stringfield --></a>. In the configuration section of the form a multiline text field is shown. As in the case of the
+label text, font and color styling possibilities are available for the text shown in a string field. Clicking on
+the <span 
+class="cmcsc-10">S<span 
+class="small-caps">a</span><span 
+class="small-caps">m</span><span 
+class="small-caps">p</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span> F<span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">m</span><span 
+class="small-caps">a</span><span 
+class="small-caps">t</span> </span>button and on the <span 
+class="cmcsc-10">S<span 
+class="small-caps">a</span><span 
+class="small-caps">m</span><span 
+class="small-caps">p</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span> C<span 
+class="small-caps">o</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span> </span>button prefills some of the fields to create
+the effect shown in Figure&#x00A0;<a 
+href="#x57-840012">7.2<!--tex4ht:ref: fig:stringfield --></a>.
+<!--l. 714--><p class="indent" >    In the case of multi line string fields, the field can be configured to either display text lines as they
+have been entered or wrapped to fit into the available width of the field. This property can be set with
+the string field&#8217;s method <span 
+class="cmtt-10">getConfiguredWrapText </span>or dynamically with method <span 
+class="cmtt-10">setWrapText</span>. Please note
+that changing this property dynamically at runtime currently only works with the SWT and the Swing
+rendering components.
+    <!--l. 725--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 725--><p class="indent" >    <a 
+ id="x57-84002r3"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-84003"></a>
+
+       <div class="caption" 
+><span class="id">Listing&#x00A0;7.3:
+       </span><span  
+class="content">A
+       masked
+       string
+       field.</span></div><!--tex4ht:label?: x57-84002r7.2 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84004r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(150.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84005r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">InputMaskedField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx57-84006"></a><span 
+class="cmssi-10">AbstractStringField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84007r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84008r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84009r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredInputMasked</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84010r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">true</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84011r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84012r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84013r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84014r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84015r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">InputMasked</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84016r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-84017r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 727--><p class="indent" >    Additional use cases for the string field are shown in the right column of the configuration section of
+the string field demo form. Specific string fields are located for the default case, a string field only
+accepting upper case letters, and a masked field. To code to represent the masked string field is provided
+in Listing&#x00A0;<a 
+href="#x57-84002r3">7.3<!--tex4ht:ref: lst:field.string.masked --></a>. Independent of what the user is typing the masked field keeps the entered content visually
+hidden. In contrast to all other forms of string fields, the content cannot be copied to the system
+clipboard. It can only be accessed programmatically with the <span 
+class="cmtt-10">getValue </span>method of the string
+field.
+<!--l. 734--><p class="indent" >    String fields also allow for the configuration of the maximum length of the text that can be entered
+into the field. In its default configuration, a maximum number of 4&#8217;000 characters can be entered into a
+string field. Using method <span 
+class="cmtt-10">setMaxLength </span>this limit can be updated dynamically at runtime.
+Alternatively, this limit can also be set in method <span 
+class="cmtt-10">getConfiguredMaxLength</span>.
+    <h3 class="sectionHead"><span class="titlemark">7.3   </span> <a 
+ id="x57-850007.3"></a>Number Fields</h3>
+<!--l. 742--><p class="noindent" >For entering numbers, Scout provides three different fields. Depending on the valid range of numbers that
+may be entered, an integer field, a long field or a big integer field best matches the given use case.
+These fields are represented by the classes <span 
+class="cmtt-10">AbstractIntegerField</span>, <span 
+class="cmtt-10">AbstractLongField </span>and
+<span 
+class="cmtt-10">AbstractBigIntegerField</span>, each one of them extinding class <span 
+class="cmtt-10">AbstractNumberField</span>.
+<!--l. 746--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-850013"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 747--><p class="noindent" ><img 
+src="ScoutClient/figures/numberfield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;7.3: </span><span  
+class="content">Number fields and example use cases. Distinct number fields are available for <span 
+class="cmtt-10">Integer</span>,
+a <span 
+class="cmtt-10">Long </span>or a <span 
+class="cmtt-10">BigInteger </span>value classes. </span></div><!--tex4ht:label?: x57-850013 -->
+                                                                                 
+
+                                                                                 
+<!--l. 752--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 754--><p class="indent" >    The form <span 
+class="cmtt-10">NumberFieldsForm </span>of the Scout widget application shown in Figure&#x00A0;<a 
+href="#x57-850013">7.3<!--tex4ht:ref: fig:numberfield --></a> contains
+examples for all three number field types. Separate buttons are available to demonstrate
+the use of the minimum and the maximum value a number field can hold. In the case of
+the <span 
+class="cmti-10">BigInteger </span>field, arbitrarily large or small values may be entered. See Listing&#x00A0;<a 
+href="#x57-85002r4">7.4<!--tex4ht:ref: lst:field.integer.input --></a> for
+the code corresponding to the input integer field in the configuration section of the example
+form.
+    <!--l. 766--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 766--><p class="indent" >    <a 
+ id="x57-85002r4"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-85003"></a>
+
+       <div class="caption" 
+><span class="id">Listing&#x00A0;7.4:
+       </span><span  
+class="content">A
+       simple
+       Integer
+       field.</span></div><!--tex4ht:label?: x57-85002r7.3 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-85004r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(10.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-85005r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">InputField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx57-85006"></a><span 
+class="cmssi-10">AbstractIntegerField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-85007r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-85008r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-85009r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-85010r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">IntegerFieldInput</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-85011r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-85012r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 768--><p class="indent" >    As already indicated by the class names of the three number fields, the fields serve to enter values
+that fit into the ranges defined by the Java classes <span 
+class="cmtt-10">Integer</span>, <span 
+class="cmtt-10">Long </span>and <span 
+class="cmtt-10">BigInteger</span>. To further
+restrict the bounds of valid numbers you may use the methods <span 
+class="cmtt-10">getConfiguredMinValue </span>and
+<span 
+class="cmtt-10">getConfiguredMaxValue</span>. The effect of setting such bounds can be tested by entering values into the
+<span 
+class="cmti-10">Minimum Value </span>field and the <span 
+class="cmti-10">Maximum Value </span>field of the example form. If, for example, a
+minimum value of 0 is entered in the <span 
+class="cmti-10">Minimum Value </span>field and the user tries to enter the
+value -1 into one of the input fields, an error marker becomes visible on the input field. A
+tooltip with the text &#8221;The value is too small; must be between 0 &#x2026;&#8221; further explains the
+issue to the user. In such a case the value entered into the user interface is not propagated to
+the number field&#8217;s value. This is why the read only <span 
+class="cmti-10">getValue() </span>field is not updated in such a
+case.
+<!--l. 776--><p class="indent" >    To textually format the entered numbers the grouping number field property can be used. In the
+example form the <span 
+class="cmti-10">Grouping </span>checkbox can be used to control this property. Ticking/unticking this
+checkbox will affect the three number input fields in the configuration section of the example
+form.
+<!--l. 780--><p class="indent" >    More extensive options to specify the formatting of the numbers is provided by the method
+<span 
+class="cmtt-10">setFormat </span>of class <span 
+class="cmtt-10">AbstractNumberField</span>. Method <span 
+class="cmtt-10">setFormat </span>is accepting an argument of the
+Java class <span 
+class="cmtt-10">DecimalFormat</span>. To demonstrate an example for such a format click on <span 
+class="cmcsc-10">S<span 
+class="small-caps">a</span><span 
+class="small-caps">m</span><span 
+class="small-caps">p</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span></span>
+<span 
+class="cmcsc-10">F<span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">m</span><span 
+class="small-caps">a</span><span 
+class="small-caps">t</span> </span>button in the example form. For more information please consult the Javadoc for class
+<span 
+class="cmtt-10">DecimalFormat</span>.
+    <h3 class="sectionHead"><span class="titlemark">7.4   </span> <a 
+ id="x57-860007.4"></a>Decimal Fields</h3>
+<!--l. 788--><p class="noindent" >Scout provides two different form fields for entering decimal values. Depending on the required precision
+and range of values to be entered a double field or a big decimal field can be used. The two field types
+are represented by Scout&#8217;s classes <span 
+class="cmtt-10">AbstractDoubleField </span>and <span 
+class="cmtt-10">AbstractBigDecimalField</span>
+and can hold values of the Java types <span 
+class="cmtt-10">Double </span>and <span 
+class="cmtt-10">BigDecimal </span>respectively. Both the double
+and the big decimal field extend class <span 
+class="cmtt-10">AbstractDecimalField </span>which in turn extends class
+<span 
+class="cmtt-10">AbstractNumberField</span>.
+<!--l. 793--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-860014"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 794--><p class="noindent" ><img 
+src="ScoutClient/figures/decimalfield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;7.4: </span><span  
+class="content">Decimal fields and example use cases. Distinct number fields are available for the
+<span 
+class="cmtt-10">Double </span>and <span 
+class="cmtt-10">BigDecimal </span>value classes. </span></div><!--tex4ht:label?: x57-860014 -->
+                                                                                 
+
+                                                                                 
+<!--l. 799--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 801--><p class="indent" >    The example form shown in Figure&#x00A0;<a 
+href="#x57-860014">7.4<!--tex4ht:ref: fig:decimalfield --></a> demonstrates the usage and some of the available options to
+configure Scout&#8217;s decimal fields. This example form is defined in class <span 
+class="cmtt-10">DecimalFieldsForm </span>of the Scout
+widget application.
+    <!--l. 811--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 811--><p class="indent" >    <a 
+ id="x57-86002r5"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-86003"></a>
+
+       <div class="caption" 
+><span class="id">Listing&#x00A0;7.5:
+       </span><span  
+class="content">A
+       styled
+       decimal
+       field
+       holding
+       Java
+       <span 
+class="cmtt-10">Double</span>
+       values.
+       Negative
+       values
+       are
+       shown
+       in
+       red</span></div><!--tex4ht:label?: x57-86002r7.4 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86004r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(50.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86005r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">StyledField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx57-86006"></a><span 
+class="cmssi-10">AbstractDoubleField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86007r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86008r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86009r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86010r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Styled</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86011r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86012r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86013r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86014r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">void</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">execChangedValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86015r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">if</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">getValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">0)</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86016r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">setForegroundColor</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">FF0000</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86017r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86018r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">else</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86019r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">setForegroundColor</span><span 
+class="cmss-10">(</span><span 
+class="cmssbx-10">null</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86020r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86021r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86022r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86023r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86024r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">void</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">execInitField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86025r21"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">setValue</span><span 
+class="cmss-10">(</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">3.1415)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86026r22"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">setForegroundColor</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">FF0000</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86027r23"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-86028r24"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 813--><p class="indent" >    The styled double field in the example section of the form displays negative values in
+red and postive values in the default black color. This behaviour is implemented in method
+<span 
+class="cmtt-10">execChangedValue </span>according to Listing&#x00A0;<a 
+href="#x57-86002r5">7.5<!--tex4ht:ref: lst:field.double.styled --></a>. The sample value shown initially is provided in the
+<span 
+class="cmtt-10">execInitField </span>method. Setting the red foreground color explicitely is needed in method
+<span 
+class="cmtt-10">execInitField </span>as the <span 
+class="cmtt-10">execChangedValue </span>is only triggered after the initial form is displayed on the
+screen.
+<!--l. 818--><p class="indent" >    For displaying and storing the fraction digits of decimal values three different properties exist. Two
+of them, the <span 
+class="cmtt-10">getConfiguredMinFractionDigits </span>and the <span 
+class="cmtt-10">getConfiguredMinFractionDigits </span>affect the
+optical representation of the decimal value. To configure the amount of fraction digits that is effectively
+represented the property <span 
+class="cmtt-10">getConfiguredFractionDigits </span>is used. The need for three different properties
+might not be immediately clear. To illustrate the concept, let us look at an example use case
+where a decimal field always has to display exactely 3 fraction digits. Should the user provide
+more fraction digits we would like to capture this additional information up to 5 fraction
+digits.
+<!--l. 825--><p class="indent" >    To configure this behaviour the following settings for this decimal field may be used.
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="cmti-10">Min Fraction Digits</span>: 3
+     </li>
+     <li class="itemize"><span 
+class="cmti-10">Max Fraction Digits</span>: 3
+     </li>
+     <li class="itemize"><span 
+class="cmti-10">Fraction Digits</span>: 5</li></ul>
+<!--l. 833--><p class="indent" >    If the user enters the text &#8221;3.141592653589793&#8221; into this field and tabs to the next field, the field will
+then display the text &#8221;4.142&#8221; but actually hold the value 3.14159. And if the user just enters a &#8221;3&#8221;, the
+field will display &#8221;3.000&#8221; and hold the value 3.0.
+<!--l. 836--><p class="indent" >    Decimal fields can also be configured to enter percentages in a convenient way. For this use
+case the <span 
+class="cmti-10">Multiplier </span>property can be set to 100 and the <span 
+class="cmti-10">Multiplier </span>property to <span 
+class="cmtt-10">true</span>. If the
+user now enters &#8221;5&#8221; into such a decimal field, it will show the text &#8221;5%&#8221; and hold the value
+0.05.
+<!--l. 840--><p class="indent" >    As in the case of number fields more extensive options to specify the formatting of the numbers is
+provided by <span 
+class="cmtt-10">setFormat </span>method of the decimal field. Method <span 
+class="cmtt-10">setFormat </span>is accepting an argument of the
+Java class <span 
+class="cmtt-10">DecimalFormat</span>. To demonstrate an example for such a format click on <span 
+class="cmcsc-10">S<span 
+class="small-caps">a</span><span 
+class="small-caps">m</span><span 
+class="small-caps">p</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span></span>
+<span 
+class="cmcsc-10">F<span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">m</span><span 
+class="small-caps">a</span><span 
+class="small-caps">t</span> </span>button in the example form. For more information please consult the Javadoc for class
+<span 
+class="cmtt-10">DecimalFormat</span>.
+    <h3 class="sectionHead"><span class="titlemark">7.5   </span> <a 
+ id="x57-870007.5"></a>Date and Time Fields</h3>
+<!--l. 848--><p class="noindent" >To work with date and time values Scout offers three dinstinct form fields. The <span 
+class="cmtt-10">AbstractDateField</span>
+allows the user to enter a date and the <span 
+class="cmtt-10">AbstractTimeField </span>is used to enter a time. The third field
+<span 
+class="cmtt-10">AbstractDateTimeField </span>combines date and time entry into a single form field. Both classes
+                                                                                 
+
+                                                                                 
+<span 
+class="cmtt-10">AbstractTimeField </span>and <span 
+class="cmtt-10">AbstractDateTimeField </span>are extending the <span 
+class="cmtt-10">AbstractDateField</span>
+field.
+<!--l. 853--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-870015"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 854--><p class="noindent" ><img 
+src="ScoutClient/figures/datetimefield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;7.5: </span><span  
+class="content">Example use cases for a date, a time and a combined date/time field. </span></div><!--tex4ht:label?: x57-870015 -->
+                                                                                 
+
+                                                                                 
+<!--l. 858--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 860--><p class="indent" >    The form <span 
+class="cmtt-10">DateTimeFieldsForm </span>of the Scout widget application shown in Figure&#x00A0;<a 
+href="#x57-870015">7.5<!--tex4ht:ref: fig:datetimefield --></a> contains
+examples for the date and time fields of Scout. Separate buttons are available to provide samle values and
+to demonstrate the formatting options for displaying date and time values. Displaying dates and times is
+highly depending on the used locale. That is why the currently used locale is shown in the example
+section of the form.
+<!--l. 865--><p class="indent" >    To enter date and time values the user can either click on the date and time icons/buttons provided
+by the fields or directly enter text into the fields. For entering dates the key arrows provide a number of
+shortcuts. Entering the currnt date can be done by pressing the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">U<span 
+class="small-caps">p</span></span><span 
+class="cmmi-10">&#x003E;</span>. Once a day is entered in a date or
+a combined day time field, the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">U<span 
+class="small-caps">p</span></span><span 
+class="cmmi-10">&#x003E; </span>and the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">D<span 
+class="small-caps">o</span><span 
+class="small-caps">w</span><span 
+class="small-caps">n</span></span><span 
+class="cmmi-10">&#x003E; </span>can be used to step to the next/previous day.
+Simultaneously pressing the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">S<span 
+class="small-caps">h</span><span 
+class="small-caps">i</span><span 
+class="small-caps">f</span><span 
+class="small-caps">t</span></span><span 
+class="cmmi-10">&#x003E; </span>or the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">C<span 
+class="small-caps">t</span><span 
+class="small-caps">r</span><span 
+class="small-caps">l</span></span><span 
+class="cmmi-10">&#x003E; </span>allows to step to the next/previous month or
+year.
+    <!--l. 878--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 878--><p class="indent" >    <a 
+ id="x57-87002r6"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-87003"></a>
+
+       <div class="caption" 
+><span class="id">Listing&#x00A0;7.6:
+       </span><span  
+class="content">A
+       disabled
+       combined
+       date
+       time
+       field
+       initialized
+       with
+       the
+       current
+       time</span></div><!--tex4ht:label?: x57-87002r7.5 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87004r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(140.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87005r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">DateTimeDisabledField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx57-87006"></a><span 
+class="cmssi-10">AbstractDateTimeField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87007r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87008r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87009r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredEnabled</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87010r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">false</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87011r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87012r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87013r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87014r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87015r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Disabled</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87016r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87017r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87018r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87019r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">void</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">execInitField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87020r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">setValue</span><span 
+class="cmss-10">(</span><span 
+class="cmssbx-10">new</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Date</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87021r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-87022r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 880--><p class="indent" >    The code of the <span 
+class="cmtt-10">DateTimeDisabledField </span>field shown in Listing&#x00A0;<a 
+href="#x57-87002r6">7.6<!--tex4ht:ref: lst:field.datetime.disabled --></a> represents the disabled combined
+date time in the example form. Before the form is opened Scout executes its <span 
+class="cmtt-10">execInitField </span>method and
+sets the fields value to the current date and time.
+<!--l. 883--><p class="indent" >    In the configuration section the local can be used at runtime to test the effect of the locale to
+displaying date and time fields. As changing the locale at runtime only works reliably in rich clients the
+field is only editable in the Swing or the SWT client. To specify the exact formatting of the displayed
+date and time values a specific format can be set in the <span 
+class="cmtt-10">getConfiguredFormat </span>method of the date and
+time fields. Internally, Scout is using the provided string to create a Java <span 
+class="cmtt-10">SimpleDateFormat</span>
+for formatting. Valid examples for the formatting are entered into the format fields of the
+example dialog by pressing the <span 
+class="cmcsc-10">S<span 
+class="small-caps">a</span><span 
+class="small-caps">m</span><span 
+class="small-caps">p</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span> F<span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">m</span><span 
+class="small-caps">a</span><span 
+class="small-caps">t</span><span 
+class="small-caps">s</span> </span>button. The string &#8221;EEEE&#8221; shown in
+date field format field represents the day of the week as shown in configuration section of
+Figure&#x00A0;<a 
+href="#x57-870015">7.5<!--tex4ht:ref: fig:datetimefield --></a>. As expected, the textual representation of the day of the week is depending on the used
+locale.
+    <h3 class="sectionHead"><span class="titlemark">7.6   </span> <a 
+ id="x57-880007.6"></a>Checkbox Fields</h3>
+<!--l. 894--><p class="noindent" >Check boxes can be used to enter/represent simple boolean values. In Scout, check boxes are derived from
+class <span 
+class="cmtt-10">AbstractCheckBox</span>.
+<!--l. 897--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-880016"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 898--><p class="noindent" ><img 
+src="ScoutClient/figures/checkboxfield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;7.6: </span><span  
+class="content">Check box field and example use cases. </span></div><!--tex4ht:label?: x57-880016 -->
+                                                                                 
+
+                                                                                 
+<!--l. 902--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 904--><p class="indent" >    In the Scout widget application the use of check boxes is demonstrated in the form <span 
+class="cmtt-10">CheckboxFieldForm</span>
+that is shown in Figure&#x00A0;<a 
+href="#x57-880016">7.6<!--tex4ht:ref: fig:checkboxfield --></a>. To access the current value, Scout provides the method <span 
+class="cmtt-10">isChecked </span>for check
+box fields. This naming reflects the boolean state of a check boxes and differs from the other Scout value
+fields that provide a <span 
+class="cmtt-10">getValue </span>method.
+    <!--l. 915--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 915--><p class="indent" >    <a 
+ id="x57-88002r7"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-88003"></a>
+
+     <div class="caption" 
+><span class="id">Listing&#x00A0;7.7:
+     </span><span  
+class="content">A
+     disabled
+     check
+     box
+     field
+     initialized
+     with
+     a
+     checked
+     state</span></div><!--tex4ht:label?: x57-88002r7.6 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88004r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(20.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88005r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">DisabledField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx57-88006"></a><span 
+class="cmssi-10">AbstractCheckBox</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88007r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88008r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88009r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredEnabled</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88010r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">false</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88011r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88012r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88013r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88014r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88015r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Disabled</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88016r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88017r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88018r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88019r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">void</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">execInitField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88020r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">setChecked</span><span 
+class="cmss-10">(</span><span 
+class="cmssbx-10">true</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88021r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88022r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-88023r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 917--><p class="indent" >    A coding example is provided in Listing&#x00A0;<a 
+href="#x57-88002r7">7.7<!--tex4ht:ref: lst:field.checkbox.disabled --></a> for the disabled check box. The initial value is set in
+method <span 
+class="cmtt-10">execInitField </span>using the method <span 
+class="cmtt-10">setChecked</span>.
+    <h3 class="sectionHead"><span class="titlemark">7.7   </span> <a 
+ id="x57-890007.7"></a>Radio Button Fields</h3>
+<!--l. 923--><p class="noindent" >With radio buttons the user can select a single element out of a number of distinct choices. For this, a
+number of radio buttons may be placed into a radio button group field where a radio button group
+extends class <span 
+class="cmtt-10">AbstractRadioButtonGroup</span>. The contained individual buttons are extending class
+<span 
+class="cmtt-10">AbstractRadioButton</span>.
+<!--l. 927--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-890017"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 928--><p class="noindent" ><img 
+src="ScoutClient/figures/radiobuttonfield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;7.7: </span><span  
+class="content">Radio buttons in a radio button group field and example use cases. Assigning distinct
+values to the individual radio buttons allows to query the selected radio button.</span></div><!--tex4ht:label?: x57-890017 -->
+                                                                                 
+
+                                                                                 
+<!--l. 932--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 934--><p class="indent" >    Figure&#x00A0;<a 
+href="#x57-890017">7.7<!--tex4ht:ref: fig:radiobuttonfield --></a> demonstrates the use of radio button groups in Scout. It is implemented in class
+<span 
+class="cmtt-10">RadioButtonGroupFieldForm </span>of the Scout widget application. As shown in the example section of the
+form, radio buttons may have labes and/or icons assigned.
+    <!--l. 945--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 945--><p class="indent" >    <a 
+ id="x57-89002r8"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-89003"></a>
+
+       <div class="caption" 
+><span class="id">Listing&#x00A0;7.8:
+       </span><span  
+class="content">A
+       radio
+       button
+       group
+       defined
+       by
+       a
+       code
+       type</span></div><!--tex4ht:label?: x57-89002r7.7 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89004r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89005r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Default</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89006r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89007r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89008r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89009r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Class</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">?</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ICodeType</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">?,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmmi-10">&#x003E;&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredCodeType</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89010r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">EventTypeCodeType</span><span 
+class="cmss-10">.</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89011r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89012r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89013r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89014r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">void</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">execInitField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89015r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">setValue</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">EventTypeCodeType</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">ExternalCode</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89016r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89017r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89018r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89019r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(20.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89020r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">DisabledGroup</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx57-89021"></a><span 
+class="cmssi-10">AbstractRadioButtonGroup</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 947--><p class="indent" >    The simplest way to define the content of a radio button group is by using its configuration
+properties <span 
+class="cmtt-10">getConfiguredCodeType </span>or <span 
+class="cmtt-10">getConfiguredLookupCall</span>. Listing&#x00A0;<a 
+href="#x57-89002r8">7.8<!--tex4ht:ref: lst:field.radiobuttongroup --></a> provides the
+implementation of &#8221;Default radio button group <span 
+class="cmtt-10">DefaultGroup</span>. This radio button group is typed by the
+generic parameter <span 
+class="cmtt-10">Long </span>and the individual radio buttons are obtained from the code type
+<span 
+class="cmtt-10">EventTypeCodeType </span>specified in method <span 
+class="cmtt-10">getConfiguredCodeType</span>. Please note that the <span 
+class="cmtt-10">Long </span>type
+matches the key type of the codes in the <span 
+class="cmtt-10">EventTypeCodeType</span>. The generic parameter used in the
+definition of a radio button group also determines the type that will be returned by the group&#8217;s <span 
+class="cmtt-10">getValue</span>
+method.
+    <!--l. 959--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 959--><p class="indent" >    <a 
+ id="x57-89022r9"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-89023"></a>
+
+         <div class="caption" 
+><span class="id">Listing&#x00A0;7.9:
+         </span><span  
+class="content">A
+         complete
+         radio
+         button
+         group
+         with
+         two
+         radio
+         buttons
+         with
+         individual
+         radio
+         values
+         assigned</span></div><!--tex4ht:label?: x57-89022r7.7 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89024r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89025r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(20.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89026r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ErrorButton</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractRadioButton</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89027r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89028r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89029r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredIconId</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89030r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractIcons</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">StatusError</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89031r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89032r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89033r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89034r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Object</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredRadioValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89035r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">valueOf</span><span 
+class="cmss-10">(</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">2</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89036r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89037r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89038r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89039r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89040r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89041r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(20.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89042r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ConfigurationBox</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractGroupBox</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89043r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89044r21"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89045r22"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89046r23"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Configure</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89047r24"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89048r25"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89049r26"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89050r27"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabelVisible</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89051r28"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">true</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89052r29"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89053r30"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89054r31"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(10.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89055r32"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">RadioButtonGroup</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractRadioButtonGroup</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89056r33"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89057r34"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89058r35"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89059r36"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">RadioButtonGroup</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89060r37"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89061r38"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89062r39"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-89063r40"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">void</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">execInitField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 961--><p class="indent" >    Alternatively, the individual buttons in a radio button group can also be defined as inner classes.
+This approach has been used for the &#8221;Styled radio button group in the example section of
+the <span 
+class="cmtt-10">RadioButtonGroupFieldForm</span>. The corresponding code is provided in Listing&#x00A0;<a 
+href="#x57-89022r9">7.9<!--tex4ht:ref: lst:field.radiobuttongroup.styled --></a>. The
+type of the value that is returned by the <span 
+class="cmtt-10">getValue </span>method is defined on the radio button
+group. In the provided listing, the <span 
+class="cmtt-10">StyledGroupBox </span>is configured to return a value of the
+type <span 
+class="cmtt-10">Long</span>. Consequently, the individual radio buttons are returning radio values of the type
+<span 
+class="cmtt-10">Long </span>as well in the <span 
+class="cmtt-10">getConfiguredRadioValue </span>methods. The field <span 
+class="cmtt-10">PlaceholderField </span>in the
+radio button group only serves layouting purposes. Without this place holder field, the two
+radio buttons of the styled radio button group would be evenly distributed in the available
+space.
+    <h3 class="sectionHead"><span class="titlemark">7.8   </span> <a 
+ id="x57-900007.8"></a>Buttons and Links</h3>
+<!--l. 973--><p class="noindent" >Buttons and links are used to trigger actions in Scout. Buttons come in two variations, normal push
+buttons and toggle buttons. While buttons have an associated label and/or icon, links can only have a
+label. Buttons extend class <span 
+class="cmtt-10">AbstractButton </span>and links extend <span 
+class="cmtt-10">AbstractLinkButton</span>.
+<!--l. 978--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-900018"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 979--><p class="noindent" ><img 
+src="ScoutClient/figures/buttonlink.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;7.8: </span><span  
+class="content">Buttons and links may be placed on a Scout form to initiate actions. Buttons may
+have an associated icon and/or a label. Links only have a label.</span></div><!--tex4ht:label?: x57-900018 -->
+                                                                                 
+
+                                                                                 
+<!--l. 984--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 986--><p class="indent" >    Example uses of buttons and links are shown in the form <span 
+class="cmtt-10">ButtonLinkFieldsForm </span>of the Scout
+widget application shown in Figure&#x00A0;<a 
+href="#x57-900018">7.8<!--tex4ht:ref: fig:buttonlink --></a>.
+    <!--l. 995--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 995--><p class="indent" >    <a 
+ id="x57-90002r10"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-90003"></a>
+
+       <div class="caption" 
+><span class="id">Listing&#x00A0;7.10:
+       </span><span  
+class="content">A
+       button
+       with
+       a
+       label
+       and
+       an
+       icon
+       that
+       horizontally
+       stretches
+       over
+       the
+       whole
+       column</span></div><!--tex4ht:label?: x57-90002r7.8 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90004r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(80.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90005r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">StyledField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx57-90006"></a><span 
+class="cmssi-10">AbstractButton</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90007r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90008r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90009r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredFillHorizontal</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90010r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">true</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90011r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90012r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90013r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90014r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredIconId</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90015r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractIcons</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">WizardBackButton</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90016r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90017r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90018r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90019r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90020r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Styled</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90021r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90022r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90023r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90024r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredProcessButton</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90025r21"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">false</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90026r22"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90027r23"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 997--><p class="indent" >    In it&#8217;s simplest form a button just extends class <span 
+class="cmtt-10">AbstractButton </span>and overrides <span 
+class="cmtt-10">getConfiguredLabel</span>
+to set the label. The example in Listing&#x00A0;<a 
+href="#x57-90002r10">7.10<!--tex4ht:ref: lst:field.button.styled --></a> also has an icon assigned and stretches over the whole
+column width. In addition, the example button overrides method <span 
+class="cmtt-10">getConfiguredProcessButton </span>to
+return <span 
+class="cmtt-10">false</span>. This has the effect that buttons (and links) appear at the exact location where they are
+defined in a field container. Otherwise, buttons (and links) are placed at the bottom of the container they
+are defined in.
+    <!--l. 1010--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 1010--><p class="indent" >    <a 
+ id="x57-90028r11"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-90029"></a>
+
+       <div class="caption" 
+><span class="id">Listing&#x00A0;7.11:
+       </span><span  
+class="content">A
+       toggle
+       button
+       implementation
+       that
+       changes
+       the
+       label
+       text
+       depending
+       on
+       its
+       toggled
+       state</span></div><!--tex4ht:label?: x57-90028r7.8 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90030r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(100.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90031r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ToggleButtonDefaultField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx57-90032"></a><span 
+class="cmssi-10">AbstractButton</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90033r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90034r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90035r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">int</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredDisplayStyle</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90036r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">DISPLAY</span><span 
+class="cmssi-10">_STYLE</span><span 
+class="cmssi-10">_TOGGLE</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90037r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90038r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90039r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90040r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90041r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">PushToSelect</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90042r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90043r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90044r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90045r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredProcessButton</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90046r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">false</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90047r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90048r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90049r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90050r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">void</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">execToggleAction</span><span 
+class="cmss-10">(</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">selected</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90051r21"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">if</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">selected</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90052r22"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">setLabel</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Selected</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90053r23"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90054r24"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">else</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90055r25"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">setLabel</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">PushToSelect</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90056r26"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90057r27"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-90058r28"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 1012--><p class="indent" >    The code of the default toggle button in the example form of the widget application is
+provided in Listing&#x00A0;<a 
+href="#x57-90028r11">7.11<!--tex4ht:ref: lst:field.togglebutton --></a>. To query the state of a toggle button method <span 
+class="cmtt-10">isSelected </span>can be
+used.
+<!--l. 1015--><p class="indent" >    In the configuration section of the example form the use of mnemonics using the character &amp; is
+demonstrated. Please note, that this feature is not identically available across the different supported UI
+technologies. In the Swing UI shown in Figure&#x00A0;<a 
+href="#x57-900018">7.8<!--tex4ht:ref: fig:buttonlink --></a> the label &#8221;&amp;Toggle&#8221; has the effect, that pressing the
+<span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10"><span 
+class="small-caps">a</span><span 
+class="small-caps">l</span><span 
+class="small-caps">t</span></span><span 
+class="cmmi-10">&#x003E;</span>+<span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">T</span><span 
+class="cmmi-10">&#x003E; </span>key combination changes the toggle state of this button. In the case of the SWT UI the
+<span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10"><span 
+class="small-caps">a</span><span 
+class="small-caps">l</span><span 
+class="small-caps">t</span></span><span 
+class="cmmi-10">&#x003E; </span>key is not necessary. Pressing the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">T</span><span 
+class="cmmi-10">&#x003E; </span>changes the toggle state. In contrast to the Swing UI the
+letter &#8217;T&#8217; is not underlined. To optically indicate shortcut letters in the SWT UI it is recommended to
+adapt the label from &#8221;&amp;Toggle&#8221; to &#8221;[&amp;T]oggle&#8221;. The RAP UI does not currently support mnemonics on
+buttons.
+    <h3 class="sectionHead"><span class="titlemark">7.9   </span> <a 
+ id="x57-910007.9"></a>Message Boxes</h3>
+<!--l. 1027--><p class="noindent" >Message boxes are used to provide information to a user or ask the user simple yes/no questions. In
+Scout, class <span 
+class="cmtt-10">MessageBox </span>provides a number of static convenience methods for this purpose.
+Additionally, message boxes are shown to the user in the case of a processing exception or a veto
+exception<span class="footnote-mark"><a 
+href="scout_frontend58.html#fn1x9"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x57-91001f1"></a> .
+<!--l. 1034--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-910029"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 1035--><p class="noindent" ><img 
+src="ScoutClient/figures/messagebox.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;7.9: </span><span  
+class="content">Message boxes are available for different use cases. The message box shown in front
+is defined by the properties entered in the configuration section.</span></div><!--tex4ht:label?: x57-910029 -->
+                                                                                 
+
+                                                                                 
+<!--l. 1039--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 1041--><p class="indent" >    In the examples section of the <span 
+class="cmtt-10">MessageBoxForm </span>form shown in Figure&#x00A0;<a 
+href="#x57-910029">7.9<!--tex4ht:ref: fig:messagebox --></a> a number of links is
+provided. Clicking on any of these links opens a corresponding message box via the static convenience
+methods available with class <span 
+class="cmtt-10">MessageBox</span>. For example, calling <span 
+class="cmtt-10">MessageBox.showOkMessage(title,</span>
+<span 
+class="cmtt-10">header, info) </span>opens a message box with a title, a header text and some additional information.
+    <!--l. 1052--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 1052--><p class="indent" >    <a 
+ id="x57-91003r12"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x57-91004"></a>
+
+         <div class="caption" 
+><span class="id">Listing&#x00A0;7.12:
+         </span><span  
+class="content">Configuring
+         and
+         starting
+         of
+         a
+         message
+         box.</span></div><!--tex4ht:label?: x57-91003r7.9 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91005r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91006r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">void</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">execClickAction</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91007r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">title</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getTitleField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">getValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91008r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">introText</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getIntroTextField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">getValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91009r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">actionText</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getActionTextField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">getValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91010r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">yesButtonText</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getYesButtonTextField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">getValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91011r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">noButtonText</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getNoButtonTextField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">getValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91012r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">cancelButtonText</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getCancelButtonTextField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">getValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91013r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">hiddenText</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getHiddenTextContentField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">getValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91014r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">iconId</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getIconIdField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">getValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91015r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91016r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">autoCloseMillis</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">NumberUtility</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">nvl</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">getAutoCloseMillisField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">getValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">-</span><span 
+class="cmss-10">1)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91017r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">int</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">defaultReturnValue</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">NumberUtility</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">nvl</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">getDefaultReturnValueField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">getValue</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">IMessageBox</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">CANCEL</span><span 
+class="cmssi-10">_OPTION</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><a 
+ id="dx57-91018"></a><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91019r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91020r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">MessageBox</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">msgbox</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">new</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx57-91021"></a><span 
+class="cmssi-10">MessageBox</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">title</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">introText</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">actionText</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">yesButtonText</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">noButtonText</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">cancelButtonText</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">hiddenText</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">iconId</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91022r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">msgbox</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">setAutoCloseMillis</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">autoCloseMillis</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91023r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91024r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">int</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">result</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">msgbox</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">startMessageBox</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">defaultReturnValue</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91025r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getReturnValueField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">setValue</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">result</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x57-91026r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 1054--><p class="indent" >    In addition to the static convenience methods, message boxes can be configured to meet specific
+requirements by a number of parameters. These parameters are shown in Figure&#x00A0;<a 
+href="#x57-910029">7.9<!--tex4ht:ref: fig:messagebox --></a> in the
+configuration section of the sample form <span 
+class="cmtt-10">MessageBoxForm </span>of the Scout widget application.
+Clicking on the <span 
+class="cmcsc-10">S<span 
+class="small-caps">a</span><span 
+class="small-caps">m</span><span 
+class="small-caps">p</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span> C<span 
+class="small-caps">o</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span> </span>button will fill in example values for the message box
+parameters. The configured message box can them be started by clicking on the <span 
+class="cmti-10">Open the configured</span>
+<span 
+class="cmti-10">MessageBox </span>link. This behaviour is implemented in the link&#8217;s <span 
+class="cmtt-10">execClickAction </span>method
+according to Listing&#x00A0;<a 
+href="#x57-91003r12">7.12<!--tex4ht:ref: lst:field.openmessagebox --></a>. The text below details the purpose of less evident message box
+properties.
+<!--l. 1061--><p class="indent" >    Message box buttons only appear if an non-emtpy label text is assigned to the <span 
+class="cmti-10">Yes Button Text</span>
+property, the <span 
+class="cmti-10">No Button Text </span>property and <span 
+class="cmti-10">Cancel Button Text </span>property. If the <span 
+class="cmti-10">hidden text </span>property has
+a non-empty text assigned, an additional <span 
+class="cmcsc-10">C<span 
+class="small-caps">o</span><span 
+class="small-caps">p</span><span 
+class="small-caps">y</span> </span>button will be added to the message box. An example use
+case is the case of elaborate error messages (or complete stack traces in cases where this does not
+negatively impact the application&#8217;s security). Here the copy button allows to transport this text into the
+system clipboard. From the clipboard the user may decides to paste this text into an email to the
+companys help desk. The <span 
+class="cmti-10">default return value </span>property specifies the return value of the message box if the
+box closes autmatically after the time provided in the <span 
+class="cmti-10">auto close millisecond </span>property has
+passed. If the <span 
+class="cmti-10">auto close millisecond </span>property is set to -1, the message box will not clause
+automatically.
+<!--l. 1069--><p class="indent" >    Once a message box is started with method <span 
+class="cmtt-10">startMessageBox </span>the user interface is blocked until the
+user chooses any of the options or clicks the dialog away. The selected option is the provided by the
+method&#8217;s return value. If the user closes the message box by hitting the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10"><span 
+class="small-caps">e</span><span 
+class="small-caps">s</span><span 
+class="small-caps">c</span></span><span 
+class="cmmi-10">&#x003E; </span>or clicking on the icon to
+close a dialog, the start method of the message box will always return the value <span 
+class="cmtt-10">CANCEL</span><span 
+class="cmtt-10">_OPTION </span>of the
+<span 
+class="cmtt-10">IMessageBox </span>interface.
+                                                                                 
+
+                                                                                 
+    <!--l. 1074--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendch9.html" >next</a>] [<a 
+href="scout_frontendch7.html" >prev</a>] [<a 
+href="scout_frontendch7.html#tailscout_frontendch7.html" >prev-tail</a>] [<a 
+href="scout_frontendch8.html" >front</a>] [<a 
+href="scout_frontend.html#scout_frontendch8.html" >up</a>] </p></div>
+<!--l. 1074--><p class="indent" >    <a 
+ id="tailscout_frontendch8.html"></a>   
+</body></html> 

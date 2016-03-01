@@ -1,0 +1,1239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>2 &#8221;Hello World&#8221; Tutorial</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,info --> 
+<meta name="src" content="book.tex"> 
+<meta name="date" content="2014-02-26 16:18:00"> 
+<link rel="stylesheet" type="text/css" href="book.css"> 
+</head><body 
+>
+    <!--l. 383--><div class="crosslinks"><p class="noindent">[<a 
+href="bookch4.html" >next</a>] [<a 
+href="bookch2.html" >prev</a>] [<a 
+href="bookch2.html#tailbookch2.html" >prev-tail</a>] [<a 
+href="#tailbookch3.html">tail</a>] [<a 
+href="bookpa1.html#bookch3.html" >up</a>] </p></div>
+    <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;2</span><br /><a 
+ id="x31-230002"></a>&#8221;Hello World&#8221; Tutorial</h2>
+<!--l. 386--><p class="noindent" >The &#8221;Hello World&#8221; chapter walks you through the creation of an Eclipse Scout client server
+application. When the user starts the client part of this application, the client connects to the
+server<span class="footnote-mark"><a 
+href="book32.html#fn1x4"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x31-23001f1"></a> 
+and asks for some text content that is to be displayed to the user. Next, the server retrieves the desired
+information and sends it back to the client. The client then copies the content obtained from the server
+into a text field widget. Finally, the client displays the message obtained from the server in a text field
+widget.
+<!--l. 395--><p class="indent" >    The goal of this chapter is to provide a first impression of working with the Scout framework using
+the Scout SDK. We will start by building the application from scratch and then we&#8217;ll deploy the
+complete application to a Tomcat web server. Except for a single line of code in the server part
+of the &#8221;Hello World&#8221; application, we will only be using the tooling provided by the Scout
+SDK.
+<!--l. 399--><p class="indent" >    Based on this simple &#8221;Hello World&#8221; applications a large number of Scout concepts
+can be illustrated. Rather than including this background material in this tutorial, such
+information is provided separately in Chapter&#x00A0;<a 
+href="bookch4.html#x40-320003">3<!--tex4ht:ref: cha:helloworld_background --></a>. This tutorial is also available in the Scout
+wiki<span class="footnote-mark"><a 
+href="book33.html#fn2x4"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x31-23002f2"></a> .
+    <h3 class="sectionHead"><span class="titlemark">2.1   </span> <a 
+ id="x31-240002.1"></a>Installation and Setup</h3>
+<!--l. 408--><p class="noindent" >Before you can start with the &#8221;Hello World&#8221; example you need to have a complete and working Scout
+installation. For this, see the step-by-step installation guide provided in Appendix&#x00A0;<a 
+href="bookap2.html#x97-87000B">B<!--tex4ht:ref: apx:install_scout --></a>. Once you have
+everything installed, you are ready to create your first Scout project.
+<!--l. 413--><p class="noindent" >
+    <h3 class="sectionHead"><span class="titlemark">2.2   </span> <a 
+ id="x31-250002.2"></a>Create a new Project</h3>
+<a 
+ id="dx31-25001"></a>
+<!--l. 417--><p class="noindent" >Start your Eclipse IDE and select an empty directory for your workspace. This workspace directory will
+then hold all the project code for the &#8221;Hello World&#8221; application. In the started Eclipse IDE, you can then
+create a new Scout project by selecting the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> S<span 
+class="small-caps">c</span><span 
+class="small-caps">o</span><span 
+class="small-caps">u</span><span 
+class="small-caps">t</span> P<span 
+class="small-caps">r</span><span 
+class="small-caps">o</span><span 
+class="small-caps">j</span><span 
+class="small-caps">e</span><span 
+class="small-caps">c</span><span 
+class="small-caps">t</span>... </span>context menu as shown in
+Figure&#x00A0;<a 
+href="#x31-250021">2.1<!--tex4ht:ref: fig:sdk_create_new_scout_project --></a>. Alternatively, you can also use the Eclipse <span 
+class="cmcsc-10">F<span 
+class="small-caps">i</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span>&#8212;N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span>&#8212;P<span 
+class="small-caps">r</span><span 
+class="small-caps">o</span><span 
+class="small-caps">j</span><span 
+class="small-caps">e</span><span 
+class="small-caps">c</span><span 
+class="small-caps">t</span>... </span>menu. In this case you
+are shown the generic <span 
+class="cmti-10">New Project </span>wizard of Eclipse where you can select the <span 
+class="cmti-10">Scout Project </span>wizard below
+                                                                                 
+
+                                                                                 
+the Scout folder as seen in Figure&#x00A0;<a 
+href="#x31-250032">2.2<!--tex4ht:ref: fig:sdk_new_project_wizard --></a>. With the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span> </span>button you will be directed to the next dialog
+step, the <span 
+class="cmti-10">New Scout Project </span>wizard.
+<!--l. 424--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-250021"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 425--><p class="noindent" ><img 
+src="Introduction/figures/sdk_create_new_scout_project.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.1: </span><span  
+class="content">Create a new Scout project using the Scout SDK perspective.</span></div><!--tex4ht:label?: x31-250021 -->
+                                                                                 
+
+                                                                                 
+<!--l. 428--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 430--><p class="indent" >    In the <span 
+class="cmti-10">New Scout Project </span>wizard enter a name for you Scout project. As we are creating a &#8221;Hello
+World&#8221; application, use <span 
+class="cmtt-10">org.eclipsescout.helloworld </span>for the <span 
+class="cmti-10">Project Name </span>field. Now, click the
+<span 
+class="cmcsc-10">F<span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">i</span><span 
+class="small-caps">s</span><span 
+class="small-caps">h</span> </span>button to let the Scout SDK create the initial project code for you.
+<!--l. 434--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-250032"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 435--><p class="noindent" ><img 
+src="Introduction/figures/sdk_new_project_1.png" alt="PIC"  
+> &#x00A0;     <img 
+src="Introduction/figures/sdk_new_project_2.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.2: </span><span  
+class="content">The new project wizard. The dialog on the left side is only shown when using the
+generic <span 
+class="cmti-10">New Project </span>wizard of Eclipse</span></div><!--tex4ht:label?: x31-250032 -->
+<a 
+ id="dx31-25004"></a>
+                                                                                 
+
+                                                                                 
+<!--l. 440--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 442--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-250053"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 443--><p class="noindent" ><img 
+src="Introduction/figures/sdk_initial_helloworld_project.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.3: </span><span  
+class="content">The Scout SDK showing the tree representation of our &#8221;Hello World&#8221; application in
+the Scout Explorer. Scout Object Properties displays the product launchers for the server and the
+available clients.</span></div><!--tex4ht:label?: x31-250053 -->
+                                                                                 
+
+                                                                                 
+<!--l. 447--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 449--><p class="indent" >    Once the initial project code is built, the Scout SDK displays the application model in the <span 
+class="cmti-10">Scout</span>
+<span 
+class="cmti-10">Explorer</span>. This model is visually presented as a tree structure covering both the client and the server part
+of the application. In Figure&#x00A0;<a 
+href="#x31-250053">2.3<!--tex4ht:ref: fig:sdk_initial_helloworld_project --></a> the Scout Explorer displays the top level elements of the complete Scout
+application.
+    <h3 class="sectionHead"><span class="titlemark">2.3   </span> <a 
+ id="x31-260002.3"></a>Run the Initial Application</h3>
+<!--l. 457--><p class="noindent" >After the initial project creation step we are ready to start the server and the clients of the still
+empty Scout application. For this, we switch to the Scout Explorer and select the root node
+<span 
+class="cmti-10">org.eclipse.scout.helloworld</span>. Selecting the application&#8217;s <span 
+class="cmti-10">org.eclipse.scout.helloworld </span>node in the Scout
+Explorer displays the product launchers in the <span 
+class="cmti-10">Scout Object Properties</span>. As we can see in Figure&#x00A0;<a 
+href="#x31-260014">2.4<!--tex4ht:ref: fig:start_client --></a>, we
+have product launchers for four different development products.
+    <div class="tabular"> <table id="TBL-2" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-2-1g"><col 
+id="TBL-2-1"><col 
+id="TBL-2-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-2-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-1-1"  
+class="td11"><span 
+class="cmbx-10">RAP </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-1-2"  
+class="td11">The RAP server application for web and mobile clients</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-1"  
+class="td11"><span 
+class="cmbx-10">Swing </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-2"  
+class="td11">The Scout Swing desktop client application               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-1"  
+class="td11"><span 
+class="cmbx-10">SWT  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-2"  
+class="td11">The Scout SWT desktop client application                </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-4-1"  
+class="td11"><span 
+class="cmbx-10">Server</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-4-2"  
+class="td11">The Scout server application                                   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-5-1"  
+class="td11">      </td> </tr></table>
+</div>
+<!--l. 469--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-260014"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 470--><p class="noindent" ><img 
+src="Introduction/figures/sdk_start_client_product.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.4: </span><span  
+class="content">Starting the SWT client in the Scout SDK using the provided SWT product launcher.
+Make sure to start the server before starting any client product.</span></div><!--tex4ht:label?: x31-260014 -->
+<a 
+ id="dx31-26002"></a>
+                                                                                 
+
+                                                                                 
+<!--l. 474--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 476--><p class="indent" >    Each product launcher box provides a link to the corresponding Eclipse product
+file<span class="footnote-mark"><a 
+href="book34.html#fn3x4"><sup class="textsuperscript">3</sup></a></span><a 
+ id="x31-26003f3"></a> , the
+configuration file<span class="footnote-mark"><a 
+href="book35.html#fn4x4"><sup class="textsuperscript">4</sup></a></span><a 
+ id="x31-26004f4"></a> ,
+as well as three launcher icons to start and stop the corresponding application. The green <span 
+class="cmcsc-10">C<span 
+class="small-caps">i</span><span 
+class="small-caps">r</span><span 
+class="small-caps">c</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span> </span>icon
+starts the product in normal mode. The <span 
+class="cmcsc-10">B<span 
+class="small-caps">u</span><span 
+class="small-caps">g</span> </span>icon just below, starts a product in debug mode. To
+terminate a running product, the red <span 
+class="cmcsc-10">S<span 
+class="small-caps">q</span><span 
+class="small-caps">u</span><span 
+class="small-caps">a</span><span 
+class="small-caps">r</span><span 
+class="small-caps">e</span> </span>icon is provided. Alternatively, you can also stop products
+by clicking on the same red icon in the console view. This is shown on the right hand side of Figure&#x00A0;<a 
+href="#x31-260014">2.4<!--tex4ht:ref: fig:start_client --></a>.
+Client products may also be stopped by closing the client&#8217;s main window or using the provided
+<span 
+class="cmcsc-10">F<span 
+class="small-caps">i</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span>&#8212;E<span 
+class="small-caps">x</span><span 
+class="small-caps">i</span><span 
+class="small-caps">t</span> </span>menu.
+<!--l. 490--><p class="indent" >    Before any of the client products is started, we need to start the server product using the green circle
+or the bug launcher icon. During startup of the Scout server you should see console output similar to
+the one shown on the right hand side of Figure&#x00A0;<a 
+href="#x31-260014">2.4<!--tex4ht:ref: fig:start_client --></a>. Once the server is running, you may
+start the SWT client as shown in Figure&#x00A0;<a 
+href="#x31-260014">2.4<!--tex4ht:ref: fig:start_client --></a>, the Swing client, and the RAP server in the
+same way. With a running RAP product, you may also display the Scout client in a web
+browser. Just type the address <span 
+class="cmtt-10">http://localhost:8082/web </span>into the browser&#8217;s navigation
+bar.
+<!--l. 496--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-260055"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 497--><p class="noindent" ><img 
+src="Introduction/figures/hellworld_empty_swing.png" alt="PIC"  
+>     <img 
+src="Introduction/figures/hellworld_empty_swt.png" alt="PIC"  
+>     <img 
+src="Introduction/figures/hellworld_empty_rap.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.5: </span><span  
+class="content">Running the three client applications. Each client displays an empty desktop form.
+From left to right: The Swing client, the SWT client, and the web client</span></div><!--tex4ht:label?: x31-260055 -->
+                                                                                 
+
+                                                                                 
+<!--l. 504--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 506--><p class="indent" >    Having started the Scout server and all client products, the client applications should become visible
+as shown in Figure&#x00A0;<a 
+href="#x31-260055">2.5<!--tex4ht:ref: fig:helloworld_empty --></a>.
+    <h3 class="sectionHead"><span class="titlemark">2.4   </span> <a 
+ id="x31-270002.4"></a>The User Interface Part</h3>
+<!--l. 512--><p class="noindent" >In this section we will define the user interface (UI) model for the &#8221;Hello World&#8221; application. More
+specifically, we add a text field widget to the client&#8217;s empty desktop form of the &#8221;Hello World&#8221; application. In
+the steps described below, we use the <span 
+class="cmti-10">New Form Field </span>wizard provided by the Scout SDK. First, we add
+a group box field to the desktop form. Then, we apply this wizard a second time to add the actual text
+widget<span class="footnote-mark"><a 
+href="book36.html#fn5x4"><sup class="textsuperscript">5</sup></a></span><a 
+ id="x31-27001f5"></a> .
+<!--l. 520--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-270026"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 521--><p class="noindent" ><img 
+src="Introduction/figures/sdk_new_field_wizard_menu.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.6: </span><span  
+class="content">Using the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> F<span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">m</span> F<span 
+class="small-caps">i</span><span 
+class="small-caps">e</span><span 
+class="small-caps">l</span><span 
+class="small-caps">d</span> ... </span>menu to start the form field wizard provided by the
+Scout SDK.</span></div><!--tex4ht:label?: x31-270026 -->
+                                                                                 
+
+                                                                                 
+<!--l. 524--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 526--><p class="indent" >    To add any widgets to the desktop form we first need to navigate to the <span 
+class="cmti-10">DesktopForm </span>in the Scout
+Explorer. By clicking on the small plus icon on the left hand side of the <span 
+class="cmti-10">DesktopForm </span>this element is
+expanded and the <span 
+class="cmti-10">MainBox </span>element becomes visible below. With a click of the right mouse button over
+the <span 
+class="cmti-10">MainBox</span>, the available context menus are displayed. To start the form field wizard we select the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span></span>
+<span 
+class="cmcsc-10">F<span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">m</span> F<span 
+class="small-caps">i</span><span 
+class="small-caps">e</span><span 
+class="small-caps">l</span><span 
+class="small-caps">d</span> ... </span>menu as shown in Figure&#x00A0;<a 
+href="#x31-270026">2.6<!--tex4ht:ref: fig:new_field_context_menu --></a>.
+<!--l. 531--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-270037"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 532--><p class="noindent" ><img 
+src="Introduction/figures/sdk_new_field_groupbox_1.png" alt="PIC"  
+> &#x00A0;&#x00A0;        <img 
+src="Introduction/figures/sdk_new_field_groupbox_2.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.7: </span><span  
+class="content">Adding the <span 
+class="cmti-10">DesktopBox </span>field with the Scout SDK form field wizard.</span></div><!--tex4ht:label?: x31-270037 -->
+<a 
+ id="dx31-27004"></a>
+                                                                                 
+
+                                                                                 
+<!--l. 537--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 539--><p class="indent" >    In the first dialog of the form field wizard shown on the left side of Figure&#x00A0;<a 
+href="#x31-270037">2.7<!--tex4ht:ref: fig:helloworld_groupboxfield --></a>, we choose the form
+field type. To select the desired field type, we either select the desired type with the mouse or use the
+search field to filter the list of available field types. In the second wizard dialog, we do not
+provide a label for the group box in the <span 
+class="cmti-10">Name </span>field. As we have only a single group box in the
+&#8221;Hello World&#8221; desktop form we omit the name and enter &#8217;Desktop&#8217; into the <span 
+class="cmti-10">Class Name</span>
+field before we close the wizard with the <span 
+class="cmcsc-10">F<span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">i</span><span 
+class="small-caps">s</span><span 
+class="small-caps">h</span> </span>button. This step is shown on the right side
+of Figure&#x00A0;<a 
+href="#x31-270037">2.7<!--tex4ht:ref: fig:helloworld_groupboxfield --></a>. The Scout SDK will add the necessary Java code for the <span 
+class="cmtt-10">DesktopBox </span>in the
+background.
+<!--l. 546--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-270058"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 547--><p class="noindent" ><img 
+src="Introduction/figures/sdk_new_field_stringfield_1.png" alt="PIC"  
+> &#x00A0;&#x00A0;        <img 
+src="Introduction/figures/sdk_new_field_stringfield_2.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.8: </span><span  
+class="content">Adding a <span 
+class="cmti-10">StringField </span>and providing a new translation entry.</span></div><!--tex4ht:label?: x31-270058 -->
+<a 
+ id="dx31-27006"></a>
+                                                                                 
+
+                                                                                 
+<!--l. 552--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 554--><p class="indent" >    To add the text field widget to the group box just created, we navigate to the corresponding
+<span 
+class="cmti-10">DesktopBox </span>in the Scout Explorer. For this, we click on the small plus icon on the left hand side of the
+<span 
+class="cmti-10">MainBox </span>to expand this node and make the <span 
+class="cmti-10">DesktopBox </span>element visible. On <span 
+class="cmti-10">DesktopBox </span>we again use
+the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> F<span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">m</span> F<span 
+class="small-caps">i</span><span 
+class="small-caps">e</span><span 
+class="small-caps">l</span><span 
+class="small-caps">d</span> ... </span>menu. In the first wizard dialog, we select <span 
+class="cmti-10">StringField </span>using &#8217;st&#8217; as a search
+criteria and click the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span> </span>button to open the second wizard dialog. In the second wizard
+dialog, we enter &#8217;Message&#8217; into the <span 
+class="cmti-10">Name </span>field. As we do not yet have the text &#8217;Message&#8217;
+available in our &#8221;Hello World&#8221; application the wizard prompts the user with the proposal <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span></span>
+<span 
+class="cmcsc-10">T<span 
+class="small-caps">r</span><span 
+class="small-caps">a</span><span 
+class="small-caps">n</span><span 
+class="small-caps">s</span><span 
+class="small-caps">l</span><span 
+class="small-caps">a</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">d</span> T<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span> ...</span>. Selecting the provided option we can add a new text entry as shown in
+Figure&#x00A0;<a 
+href="#x31-270058">2.8<!--tex4ht:ref: fig:helloworld_stringfield --></a>. Once we have provided some initial translation for our message label, we can close the
+translation dialog with the <span 
+class="cmcsc-10">O<span 
+class="small-caps">k</span> </span>button. Finally, we close the form field wizard using the <span 
+class="cmcsc-10">F<span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">i</span><span 
+class="small-caps">s</span><span 
+class="small-caps">h</span></span>
+button.
+<!--l. 564--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-270079"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 565--><p class="noindent" ><img 
+src="Introduction/figures/sdk_helloworld_messagefield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.9: </span><span  
+class="content">Scout SDK showing the <span 
+class="cmti-10">MessageField</span></span></div><!--tex4ht:label?: x31-270079 -->
+                                                                                 
+
+                                                                                 
+<!--l. 568--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 570--><p class="indent" >    By expanding the <span 
+class="cmti-10">DesktopBox </span>element in the Scout Explorer, the new message field becomes visible.
+A double click on the message field element then loads the corresponding Java code into an Editor as
+shown in Figure&#x00A0;<a 
+href="#x31-270079">2.9<!--tex4ht:ref: fig:helloworld_messagefield --></a>. If you are following this tutorial with your own Eclipse Scout installation
+compare your status with this screenshot. Make sure that the project structure in the Scout
+Explorer looks as shown in Figure&#x00A0;<a 
+href="#x31-270079">2.9<!--tex4ht:ref: fig:helloworld_messagefield --></a> and a double click to the <span 
+class="cmti-10">MessageField </span>both loads
+the corresponding Java code and displays the message field&#8217;s properties in the Scout Object
+Properties.
+<!--l. 575--><p class="indent" >    Having verified your status of the &#8221;Hello World&#8221; application you can start the application as
+described in Section&#x00A0;<a 
+href="#x31-260002.3">2.3<!--tex4ht:ref: sec:run_initial --></a>. The client applications will then display your message widget. However, the text
+widget is still empty, as we did not yet load any initial content into it. This is the topic of the next section
+where we continue the tutorial with the server part.
+    <h3 class="sectionHead"><span class="titlemark">2.5   </span> <a 
+ id="x31-280002.5"></a>The Server Part</h3>
+<!--l. 584--><p class="noindent" >The responsibility of the server part in our &#8221;Hello World&#8221; application is to provide an initial text content
+for the message field in the client&#8217;s user interface. We implement this behaviour in the <span 
+class="cmtt-10">load </span>method of
+the server&#8217;s <span 
+class="cmtt-10">DesktopService</span>. An empty stub for the <span 
+class="cmtt-10">load </span>method and the <span 
+class="cmtt-10">DesktopService </span>service have
+already been created during the initial project creation step described in Section&#x00A0;<a 
+href="#x31-250002.2">2.2<!--tex4ht:ref: sec:create_project_simple --></a>. The
+<span 
+class="cmtt-10">DesktopService </span>represents the server service corresponding to the <span 
+class="cmtt-10">DesktopForm </span>on the client side. This
+initial setup represents Scout&#8217;s standard form processing mechanism where client forms and server
+services typically come in pairs.
+<!--l. 590--><p class="indent" >    Whenever the client&#8217;s user interface displays a form to the user, the client connects to the server and
+calls the <span 
+class="cmtt-10">load </span>method of the corresponding server service. We can now add the business logic to the <span 
+class="cmtt-10">load</span>
+method of the server&#8217;s <span 
+class="cmtt-10">DesktopService </span>to implement the desired behaviour. And this is the last missing
+piece to complete the &#8221;Hello World&#8221; application.
+<!--l. 594--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-2800110"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 595--><p class="noindent" ><img 
+src="Introduction/figures/sdk_server_desktopservice_load.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.10: </span><span  
+class="content">The Scout Explorer showing the blue server node expanded with the <span 
+class="cmti-10">Services </span>folder.
+In this folder the <span 
+class="cmti-10">load </span>method of <span 
+class="cmti-10">DesktopService </span>is selected and its initial implementation is shown
+in the editor on the right side.</span></div><!--tex4ht:label?: x31-2800110 -->
+                                                                                 
+
+                                                                                 
+<!--l. 599--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 601--><p class="indent" >    To navigate to the implementation of the desktop service in the Scout SDK, we first expand the blue
+top-level <span 
+class="cmti-10">server </span>node in the Scout Explorer. Below the server node, we then expand the <span 
+class="cmti-10">Services </span>folder
+which shows the <span 
+class="cmti-10">DesktopService </span>element. Expanding this <span 
+class="cmti-10">DesktopService </span>node, the <span 
+class="cmtt-10">load </span>method becomes
+visible as shown in Figure&#x00A0;<a 
+href="#x31-2800110">2.10<!--tex4ht:ref: fig:helloworld_load_servicemethod --></a>.
+    <!--l. 605-->
+<div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x31-28002r1"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">@Override</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-28003r2"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">public</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">DesktopFormData</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">load</span><span 
+class="cmtt-9">(</span><span 
+class="cmtt-9">DesktopFormData</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">formData</span><span 
+class="cmtt-9">)</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">throws</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">ProcessingException</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">{</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-28004r3"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">//</span><span 
+class="cmtt-9">TODO</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">[</span><span 
+class="cmtt-9">mzi</span><span 
+class="cmtt-9">]</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">Auto</span><span 
+class="cmtt-9">-</span><span 
+class="cmtt-9">generated</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">method</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">stub</span><span 
+class="cmtt-9">.</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-28005r4"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">return</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">formData</span><span 
+class="cmtt-9">;</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-28006r5"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">}</span>
+    </div>
+<!--l. 613--><p class="indent" >    According to the signature of the <span 
+class="cmtt-10">load </span>method, a <span 
+class="cmtt-10">formData </span>object is passed into this method that is
+then handed back in the return statement. To complete the implementation of the <span 
+class="cmtt-10">load </span>method it is
+sufficient to assign the text &#8217;hello world!&#8217; to the message field part of the form data. The only line of Java
+code we write in our &#8221;Hello World&#8221; application is printed below. For the complete implementation of the
+load method see Listing&#x00A0;<a 
+href="#x31-28008r1">2.1<!--tex4ht:ref: lst:helloworld.load --></a>.
+    <!--l. 618-->
+<div class="lstlisting" id="listing-2"><span class="label"><a 
+ id="x31-28007r1"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">formData</span><span 
+class="cmtt-9">.</span><span 
+class="cmtt-9">getMessage</span><span 
+class="cmtt-9">()</span><span 
+class="cmtt-9">.</span><span 
+class="cmtt-9">setValue</span><span 
+class="cmtt-9">(</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">hello</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">world</span><span 
+class="cmtt-9">!</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">)</span><span 
+class="cmtt-9">;</span>
+    </div>
+    <!--l. 629--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 629--><p class="indent" >    <a 
+ id="x31-28008r1"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-28009"></a>
+
+  <div class="caption" 
+><span class="id">Listing&#x00A0;2.1:
+  </span><span  
+class="content">Assigning
+  &#8221;hello
+  world&#8221;
+  to
+  the
+  form
+  data&#8217;s
+  message
+  field.</span></div><!--tex4ht:label?: x31-28008r2.5 --><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-28010r1"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">@Override</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-28011r2"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">public</span><span 
+class="cmtt-9">&#x00A0;</span><a 
+ id="dx31-28012"></a><span 
+class="cmtt-9">DesktopFormData</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">load</span><span 
+class="cmtt-9">(</span><a 
+ id="dx31-28013"></a><span 
+class="cmtt-9">DesktopFormData</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">formData</span><span 
+class="cmtt-9">)</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">throws</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">ProcessingException</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">{</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-28014r3"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">formData</span><span 
+class="cmtt-9">.</span><span 
+class="cmtt-9">getMessage</span><span 
+class="cmtt-9">()</span><span 
+class="cmtt-9">.</span><span 
+class="cmtt-9">setValue</span><span 
+class="cmtt-9">(</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">hello</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">world</span><span 
+class="cmtt-9">!</span><span 
+class="cmtt-9">"</span><span 
+class="cmtt-9">)</span><span 
+class="cmtt-9">;</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-28015r4"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">return</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">formData</span><span 
+class="cmtt-9">;</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-28016r5"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">}</span><span 
+class="cmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-28017r6"></a></span><span 
+class="cmtt-9">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+    <h3 class="sectionHead"><span class="titlemark">2.6   </span> <a 
+ id="x31-290002.6"></a>Add the Rayo Look and Feel</h3>
+<!--l. 634--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-2900111"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 635--><p class="noindent" ><img 
+src="Introduction/figures/helloworld_message_swing_rayo.png" alt="PIC"  
+> &#x00A0;     <img 
+src="Introduction/figures/helloworld_message_rap_rayo.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.11: </span><span  
+class="content">The &#8221;Hello World&#8221; client application with the Rayo look and feel. The desktop client
+is shown on the left and the web client on the right hand side.</span></div><!--tex4ht:label?: x31-2900111 -->
+                                                                                 
+
+                                                                                 
+<!--l. 639--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 641--><p class="indent" >    For Eclipse Scout applications a slick look and feel called Rayo is available in the Eclipse
+Marketplace<span class="footnote-mark"><a 
+href="book37.html#fn6x4"><sup class="textsuperscript">6</sup></a></span><a 
+ id="x31-29002f6"></a> .
+And in this (optional) part of the &#8221;Hello World&#8221; tutorial we will add Rayo to our &#8221;Hello World&#8221; Swing
+client application. As a result, we will get a Scout desktop application that looks the same as the
+corresponding Scout web client as shown in Figure&#x00A0;<a 
+href="#x31-2900111">2.11<!--tex4ht:ref: fig:helloworld_clientapp --></a>.
+<!--l. 647--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-2900312"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 648--><p class="noindent" ><img 
+src="Introduction/figures/sdk_rayo_add_checkbox.png" alt="PIC"  
+> &#x00A0;     <img 
+src="Introduction/figures/sdk_rayo_confirm_changes.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.12: </span><span  
+class="content">Adding the Rayo Swing look and feel. The Rayo checkbox to activate the look and
+feel is highlighted on the left hand side. The dialog on the right hand side shows the changes in
+the Swing plugin that will be made by the Scout SDK.</span></div><!--tex4ht:label?: x31-2900312 -->
+                                                                                 
+
+                                                                                 
+<!--l. 652--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 654--><p class="indent" >    To add Rayo in the Scout SDK to our &#8221;Hello World&#8221; project, switch to the Scout Explorer and select
+the top-level <span 
+class="cmti-10">org.eclipse.scout.helloworld </span>node. Then, according to Figure&#x00A0;<a 
+href="#x31-2900312">2.12<!--tex4ht:ref: fig:selecting_rayo --></a>, select the checkbox <span 
+class="cmti-10">Rayo</span>
+<span 
+class="cmti-10">Swing Look and Feel for Eclipse Scout </span>under the <span 
+class="cmti-10">Technologies </span>section of the Scout Object Properties.
+This brings up a dialog showing the proposed changes to the Swing plugin of the &#8221;Hello World&#8221;
+application. These changes need to be confirmed with the <span 
+class="cmcsc-10">OK </span>button. The first time the user adds the
+Rayo feature in the Scout SDK, Eclipse needs to download the package from the Eclipse Marketplace.
+This download and subsequent installation of Rayo will make you to go through the following
+steps.
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x31-29005x1">Accept Licence: GPL with Classpath Exception
+     </li>
+     <li 
+  class="enumerate" id="x31-29007x2">Accept unsigned content
+     </li>
+     <li 
+  class="enumerate" id="x31-29009x3">Restart the Eclipse IDE</li></ol>
+<!--l. 667--><p class="indent" >    After the successful download and installation of the Rayo package, start the Swing client using the
+procedure described in Section&#x00A0;<a 
+href="#x31-260002.3">2.3<!--tex4ht:ref: sec:run_initial --></a>. When we also start the web client of the &#8221;Hello World&#8221; application
+using the RAP product launcher, we can compare the result side by side.
+    <h3 class="sectionHead"><span class="titlemark">2.7   </span> <a 
+ id="x31-300002.7"></a>Exporting the Application</h3>
+<!--l. 674--><p class="noindent" >We are now ready to move the finished &#8221;Hello World&#8221; application from our development environment to a
+productive setup. The simplest option to move our application into the &#8217;wild&#8217; is to use the <span 
+class="cmti-10">Export Scout</span>
+<span 
+class="cmti-10">Project </span>wizard provided by the Scout SDK. Using the default settings, the export wizard produces two WAR
+files<span class="footnote-mark"><a 
+href="book38.html#fn7x4"><sup class="textsuperscript">7</sup></a></span><a 
+ id="x31-30001f7"></a> 
+that contain the complete Scout server and the desktop and mobile client applications.
+<!--l. 681--><p class="indent" >    To deploy the application to a web server the WAR files generated by the wizard are the only
+artefacts needed. The first WAR file contains the Scout server including a zipped desktop client for
+downloading. In the second WAR file, the RAP server application that provides both the web client and
+the client for mobile devices.
+<!--l. 685--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-3000213"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 686--><p class="noindent" ><img 
+src="Introduction/figures/sdk_export_war_menu.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.13: </span><span  
+class="content">Starting the <span 
+class="cmti-10">Export Scout Project </span>wizard in the Scout SDK with the context menu.
+In the first wizard step, the target directory for the WAR files and the artefacts to export are
+specified.</span></div><!--tex4ht:label?: x31-3000213 -->
+<a 
+ id="dx31-30003"></a>
+                                                                                 
+
+                                                                                 
+<!--l. 691--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 693--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-3000414"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 694--><p class="noindent" ><img 
+src="Introduction/figures/export_wizard_1.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.14: </span><span  
+class="content">The first dialog of the <span 
+class="cmti-10">Export Scout Project </span>wizard. Here, the target directory for
+the WAR files that will be generated by the wizard is specified.</span></div><!--tex4ht:label?: x31-3000414 -->
+                                                                                 
+
+                                                                                 
+<!--l. 698--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 700--><p class="indent" >    To start the export wizard, we start the Scout SDK with the &#8221;Hello World&#8221; Scout project. In the
+Scout Explorer we then select the corresponding <span 
+class="cmcsc-10">E<span 
+class="small-caps">x</span><span 
+class="small-caps">p</span><span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">t</span> S<span 
+class="small-caps">c</span><span 
+class="small-caps">o</span><span 
+class="small-caps">u</span><span 
+class="small-caps">t</span> P<span 
+class="small-caps">r</span><span 
+class="small-caps">o</span><span 
+class="small-caps">j</span><span 
+class="small-caps">e</span><span 
+class="small-caps">c</span><span 
+class="small-caps">t</span>... </span>context menu on the &#8221;Hello
+World&#8221; top level application node as shown in Figure&#x00A0;<a 
+href="#x31-3000213">2.13<!--tex4ht:ref: fig:sdk_export_war --></a>. In the first wizard dialog shown in Figure&#x00A0;<a 
+href="#x31-3000414">2.14<!--tex4ht:ref: fig:export_wizard_1 --></a>,
+the target directory for the WAR files needs to be specified. You may choose any directory as the target
+directory<span class="footnote-mark"><a 
+href="book39.html#fn8x4"><sup class="textsuperscript">8</sup></a></span><a 
+ id="x31-30005f8"></a> .
+After clicking <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span> </span>button the second wizard step proposes the server product file that specifies the
+artefacts to be exported including the file name for the WAR file for the &#8221;Hello World&#8221; server
+application. Typically, the proposed default values are fine. Move to the third dialog with <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span></span>
+button.
+<!--l. 711--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-3000615"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 712--><p class="noindent" ><img 
+src="Introduction/figures/export_wizard_3.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.15: </span><span  
+class="content">The third dialog of the <span 
+class="cmti-10">Export Scout Project </span>wizard defines the client application to
+be included in the <span 
+class="cmtt-10">helloworld</span><span 
+class="cmtt-10">_server.war </span>file. In the last step of the export wizard the RAP
+sever is exported to the specified file name (right).</span></div><!--tex4ht:label?: x31-3000615 -->
+                                                                                 
+
+                                                                                 
+<!--l. 716--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 718--><p class="indent" >    In the third dialog of the <span 
+class="cmti-10">Export Scout Project </span>wizard the desktop client to be included in the WAR
+file needs to be specified. The default selection is set to the SWT client application. For the &#8221;Hello
+World&#8221; example, we want to include the Swing client application with the Rayo Look and Feel. For this,
+we need to change the selected product to <span 
+class="cmti-10">helloworld-swing-client.product (production) </span>according to
+Figure&#x00A0;<a 
+href="#x31-3000615">2.15<!--tex4ht:ref: fig:export_wizard_3 --></a>. With <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span> </span>button we move to the last wizard step.
+<!--l. 724--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-3000716"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 725--><p class="noindent" ><img 
+src="Introduction/figures/export_wizard_4.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.16: </span><span  
+class="content">The last dialog of the <span 
+class="cmti-10">Export Scout Project </span>wizard defines the export of the RAP
+server. Normally, the proposed field values do not need any adjustments.</span></div><!--tex4ht:label?: x31-3000716 -->
+                                                                                 
+
+                                                                                 
+<!--l. 729--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 731--><p class="indent" >    In the last wizard dialog shown in Figure&#x00A0;<a 
+href="#x31-3000716">2.16<!--tex4ht:ref: fig:export_wizard_4 --></a>, the RAP server product and the corresponding WAR
+file name are specified. Normally, the proposed field values are fine and we can close the wizard with
+<span 
+class="cmcsc-10">F<span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">i</span><span 
+class="small-caps">s</span><span 
+class="small-caps">h</span> </span>button. After this last step, the Scout SDK is assembling the necessary artefacts and building the
+two &#8221;Hello World&#8221; WAR files. These two WAR files are the only items needed for deploying the &#8221;Hello
+World&#8221; application to a web server
+    <h3 class="sectionHead"><span class="titlemark">2.8   </span> <a 
+ id="x31-310002.8"></a>Deploying to Tomcat</h3>
+<!--l. 740--><p class="noindent" >As the final step of this tutorial, we deploy the two WAR files representing our &#8221;Hello World&#8221;
+application to a Tomcat web server. For this, we first need a working Tomcat installation. If you do
+not yet have such an installation you may want to read and follow the instructions provided
+in Appendix&#x00A0;<a 
+href="bookap3.html#x105-95000C">C<!--tex4ht:ref: apx:install_tomcat --></a>. To verify a running Tomcat instance, type <a 
+href="http://localhost:8080/" class="url" ><span 
+class="cmtt-10">http://localhost:8080/</span></a> into
+the address bar of the web browser of your choice. You should then see the page shown in
+Figure&#x00A0;<a 
+href="#x31-3100117">2.17<!--tex4ht:ref: fig:deploy_tomcat_1 --></a>.
+<!--l. 746--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-3100117"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 747--><p class="noindent" ><img 
+src="Introduction/figures/tomcat_managerapp_login.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.17: </span><span  
+class="content">The Tomcat shown after a successful installation. After clicking on the &#8221;Manager
+App&#8221; button (highlighted in red) the login box is shown in front. A successful login shows the
+&#8221;Tomcat Web Application Manager&#8221;.</span></div><!--tex4ht:label?: x31-3100117 -->
+                                                                                 
+
+                                                                                 
+<!--l. 752--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 754--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-3100218"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 755--><p class="noindent" ><img 
+src="Introduction/figures/tomcat_managerapp_selectwar.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.18: </span><span  
+class="content">The &#8221;Tomcat Web Application Manager&#8221;. The WAR files to be deployed can then
+be selected using button &#8221;Choose File&#8221; highlighted in red.</span></div><!--tex4ht:label?: x31-3100218 -->
+                                                                                 
+
+                                                                                 
+<!--l. 759--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 761--><p class="indent" >    Once the web browser displays the successful running of your Tomcat instance, switch to its
+&#8221;Manager App&#8221; by clicking on the button highlighted in Figure&#x00A0;<a 
+href="#x31-3100117">2.17<!--tex4ht:ref: fig:deploy_tomcat_1 --></a>. After entering user name and
+password the browser will display the &#8221;Tomcat Web Application Manager&#8221; as shown in Figure&#x00A0;<a 
+href="#x31-3100218">2.18<!--tex4ht:ref: fig:deploy_tomcat_2 --></a>. If
+you don&#8217;t know the correct username or password you may look it up in the file <span class="path"><span 
+class="cmtt-10">tomcat-users.xml</span></span> as
+described in Appendix&#x00A0;<a 
+href="bookap3.html#x105-97000C.2">C.2<!--tex4ht:ref: apx:tomcat_dirs_and_files --></a>.
+<!--l. 765--><p class="indent" >    After logging successfully into Tomcats manager application, you can select the WAR file(s) to be
+deployed using button &#8221;Choose File&#8221; according to the right hand side of Figure&#x00A0;<a 
+href="#x31-3100218">2.18<!--tex4ht:ref: fig:deploy_tomcat_2 --></a>. After picking your
+<span class="path"><span 
+class="cmtt-10">helloworld_server.war</span></span> and <span class="path"><span 
+class="cmtt-10">helloworld.war</span></span> file and closing the file chooser, click on button &#8221;Deploy&#8221;
+(located below button &#8221;Choose File&#8221;) to deploy the application to the Tomcat web server.
+This will copy the selected WAR file into Tomcats <span class="path"><span 
+class="cmtt-10">webapps</span></span> directory and unpack its content
+into a subdirectory with the same name. Deploying the file <span class="path"><span 
+class="cmtt-10">helloworld.war</span></span> will extract its
+contents into a subdirectory named <span class="path"><span 
+class="cmtt-10">helloworld</span></span> as shown in Figure&#x00A0;<span 
+class="cmbx-10">??</span>. Accordingly, the file
+<span class="path"><span 
+class="cmtt-10">helloworld_server.war</span></span> will be extracted into subdirectory <span class="path"><span 
+class="cmtt-10">helloworld_server</span></span>. You can now
+connect to the deployed application using the browser of your choice and enter the following
+address.
+    <!--l. 772-->
+<div class="lstlisting" id="listing-3"><span class="label"><a 
+ id="x31-31003r1"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">http</span><span 
+class="cmtt-9">:</span><span 
+class="cmtt-9">//</span><span 
+class="cmtt-9">localhost</span><span 
+class="cmtt-9">:8080/</span><span 
+class="cmtt-9">helloworld_server</span><span 
+class="cmtt-9">/</span>
+    </div>
+<!--l. 776--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-3100419"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 777--><p class="noindent" ><img 
+src="Introduction/figures/tomcat_helloworld_download.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.19: </span><span  
+class="content">The &#8221;Hello World&#8221; home page, providing a link to download the desktop client.</span></div><!--tex4ht:label?: x31-3100419 -->
+                                                                                 
+
+                                                                                 
+<!--l. 780--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 782--><p class="indent" >    You will then see the home page of the server of your &#8221;Hello World&#8221; application shown in
+Figure&#x00A0;<a 
+href="#x31-3100419">2.19<!--tex4ht:ref: fig:helloworld_running_download --></a>. From here you can download the zipped client application that can be saved in a
+directory of your choice. After unpacking the zip file, you may start the executable file named
+<span class="path"><span 
+class="cmtt-10">helloworld</span></span>. This will start the &#8221;Hello World&#8221; client application as shown on the left hand side of
+Figure&#x00A0;<a 
+href="#x31-3100620">2.20<!--tex4ht:ref: fig:helloworld_running_clients --></a>. To start the &#8221;Hello World&#8221; web application, open a browser and enter the following
+address.
+    <!--l. 788-->
+<div class="lstlisting" id="listing-4"><span class="label"><a 
+ id="x31-31005r1"></a></span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">http</span><span 
+class="cmtt-9">:</span><span 
+class="cmtt-9">//</span><span 
+class="cmtt-9">localhost</span><span 
+class="cmtt-9">:8080/</span><span 
+class="cmtt-9">helloworld</span><span 
+class="cmtt-9">/</span>
+    </div>
+<!--l. 792--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x31-3100620"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 793--><p class="noindent" ><img 
+src="Introduction/figures/helloworld_finished_rayo_swing.png" alt="PIC"  
+>&#x00A0;     <img 
+src="Introduction/figures/helloworld_finished_rayo_rap.png" alt="PIC"  
+>&#x00A0;     <img 
+src="Introduction/figures/helloworld_finished_rayo_rap_mobile.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2.20: </span><span  
+class="content">The &#8221;Hello World&#8221; client application running on the desktop, in the browser and on
+a mobile device.</span></div><!--tex4ht:label?: x31-3100620 -->
+                                                                                 
+
+                                                                                 
+<!--l. 798--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 800--><p class="indent" >    Depending on the device your browser is running on you will be redirected to <span 
+class="cmtt-10">helloworld/web </span>on a
+desktop or laptop computer, to <span 
+class="cmtt-10">helloworld/mobile </span>on a mobile device or to <span 
+class="cmtt-10">helloworld/mobile </span>if you
+are connecting from a tablet device. Figure&#x00A0;<a 
+href="#x31-3100620">2.20<!--tex4ht:ref: fig:helloworld_running_clients --></a> shows screenshots for a desktop client, the web
+application and the same application in a mobile browser. As demonstrated in these screenshots
+<span 
+class="cmtt-10">helloworld/web </span>and <span 
+class="cmtt-10">helloworld/mobile </span>lead to a different presentation of the same UI optimized to
+the target form factors of desktop browsers, tablets, and mobile phones.
+                                                                                 
+
+                                                                                 
+    <!--l. 805--><div class="crosslinks"><p class="noindent">[<a 
+href="bookch4.html" >next</a>] [<a 
+href="bookch2.html" >prev</a>] [<a 
+href="bookch2.html#tailbookch2.html" >prev-tail</a>] [<a 
+href="bookch3.html" >front</a>] [<a 
+href="bookpa1.html#bookch3.html" >up</a>] </p></div>
+<!--l. 805--><p class="indent" >    <a 
+ id="tailbookch3.html"></a>   
+</body></html> 

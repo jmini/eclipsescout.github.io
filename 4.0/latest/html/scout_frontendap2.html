@@ -1,0 +1,689 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>B Scout Installation</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,info --> 
+<meta name="src" content="scout_frontend.tex"> 
+<meta name="date" content="2015-03-04 17:09:00"> 
+<link rel="stylesheet" type="text/css" href="scout_frontend.css"> 
+</head><body 
+>
+    <!--l. 16--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendap3.html" >next</a>] [<a 
+href="scout_frontendap1.html" >prev</a>] [<a 
+href="scout_frontendap1.html#tailscout_frontendap1.html" >prev-tail</a>] [<a 
+href="#tailscout_frontendap2.html">tail</a>] [<a 
+href="scout_frontendpa1.html#scout_frontendap2.html" >up</a>] </p></div>
+    <h2 class="appendixHead"><span class="titlemark">Appendix&#x00A0;B</span><br /><a 
+ id="x71-142000B"></a>Scout Installation</h2>
+    <h3 class="sectionHead"><span class="titlemark">B.1   </span> <a 
+ id="x71-143000B.1"></a>Overview</h3>
+<!--l. 22--><p class="noindent" >This chapter walks you through the installation of Eclipse Scout. The installation description (as well as the
+rest of this book) is written and tested for Eclipse Scout 4.0 which is delivered as integral part of the Eclipse
+Luna release train, 2014. Detailed information regarding the scheduling of this release train is provided in the
+Eclipse wiki<span class="footnote-mark"><a 
+href="scout_frontend72.html#fn1x21"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x71-143001f1"></a> .
+<!--l. 27--><p class="indent" >    We assume that you have not installed any software relevant for the content of this book. This is
+why the Scout installation chapter starts with the installation of the Java Development Kit
+(JDK). Consequently, you will have to skip some of the sections depending on your existing
+setup.
+<!--l. 31--><p class="indent" >    In the text below, installation routines are described separately for Windows, Mac, and Linux. As
+Scout applications have been built primarily on the Windows platform in the past, Scout also has the
+highest maturity level on this platform.
+    <h3 class="sectionHead"><span class="titlemark">B.2   </span> <a 
+ id="x71-144000B.2"></a>Download and Install a JDK</h3>
+<!--l. 37--><p class="noindent" >The first step to install Scout is to have an existing and working installation of a JDK version 7 or 8. It is
+currently recommended to go for the most recent download of Java 7.
+<!--l. 40--><p class="indent" >    Using Scout with Java 8 is possible and has been tested as part of Eclipse release train
+testing<span class="footnote-mark"><a 
+href="scout_frontend73.html#fn2x21"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x71-144001f2"></a> .
+We are currently not aware of any productive installation so far, but this is likely to change in
+the near future as Oracle&#8217;s published end of public updates for Java 7 is scheduled for April
+2015<span class="footnote-mark"><a 
+href="scout_frontend74.html#fn3x21"><sup class="textsuperscript">3</sup></a></span><a 
+ id="x71-144002f3"></a> .
+<!--l. 45--><p class="indent" >    You may still use Scout with Java 6. However, this version is no longer tested with Scout and has
+reached Oracle&#8217;s end of public updates on February 2013. Older Java versions will no longer work
+together with the Scout framework.
+                                                                                 
+
+                                                                                 
+<!--l. 49--><p class="indent" >    Currently, we recommend to install the Oracle JDK 7 together with Scout. Although, using
+OpenJDK with Scout should work too. To successfully install the JDK you need to have at least local
+admin rights. You also need to know your hardware architecture in order to download the correct JDK
+installer.
+<!--l. 53--><p class="indent" >    For Windows, the steps necessary to determine your hardware architecture are described on Microsoft&#8217;s
+support site<span class="footnote-mark"><a 
+href="scout_frontend75.html#fn4x21"><sup class="textsuperscript">4</sup></a></span><a 
+ id="x71-144003f4"></a> .
+For Linux several ways to determine if your os is running with 32 or with 64 bits can be found on the
+web<span class="footnote-mark"><a 
+href="scout_frontend76.html#fn5x21"><sup class="textsuperscript">5</sup></a></span><a 
+ id="x71-144004f5"></a> 
+For Mac this step is simple, as only a 64 bit package is provided on JDK the download page.
+<!--l. 62--><p class="indent" >    Once you know your hardware architecture, go to Oracle&#8217;s official download
+site<span class="footnote-mark"><a 
+href="scout_frontend77.html#fn6x21"><sup class="textsuperscript">6</sup></a></span><a 
+ id="x71-144005f6"></a> 
+and accept the licence agreement by clicking on the appropriate radio button. Then, select the <span 
+class="cmti-10">Windows</span>
+<span 
+class="cmti-10">x64 </span>package if you are running 64-bit Windows as shown in Figure&#x00A0;<a 
+href="#x71-1440071">B.1<!--tex4ht:ref: fig:jdk_download_oracle --></a>. If you are running 32-bit
+Windows, go for the <span 
+class="cmti-10">Windows x86 </span>package. It is also recommended to download the <span 
+class="cmti-10">Java SE 7</span>
+<span 
+class="cmti-10">Documentation</span>. The Java API documentation package is available from the official download
+site<span class="footnote-mark"><a 
+href="scout_frontend78.html#fn7x21"><sup class="textsuperscript">7</sup></a></span><a 
+ id="x71-144006f7"></a> ,
+located further down under section <span 
+class="cmti-10">Additional Resources</span>.
+<!--l. 74--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x71-1440071"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 75--><p class="noindent" ><img 
+src="ScoutInstallation/figures/oracle_jdk_download.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;B.1:  </span><span  
+class="content">Installer  download  for  Oracle  JDK  7.  The  Windows  64bit  installer  package  is
+highlighted.</span></div><!--tex4ht:label?: x71-1440071 -->
+                                                                                 
+
+                                                                                 
+<!--l. 78--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 80--><p class="indent" >    Once you have successfully downloaded the JDK installer, follow the Windows installation
+guide<span class="footnote-mark"><a 
+href="scout_frontend79.html#fn8x21"><sup class="textsuperscript">8</sup></a></span><a 
+ id="x71-144008f8"></a> .
+To verify the installation you might want to go through this Java &#8221;Hello World!&#8221;
+tutorial<span class="footnote-mark"><a 
+href="scout_frontend80.html#fn9x21"><sup class="textsuperscript">9</sup></a></span><a 
+ id="x71-144009f9"></a> .
+<!--l. 85--><p class="indent" >    Installation instructions for Linux<span class="footnote-mark"><a 
+href="scout_frontend81.html#fn10x21"><sup class="textsuperscript">10</sup></a></span><a 
+ id="x71-144010f10"></a> 
+and Mac<span class="footnote-mark"><a 
+href="scout_frontend82.html#fn11x21"><sup class="textsuperscript">11</sup></a></span><a 
+ id="x71-144011f11"></a> 
+are also available from Oracle.
+    <h3 class="sectionHead"><span class="titlemark">B.3   </span> <a 
+ id="x71-145000B.3"></a>Download and Install Scout</h3>
+<!--l. 8--><p class="noindent" >Before you can install Scout make sure that you have a working Java Development Kit (JDK) installation
+of version 7 or 8. To download the Eclipse Scout package visit the official Eclipse download page as shown
+in Figure&#x00A0;<a 
+href="#x71-1450012">B.2<!--tex4ht:ref: fig:scout_download --></a>.
+<!--l. 11--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x71-1450012"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 12--><p class="noindent" ><img 
+src="modules/figures/scout_download.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;B.2: </span><span  
+class="content">The Eclipse download page. The platform filter is set to Windows and the available
+Packages are filtered for Scout.</span></div><!--tex4ht:label?: x71-1450012 -->
+                                                                                 
+
+                                                                                 
+<!--l. 15--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 17--><p class="indent" >    If the download page shows the wrong platform, manually select the correct platform in the
+dropdown list. As shown in Figure&#x00A0;<a 
+href="#x71-1450012">B.2<!--tex4ht:ref: fig:scout_download --></a>, the Scout package is available as a 32 bit and a 46 bit package.
+Make sure to pick the package that matches your JDK installation. You can check your installation on
+the command line as follows.
+    <!--l. 22-->
+<div class="lstlisting" id="listing-5"><span class="label"><a 
+ id="x71-145002r1"></a></span><span 
+class="cmssi-10">console</span><span 
+class="cmsy-10">-</span><span 
+class="cmssi-10">prompt</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmssi-10">java</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">-</span><span 
+class="cmssi-10">version</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145003r2"></a></span><span 
+class="cmssi-10">java</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">version</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#8221;1.7.0</span><span 
+class="cmssi-10">_55</span><span 
+class="cmss-10">&#8221;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145004r3"></a></span><span 
+class="cmssi-10">Java</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">TM</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">SE</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Runtime</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Environment</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">build</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">1.7.0</span><span 
+class="cmssi-10">_55</span><span 
+class="cmsy-10">-</span><span 
+class="cmssi-10">b13</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145005r4"></a></span><span 
+class="cmssi-10">Java</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">HotSpot</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">TM</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">64</span><span 
+class="cmsy-10">-</span><span 
+class="cmssi-10">Bit</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Server</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">VM</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">build</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">24.55</span><span 
+class="cmsy-10">-</span><span 
+class="cmssi-10">b03</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">mixed</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">mode</span><span 
+class="cmss-10">)</span>
+    </div>
+<!--l. 31--><p class="indent" >    If the output explicitly mentions the 64 bit installation as shown above, you have a 64 bit
+installation. Otherwise, you have a 32 bit JDK installed. Now you can select the correct Scout package
+from the Eclipse download site. After the package selection, confirm the suggested download mirror as
+shown in Figure&#x00A0;<a 
+href="#x71-1450063">B.3<!--tex4ht:ref: fig:scout_download_mirror --></a>.
+<!--l. 36--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x71-1450063"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 37--><p class="noindent" ><img 
+src="modules/figures/scout_download_mirror.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;B.3: </span><span  
+class="content">Downloading the Scout package from a mirror.</span></div><!--tex4ht:label?: x71-1450063 -->
+                                                                                 
+
+                                                                                 
+<!--l. 40--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 42--><p class="indent" >    As the Scout package is a simple ZIP (or tar.gz) file, you may unpack its content to a folder of your
+choice. Inside the eclipse sub-folder, you will then find the Eclipse executable file, such as the
+<span 
+class="cmtt-10">eclipse.exe </span>file on a Windows plattform. Starting the Eclipse executable brings up the workspace
+launcher as shown in Figure&#x00A0;<a 
+href="#x71-1450074">B.4<!--tex4ht:ref: fig:scout_start --></a>.
+<!--l. 46--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x71-1450074"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 47--><p class="noindent" ><img 
+src="modules/figures/scout_startup_select_workspace.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;B.4: </span><span  
+class="content">Starting the Eclipse Scout package and selecting an empty workspace.</span></div><!--tex4ht:label?: x71-1450074 -->
+                                                                                 
+
+                                                                                 
+<!--l. 50--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 52--><p class="indent" >    Into the <span 
+class="cmti-10">Workspace </span>field you enter an empty target directory for your first Scout project. After
+clicking the <span 
+class="cmcsc-10">O<span 
+class="small-caps">k</span> </span>button, the Eclipse IDE creates any directories that do not yet exist and opens the
+specified workspace. When opening a new workspace for the first time, Eclipse then displays the welcome
+screen shown in Figure&#x00A0;<a 
+href="#x71-1450085">B.5<!--tex4ht:ref: fig:scout_welcome --></a>.
+<!--l. 56--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x71-1450085"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 57--><p class="noindent" ><img 
+src="modules/figures/scout_startup_welcome.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;B.5: </span><span  
+class="content">Eclipse Scout welcome screen.</span></div><!--tex4ht:label?: x71-1450085 -->
+                                                                                 
+
+                                                                                 
+<!--l. 60--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 62--><p class="indent" >    To close the welcome page and open the Scout perspective in the Eclipse IDE click on
+the <span 
+class="cmcsc-10">W<span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">k</span><span 
+class="small-caps">b</span><span 
+class="small-caps">e</span><span 
+class="small-caps">n</span><span 
+class="small-caps">c</span><span 
+class="small-caps">h</span> </span>icon. As a result the empty Scout perspective is displayed according to
+Figure&#x00A0;<a 
+href="#x71-1450096">B.6<!--tex4ht:ref: fig:scout_perspective --></a>.
+<!--l. 65--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x71-1450096"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 66--><p class="noindent" ><img 
+src="modules/figures/scout_startup_scout_explorer.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;B.6: </span><span  
+class="content">Eclipse Scout started in the Scout SDK perspective. </span></div><!--tex4ht:label?: x71-1450096 -->
+                                                                                 
+
+                                                                                 
+<!--l. 69--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 71--><p class="indent" >    Congratulations, you just have successfully completed the Eclipse Scout installation!
+<!--l. 99--><p class="indent" >    If you have only installed a single JDK you will not need to change the default <span 
+class="cmtt-10">eclipse.ini </span>file of
+your Eclipse installation. In case you have installed multiple JDKs coming with their individual Java
+Runtime Environments (JREs), you might want to explicitly specifiy which JRE to use. Open the file
+<span 
+class="cmtt-10">eclipse.ini </span>in a editor of your choice and insert the following two lines at the top of the
+file:
+    <!--l. 103-->
+<div class="lstlisting" id="listing-6"><span class="label"><a 
+ id="x71-145010r1"></a></span><span 
+class="cmsy-10">-</span><span 
+class="cmssi-10">vm</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145011r2"></a></span><span 
+class="cmssi-10">C</span><span 
+class="cmss-10">:</span><span 
+class="cmsy-10">\</span><span 
+class="cmssi-10">java</span><span 
+class="cmsy-10">\</span><span 
+class="cmssi-10">jre7</span><span 
+class="cmsy-10">\</span><span 
+class="cmssi-10">bin</span><span 
+class="cmsy-10">\</span><span 
+class="cmssi-10">javaw</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">exe</span>
+    </div>
+<!--l. 110--><p class="indent" >    where the second line specifies the exact path to the JRE to be used to start your Eclipse Scout
+installation.
+<!--l. 112--><p class="indent" >    If you have explicitly specified the JRE to be used you verify this in the running Eclipse installation.
+Fist, select the <span 
+class="cmcsc-10">H<span 
+class="small-caps">e</span><span 
+class="small-caps">l</span><span 
+class="small-caps">p</span>&#8212;A<span 
+class="small-caps">b</span><span 
+class="small-caps">o</span><span 
+class="small-caps">u</span><span 
+class="small-caps">t</span> E<span 
+class="small-caps">c</span><span 
+class="small-caps">l</span><span 
+class="small-caps">i</span><span 
+class="small-caps">p</span><span 
+class="small-caps">s</span><span 
+class="small-caps">e</span> </span>menu to open the about dialog. Then, click on the
+<span 
+class="cmcsc-10">I<span 
+class="small-caps">n</span><span 
+class="small-caps">s</span><span 
+class="small-caps">t</span><span 
+class="small-caps">a</span><span 
+class="small-caps">l</span><span 
+class="small-caps">l</span><span 
+class="small-caps">a</span><span 
+class="small-caps">t</span><span 
+class="small-caps">i</span><span 
+class="small-caps">o</span><span 
+class="small-caps">n</span> D<span 
+class="small-caps">e</span><span 
+class="small-caps">t</span><span 
+class="small-caps">a</span><span 
+class="small-caps">i</span><span 
+class="small-caps">l</span><span 
+class="small-caps">s</span> </span>button and switch to the <span 
+class="cmcsc-10">C<span 
+class="small-caps">o</span><span 
+class="small-caps">n</span><span 
+class="small-caps">f</span><span 
+class="small-caps">i</span><span 
+class="small-caps">g</span><span 
+class="small-caps">u</span><span 
+class="small-caps">r</span><span 
+class="small-caps">a</span><span 
+class="small-caps">t</span><span 
+class="small-caps">i</span><span 
+class="small-caps">o</span><span 
+class="small-caps">n</span> </span>tab. In the long list of system
+properties you will find lines similar to the ones shown below.
+    <!--l. 117-->
+<div class="lstlisting" id="listing-7"><span class="label"><a 
+ id="x71-145012r1"></a></span><span 
+class="cmsy-10">***</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Date</span><span 
+class="cmss-10">:</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Donnerstag</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">19.</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Juni</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">2014</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">10:37:17</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Normalzeit</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145013r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145014r3"></a></span><span 
+class="cmsy-10">***</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Platform</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Details</span><span 
+class="cmss-10">:</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145015r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145016r5"></a></span><span 
+class="cmsy-10">***</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">System</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">properties</span><span 
+class="cmss-10">:</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145017r6"></a></span><span 
+class="cmss-10">...</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145018r7"></a></span><span 
+class="cmsy-10">-</span><span 
+class="cmssi-10">vm</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145019r8"></a></span><span 
+class="cmssi-10">C</span><span 
+class="cmss-10">:</span><span 
+class="cmsy-10">\</span><span 
+class="cmssi-10">java</span><span 
+class="cmsy-10">\</span><span 
+class="cmssi-10">jre7</span><span 
+class="cmsy-10">\</span><span 
+class="cmssi-10">bin</span><span 
+class="cmsy-10">\</span><span 
+class="cmssi-10">javaw</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">exe</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145020r9"></a></span><span 
+class="cmss-10">...</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x71-145021r10"></a></span><span 
+class="cmssi-10">sun</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">java</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">command</span><span 
+class="cmss-10">=...</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">vm</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">C</span><span 
+class="cmss-10">:</span><span 
+class="cmsy-10">\</span><span 
+class="cmssi-10">java</span><span 
+class="cmsy-10">\</span><span 
+class="cmssi-10">jre7</span><span 
+class="cmsy-10">\</span><span 
+class="cmssi-10">bin</span><span 
+class="cmsy-10">\</span><span 
+class="cmssi-10">javaw</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">exe</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">-</span><span 
+class="cmssi-10">vmargs</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">...</span>
+    </div>
+<!--l. 132--><p class="indent" >    You have now successfully completed the Eclipse Scout installation on your Windows environment.
+With this running Scout installation you may skip the following section on how to add Scout to an
+existing Eclipse installation.
+    <h3 class="sectionHead"><span class="titlemark">B.4   </span> <a 
+ id="x71-146000B.4"></a>Add Scout to your Eclipse Installation</h3>
+<!--l. 138--><p class="noindent" >This section describes the installation of Scout into an existing Eclipse installation. As the audience of
+this section is assumed to be familiar with Eclipse, we do not describe how you got your Eclipse
+installation in the first place. For the provided screenshots we start from the popular package <span 
+class="cmti-10">Eclipse IDE</span>
+<span 
+class="cmti-10">for Java EE Developers</span>.
+<!--l. 142--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x71-1460017"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 143--><p class="noindent" ><img 
+src="ScoutInstallation/figures/eclipse_install_new_software.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;B.7: </span><span  
+class="content">Eclipse menu to install additional software</span></div><!--tex4ht:label?: x71-1460017 -->
+                                                                                 
+
+                                                                                 
+<!--l. 146--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 148--><p class="indent" >    To add Scout to your existing Eclipse installation, you need to start Eclipse. Then select
+the <span 
+class="cmcsc-10">H<span 
+class="small-caps">e</span><span 
+class="small-caps">l</span><span 
+class="small-caps">p</span>&#8212;I<span 
+class="small-caps">n</span><span 
+class="small-caps">s</span><span 
+class="small-caps">t</span><span 
+class="small-caps">a</span><span 
+class="small-caps">l</span><span 
+class="small-caps">l</span> N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> S<span 
+class="small-caps">o</span><span 
+class="small-caps">f</span><span 
+class="small-caps">t</span><span 
+class="small-caps">w</span><span 
+class="small-caps">a</span><span 
+class="small-caps">r</span><span 
+class="small-caps">e</span>... </span>menu as shown in Figure&#x00A0;<a 
+href="#x71-1460017">B.7<!--tex4ht:ref: fig:eclipse_install_new_software --></a> to open the install
+dialog.
+<!--l. 151--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x71-1460028"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 152--><p class="noindent" ><img 
+src="ScoutInstallation/figures/eclipse_add_repository.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;B.8: </span><span  
+class="content">Add the current Scout repository</span></div><!--tex4ht:label?: x71-1460028 -->
+                                                                                 
+
+                                                                                 
+<!--l. 155--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 157--><p class="indent" >    In the install dialog, click on the <span 
+class="cmcsc-10">A<span 
+class="small-caps">d</span><span 
+class="small-caps">d</span>... </span>button to enter the link to the Scout repository. This opens
+the popup dialog <span 
+class="cmti-10">Add Repository </span>As shown in Figure&#x00A0;<a 
+href="#x71-1460028">B.8<!--tex4ht:ref: fig:eclipse_add_repository --></a>, you may use &#8221;Scout Luna&#8221; for
+the <span 
+class="cmti-10">Name </span>field. For the <span 
+class="cmti-10">Location </span>field enter the Scout release repository as specified below.
+<a 
+href="http://download.eclipse.org/scout/releases/4.0" class="url" ><span 
+class="cmtt-10">http://download.eclipse.org/scout/releases/4.0</span></a>.
+<!--l. 163--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x71-1460039"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 164--><p class="noindent" ><img 
+src="ScoutInstallation/figures/eclipse_select_scout_features.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;B.9: </span><span  
+class="content">Select the Scout features to add to the Eclipse installation</span></div><!--tex4ht:label?: x71-1460039 -->
+                                                                                 
+
+                                                                                 
+<!--l. 167--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 169--><p class="indent" >    After the Eclipse IDE has connected to the Scout repository, select the Scout feature <span 
+class="cmti-10">Scout</span>
+<span 
+class="cmti-10">Application Development </span>as shown in Figure&#x00A0;<a 
+href="#x71-1460039">B.9<!--tex4ht:ref: fig:eclipse_select_scout_features --></a>. Then, move through the installation with the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span></span>
+button. On the last installation step, accept the presented EPL terms by clicking on the appropriate radio
+button. To complete the installation, click the <span 
+class="cmcsc-10">F<span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">i</span><span 
+class="small-caps">s</span><span 
+class="small-caps">h</span> </span>button and accept the request for a restart of
+Eclipse. After the restart of the Eclipse IDE, you may add the Scout perspective using the
+<span 
+class="cmcsc-10">W<span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">d</span><span 
+class="small-caps">o</span><span 
+class="small-caps">w</span>&#8212;O<span 
+class="small-caps">p</span><span 
+class="small-caps">e</span><span 
+class="small-caps">n</span> P<span 
+class="small-caps">e</span><span 
+class="small-caps">r</span><span 
+class="small-caps">s</span><span 
+class="small-caps">p</span><span 
+class="small-caps">e</span><span 
+class="small-caps">c</span><span 
+class="small-caps">t</span><span 
+class="small-caps">i</span><span 
+class="small-caps">v</span><span 
+class="small-caps">e</span>&#8212;O<span 
+class="small-caps">t</span><span 
+class="small-caps">h</span><span 
+class="small-caps">e</span><span 
+class="small-caps">r</span> ... </span>menu and selecting the Scout perspective from the
+presented list. Clicking on the Scout perspective button should then result in a state very similar to
+Figure&#x00A0;<a 
+href="#x71-1450096">B.6<!--tex4ht:ref: fig:scout_perspective --></a>.
+    <h3 class="sectionHead"><span class="titlemark">B.5   </span> <a 
+ id="x71-147000B.5"></a>Verifying the Installation</h3>
+<!--l. 179--><p class="noindent" >After you can start your Eclipse Scout package you need to verify that Scout is working as intended. The
+simplest way to verify your Scout installation is to create a &#8221;Hello World&#8221; Scout project and run the
+corresponding Scout application as described in Chapter&#x00A0;<a 
+href="scout_frontendch3.html#x19-130002">2<!--tex4ht:ref: cha:helloworld --></a>.
+                                                                                 
+
+                                                                                 
+    <!--l. 183--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendap3.html" >next</a>] [<a 
+href="scout_frontendap1.html" >prev</a>] [<a 
+href="scout_frontendap1.html#tailscout_frontendap1.html" >prev-tail</a>] [<a 
+href="scout_frontendap2.html" >front</a>] [<a 
+href="scout_frontendpa1.html#scout_frontendap2.html" >up</a>] </p></div>
+<!--l. 183--><p class="indent" >    <a 
+ id="tailscout_frontendap2.html"></a>   
+</body></html> 

@@ -1,0 +1,1305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>8 Advanced Widgets</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,info --> 
+<meta name="src" content="scout_frontend.tex"> 
+<meta name="date" content="2015-03-04 17:09:00"> 
+<link rel="stylesheet" type="text/css" href="scout_frontend.css"> 
+</head><body 
+>
+    <!--l. 1074--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendch10.html" >next</a>] [<a 
+href="scout_frontendch8.html" >prev</a>] [<a 
+href="scout_frontendch8.html#tailscout_frontendch8.html" >prev-tail</a>] [<a 
+href="#tailscout_frontendch9.html">tail</a>] [<a 
+href="scout_frontend.html#scout_frontendch9.html" >up</a>] </p></div>
+    <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;8</span><br /><a 
+ id="x59-920008"></a>Advanced Widgets</h2>
+<!--l. 1077--><p class="noindent" >This chapter presents some of the more complex widgets of the Scout framework. This set of widgets
+includes fields to handle and display list, tree and table data. Also included in this chapter are
+widgets to display images in both raster and vector formats. As in the previous chapter, for
+each described widget, screenshots of example use cases and corresponding code snippets are
+provided.
+    <h3 class="sectionHead"><span class="titlemark">8.1   </span> <a 
+ id="x59-930008.1"></a>List Box</h3>
+<!--l. 1085--><p class="noindent" >List boxes allow a user to select a subset of a predefined list of elements. The individual elements are
+displayed in the form of checkable options. To check or uncheck a specific element, the user may click on a
+element or press the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">S<span 
+class="small-caps">p</span><span 
+class="small-caps">a</span><span 
+class="small-caps">c</span><span 
+class="small-caps">e</span></span><span 
+class="cmmi-10">&#x003E; </span>when an element has the focus. To define the list of elements that are
+presented in a list box, code types or a lookup calls can be used. Example use cases using both code
+types and lookup calls for the definition of the presented elements are implemented in class
+<span 
+class="cmtt-10">ListBoxForm </span>of the Scout widget application. See Figure&#x00A0;<a 
+href="#x59-930011">8.1<!--tex4ht:ref: fig:listbox --></a> for a screenshot of the example
+form.
+<!--l. 1092--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x59-930011"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 1093--><p class="noindent" ><img 
+src="ScoutClient/figures/listbox.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;8.1: </span><span  
+class="content">List boxes to select elements represented by code types and lookup calls.</span></div><!--tex4ht:label?: x59-930011 -->
+                                                                                 
+
+                                                                                 
+<!--l. 1096--><p class="indent" >    </div><hr class="endfigure">
+    <!--l. 1105--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 1105--><p class="indent" >    <a 
+ id="x59-93002r1"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x59-93003"></a>
+
+          <div class="caption" 
+><span class="id">Listing&#x00A0;8.1:
+          </span><span  
+class="content">A
+          simple
+          ListBox
+          field
+          backed
+          by
+          a
+          code
+          type
+          that
+          returns
+          elements
+          of
+          type
+          <span 
+class="cmtt-10">Color</span>.</span></div><!--tex4ht:label?: x59-93002r8.1 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93004r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93005r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93006r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(20.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93007r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">DefaultField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractListBox</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Color</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93008r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93009r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93010r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Class</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">?</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ICodeType</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">?,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Color</span><span 
+class="cmmi-10">&#x003E;&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredCodeType</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93011r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ColorsCodeType</span><span 
+class="cmss-10">.</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93012r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93013r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93014r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93015r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">int</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredGridH</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93016r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">5;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93017r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93018r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93019r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93020r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93021r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Default</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 1107--><p class="indent" >    In the example section of Figure&#x00A0;<a 
+href="#x59-930011">8.1<!--tex4ht:ref: fig:listbox --></a> the list boxes in the left column retrieve the elements to be
+displayed from code types. And in the right column, the displayed elements are retrieved
+from lookup calls. The implementation of the top left <span 
+class="cmti-10">Default </span>field is provided in Listing&#x00A0;<a 
+href="#x59-93002r1">8.1<!--tex4ht:ref: lst:field.listbox --></a>.
+List boxes are derived from class <span 
+class="cmtt-10">AbstractListBox </span>and parameterized by the type of keys
+of the elements. Please note that the specified key type of a list box must match the key
+type of the elements provided by code types or lookup calls. In our example, the list box
+type <span 
+class="cmtt-10">Color </span>matches the key type of the code type <span 
+class="cmtt-10">ColorsCodeType </span>configured in method
+<span 
+class="cmtt-10">getConfiguredCodeType</span>.
+<!--l. 1114--><p class="indent" >    In the <span 
+class="cmti-10">List Content </span>field located on the right hand side of the configuration section of Figure&#x00A0;<a 
+href="#x59-930011">8.1<!--tex4ht:ref: fig:listbox --></a> it is
+also possible to enter user defined content. After entering some example data and pressing the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">T<span 
+class="small-caps">a</span><span 
+class="small-caps">b</span></span><span 
+class="cmmi-10">&#x003E;</span>,
+the user content is parsed and used to update the elements displayed in the <span 
+class="cmti-10">ListBox </span>field. To get the
+initial example data shown in Figure&#x00A0;<a 
+href="#x59-930011">8.1<!--tex4ht:ref: fig:listbox --></a>, use the <span 
+class="cmcsc-10">S<span 
+class="small-caps">a</span><span 
+class="small-caps">m</span><span 
+class="small-caps">p</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span> C<span 
+class="small-caps">o</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span> </span>button of the list box
+example form. Basically, the content of each text row is parsed into a lookup row according to
+the format provided in the first row of the sample content: <span 
+class="cmtt-10"># key;text;iconId;...</span>. The
+resulting lookup rows are then used to dynamically update the content of the lookup call
+associated with the <span 
+class="cmti-10">ListBox </span>field. List boxes can be configured to only display the checked
+elements. For this, the configuration method <span 
+class="cmtt-10">getConfiguredFilterCheckedNodes </span>may be
+used.
+    <!--l. 1129--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 1129--><p class="indent" >    <a 
+ id="x59-93022r2"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x59-93023"></a>
+
+         <div class="caption" 
+><span class="id">Listing&#x00A0;8.2:
+         </span><span  
+class="content">Updating
+         the
+         <span 
+class="cmti-10">getCheckedKeys</span>
+         field
+         whenever
+         the
+         use
+         changes
+         the
+         selection
+         of
+         elements</span></div><!--tex4ht:label?: x59-93022r8.1 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93024r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">void</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">execClickAction</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93025r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getListBoxField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">uncheckAllKeys</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93026r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93027r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93028r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93029r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93030r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(30.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93031r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">GetCheckedKeysField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractStringField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93032r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93033r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93034r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredEnabled</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93035r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">false</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93036r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93037r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93038r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93039r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93040r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">getCheckedKeys</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93041r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93042r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93043r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93044r21"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Class</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">?</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">IValueField</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredMasterField</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93045r22"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ListBoxForm</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">MainBox</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">ConfigurationBox</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">ListBoxField</span><span 
+class="cmss-10">.</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-93046r23"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 1131--><p class="indent" >    To access the currently selected elements of a list box method <span 
+class="cmtt-10">getCheckedKeys </span>may be used. This is
+demonstrated in Listing&#x00A0;<a 
+href="#x59-93022r2">8.2<!--tex4ht:ref: lst:field.getcheckedkeys --></a> using the <span 
+class="cmti-10">getCheckedKeys </span>field in the example form. In order to get
+notified for every change of the list box field, the list box field is registered as the master in
+method <span 
+class="cmtt-10">getConfiguredMasterField</span>. The implementation of method <span 
+class="cmtt-10">execChangedMasterValue</span>
+is then called whenever the state of the master field is changed. In the case of Listing&#x00A0;<a 
+href="#x59-93022r2">8.2<!--tex4ht:ref: lst:field.getcheckedkeys --></a>,
+the list of selected keys can be retrieved from the list box and shown in the <span 
+class="cmti-10">getCheckedKeys</span>
+field.
+<!--l. 1137--><p class="indent" >    To read or write the content of a list box field from or to a form data on the server side, methods
+<span 
+class="cmtt-10">getValue </span>and<span 
+class="cmtt-10">setValue </span>have to be used. Both methods work with typed sets, requiring the type defined
+for the list box field.
+    <h3 class="sectionHead"><span class="titlemark">8.2   </span> <a 
+ id="x59-940008.2"></a>Tree Box</h3>
+<!--l. 1143--><p class="noindent" >Tree box fields allow a user to select a subset of a predefined list of elements. The difference to list boxes
+lies in the organisation of the presented elements. Instead of presenting the elements as a list, a tree
+structure is used with tree box fields.
+<!--l. 1147--><p class="indent" >    To check and uncheck a specific element, the user may click on a element or press the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">S<span 
+class="small-caps">p</span><span 
+class="small-caps">a</span><span 
+class="small-caps">c</span><span 
+class="small-caps">e</span></span><span 
+class="cmmi-10">&#x003E;</span>
+when an element has the focus. In addition, tree boxes can also be configured to check or uncheck the
+complete sub tree when clicking on an element. To define the trees presented in tree boxes, hierarchical
+code types and lookup calls can be used. Example use cases for tree box fields are implemented in class
+<span 
+class="cmtt-10">TreeBoxForm </span>of the Scout widget application. A screenshot of the tree box example form is shown in
+Figure&#x00A0;<a 
+href="#x59-940012">8.2<!--tex4ht:ref: fig:treebox --></a>.
+<!--l. 1153--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x59-940012"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 1154--><p class="noindent" ><img 
+src="ScoutClient/figures/treebox.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;8.2: </span><span  
+class="content">Tree box fields displaying elements defined by hierarchical code types and lookup calls.</span></div><!--tex4ht:label?: x59-940012 -->
+                                                                                 
+
+                                                                                 
+<!--l. 1157--><p class="indent" >    </div><hr class="endfigure">
+    <!--l. 1166--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 1166--><p class="indent" >    <a 
+ id="x59-94002r3"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x59-94003"></a>
+
+       <div class="caption" 
+><span class="id">Listing&#x00A0;8.3:
+       </span><span  
+class="content">A
+       simple
+       TreeBox
+       field
+       backed
+       by
+       a
+       lookup
+       call
+       that
+       returns
+       element
+       keys
+       of
+       type
+       <span 
+class="cmtt-10">String</span>.</span></div><!--tex4ht:label?: x59-94002r8.2 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94004r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(50.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94005r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">DefaultTreeBoxField</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractTreeBox</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">String</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94006r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94007r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94008r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">int</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredGridH</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94009r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">5;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94010r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94011r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94012r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94013r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLabel</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94014r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Default</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94015r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94016r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94017r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94018r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Class</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">?</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ILookupCall</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">String</span><span 
+class="cmmi-10">&#x003E;&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredLookupCall</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94019r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">YearsMonthsLookupCall</span><span 
+class="cmss-10">.</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94020r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x59-94021r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 1168--><p class="indent" >    In the example section of Figure&#x00A0;<a 
+href="#x59-940012">8.2<!--tex4ht:ref: fig:treebox --></a> the tree boxes in the left column retrieve the elements to be
+displayed from hierarchical code types. And in the right column, the displayed elements are retrieved
+from hierarchical lookup calls. The implementation of the top right <span 
+class="cmti-10">Default </span>field is provided in
+Listing&#x00A0;<a 
+href="#x59-94002r3">8.3<!--tex4ht:ref: lst:field.treebox --></a>. Tree boxes are derived from class <span 
+class="cmtt-10">AbstractTreeBox </span>and parameterized by the type of keys of
+the tree elements. As in the case of list box fields, the the specified type of a tree box must
+match the key type of the code type or the lookup call. In our example, the tree box type
+<span 
+class="cmtt-10">String </span>matches the type of the lookup call <span 
+class="cmtt-10">YearsMonthsLookupCall </span>configured in method
+<span 
+class="cmtt-10">getConfiguredLookupCall</span>.
+<!--l. 1175--><p class="indent" >    In the configuration section of the form shown in Figure&#x00A0;<a 
+href="#x59-940012">8.2<!--tex4ht:ref: fig:treebox --></a> the user may enter any tree data into
+the <span 
+class="cmti-10">Tree Content </span>field. To get the initial tree data shown in Figure&#x00A0;<a 
+href="#x59-940012">8.2<!--tex4ht:ref: fig:treebox --></a>, use the <span 
+class="cmcsc-10">S<span 
+class="small-caps">a</span><span 
+class="small-caps">m</span><span 
+class="small-caps">p</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span> C<span 
+class="small-caps">o</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span></span>
+button. Tree boxes can be configured in several ways. Using method <span 
+class="cmtt-10">getConfiguredAutoExpandAll</span>, the
+element tree will be initially expanded. Configuration method <span 
+class="cmtt-10">getConfiguredFilterCheckedNodes </span>hides
+all elements that are not checked. And with method <span 
+class="cmtt-10">getConfiguredAutoCheckChildNodes</span>,
+checking or unchecking a tree element automatically updates the elements in the subtree
+accordingly.
+<!--l. 1182--><p class="indent" >    To access the currently selected elements, the tree box method <span 
+class="cmtt-10">getCheckedKeys </span>returns a typed set
+of keys. The type of the key set is determined by the type of the tree box. To read or write
+the content of a tree box field on the server side, methods <span 
+class="cmtt-10">getValue </span>and<span 
+class="cmtt-10">setValue </span>have to
+be used. Both methods work with typed sets, requiring the type defined for the tree box
+field.
+    <h3 class="sectionHead"><span class="titlemark">8.3   </span> <a 
+ id="x59-950008.3"></a>Smart Field</h3>
+<!--l. 1190--><p class="noindent" >Smart fields are used to select a single value from a set of named elements. As smart fields offer
+&#8221;search-as-you-type functionality, the field works well for very large sets of elements. The content of smart
+fields can either be provided by code types or lookup calls. Consequently, smart fields work with both
+lists and hierarchical structures and the content may come from a static set of values or is dynamically
+provided at runtime.
+<!--l. 1195--><p class="indent" >    To select an elements in a smart field the user can either use the mouse or the keyboard. Pressing the
+<span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">U<span 
+class="small-caps">p</span> A<span 
+class="small-caps">r</span><span 
+class="small-caps">r</span><span 
+class="small-caps">o</span><span 
+class="small-caps">w</span></span><span 
+class="cmmi-10">&#x003E; </span>or the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">D<span 
+class="small-caps">o</span><span 
+class="small-caps">w</span><span 
+class="small-caps">n</span> A<span 
+class="small-caps">r</span><span 
+class="small-caps">r</span><span 
+class="small-caps">o</span><span 
+class="small-caps">w</span></span><span 
+class="cmmi-10">&#x003E; </span>in the field shows the list of entries when the smart field has
+the focus. Alternatively, the use can click with the mouse on the smart field icon. By typing a part of the
+name of the desired entry into the field, the &#8221;search-as-you-type support kicks in and a filtered list of
+elements is displayed. The selected entry can be confirmed by using the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">E<span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">r</span></span><span 
+class="cmmi-10">&#x003E; </span>or the
+<span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">T<span 
+class="small-caps">a</span><span 
+class="small-caps">b</span></span><span 
+class="cmmi-10">&#x003E;</span>.
+<!--l. 1201--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x59-950013"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 1202--><p class="noindent" ><img 
+src="ScoutClient/figures/smartfield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;8.3: </span><span  
+class="content">Smart field examples. Smart fields support &#8221;search-as-you-type and are used to select
+a value from of a list of elements or a tree.</span></div><!--tex4ht:label?: x59-950013 -->
+                                                                                 
+
+                                                                                 
+<!--l. 1206--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 1208--><p class="indent" >    Example use cases for smart fields are provided in class <span 
+class="cmtt-10">SmartFieldForm </span>of the Scout widget
+application and a screenshot of this example form is shown in Figure&#x00A0;<a 
+href="#x59-950013">8.3<!--tex4ht:ref: fig:smartfield --></a>. The left hand side of the demo
+form contains smart fields based on list content and on the right hand side smart fields backed with
+hierarchical content are shown. In the example section of the demo form, some smart fields are backed by
+code types and others by lookup calls. And in the configuration section the content shown in the smart
+fields can be entered manually at runtime. To obtain the content shown in Figure&#x00A0;<a 
+href="#x59-950013">8.3<!--tex4ht:ref: fig:smartfield --></a>, use the <span 
+class="cmcsc-10">S<span 
+class="small-caps">a</span><span 
+class="small-caps">m</span><span 
+class="small-caps">p</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span></span>
+<span 
+class="cmcsc-10">C<span 
+class="small-caps">o</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span> </span>button.
+<!--l. 1214--><p class="noindent" >Existing Documentation
+     <ul class="itemize1">
+     <li class="itemize">presentation: <a 
+href="http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf" class="url" ><span 
+class="cmtt-10">http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf</span></a>
+     </li>
+     <li class="itemize">forum: <a 
+href="http://www.eclipse.org/forums/index.php/t/369542/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/369542/</span></a></li></ul>
+    <h4 class="subsectionHead"><span class="titlemark">8.3.1   </span> <a 
+ id="x59-960008.3.1"></a>Menus</h4>
+<!--l. 1221--><p class="noindent" >Each smart field can have menus attached. The menus will be shown when the user clicks on the <span 
+class="cmti-10">arrow</span>
+symbol next to the smart field. Figure <a 
+href="#x59-960014">8.4<!--tex4ht:ref: fig:smartfield_menu --></a> shows an example of a smart field along with a set of menus.
+<hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x59-960014"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 1224--><p class="noindent" ><img 
+src="ScoutClient/figures/smartfieldmenu.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;8.4: </span><span  
+class="content">Menus attached to a smart field.</span></div><!--tex4ht:label?: x59-960014 -->
+                                                                                 
+
+                                                                                 
+<!--l. 1227--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 1229--><p class="indent" >    By default, the menus will only be shown if a value of the smart field has been selected. To show the
+menus even if the smart field is empty, one has to override the menu&#8217;s <span class="lstinline"><span 
+class="cmssi-10">getConfiguredEmptySpaceAction</span></span>
+method:
+    <h3 class="sectionHead"><span class="titlemark">8.4   </span> <a 
+ id="x59-970008.4"></a>Tree Field</h3>
+<!--l. 1233--><p class="noindent" >needs text
+<!--l. 1235--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x59-970015"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 1236--><p class="noindent" ><img 
+src="ScoutClient/figures/treefield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;8.5: </span><span  
+class="content">Tree fields and example use cases. More text.</span></div><!--tex4ht:label?: x59-970015 -->
+                                                                                 
+
+                                                                                 
+<!--l. 1240--><p class="indent" >    </div><hr class="endfigure">
+    <h3 class="sectionHead"><span class="titlemark">8.5   </span> <a 
+ id="x59-980008.5"></a>Table Field</h3>
+<!--l. 1244--><p class="noindent" >needs text
+<!--l. 1246--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x59-980016"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 1247--><p class="noindent" ><img 
+src="ScoutClient/figures/tablefield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;8.6: </span><span  
+class="content">Table fields and example use cases. More text.</span></div><!--tex4ht:label?: x59-980016 -->
+                                                                                 
+
+                                                                                 
+<!--l. 1251--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 1253--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x59-980027"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 1254--><p class="noindent" ><img 
+src="ScoutClient/figures/editabletablefield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;8.7: </span><span  
+class="content">An editable table field. More text.</span></div><!--tex4ht:label?: x59-980027 -->
+                                                                                 
+
+                                                                                 
+<!--l. 1258--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 1260--><p class="noindent" >Existing Documentation
+     <ul class="itemize1">
+     <li class="itemize">wiki tutorial <a 
+href="http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Table_Field" class="url" ><span 
+class="cmtt-10">http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Table_Field</span></a>
+     </li>
+     <li class="itemize">forum: <a 
+href="http://www.eclipse.org/forums/index.php/t/392053/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/392053/</span></a>
+     </li>
+     <li class="itemize">forum: load/save data <a 
+href="http://www.eclipse.org/forums/index.php/t/253311/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/253311/</span></a></li></ul>
+    <h3 class="sectionHead"><span class="titlemark">8.6   </span> <a 
+ id="x59-990008.6"></a>Image Field</h3>
+<!--l. 1269--><p class="noindent" >needs text
+<!--l. 1271--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x59-990018"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 1272--><p class="noindent" ><img 
+src="ScoutClient/figures/imagefield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;8.8: </span><span  
+class="content">Image fields are used to display images and icons. </span></div><!--tex4ht:label?: x59-990018 -->
+                                                                                 
+
+                                                                                 
+<!--l. 1276--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 1278--><p class="noindent" >Existing Documentation
+     <ul class="itemize1">
+     <li class="itemize">forum: scrollbars <a 
+href="http://www.eclipse.org/forums/index.php/t/291205/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/291205/</span></a></li></ul>
+    <h3 class="sectionHead"><span class="titlemark">8.7   </span> <a 
+ id="x59-1000008.7"></a>SVG Field</h3>
+<!--l. 1285--><p class="noindent" >needs text
+<!--l. 1287--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x59-1000019"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 1288--><p class="noindent" ><img 
+src="ScoutClient/figures/svgfield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;8.9: </span><span  
+class="content">SVG fields and example use cases. More text.</span></div><!--tex4ht:label?: x59-1000019 -->
+                                                                                 
+
+                                                                                 
+<!--l. 1292--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 1294--><p class="noindent" >Existing Documentation
+     <ul class="itemize1">
+     <li class="itemize">wiki tutorial <a 
+href="http://wiki.eclipse.org/Scout/Tutorial/3.8/SVG_Field" class="url" ><span 
+class="cmtt-10">http://wiki.eclipse.org/Scout/Tutorial/3.8/SVG_Field</span></a></li></ul>
+    <h3 class="sectionHead"><span class="titlemark">8.8   </span> <a 
+ id="x59-1010008.8"></a>HTML Field</h3>
+<!--l. 1301--><p class="noindent" >needs text
+<!--l. 1304--><p class="noindent" >
+    <h3 class="sectionHead"><span class="titlemark">8.9   </span> <a 
+ id="x59-1020008.9"></a>Browser Field</h3>
+<!--l. 1305--><p class="noindent" >needs text
+<!--l. 1307--><p class="noindent" >Existing Documentation
+     <ul class="itemize1">
+     <li class="itemize">forum: <a 
+href="http://www.eclipse.org/forums/index.php/t/414483/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/414483/</span></a>,
+     </li>
+     <li class="itemize">forum: <a 
+href="http://www.eclipse.org/forums/index.php/t/369963/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/369963/</span></a>,
+     </li>
+     <li class="itemize">forum: mozilla as default: <a 
+href="http://www.eclipse.org/forums/index.php/t/342433/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/342433/</span></a></li></ul>
+<!--l. 1315--><p class="noindent" >
+    <h3 class="sectionHead"><span class="titlemark">8.10   </span> <a 
+ id="x59-1030008.10"></a>Calendar Field</h3>
+<!--l. 1316--><p class="noindent" >needs text
+<!--l. 1318--><p class="noindent" >Existing Documentation
+     <ul class="itemize1">
+     <li class="itemize">forum: calendar field <a 
+href="http://www.eclipse.org/forums/index.php/t/370052/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/370052/</span></a>
+     </li>
+     <li class="itemize">forum: execloaditems <a 
+href="http://www.eclipse.org/forums/index.php/t/277447/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/277447/</span></a>
+     </li>
+     <li class="itemize">forum: filtering items <a 
+href="http://www.eclipse.org/forums/index.php/t/285644/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/285644/</span></a>
+     </li>
+     <li class="itemize">forum: usage example <a 
+href="http://www.eclipse.org/forums/index.php/t/265028/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/265028/</span></a></li></ul>
+                                                                                 
+
+                                                                                 
+    <!--l. 1327--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendch10.html" >next</a>] [<a 
+href="scout_frontendch8.html" >prev</a>] [<a 
+href="scout_frontendch8.html#tailscout_frontendch8.html" >prev-tail</a>] [<a 
+href="scout_frontendch9.html" >front</a>] [<a 
+href="scout_frontend.html#scout_frontendch9.html" >up</a>] </p></div>
+<!--l. 1327--><p class="indent" >    <a 
+ id="tailscout_frontendch9.html"></a>   
+</body></html> 

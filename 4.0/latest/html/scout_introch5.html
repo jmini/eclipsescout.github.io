@@ -1,0 +1,1631 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4 Scout Tooling</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,info --> 
+<meta name="src" content="scout_intro.tex"> 
+<meta name="date" content="2015-03-04 17:07:00"> 
+<link rel="stylesheet" type="text/css" href="scout_intro.css"> 
+</head><body 
+>
+    <!--l. 15--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_introch6.html" >next</a>] [<a 
+href="scout_introch4.html" >prev</a>] [<a 
+href="scout_introch4.html#tailscout_introch4.html" >prev-tail</a>] [<a 
+href="#tailscout_introch5.html">tail</a>] [<a 
+href="scout_intro.html#scout_introch5.html" >up</a>] </p></div>
+    <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;4</span><br /><a 
+ id="x51-420004"></a>Scout Tooling</h2>
+<!--l. 18--><p class="noindent" >In addition to the Scout runtime framework presented in the previous chapter Eclipse Scout also includes
+a comprehensive tooling, the Scout SDK. Thanks to this tooling, developing Scout applications is made
+simpler, more productive and also more robust. Initially, a solid understanding of the Java language is
+sufficient to start developing Scout applications and only a rough understanding of the underlying
+Eclipse/OSGi/JEE technologies is required.
+<!--l. 10--><p class="indent" >    The Scout SDK consists of navigation support for the application model defined by the Scout
+runtime and provides many intuitive component wizards. This creates an ideal environment for
+beginners to build complete, high-quality Scout applications. Typically Java developers only
+need a few days of Scout training to start creating their own advanced client server business
+applications.
+<!--l. 14--><p class="indent" >    The Scout SDK also helps developers to become more productive. Many repetitive and error prone
+tasks run automatically in the background or are taken care of by the component wizards of the Scout
+SDK. This starts with the initial creation of a Scout client server application, continues with the wizards
+to create complete dialogs and pages and includes the automatic management of the data transfer objects
+needed for the client server communication.
+<!--l. 18--><p class="indent" >    Finally, the application code created by the Scout SDK wizards helps to ensure that the resulting
+Scout application has a consistent and robust code base and is well aligned with the application model
+defined by the Scout runtime framework.
+    <h3 class="sectionHead"><span class="titlemark">4.1   </span> <a 
+ id="x51-430004.1"></a>The Scout SDK</h3>
+<a 
+ id="dx51-43001"></a>
+<!--l. 25--><p class="noindent" >The Scout SDK is added to the Eclipse IDE in the form of the Scout
+perspective<span class="footnote-mark"><a 
+href="scout_intro52.html#fn1x6"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x51-43002f1"></a> .
+With the Scout Explorer and Scout Objects Properties, two view parts are contained in the Scout
+perspective. Additionally, the Scout SDK contains a comprehensive set of wizards that support the
+developer in creating Scout application components.
+<!--l. 31--><p class="indent" >    The Scout Explorer view allows the developer to navigate the Scout application model. Once an
+element in the Scout Explorer is selected, the Scout Object properties view allows to validate and change
+properties of the selected element. Depending on the selection in the Scout Explorer, the Scout SDK
+offers appropriate context menus to start the related wizards.
+<!--l. 35--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-430031"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 36--><p class="noindent" ><img 
+src="ScoutTooling/figures/scout_sdk_perspective.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.1: </span><span  
+class="content">The Scout SDK perspective. On the left hand side the Scout Explorer and the Scout
+Object Properties views are visible.</span></div><!--tex4ht:label?: x51-430031 -->
+                                                                                 
+
+                                                                                 
+<!--l. 39--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 41--><p class="indent" >    Figure&#x00A0;<a 
+href="#x51-430031">4.1<!--tex4ht:ref: fig:scout_sdk_perspective --></a> provides a screenshot of the Scout SDK perspective. In the Scout Explorer shown in the
+upper left part of the screenshot, the message field in the DesktopForm of the &#8221;Hello World&#8221; application
+is selected. In the Scout Object Properties located below, the message field&#8217;s appearance, layout and
+behavior properties are displayed. On the right hand side, the corresponding source code is loaded in a
+Java editor.
+<!--l. 46--><p class="indent" >    When the developer changes a property of the selected element, the Java code is updated accordingly
+and vice versa. For example clicking the <span 
+class="cmti-10">Mandatory </span>property in the Scout Object Properties of the
+message field will insert the method <span 
+class="cmtt-10">getConfiguredMandatory </span>to the message field&#8217;s class. This
+demonstrates how the Scout SDK directly works on the Java source code. In fact, the Java source code is
+almost the only artifact relevant for the Scout SDK to &#8217;understand&#8217; the Scout application model. Taking
+advantage of this setup, the Scout SDK implements a full round-trip-engineering from creating the Java
+code for Scout application components, parsing code changes in the background, and displaying the
+current implementation of the Scout application in the Scout Explorer and the Scout Object
+Properties.
+<!--l. 52--><p class="indent" >    Thanks to the round-trip-engineering provided by the Scout SDK, the information presented in the
+Scout Explorer and the Scout Object Properties always stay in sync with the Java code of the Scout
+application. To illustrate this, we will re-use the &#8221;Hello World&#8221; Scout project from Chapter&#x00A0;<a 
+href="scout_introch3.html#x19-130002">2<!--tex4ht:ref: cha:helloworld --></a>. Start the
+Eclipse IDE with the workspace containing the &#8221;Hello World&#8221; application. Then, navigate to method
+<span 
+class="cmtt-10">getConfiguredLabel </span>as shown in Figure&#x00A0;<a 
+href="#x51-430031">4.1<!--tex4ht:ref: fig:scout_sdk_perspective --></a>, and add the java snippet shown below to the class
+<span 
+class="cmtt-10">MessageField</span>.
+    <!--l. 57-->
+<div class="lstlisting" id="listing-5"><span class="label"><a 
+ id="x51-43004r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-43005r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredMandatory</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-43006r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">true</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-43007r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+    </div>
+<!--l. 64--><p class="indent" >    After having saved the code change, you can observe that the <span 
+class="cmti-10">Mandatory </span>property in the
+section Behavior of the message field&#8217;s Scout Object properties has changed its state. The font
+of its label is now presented in bold face and underlined, the checkbox is ticked and a red
+minus icon is shown on the right side of the property. Obviously, the Scout SDK is directly
+operating on the project&#8217;s source code and does not rely or need any external meta data. This
+provides the flexibility to develop Scout applications with or without the support of the Scout
+SDK. And this choice offered to the Scout developer is one of the most important features
+provided by the Scout SDK. The Scout developer may take advantage of the development
+support provided by the Scout SDK without being restricted by the Scout tooling in any
+way.
+<!--l. 71--><p class="indent" >    Technically, the Scout SDK is a set of Eclipse plugins that operate on top
+of the Eclipse JDT and the Eclipse PDE projects. The Java Development Tools
+(JDT)<span class="footnote-mark"><a 
+href="scout_intro53.html#fn2x6"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x51-43008f2"></a>  contain
+a Java IDE supporting the development of any Java applications, and the Plugin Development Environment
+                                                                                 
+
+                                                                                 
+(PDE)<span class="footnote-mark"><a 
+href="scout_intro54.html#fn3x6"><sup class="textsuperscript">3</sup></a></span><a 
+ id="x51-43009f3"></a> 
+provides tools to create, develop, test, debug, build and deploy Eclipse plugins, and additional artifacts
+relevant for Eclipse based applications. As in the case of the Scout Runtime, the plugins representing the
+Scout SDK, the JDT and the PDE are all located in the <span class="path"><span 
+class="cmtt-10">plugins</span></span> directory of your Eclipse
+installation and named <span class="path"><span 
+class="cmtt-10">org.eclipse.scout.sdk.*</span></span>, <span class="path"><span 
+class="cmtt-10">org.eclipse.jdt.*</span></span> and <span class="path"><span 
+class="cmtt-10">org.eclipse.pde.*</span></span>
+.
+    <h3 class="sectionHead"><span class="titlemark">4.2   </span> <a 
+ id="x51-440004.2"></a>The Scout Explorer</h3>
+<a 
+ id="dx51-44001"></a>
+<!--l. 86--><p class="noindent" >The Scout Explorer view is responsible for the navigation support within the Scout application model. This
+navigation support is presented in the form of a tree view and includes the client with its UI components, the
+server and the shared part of a Scout application. It also includes all Scout application modules of modular Scout
+applications<span class="footnote-mark"><a 
+href="scout_intro55.html#fn4x6"><sup class="textsuperscript">4</sup></a></span><a 
+ id="x51-44002f4"></a> .
+For the actual navigation in the tree representing the Scout application both the mouse or the keyboard
+can be used.
+<!--l. 93--><p class="indent" >    To expand or collapse a selected node in the Scout Explorer, you may click on the tiny <span 
+class="cmcsc-10"><span 
+class="small-caps">p</span><span 
+class="small-caps">l</span><span 
+class="small-caps">u</span><span 
+class="small-caps">s</span> </span>icon or
+the <span 
+class="cmcsc-10"><span 
+class="small-caps">m</span><span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">u</span><span 
+class="small-caps">s</span> </span>icon presented to the left of the node. Alternatively, you can also use the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">R<span 
+class="small-caps">i</span><span 
+class="small-caps">g</span><span 
+class="small-caps">h</span><span 
+class="small-caps">t</span></span><span 
+class="cmmi-10">&#x003E; </span>or the
+<span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">L<span 
+class="small-caps">e</span><span 
+class="small-caps">f</span><span 
+class="small-caps">t</span></span><span 
+class="cmmi-10">&#x003E; </span>cursor keys.
+<!--l. 96--><p class="indent" >    Once a node in the tree is selected, the Scout Object Properties view presents the associated
+configuration of the selected element. If the selected element represents a specific application model
+component, the corresponding Java source code can be accessed through a double click on the node, or
+hitting the <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmcsc-10">E<span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">r</span></span><span 
+class="cmmi-10">&#x003E; </span>key.
+<!--l. 99--><p class="indent" >    The navigation tree provided in the Scout Explorer view also allows the developer to add
+elements to the application. Depending on the selected node in the tree, wizards can be launched
+using the context menus. The wizards support the creation of application components, such
+as forms on the client side or services on the server side by generating the necessary Java
+code.
+<!--l. 103--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-440032"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 104--><p class="noindent" ><img 
+src="ScoutTooling/figures/explorer_client.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.2: </span><span  
+class="content">The Scout Explorer view. The grey nodes below the expanded client node represent
+the supported UI technologies.</span></div><!--tex4ht:label?: x51-440032 -->
+                                                                                 
+
+                                                                                 
+<!--l. 107--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 109--><p class="indent" >    In Figure&#x00A0;<a 
+href="#x51-440032">4.2<!--tex4ht:ref: fig:explorer_client --></a> the top level organization of the client application model is shown as it is represented
+in the Scout Explorer. All client specific elements are located under the selected orange client node
+<span 
+class="cmti-10">org.eclipsescout.helloworld.client</span>. Right below, the three grey UI plugins which represent the
+support for the corresponding UI technologies for Swing, SWT and Eclipse RAP. The orange
+<span 
+class="cmti-10">org.eclipsescout.helloworld.client.mobile </span>node contains all elements that are specific to mobile devices such
+as the <span 
+class="cmtt-10">MobileHomeForm</span>.
+<!--l. 114--><p class="indent" >    Specific nodes for the client session and the desktop of the Scout client allow access to the corresponding
+Scout application model components. While the client session is the main entry point for client-server
+communication, the desktop represents the root component of the visible part of a Scout client application.
+Below a set of folders group additional client model components according to their type. The forms folder
+for example holds all available forms, such as the desktop form that we have used in the &#8221;Hello World!&#8221;
+tutorial<span class="footnote-mark"><a 
+href="scout_intro56.html#fn5x6"><sup class="textsuperscript">5</sup></a></span><a 
+ id="x51-44004f5"></a> .
+<!--l. 121--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-440053"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 122--><p class="noindent" ><img 
+src="ScoutTooling/figures/explorer_shared.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.3: </span><span  
+class="content">The Scout Explorer view with the expanded shared node.</span></div><!--tex4ht:label?: x51-440053 -->
+                                                                                 
+
+                                                                                 
+<!--l. 125--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 127--><p class="indent" >    A screenshot of the expanded green shared node <span 
+class="cmti-10">org.eclipsescout.helloworld.shared </span>is provided in
+Figure&#x00A0;<a 
+href="#x51-440053">4.3<!--tex4ht:ref: fig:explorer_shared --></a>. As the name &#8221;shared&#8221; suggests, the corresponding plugin holds all application components
+that are required for both the Scout client and the Scout server application. This includes texts, icons,
+codes types, permissions and lookup calls. As shown in Figure&#x00A0;<a 
+href="#x51-440053">4.3<!--tex4ht:ref: fig:explorer_shared --></a>, a separate folder for each resource
+type is provided under the shared node.
+<!--l. 132--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-440064"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 133--><p class="noindent" ><img 
+src="ScoutTooling/figures/explorer_server.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/explorer_server_servicewizard.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.4: </span><span  
+class="content">The Scout Explorer view with the expanded server node (left). On the individual
+nodes, access to the relevant Scout SDK wizards is provided using context menus (right).</span></div><!--tex4ht:label?: x51-440064 -->
+                                                                                 
+
+                                                                                 
+<!--l. 137--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 139--><p class="indent" >    In Figure&#x00A0;<a 
+href="#x51-440064">4.4<!--tex4ht:ref: fig:explorer_server --></a>, the blue server node is expanded in the Scout Explorer view. As the primary
+responsibility of the Scout server application is to answer client requests, its components are mostly
+related to different types of services. The <span 
+class="cmti-10">Services </span>folder holds services related to the processing logic of
+the application such as retrieving and updating data. The remaining folders group more specific types of
+server services. Under the <span 
+class="cmti-10">Webservices </span>folder the Scout SDK support to provide and consume web
+services is located.
+<!--l. 145--><p class="indent" >    The right side of Figure&#x00A0;<a 
+href="#x51-440064">4.4<!--tex4ht:ref: fig:explorer_server --></a> illustrates the access to the Scout SDK wizards using the corresponding
+context menus. The <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> S<span 
+class="small-caps">e</span><span 
+class="small-caps">r</span><span 
+class="small-caps">v</span><span 
+class="small-caps">i</span><span 
+class="small-caps">c</span><span 
+class="small-caps">e</span>... </span>menu shown in the screenshot will start the wizard to add a new
+Scout server service.
+<!--l. 148--><p class="indent" >    The different colored tree nodes discussed above are all represented by their individual Eclipse
+plugins. This includes the orange client node, the grey UI nodes, the orange mobile client
+node, the green shared node and the blue server node. A Scout Swing client for example
+contains the plugins <span 
+class="cmti-10">org.eclipsescout.helloworld.client</span>, <span 
+class="cmti-10">org.eclipsescout.helloworld.shared </span>and
+<span 
+class="cmti-10">org.eclipsescout.helloworld.client.ui.swing </span>but not the other UI technology plugins. The Scout server
+contains the <span 
+class="cmti-10">org.eclipsescout.helloworld.server </span>plugin and the <span 
+class="cmti-10">org.eclipsescout.helloworld.shared</span>
+plugin.
+    <h3 class="sectionHead"><span class="titlemark">4.3   </span> <a 
+ id="x51-450004.3"></a>The Scout Object Properties</h3>
+<a 
+ id="dx51-45001"></a>
+<!--l. 158--><p class="noindent" >The Scout Object Properties view provides direct access to configurable properties and operations for the
+element selected in the Scout Explorer. Before we discuss the typical layout of an object property view we
+describe the special case of the property view for a complete Scout application. This property view is
+displayed when the application&#8217;s top level node is selected in the Scout Explorer as shown in
+Figure&#x00A0;<a 
+href="scout_introch3.html#x19-150053">2.3<!--tex4ht:ref: fig:sdk_initial_helloworld_project --></a>.
+<!--l. 162--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-450025"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 163--><p class="noindent" ><img 
+src="ScoutTooling/figures/properties_technologies.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.5: </span><span  
+class="content">The Scout Object Properties showing the expanded Technologies section.</span></div><!--tex4ht:label?: x51-450025 -->
+                                                                                 
+
+                                                                                 
+<!--l. 166--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 168--><p class="indent" >    The main elements of the top-level application properties are the sections <span 
+class="cmti-10">Product Launchers </span>and the
+<span 
+class="cmti-10">Technologies</span>. As the product launcher section with its launcher boxes has already been covered in
+Section&#x00A0;<a 
+href="scout_introch3.html#x19-160002.3">2.3<!--tex4ht:ref: sec:run_initial --></a> and Section&#x00A0;<a 
+href="scout_introch4.html#x27-290003.3">3.3<!--tex4ht:ref: sec:run_initial_background --></a> we focus on the technologies here. The technologies section allows to add
+features to the application or remove such elements.
+<!--l. 172--><p class="indent" >    When the selection of a technology checkbox is changed, a message box is shown to the user. This
+box lists all project resources that are changed when the user confirms the action. Once the dialog
+is confirmed, the selected resources are modified by the Scout SDK to add or remove the
+feature.
+<!--l. 176--><p class="indent" >    This is required for features containing licences not compatible to the Eclipse Public Licence (EPL)
+or features in incubation status, because such features cannot be provided as part of the Eclipse Scout
+installation package. Instead, the associated artifacts need to be downloaded from a remote
+updated site first. Before any non-EPL content is downloaded from the internet, the user
+needs to review and confirm the associated licence. For this, a license confirmation dialog
+is shown upfront. After confirmation, the required files are downloaded and automatically
+added to the application. Currently, the procedure described above is used for the following
+technologies.
+     <ul class="itemize1">
+     <li class="itemize">MySQL JDBC Driver for Eclipse Scout
+     </li>
+     <li class="itemize">Oracle 11g2 JDBC Driver for Eclipse Scout
+     </li>
+     <li class="itemize">PostgresSQL 9 JDBC Driver for Eclipse Scout
+     </li>
+     <li class="itemize">Docx4j Support
+     </li>
+     <li class="itemize">F2 Support
+     </li>
+     <li class="itemize">Rayo Swing Look and Feel for Eclipse Scout
+     </li>
+     <li class="itemize">RAP FileChooser Support (Incubation)</li></ul>
+<!--l. 193--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-450036"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 194--><p class="noindent" ><img 
+src="ScoutTooling/figures/properties_form.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/properties_stringfield.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.6: </span><span  
+class="content">The Scout Object Properties for a complete form (left) and a string form field (right).</span></div><!--tex4ht:label?: x51-450036 -->
+                                                                                 
+
+                                                                                 
+<!--l. 198--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 200--><p class="indent" >    For the description of the Scout Object Properties of typical Scout components we use the example
+views provided in Figure&#x00A0;<a 
+href="#x51-450036">4.6<!--tex4ht:ref: fig:properties_view_examples --></a>. Both Scout Object Properties example views for the desktop form and the
+message field are taken from the &#8221;Hello World!&#8221; application described in Chapter&#x00A0;<a 
+href="scout_introch3.html#x19-130002">2<!--tex4ht:ref: cha:helloworld --></a>. As in the case of the
+top-level node representing the complete Scout application, the typical layout of the Scout Object
+Properties view is organized into several expandable sections. The content and ordering of the property
+sections usually follows the following scheme:
+     <ul class="itemize1">
+     <li class="itemize">Filter
+     </li>
+     <li class="itemize">Links
+     </li>
+     <li class="itemize">Properties
+     </li>
+     <li class="itemize">Operations
+     </li>
+     <li class="itemize">Advanced Properties
+     </li>
+     <li class="itemize">Advanced Operations</li></ul>
+<!--l. 214--><p class="indent" >    If a folder node (such as the <span 
+class="cmti-10">Forms </span>folder under the orange client node) is selected in the Scout
+Explorer, the Scout Object Properties only shows a filter section with a filter field. The content in
+this filter field then restricts the elements below the folder icon accordingly. This feature is
+especially useful for the development of larger applications containing hundreds of forms or
+services.
+<!--l. 218--><p class="indent" >    The <span 
+class="cmti-10">Links </span>section provides a set of hyperlinks as shown on the left hand side of Figure&#x00A0;<a 
+href="#x51-450036">4.6<!--tex4ht:ref: fig:properties_view_examples --></a>. The
+provided links all refer to Java classes and interfaces that related to the Scout component represented by
+the property view.
+<!--l. 221--><p class="indent" >    The available properties of a Scout component are listed in sections <span 
+class="cmti-10">Properties </span>and <span 
+class="cmti-10">Advanced</span>
+<span 
+class="cmti-10">Properties</span>. Basically, all available Java <span 
+class="cmtt-10">getConfigured </span>methods of a Scout component are listed in one of
+the two sections depending on the frequency of their usage. Section <span 
+class="cmti-10">Properties </span>shows the often used
+properties, while the less frequently used properties are provided in section <span 
+class="cmti-10">Advanced Properties</span>. The
+examples in Figure&#x00A0;<a 
+href="#x51-450036">4.6<!--tex4ht:ref: fig:properties_view_examples --></a> show the thematic organization of the sections into <span 
+class="cmti-10">Appearance</span>, <span 
+class="cmti-10">Layout</span>, <span 
+class="cmti-10">Behavior</span>
+and other groups.
+<!--l. 226--><p class="indent" >    Access to object operations implemented with Java <span 
+class="cmtt-10">exec </span>methods is provided in sections <span 
+class="cmti-10">Operations</span>
+and <span 
+class="cmti-10">Advanced Operations</span>. Again, the more and less frequently used operations are assigned to individual
+sections.
+<!--l. 229--><p class="indent" >    For all listed properties and operations the corresponding Javadoc is displayed in the form of a tooltip window.
+To display the available Javadoc, move the mouse pointer over the method of interest in the Scout Object
+                                                                                 
+
+                                                                                 
+Properties<span class="footnote-mark"><a 
+href="scout_intro57.html#fn6x6"><sup class="textsuperscript">6</sup></a></span><a 
+ id="x51-45004f6"></a> .
+<!--l. 238--><p class="indent" >    So far, we did only describe the content and organization of the Scout Object Properties. In the
+reminder of this section we will describe the procedure how to change or update the properties and
+operations of Scout components. To indicate non-default property values or non-default behavior,
+the font of the property or operation is switched to underlined bold face. As an example,
+consider the property <span 
+class="cmti-10">Ask If Need Save </span>of the desktop form shown on the left side of Figure&#x00A0;<a 
+href="#x51-450036">4.6<!--tex4ht:ref: fig:properties_view_examples --></a>.
+The bold font visualizes that this does not correspond to the default behavior of forms. And
+underlining of this property further indicates, that the label has become a clickable link.
+Clicking on this label will load the corresponding method into the Java editor in the Scout
+SDK.
+<!--l. 246--><p class="indent" >    To change a property for a specific Scout component just enter a value in the corresponding field or
+tick/untick the provided checkbox. In some cases the value may also be chosen from a dropdown list.
+For the label field shown on the right hand side of Figure&#x00A0;<a 
+href="#x51-450036">4.6<!--tex4ht:ref: fig:properties_view_examples --></a>, the &#8221;Message&#8221; value refers
+to the translation of the text key to be used in method <span 
+class="cmtt-10">getConfiguredLabel</span>. To enter a
+new label text, start typing the desired translated label and pick the option &#8221;New translated
+text...&#8221;.
+<!--l. 251--><p class="indent" >    To reset a property or operation to its default value/behavior, you may click on the red <span 
+class="cmcsc-10">M<span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">u</span><span 
+class="small-caps">s</span> </span>icon
+provided on the right side of the property field. This will remove the overridden method from the object&#8217;s
+Java code.
+    <h3 class="sectionHead"><span class="titlemark">4.4   </span> <a 
+ id="x51-460004.4"></a>Scout SDK Wizards</h3>
+<a 
+ id="dx51-46001"></a>
+<!--l. 258--><p class="noindent" >The Scout SDK wizards allow the developer to create Scout application model components with just a
+few clicks. Creation wizards are provided for all major model components such as forms on the
+client side or services on the server side. The usage of wizards not only makes developing
+Scout applications efficient but also helps to create robust code and reduces the number of
+errors.
+<!--l. 262--><p class="indent" >    Scout SDK wizards can do many things. They add and update Java classes, register
+services in the <span class="path"><span 
+class="cmtt-10">plugin.xml</span></span> files, manage plugin dependencies in the <span class="path"><span 
+class="cmtt-10">MANIFEST.MF</span></span> files and
+update Eclipse product files when necessary. All these capabilities hide a lot of the complexity
+of writing Eclipse based applications. This simplifies the development of Scout application
+considerably.
+<!--l. 267--><p class="indent" >    In the subsections below, the most commonly used Scout SDK wizards are explained. First, the
+wizards to create and export complete Scout applications are described. Then, the wizards to create
+Scout application model components are introduced.
+<!--l. 272--><p class="noindent" >
+                                                                                 
+
+                                                                                 
+    <h4 class="subsectionHead"><span class="titlemark">4.4.1   </span> <a 
+ id="x51-470004.4.1"></a>Creating a new Scout Project</h4>
+<a 
+ id="dx51-47001"></a>
+<!--l. 276--><p class="noindent" >The <span 
+class="cmti-10">New Scout Project </span>wizard creates a new Scout client server application. In the Scout Explorer, the
+<span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> S<span 
+class="small-caps">c</span><span 
+class="small-caps">o</span><span 
+class="small-caps">u</span><span 
+class="small-caps">t</span> P<span 
+class="small-caps">r</span><span 
+class="small-caps">o</span><span 
+class="small-caps">j</span><span 
+class="small-caps">e</span><span 
+class="small-caps">c</span><span 
+class="small-caps">t</span>... </span>context menu is provided on the top-level <span 
+class="cmti-10">Scout Projects </span>folder. The creation of
+a form based Scout application has already been introduced in Section&#x00A0;<a 
+href="scout_introch3.html#x19-150002.2">2.2<!--tex4ht:ref: sec:create_project_simple --></a> for the &#8221;Hello World&#8221;
+tutorial. And Section&#x00A0;<a 
+href="scout_introch4.html#x27-230003.1">3.1<!--tex4ht:ref: sec:create_project_simple_background --></a> provides background information related to the artifacts created by
+this wizard. In the text below, we will describe the different steps of the creation wizard
+individually.
+<!--l. 282--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-470027"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 283--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_new_project_1.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/wizard_new_project_2.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.7: </span><span  
+class="content">The Scout SDK wizard to create a new Scout application. The first wizard dialog (left)
+is used to specify the needed application plugins. In the next wizard step (right) the application
+template is selected.</span></div><!--tex4ht:label?: x51-470027 -->
+                                                                                 
+
+                                                                                 
+<!--l. 289--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 291--><p class="indent" >    In the first wizard step shown on the left hand side of Figure&#x00A0;<a 
+href="#x51-470027">4.7<!--tex4ht:ref: fig:wizard_new_project --></a>, the project name and
+the application plugins must be chosen. The <span 
+class="cmti-10">Project Name </span>field is used as base name of the
+application&#8217;s plugins and as the Java package base names inside of the plugins. If the project
+name is written as parts separated by periods, the last part is copied into the <span 
+class="cmti-10">Project Alias</span>
+field.
+<!--l. 295--><p class="indent" >    When building multi module applications, the optional <span 
+class="cmti-10">Project Postfix </span>field can be specified to apply
+a common naming schemes for the different modules. The resulting application plugins (UI, client,
+shared, server) are then named following the scheme <span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmtt-10">Project Name</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmtt-10">.</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmtt-10">plugin</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmtt-10">.</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmtt-10">Project</span>
+<span 
+class="cmtt-10">Postfix</span><span 
+class="cmmi-10">&#x003E;</span>.
+<!--l. 298--><p class="indent" >    In the box below the postfix field the list of possible application plugins is provided. Initially, all
+possible plugins are checked which is useful to quickly demonstrate a &#8221;Hello World&#8221; application. However,
+for a typical setup only one or two UI plugins will be needed. To develop a mobile/web application only
+the RAP UI plugin is necessary. For a desktop only client, either the Swing or the SWT UI plugin
+will be needed. And in cases where the client needs to run both on the desktop and as a
+web/mobile application, the RAP and a desktop UI plugin can be chosen. A Scout application
+must not necessarily be a client-server application. It is also possible to create a client only
+or a server only application. But make sure to include the shared plugin in all possible use
+cases.
+<!--l. 308--><p class="indent" >    In the <span 
+class="cmti-10">Eclipse Platform </span>field the Eclipse target platform version can be selected. If you choose
+another platform version than the running Eclipse instance, the platform must be downloaded from the
+Eclipse update site. This requires Internet access.
+<!--l. 310--><p class="indent" >    The content of the <span 
+class="cmti-10">Alias </span>field is used for the client&#8217;s executable file, the name of the servlet
+representing the Scout server application and to build the product launcher names. And if the <span 
+class="cmti-10">Use default</span>
+<span 
+class="cmti-10">Scout JDT preferences </span>field is checked, the Scout default Java development settings are used. Otherwise,
+you start with no settings and can apply your own template.
+<!--l. 314--><p class="indent" >    As we have seen in the &#8221;Hello World&#8221; tutorial, it is sufficient to provide a project name in the first
+wizard step and click on the <span 
+class="cmcsc-10">F<span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">i</span><span 
+class="small-caps">s</span><span 
+class="small-caps">h</span> </span>button to create a form based client server application. But we can
+also click on the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span> </span>button to choose an application template.
+<!--l. 317--><p class="indent" >    The second wizard step shown on the right side of Figure&#x00A0;<a 
+href="#x51-470027">4.7<!--tex4ht:ref: fig:wizard_new_project --></a> allows to choose a Scout application
+template for the new project. When choosing the template <span 
+class="cmti-10">Empty Application </span>only a minimal code base
+is created. The other two application templates represent different application types. The
+template <span 
+class="cmti-10">Application with a single Form </span>is the default choice used for the &#8221;Hello World&#8221;
+tutorial. Finally, the template <span 
+class="cmti-10">Outline Tree and Table Form </span>can be used to build explorer like
+applications. The outline tree is typically used to navigate between related business entities. And
+the tables are used to list a number of business entities with their attributes. We will use
+this template for the creation of a larger Scout application in Chapter&#x00A0;<a 
+href="scout_introch6.html#x59-600005">5<!--tex4ht:ref: cha:large_example --></a>. As in the case of
+the first wizard step, you may click <span 
+class="cmcsc-10">F<span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">i</span><span 
+class="small-caps">s</span><span 
+class="small-caps">h</span> </span>button to start the creation of an initial Scout
+application. Or, click on <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span> </span>button and manually step through the third and last wizard
+step.
+<!--l. 328--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-470038"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 329--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_new_project_3.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.8: </span><span  
+class="content">The last wizard step is used to specify the RAP target for the new Scout application.</span></div><!--tex4ht:label?: x51-470038 -->
+                                                                                 
+
+                                                                                 
+<!--l. 332--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 334--><p class="indent" >    The third wizard step shown in Figure&#x00A0;<a 
+href="#x51-470038">4.8<!--tex4ht:ref: fig:wizard_new_project_rap_target --></a> is only available if the RAP UI plugin has been checked in
+Step 1. Because the RAP runtime must not be installed into the running Eclipse instance, a separate
+RAP target platform is created and used by the Scout SDK. This target platform then contains all
+necessary plugins to run the Scout RAP UI. The different options provided by this wizard step are the
+following:
+<!--l. 339--><p class="indent" >    When choosing the option <span 
+class="cmti-10">Create new RAP Target</span>, a new RAP target platform will be created at
+the location specified. This target platform can then be used by several projects.
+<!--l. 341--><p class="indent" >    Option <span 
+class="cmti-10">Download RAP Target </span>will downloaded the target platform into the running workspace. This
+download will then only be available to the active workspace.
+<!--l. 343--><p class="indent" >    With the option <span 
+class="cmti-10">Existing RAP Target </span>an existing RAP target location can be specified. Usually this
+is a location that has already been created using option 1.
+<!--l. 345--><p class="indent" >    To manually define a RAP target platform choose option <span 
+class="cmti-10">I&#8217;ll do it later</span>. With this option,
+the Scout SDK does not create a RAP target platform for you. But note that the created
+project will not compile before a complete target platform has been created for the Scout
+application.
+    <h4 class="subsectionHead"><span class="titlemark">4.4.2   </span> <a 
+ id="x51-480004.4.2"></a>Exporting a Scout Project</h4>
+<a 
+ id="dx51-48001"></a>
+<!--l. 353--><p class="noindent" >The <span 
+class="cmti-10">Export a Scout Project </span>wizard allows to export a complete Scout client server application as WAR or
+EAR files. In the Scout Explorer, the <span 
+class="cmcsc-10">E<span 
+class="small-caps">x</span><span 
+class="small-caps">p</span><span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">t</span> S<span 
+class="small-caps">c</span><span 
+class="small-caps">o</span><span 
+class="small-caps">u</span><span 
+class="small-caps">t</span> P<span 
+class="small-caps">r</span><span 
+class="small-caps">o</span><span 
+class="small-caps">j</span><span 
+class="small-caps">e</span><span 
+class="small-caps">c</span><span 
+class="small-caps">t</span>... </span>context menu is provided on the main
+application node just below the top-level <span 
+class="cmti-10">Scout Projects </span>folder.
+<!--l. 356--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-480029"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 357--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_export_1.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/wizard_export_2.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.9: </span><span  
+class="content">The Scout SDK wizard to a new Scout application into WAR files. The first wizard
+step (left) is used to select the artifact to be exported. In the next wizard step (right) is used to
+define the server WAR file name and to select the server product file to be used for the export.</span></div><!--tex4ht:label?: x51-480029 -->
+                                                                                 
+
+                                                                                 
+<!--l. 363--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 365--><p class="indent" >    As a simple use case, the usage of the export wizard is described in Section&#x00A0;<a 
+href="scout_introch3.html#x19-200002.7">2.7<!--tex4ht:ref: sec:helloworld_export --></a> of the &#8221;Hello World&#8221;
+tutorial. And the corresponding background Section&#x00A0;<a 
+href="scout_introch4.html#x27-400003.7">3.7<!--tex4ht:ref: sec:helloworld_export_background --></a> provides information regarding the content and
+the organization of the WAR files produced by this wizard.
+<!--l. 368--><p class="indent" >    In the first export wizard step shown on the left hand side of Figure&#x00A0;<a 
+href="#x51-480029">4.9<!--tex4ht:ref: fig:wizard_export --></a> the target directory and the
+type of content to be exported is defined. The <span 
+class="cmti-10">Target Directory </span>field is used to define the directory where
+the generated WAR files will be exported to. Checking the <span 
+class="cmti-10">Export as Enterprise Archive (EAR) </span>field the
+WAR file(s) will be packed into a EAR file using the file name provided in the <span 
+class="cmti-10">EAR File Name</span>
+field.
+<!--l. 372--><p class="indent" >    In the artifact selector box the content to be included in the export can be specified:
+     <ul class="itemize1">
+     <li class="itemize">The blue <span 
+class="cmti-10">Server Web Application </span>node represents the Scout server application. If ticked, the
+     corresponding WAR file will also include a zipped desktop client that will then be provided
+     for download to users (only if a desktop client exists in the current Scout project).
+     </li>
+     <li class="itemize">Selecting the orange <span 
+class="cmti-10">Client Application (ZIP) </span>node node will put a zipped client into the
+     target directory.
+     </li>
+     <li class="itemize">When working with web/mobile applications the necessary RAP server is represented by the
+     grey <span 
+class="cmti-10">RAP Web Application </span>node.</li></ul>
+<!--l. 379--><p class="indent" >    The default scenario assumes that you work with a Scout client server application including a SWT
+desktop client and corresponding web/mobile clients. For this setup you just need to provide a target
+directory before you can click the <span 
+class="cmcsc-10">F<span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">i</span><span 
+class="small-caps">s</span><span 
+class="small-caps">h</span> </span>button to start the export. To verify/update what
+the export wizard will create you may click the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span> </span>button to move to the second wizard
+step.
+<!--l. 383--><p class="indent" >    The second wizard step is shown on the right side of Figure&#x00A0;<a 
+href="#x51-480029">4.9<!--tex4ht:ref: fig:wizard_export --></a>. The server WAR file name proposed
+in the <span 
+class="cmti-10">WAR File </span>field uses the naming scheme <span class="path"><span 
+class="cmtt-10">&#x003C;ProjectAlias&#x003E;_server.war</span></span>. In order for this WAR
+file to work out-of-the-box it it is recommended to use the proposed value. In the <span 
+class="cmti-10">Product</span>
+<span 
+class="cmti-10">File </span>field the server product file to be used for the creation of the WAR file can be specified.
+Clicking the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span> </span>button will move to the next wizard step to select the client product to be
+exported.
+<!--l. 389--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-4800310"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 390--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_export_client_application.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.10: </span><span  
+class="content">The third export wizard step is used to specify the desktop client product file to be
+used for the export and the download location for the resulting zipped client.</span></div><!--tex4ht:label?: x51-4800310 -->
+                                                                                 
+
+                                                                                 
+<!--l. 393--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 395--><p class="indent" >    In the third wizard step shown in Figure&#x00A0;<a 
+href="#x51-4800310">4.10<!--tex4ht:ref: fig:wizard_export_client --></a> the client product file can be selected. If the current
+Scout project defines both a Swing and a SWT client, the default will use the SWT client. Clicking on
+the dropdown button next to the <span 
+class="cmti-10">Client Product to include </span>field will open a <span 
+class="cmti-10">Select Product </span>dialog to
+choose the right product from all available client products. In the <span 
+class="cmti-10">Client Download Location </span>field the path
+to the zipped client inside the server WAR file is defined. In order for this WAR file to work
+out-of-the-box it is recommended to use the proposed value. With the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span> </span>button the last export
+wizard step is shown.
+<!--l. 402--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-4800411"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 403--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_export_rap_server.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.11: </span><span  
+class="content">The last export wizard step is used to specify the define the name of the server WAR
+for the RAP web/mobile application and the corresponding product file to be used for the export.</span></div><!--tex4ht:label?: x51-4800411 -->
+                                                                                 
+
+                                                                                 
+<!--l. 406--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 408--><p class="indent" >    The last export wizard step is shown in Figure&#x00A0;<a 
+href="#x51-4800411">4.11<!--tex4ht:ref: fig:wizard_export_rap_server --></a>. A RAP server WAR file name is proposed in
+the <span 
+class="cmti-10">WAR File </span>field based on the naming scheme <span class="path"><span 
+class="cmtt-10">&#x003C;ProjectAlias&#x003E;.war</span></span>. In order for this WAR file to
+work out-of-the-box it is recommended to use the proposed value. In the <span 
+class="cmti-10">Product File </span>field the RAP
+server product file to be used for the creation of the WAR file can be specified. The <span 
+class="cmcsc-10">F<span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">i</span><span 
+class="small-caps">s</span><span 
+class="small-caps">h</span> </span>button will
+then start the export.
+<!--l. 414--><p class="indent" >    After the wizard has completed the export, all resulting artifacts will be located in the target
+directory specified in the first wizard step.
+    <h4 class="subsectionHead"><span class="titlemark">4.4.3   </span> <a 
+ id="x51-490004.4.3"></a>Creating new Forms</h4>
+<!--l. 419--><p class="noindent" >The <span 
+class="cmti-10">New Form </span>wizard allows to create a new form including the necessary form data, permissions and
+server services. In the Scout Explorer, the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> F<span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">m</span>... </span>context menu is provided on the <span 
+class="cmti-10">Forms </span>folder
+under the orange client node.
+<!--l. 422--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-4900112"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 423--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_form_1.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/wizard_form_2.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.12: </span><span  
+class="content">The Scout SDK wizard to create a new form.</span></div><!--tex4ht:label?: x51-4900112 -->
+                                                                                 
+
+                                                                                 
+<!--l. 427--><p class="indent" >    </div><hr class="endfigure">
+    <h4 class="subsectionHead"><span class="titlemark">4.4.4   </span> <a 
+ id="x51-500004.4.4"></a>Creating new Form Fields</h4>
+<a 
+ id="dx51-50001"></a>
+<!--l. 434--><p class="noindent" >The <span 
+class="cmti-10">New Form Field </span>wizard allows to create a new form field. In the Scout Explorer, the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> F<span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">m</span></span>
+<span 
+class="cmcsc-10">F<span 
+class="small-caps">i</span><span 
+class="small-caps">e</span><span 
+class="small-caps">l</span><span 
+class="small-caps">d</span>... </span>context menu is provided on Scout Explorer nodes representing composite form fields, such as
+the <span 
+class="cmti-10">MainBox </span>node below a form node.
+<!--l. 437--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5000213"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 438--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_field_contextmenu.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/wizard_field_1.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.13: </span><span  
+class="content">Starting the new form field wizard with the context menu on a composite field (left).
+The first wizard step (right) is used to select the field type.</span></div><!--tex4ht:label?: x51-5000213 -->
+                                                                                 
+
+                                                                                 
+<!--l. 442--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 444--><p class="indent" >    Figure&#x00A0;<a 
+href="#x51-5000213">4.13<!--tex4ht:ref: fig:wizard_field_start --></a> provides screenshots for starting the form field wizard with the context menu and the
+first wizard page. In the first wizard step, the list of all available Scout form field types is presented. To
+quickly find the desired form field type, a part of the type name can be entered in the search
+field above the field type list. In the screenshot on the right hand side of Figure&#x00A0;<a 
+href="#x51-5000213">4.13<!--tex4ht:ref: fig:wizard_field_start --></a> this
+search field contains the value &#8217;s&#8217; which filters the field type list accordingly. Once the type of
+the new form field is selected, the next wizard step can be loaded by clicking on the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">x</span><span 
+class="small-caps">t</span></span>
+button.
+<!--l. 450--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5000314"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 451--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_field_2.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.14: </span><span  
+class="content">The second form field wizard step is also used to assign a field label. By typing a
+word or a parts of it into the <span 
+class="cmti-10">Name </span>field a list of existing and matching text entries is provided.</span></div><!--tex4ht:label?: x51-5000314 -->
+                                                                                 
+
+                                                                                 
+<!--l. 455--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 457--><p class="indent" >    In the second wizard step shown in Figure&#x00A0;<a 
+href="#x51-5000314">4.14<!--tex4ht:ref: fig:wizard_field_name --></a> the remaining creation parameters for the new form
+field can be specified. The <span 
+class="cmti-10">Name </span>field is used to define the content of the field label. For this, a translated
+text entry has to be defined. By typing a string into the name field, all potentially matching existing
+translation entries are shown in a dropdown list. As shown in Figure&#x00A0;<a 
+href="#x51-5000314">4.14<!--tex4ht:ref: fig:wizard_field_name --></a> not only the text key is
+used to find matching entries but also translated text entries. When assigning the label for a
+preferences string field, the substring &#8221;Pref&#8221; lists a set of text keys that have a matching
+entries.
+<!--l. 464--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5000415"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 465--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_field_translation.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/wizard_field_3.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.15: </span><span  
+class="content">Adding a text translation for a field label (left) and specifying the ordering of the
+fields (right).</span></div><!--tex4ht:label?: x51-5000415 -->
+                                                                                 
+
+                                                                                 
+<!--l. 469--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 471--><p class="indent" >    One of the presented options in the list of text entries is the <span 
+class="cmti-10">New translated text... </span>entry. A double
+click on this entry starts the wizard to create a new text entry as shown on the left hand
+side of Figure&#x00A0;<a 
+href="#x51-5000415">4.15<!--tex4ht:ref: fig:wizard_field_translation --></a>. The <span 
+class="cmti-10">Key Name </span>field holds the text key that is used to access translated
+text<span class="footnote-mark"><a 
+href="scout_intro58.html#fn7x6"><sup class="textsuperscript">7</sup></a></span><a 
+ id="x51-50005f7"></a> .
+In the tabs below the key name field, the text translations for the registered languages can be
+provided. Make sure to at least provide a text in the <span 
+class="cmti-10">default </span>tab. This text will be used in
+the Scout application if no translation is available that better matches the logged in user&#8217;s
+locale.
+<!--l. 480--><p class="indent" >    Once the name field is filled in, the entered text key is also used to create a proposal for the <span 
+class="cmti-10">Class</span>
+<span 
+class="cmti-10">Name </span>field using the pattern <span 
+class="cmtt-10">&#x003C;Field Name&#x003E;Field</span>. In contrast to the label field, the class name field is
+mandatory. If the field does not need a label the name field can remain empty. In that case, a class name
+still needs to be provided as described in Section&#x00A0;<a 
+href="scout_introch3.html#x19-170002.4">2.4<!--tex4ht:ref: sec:helloworld_ui --></a> for the <span 
+class="cmtt-10">DesktopBox </span>class in the &#8221;Hello World&#8221;
+application.
+<!--l. 485--><p class="indent" >    The <span 
+class="cmti-10">Sibling </span>field is used to define the ordering of the form fields in the parent container. As shown on
+the right hand side of Figure&#x00A0;<a 
+href="#x51-5000415">4.15<!--tex4ht:ref: fig:wizard_field_translation --></a>, the new <span 
+class="cmtt-10">PreferencesField </span>is to be placed before the message
+field.
+    <h4 class="subsectionHead"><span class="titlemark">4.4.5   </span> <a 
+ id="x51-510004.4.5"></a>Creating new Outlines</h4>
+<a 
+ id="dx51-51001"></a>
+<!--l. 492--><p class="noindent" >The <span 
+class="cmti-10">New Outline </span>wizard allows to create the container to display data of pages. In the Scout Explorer,
+the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> O<span 
+class="small-caps">u</span><span 
+class="small-caps">t</span><span 
+class="small-caps">l</span><span 
+class="small-caps">i</span><span 
+class="small-caps">n</span><span 
+class="small-caps">e</span>... </span>context menu is available on the <span 
+class="cmti-10">Outlines </span>folder below the <span 
+class="cmti-10">Desktop </span>node under the
+applications client node. The <span 
+class="cmti-10">New Outline </span>wizard is shown in Figure&#x00A0;<a 
+href="#x51-5100216">4.16<!--tex4ht:ref: fig:wizard_outline --></a>.
+<!--l. 496--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5100216"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 497--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_outline.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.16: </span><span  
+class="content">The Scout SDK wizard to create a new outline.</span></div><!--tex4ht:label?: x51-5100216 -->
+                                                                                 
+
+                                                                                 
+<!--l. 500--><p class="indent" >    </div><hr class="endfigure">
+    <h4 class="subsectionHead"><span class="titlemark">4.4.6   </span> <a 
+ id="x51-520004.4.6"></a>Creating new Pages</h4>
+<a 
+ id="dx51-52001"></a>
+<!--l. 506--><p class="noindent" >The <span 
+class="cmti-10">New Page </span>wizard allows to create pages which are shown in the corresponding outlines. In the Scout
+Explorer, the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> P<span 
+class="small-caps">a</span><span 
+class="small-caps">g</span><span 
+class="small-caps">e</span>... </span>context menu is available below outlines, below other pages or in the <span 
+class="cmti-10">All</span>
+<span 
+class="cmti-10">Pages </span>folder. The <span 
+class="cmti-10">New Page </span>wizard is shown in Figure&#x00A0;<a 
+href="#x51-5200217">4.17<!--tex4ht:ref: fig:wizard_page --></a>.
+<!--l. 510--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5200217"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 511--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_page_1.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/wizard_page_2.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/wizard_page_3.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.17: </span><span  
+class="content">The Scout SDK wizard to create a new page with table.</span></div><!--tex4ht:label?: x51-5200217 -->
+                                                                                 
+
+                                                                                 
+<!--l. 516--><p class="indent" >    </div><hr class="endfigure">
+    <h4 class="subsectionHead"><span class="titlemark">4.4.7   </span> <a 
+ id="x51-530004.4.7"></a>Creating new Table Columns</h4>
+<a 
+ id="dx51-53001"></a>
+<!--l. 522--><p class="noindent" >The <span 
+class="cmti-10">New Column </span>wizard allows to create columns in a table. In the Scout Explorer, the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> C<span 
+class="small-caps">o</span><span 
+class="small-caps">l</span><span 
+class="small-caps">u</span><span 
+class="small-caps">m</span><span 
+class="small-caps">n</span>...</span>
+context menu is available below tables, on the <span 
+class="cmti-10">Columns </span>folder. The <span 
+class="cmti-10">New Column </span>wizard is shown in
+Figure&#x00A0;<a 
+href="#x51-5300218">4.18<!--tex4ht:ref: fig:wizard_column --></a>.
+<!--l. 526--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5300218"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 527--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_column_1.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/wizard_column_2.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.18: </span><span  
+class="content">The Scout SDK wizard to create a new table column.</span></div><!--tex4ht:label?: x51-5300218 -->
+                                                                                 
+
+                                                                                 
+<!--l. 531--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 533--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5300319"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 534--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_column_explorer_properties.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.19: </span><span  
+class="content">Column Properties.</span></div><!--tex4ht:label?: x51-5300319 -->
+                                                                                 
+
+                                                                                 
+<!--l. 537--><p class="indent" >    </div><hr class="endfigure">
+    <h4 class="subsectionHead"><span class="titlemark">4.4.8   </span> <a 
+ id="x51-540004.4.8"></a>Creating new Search Forms</h4>
+<a 
+ id="dx51-54001"></a>
+<!--l. 543--><p class="noindent" >The <span 
+class="cmti-10">New Search Form </span>wizard allows to create a new Scout form to search for elements displayed in
+pages. In the Scout Explorer, the <span 
+class="cmcsc-10">C<span 
+class="small-caps">r</span><span 
+class="small-caps">e</span><span 
+class="small-caps">a</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span> S<span 
+class="small-caps">e</span><span 
+class="small-caps">a</span><span 
+class="small-caps">r</span><span 
+class="small-caps">c</span><span 
+class="small-caps">h</span> F<span 
+class="small-caps">o</span><span 
+class="small-caps">r</span><span 
+class="small-caps">m</span>... </span>context menu is provided on
+the <span 
+class="cmti-10">Search Forms </span>folder under the orange client node. If you have already a page and the
+corresponding column created, you can directly create a search form based on that table as shown in
+Figure&#x00A0;<a 
+href="#x51-5400220">4.20<!--tex4ht:ref: fig:wizard_search_form_contextmenu --></a>.
+<!--l. 547--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5400220"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 548--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_search_form_contextmenu.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.20: </span><span  
+class="content">Start the Scout SDK search form wizard for an existing table page.</span></div><!--tex4ht:label?: x51-5400220 -->
+                                                                                 
+
+                                                                                 
+<!--l. 551--><p class="indent" >    </div><hr class="endfigure">
+    <h4 class="subsectionHead"><span class="titlemark">4.4.9   </span> <a 
+ id="x51-550004.4.9"></a>Creating new Services and Operations</h4>
+<!--l. 557--><p class="noindent" >The <span 
+class="cmti-10">New Service </span>wizard allows to create new services to execute tasks and provide data to a client. In the
+Scout Explorer, the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> S<span 
+class="small-caps">e</span><span 
+class="small-caps">r</span><span 
+class="small-caps">v</span><span 
+class="small-caps">i</span><span 
+class="small-caps">c</span><span 
+class="small-caps">e</span>... </span>context menu is provided on the <span 
+class="cmti-10">Services </span>folder under the orange
+client node and the blue server node. This reflects the fact that services may be defined on both the client
+and the server side.
+<!--l. 561--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5500121"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 562--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_service_contextmenu.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.21: </span><span  
+class="content">Starting the service creation wizard to add a new server service.</span></div><!--tex4ht:label?: x51-5500121 -->
+                                                                                 
+
+                                                                                 
+<!--l. 565--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 567--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5500222"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 568--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_service_1.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/wizard_service_2.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.22: </span><span  
+class="content">The Scout SDK wizard to create a new service.</span></div><!--tex4ht:label?: x51-5500222 -->
+                                                                                 
+
+                                                                                 
+<!--l. 572--><p class="indent" >    </div><hr class="endfigure">
+    <h4 class="subsectionHead"><span class="titlemark">4.4.10   </span> <a 
+ id="x51-560004.4.10"></a>Creating new Code Types and Codes</h4>
+<!--l. 579--><p class="noindent" >The <span 
+class="cmti-10">New Code Type </span>wizard allows to create new code types. As access to code types and codes is
+required from both client and server applications they are located in the application&#8217;s shared plugin.
+Consequently, the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> C<span 
+class="small-caps">o</span><span 
+class="small-caps">d</span><span 
+class="small-caps">e</span> T<span 
+class="small-caps">y</span><span 
+class="small-caps">p</span><span 
+class="small-caps">e</span>... </span>context menu is provided on the <span 
+class="cmti-10">Code Types </span>folder under the
+green shared node in the Scout Explorer.
+<!--l. 583--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5600123"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 584--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_code_type.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/wizard_code.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.23: </span><span  
+class="content">The Scout SDK wizards to create a new code type (left) and a new code (right).</span></div><!--tex4ht:label?: x51-5600123 -->
+                                                                                 
+
+                                                                                 
+<!--l. 588--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 590--><p class="indent" >    A screenshot of the wizard to create a new code type is shown on the left side of Figure&#x00A0;<a 
+href="#x51-5600123">4.23<!--tex4ht:ref: fig:wizard_code_type --></a>. The
+<span 
+class="cmti-10">Code Id </span>field contains the ID that will be assigned to the new code type. Take care to ensure that the
+content of this field matches with the type provided in the <span 
+class="cmti-10">Datatype of CodeType Id </span>field. The <span 
+class="cmti-10">Name </span>field
+contains an optional name for the code type, and the <span 
+class="cmti-10">Class Name </span>field the name of the Java class to be
+created. If the name field is filled in, the class name field is automatically derived from the provided
+name.
+<!--l. 596--><p class="indent" >    The <span 
+class="cmti-10">New Code </span>wizard shown on the right side of Figure&#x00A0;<a 
+href="#x51-5600123">4.23<!--tex4ht:ref: fig:wizard_code_type --></a> allows to create individual codes. In
+the Scout Explorer it can be accessed through the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> C<span 
+class="small-caps">o</span><span 
+class="small-caps">d</span><span 
+class="small-caps">e</span> ... </span>context menu on existing code type
+nodes. For hierarchical code types, this wizard is also made available on existing codes to create inner
+codes.
+    <h4 class="subsectionHead"><span class="titlemark">4.4.11   </span> <a 
+ id="x51-570004.4.11"></a>Creating new Library Bundles</h4>
+<!--l. 604--><p class="noindent" >The <span 
+class="cmti-10">New Library Bundle </span>wizard allows to add functionality provided in standard JAR files to a Scout
+application. In the Scout Explorer, the <span 
+class="cmcsc-10">N<span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> L<span 
+class="small-caps">i</span><span 
+class="small-caps">b</span><span 
+class="small-caps">r</span><span 
+class="small-caps">a</span><span 
+class="small-caps">r</span><span 
+class="small-caps">y</span> B<span 
+class="small-caps">u</span><span 
+class="small-caps">n</span><span 
+class="small-caps">d</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span>... </span>context menu is provided on the
+top-level <span 
+class="cmti-10">Libraries </span>folder and individually under the orange client node, the green shared node and the
+blue server node.
+<!--l. 607--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5700124"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 608--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_library_bundle_1.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/wizard_library_bundle_2.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.24: </span><span  
+class="content">The Scout SDK wizard to add external JAR files in the form of a library bundle to
+a Scout project.</span></div><!--tex4ht:label?: x51-5700124 -->
+                                                                                 
+
+                                                                                 
+<!--l. 612--><p class="indent" >    </div><hr class="endfigure">
+    <h4 class="subsectionHead"><span class="titlemark">4.4.12   </span> <a 
+ id="x51-580004.4.12"></a>Creating new Application Modules</h4>
+<a 
+ id="dx51-58001"></a>
+<!--l. 618--><p class="noindent" >In some projects it may be desired to split the application into several modules. This allows to split the
+application into smaller parts and allows to deliver multiple versions with different features (e.g. a
+&#8221;Professional Edition&#8221; that contains more functionality). For this an additional set of client, shared and
+server plugins can be created to group e.g. all the &#8221;Professional Edition&#8221; features. To create a new
+module the <span 
+class="cmti-10">Create new Scout Bundles </span>wizard can be started by using the <span 
+class="cmcsc-10">A<span 
+class="small-caps">d</span><span 
+class="small-caps">d</span> S<span 
+class="small-caps">c</span><span 
+class="small-caps">o</span><span 
+class="small-caps">u</span><span 
+class="small-caps">t</span> B<span 
+class="small-caps">u</span><span 
+class="small-caps">n</span><span 
+class="small-caps">d</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span><span 
+class="small-caps">s</span>...</span>
+context menu on the project node (like org.eclipsescout.helloworld).
+<!--l. 623--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5800225"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 624--><p class="noindent" ><img 
+src="ScoutTooling/figures/wizard_new_bundles_1.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/wizard_new_bundles_2.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.25: </span><span  
+class="content">The Scout SDK wizard to create a new application module.</span></div><!--tex4ht:label?: x51-5800225 -->
+                                                                                 
+
+                                                                                 
+<!--l. 628--><p class="indent" >    </div><hr class="endfigure">
+    <h4 class="subsectionHead"><span class="titlemark">4.4.13   </span> <a 
+ id="x51-590004.4.13"></a>The NLS Editor</h4>
+<a 
+ id="dx51-59001"></a>
+<a 
+ id="dx51-59002"></a>
+<!--l. 8--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5900326"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 9--><p class="noindent" ><img 
+src="modules/figures/sdk_editor_nls.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.26: </span><span  
+class="content">The NLS editor provided by the Scout SDK. This editor is opened via the <span 
+class="cmti-10">Open NLS</span>
+<span 
+class="cmti-10">Editor ... </span>link in the Scout Object Properties of the <span 
+class="cmti-10">DefaultTextProviderService </span>node.</span></div><!--tex4ht:label?: x51-5900326 -->
+<a 
+ id="dx51-59004"></a>
+                                                                                 
+
+                                                                                 
+<!--l. 13--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 639--><p class="indent" >    Access to translated texts in Scout applications is provided through text provider services located in
+the application&#8217;s shared plugin. This setup makes translated texts available in the client and the server
+part of the application. Consequently, the Scout SDK provides access to the NLS Editor to manage
+translated texts and application languages under the green shared node in the Scout Explorer view as
+shown in Figure&#x00A0;<a 
+href="#x51-5900326">4.26<!--tex4ht:ref: fig:nls_editor --></a>.
+<!--l. 7--><p class="indent" >    To open the NLS editor, select the green <span 
+class="cmti-10">shared </span>node in the Scout Explorer View and expand its
+<span 
+class="cmti-10">Text Provider Services </span>folder. Then, select the contained element <span 
+class="cmti-10">¡Project Alias¿TextProviderService</span>. As
+shown in Figure&#x00A0;<a 
+href="#x51-5900326">4.26<!--tex4ht:ref: fig:nls_editor --></a>, the NLS editor can be opened using the <span 
+class="cmti-10">Open NLS Editor ... </span>link in the
+Scout Object Properties View .  In the NLS editor translations can be edited individually by
+pressing F2 or double-clicking into a text cell. This opens the editor to change the text to
+the desired value. To add a new translated text, the corresponding dialog can be opened
+by clicking on the button with the &#8217;T&#8217; icon next to the &#8217;New language&#8217; button (shown in
+Figure&#x00A0;<a 
+href="#x51-5900326">4.26<!--tex4ht:ref: fig:nls_editor --></a>).
+<!--l. 648--><p class="indent" >    In Scout applications, translated texts are obtained with the method <span 
+class="cmtt-10">TEXTS.get("key") </span>where
+&#8221;key&#8221; represents the language independent text key. In a default Scout project setup, calling
+<span 
+class="cmtt-10">TEXTS.get </span>uses the <span 
+class="cmtt-10">&#x003C;Project Alias&#x003E;TextProviderService </span>in the background. And this
+text provider service defines the access path for the text property files that are located in
+the applications shared plugin. Typically, these property files are collected in the plugin&#8217;s
+<span class="path"><span 
+class="cmtt-10">&#x003C;youraplication&#x003E;.shared/resources/texts</span></span> directory according to the right hand side of Figure&#x00A0;<a 
+href="#x51-5900527">4.27<!--tex4ht:ref: fig:adding_a_language --></a>.
+To resolve the provided text key at runtime, the user&#8217;s locale settings is used to access the correct text
+property file.
+<!--l. 654--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-5900527"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 655--><p class="noindent" ><img 
+src="ScoutTooling/figures/sdk_add_language_dialog.png" alt="PIC"  
+> &#x00A0;     <img 
+src="ScoutTooling/figures/sdk_shared_plugin_language_file.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.27:  </span><span  
+class="content">In  the  dialog  <span 
+class="cmti-10">Add  a  Language  </span>shown  on  the  left  side  the  desired  language
+and   localization   can   be   specified.   On   the   right   side,   the   location   of   property   file
+<span 
+class="cmtt-10">Texts</span><span 
+class="cmtt-10">_es</span><span 
+class="cmtt-10">_ES.properties </span>in the shared plugin of the &#8221;Hello World&#8221; application is shown. </span></div><!--tex4ht:label?: x51-5900527 -->
+                                                                                 
+
+                                                                                 
+<!--l. 661--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 663--><p class="indent" >    Adding support for a new language to a Scout project is also directly supported by the Scout SDK.
+To add support for a new translated language, click on the corresponding icon of the NLS editor as shown
+in Figure&#x00A0;<a 
+href="#x51-5900326">4.26<!--tex4ht:ref: fig:nls_editor --></a>. In the opened language dialog, add the desired language and country localization and the
+target directory as shown in Figure&#x00A0;<a 
+href="#x51-5900527">4.27<!--tex4ht:ref: fig:adding_a_language --></a>. A new language properties file is then added to
+the shared plugin project as shown in Figure&#x00A0;<a 
+href="#x51-5900527">4.27<!--tex4ht:ref: fig:adding_a_language --></a>. The new language is now available as an
+additional column in the NLS editor and as a separate tab in the dialog to add new translated
+texts.
+                                                                                 
+
+                                                                                 
+                                                                                 
+
+                                                                                 
+                                                                                 
+
+                                                                                 
+    <!--l. 15--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_introch6.html" >next</a>] [<a 
+href="scout_introch4.html" >prev</a>] [<a 
+href="scout_introch4.html#tailscout_introch4.html" >prev-tail</a>] [<a 
+href="scout_introch5.html" >front</a>] [<a 
+href="scout_intro.html#scout_introch5.html" >up</a>] </p></div>
+<!--l. 15--><p class="indent" >    <a 
+ id="tailscout_introch5.html"></a>    
+</body></html> 

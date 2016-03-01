@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>6 The Widgets Demo Application</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,info --> 
+<meta name="src" content="scout_frontend.tex"> 
+<meta name="date" content="2015-03-04 17:09:00"> 
+<link rel="stylesheet" type="text/css" href="scout_frontend.css"> 
+</head><body 
+>
+    <!--l. 523--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendch8.html" >next</a>] [<a 
+href="scout_frontendch6.html" >prev</a>] [<a 
+href="scout_frontendch6.html#tailscout_frontendch6.html" >prev-tail</a>] [<a 
+href="#tailscout_frontendch7.html">tail</a>] [<a 
+href="scout_frontend.html#scout_frontendch7.html" >up</a>] </p></div>
+    <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;6</span><br /><a 
+ id="x55-790006"></a>The Widgets Demo Application</h2>
+<!--l. 526--><p class="noindent" >This chapter introduces the &#8221;Scout Widgets Demo App&#8221;. The purpose of this demo application is to
+present Scout&#8217;s most commonly used UI widgets. Therefore, the application does not contain any
+business logic but only serves as a hands-on reference on how to use and configure Scout UI
+widgets.
+<!--l. 530--><p class="indent" >    It is interesting to note that the widget demo application works out-of-the-box with any of the
+currently supported UI technologies. This means that with the same code base the widget demo
+application is capable to run as a native desktop application, as a web application in browsers, as well as
+on touch-enabled mobile devices. Comparing individual aspects of the the desktop application with its
+mobile/tablet version reveals the default strategies used to map desktop widgets to the substantially
+different usage/form factor found on mobile devices. Please observe that for the complete widget
+application only a handful of lines of code actually depend on a specific UI technology. The interested
+reader can easily verify this by searching the application&#8217;s code for the occurrences of class
+<span 
+class="cmtt-10">UserAgentUtility</span>.
+<!--l. 536--><p class="indent" >    In the text below the organisation of the widget demo application is first described in
+Section&#x00A0;<a 
+href="#x55-800006.1">6.1<!--tex4ht:ref: sec:widgetdemo_ui --></a>. And in Section&#x00A0;<a 
+href="#x55-810006.2">6.2<!--tex4ht:ref: sec:widgetdemo_architecture --></a>, the setup in the form of a Scout client only application is
+explained.
+    <h3 class="sectionHead"><span class="titlemark">6.1   </span> <a 
+ id="x55-800006.1"></a>The User Interface</h3>
+<!--l. 543--><p class="noindent" >The application is organized into separate outlines for thematic groups of widgets. Each of the
+application&#8217;s outline then presents a list of widgets in a navigation tree. This is shown in Figure&#x00A0;<a 
+href="#x55-800011">6.1<!--tex4ht:ref: fig:widgetapp_github --></a> for
+the <span 
+class="cmti-10">Simple Widgets </span>outline that contains examples for simple UI widgets such as label fields or string
+fields.
+<!--l. 547--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x55-800011"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 548--><p class="noindent" ><img 
+src="ScoutClient/figures/widgetapp_github_menu.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;6.1: </span><span  
+class="content">The &#8221;Scout Widgets Demo App&#8221;. The widgets demo application features examples of
+the most commonly used Scout widgets. For each widget shown, example use cases are presented
+in a individual form. As shown in the screenshot, the corresponding Scout source code is made
+available via the <span 
+class="cmcsc-10">V<span 
+class="small-caps">i</span><span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> S<span 
+class="small-caps">o</span><span 
+class="small-caps">u</span><span 
+class="small-caps">r</span><span 
+class="small-caps">c</span><span 
+class="small-caps">e</span> <span 
+class="small-caps">o</span><span 
+class="small-caps">n</span> G<span 
+class="small-caps">i</span><span 
+class="small-caps">t</span>H<span 
+class="small-caps">u</span><span 
+class="small-caps">b</span> </span>context menu. </span></div><!--tex4ht:label?: x55-800011 -->
+                                                                                 
+
+                                                                                 
+<!--l. 554--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 556--><p class="indent" >    For each UI widget a corresponding example form presents a number of typical use cases and
+configuration options. The example forms are designed to be independent from each other. It should
+therefore be possible to read and understand the source code of each example form with minimal effort.
+Via the <span 
+class="cmcsc-10">O<span 
+class="small-caps">p</span><span 
+class="small-caps">e</span><span 
+class="small-caps">n</span> <span 
+class="small-caps">i</span><span 
+class="small-caps">n</span> D<span 
+class="small-caps">i</span><span 
+class="small-caps">a</span><span 
+class="small-caps">l</span><span 
+class="small-caps">o</span><span 
+class="small-caps">g</span> </span><span 
+class="cmcsc-10">&#x2026; </span>context menu the content of the view is displayed in a modal scout form. As
+shown in Figure&#x00A0;<a 
+href="#x55-800011">6.1<!--tex4ht:ref: fig:widgetapp_github --></a>, the complete source code for the selected form can be accessd via the <span 
+class="cmcsc-10">V<span 
+class="small-caps">i</span><span 
+class="small-caps">e</span><span 
+class="small-caps">w</span> S<span 
+class="small-caps">o</span><span 
+class="small-caps">u</span><span 
+class="small-caps">r</span><span 
+class="small-caps">c</span><span 
+class="small-caps">e</span></span>
+<span 
+class="cmcsc-10"><span 
+class="small-caps">o</span><span 
+class="small-caps">n</span> G<span 
+class="small-caps">i</span><span 
+class="small-caps">t</span>H<span 
+class="small-caps">u</span><span 
+class="small-caps">b</span> </span>context menu.
+<!--l. 562--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x55-800022"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 563--><p class="noindent" ><img 
+src="ScoutClient/figures/widgetapp_swt.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;6.2: </span><span  
+class="content">The &#8221;Scout Widgets Demo App&#8221; running as an SWT desktop application.</span></div><!--tex4ht:label?: x55-800022 -->
+                                                                                 
+
+                                                                                 
+<!--l. 566--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 568--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x55-800033"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 569--><p class="noindent" ><img 
+src="ScoutClient/figures/widgetapp_web.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;6.3: </span><span  
+class="content">The &#8221;Scout Widgets Demo App&#8221; running in the browser.</span></div><!--tex4ht:label?: x55-800033 -->
+                                                                                 
+
+                                                                                 
+<!--l. 572--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 574--><p class="indent" >    The widget demo application can also be run as a native SWT desktop application. This is shown in
+Figure&#x00A0;<a 
+href="#x55-800022">6.2<!--tex4ht:ref: fig:widgetapp_swt --></a>. And the exact same application also runs in a browser as a web application shown in
+Figure&#x00A0;<a 
+href="#x55-800033">6.3<!--tex4ht:ref: fig:widgetapp_web --></a>.
+<!--l. 578--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x55-800044"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 579--><p class="noindent" ><img 
+src="ScoutClient/figures/widgetapp_mobile1.png" alt="PIC"  
+> <img 
+src="ScoutClient/figures/widgetapp_mobile2.png" alt="PIC"  
+> <img 
+src="ScoutClient/figures/widgetapp_mobile3.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;6.4: </span><span  
+class="content">The &#8221;Scout Widgets Demo App&#8221; running on a mobile device. On the left, all outlines
+of the application are displayed on the home screen. The screens shown in the middle allows to
+navigate through &#8221;Simple Widgets&#8221; outline while the selected &#8221;StringField&#8221; form is shown on the
+right. </span></div><!--tex4ht:label?: x55-800044 -->
+                                                                                 
+
+                                                                                 
+<!--l. 587--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 589--><p class="indent" >    In Figure&#x00A0;<a 
+href="#x55-800044">6.4<!--tex4ht:ref: fig:widgetapp_mobile --></a>, the content of the widget demo application is shown on a mobile device. On the home
+screen of the mobile application, the available outlines are presented. When the user selects a specific
+outline, the associated navigation tree is then shown as a scrollable list. Finally, when the user selects a
+specific widget, the associated example form is shown.
+    <h3 class="sectionHead"><span class="titlemark">6.2   </span> <a 
+ id="x55-810006.2"></a>Client Only Architecture</h3>
+<!--l. 598--><p class="noindent" >As the sole purpose of the widget demo application is to demonstrate the usage of the UI elements
+provided by the Scout framework, no server side data access and/or business logic is required. Therefore,
+the widget demo application has been designed as a client only application. As a side effect, the
+architecture of this widget application may also be used as a template to build similar client only
+applications with the Scout framework. It is important to note that this architecture can only be
+recommended for very simple applications. For more complex software packages, for example
+personal digital archives or private accounting software, it is not recommended to implement the
+business logic and the access to the database in the application&#8217;s client plugin. A much cleaner
+approach is to take advantage of the offline support provided by the Scout framework. As in
+typical Scout client server projects, the presentation logic can be implemented in the client
+plugin and business logic and access to a (local) database are located in the server plugin. A
+detailed description of this setup including step-by-step instructions is available on the Scout
+Wiki<span class="footnote-mark"><a 
+href="scout_frontend56.html#fn1x8"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x55-81001f1"></a> .
+In the text below the client only setup of the widget demo application is explained by looking at the main
+differences to the setup of the &#8220;Hello World&#8221; application introduced in Chapter&#x00A0;<a 
+href="scout_frontendch3.html#x19-130002">2<!--tex4ht:ref: cha:helloworld --></a>.
+    <!--l. 617--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 617--><p class="indent" >    <a 
+ id="x55-81002r1"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x55-81003"></a>
+
+    <div class="caption" 
+><span class="id">Listing&#x00A0;6.1:
+    </span><span  
+class="content">The
+    setup
+    of
+    the
+    client
+    session
+    in
+    the
+    Scout
+    widget
+    demo
+    application.</span></div><!--tex4ht:label?: x55-81002r6.2 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x55-81004r1"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">service</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">SERVICES</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x55-81005r2"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipsescout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">demo</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">widgets</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">client</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">ui</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">desktop</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">Desktop</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x55-81006r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x55-81007r4"></a></span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx55-81008"></a><span 
+class="cmssi-10">ClientSession</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractClientSession</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x55-81009r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">private</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">IScoutLogger</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">logger</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ScoutLogManager</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">getLogger</span><span 
+class="cmss-10">(</span><a 
+ id="dx55-81010"></a><span 
+class="cmssi-10">ClientSession</span><span 
+class="cmss-10">.</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x55-81011r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x55-81012r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">private</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">m</span><span 
+class="cmssi-10">_product</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x55-81013r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">private</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">m</span><span 
+class="cmssi-10">_footless</span><span 
+class="cmss-10">;</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 619--><p class="indent" >    The most obvious difference of the widget demo application to the &#8220;Hello World&#8221; client server
+example is the missing server (plugin). Consequently, the widget demo application also does not need a
+service tunnel to handle client server communication. As the setup of this service tunnel is
+typically initiated in method <span 
+class="cmtt-10">execLoadSession </span>of the client&#8217;s <span 
+class="cmtt-10">ClientSession </span>class, the setup of
+the service tunnel has been commented out in the widget demo application according to
+Listing&#x00A0;<a 
+href="#x55-81002r1">6.1<!--tex4ht:ref: lst:demoapp.clientsession --></a>.
+<!--l. 624--><p class="indent" >    The next difference between typical Scout applications and the widget demo lies in the handling of
+code types and codes. Accessing code types and codes is the responsibility of the server&#8217;s <span 
+class="cmtt-10">CodeService</span>
+class in Scout applications. As the widget demo does not have a server but we still want to
+work with codes and code types, a <span 
+class="cmtt-10">LocalCodeService </span>class has been added to the client&#8217;s
+plugin.
+<!--l. 628--><p class="indent" >    The last difference of note between the &#8220;Hello World&#8221; example and the widget demo application lies
+in the implementation of the form handler classes. In the desktop form&#8217;s view handler of the &#8220;Hello
+World&#8221; application the data to be displayed is retrieved via the server&#8217;s <span 
+class="cmtt-10">DesktopService </span>as shown in
+Listing&#x00A0;<a 
+href="scout_frontendch4.html#x27-27001r2">3.2<!--tex4ht:ref: lst:helloworld.viewhandler --></a>. As the forms of the widget demo application do not load/persist any data from/to a
+server, no such logic is required in the form handlers and the corresponding classes remain
+empty.
+                                                                                 
+
+                                                                                 
+    <!--l. 633--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendch8.html" >next</a>] [<a 
+href="scout_frontendch6.html" >prev</a>] [<a 
+href="scout_frontendch6.html#tailscout_frontendch6.html" >prev-tail</a>] [<a 
+href="scout_frontendch7.html" >front</a>] [<a 
+href="scout_frontend.html#scout_frontendch7.html" >up</a>] </p></div>
+<!--l. 633--><p class="indent" >    <a 
+ id="tailscout_frontendch7.html"></a>   
+</body></html> 

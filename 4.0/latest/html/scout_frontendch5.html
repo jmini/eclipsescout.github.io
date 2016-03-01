@@ -1,0 +1,2489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4 Shared Components</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,info --> 
+<meta name="src" content="scout_frontend.tex"> 
+<meta name="date" content="2015-03-04 17:09:00"> 
+<link rel="stylesheet" type="text/css" href="scout_frontend.css"> 
+</head><body 
+>
+    <!--l. 15--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendch6.html" >next</a>] [<a 
+href="scout_frontendch4.html" >prev</a>] [<a 
+href="scout_frontendch4.html#tailscout_frontendch4.html" >prev-tail</a>] [<a 
+href="#tailscout_frontendch5.html">tail</a>] [<a 
+href="scout_frontend.html#scout_frontendch5.html" >up</a>] </p></div>
+    <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;4</span><br /><a 
+ id="x51-420004"></a>Shared Components</h2>
+<!--l. 17--><p class="noindent" >In this chapter deals with the content of the shared plugin of any Scout application. As the name &#8221;shared
+already indicates, this plugin contains code and resources that need to be available to both the Scout
+client and the server application.
+<!--l. 20--><p class="indent" >    The chapter starts with the internationalization of texts in Scout and icon resources. Then, the less
+visible components are introduced. These include permissions, code types, lookup calls and form data
+objects.
+    <h3 class="sectionHead"><span class="titlemark">4.1   </span> <a 
+ id="x51-430004.1"></a>Texts / i18n / NLS Support</h3>
+<!--l. 26--><p class="noindent" >needs text
+<!--l. 28--><p class="noindent" >Existing Documentation
+     <ul class="itemize1">
+     <li class="itemize">concept wiki: <a 
+href="http://wiki.eclipse.org/Scout/Concepts/Texts" class="url" ><span 
+class="cmtt-10">http://wiki.eclipse.org/Scout/Concepts/Texts</span></a>
+     </li>
+     <li class="itemize">forum: <a 
+href="http://www.eclipse.org/forums/index.php/t/319136/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/319136/</span></a>
+     </li>
+     <li class="itemize">forum: <a 
+href="http://www.eclipse.org/forums/index.php/t/326343/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/326343/</span></a>
+     </li>
+     <li class="itemize">forum:              overwriting              texts              provided              by              scout
+     <a 
+href="http://www.eclipse.org/forums/index.php/t/308273/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/308273/</span></a>
+     </li>
+     <li class="itemize">forum:                  additional                  text                  provider                  service
+     <a 
+href="http://www.eclipse.org/forums/index.php/t/317565/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/317565/</span></a>
+     </li>
+     <li class="itemize">forum:           changing           default           language           for           scout           apps
+     <a 
+href="http://www.eclipse.org/forums/index.php/t/367177/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/367177/</span></a>
+     </li>
+     <li class="itemize">forum:                          export/import                          not                          possible:
+     <a 
+href="http://www.eclipse.org/forums/index.php/t/326320/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/326320/</span></a>
+     </li>
+     <li class="itemize">forum:                usage                counts                for                text                entries:
+     <a 
+href="http://www.eclipse.org/forums/index.php/t/261235/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/261235/</span></a></li></ul>
+                                                                                 
+
+                                                                                 
+<!--l. 41--><p class="noindent" >
+    <h3 class="sectionHead"><span class="titlemark">4.2   </span> <a 
+ id="x51-440004.2"></a>Icons</h3>
+<!--l. 42--><p class="noindent" >needs text
+<!--l. 44--><p class="noindent" >Existing Documentation
+     <ul class="itemize1">
+     <li class="itemize">how-to wiki <a 
+href="http://wiki.eclipse.org/Scout/HowTo/3.8/Add_an_icon" class="url" ><span 
+class="cmtt-10">http://wiki.eclipse.org/Scout/HowTo/3.8/Add_an_icon</span></a>
+     </li>
+     <li class="itemize">how-to wiki <a 
+href="http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images" class="url" ><span 
+class="cmtt-10">http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images</span></a></li></ul>
+<!--l. 51--><p class="noindent" >
+    <h3 class="sectionHead"><span class="titlemark">4.3   </span> <a 
+ id="x51-450004.3"></a>Code Types and Codes</h3>
+<!--l. 54--><p class="noindent" >Code types and codes are widely used in business applications. In general, any fixed set of named entities
+can be seen as a code type. Code types can be used to model the organisational structure of companies,
+to represent business units or to categorise or segment entities. Frequently, enumerations or enumerated
+types<span class="footnote-mark"><a 
+href="scout_frontend52.html#fn1x6"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x51-45001f1"></a> 
+are used as synonyms for code types. The individual named entities in a code type are called codes in
+Scout.
+<!--l. 63--><p class="indent" >    Both code types and codes have associated names (translated texts) and IDs. As in the case of
+standard Java enumerations, Scout codes can also have associated values. A set of additional features
+enhances Scout code types over simple Java enumerations:
+     <ul class="itemize1">
+     <li class="itemize">Code types can be organized hierarchically
+     </li>
+     <li class="itemize">Code types support multitenancy for individual codes
+     </li>
+     <li class="itemize">Code types and codes can be accessed through a code service
+     </li>
+     <li class="itemize">Codes can by added from external sources dynamically at runtime
+     </li>
+     <li class="itemize">Codes are cached on both client and server side</li></ul>
+<!--l. 74--><p class="indent" >    The text below first introduces the basic features of code types and codes using a simple example
+with static codes. Then, hierarchical code types and the dynamic loading of codes from external sources is
+explained.
+                                                                                 
+
+                                                                                 
+    <h4 class="subsectionHead"><span class="titlemark">4.3.1   </span> <a 
+ id="x51-460004.3.1"></a>A Simple Example</h4>
+<!--l. 80--><p class="noindent" >As a simple example we assume that an event managing organization works with an application to
+plan events for customers. To distinguish public and private events it is natural to define a
+corresponding code type. Both the code type and all its elements will have an assigned ID
+and associated translated texts. See Listing&#x00A0;<a 
+href="#x51-46001r1">4.1<!--tex4ht:ref: lst:codetype.simple --></a> for a possible implementation of such a code
+type.
+    <!--l. 92--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 92--><p class="indent" >    <a 
+ id="x51-46001r1"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-46002"></a>
+
+  <div class="caption" 
+><span class="id">Listing&#x00A0;4.1:
+  </span><span  
+class="content">A
+  code
+  type
+  with
+  associated
+  codes.</span></div><!--tex4ht:label?: x51-46001r4.3 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46003r1"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46004r2"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">common</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">code</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">AbstractCode</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46005r3"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">common</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">code</span><span 
+class="cmss-10">.</span><a 
+ id="dx51-46006"></a><span 
+class="cmssi-10">AbstractCodeType</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46007r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46008r5"></a></span><span 
+class="cmss-10">/</span><span 
+class="cmsy-10">**</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46009r6"></a></span><span 
+class="cmsy-10">*</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">@author</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">mzi</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46010r7"></a></span><span 
+class="cmsy-10">*</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46011r8"></a></span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">EventTypeCodeType</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx51-46012"></a><span 
+class="cmssi-10">AbstractCodeType</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46013r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46014r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">private</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">serialVersionUID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">1</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46015r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">10000</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46016r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46017r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">EventTypeCodeType</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46018r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">super</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46019r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46020r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46021r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46022r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredText</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46023r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">EventType</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46024r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46025r21"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46026r22"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46027r23"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getId</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46028r24"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46029r25"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46030r26"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46031r27"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(10.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46032r28"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">PublicCode</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractCode</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46033r29"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46034r30"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">private</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">serialVersionUID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">1</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46035r31"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">10010</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46036r32"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46037r33"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46038r34"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredText</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46039r35"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Public</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46040r36"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46041r37"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46042r38"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46043r39"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getId</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46044r40"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46045r41"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46046r42"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46047r43"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46048r44"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(20.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46049r45"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">PrivateCode</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractCode</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46050r46"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46051r47"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">private</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">serialVersionUID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">1</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46052r48"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">10020</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46053r49"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46054r50"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46055r51"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredText</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46056r52"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Private</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46057r53"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46058r54"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46059r55"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46060r56"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getId</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46061r57"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46062r58"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46063r59"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46064r60"></a></span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 94--><p class="indent" >    The code type class and its codes shown in Listing&#x00A0;<a 
+href="#x51-46001r1">4.1<!--tex4ht:ref: lst:codetype.simple --></a> have been created using the creation wizards
+provided by the Scout SDK as described in Section&#x00A0;<span 
+class="cmbx-10">??</span>. In Scout, code type classes are derived from class
+<span 
+class="cmtt-10">AbstractCodeType&#x003C;CODE</span><span 
+class="cmtt-10">_TYPE</span><span 
+class="cmtt-10">_ID, CODE</span><span 
+class="cmtt-10">_ID&#x003E;</span>. In the provided example, both the code type ID and the
+code ID are typed with <span 
+class="cmtt-10">Long</span>. The value of the event code type ID is assigned by <span 
+class="cmtt-10">Long ID =</span>
+<span 
+class="cmtt-10">10000L</span>. The contained codes for public and private events are realized by the inner classes
+<span 
+class="cmtt-10">PublicCode </span>and <span 
+class="cmtt-10">PrivateCode </span>that are derived from Scout&#8217;s <span 
+class="cmtt-10">AbstractCode&#x003C;CODE</span><span 
+class="cmtt-10">_ID&#x003E; </span>class.
+Their individual IDs then have assigned the numbers 10010 and 10020 respectively. This
+pattern follows the convention to leave an ample number space between any two code type IDs.
+This space can then be used for the individual codes of a code type that need ID values as
+well.
+<!--l. 103--><p class="indent" >    In the above example the types for the ID values are defined by the generic parameter <span 
+class="cmtt-10">&#x003C;Long&#x003E;</span>. And
+other classes from the package <span 
+class="cmtt-10">java.lang </span>work well too. In fact, any Java class may be used as a key
+type for code types and codes as long as it satisfies the following requirements:
+     <ul class="itemize1">
+     <li class="itemize">Key types implement <span 
+class="cmtt-10">Serializable</span>
+     </li>
+     <li class="itemize">Key types correctly implement the <span 
+class="cmtt-10">equals </span>and <span 
+class="cmtt-10">hashCode </span>methods
+     </li>
+     <li class="itemize">Key types are available in the Scout server and the client application.</li></ul>
+    <!--l. 119--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 119--><p class="indent" >    <a 
+ id="x51-46065r2"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-46066"></a>
+
+       <div class="caption" 
+><span class="id">Listing&#x00A0;4.2:
+       </span><span  
+class="content">A
+       codes
+       that
+       is
+       set
+       to
+       inactive.</span></div><!--tex4ht:label?: x51-46065r4.3 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46067r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46068r2"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46069r3"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getId</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46070r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46071r5"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46072r6"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46073r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46074r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(30.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46075r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ExternalCode</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx51-46076"></a><span 
+class="cmssi-10">AbstractCode</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46077r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46078r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">private</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">serialVersionUID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">1</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46079r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">10030</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46080r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46081r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46082r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredActive</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46083r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">false</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46084r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46085r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46086r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46087r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredText</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-46088r21"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">External</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 121--><p class="indent" >    To allow for language specific translations, the configuration method <span 
+class="cmtt-10">getConfiguredText </span>is used for
+both the names of code types and codes. A frequently used code property is the active flag to
+mark obsolete codes. Setting individual codes to inactive is useful for codes that are still
+linked with existing data but should not longer be used when entering new data into the
+application. As shown in Listing&#x00A0;<a 
+href="#x51-46065r2">4.2<!--tex4ht:ref: lst:code.inactive --></a>, codes can be marked inactive by returning false in method
+<span 
+class="cmtt-10">getConfiguredActive</span>.
+<!--l. 126--><p class="indent" >    A set of additional code properties is available to control the appearance of individual codes. Clicking
+on an individual code in the Scout Explorer provides the list in the Scout Object Property
+view.
+    <h4 class="subsectionHead"><span class="titlemark">4.3.2   </span> <a 
+ id="x51-470004.3.2"></a>Hierarchical Code Types</h4>
+<!--l. 132--><p class="noindent" >To explain the definition and use of hierarchical codes we use the Industry Classification
+Benchmark as a concrete example. The Industry Classification Benchmark or
+ICB<span class="footnote-mark"><a 
+href="scout_frontend53.html#fn2x6"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x51-47001f2"></a> 
+allows to hierarchically classify companies and organisations into industries, super sectors, sectors and sub
+sectors. Each organizational level has a unique number assigned and a name. This setup can easily be
+transferred to a hierarchical Scout code type.
+    <!--l. 147--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 147--><p class="indent" >    <a 
+ id="x51-47002r3"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-47003"></a>
+
+          <div class="caption" 
+><span class="id">Listing&#x00A0;4.3:
+          </span><span  
+class="content">A
+          hierarchical
+          code
+          type
+          for
+          the
+          Industry
+          Classification
+          Benchmark.</span></div><!--tex4ht:label?: x51-47002r4.3 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47004r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47005r2"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">commons</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">annotations</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">Order</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47006r3"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">commons</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">exception</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47007r4"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47008r5"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">common</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">code</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">AbstractCode</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47009r6"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">common</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">code</span><span 
+class="cmss-10">.</span><a 
+ id="dx51-47010"></a><span 
+class="cmssi-10">AbstractCodeType</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47011r7"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47012r8"></a></span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">IndustryICBCodeType</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx51-47013"></a><span 
+class="cmssi-10">AbstractCodeType</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47014r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47015r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">private</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">serialVersionUID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">1</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47016r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">0000</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47017r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47018r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">IndustryICBCodeType</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47019r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">super</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47020r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47021r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47022r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47023r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">boolean</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredIsHierarchy</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47024r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">true</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47025r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47026r21"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47027r22"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47028r23"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredText</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-47029r24"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getId</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 149--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-470301"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 150--><p class="noindent" ><img 
+src="ScoutClient/figures/hierarchicalcodetype.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.1: </span><span  
+class="content">A hierarchical code type class shown in the Scout SDK.</span></div><!--tex4ht:label?: x51-470301 -->
+                                                                                 
+
+                                                                                 
+<!--l. 153--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 155--><p class="indent" >    The corresponding code for the ICB code type is provided in Listing&#x00A0;<a 
+href="#x51-47002r3">4.3<!--tex4ht:ref: lst:codetype.hierarchical --></a> where its hierarchical
+nature is reflected by method <span 
+class="cmtt-10">getConfiguredIsHierarchy</span>. The actual hierarchical codes are then
+implemented as nested inner code classes that are derived from Scout class <span 
+class="cmtt-10">AbstractCode</span>.
+See Figure&#x00A0;<a 
+href="#x51-470301">4.1<!--tex4ht:ref: fig:hierarchicalcodetype --></a> for a screenshot of the partially expanded ICB code type class in the Scout
+SDK.
+    <h4 class="subsectionHead"><span class="titlemark">4.3.3   </span> <a 
+ id="x51-480004.3.3"></a>Loading Codes Dynamically</h4>
+<!--l. 162--><p class="noindent" >Although codes types remain mostly static in their nature, they do evolve over time in any real world
+application. Requiring that all codes are statically defined in the application&#8217;s code base would result in
+the necessity to update the code base for every change of a code required by the business. Clearly, such a
+setup is not sustainable and this is why Scout allows to dynamically update the set of codes contained in
+a code type.
+    <!--l. 173--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 173--><p class="indent" >    <a 
+ id="x51-48001r4"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-48002"></a>
+
+     <div class="caption" 
+><span class="id">Listing&#x00A0;4.4:
+     </span><span  
+class="content">Adding
+     codes
+     dynamically
+     in
+     method
+     <span 
+class="cmtt-10">execLoadCodes</span>.</span></div><!--tex4ht:label?: x51-48001r4.3 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48003r1"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">common</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">code</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">AbstractCodeType</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48004r2"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">common</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">code</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">CodeRow</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48005r3"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">common</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">code</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">ICodeRow</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48006r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48007r5"></a></span><span 
+class="cmss-10">/</span><span 
+class="cmsy-10">**</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48008r6"></a></span><span 
+class="cmsy-10">*</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">@author</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">mzi</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48009r7"></a></span><span 
+class="cmsy-10">*</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48010r8"></a></span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ColorsCodeType</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractCodeType</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Color</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48011r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48012r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">private</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">serialVersionUID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">1</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48013r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">20000</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48014r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48015r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ColorsCodeType</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48016r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">super</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48017r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48018r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48019r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48020r18"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredText</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48021r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Colors</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48022r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48023r21"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48024r22"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48025r23"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getId</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48026r24"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48027r25"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48028r26"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48029r27"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48030r28"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">List</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">?</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ICodeRow</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Color</span><span 
+class="cmmi-10">&#x003E;&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx51-48031"></a><span 
+class="cmssi-10">execLoadCodes</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">Class</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">?</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ICodeRow</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Color</span><span 
+class="cmmi-10">&#x003E;&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">codeRowType</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48032r29"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">List</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">ICodeRow</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Color</span><span 
+class="cmmi-10">&#x003E;&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">codes</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">new</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ArrayList</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">ICodeRow</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Color</span><span 
+class="cmmi-10">&#x003E;&#x003E;</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48033r30"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48034r31"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">codes</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">add</span><span 
+class="cmss-10">(</span><span 
+class="cmssbx-10">new</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">CodeRow</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Color</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">(</span><span 
+class="cmssi-10">Color</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">PINK</span><span 
+class="cmss-10">,</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Pink</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48035r32"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48036r33"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48037r34"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48038r35"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Color</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getId</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48039r36"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48040r37"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48041r38"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48042r39"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48043r40"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Order</span><span 
+class="cmss-10">(120.0)</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48044r41"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">YellowCode</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">AbstractCode</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Color</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48045r42"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">private</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">serialVersionUID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">1</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48046r43"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Color</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">Color</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">YELLOW</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48047r44"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48048r45"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48049r46"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">String</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">getConfiguredText</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48050r47"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">get</span><span 
+class="cmss-10">(</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmbx-10">Yellow</span><span 
+class="cmbx-10">&#8221;</span><span 
+class="cmss-10">)</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-48051r48"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 175--><p class="indent" >    At startup of a Scout application the codes of all defined code types are loaded into memory. For
+this, Scout internally calls method <span 
+class="cmtt-10">loadCodes </span>for each code type class derived from class
+<span 
+class="cmtt-10">AbstractCodeType</span>. In this method Scout first creates objects representing the statically defined
+codes and then dynamically adds additional codes in method <span 
+class="cmtt-10">execLoadCodes</span>. By overriding
+this method, a code type class can dynamically add codes from any external sources. An
+example for the dynamic loading of codes is provided in Listing&#x00A0;<a 
+href="#x51-48001r4">4.4<!--tex4ht:ref: lst:codetype.addcodes --></a>. Please note that this code
+snipped only illustrates the principle and does therefore not access any external web services or
+databases.
+<!--l. 182--><p class="indent" >    As codes have IDs and can be defined both statically in code and dynamically from external data,
+conflicting definitions of codes are inevitable. In the Scout framework these conflicts are resolved in
+method <span 
+class="cmtt-10">execOverrideCode</span>. In the default implementation provided by class <span 
+class="cmtt-10">AbstractCodeType</span>, priority
+is given to the dynamically defined code. Only attributes that are undefined for the dynamic code are
+copied from the static code definition. This logic can be changed for any code type by simply overriding
+method <span 
+class="cmtt-10">execOverrideCode </span>with the desired behaviour. In the example provided in Listing&#x00A0;<a 
+href="#x51-48001r4">4.4<!--tex4ht:ref: lst:codetype.addcodes --></a> the code
+with ID <span 
+class="cmtt-10">Color.YELLOW </span>is defined both statically and dynamically. As a result, the translated text for key
+<span 
+class="cmtt-10">"YellowDynamic" </span>is shown in the user interface as it has priority over the statically defined text key
+<span 
+class="cmtt-10">"Yellow"</span>.
+<!--l. 190--><p class="indent" >    To have access to all codes at runtime, Scout provides the convenience accessor <span 
+class="cmtt-10">CODES</span>.
+This accessor encapsulates the access to the <span 
+class="cmtt-10">ICodeService </span>and provides a number of useful
+methods. At startup, all codes are loaded and cached in the applications client session using
+method <span 
+class="cmtt-10">getAllCodeTypes</span>. And for a class <span 
+class="cmtt-10">MyCodeType</span>, all its codes can be retrieved by
+<span 
+class="cmtt-10">CODES.getCodeType(MyCodeType.class).getCodes()</span>.
+    <h3 class="sectionHead"><span class="titlemark">4.4   </span> <a 
+ id="x51-490004.4"></a>Lookup Calls and Services</h3>
+<!--l. 200--><p class="noindent" >Lookup calls are are used to look up lists of lookup rows in the form of key-text pairs. The list of lookup
+rows returned is usually defined by some search criteria. When the look up is triggered by a
+key, only a single element is returned. And when a string is provided as a search criteria,
+the returned list typically contains the lookup rows that contain the given search text as a
+substring.
+<!--l. 205--><p class="indent" >    For lookup calls two main use cases exist. In the first case, the lookup data is locally available, not
+too large and can be kept in memory. In this situation, the lookup data can be directly created in the call
+itself. As an example, you may consider a lookup call where the lookup data is based on a code type. In
+the other case, the lookup data is dynamic in nature, the amount of data is large and needs to be read
+from some external source, such as a database or a web service. To access large amounts of external data,
+a lookup call typically invokes a so called lookup service that is providing the necessary data.
+This is exactly the scenario that was used in the &#8221;My Contacts application of the book&#8217;s
+first part in Section&#x00A0;<span 
+class="cmbx-10">??</span>. In the contact form of that application, a company smart field is
+used to let the user select a specific entry from a list of companies. And in turn, this smart
+field uses a company lookup call that is backed by a company lookup service. This lookup
+service then accesses a database to create the list of companies required for the company smart
+field.
+<!--l. 216--><p class="indent" >    in the text below (0) general aspects: * getDataByKey&#8212;Text&#8212;Rec?&#8212;All * additional properties as
+                                                                                 
+
+                                                                                 
+constraints to the result set: master field * for a specific implementation additional properties can be
+added with getters/setters ? -¿ yes as they are passed to services as bind variables (1) local lookup calls in
+the client plugin (2) lookup calls in the shared plugin (3) lookup services are only mentioned here for
+completeness. full discussion in book part 3 for scout server? or not? probably needs to be here
+...
+    <!--l. 232--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 232--><p class="indent" >    <a 
+ id="x51-49001r5"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-49002"></a>
+
+     <div class="caption" 
+><span class="id">Listing&#x00A0;4.5:
+     </span><span  
+class="content">A
+     simple
+     local
+     lookup
+     call
+     defining
+     it&#8217;s
+     entries
+     in
+     method
+     <span 
+class="cmtt-10">execCreateLookupRows</span>.</span></div><!--tex4ht:label?: x51-49001r4.4 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49003r1"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">TEXTS</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49004r2"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">lookup</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">LocalLookupCall</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49005r3"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">lookup</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">LookupRow</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49006r4"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49007r5"></a></span><span 
+class="cmss-10">/</span><span 
+class="cmsy-10">**</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49008r6"></a></span><span 
+class="cmsy-10">*</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">@author</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">mzi</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49009r7"></a></span><span 
+class="cmsy-10">*</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49010r8"></a></span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">FontStyleLookupCall</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">LocalLookupCall</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Integer</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49011r9"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49012r10"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">private</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">serialVersionUID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">1</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49013r11"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49014r12"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49015r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">List</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">LookupRow</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Integer</span><span 
+class="cmmi-10">&#x003E;&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx51-49016"></a><span 
+class="cmssi-10">execCreateLookupRows</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49017r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ArrayList</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">LookupRow</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Integer</span><span 
+class="cmmi-10">&#x003E;&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">rows</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">new</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ArrayList</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">LookupRow</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Integer</span><span 
+class="cmmi-10">&#x003E;&#x003E;</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+    <!--l. 241--><div class="lstinputlisting">
+                                                                                 
+
+                                                                                 
+<!--l. 241--><p class="indent" >    <a 
+ id="x51-49018r6"></a><hr class="float"><div class="float" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-49019"></a>
+
+    <div class="caption" 
+><span class="id">Listing&#x00A0;4.6:
+    </span><span  
+class="content">A
+    local
+    code
+    lookup
+    call.
+    This
+    lookup
+    removes
+    inactive
+    codes
+    in
+    the
+    lookup
+    data.</span></div><!--tex4ht:label?: x51-49018r4.4 --><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49020r1"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49021r2"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">commons</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">exception</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49022r3"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">common</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">code</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">ICode</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49023r4"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">lookup</span><span 
+class="cmss-10">.</span><a 
+ id="dx51-49024"></a><span 
+class="cmssi-10">CodeLookupCall</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49025r5"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">lookup</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">ICodeLookupCallVisitor</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49026r6"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipse</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">scout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">rt</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">lookup</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">ILookupRow</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49027r7"></a></span><span 
+class="cmssbx-10">import</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">org</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">eclipsescout</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">demo</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">widgets</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">shared</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">services</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">code</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">EventTypeCodeType</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49028r8"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49029r9"></a></span><span 
+class="cmss-10">/</span><span 
+class="cmsy-10">**</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49030r10"></a></span><span 
+class="cmsy-10">*</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">@author</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">mzi</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49031r11"></a></span><span 
+class="cmsy-10">*</span><span 
+class="cmss-10">/</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49032r12"></a></span><span 
+class="cmssbx-10">public</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">EventTypeLookupCall</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><a 
+ id="dx51-49033"></a><span 
+class="cmssi-10">CodeLookupCall</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmmi-10">&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49034r13"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49035r14"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">private</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">static</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">final</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">long</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">serialVersionUID</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">=</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">1</span><span 
+class="cmssi-10">L</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49036r15"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49037r16"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">@Override</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49038r17"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">protected</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">List</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmss-10">?</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">extends</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ILookupRow</span><span 
+class="cmmi-10">&#x003C;</span><span 
+class="cmssi-10">Long</span><span 
+class="cmmi-10">&#x003E;&#x003E;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">execCreateLookupRows</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">throws</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssi-10">ProcessingException</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">{</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49039r18"></a></span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">//</span><span 
+class="cmti-10">TODO</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">[</span><span 
+class="cmti-10">mzi</span><span 
+class="cmti-10">]</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">Auto</span><span 
+class="cmsy-10">-</span><span 
+class="cmti-10">generated</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">method</span><span 
+class="cmti-10">&#x00A0;</span><span 
+class="cmti-10">stub</span><span 
+class="cmti-10">.</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49040r19"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">return</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmssbx-10">super</span><span 
+class="cmss-10">.</span><span 
+class="cmssi-10">execCreateLookupRows</span><span 
+class="cmss-10">()</span><span 
+class="cmss-10">;</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49041r20"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">}</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49042r21"></a></span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49043r22"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">/</span><span 
+class="cmsy-10">**</span><span 
+class="cmss-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x51-49044r23"></a></span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmsy-10">*</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">Visitor</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">class</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">that</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">filters</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">out</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">inactive</span><span 
+class="cmss-10">&#x00A0;</span><span 
+class="cmss-10">codes</span><span 
+class="cmss-10">.</span>
+                                                                                 
+
+                                                                                 
+    </div><hr class="endfloat" />
+    </div>
+<!--l. 243--><p class="indent" >    TODO: fix Figure&#x00A0;<a 
+href="#x51-490452">4.2<!--tex4ht:ref: fig:lookup_call --></a>: MyLookupService extends AbstractLookupService and implements
+IMyLookupService that extends ILookupService which
+<!--l. 245--><p class="indent" >    <hr class="figure"><div class="figure" 
+>
+                                                                                 
+
+                                                                                 
+<a 
+ id="x51-490452"></a>
+                                                                                 
+
+                                                                                 
+
+<!--l. 246--><p class="noindent" ><img 
+src="ScoutClient/figures/lookup_call.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4.2: </span><span  
+class="content">Implementing a lookup call with a corresponding lookup service. Scout framework
+components are shown in orange, user code in blue.</span></div><!--tex4ht:label?: x51-490452 -->
+                                                                                 
+
+                                                                                 
+<!--l. 249--><p class="indent" >    </div><hr class="endfigure">
+<!--l. 252--><p class="noindent" >Existing Documentation
+     <ul class="itemize1">
+     <li class="itemize">presentation: <a 
+href="http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf" class="url" ><span 
+class="cmtt-10">http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf</span></a>
+     </li>
+     <li class="itemize">tutorial: <a 
+href="https://wiki.eclipse.org/Scout/Tutorial/Lookup_Calls" class="url" ><span 
+class="cmtt-10">https://wiki.eclipse.org/Scout/Tutorial/Lookup_Calls</span></a>
+     </li>
+     <li class="itemize">tutorial minicrm: <a 
+href="https://wiki.eclipse.org/Scout/Tutorial/4.0/Minicrm/Lookup_Calls_and_Lookup_Services" class="url" ><span 
+class="cmtt-10">https://wiki.eclipse.org/Scout/Tutorial/4.0/Minicrm/Lookup_Calls_and_Lookup_Services</span></a>
+     </li>
+     <li class="itemize">concept wiki: <a 
+href="http://wiki.eclipse.org/Scout/Concepts/LookupCall" class="url" ><span 
+class="cmtt-10">http://wiki.eclipse.org/Scout/Concepts/LookupCall</span></a>
+     </li>
+     <li class="itemize">concept wiki: <a 
+href="http://wiki.eclipse.org/Scout/Concepts/Lookup_Service" class="url" ><span 
+class="cmtt-10">http://wiki.eclipse.org/Scout/Concepts/Lookup_Service</span></a>
+     </li>
+     <li class="itemize">forum: <a 
+href="http://www.eclipse.org/forums/index.php/t/279108/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/279108/</span></a>
+     </li>
+     <li class="itemize">javadoc lookupcall: <a 
+href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupCall.java" class="url" ><span 
+class="cmtt-10">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupCall.java</span></a>
+     </li>
+     <li class="itemize">javadoc lookuprow: <a 
+href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupRow.java" class="url" ><span 
+class="cmtt-10">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupRow.java</span></a>
+     </li>
+     <li class="itemize">javadoc codelookupcall <a 
+href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/CodeLookupCall.java" class="url" ><span 
+class="cmtt-10">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/CodeLookupCall.java</span></a>
+     </li>
+     <li class="itemize">javadoc locallookupcall <a 
+href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LocalLookupCall.java" class="url" ><span 
+class="cmtt-10">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LocalLookupCall.java</span></a>
+     </li>
+     <li class="itemize">javadoc ilookupservice <a 
+href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/ILookupService.java" class="url" ><span 
+class="cmtt-10">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/ILookupService.java</span></a>
+     </li>
+     <li class="itemize">javadoc lookupservices <a 
+href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.server/src/org/eclipse/scout/rt/server/services/lookup/" class="url" ><span 
+class="cmtt-10">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.server/src/org/eclipse/scout/rt/server/services/lookup/</span></a></li></ul>
+<!--l. 268--><p class="indent" >    * lookup service * sqllookup service
+    <h3 class="sectionHead"><span class="titlemark">4.5   </span> <a 
+ id="x51-500004.5"></a>Permissions</h3>
+<!--l. 275--><p class="noindent" >needs text, topic is relevant for client, server, and security. what to present where to be decided
+<!--l. 277--><p class="noindent" >Existing Documentation
+     <ul class="itemize1">
+     <li class="itemize">how-to wiki: <a 
+href="http://wiki.eclipse.org/Scout/HowTo/3.8/Create_Permissions" class="url" ><span 
+class="cmtt-10">http://wiki.eclipse.org/Scout/HowTo/3.8/Create_Permissions</span></a>
+     </li>
+     <li class="itemize">concept wiki: <a 
+href="http://wiki.eclipse.org/Scout/Concepts/Permission" class="url" ><span 
+class="cmtt-10">http://wiki.eclipse.org/Scout/Concepts/Permission</span></a>
+                                                                                 
+
+                                                                                 
+     </li>
+     <li class="itemize">forum: <a 
+href="http://www.eclipse.org/forums/index.php/t/243966/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/243966/</span></a></li></ul>
+<!--l. 285--><p class="noindent" >
+    <h3 class="sectionHead"><span class="titlemark">4.6   </span> <a 
+ id="x51-510004.6"></a>Form Data Objects</h3>
+<!--l. 286--><p class="noindent" >needs text, explain that form data objects are data transfer objects
+<!--l. 288--><p class="noindent" >Existing Documentation
+     <ul class="itemize1">
+     <li class="itemize">form data/dto <a 
+href="http://www.eclipse.org/forums/index.php/t/169334/" class="url" ><span 
+class="cmtt-10">http://www.eclipse.org/forums/index.php/t/169334/</span></a></li></ul>
+<!--l. 293--><p class="noindent" >
+    <h4 class="subsectionHead"><span class="titlemark">4.6.1   </span> <a 
+ id="x51-520004.6.1"></a>Data Binding</h4>
+<!--l. 294--><p class="noindent" >needs text, this is about Form Data Export and Import
+<!--l. 296--><p class="noindent" >
+    <h4 class="subsectionHead"><span class="titlemark">4.6.2   </span> <a 
+ id="x51-530004.6.2"></a>Automatic Updates by the Scout SDK</h4>
+<!--l. 297--><p class="noindent" >needs text
+<!--l. 299--><p class="noindent" >
+    <h4 class="subsectionHead"><span class="titlemark">4.6.3   </span> <a 
+ id="x51-540004.6.3"></a>Manual Form Data Updates</h4>
+<!--l. 300--><p class="noindent" >needs text
+                                                                                 
+
+                                                                                 
+    <!--l. 303--><div class="crosslinks"><p class="noindent">[<a 
+href="scout_frontendch6.html" >next</a>] [<a 
+href="scout_frontendch4.html" >prev</a>] [<a 
+href="scout_frontendch4.html#tailscout_frontendch4.html" >prev-tail</a>] [<a 
+href="scout_frontendch5.html" >front</a>] [<a 
+href="scout_frontend.html#scout_frontendch5.html" >up</a>] </p></div>
+<!--l. 303--><p class="indent" >    <a 
+ id="tailscout_frontendch5.html"></a>    
+</body></html> 
