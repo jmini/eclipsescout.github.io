@@ -4,14 +4,14 @@
   <meta charset="UTF-8" /> 
   <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
-  <meta name="generator" content="Asciidoctor 1.5.2" /> 
+  <meta name="generator" content="Asciidoctor 1.5.4" /> 
   <meta name="author" content="Matthias Zimmermann" /> 
   <title>Eclipse Scout: an Introduction</title> 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400" /> 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700" /> 
   <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
-/* Remove the comments around the @import statement below when using this as a custom stylesheet */
-/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400";*/
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
 audio,canvas,video{display:inline-block}
 audio:not([controls]){display:none;height:0}
@@ -58,7 +58,6 @@ a:hover{cursor:pointer}
 img,object,embed{max-width:100%;height:auto}
 object,embed{height:100%}
 img{-ms-interpolation-mode:bicubic}
-#map_canvas img,#map_canvas embed,#map_canvas object,.map_canvas img,.map_canvas embed,.map_canvas object{max-width:none!important}
 .left{float:left!important}
 .right{float:right!important}
 .text-left{text-align:left!important}
@@ -66,10 +65,12 @@ img{-ms-interpolation-mode:bicubic}
 .text-center{text-align:center!important}
 .text-justify{text-align:justify!important}
 .hide{display:none}
-.antialiased,body{-webkit-font-smoothing:antialiased}
-img{display:inline-block;vertical-align:middle}
+body{-webkit-font-smoothing:antialiased}
+img,object,svg{display:inline-block;vertical-align:middle}
 textarea{height:auto;min-height:50px}
 select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
 p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
 .subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
 div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
@@ -112,12 +113,14 @@ blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
 h1{font-size:2.75em}
 h2{font-size:2.3125em}
 h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
-h4{font-size:1.4375em}}table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
 table thead,table tfoot{background:#f7f8f7;font-weight:bold}
 table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
 table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
 table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
 table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+body{tab-size:4}
 h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
 h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
 .clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
@@ -125,7 +128,7 @@ h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title str
 *:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
 pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
 .keyseq{color:rgba(51,51,51,.8)}
-kbd{display:inline-block;color:rgba(0,0,0,.8);font-size:.75em;line-height:1.4;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:-.15em .15em 0 .15em;padding:.2em .6em .2em .5em;vertical-align:middle;white-space:nowrap}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
 .keyseq kbd:first-child{margin-left:0}
 .keyseq kbd:last-child{margin-right:0}
 .menuseq,.menu{color:rgba(0,0,0,.8)}
@@ -156,29 +159,33 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toc ul.sectlevel0>li>a{font-style:italic}
 #toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
 #toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
 #toc a{text-decoration:none}
 #toc a:active{text-decoration:underline}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media only screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
 #toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
-#toc.toc2 #toctitle{margin-top:0;font-size:1.2em}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
 #toc.toc2 ul ul{margin-left:0;padding-left:1em}
 #toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
 body.toc2.toc-right{padding-left:0;padding-right:15em}
-body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
 #toc.toc2{width:20em}
 #toc.toc2 #toctitle{font-size:1.375em}
 #toc.toc2>ul{font-size:.95em}
 #toc.toc2 ul ul{padding-left:1.25em}
-body.toc2.toc-right{padding-left:0;padding-right:20em}}#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
 #content #toc>:first-child{margin-top:0}
 #content #toc>:last-child{margin-bottom:0}
 #footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
 #footer-text{color:rgba(255,255,255,.8);line-height:1.44}
 .sect1{padding-bottom:.625em}
-@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}.sect1+.sect1{border-top:1px solid #efefed}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
 #content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
 #content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
 #content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
@@ -207,7 +214,9 @@ table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inh
 .sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
 .literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
 .literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
-@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
 .listingblock pre.highlightjs{padding:0}
 .listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
 .listingblock pre.prettyprint{border-width:0}
@@ -217,7 +226,7 @@ table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inh
 .listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
 .listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
 table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
-table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
 table.pyhltable td.code{padding-left:.75em;padding-right:0}
 pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
 pre.pygments .lineno{display:inline-block;margin-right:.25em}
@@ -238,13 +247,12 @@ table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
 .verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
 .quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
 .quoteblock .attribution br,.verseblock .attribution br{display:none}
-.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.05em;color:rgba(0,0,0,.6)}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
 .quoteblock.abstract{margin:0 0 1.25em 0;display:block}
 .quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
 .quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
 table.tableblock{max-width:100%;border-collapse:separate}
 table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
-table.spread{width:100%}
 table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
 table.grid-all th.tableblock,table.grid-all td.tableblock{border-width:0 1px 1px 0}
 table.grid-all tfoot>tr>th.tableblock,table.grid-all tfoot>tr>td.tableblock{border-width:1px 1px 0 0}
@@ -290,8 +298,8 @@ ol.upperroman{list-style-type:upper-roman}
 ol.lowergreek{list-style-type:lower-greek}
 .hdlist>table,.colist>table{border:0;background:none}
 .hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
-td.hdlist1{padding-right:.75em;font-weight:bold}
-td.hdlist1,td.hdlist2{vertical-align:top}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
 .literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
 .colist>table tr>td:first-of-type{padding:0 .75em;line-height:1}
 .colist>table tr>td:last-of-type{padding:.25em 0}
@@ -304,13 +312,14 @@ td.hdlist1,td.hdlist2{vertical-align:top}
 .image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
 .image.left{margin-right:.625em}
 .image.right{margin-left:.625em}
-a.image{text-decoration:none}
-span.footnote,span.footnoteref{vertical-align:super;font-size:.875em}
-span.footnote a,span.footnoteref a{text-decoration:none}
-span.footnote a:active,span.footnoteref a:active{text-decoration:underline}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
-#footnotes .footnote{padding:0 .375em;line-height:1.3;font-size:.875em;margin-left:1.2em;text-indent:-1.2em;margin-bottom:.2em}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
 #footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
 #footnotes .footnote:last-of-type{margin-bottom:0}
 #content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
@@ -368,11 +377,10 @@ span.icon>.fa{cursor:default}
 pre .conum[data-value]{position:relative;top:-.125em}
 b.conum *{color:inherit!important}
 .conum:not([data-value]):empty{display:none}
-h1,h2{letter-spacing:-.01em}
-dt,th.tableblock,td.content{text-rendering:optimizeLegibility}
-p,td.content{letter-spacing:-.01em}
-p strong,td.content strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content{font-size:1.0625rem}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -383,9 +391,9 @@ a{color:inherit!important;text-decoration:underline!important}
 a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
 a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
 abbr[title]:after{content:" (" attr(title) ")"}
-pre,blockquote,tr,img{page-break-inside:avoid}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
 thead{display:table-header-group}
-img{max-width:100%!important}
+svg{max-width:100%}
 p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
 h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
 #toc,.sidebarblock,.exampleblock>.content{background:none!important}
@@ -409,15 +417,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style> 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" /> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" /> 
   <style>
 /* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
 /*pre.CodeRay {background-color:#f7f7f8;}*/
 .CodeRay .line-numbers{border-right:1px solid #d8d8d8;padding:0 0.5em 0 .25em}
 .CodeRay span.line-numbers{display:inline-block;margin-right:.5em;color:rgba(0,0,0,.3)}
-.CodeRay .line-numbers strong{font-weight: normal}
+.CodeRay .line-numbers strong{color:rgba(0,0,0,.4)}
 table.CodeRay{border-collapse:separate;border-spacing:0;margin-bottom:0;border:0;background:none}
-table.CodeRay td{vertical-align: top}
+table.CodeRay td{vertical-align: top;line-height:1.45}
 table.CodeRay td.line-numbers{text-align:right}
 table.CodeRay td.line-numbers>pre{padding:0;color:rgba(0,0,0,.3)}
 table.CodeRay td.code{padding:0 0 0 .5em}
@@ -452,7 +460,7 @@ table.CodeRay td.code>pre{padding:0}
 .CodeRay .hex{color:#058}
 .CodeRay .integer,.CodeRay .float{color:#099}
 .CodeRay .include{color:#555}
-.CodeRay .inline{color:#00}
+.CodeRay .inline{color:#000}
 .CodeRay .inline .inline{background:#ccc}
 .CodeRay .inline .inline .inline{background:#bbb}
 .CodeRay .inline .inline-delimiter{color:#d14}
@@ -502,7 +510,7 @@ table.CodeRay td.code>pre{padding:0}
 .CodeRay .head .head{color:#f4f}
 </style> 
  </head> 
- <body class="article"> 
+ <body class="book toc2 toc-left"> 
   <div id="header"> 
    <h1>Eclipse Scout: an Introduction</h1> 
    <div class="details"> 
@@ -511,6 +519,174 @@ table.CodeRay td.code>pre{padding:0}
     <span id="email" class="email"><a href="mailto:matthias.zimmermann@bsi-software.com">matthias.zimmermann@bsi-software.com</a></span>
     <br /> 
     <span id="revnumber">version 5.2.0-SNAPSHOT</span> 
+   </div> 
+   <div id="toc" class="toc2"> 
+    <div id="toctitle">
+     Table of Contents
+    </div> 
+    <ul class="sectlevel1"> 
+     <li><a href="#preface">Preface</a></li> 
+     <li><a href="#introduction">1. Introduction</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#sec-what_is_scout">1.1. What is Scout?</a></li> 
+       <li><a href="#sec-why_scout">1.2. Why Scout?</a></li> 
+       <li><a href="#sec-whatshouldiread">1.3. What should I read?</a></li> 
+      </ul> </li> 
+     <li><a href="#cha-helloworld">2. &#x201c;Hello World&#x201d; Tutorial</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#installation-and-setup">2.1. Installation and Setup</a></li> 
+       <li><a href="#sec-create_project_simple">2.2. Create a new Project</a></li> 
+       <li><a href="#sec-run_initial">2.3. Run the Initial Application</a></li> 
+       <li><a href="#sec-helloworld_export">2.4. Exporting the Application</a></li> 
+       <li><a href="#sec-helloworld_deploy">2.5. Deploying to Tomcat</a></li> 
+      </ul> </li> 
+     <li><a href="#cha-helloworld_background">3. &#x201c;Hello World&#x201d; Background</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#sec-create_project_simple_background">3.1. Create a new Project</a></li> 
+       <li><a href="#sec-initial_helloworld">3.2. Walking through the Initial Application</a></li> 
+       <li><a href="#sec-run_initial_background">3.3. Run the Initial Application</a></li> 
+       <li><a href="#sec-helloworld.userinterface.background">3.4. The User Interface Part</a></li> 
+       <li><a href="#sec-helloworld.server.background">3.5. The Server Part</a></li> 
+       <li><a href="#sec-helloworld.rayo.background">3.6. Add the Rayo Look and Feel</a></li> 
+       <li><a href="#sec-helloworld_export_background">3.7. Exporting the Application</a></li> 
+       <li><a href="#sec-helloworld.tomcat.background">3.8. Deploying to Tomcat</a></li> 
+      </ul> </li> 
+     <li><a href="#shared-components">4. Shared Components</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#texts-i18n-nls-support">4.1. Texts / i18n / NLS Support</a></li> 
+       <li><a href="#icons">4.2. Icons</a></li> 
+       <li><a href="#sec-code_types_codes">4.3. Code Types and Codes</a></li> 
+       <li><a href="#lookup-calls-and-services">4.4. Lookup Calls and Services</a></li> 
+       <li><a href="#permissions">4.5. Permissions</a></li> 
+       <li><a href="#form-data-objects">4.6. Form Data Objects</a></li> 
+      </ul> </li> 
+     <li><a href="#client-components">5. Client components</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#client-model">5.1. Client Model</a></li> 
+       <li><a href="#splash-screen">5.2. Splash Screen</a></li> 
+       <li><a href="#login-box">5.3. Login Box</a></li> 
+       <li><a href="#client-session">5.4. Client Session</a></li> 
+       <li><a href="#desktop-2">5.5. Desktop</a></li> 
+       <li><a href="#menus">5.6. Menus</a></li> 
+       <li><a href="#outlines">5.7. Outlines</a></li> 
+       <li><a href="#tools">5.8. Tools</a></li> 
+       <li><a href="#forms">5.9. Forms</a></li> 
+       <li><a href="#form-fields">5.10. Form Fields</a></li> 
+       <li><a href="#trees">5.11. Trees</a></li> 
+       <li><a href="#pages">5.12. Pages</a></li> 
+       <li><a href="#search-forms">5.13. Search Forms</a></li> 
+       <li><a href="#tables">5.14. Tables</a></li> 
+       <li><a href="#workflows-and-wizards">5.15. Workflows and Wizards</a></li> 
+      </ul> </li> 
+     <li><a href="#cha-widgetsdemo">6. The Widgets Demo Application</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#sec-widgetdemo_ui">6.1. The User Interface</a></li> 
+       <li><a href="#sec-widgetdemo_architecture">6.2. Client Only Architecture</a></li> 
+      </ul> </li> 
+     <li><a href="#cha-simplewidgets">7. Simple Widgets</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#label-fields">7.1. Label Fields</a></li> 
+       <li><a href="#string-fields">7.2. String Fields</a></li> 
+       <li><a href="#number-fields">7.3. Number Fields</a></li> 
+       <li><a href="#decimal-fields">7.4. Decimal Fields</a></li> 
+       <li><a href="#date-and-time-fields">7.5. Date and Time Fields</a></li> 
+       <li><a href="#checkbox-fields">7.6. Checkbox Fields</a></li> 
+       <li><a href="#radio-button-fields">7.7. Radio Button Fields</a></li> 
+       <li><a href="#buttons-and-links">7.8. Buttons and Links</a></li> 
+       <li><a href="#message-boxes">7.9. Message Boxes</a></li> 
+      </ul> </li> 
+     <li><a href="#cha-advancedwidgets">8. Advanced Widgets</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#list-box">8.1. List Box</a></li> 
+       <li><a href="#tree-box">8.2. Tree Box</a></li> 
+       <li><a href="#smart-field">8.3. Smart Field</a></li> 
+       <li><a href="#tree-field">8.4. Tree Field</a></li> 
+       <li><a href="#table-field">8.5. Table Field</a></li> 
+       <li><a href="#image-field">8.6. Image Field</a></li> 
+       <li><a href="#svg-field">8.7. SVG Field</a></li> 
+       <li><a href="#html-field">8.8. HTML Field</a></li> 
+       <li><a href="#browser-field">8.9. Browser Field</a></li> 
+       <li><a href="#calendar-field">8.10. Calendar Field</a></li> 
+      </ul> </li> 
+     <li><a href="#cha-layoutwidgets">9. Layout Widgets</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#group-box">9.1. Group Box</a></li> 
+       <li><a href="#tab-box">9.2. Tab Box</a></li> 
+       <li><a href="#sequence-box">9.3. Sequence Box</a></li> 
+       <li><a href="#split-box">9.4. Split Box</a></li> 
+       <li><a href="#page-field">9.5. Page Field</a></li> 
+       <li><a href="#file-chooser-field">9.6. File Chooser Field</a></li> 
+       <li><a href="#master-slave-fields">9.7. Master Slave Fields</a></li> 
+      </ul> </li> 
+     <li><a href="#cha-custom_fields">10. Custom Fields</a></li> 
+     <li><a href="#template-fields">11. Template Fields</a></li> 
+     <li><a href="#layouting">12. Layouting</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#the-desktop">12.1. The Desktop</a></li> 
+       <li><a href="#form-layout">12.2. Form Layout</a></li> 
+      </ul> </li> 
+     <li><a href="#bookmarks">13. Bookmarks</a></li> 
+     <li><a href="#client-notification">14. Client Notification</a></li> 
+     <li><a href="#file-upload-and-download">15. File Upload and Download</a></li> 
+     <li><a href="#application-branding">16. Application Branding</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#rayo-look-and-feel">16.1. Rayo Look and Feel</a></li> 
+       <li><a href="#branding-the-swing-client">16.2. Branding the Swing Client</a></li> 
+       <li><a href="#branding-the-swt-client">16.3. Branding the SWT Client</a></li> 
+       <li><a href="#branding-the-webclient">16.4. Branding the Webclient</a></li> 
+      </ul> </li> 
+     <li><a href="#advanced-topics">17. Advanced Topics</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#modifying-the-ui-at-runtime">17.1. Modifying the UI at Runtime</a></li> 
+       <li><a href="#focus-handling">17.2. Focus Handling</a></li> 
+       <li><a href="#keyboard-control">17.3. Keyboard Control</a></li> 
+       <li><a href="#master-detail-pages">17.4. Master Detail Pages</a></li> 
+       <li><a href="#client-only-applications">17.5. Client Only Applications</a></li> 
+       <li><a href="#headless-client">17.6. Headless Client</a></li> 
+       <li><a href="#client-startup">17.7. Client Startup</a></li> 
+       <li><a href="#client-shutdown">17.8. Client Shutdown</a></li> 
+       <li><a href="#threading-and-jobs">17.9. Threading and Jobs</a></li> 
+       <li><a href="#caching">17.10. Caching</a></li> 
+      </ul> </li> 
+     <li><a href="#apx-cclicence">Appendix A: Licence and Copyright</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#licence-summary">A.1. Licence Summary</a></li> 
+       <li><a href="#sec-contributing_individuals">A.2. Contributing Individuals</a></li> 
+       <li><a href="#full-licence-text">A.3. Full Licence Text</a></li> 
+      </ul> </li> 
+     <li><a href="#apx-install_scout">Appendix B: Scout Installation</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#overview">B.1. Overview</a></li> 
+       <li><a href="#download-and-install-a-jdk">B.2. Download and Install a JDK</a></li> 
+       <li><a href="#sec-download_install">B.3. Download and Install Scout</a></li> 
+       <li><a href="#add-scout-to-your-eclipse-installation">B.4. Add Scout to your Eclipse Installation</a></li> 
+       <li><a href="#verifying-the-installation">B.5. Verifying the Installation</a></li> 
+      </ul> </li> 
+     <li><a href="#apx-install_tomcat">Appendix C: Apache Tomcat Installation</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#platform-specific-instructions">C.1. Platform Specific Instructions</a></li> 
+       <li><a href="#apx-tomcat_dirs_and_files">C.2. Directories and Files</a></li> 
+       <li><a href="#apx-tomcat_manager_app">C.3. The Tomcat Manager Application</a></li> 
+      </ul> </li> 
+     <li><a href="#scout-utilities">Appendix D: Scout Utilities</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#stringutility">D.1. StringUtility</a></li> 
+       <li><a href="#dateutility">D.2. DateUtility</a></li> 
+       <li><a href="#fileutility">D.3. FileUtility</a></li> 
+      </ul> </li> 
+     <li><a href="#apx-java_basics">Appendix E: Java Basics</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#apx-javase_basics">E.1. Java SE Basics</a></li> 
+       <li><a href="#apx-javaee_basics">E.2. Java EE Basics</a></li> 
+      </ul> </li> 
+     <li><a href="#apx-eclipse_basics">Appendix F: Eclipse Basics</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#apx-eclipse_ide">F.1. Eclipse as an IDE</a></li> 
+       <li><a href="#apx-osgi_basics">F.2. OSGi and Equinox</a></li> 
+       <li><a href="#apx-platform_basics">F.3. Eclipse</a></li> 
+       <li><a href="#apx-plugin_basics">F.4. Eclipse Plugins</a></li> 
+      </ul> </li> 
+    </ul> 
    </div> 
   </div> 
   <div id="content"> 
@@ -612,7 +788,7 @@ table.CodeRay td.code>pre{padding:0}
         <p>In this situation, the company needs to evaluate if it should buy a new standard product or if the old application has to be migrated to a new technology stack. Now let us assume, that available products do not fit the company&#x2019;s requirements well enough and we have to settle for the migration scenario. In the target architecture, a clean layering similar to the one shown in <a href="#img-scout_integration">Figure 5</a> is often desirable.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>While a number of modern and established technologies exist that address the backend side (data bases, data access and business services), the situation is different for the UI layer and the application layer. The number of frameworks to develop web applications with Java is excessively large.<span class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</span>, but the choice between desktop application technologies in the Java domain is restricted to three options only. Swing, SWT and JavaFX. Both Eclipse SWT and Java Swing are mature and well established but Swing is moving into 'maintenance only' mode and will be replaced by JavaFX. However, the maturity of the new JavaFX technology in large complex enterprise applications is not yet established. Obviously, deciding for the right UI technology is a challenge and needs to be made very carefully. Reverting this decision late in a project or after going into production can get very expensive and time consuming.</p> 
+        <p>While a number of modern and established technologies exist that address the backend side (data bases, data access and business services), the situation is different for the UI layer and the application layer. The number of frameworks to develop web applications with Java is excessively large.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup>, but the choice between desktop application technologies in the Java domain is restricted to three options only. Swing, SWT and JavaFX. Both Eclipse SWT and Java Swing are mature and well established but Swing is moving into 'maintenance only' mode and will be replaced by JavaFX. However, the maturity of the new JavaFX technology in large complex enterprise applications is not yet established. Obviously, deciding for the right UI technology is a challenge and needs to be made very carefully. Reverting this decision late in a project or after going into production can get very expensive and time consuming.</p> 
        </div> 
        <div class="paragraph"> 
         <p>Once the organisation has decided for a specific UI technology, additional components and frameworks need to be evaluated to cover client server communication, requirements for the application layer, and integration into the existing application landscape. To avoid drowning in the integration effort for all the elements necessary to cover the UI and the application layer a &#x2018;lightweight&#x2019; framework is frequently developed. When available, this framework initially leads to desirable gains in productivity. Unfortunately, such frameworks often become legacy by themselves. Setting up a dedicated team to actively maintain the framework and adapt to new technologies can reduce this risk. But then again, such a strategy is expensive and developing business application frameworks is usually not the core business of a company.</p> 
@@ -648,7 +824,7 @@ table.CodeRay td.code>pre{padding:0}
         <p>Client-server communication is an additional aspect where the developers is supported by Scout. Calling remote services in the client application that are provided by the Scout server looks identical to the invocation of local services. The complete communication including the transfer of parameter objects is handled fully transparent by the Scout framework. In addition, the Scout SDK can completely manage the necessary transfer objects to fetch data from the Scout server that is to be shown in dialog forms on the Scout client. The binding of the transferred data to the form fields is done by the framework.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Although the Scout SDK wizards can generate a significant amount of code, there is no one-way code generation and no meta data in a Scout application. Just the Java code.<span class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</span>. Developers preferring to write the necessary code manually, may do so. The Scout SDK parses the application&#x2019;s Java code in the background to present the updated Scout application model to the developers preferring to work with the Scout SDK.</p> 
+        <p>Although the Scout SDK wizards can generate a significant amount of code, there is no one-way code generation and no meta data in a Scout application. Just the Java code.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup>. Developers preferring to write the necessary code manually, may do so. The Scout SDK parses the application&#x2019;s Java code in the background to present the updated Scout application model to the developers preferring to work with the Scout SDK.</p> 
        </div> 
        <div class="paragraph"> 
         <p>Finally, Scout is an open source framework hosted at the Eclipse foundation. This provides a number of interesting options to developers that are not available for closed source frameworks. First of all, it is simple to get all the source code of Scout and the underlying Eclipse platform. This allows for complete debugging of all problems and errors found in Scout applications. Starting from the application code, including the Scout framework, Eclipse and down to the Java platform.</p> 
@@ -660,7 +836,7 @@ table.CodeRay td.code>pre{padding:0}
         <p>At times, framework bugs can be identified from questions asked in the forum. As all other enhancement requests and issues, such bugs can be reported in Bugzilla by the Scout developer. Using Bugzilla, Scout developers can also contribute bug analysis and patch proposals to solve the reported issue. With this process, Scout developers can actively contribute to the code base of Eclipse Scout. This has the advantage, that workarounds in existing Scout applications can be removed when an upgrade of the Scout framework is made.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Having provided a significant number of high quality patches and a meaningful involvement in the Scout community, the Scout project can nominate a Scout developer as a new Scout committer. Fundamentally, such a nomination is based on the trust of Scout committers in the candidate. To quote the official guidelines.<span class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</span> for nominating and electing a new committer:</p> 
+        <p>Having provided a significant number of high quality patches and a meaningful involvement in the Scout community, the Scout project can nominate a Scout developer as a new Scout committer. Fundamentally, such a nomination is based on the trust of Scout committers in the candidate. To quote the official guidelines.<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup> for nominating and electing a new committer:</p> 
        </div> 
        <div class="quoteblock"> 
         <blockquote>
@@ -696,7 +872,7 @@ table.CodeRay td.code>pre{padding:0}
        </ul> 
       </div> 
       <div class="paragraph"> 
-       <p>That Scout should help in the last two situations mentioned above seems to be contradictory at first but is just based on a simple principle. Where possible, the Scout framework provides abstractions for areas/topics.<span class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</span> that need to be implemented for business applications again and again. And for each of these abstractions Scout provides a default implementation out of the box. Typically, the default implementation of such an abstraction integrates a framework or technology that is commonly used.</p> 
+       <p>That Scout should help in the last two situations mentioned above seems to be contradictory at first but is just based on a simple principle. Where possible, the Scout framework provides abstractions for areas/topics.<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</sup> that need to be implemented for business applications again and again. And for each of these abstractions Scout provides a default implementation out of the box. Typically, the default implementation of such an abstraction integrates a framework or technology that is commonly used.</p> 
       </div> 
       <div class="paragraph"> 
        <p>When needing a working prototype application by the end of the week, the developer just needs to care about the desired functionality. The necessary default implementations are then automatically included by the Scout tooling into the Scout project setup. The provided Scout SDK tooling also helps to get started quickly with Scout. It also allows to efficiently implement application components such as user interface components, server services or connections to databases.</p> 
@@ -713,19 +889,19 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3"> 
        <h4 id="i-know-java"><a class="anchor" href="#i-know-java"></a>1.3.1. I know Java</h4> 
        <div class="paragraph"> 
-        <p>The good news first. This book is written for you! For the purpose of this book we do not assume any significant understanding of the Java Enterprise Edition (Java EE).<span class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</span> and the Eclipse Platform.<span class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnote_6" title="View footnote.">6</a>]</span>.</p> 
+        <p>The good news first. This book is written for you! For the purpose of this book we do not assume any significant understanding of the Java Enterprise Edition (Java EE).<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</sup> and the Eclipse Platform.<sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnote_6" title="View footnote.">6</a>]</sup>.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Of course, having prior experience in client server programming with Java is helpful. And having used the Eclipse IDE for Java development before --- please do not mistake the IDE with the Eclipse platform.<span class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnote_7" title="View footnote.">7</a>]</span> is certainly of benefit.</p> 
+        <p>Of course, having prior experience in client server programming with Java is helpful. And having used the Eclipse IDE for Java development before --- please do not mistake the IDE with the Eclipse platform.<sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnote_7" title="View footnote.">7</a>]</sup> is certainly of benefit.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>The &#x201c;bad&#x201d; news is, that writing Scout applications requires a solid understanding of Java. To properly benefit from this book, we assume that you have been developing software for a year or more. And you should have mastered the Java Standard Edition (Java SE).<span class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</span> to a significant extent. To be more explicit, you are expected to be comfortable with all material required for the Java Programmer Level I Exam.<span class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</span> and most of the material required for Level II.<span class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</span>.</p> 
+        <p>The &#x201c;bad&#x201d; news is, that writing Scout applications requires a solid understanding of Java. To properly benefit from this book, we assume that you have been developing software for a year or more. And you should have mastered the Java Standard Edition (Java SE).<sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</sup> to a significant extent. To be more explicit, you are expected to be comfortable with all material required for the Java Programmer Level I Exam.<sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</sup> and most of the material required for Level II.<sup class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</sup>.</p> 
        </div> 
        <div class="paragraph"> 
         <p>We now propose to start downloading and installing Scout as described in Appendix <a href="#apx-install_scout">Scout Installation</a> and do some actual coding. To do so, please continue with the &#x201c;Hello World&#x201d; example provided in Chapter <a href="#cha-helloworld">&#x201c;Hello World&#x201d; Tutorial</a>. You can expect to complete this example in less than one hour including the necessary download and installation steps. Afterwards, you might want to continue with the remaining material in &#x201c;Getting Started&#x201d;. Working through the complete book should take no more than two days.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Once you work with the Scout framework on a regular basis, you might want to ask questions in the Scout forum.<span class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnote_11" title="View footnote.">11</a>]</span>. When your question gets answered, please ask yourself if your initial problem could have been solved by better documentation. In that case, you might want to help the Scout community by fixing or amending the Scout wiki pages.<span class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnote_12" title="View footnote.">12</a>]</span>. Or this book. If you find a bug in Eclipse Scout that makes your life miserable you can report it or even propose a patch. And when your bug is fixed, you can test the fix. All of these actions will add to the healthy grow of the Scout community.</p> 
+        <p>Once you work with the Scout framework on a regular basis, you might want to ask questions in the Scout forum.<sup class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnote_11" title="View footnote.">11</a>]</sup>. When your question gets answered, please ask yourself if your initial problem could have been solved by better documentation. In that case, you might want to help the Scout community by fixing or amending the Scout wiki pages.<sup class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnote_12" title="View footnote.">12</a>]</sup>. Or this book. If you find a bug in Eclipse Scout that makes your life miserable you can report it or even propose a patch. And when your bug is fixed, you can test the fix. All of these actions will add to the healthy grow of the Scout community.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
@@ -738,7 +914,7 @@ table.CodeRay td.code>pre{padding:0}
          <li> <p>Chapter <a href="#cha-helloworld">&#x201c;Hello World&#x201d; Tutorial</a> <code>&quot;Hello World&quot;</code> Tutorial. Download and installation of the Scout package should take less than 30 minutes, going through the <code>&quot;Hello World&quot;</code> takes another 15 minutes.</p> </li> 
          <li> <p>Section <a href="#sec-initial_helloworld">Walking through the Initial Application</a> &#x201c;Walking through the Initial Application&#x201d; Read about some key elements used in every Scout client application including integration of server services and data binding.</p> </li> 
          <li> <p>Chapter <a href="#cha-tooling">[cha-tooling]</a> &#x201c;Scout Tooling&#x201d;. Browse through the tooling chapter to get an impression on the tooling provided with Scout. Make sure you understand that the Scout SDK is supporting the developer without restricting the developer.</p> </li> 
-         <li> <p>Chapter <a href="#cha-large_example">[cha-large_example]</a> &#x201c;The My Contacts Application&#x201d;. Check out the slightly larger demo application. In case you are not yet running out of time, download the demo app as described in the Scout wiki.<span class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnote_13" title="View footnote.">13</a>]</span>.</p> </li> 
+         <li> <p>Chapter <a href="#cha-large_example">[cha-large_example]</a> &#x201c;The My Contacts Application&#x201d;. Check out the slightly larger demo application. In case you are not yet running out of time, download the demo app as described in the Scout wiki.<sup class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnote_13" title="View footnote.">13</a>]</sup>.</p> </li> 
         </ul> 
        </div> 
       </div> 
@@ -755,7 +931,7 @@ table.CodeRay td.code>pre{padding:0}
         </ul> 
        </div> 
        <div class="paragraph"> 
-        <p>To learn about Scout and about its benefits first go through Section <a href="#sec-what_is_scout">What is Scout?</a> and Section <a href="#sec-why_scout">Why Scout?</a>. Then, flip through Section <a href="#sec-my_contacts_guide">[sec-my_contacts_guide]</a> to get an impression of the &#x201c;My Contacts&#x201d; application. In case you like the idea that your developers should be able to build such an application in a single day, you might want to talk to us.<span class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnote_14" title="View footnote.">14</a>]</span>.</p> 
+        <p>To learn about Scout and about its benefits first go through Section <a href="#sec-what_is_scout">What is Scout?</a> and Section <a href="#sec-why_scout">Why Scout?</a>. Then, flip through Section <a href="#sec-my_contacts_guide">[sec-my_contacts_guide]</a> to get an impression of the &#x201c;My Contacts&#x201d; application. In case you like the idea that your developers should be able to build such an application in a single day, you might want to talk to us.<sup class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnote_14" title="View footnote.">14</a>]</sup>.</p> 
        </div> 
       </div> 
      </div> 
@@ -765,13 +941,13 @@ table.CodeRay td.code>pre{padding:0}
     <h2 id="cha-helloworld"><a class="anchor" href="#cha-helloworld"></a>2. &#x201c;Hello World&#x201d; Tutorial</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p>The &#x201c;Hello World&#x201d; chapter walks you through the creation of an Eclipse Scout client server application. When the user starts the client part of this application, the client connects to the server.<span class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnote_15" title="View footnote.">15</a>]</span> and asks for some text content that is to be displayed to the user. Next, the server retrieves the desired information and sends it back to the client. The client then copies the content obtained from the server into a text field widget. Finally, the client displays the message obtained from the server in a text field widget.</p> 
+      <p>The &#x201c;Hello World&#x201d; chapter walks you through the creation of an Eclipse Scout client server application. When the user starts the client part of this application, the client connects to the server.<sup class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnote_15" title="View footnote.">15</a>]</sup> and asks for some text content that is to be displayed to the user. Next, the server retrieves the desired information and sends it back to the client. The client then copies the content obtained from the server into a text field widget. Finally, the client displays the message obtained from the server in a text field widget.</p> 
      </div> 
      <div class="paragraph"> 
       <p>The goal of this chapter is to provide a first impression of working with the Scout framework using the Scout SDK. We will start by building the application from scratch and then we&#x2019;ll deploy the complete application to a Tomcat web server. Except for a single line of code in the server part of the &#x201c;Hello World&#x201d; application, we will only be using the tooling provided by the Scout SDK.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>Based on this simple &#x201c;Hello World&#x201d; applications a large number of Scout concepts can be illustrated. Rather than including such background material in this tutorial, this information is provided separately in Chapter <a href="#cha-helloworld_background">&#x201c;Hello World&#x201d; Background</a>. This tutorial is also available in the Scout wiki.<span class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnote_16" title="View footnote.">16</a>]</span>.</p> 
+      <p>Based on this simple &#x201c;Hello World&#x201d; applications a large number of Scout concepts can be illustrated. Rather than including such background material in this tutorial, this information is provided separately in Chapter <a href="#cha-helloworld_background">&#x201c;Hello World&#x201d; Background</a>. This tutorial is also available in the Scout wiki.<sup class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnote_16" title="View footnote.">16</a>]</sup>.</p> 
      </div> 
      <div class="sect2"> 
       <h3 id="installation-and-setup"><a class="anchor" href="#installation-and-setup"></a>2.1. Installation and Setup</h3> 
@@ -836,7 +1012,7 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2"> 
       <h3 id="sec-helloworld_export"><a class="anchor" href="#sec-helloworld_export"></a>2.4. Exporting the Application</h3> 
       <div class="paragraph"> 
-       <p>We are now ready to move the finished &#x201c;Hello World&#x201d; application from our development environment to a productive setup. The simplest option to move our application into the &#x2018;wild&#x2019; is to use the <em class="wizard">Export Scout Project</em> wizard provided by the Scout SDK. Using the default settings, the export wizard produces two WAR files.<span class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnote_17" title="View footnote.">17</a>]</span> that contain the complete Scout server and the desktop and mobile client applications.</p> 
+       <p>We are now ready to move the finished &#x201c;Hello World&#x201d; application from our development environment to a productive setup. The simplest option to move our application into the &#x2018;wild&#x2019; is to use the <em class="wizard">Export Scout Project</em> wizard provided by the Scout SDK. Using the default settings, the export wizard produces two WAR files.<sup class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnote_17" title="View footnote.">17</a>]</sup> that contain the complete Scout server and the desktop and mobile client applications.</p> 
       </div> 
       <div class="paragraph"> 
        <p>To deploy the application to a web server the WAR files generated by the wizard are the only artefacts needed. The first WAR file contains the Scout server including a zipped desktop client for downloading. In the second WAR file, the RAP server application that provides both the web client and the client for mobile devices.</p> 
@@ -860,7 +1036,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>To start the export wizard, we start the Scout SDK with the &#x201c;Hello World&#x201d; Scout project. In the Scout Explorer we then select the corresponding <span class="menu">Export Scout Project&#x2026;&#x200b;</span> context menu on the &#x201c;Hello World&#x201d; top level application node as shown in <a href="#img-sdk_export_war">Figure 9</a>. In the first wizard dialog shown in <a href="#img-export_wizard_1">Figure 10</a>, the target directory for the WAR files needs to be specified. You may choose any directory as the target directory.<span class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnote_18" title="View footnote.">18</a>]</span>. After clicking <b class="button">Next</b> button the second wizard step proposes the server product file that specifies the artefacts to be exported including the file name for the WAR file for the &#x201c;Hello World&#x201d; server application. Typically, the proposed default values are fine. Move to the third dialog with <b class="button">Next</b> button.</p> 
+       <p>To start the export wizard, we start the Scout SDK with the &#x201c;Hello World&#x201d; Scout project. In the Scout Explorer we then select the corresponding <span class="menu">Export Scout Project&#x2026;&#x200b;</span> context menu on the &#x201c;Hello World&#x201d; top level application node as shown in <a href="#img-sdk_export_war">Figure 9</a>. In the first wizard dialog shown in <a href="#img-export_wizard_1">Figure 10</a>, the target directory for the WAR files needs to be specified. You may choose any directory as the target directory.<sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnote_18" title="View footnote.">18</a>]</sup>. After clicking <b class="button">Next</b> button the second wizard step proposes the server product file that specifies the artefacts to be exported including the file name for the WAR file for the &#x201c;Hello World&#x201d; server application. Typically, the proposed default values are fine. Move to the third dialog with <b class="button">Next</b> button.</p> 
       </div> 
       <div id="img-export_wizard_3" class="imageblock"> 
        <div class="content"> 
@@ -1040,7 +1216,7 @@ table.CodeRay td.code>pre{padding:0}
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>Method <span class="java">execOpened</span> is called by the Scout framework after the desktop frame becomes visible. The only thing that happens here is the creation of a <span class="java">desktopForm</span> object, that gets assigned an icon before it is started via method <span class="java">startView</span>. This desktop form object holds the <em class="field">Message</em> field text widget that is displayed to the user.<span class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnote_19" title="View footnote.">19</a>]</span>. More information regarding form elements are provided in the next section.</p> 
+        <p>Method <span class="java">execOpened</span> is called by the Scout framework after the desktop frame becomes visible. The only thing that happens here is the creation of a <span class="java">desktopForm</span> object, that gets assigned an icon before it is started via method <span class="java">startView</span>. This desktop form object holds the <em class="field">Message</em> field text widget that is displayed to the user.<sup class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnote_19" title="View footnote.">19</a>]</sup>. More information regarding form elements are provided in the next section.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
@@ -1049,7 +1225,7 @@ table.CodeRay td.code>pre{padding:0}
         <p>Scout forms are UI containers that hold form field widgets. A Scout form always inherits from Scout class <span class="java">AbstractForm</span> and can either be displayed as a dialog in its own window or shown as a view inside of another UI container. In the &#x201c;Hello World&#x201d; application a <span class="java">DesktopForm</span> object is created and displayed as a view inside of the desktop element.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>To find the desktop form class in the Scout Explorer, expand the orange <em class="node">client</em> node.<span class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnote_20" title="View footnote.">20</a>]</span>. Below this node, you will find the <em class="folder">Forms</em> folder. Expand this folder to show the <em class="element">DesktopForm</em> as shown in <a href="#img-helloworld_viewhandler">Figure 18</a>. In the Scout Object Property window in the screenshot, we can also see the <em class="property">Display Hint</em> property. Its value is set to &#x2018;View&#x2019; to display the desktop form as a view and not as a dialog in its own frame.</p> 
+        <p>To find the desktop form class in the Scout Explorer, expand the orange <em class="node">client</em> node.<sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnote_20" title="View footnote.">20</a>]</sup>. Below this node, you will find the <em class="folder">Forms</em> folder. Expand this folder to show the <em class="element">DesktopForm</em> as shown in <a href="#img-helloworld_viewhandler">Figure 18</a>. In the Scout Object Property window in the screenshot, we can also see the <em class="property">Display Hint</em> property. Its value is set to &#x2018;View&#x2019; to display the desktop form as a view and not as a dialog in its own frame.</p> 
        </div> 
        <div id="img-helloworld_viewhandler" class="imageblock"> 
         <div class="content"> 
@@ -1088,7 +1264,7 @@ table.CodeRay td.code>pre{padding:0}
        <div class="olist arabic"> 
         <ol class="arabic"> 
          <li> <p>Get a reference to the forms server service running on the server.</p> </li> 
-         <li> <p>Create a data transfer object (DTO).<span class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnote_21" title="View footnote.">21</a>]</span></p> </li> 
+         <li> <p>Create a data transfer object (DTO).<sup class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnote_21" title="View footnote.">21</a>]</sup></p> </li> 
          <li> <p>Pass the empty DTO to the load service method (ask the server for some data).</p> </li> 
          <li> <p>Update the DTO with the content provided by the service load method.</p> </li> 
          <li> <p>Copy the updated information from the DTO into the desired form field.</p> </li> 
@@ -1148,7 +1324,7 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3"> 
        <h4 id="eclipse-product-files"><a class="anchor" href="#eclipse-product-files"></a>3.3.2. Eclipse Product Files</h4> 
        <div class="paragraph"> 
-        <p>The available products shown on the right side of <a href="#img-select_product_launchers">Figure 19</a> represent the Eclipse product files created in the initial project creation step. Product files.<span class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnote_22" title="View footnote.">22</a>]</span> are used in Eclipse to specify the configuration and content of an executable application. In the case of the &#x201c;Hello World&#x201d; project, four executable applications --- with two Eclipse product files for each application --- have been defined by the Scout SDK. The four applications, one for the server application and one for each client technology, have already been discussed in Section <a href="#sec-run_initial">Run the Initial Application</a>.</p> 
+        <p>The available products shown on the right side of <a href="#img-select_product_launchers">Figure 19</a> represent the Eclipse product files created in the initial project creation step. Product files.<sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnote_22" title="View footnote.">22</a>]</sup> are used in Eclipse to specify the configuration and content of an executable application. In the case of the &#x201c;Hello World&#x201d; project, four executable applications --- with two Eclipse product files for each application --- have been defined by the Scout SDK. The four applications, one for the server application and one for each client technology, have already been discussed in Section <a href="#sec-run_initial">Run the Initial Application</a>.</p> 
        </div> 
        <div id="img-server_plugin" class="imageblock"> 
         <div class="content"> 
@@ -1180,7 +1356,7 @@ table.CodeRay td.code>pre{padding:0}
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>For the case of the &#x201c;Hello World&#x201d; example we did not need to edit or change the product files generated by the Scout SDK. However, if your requirements are not met by the provided product files, you may use the Eclipse product file editor. A screenshot of this editor is shown in <a href="#img-server_dev_product">Figure 21</a> with the tab <em class="element">Dependencies</em> opened. In the tab Dependencies, the complete list of necessary plugins is provided. Example plugins visible in <a href="#img-server_dev_product">Figure 21</a> include the &#x201c;Hello World&#x201d; server and shared plugins, Scout framework plugins, and Jetty plugins. The Jetty.<span class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnote_23" title="View footnote.">23</a>]</span> plugins are only needed to run the &#x201c;Hello World&#x201d; server application inside the Scout SDK. Consequently, Jetty plugins are not listed as a dependency in the Scout server&#x2019;s production product file.</p> 
+        <p>For the case of the &#x201c;Hello World&#x201d; example we did not need to edit or change the product files generated by the Scout SDK. However, if your requirements are not met by the provided product files, you may use the Eclipse product file editor. A screenshot of this editor is shown in <a href="#img-server_dev_product">Figure 21</a> with the tab <em class="element">Dependencies</em> opened. In the tab Dependencies, the complete list of necessary plugins is provided. Example plugins visible in <a href="#img-server_dev_product">Figure 21</a> include the &#x201c;Hello World&#x201d; server and shared plugins, Scout framework plugins, and Jetty plugins. The Jetty.<sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnote_23" title="View footnote.">23</a>]</sup> plugins are only needed to run the &#x201c;Hello World&#x201d; server application inside the Scout SDK. Consequently, Jetty plugins are not listed as a dependency in the Scout server&#x2019;s production product file.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
@@ -1210,7 +1386,7 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3"> 
        <h4 id="scout-desktop-client-applications"><a class="anchor" href="#scout-desktop-client-applications"></a>3.3.4. Scout Desktop Client Applications</h4> 
        <div class="paragraph"> 
-        <p>Having introduced Eclipse product files and configuration files based on the &#x201c;Hello World&#x201d; server application, we will now look at the different client applications in turn. With Swing applications.<span class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnote_24" title="View footnote.">24</a>]</span> and SWT applications.<span class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnote_25" title="View footnote.">25</a>]</span>, two alternative UI technologies are currently available to build Scout desktop client applications. More recently, JavaFX.<span class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnote_26" title="View footnote.">26</a>]</span> is promoted as a successor to Swing and it is therefore likely, that Scout will provide JavaFX client applications in the future.</p> 
+        <p>Having introduced Eclipse product files and configuration files based on the &#x201c;Hello World&#x201d; server application, we will now look at the different client applications in turn. With Swing applications.<sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnote_24" title="View footnote.">24</a>]</sup> and SWT applications.<sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnote_25" title="View footnote.">25</a>]</sup>, two alternative UI technologies are currently available to build Scout desktop client applications. More recently, JavaFX.<sup class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnote_26" title="View footnote.">26</a>]</sup> is promoted as a successor to Swing and it is therefore likely, that Scout will provide JavaFX client applications in the future.</p> 
        </div> 
        <div class="paragraph"> 
         <p>When we compare the product files for the Swing and the SWT client applications, it is apparent that both client applications share a large number of plugins. Most importantly, the complete UI model and the business logic is identical for both client applications. In other words, the value created by the Scout developer is contained in the two plugins <em class="element">org.eclipse.scout.helloworld.client</em> and <em class="element">org.eclipse.scout.helloworld.shared</em>. To create an executable client application, we only need to combine these two plugins with a set of plugins specific to the desired UI technology.</p> 
@@ -1222,7 +1398,7 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3"> 
        <h4 id="scout-web-tablet-and-mobile-clients"><a class="anchor" href="#scout-web-tablet-and-mobile-clients"></a>3.3.5. Scout Web, Tablet and Mobile Clients</h4> 
        <div class="paragraph"> 
-        <p>For Scout web, tablet and mobile clients, the Eclipse RAP framework.<span class="footnote">[<a id="_footnoteref_27" class="footnote" href="#_footnote_27" title="View footnote.">27</a>]</span> is used. The RAP framework provides an API that is almost identical to the one provided by SWT and allows to use Java for server-side Ajax.<span class="footnote">[<a id="_footnoteref_28" class="footnote" href="#_footnote_28" title="View footnote.">28</a>]</span>. This setup implies that Scout tablet and mobile clients are not native clients but browser based.<span class="footnote">[<a id="_footnoteref_29" class="footnote" href="#_footnote_29" title="View footnote.">29</a>]</span>.</p> 
+        <p>For Scout web, tablet and mobile clients, the Eclipse RAP framework.<sup class="footnote">[<a id="_footnoteref_27" class="footnote" href="#_footnote_27" title="View footnote.">27</a>]</sup> is used. The RAP framework provides an API that is almost identical to the one provided by SWT and allows to use Java for server-side Ajax.<sup class="footnote">[<a id="_footnoteref_28" class="footnote" href="#_footnote_28" title="View footnote.">28</a>]</sup>. This setup implies that Scout tablet and mobile clients are not native clients but browser based.<sup class="footnote">[<a id="_footnoteref_29" class="footnote" href="#_footnote_29" title="View footnote.">29</a>]</sup>.</p> 
        </div> 
        <div class="paragraph"> 
         <p>Comparing the product file of the SWT client applications with the RAP application, we observe that the RAP development product does not include any SWT plugins, but a set of RAP and Jetty plugins. In addition, the RAP product also contains the Scout mobile client plugins <em class="element">org.eclipse.scout.rt.client.mobile</em> and <em class="element">org.eclipse.scout.helloworld.client.mobile</em>. These two plugins are responsible for transforming the UI model defined in the &#x201c;Hello World&#x201d; client plugin to the different form factors of tablet computers and mobile phones.</p> 
@@ -1235,7 +1411,7 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2"> 
       <h3 id="sec-helloworld.userinterface.background"><a class="anchor" href="#sec-helloworld.userinterface.background"></a>3.4. The User Interface Part</h3> 
       <div class="paragraph"> 
-       <p>Using the UI of the &#x201c;Hello World&#x201d; application we explain in this section how the Scout UI form model is represented in Java. We also describe how this representation is exploited by the Scout SDK to automatically manage the form data objects used for data transfer between Scout client and Scout server applications. Finally, will have a brief look at internationalization.<span class="footnote">[<a id="_footnoteref_30" class="footnote" href="#_footnote_30" title="View footnote.">30</a>]</span> support of Scout for texts.</p> 
+       <p>Using the UI of the &#x201c;Hello World&#x201d; application we explain in this section how the Scout UI form model is represented in Java. We also describe how this representation is exploited by the Scout SDK to automatically manage the form data objects used for data transfer between Scout client and Scout server applications. Finally, will have a brief look at internationalization.<sup class="footnote">[<a id="_footnoteref_30" class="footnote" href="#_footnote_30" title="View footnote.">30</a>]</sup> support of Scout for texts.</p> 
       </div> 
       <div class="paragraph"> 
        <p></p> 
@@ -1279,7 +1455,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>When we did add the <em class="field">Message</em> field to the desktop form of the &#x201c;Hello World&#x201d; application we had to enter a new translation entry for the label of the message field as shown in <a href="#img-helloworld_stringfield">[img-helloworld_stringfield]</a>. The individual translation entries are then stored in language specific text property files. To modify translated texts we can use the NLS editor.<span class="footnote">[<a id="_footnoteref_31" class="footnote" href="#_footnote_31" title="View footnote.">31</a>]</span> provided by the Scout SDK as shown in <a href="#img-nls_editor">Figure 23</a>.</p> 
+       <p>When we did add the <em class="field">Message</em> field to the desktop form of the &#x201c;Hello World&#x201d; application we had to enter a new translation entry for the label of the message field as shown in <a href="#img-helloworld_stringfield">[img-helloworld_stringfield]</a>. The individual translation entries are then stored in language specific text property files. To modify translated texts we can use the NLS editor.<sup class="footnote">[<a id="_footnoteref_31" class="footnote" href="#_footnote_31" title="View footnote.">31</a>]</sup> provided by the Scout SDK as shown in <a href="#img-nls_editor">Figure 23</a>.</p> 
       </div> 
       <div class="paragraph"> 
        <p>To access the translated label field entry in the application, the Scout SDK generated the implementation of <span class="java">getConfiguredLabel</span> using <span class="java">TEXTS.get(&quot;Message&quot;)</span> as shown in <a href="#lst-helloworld.mainbox">Listing 3</a>. In the default Scout project setup, calling <span class="java">TEXTS.get</span> uses the <span class="java">DefaultTextProviderService</span> in the background. This text provider service then defines the access path for the text property files to use for the translation. To resolve the provided key, the user&#x2019;s locale settings are used to access the correct text property file.</p> 
@@ -1293,7 +1469,7 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3"> 
        <h4 id="scout-services"><a class="anchor" href="#scout-services"></a>3.5.1. Scout Services</h4> 
        <div class="paragraph"> 
-        <p>Scout services are OSGi services.<span class="footnote">[<a id="_footnoteref_32" class="footnote" href="#_footnote_32" title="View footnote.">32</a>]</span> which in turn are defined by standard Java classes or interfaces. Scout is just adding a convenience layer to cover typical requirements in the context of client server applications. To support Scout developers as much as possible, the Scout SDK offers wizards that generate the necessary classes and interfaces and also take care of service registration.</p> 
+        <p>Scout services are OSGi services.<sup class="footnote">[<a id="_footnoteref_32" class="footnote" href="#_footnote_32" title="View footnote.">32</a>]</sup> which in turn are defined by standard Java classes or interfaces. Scout is just adding a convenience layer to cover typical requirements in the context of client server applications. To support Scout developers as much as possible, the Scout SDK offers wizards that generate the necessary classes and interfaces and also take care of service registration.</p> 
        </div> 
        <div class="paragraph"> 
         <p></p> 
@@ -1311,7 +1487,7 @@ table.CodeRay td.code>pre{padding:0}
         <p>All Scout services need to extend Scout&#x2019;s <span class="java">AbstractService</span> class and implement their own corresponding interface. This also applies to the &#x201c;Hello World&#x201d; desktop service according to <a href="#lst-helloworld.desktop_service">Listing 5</a>. As shown in <a href="#img-helloworld_load_servicemethod">[img-helloworld_load_servicemethod]</a>, this service can be located in the Scout Explorer under the blue server node in the <em class="folder">Services</em> folder.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Before Scout services can be accessed and used, they need to be explicitly registered as a service in the correct place. For this registration mechanism, Scout is using Eclipse extension points and extensions.<span class="footnote">[<a id="_footnoteref_33" class="footnote" href="#_footnote_33" title="View footnote.">33</a>]</span> which are conceptually similar to electrical outlets and plugs. And in order to work, as in the case of outlets and plugs, the plug must fit to the outlet. In our &#x201c;Hello World&#x201d; example, the extension (plug) is represented by class <span class="java">DesktopService</span> and the service extension point (outlet) is named <span class="java">org.eclipse.scout.service.services</span>. What makes the desktop service fit to the service extension point is the fact that its interface <span class="java">IDesktopService</span> extends Scout&#x2019;s <span class="java">IService</span> interface.</p> 
+        <p>Before Scout services can be accessed and used, they need to be explicitly registered as a service in the correct place. For this registration mechanism, Scout is using Eclipse extension points and extensions.<sup class="footnote">[<a id="_footnoteref_33" class="footnote" href="#_footnote_33" title="View footnote.">33</a>]</sup> which are conceptually similar to electrical outlets and plugs. And in order to work, as in the case of outlets and plugs, the plug must fit to the outlet. In our &#x201c;Hello World&#x201d; example, the extension (plug) is represented by class <span class="java">DesktopService</span> and the service extension point (outlet) is named <span class="java">org.eclipse.scout.service.services</span>. What makes the desktop service fit to the service extension point is the fact that its interface <span class="java">IDesktopService</span> extends Scout&#x2019;s <span class="java">IService</span> interface.</p> 
        </div> 
        <div id="img-plugin_editor" class="imageblock"> 
         <div class="content"> 
@@ -1370,10 +1546,10 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2"> 
       <h3 id="sec-helloworld.rayo.background"><a class="anchor" href="#sec-helloworld.rayo.background"></a>3.6. Add the Rayo Look and Feel</h3> 
       <div class="paragraph"> 
-       <p>Rayo has been designed in 2009 by BSI for its CRM.<span class="footnote">[<a id="_footnoteref_34" class="footnote" href="#_footnote_34" title="View footnote.">34</a>]</span> application and contact center solution. Since then, Rayo has been copied for Scout web applications and also adapted to work on touch/mobile devices.</p> 
+       <p>Rayo has been designed in 2009 by BSI for its CRM.<sup class="footnote">[<a id="_footnoteref_34" class="footnote" href="#_footnote_34" title="View footnote.">34</a>]</sup> application and contact center solution. Since then, Rayo has been copied for Scout web applications and also adapted to work on touch/mobile devices.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>The implementation of Rayo for desktop clients is based on the Java Synth look and feel.<span class="footnote">[<a id="_footnoteref_35" class="footnote" href="#_footnote_35" title="View footnote.">35</a>]</span>. However, in a few cases it was necessary to adjust some of the synth classes. In order to do this, the adapted classes are copied form the OpenJDK implementation.<span class="footnote">[<a id="_footnoteref_36" class="footnote" href="#_footnote_36" title="View footnote.">36</a>]</span> As OpenJDK is licenced under the GNU General Public Licence (GPL) with a linking exception it is not possible to distribute Rayo under the Eclipse Public Licence. That is why Rayo is not initially contained in the Eclipse Scout package but needs to be downloaded from the Eclipse Marketplace. Fortunately, there is still no restriction to use Rayo in commercial products. The only remaining restriction applies to modifying Rayo for commercial products. In this case you will be obliged to redistribute your modified version of Rayo under the same licence (GPL with classpath exception).</p> 
+       <p>The implementation of Rayo for desktop clients is based on the Java Synth look and feel.<sup class="footnote">[<a id="_footnoteref_35" class="footnote" href="#_footnote_35" title="View footnote.">35</a>]</sup>. However, in a few cases it was necessary to adjust some of the synth classes. In order to do this, the adapted classes are copied form the OpenJDK implementation.<sup class="footnote">[<a id="_footnoteref_36" class="footnote" href="#_footnote_36" title="View footnote.">36</a>]</sup> As OpenJDK is licenced under the GNU General Public Licence (GPL) with a linking exception it is not possible to distribute Rayo under the Eclipse Public Licence. That is why Rayo is not initially contained in the Eclipse Scout package but needs to be downloaded from the Eclipse Marketplace. Fortunately, there is still no restriction to use Rayo in commercial products. The only remaining restriction applies to modifying Rayo for commercial products. In this case you will be obliged to redistribute your modified version of Rayo under the same licence (GPL with classpath exception).</p> 
       </div> 
       <div class="paragraph"> 
        <p>With Eclipse Scout 3.8 (Juno), the Scout framework also allows to build web clients based on Eclipse RAP. Great care has been taken to ensure, that the look and feel for Scout web applications matches the look and feel of the desktop as closely as possible. As RAP is already distributed under the EPL licence the Rayo for web apps is directly contained in the Scout package. TODO: Describe what to change to use RAP default look and feel</p> 
@@ -1402,13 +1578,13 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>The content and its organisation of the exported WAR files was not specifically designed for Scout applications. Rather, it is defined according to server-side Equinox.<span class="footnote">[<a id="_footnoteref_37" class="footnote" href="#_footnote_37" title="View footnote.">37</a>]</span>, the typical setup for running Eclipse based server applications on a web server. Using file <span class="filename">helloworld_server.war</span> as a concrete example, we will first describe the general organisation of the WAR file. Then, we introduce individual artefacts of interest that are contained in this WAR file.</p> 
+       <p>The content and its organisation of the exported WAR files was not specifically designed for Scout applications. Rather, it is defined according to server-side Equinox.<sup class="footnote">[<a id="_footnoteref_37" class="footnote" href="#_footnote_37" title="View footnote.">37</a>]</sup>, the typical setup for running Eclipse based server applications on a web server. Using file <span class="filename">helloworld_server.war</span> as a concrete example, we will first describe the general organisation of the WAR file. Then, we introduce individual artefacts of interest that are contained in this WAR file.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>The explicit organisation of the server WAR file is shown in <a href="#img-helloworld_server_war">Figure 25</a>. From the left hand side of the figure we can see that on the top level only folder <span class="filename">WEB-INF</span> exists in the WAR file. This folder contains all files and directories that are private to the web application. Inside, the web deployment descriptor file <span class="filename">web.xml</span> as well as the directories <span class="filename">lib</span> and <span class="filename">eclipse</span> are located. While the <span class="filename">web.xml</span> file and directory <span class="filename">lib</span> are standard for servlet based based applications.<span class="footnote">[<a id="_footnoteref_38" class="footnote" href="#_footnote_38" title="View footnote.">38</a>]</span>, directory <span class="filename">eclipse</span> contains all necessary artefacts for servlet based Eclipse applications.<span class="footnote">[<a id="_footnoteref_39" class="footnote" href="#_footnote_39" title="View footnote.">39</a>]</span>. Such as Eclipse Scout server applications.</p> 
+       <p>The explicit organisation of the server WAR file is shown in <a href="#img-helloworld_server_war">Figure 25</a>. From the left hand side of the figure we can see that on the top level only folder <span class="filename">WEB-INF</span> exists in the WAR file. This folder contains all files and directories that are private to the web application. Inside, the web deployment descriptor file <span class="filename">web.xml</span> as well as the directories <span class="filename">lib</span> and <span class="filename">eclipse</span> are located. While the <span class="filename">web.xml</span> file and directory <span class="filename">lib</span> are standard for servlet based based applications.<sup class="footnote">[<a id="_footnoteref_38" class="footnote" href="#_footnote_38" title="View footnote.">38</a>]</sup>, directory <span class="filename">eclipse</span> contains all necessary artefacts for servlet based Eclipse applications.<sup class="footnote">[<a id="_footnoteref_39" class="footnote" href="#_footnote_39" title="View footnote.">39</a>]</sup>. Such as Eclipse Scout server applications.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>On the right hand side of <a href="#img-helloworld_server_war">Figure 25</a> the eclipse specific content of the WAR file is shown. From top to bottom we find the configuration file <span class="filename">config.ini</span> introduced in Section <a href="#sec-config_ini">Eclipse Configuration Files</a>. In folder <span class="filename">plugins</span> the necessary plugins that constitute the eclipse application are located where the plugins are available in the form of JAR files.<span class="footnote">[<a id="_footnoteref_40" class="footnote" href="#_footnote_40" title="View footnote.">40</a>]</span>. This includes plugins for servlet management, the eclipse platform including the servlet bridge, the scout framework parts and of course our &#x201c;Hello World&#x201d; server and shared plugin. These &#x201c;Hello World&#x201d; jar files exactly match with the plugin projects discussed in Section <a href="#sec-create_project_simple_background">Create a new Project</a>.</p> 
+       <p>On the right hand side of <a href="#img-helloworld_server_war">Figure 25</a> the eclipse specific content of the WAR file is shown. From top to bottom we find the configuration file <span class="filename">config.ini</span> introduced in Section <a href="#sec-config_ini">Eclipse Configuration Files</a>. In folder <span class="filename">plugins</span> the necessary plugins that constitute the eclipse application are located where the plugins are available in the form of JAR files.<sup class="footnote">[<a id="_footnoteref_40" class="footnote" href="#_footnote_40" title="View footnote.">40</a>]</sup>. This includes plugins for servlet management, the eclipse platform including the servlet bridge, the scout framework parts and of course our &#x201c;Hello World&#x201d; server and shared plugin. These &#x201c;Hello World&#x201d; jar files exactly match with the plugin projects discussed in Section <a href="#sec-create_project_simple_background">Create a new Project</a>.</p> 
       </div> 
       <div id="img-helloworld_server_plugin" class="imageblock"> 
        <div class="content"> 
@@ -1492,7 +1668,7 @@ table.CodeRay td.code>pre{padding:0}
        <p>How you start and stop Tomcat depends on the platform you are running it. If you have installed Tomcat on a Windows box according to Appendix <a href="#apx-install_tomcat">Apache Tomcat Installation</a> it will be running as a service. This means that to stop the Tomcat web server you need to stop the corresponding Windows service. For starting and stopping Tomcat on Mac/Linux/Unix systems, you can use the command line script files <span class="filename">startup.sh</span> and <span class="filename">shutdown.sh</span> located in Tomcat&#x2019;s subdirectory <span class="filename">bin</span>.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>For those interested in more advanced aspects of Apache Tomcat we recommend the article &#x201c;More about the Cat&#x201d; by Chua Hock-Chuan.<span class="footnote">[<a id="_footnoteref_41" class="footnote" href="#_footnote_41" title="View footnote.">41</a>]</span>.</p> 
+       <p>For those interested in more advanced aspects of Apache Tomcat we recommend the article &#x201c;More about the Cat&#x201d; by Chua Hock-Chuan.<sup class="footnote">[<a id="_footnoteref_41" class="footnote" href="#_footnote_41" title="View footnote.">41</a>]</sup>.</p> 
       </div> 
      </div> 
     </div> 
@@ -1545,7 +1721,7 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2"> 
       <h3 id="sec-code_types_codes"><a class="anchor" href="#sec-code_types_codes"></a>4.3. Code Types and Codes</h3> 
       <div class="paragraph"> 
-       <p>Code types and codes are widely used in business applications. In general, any fixed set of named entities can be seen as a code type. Code types can be used to model the organisational structure of companies, to represent business units or to categorise or segment entities. Frequently, enumerations or enumerated types.<span class="footnote">[<a id="_footnoteref_42" class="footnote" href="#_footnote_42" title="View footnote.">42</a>]</span> are used as synonyms for code types. The individual named entities in a code type are called codes in Scout.</p> 
+       <p>Code types and codes are widely used in business applications. In general, any fixed set of named entities can be seen as a code type. Code types can be used to model the organisational structure of companies, to represent business units or to categorise or segment entities. Frequently, enumerations or enumerated types.<sup class="footnote">[<a id="_footnoteref_42" class="footnote" href="#_footnote_42" title="View footnote.">42</a>]</sup> are used as synonyms for code types. The individual named entities in a code type are called codes in Scout.</p> 
       </div> 
       <div class="paragraph"> 
        <p>Both code types and codes have associated names (translated texts) and IDs. As in the case of standard Java enumerations, Scout codes can also have associated values. A set of additional features enhances Scout code types over simple Java enumerations:</p> 
@@ -1612,7 +1788,7 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3"> 
        <h4 id="hierarchical-code-types"><a class="anchor" href="#hierarchical-code-types"></a>4.3.2. Hierarchical Code Types</h4> 
        <div class="paragraph"> 
-        <p>To explain the definition and use of hierarchical codes we use the Industry Classification Benchmark as a concrete example. The Industry Classification Benchmark or ICB.<span class="footnote">[<a id="_footnoteref_43" class="footnote" href="#_footnote_43" title="View footnote.">43</a>]</span> allows to hierarchically classify companies and organisations into industries, super sectors, sectors and sub sectors. Each organizational level has a unique number assigned and a name. This setup can easily be transferred to a hierarchical Scout code type.</p> 
+        <p>To explain the definition and use of hierarchical codes we use the Industry Classification Benchmark as a concrete example. The Industry Classification Benchmark or ICB.<sup class="footnote">[<a id="_footnoteref_43" class="footnote" href="#_footnote_43" title="View footnote.">43</a>]</sup> allows to hierarchically classify companies and organisations into industries, super sectors, sectors and sub sectors. Each organizational level has a unique number assigned and a name. This setup can easily be transferred to a hierarchical Scout code type.</p> 
        </div> 
        <div class="paragraph"> 
         <p></p> 
@@ -2190,7 +2366,7 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2"> 
       <h3 id="sec-widgetdemo_architecture"><a class="anchor" href="#sec-widgetdemo_architecture"></a>6.2. Client Only Architecture</h3> 
       <div class="paragraph"> 
-       <p>As the sole purpose of the widget demo application is to demonstrate the usage of the UI elements provided by the Scout framework, no server side data access and/or business logic is required. Therefore, the widget demo application has been designed as a client only application. As a side effect, the architecture of this widget application may also be used as a template to build similar client only applications with the Scout framework. It is important to note that this architecture can only be recommended for very simple applications. For more complex software packages, for example personal digital archives or private accounting software, it is not recommended to implement the business logic and the access to the database in the application&#x2019;s client plugin. A much cleaner approach is to take advantage of the offline support provided by the Scout framework. As in typical Scout client server projects, the presentation logic can be implemented in the client plugin and business logic and access to a (local) database are located in the server plugin. A detailed description of this setup including step-by-step instructions is available on the Scout Wiki.<span class="footnote">[<a id="_footnoteref_44" class="footnote" href="#_footnote_44" title="View footnote.">44</a>]</span>. In the text below the client only setup of the widget demo application is explained by looking at the main differences to the setup of the &#x201c;Hello World&#x201d; application introduced in Chapter <a href="#cha-helloworld">&#x201c;Hello World&#x201d; Tutorial</a>.</p> 
+       <p>As the sole purpose of the widget demo application is to demonstrate the usage of the UI elements provided by the Scout framework, no server side data access and/or business logic is required. Therefore, the widget demo application has been designed as a client only application. As a side effect, the architecture of this widget application may also be used as a template to build similar client only applications with the Scout framework. It is important to note that this architecture can only be recommended for very simple applications. For more complex software packages, for example personal digital archives or private accounting software, it is not recommended to implement the business logic and the access to the database in the application&#x2019;s client plugin. A much cleaner approach is to take advantage of the offline support provided by the Scout framework. As in typical Scout client server projects, the presentation logic can be implemented in the client plugin and business logic and access to a (local) database are located in the server plugin. A detailed description of this setup including step-by-step instructions is available on the Scout Wiki.<sup class="footnote">[<a id="_footnoteref_44" class="footnote" href="#_footnote_44" title="View footnote.">44</a>]</sup>. In the text below the client only setup of the widget demo application is explained by looking at the main differences to the setup of the &#x201c;Hello World&#x201d; application introduced in Chapter <a href="#cha-helloworld">&#x201c;Hello World&#x201d; Tutorial</a>.</p> 
       </div> 
       <div class="paragraph"> 
        <p></p> 
@@ -2579,7 +2755,7 @@ image::{imgsdir}/buttonlink.png[]</pre>
      <div class="sect2"> 
       <h3 id="message-boxes"><a class="anchor" href="#message-boxes"></a>7.9. Message Boxes</h3> 
       <div class="paragraph"> 
-       <p>Message boxes are used to provide information to a user or ask the user simple yes/no questions. In Scout, class <span class="java">MessageBox</span> provides a number of static convenience methods for this purpose. Additionally, message boxes are shown to the user in the case of a processing exception or a veto exception.<span class="footnote">[<a id="_footnoteref_45" class="footnote" href="#_footnote_45" title="View footnote.">45</a>]</span>.</p> 
+       <p>Message boxes are used to provide information to a user or ask the user simple yes/no questions. In Scout, class <span class="java">MessageBox</span> provides a number of static convenience methods for this purpose. Additionally, message boxes are shown to the user in the case of a processing exception or a veto exception.<sup class="footnote">[<a id="_footnoteref_45" class="footnote" href="#_footnote_45" title="View footnote.">45</a>]</sup>.</p> 
       </div> 
       <div id="img-messagebox" class="literalblock"> 
        <div class="title">
@@ -3431,7 +3607,7 @@ image::{imgsdir}/messagebox.png[]</pre>
      <div class="sect2"> 
       <h3 id="overview"><a class="anchor" href="#overview"></a>B.1. Overview</h3> 
       <div class="paragraph"> 
-       <p>This chapter walks you through the installation of Eclipse Scout. The installation description (as well as the rest of this book) is written and tested for Eclipse Scout 4.0 which is delivered as integral part of the Eclipse Luna release train, 2014. Detailed information regarding the scheduling of this release train is provided in the Eclipse wiki.<span class="footnote">[<a id="_footnoteref_46" class="footnote" href="#_footnote_46" title="View footnote.">46</a>]</span>.</p> 
+       <p>This chapter walks you through the installation of Eclipse Scout. The installation description (as well as the rest of this book) is written and tested for Eclipse Scout 4.0 which is delivered as integral part of the Eclipse Luna release train, 2014. Detailed information regarding the scheduling of this release train is provided in the Eclipse wiki.<sup class="footnote">[<a id="_footnoteref_46" class="footnote" href="#_footnote_46" title="View footnote.">46</a>]</sup>.</p> 
       </div> 
       <div class="paragraph"> 
        <p>We assume that you have not installed any software relevant for the content of this book. This is why the Scout installation chapter starts with the installation of the Java Development Kit (JDK). Consequently, you will have to skip some of the sections depending on your existing setup.</p> 
@@ -3446,7 +3622,7 @@ image::{imgsdir}/messagebox.png[]</pre>
        <p>The first step to install Scout is to have an existing and working installation of a JDK version 7 or 8. It is currently recommended to go for the most recent download of Java 7.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Using Scout with Java 8 is possible and has been tested as part of Eclipse release train testing.<span class="footnote">[<a id="_footnoteref_47" class="footnote" href="#_footnote_47" title="View footnote.">47</a>]</span>. We are currently not aware of any productive installation so far, but this is likely to change in the near future as Oracle&#x2019;s published end of public updates for Java 7 is scheduled for April 2015.<span class="footnote">[<a id="_footnoteref_48" class="footnote" href="#_footnote_48" title="View footnote.">48</a>]</span>.</p> 
+       <p>Using Scout with Java 8 is possible and has been tested as part of Eclipse release train testing.<sup class="footnote">[<a id="_footnoteref_47" class="footnote" href="#_footnote_47" title="View footnote.">47</a>]</sup>. We are currently not aware of any productive installation so far, but this is likely to change in the near future as Oracle&#x2019;s published end of public updates for Java 7 is scheduled for April 2015.<sup class="footnote">[<a id="_footnoteref_48" class="footnote" href="#_footnote_48" title="View footnote.">48</a>]</sup>.</p> 
       </div> 
       <div class="paragraph"> 
        <p>You may still use Scout with Java 6. However, this version is no longer tested with Scout and has reached Oracle&#x2019;s end of public updates on February 2013. Older Java versions will no longer work together with the Scout framework.</p> 
@@ -3455,10 +3631,10 @@ image::{imgsdir}/messagebox.png[]</pre>
        <p>Currently, we recommend to install the Oracle JDK 7 together with Scout. Although, using OpenJDK with Scout should work too. To successfully install the JDK you need to have at least local admin rights. You also need to know your hardware architecture in order to download the correct JDK installer.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>For Windows, the steps necessary to determine your hardware architecture are described on Microsoft&#x2019;s support site.<span class="footnote">[<a id="_footnoteref_49" class="footnote" href="#_footnote_49" title="View footnote.">49</a>]</span>. For Linux several ways to determine if your os is running with 32 or with 64 bits can be found on the web.<span class="footnote">[<a id="_footnoteref_50" class="footnote" href="#_footnote_50" title="View footnote.">50</a>]</span> For Mac this step is simple, as only a 64 bit package is provided on JDK the download page.</p> 
+       <p>For Windows, the steps necessary to determine your hardware architecture are described on Microsoft&#x2019;s support site.<sup class="footnote">[<a id="_footnoteref_49" class="footnote" href="#_footnote_49" title="View footnote.">49</a>]</sup>. For Linux several ways to determine if your os is running with 32 or with 64 bits can be found on the web.<sup class="footnote">[<a id="_footnoteref_50" class="footnote" href="#_footnote_50" title="View footnote.">50</a>]</sup> For Mac this step is simple, as only a 64 bit package is provided on JDK the download page.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Once you know your hardware architecture, go to Oracle&#x2019;s official download site.<span class="footnote">[<a id="_footnoteref_51" class="footnote" href="#_footnote_51" title="View footnote.">51</a>]</span> and accept the licence agreement by clicking on the appropriate radio button. Then, select the <em>Windows x64</em> package if you are running 64-bit Windows as shown in <a href="#img-jdk_download_oracle">Figure 50</a>. If you are running 32-bit Windows, go for the <em>Windows x86</em> package. It is also recommended to download the <em>Java SE 7 Documentation</em>. The Java API documentation package is available from the official download site.<span class="footnote">[<a id="_footnoteref_52" class="footnote" href="#_footnote_52" title="View footnote.">52</a>]</span>, located further down under section <em>Additional Resources</em>.</p> 
+       <p>Once you know your hardware architecture, go to Oracle&#x2019;s official download site.<sup class="footnote">[<a id="_footnoteref_51" class="footnote" href="#_footnote_51" title="View footnote.">51</a>]</sup> and accept the licence agreement by clicking on the appropriate radio button. Then, select the <em>Windows x64</em> package if you are running 64-bit Windows as shown in <a href="#img-jdk_download_oracle">Figure 50</a>. If you are running 32-bit Windows, go for the <em>Windows x86</em> package. It is also recommended to download the <em>Java SE 7 Documentation</em>. The Java API documentation package is available from the official download site.<sup class="footnote">[<a id="_footnoteref_52" class="footnote" href="#_footnote_52" title="View footnote.">52</a>]</sup>, located further down under section <em>Additional Resources</em>.</p> 
       </div> 
       <div id="img-jdk_download_oracle" class="imageblock"> 
        <div class="content"> 
@@ -3469,10 +3645,10 @@ image::{imgsdir}/messagebox.png[]</pre>
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Once you have successfully downloaded the JDK installer, follow the Windows installation guide.<span class="footnote">[<a id="_footnoteref_53" class="footnote" href="#_footnote_53" title="View footnote.">53</a>]</span>. To verify the installation you might want to go through this Java &#x201c;Hello World!&#x201d; tutorial.<span class="footnote">[<a id="_footnoteref_54" class="footnote" href="#_footnote_54" title="View footnote.">54</a>]</span>.</p> 
+       <p>Once you have successfully downloaded the JDK installer, follow the Windows installation guide.<sup class="footnote">[<a id="_footnoteref_53" class="footnote" href="#_footnote_53" title="View footnote.">53</a>]</sup>. To verify the installation you might want to go through this Java &#x201c;Hello World!&#x201d; tutorial.<sup class="footnote">[<a id="_footnoteref_54" class="footnote" href="#_footnote_54" title="View footnote.">54</a>]</sup>.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Installation instructions for Linux.<span class="footnote">[<a id="_footnoteref_55" class="footnote" href="#_footnote_55" title="View footnote.">55</a>]</span> and Mac.<span class="footnote">[<a id="_footnoteref_56" class="footnote" href="#_footnote_56" title="View footnote.">56</a>]</span> are also available from Oracle.</p> 
+       <p>Installation instructions for Linux.<sup class="footnote">[<a id="_footnoteref_55" class="footnote" href="#_footnote_55" title="View footnote.">55</a>]</sup> and Mac.<sup class="footnote">[<a id="_footnoteref_56" class="footnote" href="#_footnote_56" title="View footnote.">56</a>]</sup> are also available from Oracle.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -3630,10 +3806,10 @@ sun.java.command=... vm C:\java\jre7\bin\javaw.exe -vmargs ...</pre>
     <h2 id="apx-install_tomcat"><a class="anchor" href="#apx-install_tomcat"></a>Appendix C: Apache Tomcat Installation</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p>Apache Tomcat is an open source web server that is a widely used implementation of the Java Servlet Specification. Specifically, Tomcat works very well to run the server part of Scout client server applications. In case you are interested in getting some general context around Tomcat you could start with the Wikipedia article.<span class="footnote">[<a id="_footnoteref_57" class="footnote" href="#_footnote_57" title="View footnote.">57</a>]</span>. Then get introduced to its core component &#x201c;Tomcat Catalina&#x201d;.<span class="footnote">[<a id="_footnoteref_58" class="footnote" href="#_footnote_58" title="View footnote.">58</a>]</span> before you switch to the official Tomcat homepage.<span class="footnote">[<a id="_footnoteref_59" class="footnote" href="#_footnote_59" title="View footnote.">59</a>]</span>.</p> 
+      <p>Apache Tomcat is an open source web server that is a widely used implementation of the Java Servlet Specification. Specifically, Tomcat works very well to run the server part of Scout client server applications. In case you are interested in getting some general context around Tomcat you could start with the Wikipedia article.<sup class="footnote">[<a id="_footnoteref_57" class="footnote" href="#_footnote_57" title="View footnote.">57</a>]</sup>. Then get introduced to its core component &#x201c;Tomcat Catalina&#x201d;.<sup class="footnote">[<a id="_footnoteref_58" class="footnote" href="#_footnote_58" title="View footnote.">58</a>]</sup> before you switch to the official Tomcat homepage.<sup class="footnote">[<a id="_footnoteref_59" class="footnote" href="#_footnote_59" title="View footnote.">59</a>]</sup>.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>This section is not really a step by step download and installation guide. Rather, it points you to the proper places for downloading and installing Tomcat. We recommend to work with Tomcat version 7.0. Start your download from the official download site.<span class="footnote">[<a id="_footnoteref_60" class="footnote" href="#_footnote_60" title="View footnote.">60</a>]</span>.</p> 
+      <p>This section is not really a step by step download and installation guide. Rather, it points you to the proper places for downloading and installing Tomcat. We recommend to work with Tomcat version 7.0. Start your download from the official download site.<sup class="footnote">[<a id="_footnoteref_60" class="footnote" href="#_footnote_60" title="View footnote.">60</a>]</sup>.</p> 
      </div> 
      <div id="img-tomcat_install" class="imageblock"> 
       <div class="content"> 
@@ -3649,13 +3825,13 @@ sun.java.command=... vm C:\java\jre7\bin\javaw.exe -vmargs ...</pre>
      <div class="sect2"> 
       <h3 id="platform-specific-instructions"><a class="anchor" href="#platform-specific-instructions"></a>C.1. Platform Specific Instructions</h3> 
       <div class="paragraph"> 
-       <p>According to the Tomcat setup installation for Windows.<span class="footnote">[<a id="_footnoteref_61" class="footnote" href="#_footnote_61" title="View footnote.">61</a>]</span> download the package &#x201c;32-bit/64-bit Windows Service Installer&#x201d; from the <a href="http://tomcat.apache.org/download-70.cgi">Tomcat 7 download site</a>. Then, start the installer and accept the proposed default settings.</p> 
+       <p>According to the Tomcat setup installation for Windows.<sup class="footnote">[<a id="_footnoteref_61" class="footnote" href="#_footnote_61" title="View footnote.">61</a>]</sup> download the package &#x201c;32-bit/64-bit Windows Service Installer&#x201d; from the <a href="http://tomcat.apache.org/download-70.cgi">Tomcat 7 download site</a>. Then, start the installer and accept the proposed default settings.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>For installing Tomcat on OS X systems download the &#x201c;tar.gz&#x201d; package from the <a href="http://tomcat.apache.org/download-70.cgi">Tomcat 7 download site</a>. Then, follow the installation guide.<span class="footnote">[<a id="_footnoteref_62" class="footnote" href="#_footnote_62" title="View footnote.">62</a>]</span> provided by Wolf Paulus.</p> 
+       <p>For installing Tomcat on OS X systems download the &#x201c;tar.gz&#x201d; package from the <a href="http://tomcat.apache.org/download-70.cgi">Tomcat 7 download site</a>. Then, follow the installation guide.<sup class="footnote">[<a id="_footnoteref_62" class="footnote" href="#_footnote_62" title="View footnote.">62</a>]</sup> provided by Wolf Paulus.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>For Linux systems download the &#x201c;tar.gz&#x201d; package from the <a href="http://tomcat.apache.org/download-70.cgi">Tomcat 7 download site</a>. Then, follow the description of the Unix setup.<span class="footnote">[<a id="_footnoteref_63" class="footnote" href="#_footnote_63" title="View footnote.">63</a>]</span> to run Tomcat as a deamon. If you use Ubuntu, you may want to follow the tutorial.<span class="footnote">[<a id="_footnoteref_64" class="footnote" href="#_footnote_64" title="View footnote.">64</a>]</span> for downloading and installing Tomcat provided by Lars Vogel.</p> 
+       <p>For Linux systems download the &#x201c;tar.gz&#x201d; package from the <a href="http://tomcat.apache.org/download-70.cgi">Tomcat 7 download site</a>. Then, follow the description of the Unix setup.<sup class="footnote">[<a id="_footnoteref_63" class="footnote" href="#_footnote_63" title="View footnote.">63</a>]</sup> to run Tomcat as a deamon. If you use Ubuntu, you may want to follow the tutorial.<sup class="footnote">[<a id="_footnoteref_64" class="footnote" href="#_footnote_64" title="View footnote.">64</a>]</sup> for downloading and installing Tomcat provided by Lars Vogel.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -3691,7 +3867,7 @@ sun.java.command=... vm C:\java\jre7\bin\javaw.exe -vmargs ...</pre>
      <div class="sect2"> 
       <h3 id="apx-tomcat_manager_app"><a class="anchor" href="#apx-tomcat_manager_app"></a>C.3. The Tomcat Manager Application</h3> 
       <div class="paragraph"> 
-       <p>Tomcat comes with the pre installed &#x201c;Manager App&#x201d;. This application is useful to manage web applications and perform tasks such as deploying a web application from a WAR file, or starting and stopping installed web applications. A comprehensive documentation for the &#x201c;Manager App&#x201d; can be found under the Tomcat homepage.<span class="footnote">[<a id="_footnoteref_65" class="footnote" href="#_footnote_65" title="View footnote.">65</a>]</span>. Here we only show how to start this application from the hompage of a running Tomcat installation.</p> 
+       <p>Tomcat comes with the pre installed &#x201c;Manager App&#x201d;. This application is useful to manage web applications and perform tasks such as deploying a web application from a WAR file, or starting and stopping installed web applications. A comprehensive documentation for the &#x201c;Manager App&#x201d; can be found under the Tomcat homepage.<sup class="footnote">[<a id="_footnoteref_65" class="footnote" href="#_footnote_65" title="View footnote.">65</a>]</sup>. Here we only show how to start this application from the hompage of a running Tomcat installation.</p> 
       </div> 
       <div class="paragraph"> 
        <p>To access this application you can switch to the &#x201c;Manager App&#x201d; with a click on the corresponding button on the right hand side. The button can be found on the right hand side of <a href="#img-tomcat_install">Figure 59</a>. Before you are allowed to start this application, you need to provide username and password credentials of a user associated with Tomcats&#x2019;s <span class="java">manager-gui</span> role.</p> 
@@ -3782,10 +3958,10 @@ sun.java.command=... vm C:\java\jre7\bin\javaw.exe -vmargs ...</pre>
         <p>To progam Scout applications you need to have a solid understanding of the Java language. Scout will only work for you if you have achieved a certain proficiency level in Java.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Luckily, free online tutorials to learn Java are offered in many places. A good starting point is the official Java documentation site.<span class="footnote">[<a id="_footnoteref_66" class="footnote" href="#_footnote_66" title="View footnote.">66</a>]</span>. If you prefer to work with video tutorials we recommend &#x201c;Eclipse and Java for Total Beginners&#x201d;.<span class="footnote">[<a id="_footnoteref_67" class="footnote" href="#_footnote_67" title="View footnote.">67</a>]</span>, although the installation used is somewhat out of date. As for printed books, we suggest to start with either &#x201c;Head First Java&#x201d;\cite{batessierra05} or &#x201c;Thinking in Java&#x201d;\cite{eckel06}. Highly recommended but slightly more advanced is &#x201c;Effective Java&#x201d;\cite{bloch08}.</p> 
+        <p>Luckily, free online tutorials to learn Java are offered in many places. A good starting point is the official Java documentation site.<sup class="footnote">[<a id="_footnoteref_66" class="footnote" href="#_footnote_66" title="View footnote.">66</a>]</sup>. If you prefer to work with video tutorials we recommend &#x201c;Eclipse and Java for Total Beginners&#x201d;.<sup class="footnote">[<a id="_footnoteref_67" class="footnote" href="#_footnote_67" title="View footnote.">67</a>]</sup>, although the installation used is somewhat out of date. As for printed books, we suggest to start with either &#x201c;Head First Java&#x201d;\cite{batessierra05} or &#x201c;Thinking in Java&#x201d;\cite{eckel06}. Highly recommended but slightly more advanced is &#x201c;Effective Java&#x201d;\cite{bloch08}.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>To solve really tricky Java problems there is often no way around the Java specification.<span class="footnote">[<a id="_footnoteref_68" class="footnote" href="#_footnote_68" title="View footnote.">68</a>]</span> itself. Just make sure to pick the right Java version for your context.</p> 
+        <p>To solve really tricky Java problems there is often no way around the Java specification.<sup class="footnote">[<a id="_footnoteref_68" class="footnote" href="#_footnote_68" title="View footnote.">68</a>]</sup> itself. Just make sure to pick the right Java version for your context.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
@@ -3837,7 +4013,7 @@ sun.java.command=... vm C:\java\jre7\bin\javaw.exe -vmargs ...</pre>
       <div class="sect3"> 
        <h4 id="servlets"><a class="anchor" href="#servlets"></a>E.2.1. Servlets</h4> 
        <div class="paragraph"> 
-        <p>A very comprehensive and detailed step to step description has been written by Chua Hock-Chuan.<span class="footnote">[<a id="_footnoteref_69" class="footnote" href="#_footnote_69" title="View footnote.">69</a>]</span>.</p> 
+        <p>A very comprehensive and detailed step to step description has been written by Chua Hock-Chuan.<sup class="footnote">[<a id="_footnoteref_69" class="footnote" href="#_footnote_69" title="View footnote.">69</a>]</sup>.</p> 
        </div> 
        <div class="paragraph"> 
         <p>may be found online do servlet stuff with annotations (JEE6) not JEE5?</p> 
@@ -3986,6 +4162,16 @@ sun.java.command=... vm C:\java\jre7\bin\javaw.exe -vmargs ...</pre>
         <li> <p>servlet bridge</p> </li> 
         <li> <p>client exe files</p> </li> 
        </ul> 
+      </div> 
+      <div class="admonitionblock tip"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
+          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.x-docs.branch-5.2_nightly/docs/build/book_scout_frontend/src/docs/scout_frontend.adoc">edit this page</a> on GitHub. </td> 
+         </tr> 
+        </tbody>
+       </table> 
       </div> 
      </div> 
     </div> 
@@ -4267,7 +4453,7 @@ sun.java.command=... vm C:\java\jre7\bin\javaw.exe -vmargs ...</pre>
   <div id="footer"> 
    <div id="footer-text">
      Version 5.2.0-SNAPSHOT
-    <br /> Last updated 2016-01-21 13:35:04 CET 
+    <br /> Last updated 2016-03-02 02:26:06 CET 
    </div> 
   </div>  
  </body>

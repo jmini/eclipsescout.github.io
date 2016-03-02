@@ -4,14 +4,14 @@
   <meta charset="UTF-8" /> 
   <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
-  <meta name="generator" content="Asciidoctor 1.5.2" /> 
+  <meta name="generator" content="Asciidoctor 1.5.4" /> 
   <meta name="author" content="Matthias Zimmermann, Daniel Wiehl, Judith Gull, Matthias Villiger" /> 
   <title>Eclipse Scout: Architecture</title> 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400" /> 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700" /> 
   <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
-/* Remove the comments around the @import statement below when using this as a custom stylesheet */
-/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400";*/
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
 audio,canvas,video{display:inline-block}
 audio:not([controls]){display:none;height:0}
@@ -58,7 +58,6 @@ a:hover{cursor:pointer}
 img,object,embed{max-width:100%;height:auto}
 object,embed{height:100%}
 img{-ms-interpolation-mode:bicubic}
-#map_canvas img,#map_canvas embed,#map_canvas object,.map_canvas img,.map_canvas embed,.map_canvas object{max-width:none!important}
 .left{float:left!important}
 .right{float:right!important}
 .text-left{text-align:left!important}
@@ -66,10 +65,12 @@ img{-ms-interpolation-mode:bicubic}
 .text-center{text-align:center!important}
 .text-justify{text-align:justify!important}
 .hide{display:none}
-.antialiased,body{-webkit-font-smoothing:antialiased}
-img{display:inline-block;vertical-align:middle}
+body{-webkit-font-smoothing:antialiased}
+img,object,svg{display:inline-block;vertical-align:middle}
 textarea{height:auto;min-height:50px}
 select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
 p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
 .subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
 div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
@@ -112,12 +113,14 @@ blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
 h1{font-size:2.75em}
 h2{font-size:2.3125em}
 h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
-h4{font-size:1.4375em}}table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
 table thead,table tfoot{background:#f7f8f7;font-weight:bold}
 table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
 table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
 table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
 table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+body{tab-size:4}
 h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
 h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
 .clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
@@ -125,7 +128,7 @@ h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title str
 *:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
 pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
 .keyseq{color:rgba(51,51,51,.8)}
-kbd{display:inline-block;color:rgba(0,0,0,.8);font-size:.75em;line-height:1.4;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:-.15em .15em 0 .15em;padding:.2em .6em .2em .5em;vertical-align:middle;white-space:nowrap}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
 .keyseq kbd:first-child{margin-left:0}
 .keyseq kbd:last-child{margin-right:0}
 .menuseq,.menu{color:rgba(0,0,0,.8)}
@@ -156,29 +159,33 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toc ul.sectlevel0>li>a{font-style:italic}
 #toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
 #toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
 #toc a{text-decoration:none}
 #toc a:active{text-decoration:underline}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media only screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
 #toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
-#toc.toc2 #toctitle{margin-top:0;font-size:1.2em}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
 #toc.toc2 ul ul{margin-left:0;padding-left:1em}
 #toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
 body.toc2.toc-right{padding-left:0;padding-right:15em}
-body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
 #toc.toc2{width:20em}
 #toc.toc2 #toctitle{font-size:1.375em}
 #toc.toc2>ul{font-size:.95em}
 #toc.toc2 ul ul{padding-left:1.25em}
-body.toc2.toc-right{padding-left:0;padding-right:20em}}#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
 #content #toc>:first-child{margin-top:0}
 #content #toc>:last-child{margin-bottom:0}
 #footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
 #footer-text{color:rgba(255,255,255,.8);line-height:1.44}
 .sect1{padding-bottom:.625em}
-@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}.sect1+.sect1{border-top:1px solid #efefed}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
 #content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
 #content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
 #content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
@@ -207,7 +214,9 @@ table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inh
 .sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
 .literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
 .literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
-@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
 .listingblock pre.highlightjs{padding:0}
 .listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
 .listingblock pre.prettyprint{border-width:0}
@@ -217,7 +226,7 @@ table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inh
 .listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
 .listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
 table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
-table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
 table.pyhltable td.code{padding-left:.75em;padding-right:0}
 pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
 pre.pygments .lineno{display:inline-block;margin-right:.25em}
@@ -238,13 +247,12 @@ table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
 .verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
 .quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
 .quoteblock .attribution br,.verseblock .attribution br{display:none}
-.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.05em;color:rgba(0,0,0,.6)}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
 .quoteblock.abstract{margin:0 0 1.25em 0;display:block}
 .quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
 .quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
 table.tableblock{max-width:100%;border-collapse:separate}
 table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
-table.spread{width:100%}
 table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
 table.grid-all th.tableblock,table.grid-all td.tableblock{border-width:0 1px 1px 0}
 table.grid-all tfoot>tr>th.tableblock,table.grid-all tfoot>tr>td.tableblock{border-width:1px 1px 0 0}
@@ -290,8 +298,8 @@ ol.upperroman{list-style-type:upper-roman}
 ol.lowergreek{list-style-type:lower-greek}
 .hdlist>table,.colist>table{border:0;background:none}
 .hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
-td.hdlist1{padding-right:.75em;font-weight:bold}
-td.hdlist1,td.hdlist2{vertical-align:top}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
 .literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
 .colist>table tr>td:first-of-type{padding:0 .75em;line-height:1}
 .colist>table tr>td:last-of-type{padding:.25em 0}
@@ -304,13 +312,14 @@ td.hdlist1,td.hdlist2{vertical-align:top}
 .image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
 .image.left{margin-right:.625em}
 .image.right{margin-left:.625em}
-a.image{text-decoration:none}
-span.footnote,span.footnoteref{vertical-align:super;font-size:.875em}
-span.footnote a,span.footnoteref a{text-decoration:none}
-span.footnote a:active,span.footnoteref a:active{text-decoration:underline}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
-#footnotes .footnote{padding:0 .375em;line-height:1.3;font-size:.875em;margin-left:1.2em;text-indent:-1.2em;margin-bottom:.2em}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
 #footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
 #footnotes .footnote:last-of-type{margin-bottom:0}
 #content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
@@ -368,11 +377,10 @@ span.icon>.fa{cursor:default}
 pre .conum[data-value]{position:relative;top:-.125em}
 b.conum *{color:inherit!important}
 .conum:not([data-value]):empty{display:none}
-h1,h2{letter-spacing:-.01em}
-dt,th.tableblock,td.content{text-rendering:optimizeLegibility}
-p,td.content{letter-spacing:-.01em}
-p strong,td.content strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content{font-size:1.0625rem}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -383,9 +391,9 @@ a{color:inherit!important;text-decoration:underline!important}
 a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
 a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
 abbr[title]:after{content:" (" attr(title) ")"}
-pre,blockquote,tr,img{page-break-inside:avoid}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
 thead{display:table-header-group}
-img{max-width:100%!important}
+svg{max-width:100%}
 p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
 h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
 #toc,.sidebarblock,.exampleblock>.content{background:none!important}
@@ -409,15 +417,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style> 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" /> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" /> 
   <style>
 /* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
 /*pre.CodeRay {background-color:#f7f7f8;}*/
 .CodeRay .line-numbers{border-right:1px solid #d8d8d8;padding:0 0.5em 0 .25em}
 .CodeRay span.line-numbers{display:inline-block;margin-right:.5em;color:rgba(0,0,0,.3)}
-.CodeRay .line-numbers strong{font-weight: normal}
+.CodeRay .line-numbers strong{color:rgba(0,0,0,.4)}
 table.CodeRay{border-collapse:separate;border-spacing:0;margin-bottom:0;border:0;background:none}
-table.CodeRay td{vertical-align: top}
+table.CodeRay td{vertical-align: top;line-height:1.45}
 table.CodeRay td.line-numbers{text-align:right}
 table.CodeRay td.line-numbers>pre{padding:0;color:rgba(0,0,0,.3)}
 table.CodeRay td.code{padding:0 0 0 .5em}
@@ -452,7 +460,7 @@ table.CodeRay td.code>pre{padding:0}
 .CodeRay .hex{color:#058}
 .CodeRay .integer,.CodeRay .float{color:#099}
 .CodeRay .include{color:#555}
-.CodeRay .inline{color:#00}
+.CodeRay .inline{color:#000}
 .CodeRay .inline .inline{background:#ccc}
 .CodeRay .inline .inline .inline{background:#bbb}
 .CodeRay .inline .inline-delimiter{color:#d14}
@@ -502,7 +510,7 @@ table.CodeRay td.code>pre{padding:0}
 .CodeRay .head .head{color:#f4f}
 </style> 
  </head> 
- <body class="article toc2 toc-left"> 
+ <body class="book toc2 toc-left"> 
   <div id="header"> 
    <h1>Eclipse Scout: Architecture</h1> 
    <div class="details"> 
@@ -540,169 +548,169 @@ table.CodeRay td.code>pre{padding:0}
       </ul> </li> 
      <li><a href="#working-with-exceptions">Working with exceptions</a> 
       <ul class="sectlevel1"> 
-       <li><a href="#scout-runtime-exceptions">1. Scout Runtime Exceptions</a> 
+       <li><a href="#scout-runtime-exceptions">6. Scout Runtime Exceptions</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#platformexception">1.1. PlatformException</a></li> 
-         <li><a href="#processingexception">1.2. ProcessingException</a></li> 
-         <li><a href="#vetoexception">1.3. VetoException</a></li> 
-         <li><a href="#assertionexception">1.4. AssertionException</a></li> 
-         <li><a href="#threadinterruptedexception">1.5. ThreadInterruptedException</a></li> 
-         <li><a href="#futurecancelledexception">1.6. FutureCancelledException</a></li> 
-         <li><a href="#timedoutexception">1.7. TimedOutException</a></li> 
-         <li><a href="#transactionrequiredexception">1.8. TransactionRequiredException</a></li> 
+         <li><a href="#platformexception">6.1. PlatformException</a></li> 
+         <li><a href="#processingexception">6.2. ProcessingException</a></li> 
+         <li><a href="#vetoexception">6.3. VetoException</a></li> 
+         <li><a href="#assertionexception">6.4. AssertionException</a></li> 
+         <li><a href="#threadinterruptedexception">6.5. ThreadInterruptedException</a></li> 
+         <li><a href="#futurecancelledexception">6.6. FutureCancelledException</a></li> 
+         <li><a href="#timedoutexception">6.7. TimedOutException</a></li> 
+         <li><a href="#transactionrequiredexception">6.8. TransactionRequiredException</a></li> 
         </ul> </li> 
-       <li><a href="#exception-handling">2. Exception handling</a></li> 
-       <li><a href="#exception-translation">3. Exception translation</a> 
+       <li><a href="#exception-handling">7. Exception handling</a></li> 
+       <li><a href="#exception-translation">8. Exception translation</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#defaultexceptiontranslator">3.1. DefaultExceptionTranslator</a></li> 
-         <li><a href="#defaultruntimeexceptiontranslator">3.2. DefaultRuntimeExceptionTranslator</a></li> 
-         <li><a href="#platformexceptiontranslator">3.3. PlatformExceptionTranslator</a></li> 
-         <li><a href="#nullexceptiontranslator">3.4. NullExceptionTranslator</a></li> 
+         <li><a href="#defaultexceptiontranslator">8.1. DefaultExceptionTranslator</a></li> 
+         <li><a href="#defaultruntimeexceptiontranslator">8.2. DefaultRuntimeExceptionTranslator</a></li> 
+         <li><a href="#platformexceptiontranslator">8.3. PlatformExceptionTranslator</a></li> 
+         <li><a href="#nullexceptiontranslator">8.4. NullExceptionTranslator</a></li> 
         </ul> </li> 
-       <li><a href="#exception-logging">4. Exception Logging</a></li> 
+       <li><a href="#exception-logging">9. Exception Logging</a></li> 
       </ul> </li> 
      <li><a href="#jobmanager">JobManager</a> 
       <ul class="sectlevel1"> 
-       <li><a href="#functionality">1. Functionality</a></li> 
-       <li><a href="#job">2. Job</a></li> 
-       <li><a href="#scheduling-a-job">3. Scheduling a Job</a></li> 
-       <li><a href="#jobinput">4. JobInput</a> 
+       <li><a href="#functionality">10. Functionality</a></li> 
+       <li><a href="#job">11. Job</a></li> 
+       <li><a href="#scheduling-a-job">12. Scheduling a Job</a></li> 
+       <li><a href="#jobinput">13. JobInput</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#jobinput-withname">4.1. JobInput.withName</a></li> 
-         <li><a href="#jobinput-withruncontext">4.2. JobInput.withRunContext</a></li> 
-         <li><a href="#jobinput-withexecutiontrigger">4.3. JobInput.withExecutionTrigger</a></li> 
-         <li><a href="#jobinput-withexecutionsemaphore">4.4. JobInput.withExecutionSemaphore</a></li> 
-         <li><a href="#jobinput-withexecutionhint">4.5. JobInput.withExecutionHint</a></li> 
-         <li><a href="#jobinput-withexceptionhandling">4.6. JobInput.withExceptionHandling</a></li> 
-         <li><a href="#jobinput-withthreadname">4.7. JobInput.withThreadName</a></li> 
-         <li><a href="#jobinput-withexpirationtime">4.8. JobInput.withExpirationTime</a></li> 
+         <li><a href="#jobinput-withname">13.1. JobInput.withName</a></li> 
+         <li><a href="#jobinput-withruncontext">13.2. JobInput.withRunContext</a></li> 
+         <li><a href="#jobinput-withexecutiontrigger">13.3. JobInput.withExecutionTrigger</a></li> 
+         <li><a href="#jobinput-withexecutionsemaphore">13.4. JobInput.withExecutionSemaphore</a></li> 
+         <li><a href="#jobinput-withexecutionhint">13.5. JobInput.withExecutionHint</a></li> 
+         <li><a href="#jobinput-withexceptionhandling">13.6. JobInput.withExceptionHandling</a></li> 
+         <li><a href="#jobinput-withthreadname">13.7. JobInput.withThreadName</a></li> 
+         <li><a href="#jobinput-withexpirationtime">13.8. JobInput.withExpirationTime</a></li> 
         </ul> </li> 
-       <li><a href="#ifuture">5. IFuture</a></li> 
-       <li><a href="#job-states">6. Job states</a></li> 
-       <li><a href="#future-filter">7. Future filter</a></li> 
-       <li><a href="#event-filter">8. Event filter</a></li> 
-       <li><a href="#job-cancellation">9. Job cancellation</a></li> 
-       <li><a href="#subscribe-for-job-lifecycle-events">10. Subscribe for job lifecycle events</a></li> 
-       <li><a href="#awaiting-job-completion">11. Awaiting job completion</a> 
+       <li><a href="#ifuture">14. IFuture</a></li> 
+       <li><a href="#job-states">15. Job states</a></li> 
+       <li><a href="#future-filter">16. Future filter</a></li> 
+       <li><a href="#event-filter">17. Event filter</a></li> 
+       <li><a href="#job-cancellation">18. Job cancellation</a></li> 
+       <li><a href="#subscribe-for-job-lifecycle-events">19. Subscribe for job lifecycle events</a></li> 
+       <li><a href="#awaiting-job-completion">20. Awaiting job completion</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#difference-between-done-and-finished-state">11.1. Difference between 'done' and 'finished' state</a></li> 
-         <li><a href="#awaiting-a-single-future-s-done-state">11.2. Awaiting a single future&#x2019;s 'done' state</a></li> 
-         <li><a href="#awaiting-a-single-future-s-finished-state">11.3. Awaiting a single future&#x2019;s 'finished' state</a></li> 
-         <li><a href="#awaiting-multiple-future-s-done-state">11.4. Awaiting multiple future&#x2019;s 'done' state</a></li> 
-         <li><a href="#awaiting-multiple-future-s-finished-state">11.5. Awaiting multiple future&#x2019;s 'finished' state</a></li> 
+         <li><a href="#difference-between-done-and-finished-state">20.1. Difference between 'done' and 'finished' state</a></li> 
+         <li><a href="#awaiting-a-single-future-s-done-state">20.2. Awaiting a single future&#x2019;s 'done' state</a></li> 
+         <li><a href="#awaiting-a-single-future-s-finished-state">20.3. Awaiting a single future&#x2019;s 'finished' state</a></li> 
+         <li><a href="#awaiting-multiple-future-s-done-state">20.4. Awaiting multiple future&#x2019;s 'done' state</a></li> 
+         <li><a href="#awaiting-multiple-future-s-finished-state">20.5. Awaiting multiple future&#x2019;s 'finished' state</a></li> 
         </ul> </li> 
-       <li><a href="#uncaught-job-exceptions">12. Uncaught job exceptions</a></li> 
-       <li><a href="#blocking-condition">13. Blocking condition</a> 
+       <li><a href="#uncaught-job-exceptions">21. Uncaught job exceptions</a></li> 
+       <li><a href="#blocking-condition">22. Blocking condition</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#example-of-a-blocking-condition">13.1. Example of a blocking condition</a></li> 
+         <li><a href="#example-of-a-blocking-condition">22.1. Example of a blocking condition</a></li> 
         </ul> </li> 
-       <li><a href="#executionsemaphore">14. ExecutionSemaphore</a></li> 
-       <li><a href="#executiontrigger">15. ExecutionTrigger</a> 
+       <li><a href="#executionsemaphore">23. ExecutionSemaphore</a></li> 
+       <li><a href="#executiontrigger">24. ExecutionTrigger</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#misfiring">15.1. Misfiring</a></li> 
+         <li><a href="#misfiring">24.1. Misfiring</a></li> 
         </ul> </li> 
-       <li><a href="#stopping-the-platform">16. Stopping the platform</a></li> 
-       <li><a href="#modeljobs">17. ModelJobs</a></li> 
-       <li><a href="#configuration">18. Configuration</a></li> 
-       <li><a href="#extending-job-manager">19. Extending job manager</a></li> 
-       <li><a href="#scheduling-examples">20. Scheduling examples</a></li> 
+       <li><a href="#stopping-the-platform">25. Stopping the platform</a></li> 
+       <li><a href="#modeljobs">26. ModelJobs</a></li> 
+       <li><a href="#configuration">27. Configuration</a></li> 
+       <li><a href="#extending-job-manager">28. Extending job manager</a></li> 
+       <li><a href="#scheduling-examples">29. Scheduling examples</a></li> 
       </ul> </li> 
      <li><a href="#runcontext">RunContext</a> 
       <ul class="sectlevel1"> 
-       <li><a href="#factory-methods-to-create-a-runcontext">1. Factory methods to create a RunContext</a></li> 
-       <li><a href="#properties-of-a-runcontext">2. Properties of a RunContext</a></li> 
-       <li><a href="#properties-of-a-serverruncontext">3. Properties of a ServerRunContext</a></li> 
-       <li><a href="#properties-of-a-clientruncontext">4. Properties of a ClientRunContext</a></li> 
+       <li><a href="#factory-methods-to-create-a-runcontext">30. Factory methods to create a RunContext</a></li> 
+       <li><a href="#properties-of-a-runcontext">31. Properties of a RunContext</a></li> 
+       <li><a href="#properties-of-a-serverruncontext">32. Properties of a ServerRunContext</a></li> 
+       <li><a href="#properties-of-a-clientruncontext">33. Properties of a ClientRunContext</a></li> 
       </ul> </li> 
      <li><a href="#runmonitor">RunMonitor</a></li> 
      <li><a href="#secure-output">Secure Output</a> 
       <ul class="sectlevel1"> 
-       <li><a href="#encoding-by-default">1. Encoding by Default</a></li> 
-       <li><a href="#html-enabled">2. Html Enabled</a> 
+       <li><a href="#encoding-by-default">34. Encoding by Default</a></li> 
+       <li><a href="#html-enabled">35. Html Enabled</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#css-class-and-other-model-properties">2.1. CSS Class and Other Model Properties</a></li> 
-         <li><a href="#html-builder">2.2. HTML Builder</a></li> 
-         <li><a href="#styling-in-the-ui-layer">2.3. Styling in the UI-Layer</a></li> 
-         <li><a href="#manual-encoding">2.4. Manual Encoding</a></li> 
-         <li><a href="#using-a-white-list-filter">2.5. Using a White-List Filter</a></li> 
+         <li><a href="#css-class-and-other-model-properties">35.1. CSS Class and Other Model Properties</a></li> 
+         <li><a href="#html-builder">35.2. HTML Builder</a></li> 
+         <li><a href="#styling-in-the-ui-layer">35.3. Styling in the UI-Layer</a></li> 
+         <li><a href="#manual-encoding">35.4. Manual Encoding</a></li> 
+         <li><a href="#using-a-white-list-filter">35.5. Using a White-List Filter</a></li> 
         </ul> </li> 
       </ul> </li> 
      <li><a href="#client-notifications">Client Notifications</a> 
       <ul class="sectlevel1"> 
-       <li><a href="#examples-2">1. Examples</a></li> 
-       <li><a href="#data-flow">2. Data Flow</a></li> 
-       <li><a href="#push-technology">3. Push Technology</a></li> 
-       <li><a href="#components">4. Components</a> 
+       <li><a href="#examples-2">36. Examples</a></li> 
+       <li><a href="#data-flow">37. Data Flow</a></li> 
+       <li><a href="#push-technology">38. Push Technology</a></li> 
+       <li><a href="#components">39. Components</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#multiple-server-nodes">4.1. Multiple Server Nodes</a></li> 
+         <li><a href="#multiple-server-nodes">39.1. Multiple Server Nodes</a></li> 
         </ul> </li> 
-       <li><a href="#publishing">5. Publishing</a> 
+       <li><a href="#publishing">40. Publishing</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#clientnotificationaddress">5.1. ClientNotificationAddress</a></li> 
-         <li><a href="#transactional-vs-non-transactional">5.2. Transactional vs. Non-transactional</a></li> 
-         <li><a href="#distributing-to-all-cluster-nodes">5.3. Distributing to all Cluster Nodes</a></li> 
-         <li><a href="#coalescing-notifications">5.4. Coalescing Notifications</a></li> 
+         <li><a href="#clientnotificationaddress">40.1. ClientNotificationAddress</a></li> 
+         <li><a href="#transactional-vs-non-transactional">40.2. Transactional vs. Non-transactional</a></li> 
+         <li><a href="#distributing-to-all-cluster-nodes">40.3. Distributing to all Cluster Nodes</a></li> 
+         <li><a href="#coalescing-notifications">40.4. Coalescing Notifications</a></li> 
         </ul> </li> 
-       <li><a href="#handling">6. Handling</a> 
+       <li><a href="#handling">41. Handling</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#creating-a-client-notification-handler">6.1. Creating a Client Notification Handler</a></li> 
-         <li><a href="#handling-notifications-temporarily">6.2. Handling Notifications Temporarily</a></li> 
-         <li><a href="#asynchronous-dispatching">6.3. Asynchronous Dispatching</a></li> 
-         <li><a href="#updating-scout-model">6.4. Updating Scout Model</a></li> 
+         <li><a href="#creating-a-client-notification-handler">41.1. Creating a Client Notification Handler</a></li> 
+         <li><a href="#handling-notifications-temporarily">41.2. Handling Notifications Temporarily</a></li> 
+         <li><a href="#asynchronous-dispatching">41.3. Asynchronous Dispatching</a></li> 
+         <li><a href="#updating-scout-model">41.4. Updating Scout Model</a></li> 
         </ul> </li> 
       </ul> </li> 
      <li><a href="#webservices-with-jax-ws">Webservices with JAX-WS</a> 
       <ul class="sectlevel1"> 
-       <li><a href="#functionality-2">1. Functionality</a></li> 
-       <li><a href="#jax-ws-implementor-and-deployment">2. JAX-WS implementor and deployment</a> 
+       <li><a href="#functionality-2">42. Functionality</a></li> 
+       <li><a href="#jax-ws-implementor-and-deployment">43. JAX-WS implementor and deployment</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#jax-ws-version-and-implementor">2.1. JAX-WS version and implementor</a></li> 
-         <li><a href="#running-jax-ws-in-a-servlet-container">2.2. Running JAX-WS in a servlet container</a></li> 
-         <li><a href="#running-jax-ws-in-a-ee-container">2.3. Running JAX-WS in a EE container</a></li> 
-         <li><a href="#jaxws.implementor.configuration">2.4. Configure JAX-WS implementor</a></li> 
+         <li><a href="#jax-ws-version-and-implementor">43.1. JAX-WS version and implementor</a></li> 
+         <li><a href="#running-jax-ws-in-a-servlet-container">43.2. Running JAX-WS in a servlet container</a></li> 
+         <li><a href="#running-jax-ws-in-a-ee-container">43.3. Running JAX-WS in a EE container</a></li> 
+         <li><a href="#jaxws.implementor.configuration">43.4. Configure JAX-WS implementor</a></li> 
         </ul> </li> 
-       <li><a href="#jaxws.modularization">3. Modularization</a></li> 
-       <li><a href="#build-webservice-stubs-and-artifacts">4. Build webservice stubs and artifacts</a> 
+       <li><a href="#jaxws.modularization">44. Modularization</a></li> 
+       <li><a href="#build-webservice-stubs-and-artifacts">45. Build webservice stubs and artifacts</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#jaxws.stub.generation">4.1. Configure webservice stub generation via wsimport</a></li> 
-         <li><a href="#customize-wsdl-components-and-xsd-schema-elements-via-binding-files">4.2. Customize WSDL components and XSD schema elements via binding files</a></li> 
-         <li><a href="#annotation-processing-tool-apt">4.3. Annotation Processing Tool (APT)</a></li> 
-         <li><a href="#generate_artifacts_from_console">4.4. Build webservice stubs and APT artifacts from console</a></li> 
-         <li><a href="#generate_artifacts_from_eclipse">4.5. Build webservice stubs and APT artifacts from within Eclipse IDE</a></li> 
-         <li><a href="#exclude-derived-resources-from-version-control">4.6. Exclude derived resources from version control</a></li> 
-         <li><a href="#jaxwsannotationprocessor">4.7. JaxWsAnnotationProcessor</a></li> 
+         <li><a href="#jaxws.stub.generation">45.1. Configure webservice stub generation via wsimport</a></li> 
+         <li><a href="#customize-wsdl-components-and-xsd-schema-elements-via-binding-files">45.2. Customize WSDL components and XSD schema elements via binding files</a></li> 
+         <li><a href="#annotation-processing-tool-apt">45.3. Annotation Processing Tool (APT)</a></li> 
+         <li><a href="#generate_artifacts_from_console">45.4. Build webservice stubs and APT artifacts from console</a></li> 
+         <li><a href="#generate_artifacts_from_eclipse">45.5. Build webservice stubs and APT artifacts from within Eclipse IDE</a></li> 
+         <li><a href="#exclude-derived-resources-from-version-control">45.6. Exclude derived resources from version control</a></li> 
+         <li><a href="#jaxwsannotationprocessor">45.7. JaxWsAnnotationProcessor</a></li> 
         </ul> </li> 
-       <li><a href="#provide-a-webservice">5. Provide a webservice</a> 
+       <li><a href="#provide-a-webservice">46. Provide a webservice</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#WebServiceEntryPoint">5.1. The concept of an Entry Point</a></li> 
-         <li><a href="#generate-an-entry-point-as-an-endpoint-interface">5.2. Generate an Entry Point as an endpoint interface</a></li> 
-         <li><a href="#instrument-the-entry-point-generation">5.3. Instrument the Entry Point generation</a></li> 
-         <li><a href="#example.entrypoint.definition">5.4. Example of an Entry Point definition</a></li> 
-         <li><a href="#jaxws.provider.handlerChain">5.5. Configure JAX-WS Handlers</a></li> 
-         <li><a href="#jaxws.provider.statepropagation">5.6. Propagate state among Handlers and port type</a></li> 
-         <li><a href="#registration-of-webservice-endpoints">5.7. Registration of webservice endpoints</a></li> 
+         <li><a href="#WebServiceEntryPoint">46.1. The concept of an Entry Point</a></li> 
+         <li><a href="#generate-an-entry-point-as-an-endpoint-interface">46.2. Generate an Entry Point as an endpoint interface</a></li> 
+         <li><a href="#instrument-the-entry-point-generation">46.3. Instrument the Entry Point generation</a></li> 
+         <li><a href="#example.entrypoint.definition">46.4. Example of an Entry Point definition</a></li> 
+         <li><a href="#jaxws.provider.handlerChain">46.5. Configure JAX-WS Handlers</a></li> 
+         <li><a href="#jaxws.provider.statepropagation">46.6. Propagate state among Handlers and port type</a></li> 
+         <li><a href="#registration-of-webservice-endpoints">46.7. Registration of webservice endpoints</a></li> 
         </ul> </li> 
-       <li><a href="#consume-a-webservice">6. Consume a webservice</a> 
+       <li><a href="#consume-a-webservice">47. Consume a webservice</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#invoke-a-webservice">6.1. Invoke a webservice</a></li> 
-         <li><a href="#cancel-a-webservice-request">6.2. Cancel a webservice request</a></li> 
-         <li><a href="#get-information-about-the-last-web-request">6.3. Get information about the last web request</a></li> 
-         <li><a href="#propagate-state-to-handlers">6.4. Propagate state to Handlers</a></li> 
-         <li><a href="#install-handlers-and-provide-credentials-for-authentication">6.5. Install handlers and provide credentials for authentication</a></li> 
-         <li><a href="#jaxws.consumer.configuration">6.6. Default configuration of WS-Clients</a></li> 
+         <li><a href="#invoke-a-webservice">47.1. Invoke a webservice</a></li> 
+         <li><a href="#cancel-a-webservice-request">47.2. Cancel a webservice request</a></li> 
+         <li><a href="#get-information-about-the-last-web-request">47.3. Get information about the last web request</a></li> 
+         <li><a href="#propagate-state-to-handlers">47.4. Propagate state to Handlers</a></li> 
+         <li><a href="#install-handlers-and-provide-credentials-for-authentication">47.5. Install handlers and provide credentials for authentication</a></li> 
+         <li><a href="#jaxws.consumer.configuration">47.6. Default configuration of WS-Clients</a></li> 
         </ul> </li> 
-       <li><a href="#jaxws.xmladapters">7. XML adapters to work with java.util.Date and java.util.Calendar</a></li> 
-       <li><a href="#jax-ws-appendix">8. JAX-WS Appendix</a> 
+       <li><a href="#jaxws.xmladapters">48. XML adapters to work with java.util.Date and java.util.Calendar</a></li> 
+       <li><a href="#jax-ws-appendix">49. JAX-WS Appendix</a> 
         <ul class="sectlevel2"> 
-         <li><a href="#PingWebService.wsdl">8.1. PingWebService.wsdl</a></li> 
-         <li><a href="#PingWebServicePortType.java">8.2. PingWebServicePortType.java</a></li> 
-         <li><a href="#PingWebServicePortTypeEntryPoint.java">8.3. PingWebServicePortTypeEntryPoint.java</a></li> 
-         <li><a href="#PingWebServicePortTypeBean.java">8.4. PingWebServicePortTypeBean.java</a></li> 
-         <li><a href="#settings_org.eclipse.jdt.core.prefs">8.5. .settings/org.eclipse.jdt.core.prefs file to enable APT in Eclipse IDE</a></li> 
-         <li><a href="#settings_org.eclipse.jdt.apt.core.prefs">8.6. .settings/org.eclipse.jdt.apt.core.prefs file to enable APT in Eclipse IDE</a></li> 
-         <li><a href="#factorypath">8.7. .factorypath file to enable APT in Eclipse IDE</a></li> 
-         <li><a href="#IAuthenticationMethod">8.8. Authentication Method</a></li> 
-         <li><a href="#ICredentialVerifier">8.9. Credential Verifier</a></li> 
+         <li><a href="#PingWebService.wsdl">49.1. PingWebService.wsdl</a></li> 
+         <li><a href="#PingWebServicePortType.java">49.2. PingWebServicePortType.java</a></li> 
+         <li><a href="#PingWebServicePortTypeEntryPoint.java">49.3. PingWebServicePortTypeEntryPoint.java</a></li> 
+         <li><a href="#PingWebServicePortTypeBean.java">49.4. PingWebServicePortTypeBean.java</a></li> 
+         <li><a href="#settings_org.eclipse.jdt.core.prefs">49.5. .settings/org.eclipse.jdt.core.prefs file to enable APT in Eclipse IDE</a></li> 
+         <li><a href="#settings_org.eclipse.jdt.apt.core.prefs">49.6. .settings/org.eclipse.jdt.apt.core.prefs file to enable APT in Eclipse IDE</a></li> 
+         <li><a href="#factorypath">49.7. .factorypath file to enable APT in Eclipse IDE</a></li> 
+         <li><a href="#IAuthenticationMethod">49.8. Authentication Method</a></li> 
+         <li><a href="#ICredentialVerifier">49.9. Credential Verifier</a></li> 
         </ul> </li> 
        <li><a href="#apx-cclicence">Appendix A: Licence and Copyright</a> 
         <ul class="sectlevel2"> 
@@ -726,16 +734,20 @@ table.CodeRay td.code>pre{padding:0}
     </div> 
    </div> 
    <h1 id="scout-platform" class="sect0"><a class="anchor" href="#scout-platform"></a>Scout Platform</h1> 
-   <div class="paragraph"> 
-    <p>Scout contains a platform which provides basic functionality required by many software applications. The following list gives some examples for which tasks the platform is responsible for:</p> 
-   </div> 
-   <div class="ulist"> 
-    <ul> 
-     <li> <p>Application Lifecycle Management</p> </li> 
-     <li> <p>Object Instance Management (Bean Management)</p> </li> 
-     <li> <p>Configuration Management</p> </li> 
-     <li> <p>Application Inventory</p> </li> 
-    </ul> 
+   <div class="openblock partintro"> 
+    <div class="content"> 
+     <div class="paragraph"> 
+      <p>Scout contains a platform which provides basic functionality required by many software applications. The following list gives some examples for which tasks the platform is responsible for:</p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Application Lifecycle Management</p> </li> 
+       <li> <p>Object Instance Management (Bean Management)</p> </li> 
+       <li> <p>Configuration Management</p> </li> 
+       <li> <p>Application Inventory</p> </li> 
+      </ul> 
+     </div> 
+    </div> 
    </div> 
    <div class="sect1"> 
     <h2 id="application-lifecycle"><a class="anchor" href="#application-lifecycle"></a>1. Application Lifecycle</h2> 
@@ -838,7 +850,7 @@ table.CodeRay td.code>pre{padding:0}
        </table> 
       </div> 
       <div class="paragraph"> 
-       <p>Scout uses Jandex <span class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</span> to build the class inventory. The meta data to find classes can be pre-computed during build time into an index file describing the contents of the jar file. See the jandex project for details.</p> 
+       <p>Scout uses Jandex <sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup> to build the class inventory. The meta data to find classes can be pre-computed during build time into an index file describing the contents of the jar file. See the jandex project for details.</p> 
       </div> 
      </div> 
     </div> 
@@ -1184,7 +1196,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
     <h2 id="configuration-management"><a class="anchor" href="#configuration-management"></a>4. Configuration Management</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p>Applications usually require some kind of configuration mechanism to use the same binaries in a different environment or situation. Scout applications provide a configuration mechanism using properties files <span class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</span>.</p> 
+      <p>Applications usually require some kind of configuration mechanism to use the same binaries in a different environment or situation. Scout applications provide a configuration mechanism using properties files <sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup>.</p> 
      </div> 
      <div class="paragraph"> 
       <p>For each property a class cares about default values and value validation. These classes share the <code>org.eclipse.scout.rt.platform.config.IConfigProperty</code> interface and are normal application scoped beans providing access to a specific configuration value as shown in listing <a href="#lst-ConfigProperties">Listing 8</a>.</p> 
@@ -1241,14 +1253,17 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
     </div> 
    </div> 
    <h1 id="working-with-exceptions" class="sect0"><a class="anchor" href="#working-with-exceptions"></a>Working with exceptions</h1> 
-   <div class="paragraph"> 
-    <p>Exceptions can be logged via SLF4J Logger, or given to exception handler for centralized, consistent exception handling, or translated into other exceptions. Scout provides some few exceptions, which are used by the framework. They all are runtime exceptions, and typically inherit from <a href="#platformexception">PlatformException</a>.</p> 
+   <div class="openblock partintro"> 
+    <div class="content">
+      Exceptions can be logged via SLF4J Logger, or given to exception handler for centralized, consistent exception handling, or translated into other exceptions. Scout provides some few exceptions, which are used by the framework. They all are runtime exceptions, and typically inherit from 
+     <a href="#platformexception">PlatformException</a>. 
+    </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="scout-runtime-exceptions"><a class="anchor" href="#scout-runtime-exceptions"></a>1. Scout Runtime Exceptions</h2> 
+    <h2 id="scout-runtime-exceptions"><a class="anchor" href="#scout-runtime-exceptions"></a>6. Scout Runtime Exceptions</h2> 
     <div class="sectionbody"> 
      <div class="sect2"> 
-      <h3 id="platformexception"><a class="anchor" href="#platformexception"></a>1.1. PlatformException</h3> 
+      <h3 id="platformexception"><a class="anchor" href="#platformexception"></a>6.1. PlatformException</h3> 
       <div class="paragraph"> 
        <p>Base runtime exception of the Scout platform, which allows for message formatting anchors and context information to be associated.</p> 
       </div> 
@@ -1285,43 +1300,43 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="processingexception"><a class="anchor" href="#processingexception"></a>1.2. ProcessingException</h3> 
+      <h3 id="processingexception"><a class="anchor" href="#processingexception"></a>6.2. ProcessingException</h3> 
       <div class="paragraph"> 
        <p>Represents a <a href="#platformexception">PlatformException</a> and is thrown in case of a processing failure, and which can be associated with an exception error code and severity.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="vetoexception"><a class="anchor" href="#vetoexception"></a>1.3. VetoException</h3> 
+      <h3 id="vetoexception"><a class="anchor" href="#vetoexception"></a>6.3. VetoException</h3> 
       <div class="paragraph"> 
        <p>Represents a <a href="#processingexception">ProcessingException</a> with VETO character. If thrown server-side, exceptions of this type are transported to the client and typically visualized in the form of a message box.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="assertionexception"><a class="anchor" href="#assertionexception"></a>1.4. AssertionException</h3> 
+      <h3 id="assertionexception"><a class="anchor" href="#assertionexception"></a>6.4. AssertionException</h3> 
       <div class="paragraph"> 
        <p>Represents a <a href="#platformexception">PlatformException</a> and indicates an assertion error about the application&#x2019;s assumptions about expected values.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="threadinterruptedexception"><a class="anchor" href="#threadinterruptedexception"></a>1.5. ThreadInterruptedException</h3> 
+      <h3 id="threadinterruptedexception"><a class="anchor" href="#threadinterruptedexception"></a>6.5. ThreadInterruptedException</h3> 
       <div class="paragraph"> 
        <p>Represents a <a href="#platformexception">PlatformException</a> and indicates that a thread was interrupted while waiting for some condition to become true, e.g. while waiting for a job to complete. Unlike <code>java.lang.InterruptedException</code>, the thread&#x2019;s interrupted status is not cleared when catching this exception.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="futurecancelledexception"><a class="anchor" href="#futurecancelledexception"></a>1.6. FutureCancelledException</h3> 
+      <h3 id="futurecancelledexception"><a class="anchor" href="#futurecancelledexception"></a>6.6. FutureCancelledException</h3> 
       <div class="paragraph"> 
        <p>Represents a <a href="#platformexception">PlatformException</a> and indicates that the result of a job cannot be retrieved, or the IFuture&#x2019;s completion not be awaited because the job was cancelled.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="timedoutexception"><a class="anchor" href="#timedoutexception"></a>1.7. TimedOutException</h3> 
+      <h3 id="timedoutexception"><a class="anchor" href="#timedoutexception"></a>6.7. TimedOutException</h3> 
       <div class="paragraph"> 
        <p>Represents a <a href="#platformexception">PlatformException</a> and indicates that the maximal wait time elapsed while waiting for some condition to become true, e.g. while waiting a job to complete.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="transactionrequiredexception"><a class="anchor" href="#transactionrequiredexception"></a>1.8. TransactionRequiredException</h3> 
+      <h3 id="transactionrequiredexception"><a class="anchor" href="#transactionrequiredexception"></a>6.8. TransactionRequiredException</h3> 
       <div class="paragraph"> 
        <p>Represents a <a href="#platformexception">PlatformException</a> and is thrown if a ServerRunContext requires a transaction to be available.</p> 
       </div> 
@@ -1329,7 +1344,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="exception-handling"><a class="anchor" href="#exception-handling"></a>2. Exception handling</h2> 
+    <h2 id="exception-handling"><a class="anchor" href="#exception-handling"></a>7. Exception handling</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>An exception handler is the central point for exception handling. It provides a single method 'handle' which accepts a <code>Throwable</code>, and which never throws an exception. It is implemented as a bean, meaning managed by the bean manager to allow easy replacement, e.g. to use a different handler when running client or server side. By default, a <a href="#processingexception">ProcessingException</a> is logged according to its severity, a <a href="#vetoexception">VetoException</a>, <a href="#threadinterruptedexception">ThreadInterruptedException</a> or <a href="#futurecancelledexception">FutureCancelledException</a> logged in <em>DEBUG</em> level, and any other exception logged as an <em>ERROR</em>. If running client side, exceptions are additionally visualized and showed to the user.</p> 
@@ -1337,7 +1352,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="exception-translation"><a class="anchor" href="#exception-translation"></a>3. Exception translation</h2> 
+    <h2 id="exception-translation"><a class="anchor" href="#exception-translation"></a>8. Exception translation</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Exception translators are used to translate an exception into another exception.</p> 
@@ -1346,7 +1361,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
       <p>Also, they unwrap the cause of wrapper exceptions, like <code>UndeclaredThrowableException</code>, or <code>InvocationTargetException</code>, or <code>ExecutionException</code>. If the exception is of the type <code>Error</code>, it is normally not translated, but re-thrown instead. That is because an <code>Error</code> indicates a serious problem due to an abnormal condition.</p> 
      </div> 
      <div class="sect2"> 
-      <h3 id="defaultexceptiontranslator"><a class="anchor" href="#defaultexceptiontranslator"></a>3.1. DefaultExceptionTranslator</h3> 
+      <h3 id="defaultexceptiontranslator"><a class="anchor" href="#defaultexceptiontranslator"></a>8.1. DefaultExceptionTranslator</h3> 
       <div class="paragraph"> 
        <p>Use this translator to work with checked exceptions and runtime exceptions, but not with <code>Throwable</code>.</p> 
       </div> 
@@ -1355,7 +1370,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="defaultruntimeexceptiontranslator"><a class="anchor" href="#defaultruntimeexceptiontranslator"></a>3.2. DefaultRuntimeExceptionTranslator</h3> 
+      <h3 id="defaultruntimeexceptiontranslator"><a class="anchor" href="#defaultruntimeexceptiontranslator"></a>8.2. DefaultRuntimeExceptionTranslator</h3> 
       <div class="paragraph"> 
        <p>Use this translator to work with runtime exceptions. When working with <a href="#runcontext">RunContext</a> or <a href="#ifuture">IFuture</a>, some methods optionally accept a translator. If not specified, this translator is used by default.</p> 
       </div> 
@@ -1364,7 +1379,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="platformexceptiontranslator"><a class="anchor" href="#platformexceptiontranslator"></a>3.3. PlatformExceptionTranslator</h3> 
+      <h3 id="platformexceptiontranslator"><a class="anchor" href="#platformexceptiontranslator"></a>8.3. PlatformExceptionTranslator</h3> 
       <div class="paragraph"> 
        <p>Use this translator to work with <a href="#platformexception">PlatformException</a>s.</p> 
       </div> 
@@ -1392,7 +1407,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="nullexceptiontranslator"><a class="anchor" href="#nullexceptiontranslator"></a>3.4. NullExceptionTranslator</h3> 
+      <h3 id="nullexceptiontranslator"><a class="anchor" href="#nullexceptiontranslator"></a>8.4. NullExceptionTranslator</h3> 
       <div class="paragraph"> 
        <p>Use this translator to work with <code>Throwable</code> as given.</p> 
       </div> 
@@ -1406,7 +1421,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="exception-logging"><a class="anchor" href="#exception-logging"></a>4. Exception Logging</h2> 
+    <h2 id="exception-logging"><a class="anchor" href="#exception-logging"></a>9. Exception Logging</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Scout framework logs via SLF4J (Simple Logging Facade for Java). It serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time.</p> 
@@ -1439,11 +1454,13 @@ logger.error(<span class="string"><span class="delimiter">&quot;</span><span cla
     </div> 
    </div> 
    <h1 id="jobmanager" class="sect0"><a class="anchor" href="#jobmanager"></a>JobManager</h1> 
-   <div class="paragraph"> 
-    <p>Scout provides a job manager based on Java Executors framework to run tasks in parallel, and on Quartz Trigger API to support for schedule plans and to compute firing times. A task (aka job) can be scheduled to commence execution either immediately upon being scheduled, or delayed some time in the future. A job can be single executing, or recurring based on some schedule plan. The job manager itself is implemented as an application scoped bean, meaning that it is a singleton which exists once in the web application.</p> 
+   <div class="openblock partintro"> 
+    <div class="content">
+      Scout provides a job manager based on Java Executors framework to run tasks in parallel, and on Quartz Trigger API to support for schedule plans and to compute firing times. A task (aka job) can be scheduled to commence execution either immediately upon being scheduled, or delayed some time in the future. A job can be single executing, or recurring based on some schedule plan. The job manager itself is implemented as an application scoped bean, meaning that it is a singleton which exists once in the web application. 
+    </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="functionality"><a class="anchor" href="#functionality"></a>1. Functionality</h2> 
+    <h2 id="functionality"><a class="anchor" href="#functionality"></a>10. Functionality</h2> 
     <div class="sectionbody"> 
      <div class="ulist"> 
       <ul> 
@@ -1462,7 +1479,7 @@ logger.error(<span class="string"><span class="delimiter">&quot;</span><span cla
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="job"><a class="anchor" href="#job"></a>2. Job</h2> 
+    <h2 id="job"><a class="anchor" href="#job"></a>11. Job</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>A job is defined as some work to be executed asynchronously and is associated with a <code>JobInput</code> to describe how to run that work. The work is given to the job manager in the form of a <code>Runnable</code> or <code>Callable</code>. The only difference is, that a <code>Runnable</code> represents a 'fire-and-forget' action, meaning that the submitter of the job does not expect the job to return a result. On the other hand, a <code>Callable</code> returns the computation&#x2019;s result, which the submitter can await for. Of course, a runnable&#x2019;s completion can also be waited for.</p> 
@@ -1516,7 +1533,7 @@ logger.error(<span class="string"><span class="delimiter">&quot;</span><span cla
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="scheduling-a-job"><a class="anchor" href="#scheduling-a-job"></a>3. Scheduling a Job</h2> 
+    <h2 id="scheduling-a-job"><a class="anchor" href="#scheduling-a-job"></a>12. Scheduling a Job</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>The job manager provides two scheduling methods, which only differ in the work they accept for execution (callable or runnable).</p> 
@@ -1602,7 +1619,7 @@ jobManager.schedule(<span class="keyword">new</span> IRunnable() { <i class="con
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="jobinput"><a class="anchor" href="#jobinput"></a>4. JobInput</h2> 
+    <h2 id="jobinput"><a class="anchor" href="#jobinput"></a>13. JobInput</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>The job input tells the job manager how to run the job. It further names the job to ease debugging, declares in which context to run the job, and how to deal with unhandled exceptions. The job input itself is a bean, useful if adding some additional features to the job manager. The API of <code>JobInput</code> supports for method chaining for reduced and more solid code.</p> 
@@ -1666,7 +1683,7 @@ jobManager.schedule(<span class="keyword">new</span> IRunnable() { <i class="con
       <p>The following paragraphs describe the functionality of <code>JobInput</code> in more detail.</p> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jobinput-withname"><a class="anchor" href="#jobinput-withname"></a>4.1. JobInput.withName</h3> 
+      <h3 id="jobinput-withname"><a class="anchor" href="#jobinput-withname"></a>13.1. JobInput.withName</h3> 
       <div class="paragraph"> 
        <p>To optionally specify the name of the job, which is used to name the worker thread (only in development environment) and for logging purpose. Optionally, <em>formatting anchors</em> in the form of {} pairs can be used in the name, which will be replaced by the respective argument.</p> 
       </div> 
@@ -1678,13 +1695,13 @@ jobManager.schedule(<span class="keyword">new</span> IRunnable() { <i class="con
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jobinput-withruncontext"><a class="anchor" href="#jobinput-withruncontext"></a>4.2. JobInput.withRunContext</h3> 
+      <h3 id="jobinput-withruncontext"><a class="anchor" href="#jobinput-withruncontext"></a>13.2. JobInput.withRunContext</h3> 
       <div class="paragraph"> 
        <p>To optionally specify the <code>RunContext</code> to be installed during job execution. The <code>RunMonitor</code> associated with the <code>RunContext</code> will be used as the job&#x2019;s monitor, meaning that cancellation requests to the job future or the context&#x2019;s monitor are equivalent. If no context is given, the job manager ensures a monitor to be installed, so that executing code can always query its cancellation status via <code>RunMonitor.CURRENT.get().isCancelled()</code>.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jobinput-withexecutiontrigger"><a class="anchor" href="#jobinput-withexecutiontrigger"></a>4.3. JobInput.withExecutionTrigger</h3> 
+      <h3 id="jobinput-withexecutiontrigger"><a class="anchor" href="#jobinput-withexecutiontrigger"></a>13.3. JobInput.withExecutionTrigger</h3> 
       <div class="paragraph"> 
        <p>To optionally set the trigger to define the schedule upon which the job will commence execution. If not set, the job will commence execution immediately after being scheduled, and will execute exactly once.</p> 
       </div> 
@@ -1724,7 +1741,7 @@ Jobs.newInput()
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jobinput-withexecutionsemaphore"><a class="anchor" href="#jobinput-withexecutionsemaphore"></a>4.4. JobInput.withExecutionSemaphore</h3> 
+      <h3 id="jobinput-withexecutionsemaphore"><a class="anchor" href="#jobinput-withexecutionsemaphore"></a>13.4. JobInput.withExecutionSemaphore</h3> 
       <div class="paragraph"> 
        <p>To optionally control the maximal concurrently level among jobs assigned to the same semaphore.</p> 
       </div> 
@@ -1777,13 +1794,13 @@ Jobs.newInput()
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jobinput-withexecutionhint"><a class="anchor" href="#jobinput-withexecutionhint"></a>4.5. JobInput.withExecutionHint</h3> 
+      <h3 id="jobinput-withexecutionhint"><a class="anchor" href="#jobinput-withexecutionhint"></a>13.5. JobInput.withExecutionHint</h3> 
       <div class="paragraph"> 
        <p>To associate the job with an execution hint. An execution hint is simply a marker to mark a job, and can be evaluated by filters to select jobs, e.g. to listen to job lifecycle events of some particular jobs, or to wait for some particular jobs to complete, or to cancel some particular jobs. A job may have multiple hints associated. Further, hints can be registered directly on the future via <code>IFuture.addExecutionHint(hint)</code>, or removed via <code>IFuture.removeExecutionHint(hint)</code>.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jobinput-withexceptionhandling"><a class="anchor" href="#jobinput-withexceptionhandling"></a>4.6. JobInput.withExceptionHandling</h3> 
+      <h3 id="jobinput-withexceptionhandling"><a class="anchor" href="#jobinput-withexceptionhandling"></a>13.6. JobInput.withExceptionHandling</h3> 
       <div class="paragraph"> 
        <p>To control how to deal with uncaught exceptions. By default, an uncaught exception is handled by <code>ExceptionHandler</code> bean and then propagated to the submitter, unless the submitter is not waiting for the job to complete via <code>IFuture.awaitDoneAndGet()</code>.</p> 
       </div> 
@@ -1795,13 +1812,13 @@ Jobs.newInput()
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jobinput-withthreadname"><a class="anchor" href="#jobinput-withthreadname"></a>4.7. JobInput.withThreadName</h3> 
+      <h3 id="jobinput-withthreadname"><a class="anchor" href="#jobinput-withthreadname"></a>13.7. JobInput.withThreadName</h3> 
       <div class="paragraph"> 
        <p>To set the thread name of the worker thread that will execute the job.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jobinput-withexpirationtime"><a class="anchor" href="#jobinput-withexpirationtime"></a>4.8. JobInput.withExpirationTime</h3> 
+      <h3 id="jobinput-withexpirationtime"><a class="anchor" href="#jobinput-withexpirationtime"></a>13.8. JobInput.withExpirationTime</h3> 
       <div class="paragraph"> 
        <p>To set the maximal expiration time upon which the job must commence execution. If elapsed, the job is cancelled and does not commence execution. By default, a job never expires.</p> 
       </div> 
@@ -1815,7 +1832,7 @@ Jobs.newInput()
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="ifuture"><a class="anchor" href="#ifuture"></a>5. IFuture</h2> 
+    <h2 id="ifuture"><a class="anchor" href="#ifuture"></a>14. IFuture</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>A future represents the result of an asynchronous computation, and is returned by the job manager upon scheduling a job. The future provides functionality to await for the job to complete, or to get its computation result or exception, or to cancel its execution, and more.</p> 
@@ -1826,7 +1843,7 @@ Jobs.newInput()
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="job-states"><a class="anchor" href="#job-states"></a>6. Job states</h2> 
+    <h2 id="job-states"><a class="anchor" href="#job-states"></a>15. Job states</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Upon scheduling a job, the job transitions different states. The current state of a job can be queried from its associated <a href="#ifuture">IFuture</a>.</p> 
@@ -1886,7 +1903,7 @@ Jobs.newInput()
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="future-filter"><a class="anchor" href="#future-filter"></a>7. Future filter</h2> 
+    <h2 id="future-filter"><a class="anchor" href="#future-filter"></a>16. Future filter</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>A future filter is a filter which can be passed to various methods of the job manager to select some futures. The filter must implement <code>IFilter</code> interface, and has a single method to accept futures of interest.</p> 
@@ -1968,7 +1985,7 @@ Jobs.newInput()
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="event-filter"><a class="anchor" href="#event-filter"></a>8. Event filter</h2> 
+    <h2 id="event-filter"><a class="anchor" href="#event-filter"></a>17. Event filter</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>A job event filter is a filter which can be given to job manager to subscribe for job lifecycle events. The filter must implement <code>IFilter</code> interface, and has a single method to accept events of interest.</p> 
@@ -2040,7 +2057,7 @@ Jobs.newInput()
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="job-cancellation"><a class="anchor" href="#job-cancellation"></a>9. Job cancellation</h2> 
+    <h2 id="job-cancellation"><a class="anchor" href="#job-cancellation"></a>18. Job cancellation</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>A job can be cancelled in two ways, either directly via its <a href="#ifuture">IFuture</a>, or via job manager. Both expect you to provide a boolean flag indicating whether to interrupt the executing working thread. Upon cancellation, the job immediately enters 'done' state. Learn more about <a href="#job-states">Job states</a>. If cancelling via job manager, a future filter must be given to select the jobs to be cancelled. Learn more about <a href="#future-filter">Future filter</a></p> 
@@ -2100,7 +2117,7 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="subscribe-for-job-lifecycle-events"><a class="anchor" href="#subscribe-for-job-lifecycle-events"></a>10. Subscribe for job lifecycle events</h2> 
+    <h2 id="subscribe-for-job-lifecycle-events"><a class="anchor" href="#subscribe-for-job-lifecycle-events"></a>19. Subscribe for job lifecycle events</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Sometimes it is useful to register for some job lifecycle events. The following event types can be subscribed for:</p> 
@@ -2151,7 +2168,7 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
 
       <span class="annotation">@Override</span>
       <span class="directive">public</span> <span class="type">void</span> changed(JobEvent event) {
-        IFuture&lt;?&gt; future = event.getData().getFuture(); <i class="conum" data-value="4"></i><b>(4)</b>
+        IFuture&lt;?&gt; future = event.getData().getFuture(); <i class="conum" data-value="2"></i><b>(2)</b>
         <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">&quot;</span><span class="content">Job commences execution: </span><span class="delimiter">&quot;</span></span> + future.getJobInput().getName());
       }
     });</code></pre> 
@@ -2194,19 +2211,19 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="awaiting-job-completion"><a class="anchor" href="#awaiting-job-completion"></a>11. Awaiting job completion</h2> 
+    <h2 id="awaiting-job-completion"><a class="anchor" href="#awaiting-job-completion"></a>20. Awaiting job completion</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>A job&#x2019;s completion can be either awaited on its <a href="#ifuture">IFuture</a>, or via job manager - the first optionally allows to consume the job&#x2019;s computation result, whereas the second allows multiple futures to be awaited for.</p> 
      </div> 
      <div class="sect2"> 
-      <h3 id="difference-between-done-and-finished-state"><a class="anchor" href="#difference-between-done-and-finished-state"></a>11.1. Difference between 'done' and 'finished' state</h3> 
+      <h3 id="difference-between-done-and-finished-state"><a class="anchor" href="#difference-between-done-and-finished-state"></a>20.1. Difference between 'done' and 'finished' state</h3> 
       <div class="paragraph"> 
        <p>When awaiting futures, the definition of 'done' and 'finished' state should be understood - 'done' means that the future completed either normally, or was cancelled. But, if cancelled while running, the job may still continue its execution, whereas a job which not commenced execution yet, will never do so. The latter typically applies for jobs scheduled with a delay. However, 'finished' state differs from 'done' state insofar as a cancelled, currently running job enters 'finished' state only upon its actual completion. Otherwise, if not cancelled, or cancelled before executing, it is equivalent to 'done' state. In most situations, it is sufficient to await for the future&#x2019;s done state, especially because a cancelled job cannot return a result to the submitter anyway.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="awaiting-a-single-future-s-done-state"><a class="anchor" href="#awaiting-a-single-future-s-done-state"></a>11.2. Awaiting a single future&#x2019;s 'done' state</h3> 
+      <h3 id="awaiting-a-single-future-s-done-state"><a class="anchor" href="#awaiting-a-single-future-s-done-state"></a>20.2. Awaiting a single future&#x2019;s 'done' state</h3> 
       <div class="paragraph"> 
        <p>Besides of some overloaded methods, <a href="#ifuture">IFuture</a> basically provides two methods to wait for a future to enter 'done' state, namely <code>awaitDone</code> and <code>awaitDoneAndGet</code>, with the difference that the latter additionally returns the job&#x2019;s result or exception. If the future is already done, those methods will return immediately. For both methods, there exists an overloaded version to wait for at most a given time, which once elapsed results in a <code>TimedOutException</code> thrown.</p> 
       </div> 
@@ -2292,7 +2309,7 @@ result = future.awaitDoneAndGet(<span class="integer">10</span>, <span class="pr
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="awaiting-a-single-future-s-finished-state"><a class="anchor" href="#awaiting-a-single-future-s-finished-state"></a>11.3. Awaiting a single future&#x2019;s 'finished' state</h3> 
+      <h3 id="awaiting-a-single-future-s-finished-state"><a class="anchor" href="#awaiting-a-single-future-s-finished-state"></a>20.3. Awaiting a single future&#x2019;s 'finished' state</h3> 
       <div class="paragraph"> 
        <p>Use the method <code>awaitFinished</code> to wait for the job to finish, meaning that the job either completed normally or by an exception, or that it will never commence execution due to a premature cancellation. To learn more about the difference between 'done' and 'finished' state, click <a href="#difference-between-done-and-finished-state">here</a>. Please note that this method does not return the job&#x2019;s result, because by Java Future definition, a cancelled job cannot provide a result.</p> 
       </div> 
@@ -2316,7 +2333,7 @@ future.awaitFinished(<span class="integer">10</span>, <span class="predefined-ty
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="awaiting-multiple-future-s-done-state"><a class="anchor" href="#awaiting-multiple-future-s-done-state"></a>11.4. Awaiting multiple future&#x2019;s 'done' state</h3> 
+      <h3 id="awaiting-multiple-future-s-done-state"><a class="anchor" href="#awaiting-multiple-future-s-done-state"></a>20.4. Awaiting multiple future&#x2019;s 'done' state</h3> 
       <div class="paragraph"> 
        <p>Job Manager allows to await for multiple futures at once. The filter to be provided limits the futures to await for. This method requires you to provide a maximal time to wait.</p> 
       </div> 
@@ -2356,7 +2373,7 @@ Jobs.getJobManager().awaitDone(Jobs.newFutureFilterBuilder() <i class="conum" da
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="awaiting-multiple-future-s-finished-state"><a class="anchor" href="#awaiting-multiple-future-s-finished-state"></a>11.5. Awaiting multiple future&#x2019;s 'finished' state</h3> 
+      <h3 id="awaiting-multiple-future-s-finished-state"><a class="anchor" href="#awaiting-multiple-future-s-finished-state"></a>20.5. Awaiting multiple future&#x2019;s 'finished' state</h3> 
       <div class="paragraph"> 
        <p>Use the method <code>awaitFinished</code> to wait for multiple jobs to finish, meaning that the jobs either completed normally or by an exception, or that they will never commence execution due to a premature cancellation. To learn more about the difference between 'done' and 'finished' state, click <a href="#difference-between-done-and-finished-state">here</a>.</p> 
       </div> 
@@ -2395,7 +2412,7 @@ Jobs.getJobManager().awaitFinished(Jobs.newFutureFilterBuilder() <i class="conum
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="uncaught-job-exceptions"><a class="anchor" href="#uncaught-job-exceptions"></a>12. Uncaught job exceptions</h2> 
+    <h2 id="uncaught-job-exceptions"><a class="anchor" href="#uncaught-job-exceptions"></a>21. Uncaught job exceptions</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>If a job throws an exception, that exception is handled by <code>ExceptionHandler</code>, and propagated to the submitter. However, the exception is only propagated if having a waiting submitter. Also, an uncaught exception causes repetitive jobs to terminate.</p> 
@@ -2406,7 +2423,7 @@ Jobs.getJobManager().awaitFinished(Jobs.newFutureFilterBuilder() <i class="conum
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="blocking-condition"><a class="anchor" href="#blocking-condition"></a>13. Blocking condition</h2> 
+    <h2 id="blocking-condition"><a class="anchor" href="#blocking-condition"></a>22. Blocking condition</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>A blocking condition allows a thread to wait for a condition to become <em>true</em>. That is similar to the Java Object&#x2019;s 'wait/notify' mechanism, but with some additional functionality regarding semaphore aware jobs. If a semaphore aware job enters a blocking condition, it releases ownership of the permit, which allows another job of that same semaphore to commence execution. Upon the condition becomes <em>true</em>, the job then must compete for a permit anew.</p> 
@@ -2418,7 +2435,7 @@ Jobs.getJobManager().awaitFinished(Jobs.newFutureFilterBuilder() <i class="conum
       <p>A blocking condition is often used by model jobs to wait for something to happen, but to allow another model job to run while waiting. A typical use case would be to wait for a MessageBox to be closed.</p> 
      </div> 
      <div class="sect2"> 
-      <h3 id="example-of-a-blocking-condition"><a class="anchor" href="#example-of-a-blocking-condition"></a>13.1. Example of a blocking condition</h3> 
+      <h3 id="example-of-a-blocking-condition"><a class="anchor" href="#example-of-a-blocking-condition"></a>22.1. Example of a blocking condition</h3> 
       <div class="paragraph"> 
        <p>You are running in a semaphore aware job and require to do some long running operation. During that time you do not require to be the permit owner. A simple but wrong approach would be the following:</p> 
       </div> 
@@ -2460,7 +2477,7 @@ operationCompleted.waitForUninterruptibly();</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="executionsemaphore"><a class="anchor" href="#executionsemaphore"></a>14. ExecutionSemaphore</h2> 
+    <h2 id="executionsemaphore"><a class="anchor" href="#executionsemaphore"></a>23. ExecutionSemaphore</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Represents a fair counting semaphore used in Job API to control the maximal number of jobs running concurrently.</p> 
@@ -2474,7 +2491,7 @@ operationCompleted.waitForUninterruptibly();</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="executiontrigger"><a class="anchor" href="#executiontrigger"></a>15. ExecutionTrigger</h2> 
+    <h2 id="executiontrigger"><a class="anchor" href="#executiontrigger"></a>24. ExecutionTrigger</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Component that defines the schedule upon which a job will commence execution.</p> 
@@ -2492,7 +2509,7 @@ operationCompleted.waitForUninterruptibly();</code></pre>
       <p>Use the static factory method 'Jobs.newExecutionTrigger()' to get an instance.</p> 
      </div> 
      <div class="sect2"> 
-      <h3 id="misfiring"><a class="anchor" href="#misfiring"></a>15.1. Misfiring</h3> 
+      <h3 id="misfiring"><a class="anchor" href="#misfiring"></a>24.1. Misfiring</h3> 
       <div class="paragraph"> 
        <p>Regardless of the schedule used, job manager guarantees no concurrent execution of the same job. That may happen, if using a repeatedly schedule with the job not terminated its last execution yet, but the schedule&#x2019;s trigger would like to fire for the next execution already. Such a situation is called a misfiring. The action to be taken upon a misfiring is configurable via the schedule&#x2019;s misfiring policy. A policy can be to run the job immediately upon termination of the previous execution, or to just ignore that missed firing. See the JavaDoc of the schedule for more information.</p> 
       </div> 
@@ -2500,7 +2517,7 @@ operationCompleted.waitForUninterruptibly();</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="stopping-the-platform"><a class="anchor" href="#stopping-the-platform"></a>16. Stopping the platform</h2> 
+    <h2 id="stopping-the-platform"><a class="anchor" href="#stopping-the-platform"></a>25. Stopping the platform</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Upon stopping the platform, the job manager will also be shutdown. If having a <a href="#IPlatformListener">[IPlatformListener]</a> to perform some cleanup work, and which requires the job manager to be still functional, that listener must be annotated with an <code>@Order</code> less than <code>IJobManager.DESTROY_ORDER</code>, which is 5'900. If not specifying an <code>@Order</code> explicitly, the listener will have the default order of <em>5</em>, meaning being invoked before job manager shutdown anyway.</p> 
@@ -2508,7 +2525,7 @@ operationCompleted.waitForUninterruptibly();</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="modeljobs"><a class="anchor" href="#modeljobs"></a>17. ModelJobs</h2> 
+    <h2 id="modeljobs"><a class="anchor" href="#modeljobs"></a>26. ModelJobs</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Model jobs exist client side only, and are used to interact with the Scout client model to read and write model values in a serial manner per session. That enables no synchronization to be used when interacting with the model.</p> 
@@ -2575,7 +2592,7 @@ ModelJobs.yield();</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="configuration"><a class="anchor" href="#configuration"></a>18. Configuration</h2> 
+    <h2 id="configuration"><a class="anchor" href="#configuration"></a>27. Configuration</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Job manager can be configured with the following config properties.</p> 
@@ -2624,7 +2641,7 @@ ModelJobs.yield();</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="extending-job-manager"><a class="anchor" href="#extending-job-manager"></a>19. Extending job manager</h2> 
+    <h2 id="extending-job-manager"><a class="anchor" href="#extending-job-manager"></a>28. Extending job manager</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Job manager is implemented as an application scoped bean, and which can be replaced. To do so, create a class which extends <code>JobManager</code>, and annotate it with <code>@Replace</code> annotation. Most likely, you like to use the EE container&#x2019;s <code>ThreadPoolExecutor</code>, or to contribute some behavior to the callable chain which finally executes the job.</p> 
@@ -2638,7 +2655,7 @@ ModelJobs.yield();</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="scheduling-examples"><a class="anchor" href="#scheduling-examples"></a>20. Scheduling examples</h2> 
+    <h2 id="scheduling-examples"><a class="anchor" href="#scheduling-examples"></a>29. Scheduling examples</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>This sections contains some common scheduling examples.</p> 
@@ -2984,17 +3001,21 @@ operationCompleted.waitForUninterruptibly();</code></pre>
     </div> 
    </div> 
    <h1 id="runcontext" class="sect0"><a class="anchor" href="#runcontext"></a>RunContext</h1> 
-   <div class="paragraph"> 
-    <p>Mostly, code is run on behalf of some semantic context, for example as a particular <code>Subject</code> and with some context related <code>ThreadLocals</code> set, e.g. the user&#x2019;s <code>session</code> and its <code>Locale</code>. Scout provides you with different <code>RunContexts</code>, such as <code>ClientRunContext</code> or <code>ServerRunContext</code>. They all share some common characteristics like <code>Subject</code>, <code>Locale</code> and <code>RunMonitor</code>, but also provide some additional functionality like transaction boundaries if using <code>ServerRunContext</code>. Also, a <code>RunContext</code> facilitates propagation of state among different threads. In order to ease readability, the 'setter-methods' of the <code>RunContext</code> support method chaining.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>All a <code>RunContext</code> does is to provide some setter methods to construct the context, and a <code>run</code> and <code>call</code> method to run an action on behalf of that context. Thereby, the only difference among those two methods is their argument. Whereas <code>run</code> takes a <code>IRunnable</code> instance, <code>call</code> takes a <code>Callable</code> to additionally return a result to the caller. The action is run in the current thread, meaning that the caller is blocked until completion.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>By default, a <code>RunContext</code> is associated with a <code>RunMonitor</code>, and the monitor&#x2019;s cancellation status can be queried via <code>RunMonitor.CURRENT.get().isCancelled()</code>. The monitor allows for hard cancellation, meaning that the executing thread is interrupted upon cancellation. For instance if waiting on an interruptible construct like <code>Object.wait()</code> or <code>IFuture.awaitDone()</code>, the waiting thread returns with an interruption exception.</p> 
+   <div class="openblock partintro"> 
+    <div class="content"> 
+     <div class="paragraph"> 
+      <p>Mostly, code is run on behalf of some semantic context, for example as a particular <code>Subject</code> and with some context related <code>ThreadLocals</code> set, e.g. the user&#x2019;s <code>session</code> and its <code>Locale</code>. Scout provides you with different <code>RunContexts</code>, such as <code>ClientRunContext</code> or <code>ServerRunContext</code>. They all share some common characteristics like <code>Subject</code>, <code>Locale</code> and <code>RunMonitor</code>, but also provide some additional functionality like transaction boundaries if using <code>ServerRunContext</code>. Also, a <code>RunContext</code> facilitates propagation of state among different threads. In order to ease readability, the 'setter-methods' of the <code>RunContext</code> support method chaining.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>All a <code>RunContext</code> does is to provide some setter methods to construct the context, and a <code>run</code> and <code>call</code> method to run an action on behalf of that context. Thereby, the only difference among those two methods is their argument. Whereas <code>run</code> takes a <code>IRunnable</code> instance, <code>call</code> takes a <code>Callable</code> to additionally return a result to the caller. The action is run in the current thread, meaning that the caller is blocked until completion.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>By default, a <code>RunContext</code> is associated with a <code>RunMonitor</code>, and the monitor&#x2019;s cancellation status can be queried via <code>RunMonitor.CURRENT.get().isCancelled()</code>. The monitor allows for hard cancellation, meaning that the executing thread is interrupted upon cancellation. For instance if waiting on an interruptible construct like <code>Object.wait()</code> or <code>IFuture.awaitDone()</code>, the waiting thread returns with an interruption exception.</p> 
+     </div> 
+    </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="factory-methods-to-create-a-runcontext"><a class="anchor" href="#factory-methods-to-create-a-runcontext"></a>1. Factory methods to create a RunContext</h2> 
+    <h2 id="factory-methods-to-create-a-runcontext"><a class="anchor" href="#factory-methods-to-create-a-runcontext"></a>30. Factory methods to create a RunContext</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Typically, a <code>RunContext</code> is created from a respective factory like <code>RunContexts</code> to create a <code>RunContext</code>, or <code>ServerRunContexts</code> to create a <code>ServerRunContext</code>, or <code>ClientRunContexts</code> to create a <code>ClientRunContext</code>. Internally, the <code>BeanManager</code> is asked to provide a new instance of the <code>RunContext</code>, which allows you to replace the default implementation of a <code>RunContext</code> in an easy way. The factories declare two factory methods: <code>empty()</code> and <code>copyCurrent()</code>. Whereas <code>empty()</code> provides you an empty <code>RunContext</code>, <code>copyCurrent()</code> takes a snapshot of the current calling context and initializes the <code>RunContext</code> accordingly. That is useful if only some few values are to be changed, or, if using <code>ServerRunContext</code>, to run the code on behalf of a new transaction.</p> 
@@ -3070,7 +3091,7 @@ RunContexts.empty()
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="properties-of-a-runcontext"><a class="anchor" href="#properties-of-a-runcontext"></a>2. Properties of a RunContext</h2> 
+    <h2 id="properties-of-a-runcontext"><a class="anchor" href="#properties-of-a-runcontext"></a>31. Properties of a RunContext</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>The following properties are declared on a <code>RunContext</code> and are inherited by <code>ServerRunContext</code> and <code>ClientRunContext</code>.</p> 
@@ -3114,7 +3135,7 @@ RunContexts.empty()
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="properties-of-a-serverruncontext"><a class="anchor" href="#properties-of-a-serverruncontext"></a>3. Properties of a ServerRunContext</h2> 
+    <h2 id="properties-of-a-serverruncontext"><a class="anchor" href="#properties-of-a-serverruncontext"></a>32. Properties of a ServerRunContext</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>A <code>ServerRunContext</code> controls propagation of server-side state and sets the transaction boundaries, and is a specialization of <code>RunContext</code>.</p> 
@@ -3163,7 +3184,7 @@ RunContexts.empty()
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="properties-of-a-clientruncontext"><a class="anchor" href="#properties-of-a-clientruncontext"></a>4. Properties of a ClientRunContext</h2> 
+    <h2 id="properties-of-a-clientruncontext"><a class="anchor" href="#properties-of-a-clientruncontext"></a>33. Properties of a ClientRunContext</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>A <code>ClientRunContext</code> controls propagation of client-side state, and is a specialization of <code>RunContext</code>.</p> 
@@ -3207,38 +3228,46 @@ RunContexts.empty()
     </div> 
    </div> 
    <h1 id="runmonitor" class="sect0"><a class="anchor" href="#runmonitor"></a>RunMonitor</h1> 
-   <div class="paragraph"> 
-    <p>A RunMonitor allows the registration of <code>ICancellable</code> objects, which are cancelled upon cancellation of this monitor. A RunMonitor is associated with every RunContext and IFuture, meaning that executing code can always query its current cancellation status via <code>RunMonitor.CURRENT.get().isCancelled()</code>.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>A <code>RunMonitor</code> itself is also of the type <code>ICancellable</code>, meaning that it can be registered within another monitor as well. That way, a monitor hierarchy can be created with support of nested cancellation. That is exactly what is done when creating a copy of the current calling context, namely that the new monitor is registered as <code>ICancellable</code> within the monitor of the current calling context. Cancellation only works top-down, and not bottom up, meaning that a parent monitor is not cancelled once a child monitor is cancelled.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>When registering a <code>ICancellable</code> and this monitor is already cancelled, the <code>ICancellable</code> is cancelled immediately.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>Furthermore, a job&#x2019;s Future is linked with the job&#x2019;s <code>RunMonitor</code>, meaning that cancellation requests targeted to the <code>Future</code> are also propagated to the <code>RunMonitor</code>, and vice versa.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>The following <a href="#img-runmonitor_associations">Figure 2</a> illustrates the <code>RunMonitor</code> and its associations.</p> 
-   </div> 
-   <div id="img-runmonitor_associations" class="imageblock"> 
+   <div class="openblock partintro"> 
     <div class="content"> 
-     <img src="images/runmonitor_associations.png" alt="runmonitor associations" /> 
-    </div> 
-    <div class="title">
-     Figure 2. RunMonitor and its associations
+     <div class="paragraph"> 
+      <p>A RunMonitor allows the registration of <code>ICancellable</code> objects, which are cancelled upon cancellation of this monitor. A RunMonitor is associated with every RunContext and IFuture, meaning that executing code can always query its current cancellation status via <code>RunMonitor.CURRENT.get().isCancelled()</code>.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>A <code>RunMonitor</code> itself is also of the type <code>ICancellable</code>, meaning that it can be registered within another monitor as well. That way, a monitor hierarchy can be created with support of nested cancellation. That is exactly what is done when creating a copy of the current calling context, namely that the new monitor is registered as <code>ICancellable</code> within the monitor of the current calling context. Cancellation only works top-down, and not bottom up, meaning that a parent monitor is not cancelled once a child monitor is cancelled.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>When registering a <code>ICancellable</code> and this monitor is already cancelled, the <code>ICancellable</code> is cancelled immediately.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Furthermore, a job&#x2019;s Future is linked with the job&#x2019;s <code>RunMonitor</code>, meaning that cancellation requests targeted to the <code>Future</code> are also propagated to the <code>RunMonitor</code>, and vice versa.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>The following <a href="#img-runmonitor_associations">Figure 2</a> illustrates the <code>RunMonitor</code> and its associations.</p> 
+     </div> 
+     <div id="img-runmonitor_associations" class="imageblock"> 
+      <div class="content"> 
+       <img src="images/runmonitor_associations.png" alt="runmonitor associations" /> 
+      </div> 
+      <div class="title">
+       Figure 2. RunMonitor and its associations
+      </div> 
+     </div> 
     </div> 
    </div> 
    <h1 id="secure-output" class="sect0"><a class="anchor" href="#secure-output"></a>Secure Output</h1> 
-   <div class="paragraph"> 
-    <p>This chapter describes how HTML Output can be handled in a secure way.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>Scout applications often display potentially dangerous data, e.g. user input or data from other systems. Encoding this input in such a way, that it can not be executed, prevents security vulnerabilities like cross-site scripting.</p> 
+   <div class="openblock partintro"> 
+    <div class="content"> 
+     <div class="paragraph"> 
+      <p>This chapter describes how HTML Output can be handled in a secure way.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Scout applications often display potentially dangerous data, e.g. user input or data from other systems. Encoding this input in such a way, that it can not be executed, prevents security vulnerabilities like cross-site scripting.</p> 
+     </div> 
+    </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="encoding-by-default"><a class="anchor" href="#encoding-by-default"></a>1. Encoding by Default</h2> 
+    <h2 id="encoding-by-default"><a class="anchor" href="#encoding-by-default"></a>34. Encoding by Default</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>By default, all input in the Scout model is encoded. Examples are values/labels in value fields, cells in tables, message in message box. The reason behind this default choice is that developers do not have to think about output encoding in the standard case and are therefore less likely to forget output encoding and introduce a security vulnerability.</p> 
@@ -3263,7 +3292,7 @@ RunContexts.empty()
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="html-enabled"><a class="anchor" href="#html-enabled"></a>2. Html Enabled</h2> 
+    <h2 id="html-enabled"><a class="anchor" href="#html-enabled"></a>35. Html Enabled</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Sometimes developers may want to use HTML in the Scout model.</p> 
@@ -3305,31 +3334,31 @@ protected void execInitField() {
       <p>There are several ways to implement the use cases above. Some typical implementations are described in the following sections.</p> 
      </div> 
      <div class="sect2"> 
-      <h3 id="css-class-and-other-model-properties"><a class="anchor" href="#css-class-and-other-model-properties"></a>2.1. CSS Class and Other Model Properties</h3> 
+      <h3 id="css-class-and-other-model-properties"><a class="anchor" href="#css-class-and-other-model-properties"></a>35.1. CSS Class and Other Model Properties</h3> 
       <div class="paragraph"> 
        <p>Often using HTML in value fields or table cells is not necessary for styling. Very basic styling can be done for example by setting the CSS class.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="html-builder"><a class="anchor" href="#html-builder"></a>2.2. HTML Builder</h3> 
+      <h3 id="html-builder"><a class="anchor" href="#html-builder"></a>35.2. HTML Builder</h3> 
       <div class="paragraph"> 
        <p>For creating simple HTML files or fragments with encoded user input, the class <code>org.eclipse.scout.rt.platform.html.HTML</code> can be used. It is also easily possible to create application internal and external link with this approach.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="styling-in-the-ui-layer"><a class="anchor" href="#styling-in-the-ui-layer"></a>2.3. Styling in the UI-Layer</h3> 
+      <h3 id="styling-in-the-ui-layer"><a class="anchor" href="#styling-in-the-ui-layer"></a>35.3. Styling in the UI-Layer</h3> 
       <div class="paragraph"> 
        <p>For more complex HTML, using <code>IBeanField</code> in the scout model and implementing the styling in the UI-Layer is often the preferred way. Links are possible as well.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="manual-encoding"><a class="anchor" href="#manual-encoding"></a>2.4. Manual Encoding</h3> 
+      <h3 id="manual-encoding"><a class="anchor" href="#manual-encoding"></a>35.4. Manual Encoding</h3> 
       <div class="paragraph"> 
        <p>It is also possible to encode any String manually using <code>StringUtility.htmlEncode(String)</code>. <code>org.eclipse.scout.rt.platform.html.HTML</code> uses this method internally for encoding. However, using <code>HTML</code> is recommended, where possible, because it is more concise and leads to less errors.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="using-a-white-list-filter"><a class="anchor" href="#using-a-white-list-filter"></a>2.5. Using a White-List Filter</h3> 
+      <h3 id="using-a-white-list-filter"><a class="anchor" href="#using-a-white-list-filter"></a>35.5. Using a White-List Filter</h3> 
       <div class="paragraph"> 
        <p>If HTML or XML from external sources or more complex HTML are used in the Scout model, using a white-list filter might be the best way to avoid security bugs. Libraries, such as <a href="http://jsoup.org/">JSoup</a> provide such a white-list filter. Scout currently does not include any services or utilities for using white-list filters, because the configuration and usage is very use-case-specific and would therefore not add much benefit.</p> 
       </div> 
@@ -3337,19 +3366,23 @@ protected void execInitField() {
     </div> 
    </div> 
    <h1 id="client-notifications" class="sect0"><a class="anchor" href="#client-notifications"></a>Client Notifications</h1> 
-   <div class="paragraph"> 
-    <p>In a scout application, typically, the scout client requests some data from the scout server. Sometimes, however, the communication needs go the other way: The scout server needs to inform the scout client about something. With client notifications it is possible to do so.</p> 
-   </div> 
-   <div id="img-client_notifications" class="imageblock"> 
+   <div class="openblock partintro"> 
     <div class="content"> 
-     <img src="images/clientNotifications.png" alt="clientNotifications" /> 
-    </div> 
-    <div class="title">
-     Figure 3. Client Notifications
+     <div class="paragraph"> 
+      <p>In a scout application, typically, the scout client requests some data from the scout server. Sometimes, however, the communication needs go the other way: The scout server needs to inform the scout client about something. With client notifications it is possible to do so.</p> 
+     </div> 
+     <div id="img-client_notifications" class="imageblock"> 
+      <div class="content"> 
+       <img src="images/clientNotifications.png" alt="clientNotifications" /> 
+      </div> 
+      <div class="title">
+       Figure 3. Client Notifications
+      </div> 
+     </div> 
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="examples-2"><a class="anchor" href="#examples-2"></a>1. Examples</h2> 
+    <h2 id="examples-2"><a class="anchor" href="#examples-2"></a>36. Examples</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Example scenarios for client notifications are:</p> 
@@ -3367,7 +3400,7 @@ protected void execInitField() {
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="data-flow"><a class="anchor" href="#data-flow"></a>2. Data Flow</h2> 
+    <h2 id="data-flow"><a class="anchor" href="#data-flow"></a>37. Data Flow</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>A client notification message is just a serializable object. It is published on the server and can be addressed either to all client nodes or only to a specific session or user. On the UI server side, handlers can be used to react upon incoming notifications.</p> 
@@ -3381,7 +3414,7 @@ protected void execInitField() {
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="push-technology"><a class="anchor" href="#push-technology"></a>3. Push Technology</h2> 
+    <h2 id="push-technology"><a class="anchor" href="#push-technology"></a>38. Push Technology</h2> 
     <div class="sectionbody"> 
      <div id="img-client_notifications" class="imageblock"> 
       <div class="content"> 
@@ -3403,7 +3436,7 @@ protected void execInitField() {
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="components"><a class="anchor" href="#components"></a>4. Components</h2> 
+    <h2 id="components"><a class="anchor" href="#components"></a>39. Components</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>A client notification can be published on the server using the <code>ClientNotificationRegistry</code>. Publishing can be done either in a non-transactional or transactional way (only processed, when the transaction is committed).</p> 
@@ -3423,7 +3456,7 @@ protected void execInitField() {
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="multiple-server-nodes"><a class="anchor" href="#multiple-server-nodes"></a>4.1. Multiple Server Nodes</h3> 
+      <h3 id="multiple-server-nodes"><a class="anchor" href="#multiple-server-nodes"></a>39.1. Multiple Server Nodes</h3> 
       <div id="img-client_notification_big_picture" class="imageblock"> 
        <div class="content"> 
         <img src="images/cn_multiple_servers.png" alt="cn multiple servers" /> 
@@ -3445,7 +3478,7 @@ protected void execInitField() {
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="publishing"><a class="anchor" href="#publishing"></a>5. Publishing</h2> 
+    <h2 id="publishing"><a class="anchor" href="#publishing"></a>40. Publishing</h2> 
     <div class="sectionbody"> 
      <div class="listingblock"> 
       <div class="title">
@@ -3459,7 +3492,7 @@ protected void execInitField() {
       <p>There are several options to choose from when publishing a new client notification:</p> 
      </div> 
      <div class="sect2"> 
-      <h3 id="clientnotificationaddress"><a class="anchor" href="#clientnotificationaddress"></a>5.1. ClientNotificationAddress</h3> 
+      <h3 id="clientnotificationaddress"><a class="anchor" href="#clientnotificationaddress"></a>40.1. ClientNotificationAddress</h3> 
       <div class="paragraph"> 
        <p>The <code>ClientNotificationAddress</code> determines which how the client notification needs to be dispatched and handled. A client notification can be addressed to</p> 
       </div> 
@@ -3473,7 +3506,7 @@ protected void execInitField() {
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="transactional-vs-non-transactional"><a class="anchor" href="#transactional-vs-non-transactional"></a>5.2. Transactional vs. Non-transactional</h3> 
+      <h3 id="transactional-vs-non-transactional"><a class="anchor" href="#transactional-vs-non-transactional"></a>40.2. Transactional vs. Non-transactional</h3> 
       <div class="paragraph"> 
        <p>Client notifications can be published in a transactional or non-transactional way.</p> 
       </div> 
@@ -3485,13 +3518,13 @@ protected void execInitField() {
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="distributing-to-all-cluster-nodes"><a class="anchor" href="#distributing-to-all-cluster-nodes"></a>5.3. Distributing to all Cluster Nodes</h3> 
+      <h3 id="distributing-to-all-cluster-nodes"><a class="anchor" href="#distributing-to-all-cluster-nodes"></a>40.3. Distributing to all Cluster Nodes</h3> 
       <div class="paragraph"> 
        <p>Generally, it makes sense to distribute the client notifications automatically to all other server cluster nodes (if available). This is achieved using <code>ClusterNotifications</code>. It is however also possible to publish client notifications without cluster distribution. E.g. in case of client notifications already received from other cluster nodes.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="coalescing-notifications"><a class="anchor" href="#coalescing-notifications"></a>5.4. Coalescing Notifications</h3> 
+      <h3 id="coalescing-notifications"><a class="anchor" href="#coalescing-notifications"></a>40.4. Coalescing Notifications</h3> 
       <div class="paragraph"> 
        <p>It is possible that a service generates a lot of client notifications that are obsolete once a newer notification is created. In this case a coalescer can be created to reduce the notifications:</p> 
       </div> 
@@ -3514,13 +3547,13 @@ protected void execInitField() {
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="handling"><a class="anchor" href="#handling"></a>6. Handling</h2> 
+    <h2 id="handling"><a class="anchor" href="#handling"></a>41. Handling</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>The <code>ClientNotificationDispatcher</code> is responsible for dispatching the client notifications to the correct handler.</p> 
      </div> 
      <div class="sect2"> 
-      <h3 id="creating-a-client-notification-handler"><a class="anchor" href="#creating-a-client-notification-handler"></a>6.1. Creating a Client Notification Handler</h3> 
+      <h3 id="creating-a-client-notification-handler"><a class="anchor" href="#creating-a-client-notification-handler"></a>41.1. Creating a Client Notification Handler</h3> 
       <div class="paragraph"> 
        <p>To create a new client notification handler for a specific client notification, all you need to do is creating a class implementing <code>org.eclipse.scout.rt.shared.notification.INotificationHandler&lt;T&gt;</code>, where <code>T</code> is the type (or subtype) of the notification to handle.</p> 
       </div> 
@@ -3541,13 +3574,13 @@ protected void execInitField() {
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="handling-notifications-temporarily"><a class="anchor" href="#handling-notifications-temporarily"></a>6.2. Handling Notifications Temporarily</h3> 
+      <h3 id="handling-notifications-temporarily"><a class="anchor" href="#handling-notifications-temporarily"></a>41.2. Handling Notifications Temporarily</h3> 
       <div class="paragraph"> 
        <p>Sometimes it is necessary to start and stop handling notification dynamically, (e.g. when a form is opened) in this case <code>AbstractObservableNotificationHandler</code> can be used to add and remove listeners.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="asynchronous-dispatching"><a class="anchor" href="#asynchronous-dispatching"></a>6.3. Asynchronous Dispatching</h3> 
+      <h3 id="asynchronous-dispatching"><a class="anchor" href="#asynchronous-dispatching"></a>41.3. Asynchronous Dispatching</h3> 
       <div class="paragraph"> 
        <p>Dispatching is always done asynchronously. However, in case of transactional notifications, a service call blocks until all transactional notifications returned with the service response are handled.</p> 
       </div> 
@@ -3571,7 +3604,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="updating-scout-model"><a class="anchor" href="#updating-scout-model"></a>6.4. Updating Scout Model</h3> 
+      <h3 id="updating-scout-model"><a class="anchor" href="#updating-scout-model"></a>41.4. Updating Scout Model</h3> 
       <div class="paragraph"> 
        <p>Notification handlers are never called from a scout model thread. If the scout model needs to be updated when handling notifications, a model job needs to be created for that task.</p> 
       </div> 
@@ -3613,14 +3646,18 @@ cs.reloadCodeType(UiThemeCodeType.class);
     </div> 
    </div> 
    <h1 id="webservices-with-jax-ws" class="sect0"><a class="anchor" href="#webservices-with-jax-ws"></a>Webservices with JAX-WS</h1> 
-   <div class="paragraph"> 
-    <p>The Java API for XML-Based Web Services (JAX-WS) is a Java programming language API for creating web services. JAX-WS is one of the Java XML programming APIs, and is part of the Java EE platform.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>Scout facilitates working with webservices, supports you in the generation of artifacts, and provides the following functionality:</p> 
+   <div class="openblock partintro"> 
+    <div class="content"> 
+     <div class="paragraph"> 
+      <p>The Java API for XML-Based Web Services (JAX-WS) is a Java programming language API for creating web services. JAX-WS is one of the Java XML programming APIs, and is part of the Java EE platform.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Scout facilitates working with webservices, supports you in the generation of artifacts, and provides the following functionality:</p> 
+     </div> 
+    </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="functionality-2"><a class="anchor" href="#functionality-2"></a>1. Functionality</h2> 
+    <h2 id="functionality-2"><a class="anchor" href="#functionality-2"></a>42. Functionality</h2> 
     <div class="sectionbody"> 
      <div class="ulist"> 
       <ul> 
@@ -3637,10 +3674,10 @@ cs.reloadCodeType(UiThemeCodeType.class);
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="jax-ws-implementor-and-deployment"><a class="anchor" href="#jax-ws-implementor-and-deployment"></a>2. JAX-WS implementor and deployment</h2> 
+    <h2 id="jax-ws-implementor-and-deployment"><a class="anchor" href="#jax-ws-implementor-and-deployment"></a>43. JAX-WS implementor and deployment</h2> 
     <div class="sectionbody"> 
      <div class="sect2"> 
-      <h3 id="jax-ws-version-and-implementor"><a class="anchor" href="#jax-ws-version-and-implementor"></a>2.1. JAX-WS version and implementor</h3> 
+      <h3 id="jax-ws-version-and-implementor"><a class="anchor" href="#jax-ws-version-and-implementor"></a>43.1. JAX-WS version and implementor</h3> 
       <div class="paragraph"> 
        <p>The JAX-WS Scout integration provides a thin layer on top of JAX-WS implementors to facilitate working with webservices. It depends on the JAX-WS 2.2.x API as specified in JSR 224. It is implementor neutral, and was tested with with the following implementations:</p> 
       </div> 
@@ -3656,7 +3693,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="running-jax-ws-in-a-servlet-container"><a class="anchor" href="#running-jax-ws-in-a-servlet-container"></a>2.2. Running JAX-WS in a servlet container</h3> 
+      <h3 id="running-jax-ws-in-a-servlet-container"><a class="anchor" href="#running-jax-ws-in-a-servlet-container"></a>43.2. Running JAX-WS in a servlet container</h3> 
       <div class="paragraph"> 
        <p>A servlet container like Apache Tomcat typically does not ship with a JAX-WS implementor. As the actual implementor, you can either use <em>JAX-WS RI</em> as shipped with the JRE, or provide a separate implementor like <em>JAX-WS METRO</em> or <em>Apache CXF</em> in the form of a Maven dependency. However, <em>JAX-WS RI</em> does not provide a servlet based entry point, because the Servlet API is not part of the Java SE specification.</p> 
       </div> 
@@ -3665,13 +3702,13 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="running-jax-ws-in-a-ee-container"><a class="anchor" href="#running-jax-ws-in-a-ee-container"></a>2.3. Running JAX-WS in a EE container</h3> 
+      <h3 id="running-jax-ws-in-a-ee-container"><a class="anchor" href="#running-jax-ws-in-a-ee-container"></a>43.3. Running JAX-WS in a EE container</h3> 
       <div class="paragraph"> 
        <p>When running in an EE container, the container typically ships with a JAX-WS implementor. It is highly recommended to use that implementor, primarily to avoid classloading issues, and to further profit from the container&#x2019;s monitoring and authentication facility. Refer to the containers documentation for more information.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jaxws.implementor.configuration"><a class="anchor" href="#jaxws.implementor.configuration"></a>2.4. Configure JAX-WS implementor</h3> 
+      <h3 id="jaxws.implementor.configuration"><a class="anchor" href="#jaxws.implementor.configuration"></a>43.4. Configure JAX-WS implementor</h3> 
       <div class="paragraph"> 
        <p>JAX-WS Scout integration is prepared to run with different implementors. Unfortunately, some implementors do not implement the JSR exactly, or some important functionality is missing in the JSR. To address this fact without loosing implementor independence, the delegate bean <a href="#JaxWsImplementorSpecifics">JaxWsImplementorSpecifics</a> exists.</p> 
       </div> 
@@ -3716,7 +3753,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        <p>Of course, other implementors can be used as well. For that to work, install your own <em>JaxWsImplementorSpecifics</em> class, and reference its fully qualified name in <em>config.properties</em>.</p> 
       </div> 
       <div class="sect3"> 
-       <h4 id="JaxWsImplementorSpecifics"><a class="anchor" href="#JaxWsImplementorSpecifics"></a>2.4.1. JaxWsImplementorSpecifics</h4> 
+       <h4 id="JaxWsImplementorSpecifics"><a class="anchor" href="#JaxWsImplementorSpecifics"></a>43.4.1. JaxWsImplementorSpecifics</h4> 
        <div class="paragraph"> 
         <p>This class encapsulates functionality that is defined in JAX-WS JSR 224, but may diverge among JAX-WS implementors. As of now, the following points are addressed:</p> 
        </div> 
@@ -3733,7 +3770,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jaxws.implementor.dependency"><a class="anchor" href="#jaxws.implementor.dependency"></a>2.4.2. Configure JAX-WS Maven dependency in pom.xml</h4> 
+       <h4 id="jaxws.implementor.dependency"><a class="anchor" href="#jaxws.implementor.dependency"></a>43.4.2. Configure JAX-WS Maven dependency in pom.xml</h4> 
        <div class="paragraph"> 
         <p>The effective dependency to the JAX-WS implementor is to be specified in the pom.xml of the webapp module (not the server module). That allows for running with a different implementor depending on the environment, e.g. to provide the implementor yourself when starting the application from within your IDE in Jetty, or to use the container&#x2019;s implementor when deploying to an EE enabled application server. Even if providing the very same implementor for all environments yourself, it is good practice to do the configuration in the webapp module.</p> 
        </div> 
@@ -3786,7 +3823,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="configure-jax-ws-servlet-in-web-xml"><a class="anchor" href="#configure-jax-ws-servlet-in-web-xml"></a>2.4.3. Configure JAX-WS servlet in web.xml</h4> 
+       <h4 id="configure-jax-ws-servlet-in-web-xml"><a class="anchor" href="#configure-jax-ws-servlet-in-web-xml"></a>43.4.3. Configure JAX-WS servlet in web.xml</h4> 
        <div class="paragraph"> 
         <p>This section describes the configuration of the entry point Servlet to publish webservices. If working with webservice consumers only, no configuration is required.</p> 
        </div> 
@@ -3896,7 +3933,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="jaxws.modularization"><a class="anchor" href="#jaxws.modularization"></a>3. Modularization</h2> 
+    <h2 id="jaxws.modularization"><a class="anchor" href="#jaxws.modularization"></a>44. Modularization</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Scout JAX-WS integration does not prescribe how to organize your webservices in terms of Maven modules. You could either put all your webservices directly into the server module, or create a separate <em>jaxws</em> module containing all webservices, or even create a separate <em>jaxws</em> module for each webservice. Most often, the second approach of a single, separate <em>jaxws</em> module, which the server module depends on, is chosen.</p> 
@@ -3931,10 +3968,10 @@ cs.reloadCodeType(UiThemeCodeType.class);
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="build-webservice-stubs-and-artifacts"><a class="anchor" href="#build-webservice-stubs-and-artifacts"></a>4. Build webservice stubs and artifacts</h2> 
+    <h2 id="build-webservice-stubs-and-artifacts"><a class="anchor" href="#build-webservice-stubs-and-artifacts"></a>45. Build webservice stubs and artifacts</h2> 
     <div class="sectionbody"> 
      <div class="sect2"> 
-      <h3 id="jaxws.stub.generation"><a class="anchor" href="#jaxws.stub.generation"></a>4.1. Configure webservice stub generation via wsimport</h3> 
+      <h3 id="jaxws.stub.generation"><a class="anchor" href="#jaxws.stub.generation"></a>45.1. Configure webservice stub generation via wsimport</h3> 
       <div class="paragraph"> 
        <p>The Maven plugin 'org.codehaus.mojo:jaxws-maven-plugin' with the goal 'wsimport' is used to generate a webservice stub from a WSDL file and its referenced XSD schema files. If your Maven module inherits from the Scout module 'maven_rt_plugin_config-master', the 'jaxws' profile is available, which activates automatically upon the presence of a 'WEB-INF/wsdl' folder. Instead of inheriting from that module, you can alternatively copy the 'jaxws' profile into your projects parent POM module.</p> 
       </div> 
@@ -4063,7 +4100,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="customize-wsdl-components-and-xsd-schema-elements-via-binding-files"><a class="anchor" href="#customize-wsdl-components-and-xsd-schema-elements-via-binding-files"></a>4.2. Customize WSDL components and XSD schema elements via binding files</h3> 
+      <h3 id="customize-wsdl-components-and-xsd-schema-elements-via-binding-files"><a class="anchor" href="#customize-wsdl-components-and-xsd-schema-elements-via-binding-files"></a>45.2. Customize WSDL components and XSD schema elements via binding files</h3> 
       <div class="paragraph"> 
        <p>By default, all XML files contained in folder 'WEB-INF/binding' are used as binding files. But, most often, you will have a global binding file, which applies to all your WSDL files, and some custom binding files different per WSDL file and XSD schema files. See how to explicitly configure binding files in <a href="#lst-jaxws.pom.multiple-binding">Listing 58</a>.</p> 
       </div> 
@@ -4246,7 +4283,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="annotation-processing-tool-apt"><a class="anchor" href="#annotation-processing-tool-apt"></a>4.3. Annotation Processing Tool (APT)</h3> 
+      <h3 id="annotation-processing-tool-apt"><a class="anchor" href="#annotation-processing-tool-apt"></a>45.3. Annotation Processing Tool (APT)</h3> 
       <div class="paragraph"> 
        <p>Annotation Processing (APT) is a tool which can be enabled to fire for annotated types during compilation. In JAX-WS Scout integration, it is used as a trigger to generate webservice port type implementations. Such an auto-generated port type implementation is called an entry point. It is to be published as the webservice&#x2019;s endpoint, and acts as an interceptor for webservice requests. It optionally enforces for authentication, and makes the request to be executed in a <a href="#runcontext">RunContext</a>. Then, it handles the web request to the effectively implementing port type bean for actual processing.</p> 
       </div> 
@@ -4257,7 +4294,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        <p>When using 'jaxws' Scout Maven profile, annotation processing is enabled for that module by default. But, an entry point for a webservice port type will only be generated if enabled for that port type, meaning that a class annotated with <a href="#WebServiceEntryPoint">WebServiceEntryPoint</a> pointing to that very endpoint interface is found in this module. Anyway, for a sole webservice consumer, it makes no sense to generate an entry point at all.</p> 
       </div> 
       <div class="sect3"> 
-       <h4 id="enable-annotation-processing-tool-apt-in-eclipse-ide"><a class="anchor" href="#enable-annotation-processing-tool-apt-in-eclipse-ide"></a>4.3.1. Enable Annotation Processing Tool (APT) in Eclipse IDE</h4> 
+       <h4 id="enable-annotation-processing-tool-apt-in-eclipse-ide"><a class="anchor" href="#enable-annotation-processing-tool-apt-in-eclipse-ide"></a>45.3.1. Enable Annotation Processing Tool (APT) in Eclipse IDE</h4> 
        <div class="paragraph"> 
         <p>In Eclipse IDE, the workspace build ignores annotation processing as configured in pom.xml. Instead, it must be enabled separately with the following files. Nevertheless, to simply run Maven build with annotation support from within Eclipse IDE, those files are not required.</p> 
        </div> 
@@ -4288,13 +4325,13 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="generate_artifacts_from_console"><a class="anchor" href="#generate_artifacts_from_console"></a>4.4. Build webservice stubs and APT artifacts from console</h3> 
+      <h3 id="generate_artifacts_from_console"><a class="anchor" href="#generate_artifacts_from_console"></a>45.4. Build webservice stubs and APT artifacts from console</h3> 
       <div class="paragraph"> 
        <p>Simply run <em>mvn clean compile</em> on the project. If you are experiencing some problems, run with -X debug flag to get a more detailed error message.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="generate_artifacts_from_eclipse"><a class="anchor" href="#generate_artifacts_from_eclipse"></a>4.5. Build webservice stubs and APT artifacts from within Eclipse IDE</h3> 
+      <h3 id="generate_artifacts_from_eclipse"><a class="anchor" href="#generate_artifacts_from_eclipse"></a>45.5. Build webservice stubs and APT artifacts from within Eclipse IDE</h3> 
       <div class="paragraph"> 
        <p>In the Eclipse IDE, there are three ways to generate webservice stubs and APT artifacts.</p> 
       </div> 
@@ -4310,13 +4347,13 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="exclude-derived-resources-from-version-control"><a class="anchor" href="#exclude-derived-resources-from-version-control"></a>4.6. Exclude derived resources from version control</h3> 
+      <h3 id="exclude-derived-resources-from-version-control"><a class="anchor" href="#exclude-derived-resources-from-version-control"></a>45.6. Exclude derived resources from version control</h3> 
       <div class="paragraph"> 
        <p>Stub and APT artifacts are derived resources, and should be excluded from version control. When working with Eclipse IDE, this is done automatically by eGit, because it adds derived resources to <em>.gitignore</em> (if configured to do so).</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jaxwsannotationprocessor"><a class="anchor" href="#jaxwsannotationprocessor"></a>4.7. JaxWsAnnotationProcessor</h3> 
+      <h3 id="jaxwsannotationprocessor"><a class="anchor" href="#jaxwsannotationprocessor"></a>45.7. JaxWsAnnotationProcessor</h3> 
       <div class="paragraph"> 
        <p><code>JaxWsAnnotationProcessor</code> is an annotation processor provided by Scout JAX-WS integration to generate an entry point for an endpoint interface during compilation. The instructions how to generate the entry point is given via a Java class or Java interface annotated with <a href="#WebServiceEntryPoint">WebServiceEntryPoint</a> annotation.</p> 
       </div> 
@@ -4324,13 +4361,13 @@ cs.reloadCodeType(UiThemeCodeType.class);
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="provide-a-webservice"><a class="anchor" href="#provide-a-webservice"></a>5. Provide a webservice</h2> 
+    <h2 id="provide-a-webservice"><a class="anchor" href="#provide-a-webservice"></a>46. Provide a webservice</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>In this chapter, you will learn how to publish a webservice provider via an entry point.</p> 
      </div> 
      <div class="sect2"> 
-      <h3 id="WebServiceEntryPoint"><a class="anchor" href="#WebServiceEntryPoint"></a>5.1. The concept of an Entry Point</h3> 
+      <h3 id="WebServiceEntryPoint"><a class="anchor" href="#WebServiceEntryPoint"></a>46.1. The concept of an Entry Point</h3> 
       <div class="paragraph"> 
        <p>An entry point implements the endpoint interface (or port type interface), and is published as the webservice endpoint for that endpoint interface. The entry point itself is auto generated by <a href="#jaxwsannotationprocessor">JaxWsAnnotationProcessor</a> during compile time, based on instructions as given by the respective class/interface annotated with <code>WebServiceEntryPoint</code> annotation. The entry point is responsible to enforce authentication and to run the web request in a <code>RunContext</code>. In turn, the request is propagated to the bean implementing the endpoint interface.</p> 
       </div> 
@@ -4363,7 +4400,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="generate-an-entry-point-as-an-endpoint-interface"><a class="anchor" href="#generate-an-entry-point-as-an-endpoint-interface"></a>5.2. Generate an Entry Point as an endpoint interface</h3> 
+      <h3 id="generate-an-entry-point-as-an-endpoint-interface"><a class="anchor" href="#generate-an-entry-point-as-an-endpoint-interface"></a>46.2. Generate an Entry Point as an endpoint interface</h3> 
       <div class="paragraph"> 
        <p>This section describes the steps required to generate an entry point. For demonstration purposes, a simple ping webservice is used, which provides a single method 'ping' to accept and return a <code>String</code> object.</p> 
       </div> 
@@ -4405,7 +4442,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="instrument-the-entry-point-generation"><a class="anchor" href="#instrument-the-entry-point-generation"></a>5.3. Instrument the Entry Point generation</h3> 
+      <h3 id="instrument-the-entry-point-generation"><a class="anchor" href="#instrument-the-entry-point-generation"></a>46.3. Instrument the Entry Point generation</h3> 
       <div class="paragraph"> 
        <p>This section gives an overview on how to configure the entry point to be generated.</p> 
       </div> 
@@ -4502,7 +4539,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        </table> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jaxws.provider.authentication"><a class="anchor" href="#jaxws.provider.authentication"></a>5.3.1. Configure Authentication</h4> 
+       <h4 id="jaxws.provider.authentication"><a class="anchor" href="#jaxws.provider.authentication"></a>46.3.1. Configure Authentication</h4> 
        <div class="paragraph"> 
         <p>The field 'authentication' on <code>WebServiceEntryPoint</code> configures what authentication mechanism to install on the webservice endpoint, and in which <code>RunContext</code> to run authenticated webservice requests. It consists of the <a href="#IAuthenticationMethod">Authentication Method</a> to challenge the client to provide credentials, and the <a href="#ICredentialVerifier">Credential Verifier</a> to verify request&#x2019;s credentials against a data source.</p> 
        </div> 
@@ -4553,7 +4590,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="example.entrypoint.definition"><a class="anchor" href="#example.entrypoint.definition"></a>5.4. Example of an Entry Point definition</h3> 
+      <h3 id="example.entrypoint.definition"><a class="anchor" href="#example.entrypoint.definition"></a>46.4. Example of an Entry Point definition</h3> 
       <div id="jaxws.listing.porttypedefinition" class="listingblock"> 
        <div class="title">
         Listing 62. Example configuration for an entry point definition
@@ -4695,7 +4732,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jaxws.provider.handlerChain"><a class="anchor" href="#jaxws.provider.handlerChain"></a>5.5. Configure JAX-WS Handlers</h3> 
+      <h3 id="jaxws.provider.handlerChain"><a class="anchor" href="#jaxws.provider.handlerChain"></a>46.5. Configure JAX-WS Handlers</h3> 
       <div class="paragraph"> 
        <p>See <a href="#example.entrypoint.definition">listing</a> for an example of how to configure JAX-WS handlers.</p> 
       </div> 
@@ -4771,7 +4808,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jaxws.provider.statepropagation"><a class="anchor" href="#jaxws.provider.statepropagation"></a>5.6. Propagate state among Handlers and port type</h3> 
+      <h3 id="jaxws.provider.statepropagation"><a class="anchor" href="#jaxws.provider.statepropagation"></a>46.6. Propagate state among Handlers and port type</h3> 
       <div class="paragraph"> 
        <p>Sometimes it is useful to share state among handlers, and even with the port type. This can be done via <code>javax.xml.ws.handler.MessageContext</code>. By default, a property put onto message context is only available in the handler chain. To make it available to the port type as well, set its scope to 'APPLICATION' accordingly.</p> 
       </div> 
@@ -4898,7 +4935,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="registration-of-webservice-endpoints"><a class="anchor" href="#registration-of-webservice-endpoints"></a>5.7. Registration of webservice endpoints</h3> 
+      <h3 id="registration-of-webservice-endpoints"><a class="anchor" href="#registration-of-webservice-endpoints"></a>46.7. Registration of webservice endpoints</h3> 
       <div class="paragraph"> 
        <p>The registration of webservice endpoints depends on the implementor you use, and whether you are running in an EE container with webservice auto discovery enabled.</p> 
       </div> 
@@ -4909,7 +4946,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        <p>If not running in an EE container, the registration is implementor specific. In the following, an example for <em>JAX-WS METRO</em> and <em>Apache CXF</em> is given.</p> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jax-ws-metro"><a class="anchor" href="#jax-ws-metro"></a>5.7.1. JAX-WS METRO</h4> 
+       <h4 id="jax-ws-metro"><a class="anchor" href="#jax-ws-metro"></a>46.7.1. JAX-WS METRO</h4> 
        <div class="paragraph"> 
         <p>During startup, <em>JAX-WS METRO</em> looks for the file '/WEB-INF/sun-jaxws.xml', which contains the endpoint definitions.</p> 
        </div> 
@@ -4932,7 +4969,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jaxws.registration.endpoints.cxf"><a class="anchor" href="#jaxws.registration.endpoints.cxf"></a>5.7.2. Apache CXF</h4> 
+       <h4 id="jaxws.registration.endpoints.cxf"><a class="anchor" href="#jaxws.registration.endpoints.cxf"></a>46.7.2. Apache CXF</h4> 
        <div class="paragraph"> 
         <p>During startup, <em>Apache CXF</em> looks for the config file as specified in 'web.xml' via 'config-location'. See <a href="#lst-jaxws.webxml.cxf">Listing 55</a> for more information.</p> 
        </div> 
@@ -4979,7 +5016,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="consume-a-webservice"><a class="anchor" href="#consume-a-webservice"></a>6. Consume a webservice</h2> 
+    <h2 id="consume-a-webservice"><a class="anchor" href="#consume-a-webservice"></a>47. Consume a webservice</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Communication with a webservice endpoint is done based on the webservice&#x2019;s port generated by 'wsimport'. Learn more how to <a href="#jaxws.stub.generation">generate a webservice stub from a WSDL file</a>.</p> 
@@ -5065,7 +5102,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </table> 
      </div> 
      <div class="sect2"> 
-      <h3 id="invoke-a-webservice"><a class="anchor" href="#invoke-a-webservice"></a>6.1. Invoke a webservice</h3> 
+      <h3 id="invoke-a-webservice"><a class="anchor" href="#invoke-a-webservice"></a>47.1. Invoke a webservice</h3> 
       <div class="paragraph"> 
        <p>A webservice operation is invoked on behalf of an invocation context, which is associated with a dedicated port, and which specifies the data to be included in the web request. Upon a webservice call, the invocation context should be discarded.</p> 
       </div> 
@@ -5158,13 +5195,13 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="cancel-a-webservice-request"><a class="anchor" href="#cancel-a-webservice-request"></a>6.2. Cancel a webservice request</h3> 
+      <h3 id="cancel-a-webservice-request"><a class="anchor" href="#cancel-a-webservice-request"></a>47.2. Cancel a webservice request</h3> 
       <div class="paragraph"> 
        <p>The WS-Client supports for cancellation of webservice requests. Internally, every web request is run in another thread, which the calling thread waits for to complete. Upon cancellation, that other thread is interrupted, and the calling thread released with a <code>WebServiceRequestCancelledException</code>. However, depending on the JAX-WS implementor, the web request may still be running, because JAX-WS API does not support the cancellation of a web request.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="get-information-about-the-last-web-request"><a class="anchor" href="#get-information-about-the-last-web-request"></a>6.3. Get information about the last web request</h3> 
+      <h3 id="get-information-about-the-last-web-request"><a class="anchor" href="#get-information-about-the-last-web-request"></a>47.3. Get information about the last web request</h3> 
       <div class="paragraph"> 
        <p>The invocation context allows you to access HTTP status code and HTTP headers of the last web request.</p> 
       </div> 
@@ -5183,7 +5220,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="propagate-state-to-handlers"><a class="anchor" href="#propagate-state-to-handlers"></a>6.4. Propagate state to Handlers</h3> 
+      <h3 id="propagate-state-to-handlers"><a class="anchor" href="#propagate-state-to-handlers"></a>47.4. Propagate state to Handlers</h3> 
       <div class="paragraph"> 
        <p>An invocation context can be associated with request context properties, which are propagated to handlers and JAX-WS implementor.</p> 
       </div> 
@@ -5213,7 +5250,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="install-handlers-and-provide-credentials-for-authentication"><a class="anchor" href="#install-handlers-and-provide-credentials-for-authentication"></a>6.5. Install handlers and provide credentials for authentication</h3> 
+      <h3 id="install-handlers-and-provide-credentials-for-authentication"><a class="anchor" href="#install-handlers-and-provide-credentials-for-authentication"></a>47.5. Install handlers and provide credentials for authentication</h3> 
       <div class="paragraph"> 
        <p>To install a handler, overwrite <code>execInstallHandlers</code> and add the handler to the given List. The handlers are invoked in the order as added to the handler-chain. By default, there is no handler installed.</p> 
       </div> 
@@ -5250,7 +5287,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jaxws.consumer.configuration"><a class="anchor" href="#jaxws.consumer.configuration"></a>6.6. Default configuration of WS-Clients</h3> 
+      <h3 id="jaxws.consumer.configuration"><a class="anchor" href="#jaxws.consumer.configuration"></a>47.6. Default configuration of WS-Clients</h3> 
       <div class="paragraph"> 
        <p>The following properties can be set globally for all WS-Clients. However, a WS-Client can overwrite any of this values.</p> 
       </div> 
@@ -5299,7 +5336,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="jaxws.xmladapters"><a class="anchor" href="#jaxws.xmladapters"></a>7. XML adapters to work with java.util.Date and java.util.Calendar</h2> 
+    <h2 id="jaxws.xmladapters"><a class="anchor" href="#jaxws.xmladapters"></a>48. XML adapters to work with java.util.Date and java.util.Calendar</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Scout ships with some XML adapters to not have to work with <code>XMLGregorianCalendar</code>, but with <code>java.util.Date</code> instead.<br /> It is recommended to configure your global binding file accordingly. See <a href="#lst-jaxws.example.globalbindingfile">Listing 59</a> for an example.</p> 
@@ -5397,10 +5434,10 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="jax-ws-appendix"><a class="anchor" href="#jax-ws-appendix"></a>8. JAX-WS Appendix</h2> 
+    <h2 id="jax-ws-appendix"><a class="anchor" href="#jax-ws-appendix"></a>49. JAX-WS Appendix</h2> 
     <div class="sectionbody"> 
      <div class="sect2"> 
-      <h3 id="PingWebService.wsdl"><a class="anchor" href="#PingWebService.wsdl"></a>8.1. PingWebService.wsdl</h3> 
+      <h3 id="PingWebService.wsdl"><a class="anchor" href="#PingWebService.wsdl"></a>49.1. PingWebService.wsdl</h3> 
       <div class="listingblock"> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;</span>
@@ -5451,7 +5488,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="PingWebServicePortType.java"><a class="anchor" href="#PingWebServicePortType.java"></a>8.2. PingWebServicePortType.java</h3> 
+      <h3 id="PingWebServicePortType.java"><a class="anchor" href="#PingWebServicePortType.java"></a>49.2. PingWebServicePortType.java</h3> 
       <div class="listingblock"> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@WebService</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">PingWebServicePortType</span><span class="delimiter">&quot;</span></span>, targetNamespace = <span class="string"><span class="delimiter">&quot;</span><span class="content">http://scout.eclipse.org/docs/ws/PingWebService/</span><span class="delimiter">&quot;</span></span>)
@@ -5466,7 +5503,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="PingWebServicePortTypeEntryPoint.java"><a class="anchor" href="#PingWebServicePortTypeEntryPoint.java"></a>8.3. PingWebServicePortTypeEntryPoint.java</h3> 
+      <h3 id="PingWebServicePortTypeEntryPoint.java"><a class="anchor" href="#PingWebServicePortTypeEntryPoint.java"></a>49.3. PingWebServicePortTypeEntryPoint.java</h3> 
       <div class="listingblock"> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Generated</span>(value = <span class="string"><span class="delimiter">&quot;</span><span class="content">org.eclipse.scout.jaxws.apt.JaxWsAnnotationProcessor</span><span class="delimiter">&quot;</span></span>, date = <span class="string"><span class="delimiter">&quot;</span><span class="content">2016-01-25T14:22:58:583+0100</span><span class="delimiter">&quot;</span></span>, comments = <span class="string"><span class="delimiter">&quot;</span><span class="content">EntryPoint to run webservice requests on behalf of a RunContext</span><span class="delimiter">&quot;</span></span>)
@@ -5518,7 +5555,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="PingWebServicePortTypeBean.java"><a class="anchor" href="#PingWebServicePortTypeBean.java"></a>8.4. PingWebServicePortTypeBean.java</h3> 
+      <h3 id="PingWebServicePortTypeBean.java"><a class="anchor" href="#PingWebServicePortTypeBean.java"></a>49.4. PingWebServicePortTypeBean.java</h3> 
       <div class="listingblock"> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ApplicationScoped</span>
@@ -5533,7 +5570,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="settings_org.eclipse.jdt.core.prefs"><a class="anchor" href="#settings_org.eclipse.jdt.core.prefs"></a>8.5. .settings/org.eclipse.jdt.core.prefs file to enable APT in Eclipse IDE</h3> 
+      <h3 id="settings_org.eclipse.jdt.core.prefs"><a class="anchor" href="#settings_org.eclipse.jdt.core.prefs"></a>49.5. .settings/org.eclipse.jdt.core.prefs file to enable APT in Eclipse IDE</h3> 
       <div class="listingblock"> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml">...
@@ -5543,7 +5580,7 @@ org.eclipse.jdt.core.compiler.processAnnotations=enabled
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="settings_org.eclipse.jdt.apt.core.prefs"><a class="anchor" href="#settings_org.eclipse.jdt.apt.core.prefs"></a>8.6. .settings/org.eclipse.jdt.apt.core.prefs file to enable APT in Eclipse IDE</h3> 
+      <h3 id="settings_org.eclipse.jdt.apt.core.prefs"><a class="anchor" href="#settings_org.eclipse.jdt.apt.core.prefs"></a>49.6. .settings/org.eclipse.jdt.apt.core.prefs file to enable APT in Eclipse IDE</h3> 
       <div class="listingblock"> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml">org.eclipse.jdt.apt.aptEnabled=true
@@ -5554,13 +5591,13 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="factorypath"><a class="anchor" href="#factorypath"></a>8.7. .factorypath file to enable APT in Eclipse IDE</h3> 
+      <h3 id="factorypath"><a class="anchor" href="#factorypath"></a>49.7. .factorypath file to enable APT in Eclipse IDE</h3> 
       <div class="listingblock"> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="comment">&lt;!-- Replace 'XXX-VERSION-XXX' by the respective Scout RT version --&gt;</span>
 <span class="tag">&lt;factorypath&gt;</span>
     <span class="tag">&lt;factorypathentry</span> <span class="attribute-name">kind</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">VARJAR</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.jaxws.apt/XXX-VERSION-XXX/org.eclipse.scout.jaxws.apt-XXX-VERSION-XXX.jar</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">enabled</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">runInBatchMode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
-    <span class="tag">&lt;factorypathentry</span> <span class="attribute-name">kind</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">VARJAR</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">M2_REPO/com/unquietcode/tools/jcodemodel/codemodel/1.0.2/codemodel-1.0.2.jar</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">enabled</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">runInBatchMode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;factorypathentry</span> <span class="attribute-name">kind</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">VARJAR</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">M2_REPO/com/unquietcode/tools/jcodemodel/codemodel/1.0.3/codemodel-1.0.3.jar</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">enabled</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">runInBatchMode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
     <span class="tag">&lt;factorypathentry</span> <span class="attribute-name">kind</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">VARJAR</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.rt.platform/XXX-VERSION-XXX/org.eclipse.scout.rt.platform-XXX-VERSION-XXX.jar</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">enabled</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">runInBatchMode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
     <span class="tag">&lt;factorypathentry</span> <span class="attribute-name">kind</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">VARJAR</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.rt.server.jaxws/XXX-VERSION-XXX/org.eclipse.scout.rt.server.jaxws-XXX-VERSION-XXX.jar</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">enabled</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">runInBatchMode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
     <span class="tag">&lt;factorypathentry</span> <span class="attribute-name">kind</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">VARJAR</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">enabled</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">runInBatchMode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
@@ -5570,12 +5607,12 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="IAuthenticationMethod"><a class="anchor" href="#IAuthenticationMethod"></a>8.8. Authentication Method</h3> 
+      <h3 id="IAuthenticationMethod"><a class="anchor" href="#IAuthenticationMethod"></a>49.8. Authentication Method</h3> 
       <div class="paragraph"> 
        <p>The authentication method specifies the protocol to challenge the webservice client to provide credentials.<br /> Scout provides an implementation for <em>BASIC</em> and <em>WSSE_UsernameToken</em>. You can implement your own authentication method by implementing <code>IAuthenticationMethod</code> interface.</p> 
       </div> 
       <div class="sect3"> 
-       <h4 id="basicauthenticationmethod"><a class="anchor" href="#basicauthenticationmethod"></a>8.8.1. BasicAuthenticationMethod</h4> 
+       <h4 id="basicauthenticationmethod"><a class="anchor" href="#basicauthenticationmethod"></a>49.8.1. BasicAuthenticationMethod</h4> 
        <div class="paragraph"> 
         <p>Authentication method to apply <em>Basic Access</em> Authentication. This requires requests to provide a valid user name and password to access content. User&#x2019;s credentials are transported in HTTP headers. Basic authentication also works across firewalls and proxy servers.</p> 
        </div> 
@@ -5584,7 +5621,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="wsseusernametokenmethod"><a class="anchor" href="#wsseusernametokenmethod"></a>8.8.2. WsseUsernameTokenMethod</h4> 
+       <h4 id="wsseusernametokenmethod"><a class="anchor" href="#wsseusernametokenmethod"></a>49.8.2. WsseUsernameTokenMethod</h4> 
        <div class="paragraph"> 
         <p>Authentication method to apply <em>Message Level WS-Security with UsernameToken</em> Authentication. This requires requests to provide a valid user name and password to access content. User&#x2019;s credentials are included in SOAP message headers.</p> 
        </div> 
@@ -5593,14 +5630,14 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="containerbasedauthenticationmethod"><a class="anchor" href="#containerbasedauthenticationmethod"></a>8.8.3. ContainerBasedAuthenticationMethod</h4> 
+       <h4 id="containerbasedauthenticationmethod"><a class="anchor" href="#containerbasedauthenticationmethod"></a>49.8.3. ContainerBasedAuthenticationMethod</h4> 
        <div class="paragraph"> 
         <p>Use this authentication method when using container based authentication, meaning that webservice requests are authenticated by the application server, or a Servlet filter.</p> 
        </div> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="ICredentialVerifier"><a class="anchor" href="#ICredentialVerifier"></a>8.9. Credential Verifier</h3> 
+      <h3 id="ICredentialVerifier"><a class="anchor" href="#ICredentialVerifier"></a>49.9. Credential Verifier</h3> 
       <div class="paragraph"> 
        <p>Verifies user&#x2019;s credentials against a data source like <em>database</em>, <em>config.properties</em>, <em>Active Directory</em>, or others.<br /> Scout provides an implementation for verification against users in <em>config.properties</em>. You can implement your own verifier by implementing <code>ICredentialVerifier</code> interface.</p> 
       </div> 
@@ -5615,7 +5652,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
        </table> 
       </div> 
       <div class="sect3"> 
-       <h4 id="configfilecredentialverifier"><a class="anchor" href="#configfilecredentialverifier"></a>8.9.1. ConfigFileCredentialVerifier</h4> 
+       <h4 id="configfilecredentialverifier"><a class="anchor" href="#configfilecredentialverifier"></a>49.9.1. ConfigFileCredentialVerifier</h4> 
        <div class="paragraph"> 
         <p>Credential verifier against credentials configured in <em>config.properties</em> file.</p> 
        </div> 
@@ -5705,6 +5742,16 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
       <div class="paragraph"> 
        <p>The full licence text is available online at <a href="http://creativecommons.org/licenses/by/3.0/legalcode" class="bare">http://creativecommons.org/licenses/by/3.0/legalcode</a></p> 
       </div> 
+      <div class="admonitionblock tip"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
+          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.x-docs.branch-5.2_nightly/docs/build/book_scout_architecture/src/docs/scout_architecture.adoc">edit this page</a> on GitHub. </td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
      </div> 
     </div> 
    </div> 
@@ -5723,7 +5770,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
   <div id="footer"> 
    <div id="footer-text">
      Version 5.2.0-SNAPSHOT
-    <br /> Last updated 2016-01-21 13:35:04 CET 
+    <br /> Last updated 2016-03-02 02:26:06 CET 
    </div> 
   </div>  
  </body>
