@@ -544,8 +544,9 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#various-api-changes">Various API Changes</a></li> 
        <li><a href="#logging-api">Logging API</a></li> 
        <li><a href="#logging-configuration">Logging configuration</a></li> 
-       <li><a href="#class-renames-or-moves">Class Renames or Moves</a></li> 
        <li><a href="#migrate-to-the-new-job-api">Migrate to the new Job API</a></li> 
+       <li><a href="#client-notifications">Client Notifications</a></li> 
+       <li><a href="#class-renames-or-moves">Class Renames or Moves</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -1296,6 +1297,546 @@ replace: ERROR</pre>
       </div> 
      </div> 
      <div class="sect2"> 
+      <h3 id="migrate-to-the-new-job-api"><a class="anchor" href="#migrate-to-the-new-job-api"></a>Migrate to the new Job API</h3> 
+      <div class="paragraph"> 
+       <p>Eclipse jobs are replaced by Scout Job Manager API.</p> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="in-a-nutshell"><a class="anchor" href="#in-a-nutshell"></a>In a nutshell</h4> 
+       <div class="paragraph"> 
+        <p>Scout provides a job manager based on Java Executors framework to run tasks in parallel, and on Quartz Trigger API to support for schedule plans. A task (aka job) can be scheduled to commence execution either immediately upon being scheduled, or delayed some time in the future. A job can be single executing, or recurring based on some schedule plan.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>A job is defined as some work to be executed asynchronously and is associated with a <code>JobInput</code> to describe how to run that work. The work is given to the job manager in the form of a <code>Runnable</code> or <code>Callable</code>. The only difference is, that a <code>Runnable</code> represents a 'fire-and-forget' action, meaning that the submitter of the job does not expect the job to return a result. On the other hand, a <code>Callable</code> returns the computation&#x2019;s result, which the submitter can await for. Of course, a runnable&#x2019;s completion can also be waited for.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>See Scout architecture documentation for more information.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="static-accessors"><a class="anchor" href="#static-accessors"></a>Static accessors</h4> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p>ServerJob.getCurrentSession() &#x2192; ServerSessionProvider.currentSession()</p> </li> 
+         <li> <p>ClientJob.getCurrentSession() &#x2192; ClientSessionProvider.currentSession()</p> </li> 
+         <li> <p>ServerJob.isCurrentJobCancelled() &#x2192; RunMonitor.CURRENT.get().isCancelled()</p> </li> 
+        </ul> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="raw-eclipse-job"><a class="anchor" href="#raw-eclipse-job"></a>Raw Eclipse Job</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 4. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
+    <span class="comment">// do something</span>
+  }
+}.schedule();</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 5. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// do something</span>
+  }
+}, Jobs.newInput()
+    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="serverjob"><a class="anchor" href="#serverjob"></a>ServerJob</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 6. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> ServerJob(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>, ServerJob.getCurrentSession()) {
+
+<span class="annotation">@Override</span>
+<span class="directive">protected</span> IStatus runTransaction(IProgressMonitor monitor) <span class="directive">throws</span> <span class="exception">Exception</span> {
+  <span class="comment">// do something</span>
+  <span class="keyword">return</span> Status.OK_STATUS;
+}
+}.schedule();</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 7. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// do something</span>
+  }
+}, Jobs.newInput()
+    .withRunContext(ServerRunContexts.copyCurrent())
+    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="serverjob-runnow"><a class="anchor" href="#serverjob-runnow"></a>ServerJob.runNow(&#x2026;&#x200b;)</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 8. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> ServerJob(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>, ServerJob.getCurrentSession()) {
+
+<span class="annotation">@Override</span>
+<span class="directive">protected</span> IStatus runTransaction(IProgressMonitor monitor) <span class="directive">throws</span> <span class="exception">Exception</span> {
+  <span class="comment">// do something</span>
+  <span class="keyword">return</span> Status.OK_STATUS;
+}
+}.runNow(<span class="keyword">new</span> NullProgressMonitor());</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 9. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">ServerRunContexts.copyCurrent().run(<span class="keyword">new</span> IRunnable() {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// do something</span>
+  }
+});</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="serverjob-with-other-subject"><a class="anchor" href="#serverjob-with-other-subject"></a>ServerJob with other Subject</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 10. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> ServerJob(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>, ServerJob.getCurrentSession(), subject) {
+
+<span class="annotation">@Override</span>
+<span class="directive">protected</span> IStatus runTransaction(IProgressMonitor monitor) <span class="directive">throws</span> <span class="exception">Exception</span> {
+  <span class="comment">// do something</span>
+  <span class="keyword">return</span> Status.OK_STATUS;
+}
+}.schedule();</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 11. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// do something</span>
+  }
+}, Jobs.newInput()
+    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>)
+    .withRunContext(ServerRunContexts.copyCurrent()
+        .withSubject(subject)));</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="clientsyncjob"><a class="anchor" href="#clientsyncjob"></a>ClientSyncJob</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 12. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> ClientSyncJob(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>, ClientSessionProvider.currentSession()) {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="type">void</span> runVoid(IProgressMonitor monitor) <span class="directive">throws</span> <span class="predefined-type">Throwable</span> {
+    <span class="comment">// do something</span>
+  }
+}.schedule();</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 13. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">ModelJobs.schedule(<span class="keyword">new</span> IRunnable() {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// do something</span>
+  }
+}, ModelJobs
+    .newInput(ClientRunContexts.copyCurrent())
+    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="clientasyncjob"><a class="anchor" href="#clientasyncjob"></a>ClientAsyncJob</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 14. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> ClientAsyncJob(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>, ClientSessionProvider.currentSession()) {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="type">void</span> runVoid(IProgressMonitor monitor) <span class="directive">throws</span> <span class="predefined-type">Throwable</span> {
+    <span class="comment">// do something</span>
+  }
+}.schedule();</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 15. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// do something</span>
+  }
+}, Jobs.newInput()
+    .withRunContext(ClientRunContexts.copyCurrent())
+    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="delayed-execution"><a class="anchor" href="#delayed-execution"></a>Delayed execution</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 16. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
+
+<span class="annotation">@Override</span>
+<span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
+  <span class="comment">// do something</span>
+}
+}.schedule(<span class="integer">5</span>_000);</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 17. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// do something</span>
+  }
+}, Jobs.newInput()
+    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>)
+    .withExecutionTrigger(Jobs.newExecutionTrigger()
+        .withStartIn(<span class="integer">5</span>, <span class="predefined-type">TimeUnit</span>.SECONDS)));</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="repeatedly-execution-with-a-fixed-delay"><a class="anchor" href="#repeatedly-execution-with-a-fixed-delay"></a>Repeatedly execution with a fixed delay</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 18. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
+
+<span class="annotation">@Override</span>
+<span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
+  <span class="comment">// do something</span>
+  schedule(<span class="integer">5</span>_000);
+}
+}.schedule(<span class="integer">5</span>_000);</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 19. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// do something</span>
+  }
+}, Jobs.newInput()
+    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>)
+    .withExecutionTrigger(Jobs.newExecutionTrigger()
+        .withSchedule(FixedDelayScheduleBuilder.repeatForever(<span class="integer">5</span>, <span class="predefined-type">TimeUnit</span>.SECONDS))
+        .withStartIn(<span class="integer">5</span>, <span class="predefined-type">TimeUnit</span>.SECONDS)));</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="check-for-cancellation"><a class="anchor" href="#check-for-cancellation"></a>Check for cancellation</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 20. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
+
+<span class="annotation">@Override</span>
+<span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
+  <span class="comment">// do first chunk of work</span>
+  <span class="keyword">if</span> (monitor.isCanceled()) {
+      <span class="keyword">return</span> Status.CANCEL_STATUS;
+  }
+  <span class="comment">// do second chunk of work</span>
+  <span class="keyword">if</span> (monitor.isCanceled()) {
+    <span class="keyword">return</span> Status.CANCEL_STATUS;
+  }
+  <span class="comment">// do third chunk of work</span>
+  <span class="keyword">return</span> Status.OK_STATUS;
+}
+}.schedule();</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 21. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// do first chunk of work</span>
+    <span class="keyword">if</span> (RunMonitor.CURRENT.get().isCancelled()) {
+      <span class="keyword">return</span>;
+    }
+    <span class="comment">// do second chunk of work</span>
+    <span class="keyword">if</span> (RunMonitor.CURRENT.get().isCancelled()) {
+      <span class="keyword">return</span>;
+    }
+    <span class="comment">// do third chunk of work</span>
+  }
+}, Jobs.newInput()
+    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="join-job"><a class="anchor" href="#join-job"></a>Join job</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 22. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">Job job = <span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
+    <span class="comment">// do something</span>
+    <span class="keyword">return</span> Status.OK_STATUS;
+  }
+};
+job.schedule();
+job.join();</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 23. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">IFuture&lt;<span class="predefined-type">Void</span>&gt; future = Jobs.schedule(<span class="keyword">new</span> IRunnable() {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// do something</span>
+  }
+}, Jobs.newInput()
+    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));
+
+future.awaitDone();</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="join-job-with-a-maximal-wait-time"><a class="anchor" href="#join-job-with-a-maximal-wait-time"></a>Join job with a maximal wait time</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 24. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">Job job = <span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
+    <span class="comment">// do something</span>
+    <span class="keyword">return</span> Status.OK_STATUS;
+  }
+};
+job.schedule();
+job.join(<span class="integer">5</span>_000, <span class="keyword">new</span> NullProgressMonitor());</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 25. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">IFuture&lt;<span class="predefined-type">Void</span>&gt; future = Jobs.schedule(<span class="keyword">new</span> IRunnable() {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// do something</span>
+  }
+}, Jobs.newInput()
+    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));
+
+future.awaitDone(<span class="integer">5</span>, <span class="predefined-type">TimeUnit</span>.SECONDS);</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="join-job-and-get-the-job-s-computation-result"><a class="anchor" href="#join-job-and-get-the-job-s-computation-result"></a>Join job and get the job&#x2019;s computation result</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 26. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">final</span> <span class="predefined-type">AtomicReference</span>&lt;<span class="predefined-type">String</span>&gt; result = <span class="keyword">new</span> <span class="predefined-type">AtomicReference</span>&lt;&gt;();
+
+Job job = <span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
+    <span class="comment">// do something</span>
+    result.set(<span class="string"><span class="delimiter">&quot;</span><span class="content">abc</span><span class="delimiter">&quot;</span></span>);
+    <span class="keyword">return</span> Status.OK_STATUS;
+  }
+};
+job.schedule();
+job.join();
+<span class="predefined-type">System</span>.out.println(result);</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 27. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">IFuture&lt;<span class="predefined-type">String</span>&gt; future = Jobs.schedule(<span class="keyword">new</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">String</span>&gt;() {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="predefined-type">String</span> call() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// do something</span>
+    <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">result</span><span class="delimiter">&quot;</span></span>;
+  }
+}, Jobs.newInput()
+    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));
+
+<span class="predefined-type">String</span> result = future.awaitDoneAndGet();
+<span class="predefined-type">System</span>.out.println(result);</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="client-notifications"><a class="anchor" href="#client-notifications"></a>Client Notifications</h3> 
+      <div class="paragraph"> 
+       <p>Check out the <a href="https://eclipsescout.github.io/6.0/latest/book_scout_architecture/scout_architecture/scout_architecture.html#client-notifications">docs</a> for a description about client notifications.</p> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="changes-in-a-nutshell"><a class="anchor" href="#changes-in-a-nutshell"></a>Changes in a nutshell</h4> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p>There is only one poller per client (instead of per session): <code>ClientNotificationPoller</code></p> </li> 
+         <li> <p>Long polling is used instead of polling in regular intervals</p> </li> 
+         <li> <p>Client notifications are plain serializable objects and do not need to implement the interface <code>IClientNotification</code> anymore</p> </li> 
+         <li> <p><code>ClientNotificationRegistry</code> is used to register client notifications instead of <code>IClientNotificationService</code></p> </li> 
+         <li> <p>If a notification needs to be handled temporarily, <code>AbstractObservableNotificationHandler</code> can be used to register a listener</p> </li> 
+         <li> <p>If a notification needs to be handled always, a handler can be created as subtypes of <code>INotificationHandler&lt;T extends Serializable&gt;</code> to always handle messages of type <code>T `instead of creating a `IClientNotificationConsumerListener</code></p> </li> 
+         <li> <p>The method <code>coalesce</code> on the client notification is replaced with a class of type <code>ICoalescer&lt;T&gt;</code></p> </li> 
+         <li> <p>ServiceTunnel is now a bean instead of a member of the client session</p> </li> 
+        </ul> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="publishing-notifications"><a class="anchor" href="#publishing-notifications"></a>Publishing Notifications</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 28. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">SERVICES.getService(IClientNotificationService.class)
+    .putNotification(<span class="keyword">new</span> UserChangedClientNotification(userId), <span class="keyword">new</span> UserKeyClientNotificationFilter(userId, <span class="integer">60000L</span>));</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 29. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> userId = <span class="string"><span class="delimiter">&quot;</span><span class="content">testUser</span><span class="delimiter">&quot;</span></span>;
+BEANS.get(ClientNotificationRegistry.class)
+    .putForUser(userId, <span class="keyword">new</span> UserChangedClientNotification(userId));</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="handling-notifications"><a class="anchor" href="#handling-notifications"></a>Handling Notifications</h4> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 30. before Scout 'N' release (&lt;=5.0.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">IClientNotificationConsumerListener m_userChangedNotificationListener = <span class="keyword">new</span> IClientNotificationConsumerListener() {
+<span class="annotation">@Override</span>
+<span class="directive">public</span> <span class="type">void</span> handleEvent(ClientNotificationConsumerEvent event, <span class="type">boolean</span> sync) {
+  <span class="keyword">if</span> (event.getClientNotification() <span class="keyword">instanceof</span> UserChangedClientNotification) {
+    <span class="comment">//handle ...</span>
+  }
+}
+};
+SERVICES.getService(IClientNotificationConsumerService.class)
+    .addClientNotificationConsumerListener(AbstractCoreClientSession.get(), m_userChangedNotificationListener);</code></pre> 
+        </div> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 31. since Scout 'N' release (&gt;=5.1.x)
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">UserChangedClientNotificationHandler</span> <span class="directive">implements</span> INotificationHandler&lt;UserChangedClientNotification&gt; {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> handleNotification(UserChangedClientNotification notification) {
+    <span class="comment">//handle ...</span>
+  }
+}</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
       <h3 id="class-renames-or-moves"><a class="anchor" href="#class-renames-or-moves"></a>Class Renames or Moves</h3> 
       <div class="paragraph"> 
        <p>Excluding Tests</p> 
@@ -1308,7 +1849,7 @@ replace: ERROR</pre>
        <thead> 
         <tr> 
          <th class="tableblock halign-left valign-top">5.1.x</th> 
-         <th class="tableblock halign-left valign-top">5.2.x</th> 
+         <th class="tableblock halign-left valign-top">5.2.x/6.0.x</th> 
         </tr> 
        </thead> 
        <tfoot> 
@@ -1812,469 +2353,6 @@ replace: ERROR</pre>
         </tr> 
        </tbody> 
       </table> 
-     </div> 
-     <div class="sect2"> 
-      <h3 id="migrate-to-the-new-job-api"><a class="anchor" href="#migrate-to-the-new-job-api"></a>Migrate to the new Job API</h3> 
-      <div class="paragraph"> 
-       <p>Eclipse jobs are replaced by Scout Job Manager API.</p> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="in-a-nutshell"><a class="anchor" href="#in-a-nutshell"></a>In a nutshell</h4> 
-       <div class="paragraph"> 
-        <p>Scout provides a job manager based on Java Executors framework to run tasks in parallel, and on Quartz Trigger API to support for schedule plans. A task (aka job) can be scheduled to commence execution either immediately upon being scheduled, or delayed some time in the future. A job can be single executing, or recurring based on some schedule plan.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>A job is defined as some work to be executed asynchronously and is associated with a <code>JobInput</code> to describe how to run that work. The work is given to the job manager in the form of a <code>Runnable</code> or <code>Callable</code>. The only difference is, that a <code>Runnable</code> represents a 'fire-and-forget' action, meaning that the submitter of the job does not expect the job to return a result. On the other hand, a <code>Callable</code> returns the computation&#x2019;s result, which the submitter can await for. Of course, a runnable&#x2019;s completion can also be waited for.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>See Scout architecture documentation for more information.</p> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="static-accessors"><a class="anchor" href="#static-accessors"></a>Static accessors</h4> 
-       <div class="ulist"> 
-        <ul> 
-         <li> <p>ServerJob.getCurrentSession() &#x2192; ServerSessionProvider.currentSession()</p> </li> 
-         <li> <p>ClientJob.getCurrentSession() &#x2192; ClientSessionProvider.currentSession()</p> </li> 
-         <li> <p>ServerJob.isCurrentJobCancelled() &#x2192; RunMonitor.CURRENT.get().isCancelled()</p> </li> 
-        </ul> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="raw-eclipse-job"><a class="anchor" href="#raw-eclipse-job"></a>Raw Eclipse Job</h4> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 4. before Scout 'N' release (&lt;=5.0.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
-    <span class="comment">// do something</span>
-  }
-}.schedule();</code></pre> 
-        </div> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 5. since Scout 'N' release (&gt;=5.1.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
-}, Jobs.newInput()
-    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));</code></pre> 
-        </div> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="serverjob"><a class="anchor" href="#serverjob"></a>ServerJob</h4> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 6. before Scout 'N' release (&lt;=5.0.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> ServerJob(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>, ServerJob.getCurrentSession()) {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> IStatus runTransaction(IProgressMonitor monitor) <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-    <span class="keyword">return</span> Status.OK_STATUS;
-  }
-}.schedule();</code></pre> 
-        </div> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 7. since Scout 'N' release (&gt;=5.1.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
-}, Jobs.newInput()
-    .withRunContext(ServerRunContexts.copyCurrent())
-    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));</code></pre> 
-        </div> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="serverjob-runnow"><a class="anchor" href="#serverjob-runnow"></a>ServerJob.runNow(&#x2026;&#x200b;)</h4> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 8. before Scout 'N' release (&lt;=5.0.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> ServerJob(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>, ServerJob.getCurrentSession()) {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> IStatus runTransaction(IProgressMonitor monitor) <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-    <span class="keyword">return</span> Status.OK_STATUS;
-  }
-}.runNow(<span class="keyword">new</span> NullProgressMonitor());</code></pre> 
-        </div> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 9. since Scout 'N' release (&gt;=5.1.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">ServerRunContexts.copyCurrent().run(<span class="keyword">new</span> IRunnable() {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
-});</code></pre> 
-        </div> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="serverjob-with-other-subject"><a class="anchor" href="#serverjob-with-other-subject"></a>ServerJob with other Subject</h4> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 10. before Scout 'N' release (&lt;=5.0.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> ServerJob(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>, ServerJob.getCurrentSession(), subject) {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> IStatus runTransaction(IProgressMonitor monitor) <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-    <span class="keyword">return</span> Status.OK_STATUS;
-  }
-}.schedule();</code></pre> 
-        </div> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 11. since Scout 'N' release (&gt;=5.1.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
-}, Jobs.newInput()
-    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>)
-    .withRunContext(ServerRunContexts.copyCurrent()
-        .withSubject(subject)));</code></pre> 
-        </div> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="clientsyncjob"><a class="anchor" href="#clientsyncjob"></a>ClientSyncJob</h4> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 12. before Scout 'N' release (&lt;=5.0.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> ClientSyncJob(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>, ClientSessionProvider.currentSession()) {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> <span class="type">void</span> runVoid(IProgressMonitor monitor) <span class="directive">throws</span> <span class="predefined-type">Throwable</span> {
-    <span class="comment">// do something</span>
-  }
-}.schedule();</code></pre> 
-        </div> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 13. since Scout 'N' release (&gt;=5.1.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">ModelJobs.schedule(<span class="keyword">new</span> IRunnable() {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
-}, ModelJobs
-    .newInput(ClientRunContexts.copyCurrent())
-    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));</code></pre> 
-        </div> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="clientasyncjob"><a class="anchor" href="#clientasyncjob"></a>ClientAsyncJob</h4> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 14. before Scout 'N' release (&lt;=5.0.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> ClientAsyncJob(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>, ClientSessionProvider.currentSession()) {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> <span class="type">void</span> runVoid(IProgressMonitor monitor) <span class="directive">throws</span> <span class="predefined-type">Throwable</span> {
-    <span class="comment">// do something</span>
-  }
-}.schedule();</code></pre> 
-        </div> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 15. since Scout 'N' release (&gt;=5.1.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
-}, Jobs.newInput()
-    .withRunContext(ClientRunContexts.copyCurrent())
-    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));</code></pre> 
-        </div> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="delayed-execution"><a class="anchor" href="#delayed-execution"></a>Delayed execution</h4> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 16. before Scout 'N' release (&lt;=5.0.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
-    <span class="comment">// do something</span>
-  }
-}.schedule(<span class="integer">5</span>_000);</code></pre> 
-        </div> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 17. since Scout 'N' release (&gt;=5.1.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
-}, Jobs.newInput()
-    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>)
-    .withExecutionTrigger(Jobs.newExecutionTrigger()
-        .withStartIn(<span class="integer">5</span>, <span class="predefined-type">TimeUnit</span>.SECONDS)));</code></pre> 
-        </div> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="repeatedly-execution-with-a-fixed-delay"><a class="anchor" href="#repeatedly-execution-with-a-fixed-delay"></a>Repeatedly execution with a fixed delay</h4> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 18. before Scout 'N' release (&lt;=5.0.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
-    <span class="comment">// do something</span>
-    schedule(<span class="integer">5</span>_000);
-  }
-}.schedule(<span class="integer">5</span>_000);</code></pre> 
-        </div> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 19. since Scout 'N' release (&gt;=5.1.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
-}, Jobs.newInput()
-    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>)
-    .withExecutionTrigger(Jobs.newExecutionTrigger()
-        .withSchedule(FixedDelayScheduleBuilder.repeatForever(<span class="integer">5</span>, <span class="predefined-type">TimeUnit</span>.SECONDS))
-        .withStartIn(<span class="integer">5</span>, <span class="predefined-type">TimeUnit</span>.SECONDS)));</code></pre> 
-        </div> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="check-for-cancellation"><a class="anchor" href="#check-for-cancellation"></a>Check for cancellation</h4> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 20. before Scout 'N' release (&lt;=5.0.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
-    <span class="comment">// do first chunk of work</span>
-    <span class="keyword">if</span> (monitor.isCanceled()) {
-        <span class="keyword">return</span> Status.CANCEL_STATUS;
-    }
-    <span class="comment">// do second chunk of work</span>
-    <span class="keyword">if</span> (monitor.isCanceled()) {
-      <span class="keyword">return</span> Status.CANCEL_STATUS;
-    }
-    <span class="comment">// do third chunk of work</span>
-    <span class="keyword">return</span> Status.OK_STATUS;
-  }
-}.schedule();</code></pre> 
-        </div> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 21. since Scout 'N' release (&gt;=5.1.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do first chunk of work</span>
-    <span class="keyword">if</span> (RunMonitor.CURRENT.get().isCancelled()) {
-      <span class="keyword">return</span>;
-    }
-    <span class="comment">// do second chunk of work</span>
-    <span class="keyword">if</span> (RunMonitor.CURRENT.get().isCancelled()) {
-      <span class="keyword">return</span>;
-    }
-    <span class="comment">// do third chunk of work</span>
-  }
-}, Jobs.newInput()
-    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));</code></pre> 
-        </div> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="join-job"><a class="anchor" href="#join-job"></a>Join job</h4> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 22. before Scout 'N' release (&lt;=5.0.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">Job job = <span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
-    <span class="comment">// do something</span>
-    <span class="keyword">return</span> Status.OK_STATUS;
-  }
-};
-job.schedule();
-job.join();</code></pre> 
-        </div> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 23. since Scout 'N' release (&gt;=5.1.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">IFuture&lt;<span class="predefined-type">Void</span>&gt; future = Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
-}, Jobs.newInput()
-    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));
-
-future.awaitDone();</code></pre> 
-        </div> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="join-job-with-a-maximal-wait-time"><a class="anchor" href="#join-job-with-a-maximal-wait-time"></a>Join job with a maximal wait time</h4> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 24. before Scout 'N' release (&lt;=5.0.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">Job job = <span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
-    <span class="comment">// do something</span>
-    <span class="keyword">return</span> Status.OK_STATUS;
-  }
-};
-job.schedule();
-job.join(<span class="integer">5</span>_000, <span class="keyword">new</span> NullProgressMonitor());</code></pre> 
-        </div> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 25. since Scout 'N' release (&gt;=5.1.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">IFuture&lt;<span class="predefined-type">Void</span>&gt; future = Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
-}, Jobs.newInput()
-    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));
-
-future.awaitDone(<span class="integer">5</span>, <span class="predefined-type">TimeUnit</span>.SECONDS);</code></pre> 
-        </div> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="join-job-and-get-the-job-s-computation-result"><a class="anchor" href="#join-job-and-get-the-job-s-computation-result"></a>Join job and get the job&#x2019;s computation result</h4> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 26. before Scout 'N' release (&lt;=5.0.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">final</span> <span class="predefined-type">AtomicReference</span>&lt;<span class="predefined-type">String</span>&gt; result = <span class="keyword">new</span> <span class="predefined-type">AtomicReference</span>&lt;&gt;();
-
-Job job = <span class="keyword">new</span> Job(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>) {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> IStatus run(IProgressMonitor monitor) {
-    <span class="comment">// do something</span>
-    result.set(<span class="string"><span class="delimiter">&quot;</span><span class="content">abc</span><span class="delimiter">&quot;</span></span>);
-    <span class="keyword">return</span> Status.OK_STATUS;
-  }
-};
-job.schedule();
-job.join();
-<span class="predefined-type">System</span>.out.println(result);</code></pre> 
-        </div> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 27. since Scout 'N' release (&gt;=5.1.x)
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">IFuture&lt;<span class="predefined-type">String</span>&gt; future = Jobs.schedule(<span class="keyword">new</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">String</span>&gt;() {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="predefined-type">String</span> call() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-    <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">result</span><span class="delimiter">&quot;</span></span>;
-  }
-}, Jobs.newInput()
-    .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">job-name</span><span class="delimiter">&quot;</span></span>));
-
-<span class="predefined-type">String</span> result = future.awaitDoneAndGet();
-<span class="predefined-type">System</span>.out.println(result);</code></pre> 
-        </div> 
-       </div> 
-      </div> 
      </div> 
     </div> 
    </div> 
