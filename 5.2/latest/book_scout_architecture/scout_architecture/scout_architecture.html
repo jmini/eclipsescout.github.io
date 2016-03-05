@@ -1206,24 +1206,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
        Listing 8. A configuration property of type string.
       </div> 
       <div class="content"> 
-       <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/** * Defines a new property of data type {@link String} with key 'my.application.key' and default value 'defaultValue'. */</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">MyCustomStringProperty</span> <span class="directive">extends</span> AbstractStringConfigProperty {
-
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="predefined-type">String</span> getKey() {
-    <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">my.application.key</span><span class="delimiter">&quot;</span></span>;
-  }
-
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> <span class="predefined-type">String</span> getDefaultValue() {
-    <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">defaultValue</span><span class="delimiter">&quot;</span></span>;
-  }
-}
-
-<span class="comment">/** * @return The current value of the property 'my.application.key'. */</span>
-<span class="directive">private</span> <span class="predefined-type">String</span> getMyCustomPropertyValue() {
-  <span class="keyword">return</span> CONFIG.getPropertyValue(MyCustomStringProperty.class);
-}</code></pre> 
+       <pre class="CodeRay highlight"><code data-lang="java"></code></pre> 
       </div> 
      </div> 
      <div class="paragraph"> 
@@ -3981,7 +3964,10 @@ cs.reloadCodeType(UiThemeCodeType.class);
       <div class="paragraph"> 
        <p>The profiles requires the Scout runtime version to be specified, and which is used to refer to <code>org.eclipse.scout.jaxws.apt</code> module to generate webservice provider artifacts. However, this version is typically defined in pom.xml of the parent module, because also used to refer to other Scout runtime artifacts.</p> 
       </div> 
-      <div class="listingblock"> 
+      <div id="lst-jaxws.pom.scoutversion" class="listingblock"> 
+       <div class="title">
+        Listing 56. Scout version defined as Maven property
+       </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;properties&gt;</span>
   <span class="tag">&lt;org.eclipse.scout.rt.version&gt;</span>5.2.0-SNAPSHOT<span class="tag">&lt;/org.eclipse.scout.rt.version&gt;</span>
@@ -3989,34 +3975,44 @@ cs.reloadCodeType(UiThemeCodeType.class);
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>If your project design envisions a separate JAR module per WSDL, you simply have to set the property 'jaxws.wsdl.file' with the name of your WSDL file in the module&#x2019;s pom.xml (example in <a href="#lst-jaxws.pom.single-wsdl-file">Listing 56</a>).</p> 
+       <p>If your project design envisions a separate JAR module per WSDL, you simply have to set the property 'jaxws.wsdl.file' with the name of your WSDL file in the module&#x2019;s pom.xml (example in <a href="#lst-jaxws.pom.single-wsdl-file">Listing 57</a>).</p> 
       </div> 
       <div id="lst-jaxws.pom.single-wsdl-file" class="listingblock"> 
        <div class="title">
-        Listing 56. wsimport configuration in pom.xml if working with a single WSDL file per JAR module
+        Listing 57. wsimport configuration in pom.xml if working with a single WSDL file per JAR module
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;properties&gt;</span>
-  <span class="tag">&lt;jaxws.wsdl.file&gt;</span>YourWebService.wsdl<span class="tag">&lt;/jaxws.wsdl.file&gt;</span>
+  <span class="tag">&lt;jaxws.wsdl.file&gt;</span>YourWebService.wsdl<span class="tag">&lt;/jaxws.wsdl.file&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
 <span class="tag">&lt;/properties&gt;</span></code></pre> 
        </div> 
       </div> 
+      <div class="colist arabic"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td><i class="conum" data-value="1"></i><b>1</b></td> 
+          <td>name of the wsdl file</td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
       <div class="paragraph"> 
-       <p>Otherwise, if having multiple WSDL files in your JAR module, some little more configuration is required, namely a respective execution section per WSDL file. Thereby, the 'id' of the execution section must be unique. Scout 'jaxws' profile already provides one such section, which is used to generate the stub for a single WSDL file (see such configuration in <a href="#lst-jaxws.pom.single-wsdl-file">Listing 56</a>), and names it 'wsimport-1'. It is simplest to name the subsequent execution sections 'wsimport-2', 'wsimport-3', and so on.<br /> For each execution section, you must configure its unique <em>id</em>, the <em>goal</em> 'wsimport', and in the configuration section the respective <em>wsdlLocation</em> and <em>wsdlFile</em>. For 'wsimport' to work, <em>wsdlLocation</em> is not required. However, that location will be referenced in generated artifacts to set the wsdl location via <code>@WebService</code> and <code>@WebServiceClient</code>. The complete configuration is presented in <a href="#lst-jaxws.pom.multiple-wsdl">Listing 57</a>.</p> 
+       <p>Otherwise, if having multiple WSDL files in your JAR module, some little more configuration is required, namely a respective execution section per WSDL file. Thereby, the 'id' of the execution section must be unique. Scout 'jaxws' profile already provides one such section, which is used to generate the stub for a single WSDL file (see such configuration in <a href="#lst-jaxws.pom.single-wsdl-file">Listing 57</a>), and names it 'wsimport-1'. It is simplest to name the subsequent execution sections 'wsimport-2', 'wsimport-3', and so on.<br /> For each execution section, you must configure its unique <em>id</em>, the <em>goal</em> 'wsimport', and in the configuration section the respective <em>wsdlLocation</em> and <em>wsdlFile</em>. For 'wsimport' to work, <em>wsdlLocation</em> is not required. However, that location will be referenced in generated artifacts to set the wsdl location via <code>@WebService</code> and <code>@WebServiceClient</code>. The complete configuration is presented in <a href="#lst-jaxws.pom.multiple-wsdl">Listing 58</a>.</p> 
       </div> 
       <div class="admonitionblock warning"> 
        <table> 
         <tbody>
          <tr> 
           <td class="icon"> <i class="fa icon-warning" title="Warning"></i> </td> 
-          <td class="content"> If you decide to configure multiple WSDL files in your POM as described in <a href="#lst-jaxws.pom.multiple-wsdl">Listing 57</a>, the configuration defined in the parent POM (<code>maven_rt_plugin_config-master</code>) and expecting a configuration as presented in <a href="#lst-jaxws.pom.single-wsdl-file">Listing 56</a> needs to be overridden, therefore one of your execution id needs to be <code>wsimport-1</code>. </td> 
+          <td class="content"> If you decide to configure multiple WSDL files in your POM as described in <a href="#lst-jaxws.pom.multiple-wsdl">Listing 58</a>, the configuration defined in the parent POM (<code>maven_rt_plugin_config-master</code>) and expecting a configuration as presented in <a href="#lst-jaxws.pom.single-wsdl-file">Listing 57</a> needs to be overridden, therefore one of your execution id needs to be <code>wsimport-1</code>. </td> 
          </tr> 
         </tbody>
        </table> 
       </div> 
       <div id="lst-jaxws.pom.multiple-wsdl" class="listingblock"> 
        <div class="title">
-        Listing 57. wsimport configuration in pom.xml if working with multiple WSDL files per JAR module
+        Listing 58. wsimport configuration in pom.xml if working with multiple WSDL files per JAR module
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;build&gt;</span>
@@ -4102,11 +4098,11 @@ cs.reloadCodeType(UiThemeCodeType.class);
      <div class="sect2"> 
       <h3 id="customize-wsdl-components-and-xsd-schema-elements-via-binding-files"><a class="anchor" href="#customize-wsdl-components-and-xsd-schema-elements-via-binding-files"></a>45.2. Customize WSDL components and XSD schema elements via binding files</h3> 
       <div class="paragraph"> 
-       <p>By default, all XML files contained in folder 'WEB-INF/binding' are used as binding files. But, most often, you will have a global binding file, which applies to all your WSDL files, and some custom binding files different per WSDL file and XSD schema files. See how to explicitly configure binding files in <a href="#lst-jaxws.pom.multiple-binding">Listing 58</a>.</p> 
+       <p>By default, all XML files contained in folder 'WEB-INF/binding' are used as binding files. But, most often, you will have a global binding file, which applies to all your WSDL files, and some custom binding files different per WSDL file and XSD schema files. See how to explicitly configure binding files in <a href="#lst-jaxws.pom.multiple-binding">Listing 59</a>.</p> 
       </div> 
       <div id="lst-jaxws.pom.multiple-binding" class="listingblock"> 
        <div class="title">
-        Listing 58. explicit configuration of binding files
+        Listing 59. explicit configuration of binding files
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="comment">&lt;!-- YourFirstWebService.wsdl --&gt;</span>
@@ -4141,15 +4137,15 @@ cs.reloadCodeType(UiThemeCodeType.class);
         <tbody>
          <tr> 
           <td><i class="conum" data-value="1"></i><b>1</b></td> 
-          <td>global binding file which applies to all XSD schema elements. See <a href="#lst-jaxws.example.globalbindingfile">Listing 59</a> for an example.</td> 
+          <td>global binding file which applies to all XSD schema elements. See <a href="#lst-jaxws.example.globalbindingfile">Listing 60</a> for an example.</td> 
          </tr> 
          <tr> 
           <td><i class="conum" data-value="2"></i><b>2</b></td> 
-          <td>custom binding file to customize the webservice&#x2019;s WSDL components in the namespace <em><a href="http://java.sun.com/xml/ns/jaxws" class="bare">http://java.sun.com/xml/ns/jaxws</a></em>. See <a href="#lst-jaxws.bindingfile.ws">Listing 60</a> for an example.</td> 
+          <td>custom binding file to customize the webservice&#x2019;s WSDL components in the namespace <em><a href="http://java.sun.com/xml/ns/jaxws" class="bare">http://java.sun.com/xml/ns/jaxws</a></em>. See <a href="#lst-jaxws.bindingfile.ws">Listing 61</a> for an example.</td> 
          </tr> 
          <tr> 
           <td><i class="conum" data-value="3"></i><b>3</b></td> 
-          <td>custom binding file to customize the webservice&#x2019;s XSD schema elements in the namespace <em><a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a></em>. See <a href="#lst-jaxws.bindingfile.xs">Listing 61</a> for an example.</td> 
+          <td>custom binding file to customize the webservice&#x2019;s XSD schema elements in the namespace <em><a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a></em>. See <a href="#lst-jaxws.bindingfile.xs">Listing 62</a> for an example.</td> 
          </tr> 
         </tbody>
        </table> 
@@ -4162,7 +4158,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div id="lst-jaxws.example.globalbindingfile" class="listingblock"> 
        <div class="title">
-        Listing 59. example of global binding file in the namespace 
+        Listing 60. example of global binding file in the namespace 
         <a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a>
        </div> 
        <div class="content"> 
@@ -4195,7 +4191,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div id="lst-jaxws.bindingfile.ws" class="listingblock"> 
        <div class="title">
-        Listing 60. example of jaxws component customization in the namespace 
+        Listing 61. example of jaxws component customization in the namespace 
         <a href="http://java.sun.com/xml/ns/jaxws" class="bare">http://java.sun.com/xml/ns/jaxws</a>
        </div> 
        <div class="content"> 
@@ -4221,7 +4217,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div id="lst-jaxws.bindingfile.xs" class="listingblock"> 
        <div class="title">
-        Listing 61. example of xsd schema element customization in the namespace 
+        Listing 62. example of xsd schema element customization in the namespace 
         <a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a>
        </div> 
        <div class="content"> 
@@ -4593,7 +4589,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       <h3 id="example.entrypoint.definition"><a class="anchor" href="#example.entrypoint.definition"></a>46.4. Example of an Entry Point definition</h3> 
       <div id="jaxws.listing.porttypedefinition" class="listingblock"> 
        <div class="title">
-        Listing 62. Example configuration for an entry point definition
+        Listing 63. Example configuration for an entry point definition
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@WebServiceEntryPoint</span>(
@@ -4681,7 +4677,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 63. PingWebServiceEntryPoint_handler-chain.xml
+        Listing 64. PingWebServiceEntryPoint_handler-chain.xml
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java">&lt;handler-chains xmlns=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://java.sun.com/xml/ns/javaee</span><span class="delimiter">&quot;</span></span>&gt;
@@ -4717,7 +4713,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 64. PingWebServiceEntryPoint.java
+        Listing 65. PingWebServiceEntryPoint.java
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@WebService</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">PingWebServicePortType</span><span class="delimiter">&quot;</span></span>,
@@ -4750,7 +4746,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 65. Example of a JAX-WS Handler
+        Listing 66. Example of a JAX-WS Handler
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ApplicationScoped</span> <i class="conum" data-value="1"></i><b>(1)</b>
@@ -4817,7 +4813,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 66. This handler puts the correlation ID onto message context to be accessible by subsequent handlers and the port type.
+        Listing 67. This handler puts the correlation ID onto message context to be accessible by subsequent handlers and the port type.
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ApplicationScoped</span>
@@ -4862,7 +4858,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div id="jaxws.handler.statepropagation.readcid" class="listingblock"> 
        <div class="title">
-        Listing 67. This handler accesses the 'correlation ID' as set by the previous handler.
+        Listing 68. This handler accesses the 'correlation ID' as set by the previous handler.
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ApplicationScoped</span>
@@ -4903,7 +4899,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 68. This port type accesses the 'correlation ID' as set by the previous handler.
+        Listing 69. This port type accesses the 'correlation ID' as set by the previous handler.
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ApplicationScoped</span>
@@ -4952,7 +4948,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        </div> 
        <div class="listingblock"> 
         <div class="title">
-         Listing 69. WEB-INF/sun-jaxws.xml
+         Listing 70. WEB-INF/sun-jaxws.xml
         </div> 
         <div class="content"> 
          <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;jws:endpoints</span> <span class="attribute-name">xmlns:jws</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://java.sun.com/xml/ns/jax-ws/ri/runtime</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">version</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">2.0</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
@@ -4975,7 +4971,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        </div> 
        <div class="listingblock"> 
         <div class="title">
-         Listing 70. WEB-INF/cxf-jaxws.xml
+         Listing 71. WEB-INF/cxf-jaxws.xml
         </div> 
         <div class="content"> 
          <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;beans</span> <span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.springframework.org/schema/beans</span><span class="delimiter">&quot;</span></span>
@@ -5026,7 +5022,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 71. Example of a WS-Client
+       Listing 72. Example of a WS-Client
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">PingWebServiceClient</span> <span class="directive">extends</span> AbstractWebServiceClient&lt;PingWebService, PingWebServicePortType&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
@@ -5051,7 +5047,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 72. Example of a WS-Client configuration
+       Listing 73. Example of a WS-Client configuration
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">PingWebServiceClient1</span> <span class="directive">extends</span> AbstractWebServiceClient&lt;PingWebService, PingWebServicePortType&gt; {
@@ -5108,7 +5104,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 73. Example of a webservice call
+        Listing 74. Example of a webservice call
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java">PingWebServicePortType port = BEANS.get(PingWebServiceClient.class).newInvocationContext().getPort(); <i class="conum" data-value="1"></i><b>(1)</b>
@@ -5138,7 +5134,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 74. Configure invocation context with data to be included in the web request
+        Listing 75. Configure invocation context with data to be included in the web request
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">final</span> InvocationContext&lt;PingWebServicePortType&gt; context = BEANS.get(PingWebServiceClient.class).newInvocationContext();
@@ -5246,7 +5242,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
        </table> 
       </div> 
       <div class="paragraph"> 
-       <p>Learn more how to <a href="#jaxws.handler.statepropagation.readcid">Listing 67</a>.</p> 
+       <p>Learn more how to <a href="#jaxws.handler.statepropagation.readcid">Listing 68</a>.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -5339,7 +5335,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
     <h2 id="jaxws.xmladapters"><a class="anchor" href="#jaxws.xmladapters"></a>48. XML adapters to work with java.util.Date and java.util.Calendar</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p>Scout ships with some XML adapters to not have to work with <code>XMLGregorianCalendar</code>, but with <code>java.util.Date</code> instead.<br /> It is recommended to configure your global binding file accordingly. See <a href="#lst-jaxws.example.globalbindingfile">Listing 59</a> for an example.</p> 
+      <p>Scout ships with some XML adapters to not have to work with <code>XMLGregorianCalendar</code>, but with <code>java.util.Date</code> instead.<br /> It is recommended to configure your global binding file accordingly. See <a href="#lst-jaxws.example.globalbindingfile">Listing 60</a> for an example.</p> 
      </div> 
      <div class="paragraph"> 
       <p>See the adapter&#x2019;s JavaDoc for more detailed information.</p> 
@@ -5747,7 +5743,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
         <tbody>
          <tr> 
           <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
-          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.x-docs.branch-5.2_nightly/docs/build/book_scout_architecture/src/docs/scout_architecture.adoc">edit this page</a> on GitHub. </td> 
+          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/5.2.x/docs/build/book_scout_architecture/src/docs/scout_architecture.adoc">edit this page</a> on GitHub. </td> 
          </tr> 
         </tbody>
        </table> 
@@ -5770,7 +5766,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
   <div id="footer"> 
    <div id="footer-text">
      Version 5.2.0-SNAPSHOT
-    <br /> Last updated 2016-03-02 02:26:06 CET 
+    <br /> Last updated 2016-03-01 06:39:16 CET 
    </div> 
   </div>  
  </body>
