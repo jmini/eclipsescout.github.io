@@ -712,6 +712,11 @@ table.CodeRay td.code>pre{padding:0}
          <li><a href="#IAuthenticationMethod">49.8. Authentication Method</a></li> 
          <li><a href="#ICredentialVerifier">49.9. Credential Verifier</a></li> 
         </ul> </li> 
+      </ul> </li> 
+     <li><a href="#session-cookie-jsessionid-cookie-configuration">Session Cookie (JSESSIONID Cookie) Configuration</a> 
+      <ul class="sectlevel1"> 
+       <li><a href="#httponly">50. HttpOnly</a></li> 
+       <li><a href="#secure">51. Secure</a></li> 
        <li><a href="#apx-cclicence">Appendix A: Licence and Copyright</a> 
         <ul class="sectlevel2"> 
          <li><a href="#licence-summary">A.1. Licence Summary</a></li> 
@@ -1692,7 +1697,7 @@ jobManager.schedule(<span class="keyword">new</span> IRunnable() { <i class="con
        <p>The trigger mechanism is provided by Quartz Scheduler, meaning that you can profit from the powerful Quartz schedule capabilities.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>For more information, see <a href="http://www.quartz-scheduler.org" class="bare">http://www.quartz-scheduler.org</a>.</p> 
+       <p>For more information, see <a href="http://www.quartz-scheduler.org" class="bare" target="_blank">http://www.quartz-scheduler.org</a>.</p> 
       </div> 
       <div class="paragraph"> 
        <p>Use the static factory method <code>Jobs.newExecutionTrigger()</code> to get an instance:</p> 
@@ -2483,7 +2488,7 @@ operationCompleted.waitForUninterruptibly();</code></pre>
       <p>A trigger can be as simple as a 'one-shot' execution at some specific point in time in the future, or represent a schedule which executes a job on a repeatedly basis. The latter can be configured to run infinitely, or to end at a specific point in time. It is further possible to define rather complex triggers, like to execute a job every second Friday at noon, but with the exclusion of all the business&#x2019;s holidays.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>See the various schedule builders provided by Quartz Scheduler: <code>SimpleScheduleBuilder</code>, <code>CronScheduleBuilder</code>, <code>CalendarIntervalScheduleBuilder</code>, <code>DailyTimeIntervalScheduleBuilder</code>. The most powerful builder is <code>CronScheduleBuilder</code>. Cron is a UNIX tool with powerful and proven scheduling capabilities. For more information, see <a href="http://www.quartz-scheduler.org" class="bare">http://www.quartz-scheduler.org</a>.</p> 
+      <p>See the various schedule builders provided by Quartz Scheduler: <code>SimpleScheduleBuilder</code>, <code>CronScheduleBuilder</code>, <code>CalendarIntervalScheduleBuilder</code>, <code>DailyTimeIntervalScheduleBuilder</code>. The most powerful builder is <code>CronScheduleBuilder</code>. Cron is a UNIX tool with powerful and proven scheduling capabilities. For more information, see <a href="http://www.quartz-scheduler.org" class="bare" target="_blank">http://www.quartz-scheduler.org</a>.</p> 
      </div> 
      <div class="paragraph"> 
       <p>Additionally, Scout provides you with <code>FixedDelayScheduleBuilder</code> to run a job with a fixed delay between the termination of one execution and the commencement of the next execution.</p> 
@@ -3343,7 +3348,7 @@ protected void execInitField() {
      <div class="sect2"> 
       <h3 id="using-a-white-list-filter"><a class="anchor" href="#using-a-white-list-filter"></a>35.5. Using a White-List Filter</h3> 
       <div class="paragraph"> 
-       <p>If HTML or XML from external sources or more complex HTML are used in the Scout model, using a white-list filter might be the best way to avoid security bugs. Libraries, such as <a href="http://jsoup.org/">JSoup</a> provide such a white-list filter. Scout currently does not include any services or utilities for using white-list filters, because the configuration and usage is very use-case-specific and would therefore not add much benefit.</p> 
+       <p>If HTML or XML from external sources or more complex HTML are used in the Scout model, using a white-list filter might be the best way to avoid security bugs. Libraries, such as <a href="http://jsoup.org/" target="_blank">JSoup</a> provide such a white-list filter. Scout currently does not include any services or utilities for using white-list filters, because the configuration and usage is very use-case-specific and would therefore not add much benefit.</p> 
       </div> 
      </div> 
     </div> 
@@ -4089,7 +4094,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        </table> 
       </div> 
       <div class="paragraph"> 
-       <p>Further, you can overwrite any configuration as defined by 'jaxws-maven-plugin'. See <a href="http://www.mojohaus.org/jaxws-maven-plugin/" class="bare">http://www.mojohaus.org/jaxws-maven-plugin/</a> for supported configuration properties.</p> 
+       <p>Further, you can overwrite any configuration as defined by 'jaxws-maven-plugin'. See <a href="http://www.mojohaus.org/jaxws-maven-plugin/" class="bare" target="_blank">http://www.mojohaus.org/jaxws-maven-plugin/</a> for supported configuration properties.</p> 
       </div> 
       <div class="paragraph"> 
        <p>Also, it is good practice to create a separate folder for each WSDL file, which also contains all its referenced XSD schemas. Then, do not forget to change the properties <em>wsdlLocation</em> and <em>wsdlFile</em> accordingly.</p> 
@@ -4141,11 +4146,11 @@ cs.reloadCodeType(UiThemeCodeType.class);
          </tr> 
          <tr> 
           <td><i class="conum" data-value="2"></i><b>2</b></td> 
-          <td>custom binding file to customize the webservice&#x2019;s WSDL components in the namespace <em><a href="http://java.sun.com/xml/ns/jaxws" class="bare">http://java.sun.com/xml/ns/jaxws</a></em>. See <a href="#lst-jaxws.bindingfile.ws">Listing 61</a> for an example.</td> 
+          <td>custom binding file to customize the webservice&#x2019;s WSDL components in the namespace <em><a href="http://java.sun.com/xml/ns/jaxws" class="bare" target="_blank">http://java.sun.com/xml/ns/jaxws</a></em>. See <a href="#lst-jaxws.bindingfile.ws">Listing 61</a> for an example.</td> 
          </tr> 
          <tr> 
           <td><i class="conum" data-value="3"></i><b>3</b></td> 
-          <td>custom binding file to customize the webservice&#x2019;s XSD schema elements in the namespace <em><a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a></em>. See <a href="#lst-jaxws.bindingfile.xs">Listing 62</a> for an example.</td> 
+          <td>custom binding file to customize the webservice&#x2019;s XSD schema elements in the namespace <em><a href="http://java.sun.com/xml/ns/jaxb" class="bare" target="_blank">http://java.sun.com/xml/ns/jaxb</a></em>. See <a href="#lst-jaxws.bindingfile.xs">Listing 62</a> for an example.</td> 
          </tr> 
         </tbody>
        </table> 
@@ -4159,7 +4164,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       <div id="lst-jaxws.example.globalbindingfile" class="listingblock"> 
        <div class="title">
         Listing 60. example of global binding file in the namespace 
-        <a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a>
+        <a href="http://java.sun.com/xml/ns/jaxb" class="bare" target="_blank">http://java.sun.com/xml/ns/jaxb</a>
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bindings</span> <span class="attribute-name">version</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">2.0</span><span class="delimiter">&quot;</span></span>
@@ -4187,12 +4192,12 @@ cs.reloadCodeType(UiThemeCodeType.class);
        <p>By default, generated artifacts are put into the package corresponding to the element&#x2019;s namespace. Sometimes, you like to control the package names, but you want to do that on a per-namespace basis, and not put all the artifacts of a webservice into the very same package. That is mainly to omit collisions, and to have artifacts shared among webservices not duplicated.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Two separate binding files are required to customize WSDL components and XSD schema elements.<br /> That is because WSDL component customization is to be done in 'jaxws' namespace <a href="http://java.sun.com/xml/ns/jaxws" class="bare">http://java.sun.com/xml/ns/jaxws</a>, whereas XSD schema element customization in 'jaxb' namespace <a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a>.</p> 
+       <p>Two separate binding files are required to customize WSDL components and XSD schema elements.<br /> That is because WSDL component customization is to be done in 'jaxws' namespace <a href="http://java.sun.com/xml/ns/jaxws" class="bare" target="_blank">http://java.sun.com/xml/ns/jaxws</a>, whereas XSD schema element customization in 'jaxb' namespace <a href="http://java.sun.com/xml/ns/jaxb" class="bare" target="_blank">http://java.sun.com/xml/ns/jaxb</a>.</p> 
       </div> 
       <div id="lst-jaxws.bindingfile.ws" class="listingblock"> 
        <div class="title">
         Listing 61. example of jaxws component customization in the namespace 
-        <a href="http://java.sun.com/xml/ns/jaxws" class="bare">http://java.sun.com/xml/ns/jaxws</a>
+        <a href="http://java.sun.com/xml/ns/jaxws" class="bare" target="_blank">http://java.sun.com/xml/ns/jaxws</a>
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="comment">&lt;!-- binding to customize webservice components (xmlns=http://java.sun.com/xml/ns/jaxws) --&gt;</span>
@@ -4206,7 +4211,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
         <tbody>
          <tr> 
           <td><i class="conum" data-value="1"></i><b>1</b></td> 
-          <td>customization via jaxws namespace: <a href="http://java.sun.com/xml/ns/jaxws" class="bare">http://java.sun.com/xml/ns/jaxws</a></td> 
+          <td>customization via jaxws namespace: <a href="http://java.sun.com/xml/ns/jaxws" class="bare" target="_blank">http://java.sun.com/xml/ns/jaxws</a></td> 
          </tr> 
          <tr> 
           <td><i class="conum" data-value="2"></i><b>2</b></td> 
@@ -4218,7 +4223,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       <div id="lst-jaxws.bindingfile.xs" class="listingblock"> 
        <div class="title">
         Listing 62. example of xsd schema element customization in the namespace 
-        <a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a>
+        <a href="http://java.sun.com/xml/ns/jaxb" class="bare" target="_blank">http://java.sun.com/xml/ns/jaxb</a>
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="comment">&lt;!-- binding to customize xsd schema elements (xmlns=http://java.sun.com/xml/ns/jaxb) --&gt;</span>
@@ -4244,15 +4249,15 @@ cs.reloadCodeType(UiThemeCodeType.class);
         <tbody>
          <tr> 
           <td><i class="conum" data-value="1"></i><b>1</b></td> 
-          <td>customization via jaxb namespace: <a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a></td> 
+          <td>customization via jaxb namespace: <a href="http://java.sun.com/xml/ns/jaxb" class="bare" target="_blank">http://java.sun.com/xml/ns/jaxb</a></td> 
          </tr> 
          <tr> 
           <td><i class="conum" data-value="2"></i><b>2</b></td> 
-          <td>instructs to put all XSD schema elements in namespace <em><a href="http://eclipse.org/public/services/ws/soap" class="bare">http://eclipse.org/public/services/ws/soap</a></em> into package <em>org.eclipse.ws.yourfirstwebservice</em></td> 
+          <td>instructs to put all XSD schema elements in namespace <em><a href="http://eclipse.org/public/services/ws/soap" class="bare" target="_blank">http://eclipse.org/public/services/ws/soap</a></em> into package <em>org.eclipse.ws.yourfirstwebservice</em></td> 
          </tr> 
          <tr> 
           <td><i class="conum" data-value="3"></i><b>3</b></td> 
-          <td>instructs to put all XSD schema elements in namespace <em><a href="http://eclipse.org/public/services/ws/common/soap" class="bare">http://eclipse.org/public/services/ws/common/soap</a></em> into package <em>org.eclipse.ws.common</em></td> 
+          <td>instructs to put all XSD schema elements in namespace <em><a href="http://eclipse.org/public/services/ws/common/soap" class="bare" target="_blank">http://eclipse.org/public/services/ws/common/soap</a></em> into package <em>org.eclipse.ws.common</em></td> 
          </tr> 
         </tbody>
        </table> 
@@ -4272,7 +4277,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
         <tbody>
          <tr> 
           <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
-          <td class="content"> For shared webservice artifacts, you can also use XJC binding compiler to generate those artifacts in advance, and then provide the resulting episode binding file (META-INF/sun-jaxb.episode) to <em>wsimport</em>. See <a href="http://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.2/xjc-mojo.html" class="bare">http://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.2/xjc-mojo.html</a> for more information. </td> 
+          <td class="content"> For shared webservice artifacts, you can also use XJC binding compiler to generate those artifacts in advance, and then provide the resulting episode binding file (META-INF/sun-jaxb.episode) to <em>wsimport</em>. See <a href="http://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.2/xjc-mojo.html" class="bare" target="_blank">http://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.2/xjc-mojo.html</a> for more information. </td> 
          </tr> 
         </tbody>
        </table> 
@@ -5002,7 +5007,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
          <tbody>
           <tr> 
            <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
-           <td class="content"> Depending on the implementor, a HTML page may be provided to see all webservices published.<br /> For <em>JAX-WS METRO</em>, enter the URL to a concrete webservice, e.g. <a href="http://localhost:8080/jaxws/PingWebService" class="bare">http://localhost:8080/jaxws/PingWebService</a>.<br /> For <em>Apache CXF</em>, enter the base URL where the webservices are published, e.g. <a href="http://localhost:8080/jaxws" class="bare">http://localhost:8080/jaxws</a>. </td> 
+           <td class="content"> Depending on the implementor, a HTML page may be provided to see all webservices published.<br /> For <em>JAX-WS METRO</em>, enter the URL to a concrete webservice, e.g. <a href="http://localhost:8080/jaxws/PingWebService" class="bare" target="_blank">http://localhost:8080/jaxws/PingWebService</a>.<br /> For <em>Apache CXF</em>, enter the base URL where the webservices are published, e.g. <a href="http://localhost:8080/jaxws" class="bare" target="_blank">http://localhost:8080/jaxws</a>. </td> 
           </tr> 
          </tbody>
         </table> 
@@ -5668,6 +5673,119 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
      </div> 
     </div> 
    </div> 
+   <h1 id="session-cookie-jsessionid-cookie-configuration" class="sect0"><a class="anchor" href="#session-cookie-jsessionid-cookie-configuration"></a>Session Cookie (JSESSIONID Cookie) Configuration</h1> 
+   <div class="openblock partintro"> 
+    <div class="content"> 
+     <div class="paragraph"> 
+      <p>The UiServlet checks after the creation of a session cookie if the server is configured safely. The validation is implemented in the Bean <code>SessionCookieValidator</code> and can be replaced or customized by developers. The validation is only automatically performed by the UiServlet. There is no automatic validation on the backend server side or on any custom servlets!</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>If the validation fails, the validator assumes that the session has been tampered and invalidates the session immediately. For the end user this leads to a session timeout message right after application access or that the user cannot login at all. In this case the application should be taken offline and the configuration should be fixed.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="httponly"><a class="anchor" href="#httponly"></a>50. HttpOnly</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>First the default implementation checks the existence of the <code>HttpOnly</code> flag on the <code>Set-Cookie</code> HTTP response header. If the user agent supports this flag, the cookie cannot be accessed through a client side script. As a result even if a cross-site scripting (XSS) flaw exists and a user accidentally accesses a link that exploits this flaw, the user agent will not reveal the cookie to a third party. For a list of user agents supporting this feature please refer to <a href="https://www.owasp.org/index.php/HTTPOnly#Browsers_Supporting_HttpOnly" target="_blank">OWASP</a>.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>It is recommended to always enable this flag.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor <code>WEB-INF/web.xml</code>:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="CodeRay highlight"><code data-lang="xml"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="tag">&lt;web-app</span>
+    <span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://xmlns.jcp.org/xml/ns/javaee</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">xmlns:xsi</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.w3.org/2001/XMLSchema-instance</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">xsi:schemaLocation</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">version</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">3.1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+  ...
+  <span class="tag">&lt;session-config&gt;</span>
+    ...
+    <span class="tag">&lt;cookie-config&gt;</span>
+      <span class="tag">&lt;http-only&gt;</span>true<span class="tag">&lt;/http-only&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+      ...
+    <span class="tag">&lt;/cookie-config&gt;</span>
+    ...
+  <span class="tag">&lt;/session-config&gt;</span>
+  ...
+<span class="tag">&lt;/web-app&gt;</span></code></pre> 
+      </div> 
+     </div> 
+     <div class="colist arabic"> 
+      <table> 
+       <tbody>
+        <tr> 
+         <td><i class="conum" data-value="1"></i><b>1</b></td> 
+         <td>The HttpOnly flag activated</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="secure"><a class="anchor" href="#secure"></a>51. Secure</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Second the default implementation checks the existence of the <code>Secure</code> flag on the <code>Set-Cookie</code> HTTP response header. The purpose of the secure flag is to prevent cookies from being observed by unauthorized parties due to the transmission of a the cookie in clear text. Therefore setting this flag will prevent the user agent from transmitting the session id over an unencrypted channel.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor <code>WEB-INF/web.xml</code>:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="CodeRay highlight"><code data-lang="xml"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="tag">&lt;web-app</span>
+    <span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://xmlns.jcp.org/xml/ns/javaee</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">xmlns:xsi</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.w3.org/2001/XMLSchema-instance</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">xsi:schemaLocation</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">version</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">3.1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+  ...
+  <span class="tag">&lt;session-config&gt;</span>
+    ...
+    <span class="tag">&lt;cookie-config&gt;</span>
+      <span class="tag">&lt;secure&gt;</span>true<span class="tag">&lt;/secure&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+      ...
+    <span class="tag">&lt;/cookie-config&gt;</span>
+    ...
+  <span class="tag">&lt;/session-config&gt;</span>
+  ...
+<span class="tag">&lt;/web-app&gt;</span></code></pre> 
+      </div> 
+     </div> 
+     <div class="colist arabic"> 
+      <table> 
+       <tbody>
+        <tr> 
+         <td><i class="conum" data-value="1"></i><b>1</b></td> 
+         <td>The Secure flag activated</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </div> 
+     <div class="paragraph"> 
+      <p>This of course only makes sense if the application is exposed to the end user using an encrypted channel like HTTPS (which is hardly recommended).</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Unfortunately it is not possible to detect if an application uses a secured channel. Consider the following example: The servlet container is protected by a reverse proxy. The communication between the user agent and the proxy is encrypted while the channel between the proxy and the servlet container is not. In this scenario the container cannot know that from a user agent point of view the channel is secured.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Because of this the cookie validator assumes that the channel from the user agent to the entering node is secured and by default checks for the <code>Secure</code> flag. In case this assumption is not true and an unencrypted channel must be used this validation step can be disabled by setting the following property in the <code>config.propertis</code> file:</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p><code>scout.auth.cookie.session.validate.secure=false</code></p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>This skips the <code>Secure</code> flag check completely. In this scenario (not using https) it is also required to remove the secure tag from the cookie config in the <code>WEB-INF/web.xml</code>.</p> 
+     </div> 
+    </div> 
+   </div> 
    <div class="sect1"> 
     <h2 id="apx-cclicence"><a class="anchor" href="#apx-cclicence"></a>Appendix A: Licence and Copyright</h2> 
     <div class="sectionbody"> 
@@ -5677,7 +5795,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
      <div class="sect2"> 
       <h3 id="licence-summary"><a class="anchor" href="#licence-summary"></a>A.1. Licence Summary</h3> 
       <div class="paragraph"> 
-       <p>This work is licensed under the Creative Commons Attribution License. To view a copy of this license, visit <a href="https://creativecommons.org/licenses/by/3.0/" class="bare">https://creativecommons.org/licenses/by/3.0/</a> or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.</p> 
+       <p>This work is licensed under the Creative Commons Attribution License. To view a copy of this license, visit <a href="https://creativecommons.org/licenses/by/3.0/" class="bare" target="_blank">https://creativecommons.org/licenses/by/3.0/</a> or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.</p> 
       </div> 
       <div class="paragraph"> 
        <p>A summary of the license is given below, followed by the full legal text.</p> 
@@ -5718,7 +5836,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
        </ul> 
       </div> 
       <div class="paragraph"> 
-       <p><strong>Notice</strong> ---For any reuse or distribution, you must make clear to others the license terms of this work. The best way to do this is with a link to <a href="https://creativecommons.org/licenses/by/3.0/" class="bare">https://creativecommons.org/licenses/by/3.0/</a>.</p> 
+       <p><strong>Notice</strong> ---For any reuse or distribution, you must make clear to others the license terms of this work. The best way to do this is with a link to <a href="https://creativecommons.org/licenses/by/3.0/" class="bare" target="_blank">https://creativecommons.org/licenses/by/3.0/</a>.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -5736,14 +5854,14 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
      <div class="sect2"> 
       <h3 id="full-licence-text"><a class="anchor" href="#full-licence-text"></a>A.3. Full Licence Text</h3> 
       <div class="paragraph"> 
-       <p>The full licence text is available online at <a href="http://creativecommons.org/licenses/by/3.0/legalcode" class="bare">http://creativecommons.org/licenses/by/3.0/legalcode</a></p> 
+       <p>The full licence text is available online at <a href="http://creativecommons.org/licenses/by/3.0/legalcode" class="bare" target="_blank">http://creativecommons.org/licenses/by/3.0/legalcode</a></p> 
       </div> 
       <div class="admonitionblock tip"> 
        <table> 
         <tbody>
          <tr> 
           <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
-          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/5.2.x/docs/build/book_scout_architecture/src/docs/scout_architecture.adoc">edit this page</a> on GitHub. </td> 
+          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/5.2.x/docs/build/book_scout_architecture/src/docs/scout_architecture.adoc" target="_blank">edit this page</a> on GitHub. </td> 
          </tr> 
         </tbody>
        </table> 
@@ -5756,17 +5874,17 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
    <hr /> 
    <div class="footnote" id="_footnote_1"> 
     <a href="#_footnoteref_1">1</a>. 
-    <a href="https://github.com/wildfly/jandex" class="bare">https://github.com/wildfly/jandex</a> 
+    <a href="https://github.com/wildfly/jandex" class="bare" target="_blank">https://github.com/wildfly/jandex</a> 
    </div> 
    <div class="footnote" id="_footnote_2"> 
     <a href="#_footnoteref_2">2</a>. 
-    <a href="https://en.wikipedia.org/wiki/.properties" class="bare">https://en.wikipedia.org/wiki/.properties</a> 
+    <a href="https://en.wikipedia.org/wiki/.properties" class="bare" target="_blank">https://en.wikipedia.org/wiki/.properties</a> 
    </div> 
   </div> 
   <div id="footer"> 
    <div id="footer-text">
      Version 5.2.0-SNAPSHOT
-    <br /> Last updated 2016-03-01 06:39:16 CET 
+    <br /> Last updated 2016-04-07 06:50:22 CEST 
    </div> 
   </div>  
  </body>
