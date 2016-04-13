@@ -538,6 +538,10 @@ table.CodeRay td.code>pre{padding:0}
          <li><a href="#drag-and-drop-support">Drag and drop support</a></li> 
          <li><a href="#input-placeholders">Input placeholders</a></li> 
          <li><a href="#httpservicetunnel">HttpServiceTunnel</a></li> 
+         <li><a href="#security-malwarescanner">Security: MalwareScanner</a></li> 
+         <li><a href="#imimetypedetector-new">IMimeTypeDetector [New]</a></li> 
+         <li><a href="#uploadrequesthandler-added-features">UploadRequestHandler [Added features]</a></li> 
+         <li><a href="#session-cookie-jsessionid-cookie-configuration-validation">Session Cookie (JSESSIONID Cookie) configuration validation</a></li> 
         </ul> </li> 
       </ul> </li> 
     </ul> 
@@ -758,13 +762,47 @@ table.CodeRay td.code>pre{padding:0}
        <p>It is now possible again to call services on a different scout server by specifying server org.eclipse.scout.rt.servicetunnel.targetUrl and scout.auth.privatekey. For all interfaces annotated with @TunnelToServer without implementation, a proxy is created.</p> 
       </div> 
      </div> 
+     <div class="sect2"> 
+      <h3 id="security-malwarescanner"><a class="anchor" href="#security-malwarescanner"></a>Security: MalwareScanner</h3> 
+      <div class="paragraph"> 
+       <p>Facility used to scan files and resources for malware. The new @Bean MalwareScanner assumes that an appropriate malware scanner is in place on the webapp deployment machine and is configured to scan the TEMP folder (as used by File#createTempFile) using a realtime filesystem scan strategy. Malware should therefore immediately be removed or blocked by the malware implementation when placed in that folder. The new MalwareScanner is used in the ui.html file upload handler and thus checks every uploaded file.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="imimetypedetector-new"><a class="anchor" href="#imimetypedetector-new"></a>IMimeTypeDetector [New]</h3> 
+      <div class="paragraph"> 
+       <p>The new interface IMimeTypeDetector provides multiple ordered implementations that can detect mime types PrimaryMimeTypeDetector with order 0 defines important webapp mime types ServletContextMimeTypeDetector with order 10 uses ServletContext.getMimeType JavaNioMimeTypeDetector uses java.nio Files.probeContentType</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="uploadrequesthandler-added-features"><a class="anchor" href="#uploadrequesthandler-added-features"></a>UploadRequestHandler [Added features]</h3> 
+      <div class="paragraph"> 
+       <p>The UploadRequestHandler checks for malware and limits the file types that can be uploaded.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="session-cookie-jsessionid-cookie-configuration-validation"><a class="anchor" href="#session-cookie-jsessionid-cookie-configuration-validation"></a>Session Cookie (JSESSIONID Cookie) configuration validation</h3> 
+      <div class="paragraph"> 
+       <p>The HTML UI checks if the application is configured safe by validating some flags set on the session cookie. For more details on how to configure your session cookie please refer to the Scout Documentation chapter &quot;Session Cookie (JSESSIONID Cookie) Configuration&quot;.</p> 
+      </div> 
+      <div class="admonitionblock tip"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
+          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/6.0.x/docs/build/scout_releasenotes/src/docs/scout_releasenotes.adoc">edit this page</a> on GitHub. </td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
+     </div> 
     </div> 
    </div> 
   </div> 
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0.0-SNAPSHOT
-    <br /> Last updated 2016-02-16 08:39:41 CET 
+    <br /> Last updated 2016-04-07 06:50:22 CEST 
    </div> 
   </div>  
  </body>

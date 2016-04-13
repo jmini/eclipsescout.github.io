@@ -545,6 +545,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#logging-api">Logging API</a></li> 
        <li><a href="#logging-configuration">Logging configuration</a></li> 
        <li><a href="#migrate-to-the-new-job-api">Migrate to the new Job API</a></li> 
+       <li><a href="#session-cookie-configuration">Session Cookie Configuration</a></li> 
        <li><a href="#client-notifications">Client Notifications</a></li> 
        <li><a href="#class-renames-or-moves">Class Renames or Moves</a></li> 
       </ul> </li> 
@@ -660,6 +661,7 @@ ClientSessionProvider.currentSession().getDesktop()
         <li> <p>Renamed <code>IUrlTarget</code> to <code>ITargetWindows</code>, <code>UrlTarget</code> to <code>TargetWindow</code></p> </li> 
         <li> <p>Renamed <code>DesktopEvent.TYPE_OPEN_URL_IN_BROWSER</code> to <code>TYPE_OPEN_URI</code></p> </li> 
         <li> <p>Renamed <code>DesktopEvent.TYPE_OPEN_DOWNLOAD_IN_BROWSER</code> to <code>TYPE_DOWNLOAD_RESOURCE</code></p> </li> 
+        <li> <p>F5 Keystroke on the desktop to reload the current page is no longer necessary because the table itself now provides the f5 keystroke &#x2192; Remove the keystroke from your desktop to prevent refreshing the table twice.</p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -755,6 +757,10 @@ ClientSessionProvider.currentSession().getDesktop()
          <li> <p><code>InternalTableRow</code> / <code>AbstractTable</code>: checked state of a row is moved to the table. The <code>TYPE_ROWS_UPDATED</code> is no longer used to notify about rows checked. Instead there is an event <code>TYPE_ROWS_CHECKED</code> which is fired when rows are checked or unchecked. Also there is a new Method on the model which is executed when rows are checked (<code>execRowsChecked</code>). This method is also available in extensions.</p> 
           <div class="paragraph"> 
            <p>A row should be set to checked from the model even if the row is disabled. For this, the method <code>setRowsChecked</code> is extended with a new parameter to identify if only enabled rows should be checked or not. The ui should only check enabled rows, so the ui-facade calls the method with true.</p> 
+          </div> </li> 
+         <li> <p>Removed <code>ITable#rowHeightHint</code> / <code>getConfiguredRowHeightHint</code></p> 
+          <div class="paragraph"> 
+           <p>This property was added because with rap and swt it was not possible to have variable table rows as height as their content. The only possibility to get multiline rows was to set a fixed height. This limitation is now gone. If you still want every row to have a fixed height on multiline tables, you can use css to achieve it.</p> 
           </div> </li> 
         </ul> 
        </div> 
@@ -1114,7 +1120,12 @@ ClientSessionProvider.currentSession().getDesktop()
         <li> <p><code>NumberUtility.sum(double&#x2026;&#x200b;)</code> -&#x2192; use <code>sum(Number&#x2026;&#x200b;)</code></p> </li> 
         <li> <p><code>NumberUtility.sum(long&#x2026;&#x200b;)</code> -&#x2192; use <code>sum(Number&#x2026;&#x200b;)</code></p> </li> 
         <li> <p>Removed <code>NumberUtility.avg(double&#x2026;&#x200b;)</code></p> </li> 
-        <li> <p>Removed <code>NumberUtility.divide(double, double)</code></p> </li> 
+        <li> <p>Removed <code>NumberUtility.divide(double, double)</code></p> 
+         <div class="ulist"> 
+          <ul> 
+           <li> <p><code>NlsUtility.getDefaultLocale()</code> has been removed -&#x2192; use <code>NlsLocale.CURRENT</code></p> </li> 
+          </ul> 
+         </div> </li> 
         <li> <p>The following Classes have been moved. Organize imports to fix errors:</p> 
          <div class="ulist"> 
           <ul> 
@@ -1760,6 +1771,12 @@ job.join();
       </div> 
      </div> 
      <div class="sect2"> 
+      <h3 id="session-cookie-configuration"><a class="anchor" href="#session-cookie-configuration"></a>Session Cookie Configuration</h3> 
+      <div class="paragraph"> 
+       <p>The Scout HTML UI Session cookie requires some security flags. Please refer to the Scout documentation chapter &quot;Session Cookie (JSESSIONID Cookie) Configuration&quot; to learn how to configure your JSESSIONID cookie.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
       <h3 id="client-notifications"><a class="anchor" href="#client-notifications"></a>Client Notifications</h3> 
       <div class="paragraph"> 
        <p>Check out the <a href="https://eclipsescout.github.io/6.0/latest/book_scout_architecture/scout_architecture/scout_architecture.html#client-notifications">docs</a> for a description about client notifications.</p> 
@@ -2353,6 +2370,16 @@ SERVICES.getService(IClientNotificationConsumerService.class)
         </tr> 
        </tbody> 
       </table> 
+      <div class="admonitionblock tip"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
+          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/6.0.x/docs/build/scout_migration/src/docs/scout_migration_guide.adoc">edit this page</a> on GitHub. </td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
      </div> 
     </div> 
    </div> 
@@ -2371,7 +2398,7 @@ SERVICES.getService(IClientNotificationConsumerService.class)
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0.0-SNAPSHOT
-    <br /> Last updated 2016-02-16 08:39:41 CET 
+    <br /> Last updated 2016-04-07 06:50:22 CEST 
    </div> 
   </div>  
  </body>

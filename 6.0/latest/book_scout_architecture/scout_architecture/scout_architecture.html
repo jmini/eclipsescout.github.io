@@ -688,7 +688,8 @@ table.CodeRay td.code>pre{padding:0}
          <li><a href="#example.entrypoint.definition">46.4. Example of an Entry Point definition</a></li> 
          <li><a href="#jaxws.provider.handlerChain">46.5. Configure JAX-WS Handlers</a></li> 
          <li><a href="#jaxws.provider.statepropagation">46.6. Propagate state among Handlers and port type</a></li> 
-         <li><a href="#registration-of-webservice-endpoints">46.7. Registration of webservice endpoints</a></li> 
+         <li><a href="#jax-ws-correlation-id-propagation">46.7. JAX-WS Correlation ID Propagation</a></li> 
+         <li><a href="#registration-of-webservice-endpoints">46.8. Registration of webservice endpoints</a></li> 
         </ul> </li> 
        <li><a href="#consume-a-webservice">47. Consume a webservice</a> 
         <ul class="sectlevel2"> 
@@ -697,7 +698,8 @@ table.CodeRay td.code>pre{padding:0}
          <li><a href="#get-information-about-the-last-web-request">47.3. Get information about the last web request</a></li> 
          <li><a href="#propagate-state-to-handlers">47.4. Propagate state to Handlers</a></li> 
          <li><a href="#install-handlers-and-provide-credentials-for-authentication">47.5. Install handlers and provide credentials for authentication</a></li> 
-         <li><a href="#jaxws.consumer.configuration">47.6. Default configuration of WS-Clients</a></li> 
+         <li><a href="#jax-ws-client-correlation-id-propagation">47.6. JAX-WS Client Correlation ID Propagation</a></li> 
+         <li><a href="#jaxws.consumer.configuration">47.7. Default configuration of WS-Clients</a></li> 
         </ul> </li> 
        <li><a href="#jaxws.xmladapters">48. XML adapters to work with java.util.Date and java.util.Calendar</a></li> 
        <li><a href="#jax-ws-appendix">49. JAX-WS Appendix</a> 
@@ -712,6 +714,11 @@ table.CodeRay td.code>pre{padding:0}
          <li><a href="#IAuthenticationMethod">49.8. Authentication Method</a></li> 
          <li><a href="#ICredentialVerifier">49.9. Credential Verifier</a></li> 
         </ul> </li> 
+      </ul> </li> 
+     <li><a href="#session-cookie-jsessionid-cookie-configuration-validation">Session Cookie (JSESSIONID Cookie) Configuration Validation</a> 
+      <ul class="sectlevel1"> 
+       <li><a href="#httponly">50. HttpOnly</a></li> 
+       <li><a href="#secure">51. Secure</a></li> 
        <li><a href="#apx-cclicence">Appendix A: Licence and Copyright</a> 
         <ul class="sectlevel2"> 
          <li><a href="#licence-summary">A.1. Licence Summary</a></li> 
@@ -1203,27 +1210,49 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
      </div> 
      <div id="lst-ConfigProperties" class="listingblock"> 
       <div class="title">
-       Listing 8. A configuration property of type string.
+       Listing 8. A configuration property of type Long.
       </div> 
       <div class="content"> 
-       <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/** * Defines a new property of data type {@link String} with key 'my.application.key' and default value 'defaultValue'. */</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">MyCustomStringProperty</span> <span class="directive">extends</span> AbstractStringConfigProperty {
+       <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">import</span> <span class="include">org.eclipse.scout.rt.platform.config.AbstractLongConfigProperty</span>;
+
+<span class="comment">/** * Property of data type {@link Long} with key 'my.custom.timeout' and default value '3600L'. */</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">MyCustomTimeoutProperty</span> <span class="directive">extends</span> AbstractLongConfigProperty {
 
   <span class="annotation">@Override</span>
   <span class="directive">public</span> <span class="predefined-type">String</span> getKey() {
-    <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">my.application.key</span><span class="delimiter">&quot;</span></span>;
+    <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">my.custom.timeout</span><span class="delimiter">&quot;</span></span>; <i class="conum" data-value="1"></i><b>(1)</b>
   }
 
   <span class="annotation">@Override</span>
-  <span class="directive">protected</span> <span class="predefined-type">String</span> getDefaultValue() {
-    <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">defaultValue</span><span class="delimiter">&quot;</span></span>;
+  <span class="directive">protected</span> <span class="predefined-type">Long</span> getDefaultValue() {
+    <span class="keyword">return</span> <span class="integer">3600L</span>; <i class="conum" data-value="2"></i><b>(2)</b>
   }
-}
-
-<span class="comment">/** * @return The current value of the property 'my.application.key'. */</span>
-<span class="directive">private</span> <span class="predefined-type">String</span> getMyCustomPropertyValue() {
-  <span class="keyword">return</span> CONFIG.getPropertyValue(MyCustomStringProperty.class);
 }</code></pre> 
+      </div> 
+     </div> 
+     <div class="colist arabic"> 
+      <table> 
+       <tbody>
+        <tr> 
+         <td><i class="conum" data-value="1"></i><b>1</b></td> 
+         <td>key</td> 
+        </tr> 
+        <tr> 
+         <td><i class="conum" data-value="2"></i><b>2</b></td> 
+         <td>default value</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </div> 
+     <div class="paragraph"> 
+      <p>To read the configured value you can use the <code>CONFIG</code> class as demonstrated in <a href="#lst-getPropertyValue">Listing 9</a>.</p> 
+     </div> 
+     <div id="lst-getPropertyValue" class="listingblock"> 
+      <div class="title">
+       Listing 9. Read the configured value in your code.
+      </div> 
+      <div class="content"> 
+       <pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Long</span> value = CONFIG.getPropertyValue(MyCustomTimeoutProperty.class);</code></pre> 
       </div> 
      </div> 
      <div class="paragraph"> 
@@ -1275,7 +1304,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 9. PlatformException examples
+        Listing 10. PlatformException examples
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="exception">Exception</span> cause = <span class="keyword">new</span> <span class="exception">Exception</span>();
@@ -1391,7 +1420,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 10. PlatformException examples
+        Listing 11. PlatformException examples
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> {
@@ -1431,7 +1460,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 11. Logging examples
+       Listing 12. Logging examples
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="exception">Exception</span> e = <span class="keyword">new</span> <span class="exception">Exception</span>();
@@ -1486,7 +1515,7 @@ logger.error(<span class="string"><span class="delimiter">&quot;</span><span cla
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 12. Work that does not return a result
+       Listing 13. Work that does not return a result
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">Work</span> <span class="directive">implements</span> IRunnable {
@@ -1500,7 +1529,7 @@ logger.error(<span class="string"><span class="delimiter">&quot;</span><span cla
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 13. Work that returns a computation result
+       Listing 14. Work that returns a computation result
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">WorkWithResult</span> <span class="directive">implements</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">String</span>&gt; {
@@ -1518,7 +1547,7 @@ logger.error(<span class="string"><span class="delimiter">&quot;</span><span cla
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 14. Accessing the Future from within the job
+       Listing 15. Accessing the Future from within the job
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">Job</span> <span class="directive">implements</span> IRunnable {
@@ -1567,7 +1596,7 @@ logger.error(<span class="string"><span class="delimiter">&quot;</span><span cla
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 15. Schedule a job
+       Listing 16. Schedule a job
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">IJobManager jobManager = BEANS.get(IJobManager.class); <i class="conum" data-value="1"></i><b>(1)</b>
@@ -1604,7 +1633,7 @@ jobManager.schedule(<span class="keyword">new</span> IRunnable() { <i class="con
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 16. Schedule a job via Jobs helper class
+       Listing 17. Schedule a job via Jobs helper class
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
@@ -1626,7 +1655,7 @@ jobManager.schedule(<span class="keyword">new</span> IRunnable() { <i class="con
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 17. Schedule a job and control execution via JobInput
+       Listing 18. Schedule a job and control execution via JobInput
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
@@ -1910,7 +1939,7 @@ Jobs.newInput()
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 18. Example of a future filter
+       Listing 19. Example of a future filter
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">FutureFilter</span> <span class="directive">implements</span> IFilter&lt;IFuture&lt;?&gt;&gt; {
@@ -1928,7 +1957,7 @@ Jobs.newInput()
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 19. Usage of FutureFilterBuilder
+       Listing 20. Usage of FutureFilterBuilder
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">IFilter&lt;IFuture&lt;?&gt;&gt; filter = Jobs.newFutureFilterBuilder() <i class="conum" data-value="1"></i><b>(1)</b>
@@ -1992,7 +2021,7 @@ Jobs.newInput()
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 20. Example of an event filter
+       Listing 21. Example of an event filter
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">EventFilter</span> <span class="directive">implements</span> IFilter&lt;JobEvent&gt; {
@@ -2010,7 +2039,7 @@ Jobs.newInput()
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 21. Usage of JobEventFilterBuilder
+       Listing 22. Usage of JobEventFilterBuilder
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">IFilter&lt;JobEvent&gt; filter = Jobs.newEventFilterBuilder() <i class="conum" data-value="1"></i><b>(1)</b>
@@ -2070,7 +2099,7 @@ Jobs.newInput()
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 22. Cancel a job via its future
+       Listing 23. Cancel a job via its future
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// Schedule a job</span>
@@ -2082,7 +2111,7 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 23. Cancel multiple jobs via job manager
+       Listing 24. Cancel multiple jobs via job manager
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.getJobManager().cancel(Jobs.newFutureFilterBuilder()
@@ -2092,7 +2121,7 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 24. Cancel multiple jobs which match a specific execution hint and the current session
+       Listing 25. Cancel multiple jobs which match a specific execution hint and the current session
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.getJobManager().cancel(Jobs.newFutureFilterBuilder()
@@ -2157,7 +2186,7 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 25. Subscribe for global job events
+       Listing 26. Subscribe for global job events
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.getJobManager().addListener(Jobs.newEventFilterBuilder() <i class="conum" data-value="1"></i><b>(1)</b>
@@ -2193,7 +2222,7 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 26. Subscribe for local job events
+       Listing 27. Subscribe for local job events
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">future.addListener(Jobs.newEventFilterBuilder()
@@ -2232,7 +2261,7 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 27. Examples of how to await done state on a future
+        Listing 28. Examples of how to await done state on a future
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java">IFuture&lt;<span class="predefined-type">String</span>&gt; future = Jobs.schedule(<span class="keyword">new</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">String</span>&gt;() {
@@ -2292,7 +2321,7 @@ result = future.awaitDoneAndGet(<span class="integer">10</span>, <span class="pr
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 28. Example of when-done callback
+        Listing 29. Example of when-done callback
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java">future.whenDone(<span class="keyword">new</span> IDoneHandler&lt;<span class="predefined-type">String</span>&gt;() {
@@ -2315,7 +2344,7 @@ result = future.awaitDoneAndGet(<span class="integer">10</span>, <span class="pr
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 29. Examples of how to await finished state on a future
+        Listing 30. Examples of how to await finished state on a future
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java">IFuture&lt;<span class="predefined-type">String</span>&gt; future = Jobs.schedule(<span class="keyword">new</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">String</span>&gt;() {
@@ -2342,7 +2371,7 @@ future.awaitFinished(<span class="integer">10</span>, <span class="predefined-ty
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 30. Examples of how to await done state of multiple futures
+        Listing 31. Examples of how to await done state of multiple futures
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// Wait for some futures</span>
@@ -2379,7 +2408,7 @@ Jobs.getJobManager().awaitDone(Jobs.newFutureFilterBuilder() <i class="conum" da
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 31. Examples of how to await finish state of multiple futures
+        Listing 32. Examples of how to await finish state of multiple futures
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// Wait for some futures</span>
@@ -2538,7 +2567,7 @@ operationCompleted.waitForUninterruptibly();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 32. Running work in model thread
+       Listing 33. Running work in model thread
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">ModelJobs.schedule(<span class="keyword">new</span> IRunnable() { <i class="conum" data-value="1"></i><b>(1)</b>
@@ -2662,7 +2691,7 @@ ModelJobs.yield();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 33. Schedule a one-shot job
+       Listing 34. Schedule a one-shot job
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
@@ -2678,7 +2707,7 @@ ModelJobs.yield();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 34. Schedule a job with a delay
+       Listing 35. Schedule a job with a delay
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
@@ -2696,7 +2725,7 @@ ModelJobs.yield();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 35. Schedule a repetitive job at a fixed rate
+       Listing 36. Schedule a repetitive job at a fixed rate
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
@@ -2739,7 +2768,7 @@ ModelJobs.yield();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 36. Schedule a repetitive job which runs 60 times at every minute
+       Listing 37. Schedule a repetitive job which runs 60 times at every minute
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
@@ -2782,7 +2811,7 @@ ModelJobs.yield();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 37. Schedule a repetitive job at a fixed delay
+       Listing 38. Schedule a repetitive job at a fixed delay
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
@@ -2815,7 +2844,7 @@ ModelJobs.yield();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 38. Schedule a repetitive job which runs 60 times, but waits 1 minute between the termination of the previous and the commencement of the next execution
+       Listing 39. Schedule a repetitive job which runs 60 times, but waits 1 minute between the termination of the previous and the commencement of the next execution
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
@@ -2848,7 +2877,7 @@ ModelJobs.yield();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 39. Running at 10:15am every Monday, Tuesday, Wednesday, Thursday and Friday
+       Listing 40. Running at 10:15am every Monday, Tuesday, Wednesday, Thursday and Friday
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
@@ -2876,7 +2905,7 @@ ModelJobs.yield();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 40. Running every minute starting at 14:00 and ending at 14:05, every day
+       Listing 41. Running every minute starting at 14:00 and ending at 14:05, every day
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
@@ -2904,7 +2933,7 @@ ModelJobs.yield();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 41. Limit the maximal concurrency level among jobs
+       Listing 42. Limit the maximal concurrency level among jobs
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">IExecutionSemaphore semaphore = Jobs.newExecutionSemaphore(<span class="integer">5</span>); <i class="conum" data-value="1"></i><b>(1)</b>
@@ -2938,7 +2967,7 @@ ModelJobs.yield();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 42. Cancel all jobs of the current session
+       Listing 43. Cancel all jobs of the current session
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">Jobs.getJobManager().cancel(Jobs.newFutureFilterBuilder()
@@ -2948,7 +2977,7 @@ ModelJobs.yield();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 43. Query for cancellation
+       Listing 44. Query for cancellation
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">CancellableWork</span> <span class="directive">implements</span> IRunnable {
@@ -2975,7 +3004,7 @@ ModelJobs.yield();</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 44. Release current semaphore permit while executing
+       Listing 45. Release current semaphore permit while executing
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// Create a blocking condition.</span>
@@ -3021,11 +3050,11 @@ operationCompleted.waitForUninterruptibly();</code></pre>
       <p>Typically, a <code>RunContext</code> is created from a respective factory like <code>RunContexts</code> to create a <code>RunContext</code>, or <code>ServerRunContexts</code> to create a <code>ServerRunContext</code>, or <code>ClientRunContexts</code> to create a <code>ClientRunContext</code>. Internally, the <code>BeanManager</code> is asked to provide a new instance of the <code>RunContext</code>, which allows you to replace the default implementation of a <code>RunContext</code> in an easy way. The factories declare two factory methods: <code>empty()</code> and <code>copyCurrent()</code>. Whereas <code>empty()</code> provides you an empty <code>RunContext</code>, <code>copyCurrent()</code> takes a snapshot of the current calling context and initializes the <code>RunContext</code> accordingly. That is useful if only some few values are to be changed, or, if using <code>ServerRunContext</code>, to run the code on behalf of a new transaction.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>The following <a href="#lst-RunContexts.copyCurrent">Listing 46</a> illustrates the creation of an empty <code>RunContext</code> initialized with a particular <code>Subject</code> and <code>Locale</code>.</p> 
+      <p>The following <a href="#lst-RunContexts.copyCurrent">Listing 47</a> illustrates the creation of an empty <code>RunContext</code> initialized with a particular <code>Subject</code> and <code>Locale</code>.</p> 
      </div> 
      <div id="lst-RunContexts.empty" class="listingblock"> 
       <div class="title">
-       Listing 45. Creation of an empty 
+       Listing 46. Creation of an empty 
        <code>RunContext</code>
       </div> 
       <div class="content"> 
@@ -3066,11 +3095,11 @@ RunContexts.empty()
       </table> 
      </div> 
      <div class="paragraph"> 
-      <p>The following <a href="#lst-RunContexts.copyCurrent">Listing 46</a> illustrates the creation of a 'snapshot' of the current calling <code>RunContext</code> with another <code>Locale</code> set.</p> 
+      <p>The following <a href="#lst-RunContexts.copyCurrent">Listing 47</a> illustrates the creation of a 'snapshot' of the current calling <code>RunContext</code> with another <code>Locale</code> set.</p> 
      </div> 
      <div id="lst-RunContexts.copyCurrent" class="listingblock"> 
       <div class="title">
-       Listing 46. Create a copy of the current calling 
+       Listing 47. Create a copy of the current calling 
        <code>RunContext</code>
       </div> 
       <div class="content"> 
@@ -3482,7 +3511,7 @@ protected void execInitField() {
     <div class="sectionbody"> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 47. Publishing Client Notifications
+       Listing 48. Publishing Client Notifications
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java">BEANS.get(ClientNotificationRegistry.class).putForUser(<span class="string"><span class="delimiter">&quot;</span><span class="content">admin</span><span class="delimiter">&quot;</span></span>, <span class="keyword">new</span> PersonTableChangedNotification());</code></pre> 
@@ -3530,7 +3559,7 @@ protected void execInitField() {
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 48. Client Notification Coalescer
+        Listing 49. Client Notification Coalescer
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">BookmarkNotificationCoalescer</span> <span class="directive">implements</span> ICoalescer&lt;BookmarkChangedClientNotification&gt; {
@@ -3562,7 +3591,7 @@ protected void execInitField() {
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 49. Notification Handler for 
+        Listing 50. Notification Handler for 
         <code>MessageNotifications</code>
        </div> 
        <div class="content"> 
@@ -3589,7 +3618,7 @@ protected void execInitField() {
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 50. Blocking until notification handling completed
+        Listing 51. Blocking until notification handling completed
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java">CodeService cs = BEANS.get(CodeService.class);
@@ -3610,7 +3639,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 51. Notification Handler Creating Model Job
+        Listing 52. Notification Handler Creating Model Job
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
@@ -3781,11 +3810,11 @@ cs.reloadCodeType(UiThemeCodeType.class);
         <p>If running in an EE application server, refer to the containers documentation for more information.</p> 
        </div> 
        <div class="paragraph"> 
-        <p><a href="#lst-maven.dep.metro">Listing 52</a> provides sample configuration for shipping with <em>JAX_WS METRO</em> and <a href="#lst-maven.dep.cxf">Listing 53</a> does the same for <em>Apache CXF</em></p> 
+        <p><a href="#lst-maven.dep.metro">Listing 53</a> provides sample configuration for shipping with <em>JAX_WS METRO</em> and <a href="#lst-maven.dep.cxf">Listing 54</a> does the same for <em>Apache CXF</em></p> 
        </div> 
        <div id="lst-maven.dep.metro" class="listingblock"> 
         <div class="title">
-         Listing 52. Maven dependency for 
+         Listing 53. Maven dependency for 
          <em>JAX-WS METRO</em>
         </div> 
         <div class="content"> 
@@ -3799,7 +3828,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        </div> 
        <div id="lst-maven.dep.cxf" class="listingblock"> 
         <div class="title">
-         Listing 53. Maven dependency for 
+         Listing 54. Maven dependency for 
          <em>Apache CXF</em>
         </div> 
         <div class="content"> 
@@ -3828,11 +3857,11 @@ cs.reloadCodeType(UiThemeCodeType.class);
         <p>This section describes the configuration of the entry point Servlet to publish webservices. If working with webservice consumers only, no configuration is required.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Similar to the pom.xml as described in <a href="#jaxws.implementor.dependency">Configure JAX-WS Maven dependency in pom.xml</a>, the <em>web.xml</em> differs from implementor to implementor, and whether the implementor is already shipped with the application server. Nevertheless, the following <a href="#lst-jaxws.webxml.metro">Listing 54</a> show a sample configuration for <em>JAX-WS METRO</em> and <a href="#lst-jaxws.webxml.cxf">Listing 55</a> for <em>Apache CXF</em>.</p> 
+        <p>Similar to the pom.xml as described in <a href="#jaxws.implementor.dependency">Configure JAX-WS Maven dependency in pom.xml</a>, the <em>web.xml</em> differs from implementor to implementor, and whether the implementor is already shipped with the application server. Nevertheless, the following <a href="#lst-jaxws.webxml.metro">Listing 55</a> show a sample configuration for <em>JAX-WS METRO</em> and <a href="#lst-jaxws.webxml.cxf">Listing 56</a> for <em>Apache CXF</em>.</p> 
        </div> 
        <div id="lst-jaxws.webxml.metro" class="listingblock"> 
         <div class="title">
-         Listing 54. web.xml for 
+         Listing 55. web.xml for 
          <em>JAX-WS METRO</em> Servlet
         </div> 
         <div class="content"> 
@@ -3870,7 +3899,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        </div> 
        <div id="lst-jaxws.webxml.cxf" class="listingblock"> 
         <div class="title">
-         Listing 55. web.xml for 
+         Listing 56. web.xml for 
          <em>Apache CXF</em> Servlet
         </div> 
         <div class="content"> 
@@ -3981,7 +4010,10 @@ cs.reloadCodeType(UiThemeCodeType.class);
       <div class="paragraph"> 
        <p>The profiles requires the Scout runtime version to be specified, and which is used to refer to <code>org.eclipse.scout.jaxws.apt</code> module to generate webservice provider artifacts. However, this version is typically defined in pom.xml of the parent module, because also used to refer to other Scout runtime artifacts.</p> 
       </div> 
-      <div class="listingblock"> 
+      <div id="lst-jaxws.pom.scoutversion" class="listingblock"> 
+       <div class="title">
+        Listing 57. Scout version defined as Maven property
+       </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;properties&gt;</span>
   <span class="tag">&lt;org.eclipse.scout.rt.version&gt;</span>5.2.0-SNAPSHOT<span class="tag">&lt;/org.eclipse.scout.rt.version&gt;</span>
@@ -3989,34 +4021,44 @@ cs.reloadCodeType(UiThemeCodeType.class);
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>If your project design envisions a separate JAR module per WSDL, you simply have to set the property 'jaxws.wsdl.file' with the name of your WSDL file in the module&#x2019;s pom.xml (example in <a href="#lst-jaxws.pom.single-wsdl-file">Listing 56</a>).</p> 
+       <p>If your project design envisions a separate JAR module per WSDL, you simply have to set the property 'jaxws.wsdl.file' with the name of your WSDL file in the module&#x2019;s pom.xml (example in <a href="#lst-jaxws.pom.single-wsdl-file">Listing 58</a>).</p> 
       </div> 
       <div id="lst-jaxws.pom.single-wsdl-file" class="listingblock"> 
        <div class="title">
-        Listing 56. wsimport configuration in pom.xml if working with a single WSDL file per JAR module
+        Listing 58. wsimport configuration in pom.xml if working with a single WSDL file per JAR module
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;properties&gt;</span>
-  <span class="tag">&lt;jaxws.wsdl.file&gt;</span>YourWebService.wsdl<span class="tag">&lt;/jaxws.wsdl.file&gt;</span>
+  <span class="tag">&lt;jaxws.wsdl.file&gt;</span>YourWebService.wsdl<span class="tag">&lt;/jaxws.wsdl.file&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
 <span class="tag">&lt;/properties&gt;</span></code></pre> 
        </div> 
       </div> 
+      <div class="colist arabic"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td><i class="conum" data-value="1"></i><b>1</b></td> 
+          <td>name of the wsdl file</td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
       <div class="paragraph"> 
-       <p>Otherwise, if having multiple WSDL files in your JAR module, some little more configuration is required, namely a respective execution section per WSDL file. Thereby, the 'id' of the execution section must be unique. Scout 'jaxws' profile already provides one such section, which is used to generate the stub for a single WSDL file (see such configuration in <a href="#lst-jaxws.pom.single-wsdl-file">Listing 56</a>), and names it 'wsimport-1'. It is simplest to name the subsequent execution sections 'wsimport-2', 'wsimport-3', and so on.<br /> For each execution section, you must configure its unique <em>id</em>, the <em>goal</em> 'wsimport', and in the configuration section the respective <em>wsdlLocation</em> and <em>wsdlFile</em>. For 'wsimport' to work, <em>wsdlLocation</em> is not required. However, that location will be referenced in generated artifacts to set the wsdl location via <code>@WebService</code> and <code>@WebServiceClient</code>. The complete configuration is presented in <a href="#lst-jaxws.pom.multiple-wsdl">Listing 57</a>.</p> 
+       <p>Otherwise, if having multiple WSDL files in your JAR module, some little more configuration is required, namely a respective execution section per WSDL file. Thereby, the 'id' of the execution section must be unique. Scout 'jaxws' profile already provides one such section, which is used to generate the stub for a single WSDL file (see such configuration in <a href="#lst-jaxws.pom.single-wsdl-file">Listing 58</a>), and names it 'wsimport-1'. It is simplest to name the subsequent execution sections 'wsimport-2', 'wsimport-3', and so on.<br /> For each execution section, you must configure its unique <em>id</em>, the <em>goal</em> 'wsimport', and in the configuration section the respective <em>wsdlLocation</em> and <em>wsdlFile</em>. For 'wsimport' to work, <em>wsdlLocation</em> is not required. However, that location will be referenced in generated artifacts to set the wsdl location via <code>@WebService</code> and <code>@WebServiceClient</code>. The complete configuration is presented in <a href="#lst-jaxws.pom.multiple-wsdl">Listing 59</a>.</p> 
       </div> 
       <div class="admonitionblock warning"> 
        <table> 
         <tbody>
          <tr> 
           <td class="icon"> <i class="fa icon-warning" title="Warning"></i> </td> 
-          <td class="content"> If you decide to configure multiple WSDL files in your POM as described in <a href="#lst-jaxws.pom.multiple-wsdl">Listing 57</a>, the configuration defined in the parent POM (<code>maven_rt_plugin_config-master</code>) and expecting a configuration as presented in <a href="#lst-jaxws.pom.single-wsdl-file">Listing 56</a> needs to be overridden, therefore one of your execution id needs to be <code>wsimport-1</code>. </td> 
+          <td class="content"> If you decide to configure multiple WSDL files in your POM as described in <a href="#lst-jaxws.pom.multiple-wsdl">Listing 59</a>, the configuration defined in the parent POM (<code>maven_rt_plugin_config-master</code>) and expecting a configuration as presented in <a href="#lst-jaxws.pom.single-wsdl-file">Listing 58</a> needs to be overridden, therefore one of your execution id needs to be <code>wsimport-1</code>. </td> 
          </tr> 
         </tbody>
        </table> 
       </div> 
       <div id="lst-jaxws.pom.multiple-wsdl" class="listingblock"> 
        <div class="title">
-        Listing 57. wsimport configuration in pom.xml if working with multiple WSDL files per JAR module
+        Listing 59. wsimport configuration in pom.xml if working with multiple WSDL files per JAR module
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;build&gt;</span>
@@ -4102,11 +4144,11 @@ cs.reloadCodeType(UiThemeCodeType.class);
      <div class="sect2"> 
       <h3 id="customize-wsdl-components-and-xsd-schema-elements-via-binding-files"><a class="anchor" href="#customize-wsdl-components-and-xsd-schema-elements-via-binding-files"></a>45.2. Customize WSDL components and XSD schema elements via binding files</h3> 
       <div class="paragraph"> 
-       <p>By default, all XML files contained in folder 'WEB-INF/binding' are used as binding files. But, most often, you will have a global binding file, which applies to all your WSDL files, and some custom binding files different per WSDL file and XSD schema files. See how to explicitly configure binding files in <a href="#lst-jaxws.pom.multiple-binding">Listing 58</a>.</p> 
+       <p>By default, all XML files contained in folder 'WEB-INF/binding' are used as binding files. But, most often, you will have a global binding file, which applies to all your WSDL files, and some custom binding files different per WSDL file and XSD schema files. See how to explicitly configure binding files in <a href="#lst-jaxws.pom.multiple-binding">Listing 60</a>.</p> 
       </div> 
       <div id="lst-jaxws.pom.multiple-binding" class="listingblock"> 
        <div class="title">
-        Listing 58. explicit configuration of binding files
+        Listing 60. explicit configuration of binding files
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="xml"><span class="comment">&lt;!-- YourFirstWebService.wsdl --&gt;</span>
@@ -4141,15 +4183,15 @@ cs.reloadCodeType(UiThemeCodeType.class);
         <tbody>
          <tr> 
           <td><i class="conum" data-value="1"></i><b>1</b></td> 
-          <td>global binding file which applies to all XSD schema elements. See <a href="#lst-jaxws.example.globalbindingfile">Listing 59</a> for an example.</td> 
+          <td>global binding file which applies to all XSD schema elements. See <a href="#lst-jaxws.example.globalbindingfile">Listing 61</a> for an example.</td> 
          </tr> 
          <tr> 
           <td><i class="conum" data-value="2"></i><b>2</b></td> 
-          <td>custom binding file to customize the webservice&#x2019;s WSDL components in the namespace <em><a href="http://java.sun.com/xml/ns/jaxws" class="bare">http://java.sun.com/xml/ns/jaxws</a></em>. See <a href="#lst-jaxws.bindingfile.ws">Listing 60</a> for an example.</td> 
+          <td>custom binding file to customize the webservice&#x2019;s WSDL components in the namespace <em><a href="http://java.sun.com/xml/ns/jaxws" class="bare">http://java.sun.com/xml/ns/jaxws</a></em>. See <a href="#lst-jaxws.bindingfile.ws">Listing 62</a> for an example.</td> 
          </tr> 
          <tr> 
           <td><i class="conum" data-value="3"></i><b>3</b></td> 
-          <td>custom binding file to customize the webservice&#x2019;s XSD schema elements in the namespace <em><a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a></em>. See <a href="#lst-jaxws.bindingfile.xs">Listing 61</a> for an example.</td> 
+          <td>custom binding file to customize the webservice&#x2019;s XSD schema elements in the namespace <em><a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a></em>. See <a href="#lst-jaxws.bindingfile.xs">Listing 63</a> for an example.</td> 
          </tr> 
         </tbody>
        </table> 
@@ -4162,7 +4204,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div id="lst-jaxws.example.globalbindingfile" class="listingblock"> 
        <div class="title">
-        Listing 59. example of global binding file in the namespace 
+        Listing 61. example of global binding file in the namespace 
         <a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a>
        </div> 
        <div class="content"> 
@@ -4195,7 +4237,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div id="lst-jaxws.bindingfile.ws" class="listingblock"> 
        <div class="title">
-        Listing 60. example of jaxws component customization in the namespace 
+        Listing 62. example of jaxws component customization in the namespace 
         <a href="http://java.sun.com/xml/ns/jaxws" class="bare">http://java.sun.com/xml/ns/jaxws</a>
        </div> 
        <div class="content"> 
@@ -4221,7 +4263,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div id="lst-jaxws.bindingfile.xs" class="listingblock"> 
        <div class="title">
-        Listing 61. example of xsd schema element customization in the namespace 
+        Listing 63. example of xsd schema element customization in the namespace 
         <a href="http://java.sun.com/xml/ns/jaxb" class="bare">http://java.sun.com/xml/ns/jaxb</a>
        </div> 
        <div class="content"> 
@@ -4593,7 +4635,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       <h3 id="example.entrypoint.definition"><a class="anchor" href="#example.entrypoint.definition"></a>46.4. Example of an Entry Point definition</h3> 
       <div id="jaxws.listing.porttypedefinition" class="listingblock"> 
        <div class="title">
-        Listing 62. Example configuration for an entry point definition
+        Listing 64. Example configuration for an entry point definition
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@WebServiceEntryPoint</span>(
@@ -4681,7 +4723,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 63. PingWebServiceEntryPoint_handler-chain.xml
+        Listing 65. PingWebServiceEntryPoint_handler-chain.xml
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java">&lt;handler-chains xmlns=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://java.sun.com/xml/ns/javaee</span><span class="delimiter">&quot;</span></span>&gt;
@@ -4717,7 +4759,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 64. PingWebServiceEntryPoint.java
+        Listing 66. PingWebServiceEntryPoint.java
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@WebService</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">PingWebServicePortType</span><span class="delimiter">&quot;</span></span>,
@@ -4750,7 +4792,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 65. Example of a JAX-WS Handler
+        Listing 67. Example of a JAX-WS Handler
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ApplicationScoped</span> <i class="conum" data-value="1"></i><b>(1)</b>
@@ -4817,7 +4859,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 66. This handler puts the correlation ID onto message context to be accessible by subsequent handlers and the port type.
+        Listing 68. This handler puts the correlation ID onto message context to be accessible by subsequent handlers and the port type.
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ApplicationScoped</span>
@@ -4862,7 +4904,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div id="jaxws.handler.statepropagation.readcid" class="listingblock"> 
        <div class="title">
-        Listing 67. This handler accesses the 'correlation ID' as set by the previous handler.
+        Listing 69. This handler accesses the 'correlation ID' as set by the previous handler.
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ApplicationScoped</span>
@@ -4903,7 +4945,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 68. This port type accesses the 'correlation ID' as set by the previous handler.
+        Listing 70. This port type accesses the 'correlation ID' as set by the previous handler.
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ApplicationScoped</span>
@@ -4935,7 +4977,63 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="registration-of-webservice-endpoints"><a class="anchor" href="#registration-of-webservice-endpoints"></a>46.7. Registration of webservice endpoints</h3> 
+      <h3 id="jax-ws-correlation-id-propagation"><a class="anchor" href="#jax-ws-correlation-id-propagation"></a>46.7. JAX-WS Correlation ID Propagation</h3> 
+      <div class="paragraph"> 
+       <p>Scout&#x2019;s JAX-WS integration already provides complete support for reading a correlation ID from the HTTP header named <code>X-Scout-Correlation-Id</code> of the incoming web service request and propagates it to the <a href="#runcontext">RunContext</a> that executes the actual service operation. A new correlation ID is created if the HTTP header is empty or missing.</p> 
+      </div> 
+      <div class="admonitionblock note"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td class="icon"> <i class="fa icon-note" title="Note"></i> </td> 
+          <td class="content"> The CorrelationIdHandler example above just illustrates the capabilities of a SOAPHandler. </td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
+      <div class="admonitionblock note"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td class="icon"> <i class="fa icon-note" title="Note"></i> </td> 
+          <td class="content"> You have to implement your own handler if the consumer provides a correlation ID in another header parameter or as part of the request&#x2019;s payload. </td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="title">
+        Listing 71. Add Scout&#x2019;s WsProviderCorrelationIdHandler to the handler chain
+       </div> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@WebServiceEntryPoint</span>(
+    endpointInterface = PingWebServicePortType.class,
+    entryPointName = <span class="string"><span class="delimiter">&quot;</span><span class="content">PingWebServiceEntryPoint</span><span class="delimiter">&quot;</span></span>,
+    entryPointPackage = <span class="string"><span class="delimiter">&quot;</span><span class="content">org.eclipse.scout.docs.ws.ping2</span><span class="delimiter">&quot;</span></span>,
+    serviceName = <span class="string"><span class="delimiter">&quot;</span><span class="content">PingWebService</span><span class="delimiter">&quot;</span></span>,
+    portName = <span class="string"><span class="delimiter">&quot;</span><span class="content">PingWebServicePort</span><span class="delimiter">&quot;</span></span>,
+    handlerChain = {
+        <span class="annotation">@Handler</span>(<span class="annotation">@Clazz</span>(WsProviderCorrelationIdHandler.class)), <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="annotation">@Handler</span>(<span class="annotation">@Clazz</span>(LogHandler.class)),
+    },
+    authentication = <span class="annotation">@Authentication</span>(
+        method = <span class="annotation">@Clazz</span>(BasicAuthenticationMethod.class) ,
+        verifier = <span class="annotation">@Clazz</span>(ConfigFileCredentialVerifier.class) ) )</code></pre> 
+       </div> 
+      </div> 
+      <div class="colist arabic"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td><i class="conum" data-value="1"></i><b>1</b></td> 
+          <td>Add the correlation ID handler <strong>at the beginning</strong> of the handler chain to ensure that all handlers can use its value (especially the <code>LogHandler</code> has to be added after the correlation ID handler).</td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="registration-of-webservice-endpoints"><a class="anchor" href="#registration-of-webservice-endpoints"></a>46.8. Registration of webservice endpoints</h3> 
       <div class="paragraph"> 
        <p>The registration of webservice endpoints depends on the implementor you use, and whether you are running in an EE container with webservice auto discovery enabled.</p> 
       </div> 
@@ -4946,13 +5044,13 @@ cs.reloadCodeType(UiThemeCodeType.class);
        <p>If not running in an EE container, the registration is implementor specific. In the following, an example for <em>JAX-WS METRO</em> and <em>Apache CXF</em> is given.</p> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jax-ws-metro"><a class="anchor" href="#jax-ws-metro"></a>46.7.1. JAX-WS METRO</h4> 
+       <h4 id="jax-ws-metro"><a class="anchor" href="#jax-ws-metro"></a>46.8.1. JAX-WS METRO</h4> 
        <div class="paragraph"> 
         <p>During startup, <em>JAX-WS METRO</em> looks for the file '/WEB-INF/sun-jaxws.xml', which contains the endpoint definitions.</p> 
        </div> 
        <div class="listingblock"> 
         <div class="title">
-         Listing 69. WEB-INF/sun-jaxws.xml
+         Listing 72. WEB-INF/sun-jaxws.xml
         </div> 
         <div class="content"> 
          <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;jws:endpoints</span> <span class="attribute-name">xmlns:jws</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://java.sun.com/xml/ns/jax-ws/ri/runtime</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">version</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">2.0</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
@@ -4969,13 +5067,13 @@ cs.reloadCodeType(UiThemeCodeType.class);
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jaxws.registration.endpoints.cxf"><a class="anchor" href="#jaxws.registration.endpoints.cxf"></a>46.7.2. Apache CXF</h4> 
+       <h4 id="jaxws.registration.endpoints.cxf"><a class="anchor" href="#jaxws.registration.endpoints.cxf"></a>46.8.2. Apache CXF</h4> 
        <div class="paragraph"> 
-        <p>During startup, <em>Apache CXF</em> looks for the config file as specified in 'web.xml' via 'config-location'. See <a href="#lst-jaxws.webxml.cxf">Listing 55</a> for more information.</p> 
+        <p>During startup, <em>Apache CXF</em> looks for the config file as specified in 'web.xml' via 'config-location'. See <a href="#lst-jaxws.webxml.cxf">Listing 56</a> for more information.</p> 
        </div> 
        <div class="listingblock"> 
         <div class="title">
-         Listing 70. WEB-INF/cxf-jaxws.xml
+         Listing 73. WEB-INF/cxf-jaxws.xml
         </div> 
         <div class="content"> 
          <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;beans</span> <span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.springframework.org/schema/beans</span><span class="delimiter">&quot;</span></span>
@@ -5026,7 +5124,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 71. Example of a WS-Client
+       Listing 74. Example of a WS-Client
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">PingWebServiceClient</span> <span class="directive">extends</span> AbstractWebServiceClient&lt;PingWebService, PingWebServicePortType&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
@@ -5051,7 +5149,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
      </div> 
      <div class="listingblock"> 
       <div class="title">
-       Listing 72. Example of a WS-Client configuration
+       Listing 75. Example of a WS-Client configuration
       </div> 
       <div class="content"> 
        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">PingWebServiceClient1</span> <span class="directive">extends</span> AbstractWebServiceClient&lt;PingWebService, PingWebServicePortType&gt; {
@@ -5108,7 +5206,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 73. Example of a webservice call
+        Listing 76. Example of a webservice call
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java">PingWebServicePortType port = BEANS.get(PingWebServiceClient.class).newInvocationContext().getPort(); <i class="conum" data-value="1"></i><b>(1)</b>
@@ -5138,7 +5236,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </div> 
       <div class="listingblock"> 
        <div class="title">
-        Listing 74. Configure invocation context with data to be included in the web request
+        Listing 77. Configure invocation context with data to be included in the web request
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">final</span> InvocationContext&lt;PingWebServicePortType&gt; context = BEANS.get(PingWebServiceClient.class).newInvocationContext();
@@ -5246,7 +5344,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
        </table> 
       </div> 
       <div class="paragraph"> 
-       <p>Learn more how to <a href="#jaxws.handler.statepropagation.readcid">Listing 67</a>.</p> 
+       <p>Learn more how to <a href="#jaxws.handler.statepropagation.readcid">Listing 69</a>.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -5270,7 +5368,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
   <span class="annotation">@Override</span>
   <span class="directive">protected</span> <span class="type">void</span> execInstallHandlers(<span class="predefined-type">List</span>&lt;javax.xml.ws.handler.Handler&lt;?&gt;&gt; handlerChain) {
     handlerChain.add(<span class="keyword">new</span> BasicAuthenticationHandler());
-    handlerChain.add(<span class="keyword">new</span> LogHandler());
+    handlerChain.add(BEANS.get(LogHandler.class));
   }
 }</code></pre> 
        </div> 
@@ -5287,7 +5385,36 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jaxws.consumer.configuration"><a class="anchor" href="#jaxws.consumer.configuration"></a>47.6. Default configuration of WS-Clients</h3> 
+      <h3 id="jax-ws-client-correlation-id-propagation"><a class="anchor" href="#jax-ws-client-correlation-id-propagation"></a>47.6. JAX-WS Client Correlation ID Propagation</h3> 
+      <div class="paragraph"> 
+       <p>The current context&#x2019;s correlation ID can be forwarded to the consumed web service. Scout provides a handler that sets the <code>X-Scout-Correlation-Id</code> HTTP header on the outgoing request.</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">PingWebServiceClient3</span> <span class="directive">extends</span> AbstractWebServiceClient&lt;PingWebService, PingWebServicePortType&gt; {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="type">void</span> execInstallHandlers(<span class="predefined-type">List</span>&lt;javax.xml.ws.handler.Handler&lt;?&gt;&gt; handlerChain) {
+    handlerChain.add(<span class="keyword">new</span> BasicAuthenticationHandler());
+    handlerChain.add(BEANS.get(LogHandler.class));
+    handlerChain.add(BEANS.get(WsConsumerCorrelationIdHandler.class)); <i class="conum" data-value="1"></i><b>(1)</b>
+  }
+}</code></pre> 
+       </div> 
+      </div> 
+      <div class="colist arabic"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td><i class="conum" data-value="1"></i><b>1</b></td> 
+          <td>The handler can be at any position in the handler chain.</td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="jaxws.consumer.configuration"><a class="anchor" href="#jaxws.consumer.configuration"></a>47.7. Default configuration of WS-Clients</h3> 
       <div class="paragraph"> 
        <p>The following properties can be set globally for all WS-Clients. However, a WS-Client can overwrite any of this values.</p> 
       </div> 
@@ -5339,7 +5466,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
     <h2 id="jaxws.xmladapters"><a class="anchor" href="#jaxws.xmladapters"></a>48. XML adapters to work with java.util.Date and java.util.Calendar</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p>Scout ships with some XML adapters to not have to work with <code>XMLGregorianCalendar</code>, but with <code>java.util.Date</code> instead.<br /> It is recommended to configure your global binding file accordingly. See <a href="#lst-jaxws.example.globalbindingfile">Listing 59</a> for an example.</p> 
+      <p>Scout ships with some XML adapters to not have to work with <code>XMLGregorianCalendar</code>, but with <code>java.util.Date</code> instead.<br /> It is recommended to configure your global binding file accordingly. See <a href="#lst-jaxws.example.globalbindingfile">Listing 61</a> for an example.</p> 
      </div> 
      <div class="paragraph"> 
       <p>See the adapter&#x2019;s JavaDoc for more detailed information.</p> 
@@ -5672,6 +5799,119 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
      </div> 
     </div> 
    </div> 
+   <h1 id="session-cookie-jsessionid-cookie-configuration-validation" class="sect0"><a class="anchor" href="#session-cookie-jsessionid-cookie-configuration-validation"></a>Session Cookie (JSESSIONID Cookie) Configuration Validation</h1> 
+   <div class="openblock partintro"> 
+    <div class="content"> 
+     <div class="paragraph"> 
+      <p>The UiServlet checks if the session cookie is configured safely. The validation is only performed on first access to the UiServlet. There is no automatic validation on the backend server side or on any custom servlets!</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>If the validation fails, a corresponding error message is logged to the server and an exception is thrown making the UiServlet inaccessible. Because of security reasons the exception shown to the user includes no details about the error. These can only be seen on the server side log.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="httponly"><a class="anchor" href="#httponly"></a>50. HttpOnly</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>First the existence of the <code>HttpOnly</code> flag is checked. The servlet container will then add this flag to the <code>Set-Cookie</code> HTTP response header. If the user agent supports this flag, the cookie cannot be accessed through a client side script. As a result even if a cross-site scripting (XSS) flaw exists and a user accidentally accesses a link that exploits this flaw, the user agent will not reveal the cookie to a third party. For a list of user agents supporting this feature please refer to <a href="https://www.owasp.org/index.php/HTTPOnly#Browsers_Supporting_HttpOnly">OWASP</a>.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>It is recommended to always enable this flag.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor <code>WEB-INF/web.xml</code>:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="CodeRay highlight"><code data-lang="xml"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="tag">&lt;web-app</span>
+    <span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://xmlns.jcp.org/xml/ns/javaee</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">xmlns:xsi</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.w3.org/2001/XMLSchema-instance</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">xsi:schemaLocation</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">version</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">3.1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+  ...
+  <span class="tag">&lt;session-config&gt;</span>
+    ...
+    <span class="tag">&lt;cookie-config&gt;</span>
+      <span class="tag">&lt;http-only&gt;</span>true<span class="tag">&lt;/http-only&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+      ...
+    <span class="tag">&lt;/cookie-config&gt;</span>
+    ...
+  <span class="tag">&lt;/session-config&gt;</span>
+  ...
+<span class="tag">&lt;/web-app&gt;</span></code></pre> 
+      </div> 
+     </div> 
+     <div class="colist arabic"> 
+      <table> 
+       <tbody>
+        <tr> 
+         <td><i class="conum" data-value="1"></i><b>1</b></td> 
+         <td>The HttpOnly flag activated</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="secure"><a class="anchor" href="#secure"></a>51. Secure</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Second the existence of the <code>Secure</code> flag is checked. The servlet container will then add this flag to the <code>Set-Cookie</code> HTTP response header. The purpose of the secure flag is to prevent cookies from being observed by unauthorized parties due to the transmission of a the cookie in clear text. Therefore setting this flag will prevent the user agent from transmitting the session id over an unencrypted channel.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor <code>WEB-INF/web.xml</code>:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="CodeRay highlight"><code data-lang="xml"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="tag">&lt;web-app</span>
+    <span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://xmlns.jcp.org/xml/ns/javaee</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">xmlns:xsi</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.w3.org/2001/XMLSchema-instance</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">xsi:schemaLocation</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">version</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">3.1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+  ...
+  <span class="tag">&lt;session-config&gt;</span>
+    ...
+    <span class="tag">&lt;cookie-config&gt;</span>
+      <span class="tag">&lt;secure&gt;</span>true<span class="tag">&lt;/secure&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+      ...
+    <span class="tag">&lt;/cookie-config&gt;</span>
+    ...
+  <span class="tag">&lt;/session-config&gt;</span>
+  ...
+<span class="tag">&lt;/web-app&gt;</span></code></pre> 
+      </div> 
+     </div> 
+     <div class="colist arabic"> 
+      <table> 
+       <tbody>
+        <tr> 
+         <td><i class="conum" data-value="1"></i><b>1</b></td> 
+         <td>The Secure flag activated</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </div> 
+     <div class="paragraph"> 
+      <p>This of course only makes sense if the application is exposed to the end user using an encrypted channel like <a href="https://en.wikipedia.org/wiki/HTTPS">HTTPS</a> (which is hardly recommended).</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Unfortunately for the UI server it is not possible to detect if an application uses a secured channel. Consider the following example: The servlet container is protected by a reverse proxy. The communication between the user agent and the proxy is encrypted while the channel between the proxy and the servlet container is not. In this scenario the container cannot know that from a user agent point of view the channel is secured.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Because of this the validation assumes that the channel from the user agent to the entering node is secured and by default checks for the <code>Secure</code> flag. In case this assumption is not true and an unencrypted channel must be used this validation step can be disabled by setting the following property in the <code>config.propertis</code> file:</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p><code>scout.auth.cookie.session.validate.secure=false</code></p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>This skips the <code>Secure</code> flag check completely. In this scenario (not using https) it is also required to remove the secure tag from the cookie config in the <code>WEB-INF/web.xml</code>.</p> 
+     </div> 
+    </div> 
+   </div> 
    <div class="sect1"> 
     <h2 id="apx-cclicence"><a class="anchor" href="#apx-cclicence"></a>Appendix A: Licence and Copyright</h2> 
     <div class="sectionbody"> 
@@ -5742,6 +5982,16 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
       <div class="paragraph"> 
        <p>The full licence text is available online at <a href="http://creativecommons.org/licenses/by/3.0/legalcode" class="bare">http://creativecommons.org/licenses/by/3.0/legalcode</a></p> 
       </div> 
+      <div class="admonitionblock tip"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
+          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/6.0.x/docs/build/book_scout_architecture/src/docs/scout_architecture.adoc">edit this page</a> on GitHub. </td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
      </div> 
     </div> 
    </div> 
@@ -5760,7 +6010,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0.0-SNAPSHOT
-    <br /> Last updated 2016-02-16 08:39:41 CET 
+    <br /> Last updated 2016-04-07 06:50:22 CEST 
    </div> 
   </div>  
  </body>
