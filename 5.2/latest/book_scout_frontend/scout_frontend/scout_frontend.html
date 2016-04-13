@@ -975,7 +975,7 @@ table.CodeRay td.code>pre{padding:0}
        <p>This workspace directory will then hold all the project code for the <code>Hello World</code> application. Once the Eclipse IDE is running it will show the Java perspective. To create a new Scout project select the menu <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Project&#x2026;&#x200b;</span></span> and type &#x201c;Scout Project&#x201d; in the wizard search field. Select the Scout Project wizard and press <b class="button">Next</b>.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>In the <em class="wizard">New Scout Project</em> wizard you have to enter a <code>group id</code>, <code>artifact id</code> and a <code>display name</code> for your Scout project. As the created project will make use of <a href="https://maven.apache.org/" target="_blank">Apache Maven</a> please refer to the <a href="https://maven.apache.org/guides/mini/guide-naming-conventions.html" target="_blank">Maven naming conventions</a> to choose <code>group id</code> and <code>artifact id</code> for your project. The <code>artifact id</code> will then also be the project name in the Eclipse workspace. The <code>display name</code> is used as the application name presented to the user (e.g. in the Browser title bar).</p> 
+       <p>In the <em class="wizard">New Scout Project</em> wizard you have to enter a <code>group id</code>, <code>artifact id</code> and a <code>display name</code> for your Scout project. As the created project will make use of <a href="https://maven.apache.org/">Apache Maven</a> please refer to the <a href="https://maven.apache.org/guides/mini/guide-naming-conventions.html">Maven naming conventions</a> to choose <code>group id</code> and <code>artifact id</code> for your project. The <code>artifact id</code> will then also be the project name in the Eclipse workspace. The <code>display name</code> is used as the application name presented to the user (e.g. in the Browser title bar).</p> 
       </div> 
       <div class="paragraph"> 
        <p>For the <code>Hello World</code> application just use the already prefilled values as sown in <a href="#img-sdk_new_project_wizard">Figure 7</a>. Then, click the <b class="button">Finish</b> button to let the Scout SDK create the initial project code for you.</p> 
@@ -989,7 +989,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Depending on your Eclipse installation some <code>Maven plugin connectors</code> may be missing initially. In that case a dialog as shown in <a href="#img-sdk_new_project_connector">Figure 8</a> may be shown. Please choose the desired actions from the combo box in the <code>Action</code> column until all mappings are green. E.g. for the <code>compiler-plugin</code> choose <code>Install M2E connector for the Eclipse JDT Compiler</code> from the combo box. Afterwards the selected connectors are resolved and you need to confirm the installation, accept the license, accept that some content has not been signed and restart Eclipse afterwards. To read more about <code>Maven plugin connectors</code> please refer to the <a href="https://www.eclipse.org/m2e/documentation/m2e-execution-not-covered.html" target="_blank">m2e documentation</a>.</p> 
+       <p>Depending on your Eclipse installation some <code>Maven plugin connectors</code> may be missing initially. In that case a dialog as shown in <a href="#img-sdk_new_project_connector">Figure 8</a> may be shown. Please choose the desired actions from the combo box in the <code>Action</code> column until all mappings are green. E.g. for the <code>compiler-plugin</code> choose <code>Install M2E connector for the Eclipse JDT Compiler</code> from the combo box. Afterwards the selected connectors are resolved and you need to confirm the installation, accept the license, accept that some content has not been signed and restart Eclipse afterwards. To read more about <code>Maven plugin connectors</code> please refer to the <a href="https://www.eclipse.org/m2e/documentation/m2e-execution-not-covered.html">m2e documentation</a>.</p> 
       </div> 
       <div id="img-sdk_new_project_connector" class="imageblock"> 
        <div class="content"> 
@@ -1020,7 +1020,7 @@ table.CodeRay td.code>pre{padding:0}
        <p>In case the launch configurations are not shown in the toolbar under the debug/run icons, you may find the <code>server-dev.launch</code> launch file under project <code>helloworld.server.app.dev</code> and the <code>ui-html-dev.launch</code> launch file under <code>helloworld.ui.html.app.dev</code>. These launch files can be started using the context menu <em class="menu">Run As</em> which will add the launch file to the <em class="button">Run</em> toolbar button.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>During startup of the Scout applications you should see console output providing information about the startup. After both have been started successfully the HTML user interface can be accessed by navigating to <a href="http://localhost:8082/" class="bare" target="_blank">http://localhost:8082/</a> in your favorite web browser.</p> 
+       <p>During startup of the Scout applications you should see console output providing information about the startup. After both have been started successfully the HTML user interface can be accessed by navigating to <a href="http://localhost:8082/" class="bare">http://localhost:8082/</a> in your favorite web browser.</p> 
       </div> 
       <div id="img-start_client" class="imageblock"> 
        <div class="content"> 
@@ -1089,7 +1089,7 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2"> 
       <h3 id="sec-helloworld_deploy"><a class="anchor" href="#sec-helloworld_deploy"></a>2.5. Deploying to Tomcat</h3> 
       <div class="paragraph"> 
-       <p>As the final step of this tutorial, we deploy the two WAR files representing our &#x201c;Hello World&#x201d; application to a Tomcat web server. For this, we first need a working Tomcat installation. If you do not yet have such an installation you may want to read and follow the instructions provided in Appendix <a href="#apx-install_tomcat">Apache Tomcat Installation</a>. To verify a running Tomcat instance, type <a href="http://localhost:8080/" class="bare" target="_blank">http://localhost:8080/</a> into the address bar of the web browser of your choice. You should then see the page shown in <a href="#img-deploy_tomcat_1">Figure 15</a>.</p> 
+       <p>As the final step of this tutorial, we deploy the two WAR files representing our &#x201c;Hello World&#x201d; application to a Tomcat web server. For this, we first need a working Tomcat installation. If you do not yet have such an installation you may want to read and follow the instructions provided in Appendix <a href="#apx-install_tomcat">Apache Tomcat Installation</a>. To verify a running Tomcat instance, type <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a> into the address bar of the web browser of your choice. You should then see the page shown in <a href="#img-deploy_tomcat_1">Figure 15</a>.</p> 
       </div> 
       <div id="img-deploy_tomcat_1" class="imageblock"> 
        <div class="content"> 
@@ -1714,14 +1714,14 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/Texts" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Texts</a></p> </li> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/319136/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/319136/</a></p> </li> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/326343/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/326343/</a></p> </li> 
-        <li> <p>forum: overwriting texts provided by scout <a href="http://www.eclipse.org/forums/index.php/t/308273/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/308273/</a></p> </li> 
-        <li> <p>forum: additional text provider service <a href="http://www.eclipse.org/forums/index.php/t/317565/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/317565/</a></p> </li> 
-        <li> <p>forum: changing default language for scout apps <a href="http://www.eclipse.org/forums/index.php/t/367177/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/367177/</a></p> </li> 
-        <li> <p>forum: export/import not possible: <a href="http://www.eclipse.org/forums/index.php/t/326320/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/326320/</a></p> </li> 
-        <li> <p>forum: usage counts for text entries: <a href="http://www.eclipse.org/forums/index.php/t/261235/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/261235/</a></p> </li> 
+        <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/Texts" class="bare">http://wiki.eclipse.org/Scout/Concepts/Texts</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/319136/" class="bare">http://www.eclipse.org/forums/index.php/t/319136/</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/326343/" class="bare">http://www.eclipse.org/forums/index.php/t/326343/</a></p> </li> 
+        <li> <p>forum: overwriting texts provided by scout <a href="http://www.eclipse.org/forums/index.php/t/308273/" class="bare">http://www.eclipse.org/forums/index.php/t/308273/</a></p> </li> 
+        <li> <p>forum: additional text provider service <a href="http://www.eclipse.org/forums/index.php/t/317565/" class="bare">http://www.eclipse.org/forums/index.php/t/317565/</a></p> </li> 
+        <li> <p>forum: changing default language for scout apps <a href="http://www.eclipse.org/forums/index.php/t/367177/" class="bare">http://www.eclipse.org/forums/index.php/t/367177/</a></p> </li> 
+        <li> <p>forum: export/import not possible: <a href="http://www.eclipse.org/forums/index.php/t/326320/" class="bare">http://www.eclipse.org/forums/index.php/t/326320/</a></p> </li> 
+        <li> <p>forum: usage counts for text entries: <a href="http://www.eclipse.org/forums/index.php/t/261235/" class="bare">http://www.eclipse.org/forums/index.php/t/261235/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -1735,8 +1735,8 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>how-to wiki <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Add_an_icon" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Add_an_icon</a></p> </li> 
-        <li> <p>how-to wiki <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images</a></p> </li> 
+        <li> <p>how-to wiki <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Add_an_icon" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Add_an_icon</a></p> </li> 
+        <li> <p>how-to wiki <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -1930,18 +1930,18 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>presentation: <a href="http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf" class="bare" target="_blank">http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf</a></p> </li> 
-        <li> <p>tutorial: <a href="https://wiki.eclipse.org/Scout/Tutorial/Lookup_Calls" class="bare" target="_blank">https://wiki.eclipse.org/Scout/Tutorial/Lookup_Calls</a></p> </li> 
-        <li> <p>tutorial minicrm: <a href="https://wiki.eclipse.org/Scout/Tutorial/4.0/Minicrm/Lookup_Calls_and_Lookup_Services" class="bare" target="_blank">https://wiki.eclipse.org/Scout/Tutorial/4.0/Minicrm/Lookup_Calls_and_Lookup_Services</a></p> </li> 
-        <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/LookupCall" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/LookupCall</a></p> </li> 
-        <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/Lookup_Service" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Lookup_Service</a></p> </li> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/279108/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/279108/</a></p> </li> 
-        <li> <p>javadoc lookupcall: <a href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupCall.java" class="bare" target="_blank">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupCall.java</a></p> </li> 
-        <li> <p>javadoc lookuprow: <a href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupRow.java" class="bare" target="_blank">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupRow.java</a></p> </li> 
-        <li> <p>javadoc codelookupcall <a href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/CodeLookupCall.java" class="bare" target="_blank">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/CodeLookupCall.java</a></p> </li> 
-        <li> <p>javadoc locallookupcall <a href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LocalLookupCall.java" class="bare" target="_blank">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LocalLookupCall.java</a></p> </li> 
-        <li> <p>javadoc ilookupservice <a href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/ILookupService.java" class="bare" target="_blank">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/ILookupService.java</a></p> </li> 
-        <li> <p>javadoc lookupservices <a href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.server/src/org/eclipse/scout/rt/server/services/lookup/" class="bare" target="_blank">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.server/src/org/eclipse/scout/rt/server/services/lookup/</a></p> </li> 
+        <li> <p>presentation: <a href="http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf" class="bare">http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf</a></p> </li> 
+        <li> <p>tutorial: <a href="https://wiki.eclipse.org/Scout/Tutorial/Lookup_Calls" class="bare">https://wiki.eclipse.org/Scout/Tutorial/Lookup_Calls</a></p> </li> 
+        <li> <p>tutorial minicrm: <a href="https://wiki.eclipse.org/Scout/Tutorial/4.0/Minicrm/Lookup_Calls_and_Lookup_Services" class="bare">https://wiki.eclipse.org/Scout/Tutorial/4.0/Minicrm/Lookup_Calls_and_Lookup_Services</a></p> </li> 
+        <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/LookupCall" class="bare">http://wiki.eclipse.org/Scout/Concepts/LookupCall</a></p> </li> 
+        <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/Lookup_Service" class="bare">http://wiki.eclipse.org/Scout/Concepts/Lookup_Service</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/279108/" class="bare">http://www.eclipse.org/forums/index.php/t/279108/</a></p> </li> 
+        <li> <p>javadoc lookupcall: <a href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupCall.java" class="bare">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupCall.java</a></p> </li> 
+        <li> <p>javadoc lookuprow: <a href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupRow.java" class="bare">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupRow.java</a></p> </li> 
+        <li> <p>javadoc codelookupcall <a href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/CodeLookupCall.java" class="bare">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/CodeLookupCall.java</a></p> </li> 
+        <li> <p>javadoc locallookupcall <a href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LocalLookupCall.java" class="bare">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LocalLookupCall.java</a></p> </li> 
+        <li> <p>javadoc ilookupservice <a href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/ILookupService.java" class="bare">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/ILookupService.java</a></p> </li> 
+        <li> <p>javadoc lookupservices <a href="https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.server/src/org/eclipse/scout/rt/server/services/lookup/" class="bare">https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.server/src/org/eclipse/scout/rt/server/services/lookup/</a></p> </li> 
         <li> <p>lookup service</p> </li> 
         <li> <p>sqllookup service</p> </li> 
        </ul> 
@@ -1959,9 +1959,9 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>how-to wiki: <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Create_Permissions" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Create_Permissions</a></p> </li> 
-        <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/Permission" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Permission</a></p> </li> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/243966/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/243966/</a></p> </li> 
+        <li> <p>how-to wiki: <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Create_Permissions" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Create_Permissions</a></p> </li> 
+        <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/Permission" class="bare">http://wiki.eclipse.org/Scout/Concepts/Permission</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/243966/" class="bare">http://www.eclipse.org/forums/index.php/t/243966/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -1975,7 +1975,7 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>form data/dto <a href="http://www.eclipse.org/forums/index.php/t/169334/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/169334/</a></p> </li> 
+        <li> <p>form data/dto <a href="http://www.eclipse.org/forums/index.php/t/169334/" class="bare">http://www.eclipse.org/forums/index.php/t/169334/</a></p> </li> 
        </ul> 
       </div> 
       <div class="sect3"> 
@@ -2047,7 +2047,7 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Desktop" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Desktop</a></p> </li> 
+        <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Desktop" class="bare">http://wiki.eclipse.org/Scout/Concepts/Desktop</a></p> </li> 
        </ul> 
       </div> 
       <div class="sect3"> 
@@ -2066,8 +2066,8 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
        <div class="ulist"> 
         <ul> 
-         <li> <p>forum: feature request <a href="http://www.eclipse.org/forums/index.php/t/366440/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/366440/</a></p> </li> 
-         <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Tool" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Tool</a></p> </li> 
+         <li> <p>forum: feature request <a href="http://www.eclipse.org/forums/index.php/t/366440/" class="bare">http://www.eclipse.org/forums/index.php/t/366440/</a></p> </li> 
+         <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Tool" class="bare">http://wiki.eclipse.org/Scout/Concepts/Tool</a></p> </li> 
         </ul> 
        </div> 
       </div> 
@@ -2088,8 +2088,8 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Menu" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Menu</a></p> </li> 
-        <li> <p>forum: hard coded swt menues <a href="http://www.eclipse.org/forums/index.php/t/236071/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/236071/</a>. is this still an issue with scout kepler?</p> </li> 
+        <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Menu" class="bare">http://wiki.eclipse.org/Scout/Concepts/Menu</a></p> </li> 
+        <li> <p>forum: hard coded swt menues <a href="http://www.eclipse.org/forums/index.php/t/236071/" class="bare">http://www.eclipse.org/forums/index.php/t/236071/</a>. is this still an issue with scout kepler?</p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -2103,7 +2103,7 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Outline" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Outline</a></p> </li> 
+        <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Outline" class="bare">http://wiki.eclipse.org/Scout/Concepts/Outline</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -2123,11 +2123,11 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Form" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Form</a></p> </li> 
+        <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Form" class="bare">http://wiki.eclipse.org/Scout/Concepts/Form</a></p> </li> 
         <li> <p>concept wiki form handlerhttp://wiki.eclipse.org/Scout/Concepts/Form_Handler</p> </li> 
-        <li> <p>how-to wiki <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Open_a_Form_in_a_View" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Open_a_Form_in_a_View</a></p> </li> 
-        <li> <p>forum: layout manager <a href="http://www.eclipse.org/forums/index.php/t/404048/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/404048/</a></p> </li> 
-        <li> <p>forum: life cycle <a href="http://www.eclipse.org/forums/index.php/t/369890/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/369890/</a></p> </li> 
+        <li> <p>how-to wiki <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Open_a_Form_in_a_View" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Open_a_Form_in_a_View</a></p> </li> 
+        <li> <p>forum: layout manager <a href="http://www.eclipse.org/forums/index.php/t/404048/" class="bare">http://www.eclipse.org/forums/index.php/t/404048/</a></p> </li> 
+        <li> <p>forum: life cycle <a href="http://www.eclipse.org/forums/index.php/t/369890/" class="bare">http://www.eclipse.org/forums/index.php/t/369890/</a></p> </li> 
         <li> <p>form validation</p> </li> 
        </ul> 
       </div> 
@@ -2145,8 +2145,8 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>concept wiki (links) <a href="http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Form_fields" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Form_fields</a></p> </li> 
-        <li> <p>concept wiki screenshots <a href="http://wiki.eclipse.org/Scout/Concepts/Field" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Field</a></p> </li> 
+        <li> <p>concept wiki (links) <a href="http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Form_fields" class="bare">http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Form_fields</a></p> </li> 
+        <li> <p>concept wiki screenshots <a href="http://wiki.eclipse.org/Scout/Concepts/Field" class="bare">http://wiki.eclipse.org/Scout/Concepts/Field</a></p> </li> 
        </ul> 
       </div> 
       <div class="sect3"> 
@@ -2159,7 +2159,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
        <div class="ulist"> 
         <ul> 
-         <li> <p>forum: label position <a href="http://www.eclipse.org/forums/index.php/t/369109/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/369109/</a></p> </li> 
+         <li> <p>forum: label position <a href="http://www.eclipse.org/forums/index.php/t/369109/" class="bare">http://www.eclipse.org/forums/index.php/t/369109/</a></p> </li> 
          <li> <p>model component</p> </li> 
          <li> <p>ui component</p> </li> 
          <li> <p>extension point registration</p> </li> 
@@ -2195,10 +2195,10 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>how-to wiki: <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Display_images_in_a_table_page" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Display_images_in_a_table_page</a></p> </li> 
-        <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/Page" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Page</a></p> </li> 
-        <li> <p>forum: pages linking to forms <a href="http://www.eclipse.org/forums/index.php/t/367595/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/367595/</a></p> </li> 
-        <li> <p>forum: changing page icons <a href="http://www.eclipse.org/forums/index.php/t/262151/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/262151/</a></p> </li> 
+        <li> <p>how-to wiki: <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Display_images_in_a_table_page" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Display_images_in_a_table_page</a></p> </li> 
+        <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/Page" class="bare">http://wiki.eclipse.org/Scout/Concepts/Page</a></p> </li> 
+        <li> <p>forum: pages linking to forms <a href="http://www.eclipse.org/forums/index.php/t/367595/" class="bare">http://www.eclipse.org/forums/index.php/t/367595/</a></p> </li> 
+        <li> <p>forum: changing page icons <a href="http://www.eclipse.org/forums/index.php/t/262151/" class="bare">http://www.eclipse.org/forums/index.php/t/262151/</a></p> </li> 
         <li> <p>page with table</p> </li> 
         <li> <p>page with nodes</p> </li> 
        </ul> 
@@ -2214,8 +2214,8 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum: position of search form <a href="http://www.eclipse.org/forums/index.php/t/353895/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/353895/</a></p> </li> 
-        <li> <p>forum: statement builder stuff <a href="http://www.eclipse.org/forums/index.php/t/165805/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/165805/</a></p> </li> 
+        <li> <p>forum: position of search form <a href="http://www.eclipse.org/forums/index.php/t/353895/" class="bare">http://www.eclipse.org/forums/index.php/t/353895/</a></p> </li> 
+        <li> <p>forum: statement builder stuff <a href="http://www.eclipse.org/forums/index.php/t/165805/" class="bare">http://www.eclipse.org/forums/index.php/t/165805/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -2229,9 +2229,9 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum: editable column <a href="http://www.eclipse.org/forums/index.php/t/220019/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/220019/</a></p> </li> 
-        <li> <p>forum: default visibility of columns <a href="http://www.eclipse.org/forums/index.php/t/166052/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/166052/</a></p> </li> 
-        <li> <p>forum: row deletion <a href="http://www.eclipse.org/forums/index.php/t/210744/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/210744/</a></p> </li> 
+        <li> <p>forum: editable column <a href="http://www.eclipse.org/forums/index.php/t/220019/" class="bare">http://www.eclipse.org/forums/index.php/t/220019/</a></p> </li> 
+        <li> <p>forum: default visibility of columns <a href="http://www.eclipse.org/forums/index.php/t/166052/" class="bare">http://www.eclipse.org/forums/index.php/t/166052/</a></p> </li> 
+        <li> <p>forum: row deletion <a href="http://www.eclipse.org/forums/index.php/t/210744/" class="bare">http://www.eclipse.org/forums/index.php/t/210744/</a></p> </li> 
         <li> <p>context menues</p> </li> 
         <li> <p>editable tables</p> </li> 
         <li> <p>column types</p> </li> 
@@ -2247,7 +2247,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
        <div class="ulist"> 
         <ul> 
-         <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/369626/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/369626/</a></p> </li> 
+         <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/369626/" class="bare">http://www.eclipse.org/forums/index.php/t/369626/</a></p> </li> 
         </ul> 
        </div> 
       </div> 
@@ -2261,8 +2261,8 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
        <div class="ulist"> 
         <ul> 
-         <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/370714/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/370714/</a></p> </li> 
-         <li> <p>forum: summary row <a href="http://www.eclipse.org/forums/index.php/t/235749/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/235749/</a></p> </li> 
+         <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/370714/" class="bare">http://www.eclipse.org/forums/index.php/t/370714/</a></p> </li> 
+         <li> <p>forum: summary row <a href="http://www.eclipse.org/forums/index.php/t/235749/" class="bare">http://www.eclipse.org/forums/index.php/t/235749/</a></p> </li> 
         </ul> 
        </div> 
       </div> 
@@ -2276,7 +2276,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
        <div class="ulist"> 
         <ul> 
-         <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/367326/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/367326/</a></p> </li> 
+         <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/367326/" class="bare">http://www.eclipse.org/forums/index.php/t/367326/</a></p> </li> 
         </ul> 
        </div> 
       </div> 
@@ -2290,8 +2290,8 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
        <div class="ulist"> 
         <ul> 
-         <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/364715/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/364715/</a></p> </li> 
-         <li> <p>forum : dynamic columns <a href="http://www.eclipse.org/forums/index.php/t/216731/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/216731/</a></p> </li> 
+         <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/364715/" class="bare">http://www.eclipse.org/forums/index.php/t/364715/</a></p> </li> 
+         <li> <p>forum : dynamic columns <a href="http://www.eclipse.org/forums/index.php/t/216731/" class="bare">http://www.eclipse.org/forums/index.php/t/216731/</a></p> </li> 
         </ul> 
        </div> 
       </div> 
@@ -2306,10 +2306,10 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Wizard" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Wizard</a></p> </li> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/391607/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/391607/</a></p> </li> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/382579/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/382579/</a></p> </li> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/366971/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/366971/</a></p> </li> 
+        <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Wizard" class="bare">http://wiki.eclipse.org/Scout/Concepts/Wizard</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/391607/" class="bare">http://www.eclipse.org/forums/index.php/t/391607/</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/382579/" class="bare">http://www.eclipse.org/forums/index.php/t/382579/</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/366971/" class="bare">http://www.eclipse.org/forums/index.php/t/366971/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -2932,8 +2932,8 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>presentation: <a href="http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf" class="bare" target="_blank">http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf</a></p> </li> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/369542/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/369542/</a></p> </li> 
+        <li> <p>presentation: <a href="http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf" class="bare">http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/369542/" class="bare">http://www.eclipse.org/forums/index.php/t/369542/</a></p> </li> 
        </ul> 
       </div> 
       <div class="sect3"> 
@@ -2994,9 +2994,9 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>wiki tutorial <a href="http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Table_Field" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Table_Field</a></p> </li> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/392053/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/392053/</a></p> </li> 
-        <li> <p>forum: load/save data <a href="http://www.eclipse.org/forums/index.php/t/253311/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/253311/</a></p> </li> 
+        <li> <p>wiki tutorial <a href="http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Table_Field" class="bare">http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Table_Field</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/392053/" class="bare">http://www.eclipse.org/forums/index.php/t/392053/</a></p> </li> 
+        <li> <p>forum: load/save data <a href="http://www.eclipse.org/forums/index.php/t/253311/" class="bare">http://www.eclipse.org/forums/index.php/t/253311/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3018,7 +3018,7 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum: scrollbars <a href="http://www.eclipse.org/forums/index.php/t/291205/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/291205/</a></p> </li> 
+        <li> <p>forum: scrollbars <a href="http://www.eclipse.org/forums/index.php/t/291205/" class="bare">http://www.eclipse.org/forums/index.php/t/291205/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3058,9 +3058,9 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/414483/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/414483/</a>,</p> </li> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/369963/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/369963/</a>,</p> </li> 
-        <li> <p>forum: mozilla as default: <a href="http://www.eclipse.org/forums/index.php/t/342433/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/342433/</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/414483/" class="bare">http://www.eclipse.org/forums/index.php/t/414483/</a>,</p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/369963/" class="bare">http://www.eclipse.org/forums/index.php/t/369963/</a>,</p> </li> 
+        <li> <p>forum: mozilla as default: <a href="http://www.eclipse.org/forums/index.php/t/342433/" class="bare">http://www.eclipse.org/forums/index.php/t/342433/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3074,10 +3074,10 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum: calendar field <a href="http://www.eclipse.org/forums/index.php/t/370052/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/370052/</a></p> </li> 
-        <li> <p>forum: execloaditems <a href="http://www.eclipse.org/forums/index.php/t/277447/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/277447/</a></p> </li> 
-        <li> <p>forum: filtering items <a href="http://www.eclipse.org/forums/index.php/t/285644/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/285644/</a></p> </li> 
-        <li> <p>forum: usage example <a href="http://www.eclipse.org/forums/index.php/t/265028/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/265028/</a></p> </li> 
+        <li> <p>forum: calendar field <a href="http://www.eclipse.org/forums/index.php/t/370052/" class="bare">http://www.eclipse.org/forums/index.php/t/370052/</a></p> </li> 
+        <li> <p>forum: execloaditems <a href="http://www.eclipse.org/forums/index.php/t/277447/" class="bare">http://www.eclipse.org/forums/index.php/t/277447/</a></p> </li> 
+        <li> <p>forum: filtering items <a href="http://www.eclipse.org/forums/index.php/t/285644/" class="bare">http://www.eclipse.org/forums/index.php/t/285644/</a></p> </li> 
+        <li> <p>forum: usage example <a href="http://www.eclipse.org/forums/index.php/t/265028/" class="bare">http://www.eclipse.org/forums/index.php/t/265028/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3132,7 +3132,7 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/414629/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/414629/</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/414629/" class="bare">http://www.eclipse.org/forums/index.php/t/414629/</a></p> </li> 
         <li> <p>exec methods</p> </li> 
         <li> <p>field validation</p> </li> 
        </ul> 
@@ -3162,7 +3162,7 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/395360/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/395360/</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/395360/" class="bare">http://www.eclipse.org/forums/index.php/t/395360/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3176,9 +3176,9 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum: file chooser field <a href="http://www.eclipse.org/forums/index.php/t/377581/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/377581/</a></p> </li> 
-        <li> <p>forum: open with default file name: <a href="http://www.eclipse.org/forums/index.php/t/351352/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/351352/</a></p> </li> 
-        <li> <p>how-to wiki: rap file chooser <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Add_FileChooser_support_for_RAP_UI" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Add_FileChooser_support_for_RAP_UI</a></p> </li> 
+        <li> <p>forum: file chooser field <a href="http://www.eclipse.org/forums/index.php/t/377581/" class="bare">http://www.eclipse.org/forums/index.php/t/377581/</a></p> </li> 
+        <li> <p>forum: open with default file name: <a href="http://www.eclipse.org/forums/index.php/t/351352/" class="bare">http://www.eclipse.org/forums/index.php/t/351352/</a></p> </li> 
+        <li> <p>how-to wiki: rap file chooser <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Add_FileChooser_support_for_RAP_UI" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Add_FileChooser_support_for_RAP_UI</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3192,7 +3192,7 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/366931/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/366931/</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/366931/" class="bare">http://www.eclipse.org/forums/index.php/t/366931/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3212,8 +3212,8 @@ image::{imgsdir}/messagebox.png[]</pre>
      </div> 
      <div class="ulist"> 
       <ul> 
-       <li> <p>how-to wiki: <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Add_a_custom_GUI_component" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Add_a_custom_GUI_component</a></p> </li> 
-       <li> <p>forum: wrap existing javaview.de swing component <a href="http://www.eclipse.org/forums/index.php/t/262755/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/262755/</a></p> </li> 
+       <li> <p>how-to wiki: <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Add_a_custom_GUI_component" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Add_a_custom_GUI_component</a></p> </li> 
+       <li> <p>forum: wrap existing javaview.de swing component <a href="http://www.eclipse.org/forums/index.php/t/262755/" class="bare">http://www.eclipse.org/forums/index.php/t/262755/</a></p> </li> 
        <li> <p>concept</p> </li> 
        <li> <p>showcase: drawing application</p> </li> 
       </ul> 
@@ -3231,9 +3231,9 @@ image::{imgsdir}/messagebox.png[]</pre>
      </div> 
      <div class="ulist"> 
       <ul> 
-       <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/Template" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Template</a></p> </li> 
-       <li> <p>forum: form data for template fields <a href="http://www.eclipse.org/forums/index.php/t/261235/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/261235/</a></p> </li> 
-       <li> <p>forum: form &#x201c;modularisation&#x201d; <a href="http://www.eclipse.org/forums/index.php/t/245857/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/245857/</a></p> </li> 
+       <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/Template" class="bare">http://wiki.eclipse.org/Scout/Concepts/Template</a></p> </li> 
+       <li> <p>forum: form data for template fields <a href="http://www.eclipse.org/forums/index.php/t/261235/" class="bare">http://www.eclipse.org/forums/index.php/t/261235/</a></p> </li> 
+       <li> <p>forum: form &#x201c;modularisation&#x201d; <a href="http://www.eclipse.org/forums/index.php/t/245857/" class="bare">http://www.eclipse.org/forums/index.php/t/245857/</a></p> </li> 
       </ul> 
      </div> 
     </div> 
@@ -3249,7 +3249,7 @@ image::{imgsdir}/messagebox.png[]</pre>
      </div> 
      <div class="ulist"> 
       <ul> 
-       <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Layouting" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Layouting</a></p> </li> 
+       <li> <p>concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Layouting" class="bare">http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Layouting</a></p> </li> 
       </ul> 
      </div> 
      <div class="sect2"> 
@@ -3285,9 +3285,9 @@ image::{imgsdir}/messagebox.png[]</pre>
      </div> 
      <div class="ulist"> 
       <ul> 
-       <li> <p>presentation: <a href="http://wiki.eclipse.org/images/e/ea/20121022_BahBah_Slides.pdf" class="bare" target="_blank">http://wiki.eclipse.org/images/e/ea/20121022_BahBah_Slides.pdf</a></p> </li> 
-       <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/Client_Notification" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Client_Notification</a></p> </li> 
-       <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/241053/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/241053/</a></p> </li> 
+       <li> <p>presentation: <a href="http://wiki.eclipse.org/images/e/ea/20121022_BahBah_Slides.pdf" class="bare">http://wiki.eclipse.org/images/e/ea/20121022_BahBah_Slides.pdf</a></p> </li> 
+       <li> <p>concept wiki: <a href="http://wiki.eclipse.org/Scout/Concepts/Client_Notification" class="bare">http://wiki.eclipse.org/Scout/Concepts/Client_Notification</a></p> </li> 
+       <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/241053/" class="bare">http://www.eclipse.org/forums/index.php/t/241053/</a></p> </li> 
       </ul> 
      </div> 
     </div> 
@@ -3303,14 +3303,14 @@ image::{imgsdir}/messagebox.png[]</pre>
      </div> 
      <div class="ulist"> 
       <ul> 
-       <li> <p>how-to wiki: <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Transfer_a_file_from_the_client_to_the_server" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Transfer_a_file_from_the_client_to_the_server</a></p> </li> 
-       <li> <p>how-to wiki: <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Use_RemoteFileService" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Use_RemoteFileService</a></p> </li> 
-       <li> <p>forum with error message box exampl <a href="http://www.eclipse.org/forums/index.php/t/441101/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/441101/</a></p> </li> 
-       <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/368166/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/368166/</a></p> </li> 
-       <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/366585/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/366585/</a></p> </li> 
-       <li> <p>forum: remotefileservice <a href="http://www.eclipse.org/forums/index.php/t/266862/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/266862/</a></p> </li> 
-       <li> <p>forum: file download <a href="http://www.eclipse.org/forums/index.php/t/263896/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/263896/</a></p> </li> 
-       <li> <p>forum: load &amp; display file <a href="http://www.eclipse.org/forums/index.php/t/440934/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/440934/</a></p> </li> 
+       <li> <p>how-to wiki: <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Transfer_a_file_from_the_client_to_the_server" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Transfer_a_file_from_the_client_to_the_server</a></p> </li> 
+       <li> <p>how-to wiki: <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Use_RemoteFileService" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Use_RemoteFileService</a></p> </li> 
+       <li> <p>forum with error message box exampl <a href="http://www.eclipse.org/forums/index.php/t/441101/" class="bare">http://www.eclipse.org/forums/index.php/t/441101/</a></p> </li> 
+       <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/368166/" class="bare">http://www.eclipse.org/forums/index.php/t/368166/</a></p> </li> 
+       <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/366585/" class="bare">http://www.eclipse.org/forums/index.php/t/366585/</a></p> </li> 
+       <li> <p>forum: remotefileservice <a href="http://www.eclipse.org/forums/index.php/t/266862/" class="bare">http://www.eclipse.org/forums/index.php/t/266862/</a></p> </li> 
+       <li> <p>forum: file download <a href="http://www.eclipse.org/forums/index.php/t/263896/" class="bare">http://www.eclipse.org/forums/index.php/t/263896/</a></p> </li> 
+       <li> <p>forum: load &amp; display file <a href="http://www.eclipse.org/forums/index.php/t/440934/" class="bare">http://www.eclipse.org/forums/index.php/t/440934/</a></p> </li> 
       </ul> 
      </div> 
     </div> 
@@ -3326,14 +3326,14 @@ image::{imgsdir}/messagebox.png[]</pre>
      </div> 
      <div class="ulist"> 
       <ul> 
-       <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/373921/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/373921/</a></p> </li> 
-       <li> <p>forum: Splash <a href="http://www.eclipse.org/forums/index.php/t/263003/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/263003/</a>,</p> </li> 
-       <li> <p>forum: Splash <a href="http://www.eclipse.org/forums/index.php/t/164495/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/164495/</a></p> </li> 
-       <li> <p>forum: Login Box <a href="http://www.eclipse.org/forums/index.php/t/417248/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/417248/</a></p> </li> 
-       <li> <p>forum: App Icon <a href="http://www.eclipse.org/forums/index.php/t/263221/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/263221/</a></p> </li> 
-       <li> <p>forum: App Name <a href="http://www.eclipse.org/forums/index.php/t/262121/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/262121/</a></p> </li> 
-       <li> <p>forum: Desktop <a href="http://www.eclipse.org/forums/index.php/t/373921/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/373921/</a></p> </li> 
-       <li> <p>forum: Scout info form <a href="http://www.eclipse.org/forums/index.php/t/236630/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/236630/</a></p> </li> 
+       <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/373921/" class="bare">http://www.eclipse.org/forums/index.php/t/373921/</a></p> </li> 
+       <li> <p>forum: Splash <a href="http://www.eclipse.org/forums/index.php/t/263003/" class="bare">http://www.eclipse.org/forums/index.php/t/263003/</a>,</p> </li> 
+       <li> <p>forum: Splash <a href="http://www.eclipse.org/forums/index.php/t/164495/" class="bare">http://www.eclipse.org/forums/index.php/t/164495/</a></p> </li> 
+       <li> <p>forum: Login Box <a href="http://www.eclipse.org/forums/index.php/t/417248/" class="bare">http://www.eclipse.org/forums/index.php/t/417248/</a></p> </li> 
+       <li> <p>forum: App Icon <a href="http://www.eclipse.org/forums/index.php/t/263221/" class="bare">http://www.eclipse.org/forums/index.php/t/263221/</a></p> </li> 
+       <li> <p>forum: App Name <a href="http://www.eclipse.org/forums/index.php/t/262121/" class="bare">http://www.eclipse.org/forums/index.php/t/262121/</a></p> </li> 
+       <li> <p>forum: Desktop <a href="http://www.eclipse.org/forums/index.php/t/373921/" class="bare">http://www.eclipse.org/forums/index.php/t/373921/</a></p> </li> 
+       <li> <p>forum: Scout info form <a href="http://www.eclipse.org/forums/index.php/t/236630/" class="bare">http://www.eclipse.org/forums/index.php/t/236630/</a></p> </li> 
        <li> <p>Icons</p> </li> 
        <li> <p>Fonts / Colors</p> </li> 
        <li> <p>Look and Feel (Swing)</p> </li> 
@@ -3349,8 +3349,8 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum <a href="http://www.eclipse.org/forums/index.php/t/369809/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/369809/</a></p> </li> 
-        <li> <p>wiki tutorial <a href="http://wiki.eclipse.org/Scout/Tutorial/3.8/Rayo_Look_and_Feel" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Tutorial/3.8/Rayo_Look_and_Feel</a></p> </li> 
+        <li> <p>forum <a href="http://www.eclipse.org/forums/index.php/t/369809/" class="bare">http://www.eclipse.org/forums/index.php/t/369809/</a></p> </li> 
+        <li> <p>wiki tutorial <a href="http://wiki.eclipse.org/Scout/Tutorial/3.8/Rayo_Look_and_Feel" class="bare">http://wiki.eclipse.org/Scout/Tutorial/3.8/Rayo_Look_and_Feel</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3364,8 +3364,8 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>how-to wiki: for logo <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Branding_the_Swing_Client" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Branding_the_Swing_Client</a></p> </li> 
-        <li> <p>how-to wiki: app logo <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images</a></p> </li> 
+        <li> <p>how-to wiki: for logo <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Branding_the_Swing_Client" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Branding_the_Swing_Client</a></p> </li> 
+        <li> <p>how-to wiki: app logo <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3379,8 +3379,8 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>how-to wiki: for logo <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Branding_the_Swing_Client" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Branding_the_Swing_Client</a></p> </li> 
-        <li> <p>how-to wiki: app logo <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images</a></p> </li> 
+        <li> <p>how-to wiki: for logo <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Branding_the_Swing_Client" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Branding_the_Swing_Client</a></p> </li> 
+        <li> <p>how-to wiki: app logo <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3394,7 +3394,7 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum <a href="http://www.eclipse.org/forums/index.php/t/367983/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/367983/</a></p> </li> 
+        <li> <p>forum <a href="http://www.eclipse.org/forums/index.php/t/367983/" class="bare">http://www.eclipse.org/forums/index.php/t/367983/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3416,7 +3416,7 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum: inject fields in form <a href="http://www.eclipse.org/forums/index.php/t/367124/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/367124/</a></p> </li> 
+        <li> <p>forum: inject fields in form <a href="http://www.eclipse.org/forums/index.php/t/367124/" class="bare">http://www.eclipse.org/forums/index.php/t/367124/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3430,7 +3430,7 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/369585/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/369585/</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/369585/" class="bare">http://www.eclipse.org/forums/index.php/t/369585/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3444,7 +3444,7 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/351417/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/351417/</a></p> </li> 
+        <li> <p>forum: <a href="http://www.eclipse.org/forums/index.php/t/351417/" class="bare">http://www.eclipse.org/forums/index.php/t/351417/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3458,7 +3458,7 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p><a href="http://www.eclipse.org/forums/index.php/t/405999/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/405999/</a></p> </li> 
+        <li> <p><a href="http://www.eclipse.org/forums/index.php/t/405999/" class="bare">http://www.eclipse.org/forums/index.php/t/405999/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3472,9 +3472,9 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>how-to wiki: <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Create_a_Standalone_Client_with_DB_Access" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/3.8/Create_a_Standalone_Client_with_DB_Access</a></p> </li> 
-        <li> <p>forum: client only <a href="http://www.eclipse.org/forums/index.php/t/210183/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/210183/</a></p> </li> 
-        <li> <p>forum: offline capable client <a href="http://www.eclipse.org/forums/index.php/t/210183/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/210183/</a></p> </li> 
+        <li> <p>how-to wiki: <a href="http://wiki.eclipse.org/Scout/HowTo/3.8/Create_a_Standalone_Client_with_DB_Access" class="bare">http://wiki.eclipse.org/Scout/HowTo/3.8/Create_a_Standalone_Client_with_DB_Access</a></p> </li> 
+        <li> <p>forum: client only <a href="http://www.eclipse.org/forums/index.php/t/210183/" class="bare">http://www.eclipse.org/forums/index.php/t/210183/</a></p> </li> 
+        <li> <p>forum: offline capable client <a href="http://www.eclipse.org/forums/index.php/t/210183/" class="bare">http://www.eclipse.org/forums/index.php/t/210183/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3488,7 +3488,7 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>headless client forum <a href="http://www.eclipse.org/forums/index.php/t/262563/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/262563/</a></p> </li> 
+        <li> <p>headless client forum <a href="http://www.eclipse.org/forums/index.php/t/262563/" class="bare">http://www.eclipse.org/forums/index.php/t/262563/</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3502,8 +3502,8 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>reading command line parameters forum <a href="http://www.eclipse.org/forums/index.php/t/281816/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/281816/</a></p> </li> 
-        <li> <p>do something right after login forum <a href="http://www.eclipse.org/forums/index.php/t/261999/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/261999/</a></p> </li> 
+        <li> <p>reading command line parameters forum <a href="http://www.eclipse.org/forums/index.php/t/281816/" class="bare">http://www.eclipse.org/forums/index.php/t/281816/</a></p> </li> 
+        <li> <p>do something right after login forum <a href="http://www.eclipse.org/forums/index.php/t/261999/" class="bare">http://www.eclipse.org/forums/index.php/t/261999/</a></p> </li> 
        </ul> 
       </div> 
       <div class="sect3"> 
@@ -3516,8 +3516,8 @@ image::{imgsdir}/messagebox.png[]</pre>
        </div> 
        <div class="ulist"> 
         <ul> 
-         <li> <p>config ini file forum <a href="http://www.eclipse.org/forums/index.php/t/365140/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/365140/</a></p> </li> 
-         <li> <p>os independent *product/confg.ini forum <a href="http://www.eclipse.org/forums/index.php/t/261674/" class="bare" target="_blank">http://www.eclipse.org/forums/index.php/t/261674/</a></p> </li> 
+         <li> <p>config ini file forum <a href="http://www.eclipse.org/forums/index.php/t/365140/" class="bare">http://www.eclipse.org/forums/index.php/t/365140/</a></p> </li> 
+         <li> <p>os independent *product/confg.ini forum <a href="http://www.eclipse.org/forums/index.php/t/261674/" class="bare">http://www.eclipse.org/forums/index.php/t/261674/</a></p> </li> 
         </ul> 
        </div> 
       </div> 
@@ -3538,7 +3538,7 @@ image::{imgsdir}/messagebox.png[]</pre>
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>threading and jobs concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Threading_and_Jobs" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Threading_and_Jobs</a></p> </li> 
+        <li> <p>threading and jobs concept wiki <a href="http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Threading_and_Jobs" class="bare">http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Threading_and_Jobs</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -3559,7 +3559,7 @@ image::{imgsdir}/messagebox.png[]</pre>
      <div class="sect2"> 
       <h3 id="licence-summary"><a class="anchor" href="#licence-summary"></a>A.1. Licence Summary</h3> 
       <div class="paragraph"> 
-       <p>This work is licensed under the Creative Commons Attribution License. To view a copy of this license, visit <a href="https://creativecommons.org/licenses/by/3.0/" class="bare" target="_blank">https://creativecommons.org/licenses/by/3.0/</a> or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.</p> 
+       <p>This work is licensed under the Creative Commons Attribution License. To view a copy of this license, visit <a href="https://creativecommons.org/licenses/by/3.0/" class="bare">https://creativecommons.org/licenses/by/3.0/</a> or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.</p> 
       </div> 
       <div class="paragraph"> 
        <p>A summary of the license is given below, followed by the full legal text.</p> 
@@ -3600,7 +3600,7 @@ image::{imgsdir}/messagebox.png[]</pre>
        </ul> 
       </div> 
       <div class="paragraph"> 
-       <p><strong>Notice</strong> ---For any reuse or distribution, you must make clear to others the license terms of this work. The best way to do this is with a link to <a href="https://creativecommons.org/licenses/by/3.0/" class="bare" target="_blank">https://creativecommons.org/licenses/by/3.0/</a>.</p> 
+       <p><strong>Notice</strong> ---For any reuse or distribution, you must make clear to others the license terms of this work. The best way to do this is with a link to <a href="https://creativecommons.org/licenses/by/3.0/" class="bare">https://creativecommons.org/licenses/by/3.0/</a>.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -3618,7 +3618,7 @@ image::{imgsdir}/messagebox.png[]</pre>
      <div class="sect2"> 
       <h3 id="full-licence-text"><a class="anchor" href="#full-licence-text"></a>A.3. Full Licence Text</h3> 
       <div class="paragraph"> 
-       <p>The full licence text is available online at <a href="http://creativecommons.org/licenses/by/3.0/legalcode" class="bare" target="_blank">http://creativecommons.org/licenses/by/3.0/legalcode</a></p> 
+       <p>The full licence text is available online at <a href="http://creativecommons.org/licenses/by/3.0/legalcode" class="bare">http://creativecommons.org/licenses/by/3.0/legalcode</a></p> 
       </div> 
      </div> 
     </div> 
@@ -3796,7 +3796,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In the install dialog, click on the <b class="button">Add&#x2026;&#x200b;</b> button to enter the link to the Scout repository. This opens the popup dialog <em>Add Repository</em> As shown in <a href="#img-eclipse_add_repository">Figure 59</a>, you may use &#x201c;Scout Luna&#x201d; for the <em class="field">Name</em> field. For the <em class="field">Location</em> field enter the Scout release repository as specified below. <a href="http://download.eclipse.org/scout/releases/4.0" class="bare" target="_blank">http://download.eclipse.org/scout/releases/4.0</a>.</p> 
+       <p>In the install dialog, click on the <b class="button">Add&#x2026;&#x200b;</b> button to enter the link to the Scout repository. This opens the popup dialog <em>Add Repository</em> As shown in <a href="#img-eclipse_add_repository">Figure 59</a>, you may use &#x201c;Scout Luna&#x201d; for the <em class="field">Name</em> field. For the <em class="field">Location</em> field enter the Scout release repository as specified below. <a href="http://download.eclipse.org/scout/releases/4.0" class="bare">http://download.eclipse.org/scout/releases/4.0</a>.</p> 
       </div> 
       <div id="img-eclipse_select_scout_features" class="imageblock"> 
        <div class="content"> 
@@ -3836,18 +3836,18 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>Once you have downloaded and installed Tomcat 8 (see the sections below for plattform specific guidelines) you can start the corresponding service or deamon. To verify that Tomcat is actually running open a web browser of your choice and type <a href="http://localhost:8080" class="bare" target="_blank">http://localhost:8080</a> into the address bar. You should then see a confirmation of the successful installation according to <a href="#img-tomcat_install">Figure 61</a>.</p> 
+      <p>Once you have downloaded and installed Tomcat 8 (see the sections below for plattform specific guidelines) you can start the corresponding service or deamon. To verify that Tomcat is actually running open a web browser of your choice and type <a href="http://localhost:8080" class="bare">http://localhost:8080</a> into the address bar. You should then see a confirmation of the successful installation according to <a href="#img-tomcat_install">Figure 61</a>.</p> 
      </div> 
      <div class="sect2"> 
       <h3 id="platform-specific-instructions"><a class="anchor" href="#platform-specific-instructions"></a>C.1. Platform Specific Instructions</h3> 
       <div class="paragraph"> 
-       <p>According to the Tomcat setup installation for Windows.<sup class="footnote">[<a id="_footnoteref_59" class="footnote" href="#_footnote_59" title="View footnote.">59</a>]</sup> download the package &#x201c;32-bit/64-bit Windows Service Installer&#x201d; from the <a href="http://tomcat.apache.org/download-80.cgi" target="_blank">Tomcat 8 download site</a>. Then, start the installer and accept the proposed default settings.</p> 
+       <p>According to the Tomcat setup installation for Windows.<sup class="footnote">[<a id="_footnoteref_59" class="footnote" href="#_footnote_59" title="View footnote.">59</a>]</sup> download the package &#x201c;32-bit/64-bit Windows Service Installer&#x201d; from the <a href="http://tomcat.apache.org/download-80.cgi">Tomcat 8 download site</a>. Then, start the installer and accept the proposed default settings.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>For installing Tomcat on OS X systems download the &#x201c;tar.gz&#x201d; package from the <a href="http://tomcat.apache.org/download-80.cgi" target="_blank">Tomcat 8 download site</a>. Then, follow the installation guide.<sup class="footnote">[<a id="_footnoteref_60" class="footnote" href="#_footnote_60" title="View footnote.">60</a>]</sup> provided by Wolf Paulus.</p> 
+       <p>For installing Tomcat on OS X systems download the &#x201c;tar.gz&#x201d; package from the <a href="http://tomcat.apache.org/download-80.cgi">Tomcat 8 download site</a>. Then, follow the installation guide.<sup class="footnote">[<a id="_footnoteref_60" class="footnote" href="#_footnote_60" title="View footnote.">60</a>]</sup> provided by Wolf Paulus.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>For Linux systems download the &#x201c;tar.gz&#x201d; package from the <a href="http://tomcat.apache.org/download-80.cgi" target="_blank">Tomcat 8 download site</a>. Then, follow the description of the Unix setup.<sup class="footnote">[<a id="_footnoteref_61" class="footnote" href="#_footnote_61" title="View footnote.">61</a>]</sup> to run Tomcat as a deamon. If you use Ubuntu, you may want to follow the tutorial.<sup class="footnote">[<a id="_footnoteref_62" class="footnote" href="#_footnote_62" title="View footnote.">62</a>]</sup> for downloading and installing Tomcat provided by Lars Vogel.</p> 
+       <p>For Linux systems download the &#x201c;tar.gz&#x201d; package from the <a href="http://tomcat.apache.org/download-80.cgi">Tomcat 8 download site</a>. Then, follow the description of the Unix setup.<sup class="footnote">[<a id="_footnoteref_61" class="footnote" href="#_footnote_61" title="View footnote.">61</a>]</sup> to run Tomcat as a deamon. If you use Ubuntu, you may want to follow the tutorial.<sup class="footnote">[<a id="_footnoteref_62" class="footnote" href="#_footnote_62" title="View footnote.">62</a>]</sup> for downloading and installing Tomcat provided by Lars Vogel.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -3928,7 +3928,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        <p>text needed</p> 
       </div> 
       <div class="paragraph"> 
-       <p>also mention apache StringUtils <a href="http://commons.apache.org/lang/api-2.3/org/apache/commons/lang/StringUtils.html" class="bare" target="_blank">http://commons.apache.org/lang/api-2.3/org/apache/commons/lang/StringUtils.html</a></p> 
+       <p>also mention apache StringUtils <a href="http://commons.apache.org/lang/api-2.3/org/apache/commons/lang/StringUtils.html" class="bare">http://commons.apache.org/lang/api-2.3/org/apache/commons/lang/StringUtils.html</a></p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -3947,7 +3947,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p>bug <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=394784" class="bare" target="_blank">https://bugs.eclipse.org/bugs/show_bug.cgi?id=394784</a></p> </li> 
+        <li> <p>bug <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=394784" class="bare">https://bugs.eclipse.org/bugs/show_bug.cgi?id=394784</a></p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -4074,7 +4074,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
       <div class="sect3"> 
        <h4 id="war-files"><a class="anchor" href="#war-files"></a>E.2.3. WAR Files</h4> 
        <div class="paragraph"> 
-        <p>war file organisation: <a href="http://documentation.progress.com/output/Iona/orbix/6.1/tutorials/fnb/dev_intro/j2ee_overview8.html" class="bare" target="_blank">http://documentation.progress.com/output/Iona/orbix/6.1/tutorials/fnb/dev_intro/j2ee_overview8.html</a></p> 
+        <p>war file organisation: <a href="http://documentation.progress.com/output/Iona/orbix/6.1/tutorials/fnb/dev_intro/j2ee_overview8.html" class="bare">http://documentation.progress.com/output/Iona/orbix/6.1/tutorials/fnb/dev_intro/j2ee_overview8.html</a></p> 
        </div> 
       </div> 
      </div> 
@@ -4086,7 +4086,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
      <div class="sect2"> 
       <h3 id="apx-eclipse_ide"><a class="anchor" href="#apx-eclipse_ide"></a>F.1. Eclipse as an IDE</h3> 
       <div class="paragraph"> 
-       <p>Excellent Eclipse IDE tutorial by L. Vogel <a href="http://www.vogella.com/articles/Eclipse/article.html" class="bare" target="_blank">http://www.vogella.com/articles/Eclipse/article.html</a>.</p> 
+       <p>Excellent Eclipse IDE tutorial by L. Vogel <a href="http://www.vogella.com/articles/Eclipse/article.html" class="bare">http://www.vogella.com/articles/Eclipse/article.html</a>.</p> 
       </div> 
       <div class="sect3"> 
        <h4 id="project-workspace"><a class="anchor" href="#project-workspace"></a>F.1.1. Project Workspace</h4> 
@@ -4125,10 +4125,10 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        </table> 
       </div> 
       <div class="paragraph"> 
-       <p>What is OSGi: <a href="http://www.osgi.org/Technology/WhatIsOSGi" class="bare" target="_blank">http://www.osgi.org/Technology/WhatIsOSGi</a> What is Equinox: <a href="http://www.eclipse.org/equinox/" class="bare" target="_blank">http://www.eclipse.org/equinox/</a></p> 
+       <p>What is OSGi: <a href="http://www.osgi.org/Technology/WhatIsOSGi" class="bare">http://www.osgi.org/Technology/WhatIsOSGi</a> What is Equinox: <a href="http://www.eclipse.org/equinox/" class="bare">http://www.eclipse.org/equinox/</a></p> 
       </div> 
       <div class="paragraph"> 
-       <p>Server-side Equinox: <a href="http://www.eclipse.org/equinox/server/http_in_container.php" class="bare" target="_blank">http://www.eclipse.org/equinox/server/http_in_container.php</a></p> 
+       <p>Server-side Equinox: <a href="http://www.eclipse.org/equinox/server/http_in_container.php" class="bare">http://www.eclipse.org/equinox/server/http_in_container.php</a></p> 
       </div> 
       <div class="paragraph"> 
        <p>The web.xml, the lib/servletbridge.jar and eclipse/plugins/servlet, equinox and bla stuff</p> 
@@ -4184,7 +4184,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
         <tbody>
          <tr> 
           <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
-          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/5.2.x/docs/build/book_scout_frontend/src/docs/scout_frontend.adoc" target="_blank">edit this page</a> on GitHub. </td> 
+          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/5.2.x/docs/build/book_scout_frontend/src/docs/scout_frontend.adoc">edit this page</a> on GitHub. </td> 
          </tr> 
         </tbody>
        </table> 
@@ -4197,7 +4197,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
    <hr /> 
    <div class="footnote" id="_footnote_1"> 
     <a href="#_footnoteref_1">1</a>. Web application framework comparison: 
-    <a href="http://en.wikipedia.org/wiki/Comparison_of_web_application_frameworks#Java" class="bare" target="_blank">http://en.wikipedia.org/wiki/Comparison_of_web_application_frameworks#Java</a>. 
+    <a href="http://en.wikipedia.org/wiki/Comparison_of_web_application_frameworks#Java" class="bare">http://en.wikipedia.org/wiki/Comparison_of_web_application_frameworks#Java</a>. 
    </div> 
    <div class="footnote" id="_footnote_2"> 
     <a href="#_footnoteref_2">2</a>. With the exception of the 
@@ -4206,25 +4206,25 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
    </div> 
    <div class="footnote" id="_footnote_3"> 
     <a href="#_footnoteref_3">3</a>. Nominating and electing a new Eclipse Scout committer: 
-    <a href="http://wiki.eclipse.org/Development_Resources/HOWTO/Nominating_and_Electing_a_New_Committer#Guidelines_for_Nominating_and_Electing_a_New_Committer" class="bare" target="_blank">http://wiki.eclipse.org/Development_Resources/HOWTO/Nominating_and_Electing_a_New_Committer#Guidelines_for_Nominating_and_Electing_a_New_Committer</a>. 
+    <a href="http://wiki.eclipse.org/Development_Resources/HOWTO/Nominating_and_Electing_a_New_Committer#Guidelines_for_Nominating_and_Electing_a_New_Committer" class="bare">http://wiki.eclipse.org/Development_Resources/HOWTO/Nominating_and_Electing_a_New_Committer#Guidelines_for_Nominating_and_Electing_a_New_Committer</a>. 
    </div> 
    <div class="footnote" id="_footnote_4"> 
     <a href="#_footnoteref_4">4</a>. Example areas/topics that are abstracted by the Scout framework are user interface (UI) technologies, databases, client-server communication or logging. 
    </div> 
    <div class="footnote" id="_footnote_5"> 
     <a href="#_footnoteref_5">5</a>. Java Enterprise Edition: 
-    <a href="http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition" class="bare" target="_blank">http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition</a> 
+    <a href="http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition" class="bare">http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition</a> 
    </div> 
    <div class="footnote" id="_footnote_6"> 
     <a href="#_footnoteref_6">6</a>. Eclipse Platform: 
-    <a href="http://wiki.eclipse.org/Platform" class="bare" target="_blank">http://wiki.eclipse.org/Platform</a> 
+    <a href="http://wiki.eclipse.org/Platform" class="bare">http://wiki.eclipse.org/Platform</a> 
    </div> 
    <div class="footnote" id="_footnote_7"> 
     <a href="#_footnoteref_7">7</a>. By reading through the book you will learn that there is much more to the Eclipse platform than just the IDE 
    </div> 
    <div class="footnote" id="_footnote_8"> 
     <a href="#_footnoteref_8">8</a>. Java Standard Edition: 
-    <a href="http://en.wikipedia.org/wiki/Java_SE" class="bare" target="_blank">http://en.wikipedia.org/wiki/Java_SE</a> 
+    <a href="http://en.wikipedia.org/wiki/Java_SE" class="bare">http://en.wikipedia.org/wiki/Java_SE</a> 
    </div> 
    <div class="footnote" id="_footnote_9"> 
     <a href="#_footnoteref_9">9</a>. Level I Exam: docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer1.html 
@@ -4234,30 +4234,30 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
    </div> 
    <div class="footnote" id="_footnote_11"> 
     <a href="#_footnoteref_11">11</a>. Eclipse Scout forum: 
-    <a href="http://www.eclipse.org/forums/eclipse.scout" class="bare" target="_blank">http://www.eclipse.org/forums/eclipse.scout</a> 
+    <a href="http://www.eclipse.org/forums/eclipse.scout" class="bare">http://www.eclipse.org/forums/eclipse.scout</a> 
    </div> 
    <div class="footnote" id="_footnote_12"> 
     <a href="#_footnoteref_12">12</a>. Eclipse Scout wiki: 
-    <a href="http://wiki.eclipse.org/Scout" class="bare" target="_blank">http://wiki.eclipse.org/Scout</a> 
+    <a href="http://wiki.eclipse.org/Scout" class="bare">http://wiki.eclipse.org/Scout</a> 
    </div> 
    <div class="footnote" id="_footnote_13"> 
     <a href="#_footnoteref_13">13</a>. Download and installation of the &#x201c;My Contacts&#x201d; application: 
-    <a href="http://wiki.eclipse.org/Scout/Book/#Download_and_Run_the_Scout_Sample_Applications" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Book/#Download_and_Run_the_Scout_Sample_Applications</a>. 
+    <a href="http://wiki.eclipse.org/Scout/Book/#Download_and_Run_the_Scout_Sample_Applications" class="bare">http://wiki.eclipse.org/Scout/Book/#Download_and_Run_the_Scout_Sample_Applications</a>. 
    </div> 
    <div class="footnote" id="_footnote_14"> 
     <a href="#_footnoteref_14">14</a>. To contact the Scout team, use the feedback provided on the Scout homepage: 
-    <a href="https://eclipse.org/scout" class="bare" target="_blank">https://eclipse.org/scout</a>. 
+    <a href="https://eclipse.org/scout" class="bare">https://eclipse.org/scout</a>. 
    </div> 
    <div class="footnote" id="_footnote_15"> 
     <a href="#_footnoteref_15">15</a>. The Scout server part of the &#x201c;Hello World&#x201d; application will be running on a web server. 
    </div> 
    <div class="footnote" id="_footnote_16"> 
     <a href="#_footnoteref_16">16</a>. &#x201c;Hello World&#x201d; wiki tutorial: 
-    <a href="http://wiki.eclipse.org/Scout/Tutorial/4.0/HelloWorld" class="bare" target="_blank">http://wiki.eclipse.org/Scout/Tutorial/4.0/HelloWorld</a> 
+    <a href="http://wiki.eclipse.org/Scout/Tutorial/4.0/HelloWorld" class="bare">http://wiki.eclipse.org/Scout/Tutorial/4.0/HelloWorld</a> 
    </div> 
    <div class="footnote" id="_footnote_17"> 
     <a href="#_footnoteref_17">17</a>. Web application ARchive (WAR): 
-    <a href="http://en.wikipedia.org/wiki/WAR_file_format_%28Sun%29" class="bare" target="_blank">http://en.wikipedia.org/wiki/WAR_file_format_%28Sun%29</a> 
+    <a href="http://en.wikipedia.org/wiki/WAR_file_format_%28Sun%29" class="bare">http://en.wikipedia.org/wiki/WAR_file_format_%28Sun%29</a> 
    </div> 
    <div class="footnote" id="_footnote_18"> 
     <a href="#_footnoteref_18">18</a>. Make sure to remember the location of this directory. We will need the directory location again when we deploy these WAR files to the Tomcat web server. 
@@ -4270,43 +4270,43 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
    </div> 
    <div class="footnote" id="_footnote_21"> 
     <a href="#_footnoteref_21">21</a>. Data Transfer Object (DTO): 
-    <a href="http://en.wikipedia.org/wiki/Data_transfer_object" class="bare" target="_blank">http://en.wikipedia.org/wiki/Data_transfer_object</a>. 
+    <a href="http://en.wikipedia.org/wiki/Data_transfer_object" class="bare">http://en.wikipedia.org/wiki/Data_transfer_object</a>. 
    </div> 
    <div class="footnote" id="_footnote_22"> 
     <a href="#_footnoteref_22">22</a>. Read the following article for an introduction to Eclipse product files: 
-    <a href="http://www.vogella.com/articles/EclipseProductDeployment/article.html" class="bare" target="_blank">http://www.vogella.com/articles/EclipseProductDeployment/article.html</a>. 
+    <a href="http://www.vogella.com/articles/EclipseProductDeployment/article.html" class="bare">http://www.vogella.com/articles/EclipseProductDeployment/article.html</a>. 
    </div> 
    <div class="footnote" id="_footnote_23"> 
     <a href="#_footnoteref_23">23</a>. Jetty is web server with a small footprint: 
-    <a href="http://www.eclipse.org/jetty/" class="bare" target="_blank">http://www.eclipse.org/jetty/</a>. 
+    <a href="http://www.eclipse.org/jetty/" class="bare">http://www.eclipse.org/jetty/</a>. 
    </div> 
    <div class="footnote" id="_footnote_24"> 
     <a href="#_footnoteref_24">24</a>. Swing is the primary Java UI technology: 
-    <a href="http://en.wikipedia.org/wiki/Swing_%28Java%29" class="bare" target="_blank">http://en.wikipedia.org/wiki/Swing_%28Java%29</a>. 
+    <a href="http://en.wikipedia.org/wiki/Swing_%28Java%29" class="bare">http://en.wikipedia.org/wiki/Swing_%28Java%29</a>. 
    </div> 
    <div class="footnote" id="_footnote_25"> 
     <a href="#_footnoteref_25">25</a>. Standard Widget Toolkit (SWT): 
-    <a href="http://en.wikipedia.org/wiki/Standard_Widget_Toolkit" class="bare" target="_blank">http://en.wikipedia.org/wiki/Standard_Widget_Toolkit</a>. 
+    <a href="http://en.wikipedia.org/wiki/Standard_Widget_Toolkit" class="bare">http://en.wikipedia.org/wiki/Standard_Widget_Toolkit</a>. 
    </div> 
    <div class="footnote" id="_footnote_26"> 
     <a href="#_footnoteref_26">26</a>. JavaFX is the most recent Java UI technology: 
-    <a href="http://en.wikipedia.org/wiki/JavaFX" class="bare" target="_blank">http://en.wikipedia.org/wiki/JavaFX</a>. 
+    <a href="http://en.wikipedia.org/wiki/JavaFX" class="bare">http://en.wikipedia.org/wiki/JavaFX</a>. 
    </div> 
    <div class="footnote" id="_footnote_27"> 
     <a href="#_footnoteref_27">27</a>. Remote Application Platform (RAP): 
-    <a href="http://www.eclipse.org/rap/" class="bare" target="_blank">http://www.eclipse.org/rap/</a>. 
+    <a href="http://www.eclipse.org/rap/" class="bare">http://www.eclipse.org/rap/</a>. 
    </div> 
    <div class="footnote" id="_footnote_28"> 
     <a href="#_footnoteref_28">28</a>. Asynchronous JavaScript and XML (AJAX): 
-    <a href="http://en.wikipedia.org/wiki/Ajax_%28programming%29" class="bare" target="_blank">http://en.wikipedia.org/wiki/Ajax_%28programming%29</a>. 
+    <a href="http://en.wikipedia.org/wiki/Ajax_%28programming%29" class="bare">http://en.wikipedia.org/wiki/Ajax_%28programming%29</a>. 
    </div> 
    <div class="footnote" id="_footnote_29"> 
     <a href="#_footnoteref_29">29</a>. To provide native clients with Scout, the simplest (commercial) option is most likely Tabris: 
-    <a href="http://developer.eclipsesource.com/tabris/" class="bare" target="_blank">http://developer.eclipsesource.com/tabris/</a> 
+    <a href="http://developer.eclipsesource.com/tabris/" class="bare">http://developer.eclipsesource.com/tabris/</a> 
    </div> 
    <div class="footnote" id="_footnote_30"> 
     <a href="#_footnoteref_30">30</a>. Internationalization and localization, also called NLS support: 
-    <a href="http://en.wikipedia.org/wiki/Internationalization_and_localization" class="bare" target="_blank">http://en.wikipedia.org/wiki/Internationalization_and_localization</a>. 
+    <a href="http://en.wikipedia.org/wiki/Internationalization_and_localization" class="bare">http://en.wikipedia.org/wiki/Internationalization_and_localization</a>. 
    </div> 
    <div class="footnote" id="_footnote_31"> 
     <a href="#_footnoteref_31">31</a>. See Section 
@@ -4314,23 +4314,23 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
    </div> 
    <div class="footnote" id="_footnote_32"> 
     <a href="#_footnoteref_32">32</a>. A good introduction to OSGi services is provided by Lars Vogel&#x2019;s tutorial: 
-    <a href="http://www.vogella.com/articles/OSGiServices/article.html" class="bare" target="_blank">http://www.vogella.com/articles/OSGiServices/article.html</a>. 
+    <a href="http://www.vogella.com/articles/OSGiServices/article.html" class="bare">http://www.vogella.com/articles/OSGiServices/article.html</a>. 
    </div> 
    <div class="footnote" id="_footnote_33"> 
     <a href="#_footnoteref_33">33</a>. A good introduction to Eclipse extensions and extension points is provided in the Eclipse wiki: 
-    <a href="http://wiki.eclipse.org/FAQ_What_are_extensions_and_extension_points%3F" class="bare" target="_blank">http://wiki.eclipse.org/FAQ_What_are_extensions_and_extension_points%3F</a>. 
+    <a href="http://wiki.eclipse.org/FAQ_What_are_extensions_and_extension_points%3F" class="bare">http://wiki.eclipse.org/FAQ_What_are_extensions_and_extension_points%3F</a>. 
    </div> 
    <div class="footnote" id="_footnote_34"> 
     <a href="#_footnoteref_34">34</a>. Customer Relationship Management (CRM): 
-    <a href="https://en.wikipedia.org/wiki/Customer_relationship_management" class="bare" target="_blank">https://en.wikipedia.org/wiki/Customer_relationship_management</a> 
+    <a href="https://en.wikipedia.org/wiki/Customer_relationship_management" class="bare">https://en.wikipedia.org/wiki/Customer_relationship_management</a> 
    </div> 
    <div class="footnote" id="_footnote_35"> 
     <a href="#_footnoteref_35">35</a>. Java Synth Look and Feel: 
-    <a href="http://en.wikipedia.org/wiki/Synth_Look_and_Feel" class="bare" target="_blank">http://en.wikipedia.org/wiki/Synth_Look_and_Feel</a> 
+    <a href="http://en.wikipedia.org/wiki/Synth_Look_and_Feel" class="bare">http://en.wikipedia.org/wiki/Synth_Look_and_Feel</a> 
    </div> 
    <div class="footnote" id="_footnote_36"> 
     <a href="#_footnoteref_36">36</a>. OpenJDK is an open source implementation of the Java platform: 
-    <a href="http://openjdk.java.net/" class="bare" target="_blank">http://openjdk.java.net/</a>. 
+    <a href="http://openjdk.java.net/" class="bare">http://openjdk.java.net/</a>. 
    </div> 
    <div class="footnote" id="_footnote_37"> 
     <a href="#_footnoteref_37">37</a>. See Appendix 
@@ -4346,23 +4346,23 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
    </div> 
    <div class="footnote" id="_footnote_40"> 
     <a href="#_footnoteref_40">40</a>. JAR files contain a set of Java classes and associated resources. 
-    <a href="http://en.wikipedia.org/wiki/JAR_%28file_format%29" class="bare" target="_blank">http://en.wikipedia.org/wiki/JAR_%28file_format%29</a>. 
+    <a href="http://en.wikipedia.org/wiki/JAR_%28file_format%29" class="bare">http://en.wikipedia.org/wiki/JAR_%28file_format%29</a>. 
    </div> 
    <div class="footnote" id="_footnote_41"> 
     <a href="#_footnoteref_41">41</a>. More about the Cat: 
-    <a href="http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_More.html" class="bare" target="_blank">http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_More.html</a>. 
+    <a href="http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_More.html" class="bare">http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_More.html</a>. 
    </div> 
    <div class="footnote" id="_footnote_42"> 
     <a href="#_footnoteref_42">42</a>. Enumerated type: 
-    <a href="http://en.wikipedia.org/wiki/Enumerated_type" class="bare" target="_blank">http://en.wikipedia.org/wiki/Enumerated_type</a> 
+    <a href="http://en.wikipedia.org/wiki/Enumerated_type" class="bare">http://en.wikipedia.org/wiki/Enumerated_type</a> 
    </div> 
    <div class="footnote" id="_footnote_43"> 
     <a href="#_footnoteref_43">43</a>. Industry Classification Benchmark (ICB): 
-    <a href="http://www.icbenchmark.com/" class="bare" target="_blank">http://www.icbenchmark.com/</a> 
+    <a href="http://www.icbenchmark.com/" class="bare">http://www.icbenchmark.com/</a> 
    </div> 
    <div class="footnote" id="_footnote_44"> 
     <a href="#_footnoteref_44">44</a>. Standalone Client with DB Access: 
-    <a href="http://wiki.eclipse.org/Scout/HowTo/Create_a_Standalone_Client_with_DB_Access" class="bare" target="_blank">http://wiki.eclipse.org/Scout/HowTo/Create_a_Standalone_Client_with_DB_Access</a> 
+    <a href="http://wiki.eclipse.org/Scout/HowTo/Create_a_Standalone_Client_with_DB_Access" class="bare">http://wiki.eclipse.org/Scout/HowTo/Create_a_Standalone_Client_with_DB_Access</a> 
    </div> 
    <div class="footnote" id="_footnote_45"> 
     <a href="#_footnoteref_45">45</a>. The processing exceptions type 
@@ -4371,91 +4371,91 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
    </div> 
    <div class="footnote" id="_footnote_46"> 
     <a href="#_footnoteref_46">46</a>. Luna release plan: 
-    <a href="http://wiki.eclipse.org/Neon/Simultaneous_Release_Plan" class="bare" target="_blank">http://wiki.eclipse.org/Neon/Simultaneous_Release_Plan</a> 
+    <a href="http://wiki.eclipse.org/Neon/Simultaneous_Release_Plan" class="bare">http://wiki.eclipse.org/Neon/Simultaneous_Release_Plan</a> 
    </div> 
    <div class="footnote" id="_footnote_47"> 
     <a href="#_footnoteref_47">47</a>. Windows 32/64-bit installation: 
-    <a href="http://support.microsoft.com/kb/827218" class="bare" target="_blank">http://support.microsoft.com/kb/827218</a> 
+    <a href="http://support.microsoft.com/kb/827218" class="bare">http://support.microsoft.com/kb/827218</a> 
    </div> 
    <div class="footnote" id="_footnote_48"> 
     <a href="#_footnoteref_48">48</a>. Linux 32/64-bit installation example page: 
-    <a href="http://mylinuxbook.com/5-ways-to-check-if-linux-is-32-bit-or-64-bit/" class="bare" target="_blank">http://mylinuxbook.com/5-ways-to-check-if-linux-is-32-bit-or-64-bit/</a> 
+    <a href="http://mylinuxbook.com/5-ways-to-check-if-linux-is-32-bit-or-64-bit/" class="bare">http://mylinuxbook.com/5-ways-to-check-if-linux-is-32-bit-or-64-bit/</a> 
    </div> 
    <div class="footnote" id="_footnote_49"> 
     <a href="#_footnoteref_49">49</a>. Official JDK 8 download: 
-    <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" class="bare" target="_blank">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a> 
+    <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" class="bare">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a> 
    </div> 
    <div class="footnote" id="_footnote_50"> 
     <a href="#_footnoteref_50">50</a>. Java API documentation download: 
-    <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" class="bare" target="_blank">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a> 
+    <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" class="bare">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a> 
    </div> 
    <div class="footnote" id="_footnote_51"> 
     <a href="#_footnoteref_51">51</a>. Install the JDK on Windows: 
-    <a href="http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jdk-installation-windows.html#Run" class="bare" target="_blank">http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jdk-installation-windows.html#Run</a> 
+    <a href="http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jdk-installation-windows.html#Run" class="bare">http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jdk-installation-windows.html#Run</a> 
    </div> 
    <div class="footnote" id="_footnote_52"> 
     <a href="#_footnoteref_52">52</a>. Windows Java &#x201c;Hello World!&#x201d;: 
-    <a href="http://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html" class="bare" target="_blank">http://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html</a> 
+    <a href="http://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html" class="bare">http://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html</a> 
    </div> 
    <div class="footnote" id="_footnote_53"> 
     <a href="#_footnoteref_53">53</a>. Install the JDK on Linux: 
-    <a href="http://docs.oracle.com/javase/7/docs/webnotes/install/linux/linux-jdk.html" class="bare" target="_blank">http://docs.oracle.com/javase/7/docs/webnotes/install/linux/linux-jdk.html</a> 
+    <a href="http://docs.oracle.com/javase/7/docs/webnotes/install/linux/linux-jdk.html" class="bare">http://docs.oracle.com/javase/7/docs/webnotes/install/linux/linux-jdk.html</a> 
    </div> 
    <div class="footnote" id="_footnote_54"> 
     <a href="#_footnoteref_54">54</a>. Install the JDK on Mac: 
-    <a href="http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html" class="bare" target="_blank">http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html</a>. 
+    <a href="http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html" class="bare">http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html</a>. 
    </div> 
    <div class="footnote" id="_footnote_55"> 
     <a href="#_footnoteref_55">55</a>. Apache Tomcat Wikipedia: 
-    <a href="http://en.wikipedia.org/wiki/Apache_Tomcat" class="bare" target="_blank">http://en.wikipedia.org/wiki/Apache_Tomcat</a>. 
+    <a href="http://en.wikipedia.org/wiki/Apache_Tomcat" class="bare">http://en.wikipedia.org/wiki/Apache_Tomcat</a>. 
    </div> 
    <div class="footnote" id="_footnote_56"> 
     <a href="#_footnoteref_56">56</a>. Mulesoft&#x2019;s introduction to Tomcat Catalina: 
-    <a href="http://www.mulesoft.com/tomcat-catalina" class="bare" target="_blank">http://www.mulesoft.com/tomcat-catalina</a>. 
+    <a href="http://www.mulesoft.com/tomcat-catalina" class="bare">http://www.mulesoft.com/tomcat-catalina</a>. 
    </div> 
    <div class="footnote" id="_footnote_57"> 
     <a href="#_footnoteref_57">57</a>. Apache Tomcat Homepage: 
-    <a href="http://tomcat.apache.org/" class="bare" target="_blank">http://tomcat.apache.org/</a> 
+    <a href="http://tomcat.apache.org/" class="bare">http://tomcat.apache.org/</a> 
    </div> 
    <div class="footnote" id="_footnote_58"> 
     <a href="#_footnoteref_58">58</a>. Tomcat 8 Downloads: 
-    <a href="http://tomcat.apache.org/download-80.cgi" class="bare" target="_blank">http://tomcat.apache.org/download-80.cgi</a> 
+    <a href="http://tomcat.apache.org/download-80.cgi" class="bare">http://tomcat.apache.org/download-80.cgi</a> 
    </div> 
    <div class="footnote" id="_footnote_59"> 
     <a href="#_footnoteref_59">59</a>. Tomcat Windows setup: 
-    <a href="http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Windows" class="bare" target="_blank">http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Windows</a> 
+    <a href="http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Windows" class="bare">http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Windows</a> 
    </div> 
    <div class="footnote" id="_footnote_60"> 
     <a href="#_footnoteref_60">60</a>. Installing Tomcat on OS X: 
-    <a href="http://wolfpaulus.com/journal/mac/tomcat8" class="bare" target="_blank">http://wolfpaulus.com/journal/mac/tomcat8</a> 
+    <a href="http://wolfpaulus.com/journal/mac/tomcat8" class="bare">http://wolfpaulus.com/journal/mac/tomcat8</a> 
    </div> 
    <div class="footnote" id="_footnote_61"> 
     <a href="#_footnoteref_61">61</a>. Tomcat Linux setup: 
-    <a href="http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Unix_daemon" class="bare" target="_blank">http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Unix_daemon</a> 
+    <a href="http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Unix_daemon" class="bare">http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Unix_daemon</a> 
    </div> 
    <div class="footnote" id="_footnote_62"> 
     <a href="#_footnoteref_62">62</a>. Apache Tomcat Tutorial: 
-    <a href="http://www.vogella.com/articles/ApacheTomcat/article.html" class="bare" target="_blank">http://www.vogella.com/articles/ApacheTomcat/article.html</a> 
+    <a href="http://www.vogella.com/articles/ApacheTomcat/article.html" class="bare">http://www.vogella.com/articles/ApacheTomcat/article.html</a> 
    </div> 
    <div class="footnote" id="_footnote_63"> 
     <a href="#_footnoteref_63">63</a>. The Tomcat Manager Application: 
-    <a href="http://tomcat.apache.org/tomcat-8.0-doc/manager-howto.html" class="bare" target="_blank">http://tomcat.apache.org/tomcat-8.0-doc/manager-howto.html</a>. 
+    <a href="http://tomcat.apache.org/tomcat-8.0-doc/manager-howto.html" class="bare">http://tomcat.apache.org/tomcat-8.0-doc/manager-howto.html</a>. 
    </div> 
    <div class="footnote" id="_footnote_64"> 
     <a href="#_footnoteref_64">64</a>. Official online Java tutorial: 
-    <a href="http://docs.oracle.com/javase/tutorial/" class="bare" target="_blank">http://docs.oracle.com/javase/tutorial/</a> 
+    <a href="http://docs.oracle.com/javase/tutorial/" class="bare">http://docs.oracle.com/javase/tutorial/</a> 
    </div> 
    <div class="footnote" id="_footnote_65"> 
     <a href="#_footnoteref_65">65</a>. Eclipse and Java for Total Beginners: 
-    <a href="http://eclipsetutorial.sourceforge.net/totalbeginner.html" class="bare" target="_blank">http://eclipsetutorial.sourceforge.net/totalbeginner.html</a> 
+    <a href="http://eclipsetutorial.sourceforge.net/totalbeginner.html" class="bare">http://eclipsetutorial.sourceforge.net/totalbeginner.html</a> 
    </div> 
    <div class="footnote" id="_footnote_66"> 
     <a href="#_footnoteref_66">66</a>. The Java Language Specification 
-    <a href="http://docs.oracle.com/javase/specs/" class="bare" target="_blank">http://docs.oracle.com/javase/specs/</a> 
+    <a href="http://docs.oracle.com/javase/specs/" class="bare">http://docs.oracle.com/javase/specs/</a> 
    </div> 
    <div class="footnote" id="_footnote_67"> 
     <a href="#_footnoteref_67">67</a>. Get Start with Java Servlet Programming: 
-    <a href="http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html" class="bare" target="_blank">http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html</a>. 
+    <a href="http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html" class="bare">http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html</a>. 
    </div> 
   </div> 
   <div id="footer"> 
