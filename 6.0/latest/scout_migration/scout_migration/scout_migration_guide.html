@@ -533,6 +533,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#ishellservice">IShellService</a></li> 
        <li><a href="#desktop">Desktop</a></li> 
        <li><a href="#offline">Offline</a></li> 
+       <li><a href="#toolbutton">ToolButton</a></li> 
        <li><a href="#menu">Menu</a></li> 
        <li><a href="#message-box">Message Box</a></li> 
        <li><a href="#table">Table</a></li> 
@@ -544,6 +545,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#various-api-changes">Various API Changes</a></li> 
        <li><a href="#logging-api">Logging API</a></li> 
        <li><a href="#logging-configuration">Logging configuration</a></li> 
+       <li><a href="#text-cleanup">Text cleanup</a></li> 
        <li><a href="#migrate-to-the-new-job-api">Migrate to the new Job API</a></li> 
        <li><a href="#session-cookie-configuration">Session Cookie Configuration</a></li> 
        <li><a href="#client-notifications">Client Notifications</a></li> 
@@ -669,6 +671,15 @@ ClientSessionProvider.currentSession().getDesktop()
       <h3 id="offline"><a class="anchor" href="#offline"></a>Offline</h3> 
       <div class="paragraph"> 
        <p>Offline functionality in the scout client was removed (not needed anymore). Delete - OfflineState - IClientSession.getOfflineSubject - IDesktop.changeVisibilityAfterOfflineSwitch</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="toolbutton"><a class="anchor" href="#toolbutton"></a>ToolButton</h3> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p><code>IToolButton</code> has been removed, it is not necessary anymore because the desktop may now display any kind of menus.</p> </li> 
+        <li> <p><code>IFormToolButton</code> has been renamed to <code>IFormMenu</code>. These menus, which display a form when selected, may now be used on any menu capable component and not only on the desktop. Therefore it has been moved from the package <code>org.eclipse.scout.rt.client.ui.desktop.outline</code> to <code>org.eclipse.scout.rt.client.ui.form</code>.</p> </li> 
+       </ul> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -1305,6 +1316,44 @@ replace: ERROR</pre>
        <div class="content"> 
         <pre>&lt;pattern&gt;%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg [%X{subject.principal.name} @ %X{http.session.id} in %thread ]%n&lt;/pattern&gt;</pre> 
        </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="text-cleanup"><a class="anchor" href="#text-cleanup"></a>Text cleanup</h3> 
+      <div class="paragraph"> 
+       <p>All unused texts in ScoutTextProviderService were removed. If you were using one of the deleted ones, you find them in:</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_bg.properties">ScoutTexts_bg.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_cs.properties">ScoutTexts_cs.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_da.properties">ScoutTexts_da.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_de_DE.properties">ScoutTexts_de_DE.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_de.properties">ScoutTexts_de.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_el.properties">ScoutTexts_el.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_es.properties">ScoutTexts_es.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_fi.properties">ScoutTexts_fi.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_fr_BE.properties">ScoutTexts_fr_BE.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_fr.properties">ScoutTexts_fr.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_hr.properties">ScoutTexts_hr.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_hu.properties">ScoutTexts_hu.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_it.properties">ScoutTexts_it.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_ja.properties">ScoutTexts_ja.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_nl_BE.properties">ScoutTexts_nl_BE.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_nl.properties">ScoutTexts_nl.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_no.properties">ScoutTexts_no.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_pl.properties">ScoutTexts_pl.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_pt_br.properties">ScoutTexts_pt_br.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_ru.properties">ScoutTexts_ru.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_se.properties">ScoutTexts_se.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_sk.properties">ScoutTexts_sk.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_sl.properties">ScoutTexts_sl.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_sr.properties">ScoutTexts_sr.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_tr.properties">ScoutTexts_tr.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_zh_TW.properties">ScoutTexts_zh_TW.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_zh.properties">ScoutTexts_zh.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts.properties">ScoutTexts.properties</a></p> </li> 
+       </ul> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -2398,7 +2447,7 @@ SERVICES.getService(IClientNotificationConsumerService.class)
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0.0-SNAPSHOT
-    <br /> Last updated 2016-04-07 06:50:22 CEST 
+    <br /> Last updated 2016-03-17 14:11:18 CET 
    </div> 
   </div>  
  </body>
