@@ -543,10 +543,11 @@ table.CodeRay td.code>pre{padding:0}
      <li><a href="#cha-tooling">3. Scout Tooling</a> 
       <ul class="sectlevel2"> 
        <li><a href="#sec-sdk_motivation">3.1. Motivation for the Tooling</a></li> 
-       <li><a href="#sec-sdk_overview">3.2. Scout SDK Overview</a></li> 
-       <li><a href="#sec-sdk_wizard">3.3. Scout Wizards</a></li> 
-       <li><a href="#sec-sdk_content_assist">3.4. Scout Content Assistance</a></li> 
-       <li><a href="#sec-sdk_nls">3.5. Scout NLS Tooling</a></li> 
+       <li><a href="#sec-eclipse_ide_tooling">3.2. Eclipse IDE tooling</a></li> 
+       <li><a href="#sec-sdk_overview">3.3. Scout SDK Overview</a></li> 
+       <li><a href="#sec-sdk_wizard">3.4. Scout Wizards</a></li> 
+       <li><a href="#sec-sdk_content_assist">3.5. Scout Content Assistance</a></li> 
+       <li><a href="#sec-sdk_nls">3.6. Scout NLS Tooling</a></li> 
       </ul> </li> 
      <li><a href="#cha-large_example">4. A One Day Tutorial</a> 
       <ul class="sectlevel2"> 
@@ -560,10 +561,11 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#sec-contacts_outlook">4.8. Next Steps and Outlook</a></li> 
       </ul> </li> 
      <li><a href="#old-stuff">5. OLD STUFF</a> 
-      <ul class="sectlevel2"> 
-       <li><a href="#creating-the-person-form">5.1. Creating the Person Form</a></li> 
-       <li><a href="#managing-person-data-on-the-server-side">5.2. Managing Person Data on the Server Side</a></li> 
-       <li><a href="#creating-the-company-form">5.3. Creating the Company Form</a></li> 
+      <ul class="sectlevel3"> 
+       <li><a href="#a-simple-form-to-edit-the-picture-url">5.1. A simple Form to edit the Picture URL</a></li> 
+       <li><a href="#sec-adding_the_smartfield">5.2. Adding the Company Smartfield</a></li> 
+       <li><a href="#adding-the-map-form">5.3. Adding the Map Form</a></li> 
+       <li><a href="#creating-the-company-form">5.4. Creating the Company Form</a></li> 
       </ul> </li> 
      <li><a href="#apx-cclicence">Appendix A: Licence and Copyright</a> 
       <ul class="sectlevel2"> 
@@ -1133,7 +1135,7 @@ table.CodeRay td.code>pre{padding:0}
       <p>This chapter presents the Scout SDK tooling that is included with the Eclipse Scout. The Scout SDK provides wizards to create new project and application components, adds code assistance to the Java Editor and comes with a NLS editor to manage all translated text entries of the application.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>The chapter is organized as follows. Section <a href="#sec-sdk_motivation">Motivation for the Tooling</a> describes the goals and benefits of the tooling included. A high level description of the tooling is provided in section <a href="#sec-sdk_overview">Scout SDK Overview</a>. Sections <a href="#sec-sdk_wizard">Scout Wizards</a>, <a href="#sec-sdk_content_assist">Scout Content Assistance</a> and <a href="#sec-sdk_nls">Scout NLS Tooling</a> then provide detailed descriptions of the functionality offered by the Scout SDK.</p> 
+      <p>The chapter is organized as follows. Section <a href="#sec-sdk_motivation">Motivation for the Tooling</a> describes the goals and benefits of the tooling included. Because the Scout Tooling is based on the Eclipse IDE, section <a href="#sec-eclipse_ide_tooling">Eclipse IDE tooling</a> provides a short overview of frequently used Eclipse features. A high level description of the Scout tooling is provided in section <a href="#sec-sdk_overview">Scout SDK Overview</a>. Sections <a href="#sec-sdk_wizard">Scout Wizards</a>, <a href="#sec-sdk_content_assist">Scout Content Assistance</a> and <a href="#sec-sdk_nls">Scout NLS Tooling</a> then provide detailed descriptions of the functionality offered by the Scout SDK.</p> 
      </div> 
      <div class="sect2"> 
       <h3 id="sec-sdk_motivation"><a class="anchor" href="#sec-sdk_motivation"></a>3.1. Motivation for the Tooling</h3> 
@@ -1148,7 +1150,77 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="sec-sdk_overview"><a class="anchor" href="#sec-sdk_overview"></a>3.2. Scout SDK Overview</h3> 
+      <h3 id="sec-eclipse_ide_tooling"><a class="anchor" href="#sec-eclipse_ide_tooling"></a>3.2. Eclipse IDE tooling</h3> 
+      <div class="paragraph"> 
+       <p>The Scout tooling is an extension of the Eclipse IDE. The goal of this section is not to provide a complete overview on the features contained in the Eclipse IDE. It provides a short overview of the important eclipse features, frequently used during the development of a Scout Application. Experimented Eclipse IDE users might skip this section.</p> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="start-the-new-wizard"><a class="anchor" href="#start-the-new-wizard"></a>3.2.1. Start the New Wizard</h4> 
+       <div class="paragraph"> 
+        <p>To start the <strong>New Wizard</strong> wizard press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> or use menu <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Other&#x2026;&#x200b;</span></span>. In the first wizard step type the name of the object you want to create into the <strong>Wizards</strong> field as shown in <a href="#img-eclipse_new_wizard">New Wizard</a>.</p> 
+       </div> 
+       <div id="img-eclipse_new_wizard" class="imageblock"> 
+        <div class="content"> 
+         <img src="images/eclipse_new_wizard.png" alt="eclipse new wizard" /> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="create-a-new-java-class"><a class="anchor" href="#create-a-new-java-class"></a>3.2.2. Create a new Java class</h4> 
+       <div class="paragraph"> 
+        <p>Start the <strong>New Wizard</strong> and type <strong>Class</strong> in the Wizards field. Select <strong>Class</strong> Click on <b class="button">Next</b> to open the <strong>New class wizard</strong></p> 
+       </div> 
+       <div id="img-eclipse_new_class" class="imageblock"> 
+        <div class="content"> 
+         <img src="images/eclipse_new_class.png" alt="eclipse new class" /> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>You can choose define the following properties:</p> 
+       </div> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p><strong>Source folder</strong>: Click on <b class="button">Browse</b> to choose the project where the class belongs.</p> </li> 
+         <li> <p><strong>Package</strong>: Click on <b class="button">Browse</b> to choose the package in the given project. If the package does not exist it will be created a new one automatically.</p> </li> 
+         <li> <p><strong>Name</strong>: Type the class name</p> </li> 
+         <li> <p><strong>Modifiers</strong>: Choose public or default. Or abstract and/or final.</p> </li> 
+         <li> <p><strong>Superclass</strong>: Choose the parent class clicking on <b class="button">Browse</b></p> </li> 
+         <li> <p><strong>Interfaces</strong>: Click on <b class="button">Add</b> to add the list of interfaces your class implements.</p> </li> 
+         <li> <p><strong>Method stubs</strong>: Include methods in your class.</p> </li> 
+         <li> <p><strong>Comments</strong>: Generate predefine comments.</p> </li> 
+        </ul> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Click on <b class="button">Finish</b> when you are done with the class definition. The java editor will open and you can start editing.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="create-a-new-java-package"><a class="anchor" href="#create-a-new-java-package"></a>3.2.3. Create a new Java package</h4> 
+       <div class="paragraph"> 
+        <p>Start the <strong>New Wizard</strong> and type <strong>Package</strong> in the Wizards field. Select <strong>Package</strong> Click on <b class="button">Next</b> to open the <strong>New package wizard</strong></p> 
+       </div> 
+       <div class="imageblock"> 
+        <div class="content"> 
+         <img src="images/create_new_package_wizard.png" alt="create new package wizard" /> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>In the <strong>New package wizard</strong> you can define the following properties:</p> 
+       </div> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p><strong>Source folder</strong>: Click on <b class="button">Browse</b> to choose the project where the package belongs.</p> </li> 
+         <li> <p><strong>Name</strong>: Write the name of the package.</p> </li> 
+         <li> <p><strong>Package info</strong>: Choose the checkbox if you want package-info</p> </li> 
+        </ul> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Click on <b class="button">Next</b> to create the project. The <strong>Project Browser</strong></p> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="sec-sdk_overview"><a class="anchor" href="#sec-sdk_overview"></a>3.3. Scout SDK Overview</h3> 
       <div class="paragraph"> 
        <p>The Scout SDK tooling helps the Scout developer to quickly create frequently used Scout components. This Scout Tooling is implemented as extensions of the Eclipse IDE in the form of wizards, content assist extension to the Eclipse Java editor and support for dealing with translated texts called NLS support.</p> 
       </div> 
@@ -1176,7 +1248,7 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="sec-sdk_wizard"><a class="anchor" href="#sec-sdk_wizard"></a>3.3. Scout Wizards</h3> 
+      <h3 id="sec-sdk_wizard"><a class="anchor" href="#sec-sdk_wizard"></a>3.4. Scout Wizards</h3> 
       <div class="paragraph"> 
        <p></p> 
       </div> 
@@ -1205,7 +1277,7 @@ table.CodeRay td.code>pre{padding:0}
        </ul> 
       </div> 
       <div class="sect3"> 
-       <h4 id="sec-wizard_project"><a class="anchor" href="#sec-wizard_project"></a>3.3.1. New Project Wizard</h4> 
+       <h4 id="sec-wizard_project"><a class="anchor" href="#sec-wizard_project"></a>3.4.1. New Project Wizard</h4> 
        <div class="paragraph"> 
         <p></p> 
        </div> 
@@ -1343,7 +1415,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="sec-wizard_page"><a class="anchor" href="#sec-wizard_page"></a>3.3.2. New Page Wizard</h4> 
+       <h4 id="sec-wizard_page"><a class="anchor" href="#sec-wizard_page"></a>3.4.2. New Page Wizard</h4> 
        <div class="paragraph"> 
         <p></p> 
        </div> 
@@ -1441,7 +1513,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="sec-wizard_form"><a class="anchor" href="#sec-wizard_form"></a>3.3.3. New Form Wizard</h4> 
+       <h4 id="sec-wizard_form"><a class="anchor" href="#sec-wizard_form"></a>3.4.3. New Form Wizard</h4> 
        <div class="paragraph"> 
         <p></p> 
        </div> 
@@ -1565,7 +1637,7 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="sec-sdk_content_assist"><a class="anchor" href="#sec-sdk_content_assist"></a>3.4. Scout Content Assistance</h3> 
+      <h3 id="sec-sdk_content_assist"><a class="anchor" href="#sec-sdk_content_assist"></a>3.5. Scout Content Assistance</h3> 
       <div class="paragraph"> 
        <p>To create new Scout components that are represented by inner classes in the Scout framework, the Scout tooling extends the Java content assist of the Eclipse Java editor. The offered proposals are context specific. Depending on the current cursor position in the Java editor, possible Scout components are added to the proposal list.</p> 
       </div> 
@@ -1573,7 +1645,7 @@ table.CodeRay td.code>pre{padding:0}
        <p>In a class representing a group box in a form, the Scout content assist adds proposals for various form fields are shown and in a table class the content assist adds proposals to add table columns or context menus. are added that trigger the creation of inner classes for form fields, table columns or codes. The Eclipse content assist can be started by typing <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Space</kbd></span>.</p> 
       </div> 
       <div class="sect3"> 
-       <h4 id="sec-sdk_new_form_field"><a class="anchor" href="#sec-sdk_new_form_field"></a>3.4.1. Create new Form Fields</h4> 
+       <h4 id="sec-sdk_new_form_field"><a class="anchor" href="#sec-sdk_new_form_field"></a>3.5.1. Create new Form Fields</h4> 
        <div class="paragraph"> 
         <p></p> 
        </div> 
@@ -1593,7 +1665,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="sec-sdk_new_table_column"><a class="anchor" href="#sec-sdk_new_table_column"></a>3.4.2. Create new Table Columns</h4> 
+       <h4 id="sec-sdk_new_table_column"><a class="anchor" href="#sec-sdk_new_table_column"></a>3.5.2. Create new Table Columns</h4> 
        <div class="paragraph"> 
         <p></p> 
        </div> 
@@ -1613,7 +1685,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="create-new-codes"><a class="anchor" href="#create-new-codes"></a>3.4.3. Create new Codes</h4> 
+       <h4 id="create-new-codes"><a class="anchor" href="#create-new-codes"></a>3.5.3. Create new Codes</h4> 
        <div class="paragraph"> 
         <p>Adding new Codes to an existing CodeType is supported by the content assist as shown in <a href="#img-java_proposals_code">Figure 22</a>.</p> 
        </div> 
@@ -1628,12 +1700,12 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="sec-sdk_nls"><a class="anchor" href="#sec-sdk_nls"></a>3.5. Scout NLS Tooling</h3> 
+      <h3 id="sec-sdk_nls"><a class="anchor" href="#sec-sdk_nls"></a>3.6. Scout NLS Tooling</h3> 
       <div class="paragraph"> 
        <p>bla</p> 
       </div> 
       <div class="sect3"> 
-       <h4 id="sec-add_text_entry"><a class="anchor" href="#sec-add_text_entry"></a>3.5.1. Adding a new Translated Text Entry</h4> 
+       <h4 id="sec-add_text_entry"><a class="anchor" href="#sec-add_text_entry"></a>3.6.1. Adding a new Translated Text Entry</h4> 
        <div class="paragraph"> 
         <p></p> 
        </div> 
@@ -1695,7 +1767,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="sec-nls_editor"><a class="anchor" href="#sec-nls_editor"></a>3.5.2. The NLS Editor</h4> 
+       <h4 id="sec-nls_editor"><a class="anchor" href="#sec-nls_editor"></a>3.6.2. The NLS Editor</h4> 
        <div class="paragraph"> 
         <p> </p> 
        </div> 
@@ -1715,7 +1787,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="action-buttons"><a class="anchor" href="#action-buttons"></a>3.5.3. Action Buttons</h4> 
+       <h4 id="action-buttons"><a class="anchor" href="#action-buttons"></a>3.6.3. Action Buttons</h4> 
        <div class="paragraph"> 
         <p>Actions on the top right corner:</p> 
        </div> 
@@ -1799,7 +1871,7 @@ table.CodeRay td.code>pre{padding:0}
        </table> 
       </div> 
       <div class="sect3"> 
-       <h4 id="default-mapping-to-property-files"><a class="anchor" href="#default-mapping-to-property-files"></a>3.5.4. Default Mapping to Property Files</h4> 
+       <h4 id="default-mapping-to-property-files"><a class="anchor" href="#default-mapping-to-property-files"></a>3.6.4. Default Mapping to Property Files</h4> 
        <div class="paragraph"> 
         <p>The mapping between the properties files is registered in the &quot;Text Provider Service&quot; class. Per default the files follow this pattern: <code>&lt;your application&gt;.shared/src/main/resources/&lt;identifier of the project&gt;/texts/Texts&lt;language&gt;.properties</code></p> 
        </div> 
@@ -3438,19 +3510,22 @@ contacts.superuser=system</code></pre>
      <div class="sect2"> 
       <h3 id="sec-contacts_forms"><a class="anchor" href="#sec-contacts_forms"></a>4.6. Adding Forms to Create/Edit Persons and Organizations</h3> 
       <div class="paragraph"> 
-       <p>In this tutorial step we add the Scout forms that are used to edit existing persons and organizations and to enter new data in the user interface.</p> 
+       <p>In this tutorial step we add the Scout forms that are used to create and edit persons and organizations in the user interface.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Before we start with the actual implementation section <a href="#sec-contacts_form_design">Designing the Person Form</a> provides an introduction in the design of the person form and the general layouting concepts of the Scout framework. We then dive into the details of the implementation of the person form.</p> 
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p><a href="#sec-contacts_form_design">Designing the Person Form</a></p> </li> 
         <li> <p><a href="#sec-contacts_form_implement">Implementing the Form</a></p> </li> 
         <li> <p><a href="#sec-contacts_form_code">Adding a Gender Code Type</a></p> </li> 
         <li> <p><a href="#sec-contacts_form_add_fields">Adding Form Fields</a></p> </li> 
-        <li> <p><a href="#sec-contacts_form_integrate_service">Integrating with the Person Service</a></p> </li> 
-        <li> <p><a href="#sec-contacts_form_refactoring">Refactoring Form Fields</a></p> </li> 
-        <li> <p><a href="#sec-contacts_form_add_company">Adding the Company Form</a></p> </li> 
-        <li> <p><a href="#sec-contacts_forms_summary">What have we achieved?</a></p> </li> 
+        <li> <p><a href="#sec-contacts_form_integrate_service">Person Form Handler and Person Service</a></p> </li> 
+        <li> <p><a href="#sec-contacts_field_validation">Adding Form Field Validation</a></p> </li> 
        </ul> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Before we implement the contact form in <a href="#sec-contacts_form_add_company">Adding the Company Form</a> we modify the person form code to be able to reuse the picture field and the address box for the contacts form as described in <a href="#sec-contacts_form_refactoring">Refactoring Form Fields</a>. Finally, a summary of this tutorial step is provided in section <a href="#sec-contacts_forms_summary">What have we achieved?</a>.</p> 
       </div> 
       <div class="sect3"> 
        <h4 id="sec-contacts_form_design"><a class="anchor" href="#sec-contacts_form_design"></a>4.6.1. Designing the Person Form</h4> 
@@ -3632,47 +3707,6 @@ contacts.superuser=system</code></pre>
 
         <span class="annotation">@Order</span>(<span class="integer">10</span>)
         <span class="directive">public</span> <span class="type">class</span> <span class="class">AddressBox</span> <span class="directive">extends</span> AbstractGroupBox {
-
-          <span class="annotation">@Override</span>
-          <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredBorderVisible() {
-            <span class="keyword">return</span> <span class="predefined-constant">false</span>;
-          }
-
-          <span class="annotation">@Override</span>
-          <span class="directive">protected</span> <span class="type">int</span> getConfiguredGridH() { <i class="conum" data-value="1"></i><b>(1)</b>
-            <span class="keyword">return</span> <span class="integer">3</span>;
-          }
-
-          <span class="annotation">@Override</span>
-          <span class="directive">protected</span> <span class="type">int</span> getConfiguredGridW() { <i class="conum" data-value="1"></i><b>(1)</b>
-            <span class="keyword">return</span> <span class="integer">1</span>;
-          }
-
-          <span class="annotation">@Override</span>
-          <span class="directive">protected</span> <span class="type">int</span> getConfiguredGridColumnCount() { <i class="conum" data-value="2"></i><b>(2)</b>
-            <span class="keyword">return</span> <span class="integer">1</span>;
-          }
-
-          <span class="directive">public</span> StreetField getStreetField() {
-            <span class="keyword">return</span> getFieldByClass(StreetField.class);
-          }
-
-          <span class="directive">public</span> LocationBox getLocationBox() {
-            <span class="keyword">return</span> getFieldByClass(LocationBox.class);
-          }
-
-          <span class="directive">public</span> CityField getCityField() {
-            <span class="keyword">return</span> getFieldByClass(CityField.class);
-          }
-
-          <span class="directive">public</span> CountryField getCountryField() {
-            <span class="keyword">return</span> getFieldByClass(CountryField.class);
-          }
-
-          <span class="directive">public</span> ShowOnMapButton getShowOnMapButton() {
-            <span class="keyword">return</span> getFieldByClass(ShowOnMapButton.class);
-          }
-
         }
       }
 
@@ -3951,7 +3985,7 @@ contacts.superuser=system</code></pre>
       <div class="sect3"> 
        <h4 id="sec-contacts_form_add_fields"><a class="anchor" href="#sec-contacts_form_add_fields"></a>4.6.4. Adding Form Fields</h4> 
        <div class="paragraph"> 
-        <p>In this section we will add the form fields to the layout containers of the person form.</p> 
+        <p>In this section we will add the form fields to the layout containers of the person form. We will start with filling the general box with the picture field, followed by the other fields in the upper part of the person form. Then we fill the individual tab boxes into the details box in the lower part of the person form.</p> 
        </div> 
        <div class="paragraph"> 
         <p>As the first field we add the field that will show the picture of the person to the <code>GeneralBox</code> container. To also store the URL pointing to the picture we also add the invisible field <code>PictureUrlField</code> according to <a href="#lst-contacts_picture_field">Listing 30</a>.</p> 
@@ -4000,8 +4034,8 @@ contacts.superuser=system</code></pre>
             setImage(<span class="predefined-constant">null</span>);
           }
           <span class="keyword">else</span> {
-            <span class="keyword">try</span> (<span class="predefined-type">InputStream</span> in = <span class="keyword">new</span> <span class="predefined-type">URL</span>((<span class="predefined-type">String</span>) url).openStream()) {
-              setImage(IOUtility.readBytes(in));
+            <span class="keyword">try</span> {
+              setImage(IOUtility.readFromUrl(<span class="keyword">new</span> <span class="predefined-type">URL</span>((<span class="predefined-type">String</span>) url)));
               setAutoFit(<span class="predefined-constant">true</span>);
             }
             <span class="keyword">catch</span> (<span class="exception">Exception</span> e) { <i class="conum" data-value="5"></i><b>(5)</b>
@@ -4103,6 +4137,9 @@ contacts.superuser=system</code></pre>
         </table> 
        </div> 
        <div class="paragraph"> 
+        <p>Whenever we add several fields to a Scout container field the individual fields will be displayed according to their order specified by the <code>@Order</code> annotation in the source code. Using the default two column layout, the Scout layouting engine uses the first fields to fill up the first column before the remaining fields are assigned to the second column. In general the Scout layouting engine tries to balance the number of fields over all available columns. For the general box this rule has the effect that the picture field (this is the first field according to its order value) is assigned to the left column and all other fields are assigned to the right column.</p> 
+       </div> 
+       <div class="paragraph"> 
         <p>After having added all the fields to the general box of the person form we can now fill the individual tabs of the <code>DetailsBox</code> container. We start with adding the content to the tabs &quot;Work&quot; and &quot;Notes&quot; as described below.</p> 
        </div> 
        <div class="paragraph"> 
@@ -4199,8 +4236,9 @@ contacts.superuser=system</code></pre>
             }
           }
 
+          <span class="comment">// use a sequence box for horizontal layout </span><i class="conum" data-value="3"></i><b>(3)</b>
           <span class="annotation">@Order</span>(<span class="integer">20</span>)
-          <span class="directive">public</span> <span class="type">class</span> <span class="class">LocationBox</span> <span class="directive">extends</span> AbstractSequenceBox { <i class="conum" data-value="3"></i><b>(3)</b>
+          <span class="directive">public</span> <span class="type">class</span> <span class="class">LocationBox</span> <span class="directive">extends</span> AbstractSequenceBox {
 
             <span class="annotation">@Override</span>
             <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredLabel() {
@@ -4292,7 +4330,7 @@ contacts.superuser=system</code></pre>
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="sec-contacts_form_integrate_service"><a class="anchor" href="#sec-contacts_form_integrate_service"></a>4.6.5. Integrating with the Person Service</h4> 
+       <h4 id="sec-contacts_form_integrate_service"><a class="anchor" href="#sec-contacts_form_integrate_service"></a>4.6.5. Person Form Handler and Person Service</h4> 
        <div class="paragraph"> 
         <p>This section shows how we can integrate the person form created in the previous sections with the &quot;Contacts&quot; backend application to load and store person data with the database.</p> 
        </div> 
@@ -4300,13 +4338,13 @@ contacts.superuser=system</code></pre>
         <p>Most of the necessary infrastructure such as the transfer objects between the frontend and the backend application has already been created by the Scout form wizard. In the text below we will first discuss the setup created by the new form wizard and then add the missing code snippets to interact with the database.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>TODO setup</p> 
+        <p>On the frontend side, the Scout new form wizard has also created the two form handler classes <code>ModifyHandler</code> and <code>NewHandler</code>. By convention a <code>ModifyHandler</code> is used to change existing data and a <code>NewHandler</code> implements the creation of new data.</p> 
        </div> 
-       <div class="ulist"> 
-        <ul> 
-         <li> <p>frontend app: form handler <a href="#lst-contacts_form_handler">Listing 34</a></p> </li> 
-         <li> <p>backend app: service method</p> </li> 
-        </ul> 
+       <div class="paragraph"> 
+        <p>Form handler classes provide a number of callback methods that are invoked at various stages during the life cycle of the form. The implementation created by the Scout wizard includes the methods <code>execLoad</code> and <code>execStore</code> for each form handler. In these methods the form fetches data from the Scout backend application and/or sends new data to the backend server.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Adapt the default implementation of the form handlers according to <a href="#lst-contacts_form_handler">Listing 34</a>.</p> 
        </div> 
        <div id="lst-contacts_form_handler" class="listingblock"> 
         <div class="title">
@@ -4320,30 +4358,21 @@ contacts.superuser=system</code></pre>
 
     <span class="annotation">@Override</span>
     <span class="directive">protected</span> <span class="type">void</span> execLoad() {
+      IPersonService service = BEANS.get(IPersonService.class); <i class="conum" data-value="1"></i><b>(1)</b>
       PersonFormData formData = <span class="keyword">new</span> PersonFormData();
-      exportFormData(formData);
-      formData = BEANS.get(IPersonService.class).load(formData);
-      importFormData(formData);
-      setEnabledPermission(<span class="keyword">new</span> PersonUpdatePermission());
+      exportFormData(formData); <i class="conum" data-value="2"></i><b>(2)</b>
+      formData = service.load(formData); <i class="conum" data-value="3"></i><b>(3)</b>
+      importFormData(formData); <i class="conum" data-value="4"></i><b>(4)</b>
 
-      getForm().setSubTitle(calculateSubTitle());
+      getForm().setSubTitle(calculateSubTitle()); <i class="conum" data-value="5"></i><b>(5)</b>
     }
 
     <span class="annotation">@Override</span>
     <span class="directive">protected</span> <span class="type">void</span> execStore() {
+      IPersonService service = BEANS.get(IPersonService.class);
       PersonFormData formData = <span class="keyword">new</span> PersonFormData();
       exportFormData(formData);
-      formData = BEANS.get(IPersonService.class).store(formData);
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="directive">protected</span> <span class="type">void</span> execDirtyStatusChanged(<span class="type">boolean</span> dirty) {
-      getForm().setSubTitle(calculateSubTitle());
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredOpenExclusive() {
-      <span class="keyword">return</span> <span class="predefined-constant">true</span>;
+      service.store(formData); <i class="conum" data-value="6"></i><b>(6)</b>
     }
   }
 
@@ -4351,21 +4380,62 @@ contacts.superuser=system</code></pre>
 
     <span class="annotation">@Override</span>
     <span class="directive">protected</span> <span class="type">void</span> execStore() {
+      IPersonService service = BEANS.get(IPersonService.class);
       PersonFormData formData = <span class="keyword">new</span> PersonFormData();
       exportFormData(formData);
-      formData = BEANS.get(IPersonService.class).create(formData);
+      service.create(formData); <i class="conum" data-value="7"></i><b>(7)</b>
     }
+  }
 
-    <span class="annotation">@Override</span>
-    <span class="directive">protected</span> <span class="type">void</span> execDirtyStatusChanged(<span class="type">boolean</span> dirty) {
-      getForm().setSubTitle(calculateSubTitle());
-    }
+  <span class="directive">private</span> <span class="predefined-type">String</span> calculateSubTitle() {
+    <span class="keyword">return</span> StringUtility.join(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, getFirstNameField().getValue(),
+        getLastNameField().getValue());
   }
 }</code></pre> 
         </div> 
        </div> 
+       <div class="colist arabic"> 
+        <table> 
+         <tbody>
+          <tr> 
+           <td><i class="conum" data-value="1"></i><b>1</b></td> 
+           <td>Obtains a reference to the person service located on the Scout backend application.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="2"></i><b>2</b></td> 
+           <td>All form field values are transferred the form data. In this case the person primary key property will be transferred to the form data. Remember that we have set this key in the &quot;Edit&quot; context menu.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="3"></i><b>3</b></td> 
+           <td>The form data (including the person primary key) is sent to the <code>load</code> method. the load method returns the person data from the backend.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="4"></i><b>4</b></td> 
+           <td>The field values in the form data are loaded into the form fields of the person form.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="5"></i><b>5</b></td> 
+           <td>The sub title on the view tab of the form is updated to reflect the name of the person.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="6"></i><b>6</b></td> 
+           <td>Calls the <code>store</code> method of the person service providing the updated person data.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="7"></i><b>7</b></td> 
+           <td>Calls the <code>create</code> method of the person service providing the new person data.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </div> 
        <div class="paragraph"> 
-        <p>TODO intro sentence to <a href="#lst-contacts_form_service">Listing 35</a></p> 
+        <p>With the implementation provided in <a href="#lst-contacts_form_handler">Listing 34</a> the classes <code>ModifyHandler</code> and <code>NewHandler</code> orchestrate the complete roundtrip between the frontend and the backend of the &quot;Contacts&quot; application.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The only part that is now missing is the implementation of the form service methods <code>create</code>, <code>load</code> and <code>store</code> on the backend of the &quot;Contacts&quot; application. For these methods we can again rely on the default implementations created by the Scout new form wizard.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Modify the person service methods according to <a href="#lst-contacts_form_service">Listing 35</a>.</p> 
        </div> 
        <div id="lst-contacts_form_service" class="listingblock"> 
         <div class="title">
@@ -4385,9 +4455,9 @@ contacts.superuser=system</code></pre>
       formData.setPersonId(<span class="predefined-type">UUID</span>.randomUUID().toString());
     }
 
-    SQL.insert(SQLs.PERSON_INSERT, formData);
+    SQL.insert(SQLs.PERSON_INSERT, formData); <i class="conum" data-value="1"></i><b>(1)</b>
 
-    <span class="keyword">return</span> store(formData); <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="keyword">return</span> store(formData); <i class="conum" data-value="2"></i><b>(2)</b>
   }
 
   <span class="annotation">@Override</span>
@@ -4396,7 +4466,7 @@ contacts.superuser=system</code></pre>
       <span class="keyword">throw</span> <span class="keyword">new</span> VetoException(TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">InsufficientPrivileges</span><span class="delimiter">&quot;</span></span>));
     }
 
-    SQL.selectInto(SQLs.PERSON_SELECT, formData);
+    SQL.selectInto(SQLs.PERSON_SELECT, formData); <i class="conum" data-value="3"></i><b>(3)</b>
 
     <span class="keyword">return</span> formData;
   }
@@ -4407,7 +4477,7 @@ contacts.superuser=system</code></pre>
       <span class="keyword">throw</span> <span class="keyword">new</span> VetoException(TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">InsufficientPrivileges</span><span class="delimiter">&quot;</span></span>));
     }
 
-    SQL.update(SQLs.PERSON_UPDATE, formData);
+    SQL.update(SQLs.PERSON_UPDATE, formData); <i class="conum" data-value="4"></i><b>(4)</b>
 
     <span class="keyword">return</span> formData;
   }
@@ -4419,47 +4489,418 @@ contacts.superuser=system</code></pre>
          <tbody>
           <tr> 
            <td><i class="conum" data-value="1"></i><b>1</b></td> 
-           <td>The <code>create</code> method creates a new person with a primary key only. To save all other attributes the <code>store</code> method is reused.</td> 
+           <td>The SQL insert statement adds adds a new person entry in the database. Only the primary key is used to create this entry.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="2"></i><b>2</b></td> 
+           <td>To save all other person attributes provided in the form data, the <code>store</code> method is reused.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="3"></i><b>3</b></td> 
+           <td>The SQL select into transfers the person data from the database into the form data.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="4"></i><b>4</b></td> 
+           <td>The SQL update statement transfers all person attributes provided in the form data to the person table.</td> 
           </tr> 
          </tbody>
         </table> 
        </div> 
        <div class="paragraph"> 
-        <p>TODO small summary</p> 
+        <p>In this section we have implemented the interaction of the frontend with the backend application including the persistance of person data in the database. We can now verify the creation of new person entries and the modification of existing person data in the current state of the &quot;Contacts&quot; application.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>TODO link to next section</p> 
+        <p>In addition to just retrieving and storing new data, a business application should also help the user to maintain the quality of the entered data. An efficient approach to address this need is to make sure that the user only enters valid data into the application. In the next section we add a number of form field validations that implement this approach for the person form.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="sec-contacts_form_refactoring"><a class="anchor" href="#sec-contacts_form_refactoring"></a>4.6.6. Refactoring Form Fields</h4> 
+       <h4 id="sec-contacts_field_validation"><a class="anchor" href="#sec-contacts_field_validation"></a>4.6.6. Adding Form Field Validation</h4> 
+       <div class="paragraph"> 
+        <p>Form field validation helps the user to enter valid data into the form fields. The Scout framework allows the validation on the level of individual fields, on the level of container fields or on the level of the whole form. The text below provides a number of examples to illustrate these possibilities.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>We start with the validation on the level of a single field using the email address field defined in the &quot;Contact Info&quot; tab. The code provided in <a href="#lst-contacts_validate_email">Listing 36</a> checks the size and the formatting of the email address.</p> 
+       </div> 
+       <div id="lst-contacts_validate_email" class="listingblock"> 
+        <div class="title">
+         Listing 36. The validation of the email field
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">        <span class="annotation">@Order</span>(<span class="integer">40</span>)
+        <span class="directive">public</span> <span class="type">class</span> <span class="class">EmailField</span> <span class="directive">extends</span> AbstractStringField {
+
+          <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> EMAIL_PATTERN = <i class="conum" data-value="1"></i><b>(1)</b>
+              <span class="string"><span class="delimiter">&quot;</span><span class="content">^[_A-Za-z0-9-</span><span class="char">\\</span><span class="content">+]+(</span><span class="char">\\</span><span class="content">.[_A-Za-z0-9-]+)*@</span><span class="delimiter">&quot;</span></span> +
+                  <span class="string"><span class="delimiter">&quot;</span><span class="content">[A-Za-z0-9-]+(</span><span class="char">\\</span><span class="content">.[A-Za-z0-9]+)*(</span><span class="char">\\</span><span class="content">.[A-Za-z]{2,})$</span><span class="delimiter">&quot;</span></span>;
+
+          <span class="annotation">@Override</span>
+          <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredLabel() {
+            <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">Email</span><span class="delimiter">&quot;</span></span>);
+          }
+
+          <span class="annotation">@Override</span> <i class="conum" data-value="2"></i><b>(2)</b>
+          <span class="directive">protected</span> <span class="type">int</span> getConfiguredMaxLength() {
+            <span class="keyword">return</span> <span class="integer">64</span>;
+          }
+
+          <span class="annotation">@Override</span> <i class="conum" data-value="3"></i><b>(3)</b>
+          <span class="directive">protected</span> <span class="predefined-type">String</span> execValidateValue(<span class="predefined-type">String</span> rawValue) {
+            <span class="keyword">if</span> (rawValue != <span class="predefined-constant">null</span> &amp;&amp; !<span class="predefined-type">Pattern</span>.matches(EMAIL_PATTERN, rawValue)) {
+              <span class="keyword">throw</span> <span class="keyword">new</span> VetoException(TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">BadEmailAddress</span><span class="delimiter">&quot;</span></span>)); <i class="conum" data-value="4"></i><b>(4)</b>
+            }
+
+            <span class="keyword">return</span> rawValue; <i class="conum" data-value="5"></i><b>(5)</b>
+          }
+        }</code></pre> 
+        </div> 
+       </div> 
+       <div class="colist arabic"> 
+        <table> 
+         <tbody>
+          <tr> 
+           <td><i class="conum" data-value="1"></i><b>1</b></td> 
+           <td>Email verification is performed against a simple pattern.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="2"></i><b>2</b></td> 
+           <td>This prevents the field from accepting more than 64 characters. The return value should match the size of the corresponding table column.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="3"></i><b>3</b></td> 
+           <td>Method <code>execValidateValue</code> is called during validation of the new field value.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="4"></i><b>4</b></td> 
+           <td>If the value violates any business rules, a <code>VetoException</code> should be thrown.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="5"></i><b>5</b></td> 
+           <td>If the new value passes all business rules the method returns the value.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </div> 
+       <div class="paragraph"> 
+        <p>In the next example we add field validation to the address box to ensure the following business rules.</p> 
+       </div> 
        <div class="ulist"> 
         <ul> 
-         <li> <p>refactor/prepare picture field</p> </li> 
-         <li> <p>edit form for image field</p> </li> 
-         <li> <p>refactor the address field</p> </li> 
+         <li> <p>Only valid countries should be allowed</p> </li> 
+         <li> <p>If a city is provided a country must also be provided</p> </li> 
+         <li> <p>If street information is provided, both a city and a country must be provided</p> </li> 
+         <li> <p>The address may be empty</p> </li> 
         </ul> 
        </div> 
        <div class="paragraph"> 
-        <p>MISSING: form sub title &quot;Alice&quot; below &quot;Person&quot; when person form opened</p> 
+        <p>The simplest rule is about entering only valid countries. This rule is already implemented as the country smart field only allows the user to select a single entry of the list of valid countries. To enforce the other rules described above we need to take into account several field values at the same time. A possible implementation for these rules is provided in <a href="#lst-contacts_validate_address">Listing 37</a>.</p> 
+       </div> 
+       <div id="lst-contacts_validate_address" class="listingblock"> 
+        <div class="title">
+         Listing 37. The validation of the fields in the address box
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">        <span class="annotation">@Order</span>(<span class="integer">10</span>)
+        <span class="directive">public</span> <span class="type">class</span> <span class="class">AddressBox</span> <span class="directive">extends</span> AbstractGroupBox {
+
+          <span class="annotation">@Order</span>(<span class="integer">10</span>)
+          <span class="directive">public</span> <span class="type">class</span> <span class="class">StreetField</span> <span class="directive">extends</span> AbstractStringField {
+
+            <span class="annotation">@Override</span> <i class="conum" data-value="1"></i><b>(1)</b>
+            <span class="directive">protected</span> <span class="type">void</span> execChangedValue() {
+              validateAddressFields(); <i class="conum" data-value="2"></i><b>(2)</b>
+            }
+          }
+
+          <span class="annotation">@Order</span>(<span class="integer">20</span>)
+          <span class="directive">public</span> <span class="type">class</span> <span class="class">LocationBox</span> <span class="directive">extends</span> AbstractSequenceBox {
+
+            <span class="annotation">@Order</span>(<span class="integer">10</span>)
+            <span class="directive">public</span> <span class="type">class</span> <span class="class">CityField</span> <span class="directive">extends</span> AbstractStringField {
+
+              <span class="annotation">@Override</span>
+              <span class="directive">protected</span> <span class="type">void</span> execChangedValue() {
+                validateAddressFields(); <i class="conum" data-value="2"></i><b>(2)</b>
+              }
+            }
+
+            <span class="annotation">@Order</span>(<span class="integer">20</span>)
+            <span class="directive">public</span> <span class="type">class</span> <span class="class">CountryField</span> <span class="directive">extends</span> AbstractSmartField&lt;<span class="predefined-type">String</span>&gt; {
+
+              <span class="annotation">@Override</span>
+              <span class="directive">protected</span> <span class="type">void</span> execChangedValue() {
+                validateAddressFields(); <i class="conum" data-value="2"></i><b>(2)</b>
+              }
+            }
+          }
+
+          <span class="directive">protected</span> <span class="type">void</span> validateAddressFields() {
+            <span class="type">boolean</span> hasStreet = StringUtility.hasText(getStreetField().getValue());
+            <span class="type">boolean</span> hasCity = StringUtility.hasText(getCityField().getValue());
+
+            getCityField().setMandatory(hasStreet); <i class="conum" data-value="3"></i><b>(3)</b>
+            getCountryField().setMandatory(hasStreet || hasCity);
+          }
+        }</code></pre> 
+        </div> 
+       </div> 
+       <div class="colist arabic"> 
+        <table> 
+         <tbody>
+          <tr> 
+           <td><i class="conum" data-value="1"></i><b>1</b></td> 
+           <td>This method is called after the value of this field has been changed.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="2"></i><b>2</b></td> 
+           <td>After changing the street, the city or the country recompute which address fields are mandatory.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="3"></i><b>3</b></td> 
+           <td>The city becomes mandatory if the street field is not empty. The country is mandatory if the street or the city is not empty.</td> 
+          </tr> 
+         </tbody>
+        </table> 
        </div> 
        <div class="paragraph"> 
-        <p>MISSING: field validation</p> 
+        <p>To verify the user input before saving the content of a complete form (and not on changing the content of individual fields) validation can also be implemented on the form level. In <a href="#lst-contacts_validate_names">Listing 38</a> we use this mechanism to make sure that the user does not save a person form with at least providing a first name or a last name.</p> 
        </div> 
-       <div class="paragraph"> 
-        <p>MISSING: order annotation, filling fields into cells of logical grid.</p> 
+       <div id="lst-contacts_validate_names" class="listingblock"> 
+        <div class="title">
+         Listing 38. The validation of the first and last names on the form level
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">PersonForm</span> <span class="directive">extends</span> AbstractForm {
+
+  <span class="annotation">@Override</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="directive">protected</span> <span class="type">boolean</span> execValidate() {
+    <span class="type">boolean</span> noFirstName = StringUtility.isNullOrEmpty(getFirstNameField().getValue());
+    <span class="type">boolean</span> noLastName = StringUtility.isNullOrEmpty(getLastNameField().getValue());
+
+    <span class="keyword">if</span> (noFirstName &amp;&amp; noLastName) {
+      getFirstNameField().requestFocus(); <i class="conum" data-value="2"></i><b>(2)</b>
+
+      <span class="keyword">throw</span> <span class="keyword">new</span> VetoException(TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">MissingName</span><span class="delimiter">&quot;</span></span>)); <i class="conum" data-value="3"></i><b>(3)</b>
+    }
+
+    <span class="keyword">return</span> <span class="predefined-constant">true</span>; <i class="conum" data-value="4"></i><b>(4)</b>
+  }
+}</code></pre> 
+        </div> 
+       </div> 
+       <div class="colist arabic"> 
+        <table> 
+         <tbody>
+          <tr> 
+           <td><i class="conum" data-value="1"></i><b>1</b></td> 
+           <td>This method is called during the form validation and before the form is stored/closed.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="2"></i><b>2</b></td> 
+           <td>In case both the first name and the last name fields are empty place the focus on the first name field.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="3"></i><b>3</b></td> 
+           <td>Throw a new veto exception that includes a message to inform the user to enter a first name or a last name.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="4"></i><b>4</b></td> 
+           <td>Returning <code>true</code> is indicating that validation has passed successfully on the form level.</td> 
+          </tr> 
+         </tbody>
+        </table> 
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="sec-contacts_form_add_company"><a class="anchor" href="#sec-contacts_form_add_company"></a>4.6.7. Adding the Company Form</h4> 
+       <h4 id="sec-contacts_form_refactoring"><a class="anchor" href="#sec-contacts_form_refactoring"></a>4.6.7. Refactoring Form Fields</h4> 
+       <div class="paragraph"> 
+        <p>In this section we refactor the picture field and the address box and the email field as template fields that allow these fields to be reused in both the person form and the company form.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>When we create the company in the next section of this tutorial we want to display the company&#x2019;s logo in the form. From a technical point of view this is the same as showing a picture of a person. To avoid a copy&amp;paste approach we will refactor the picture field of the person form into a picture box that can be used by both the person and the company form. For the same reason we will also refactor the address box and the email field for reuse in different forms of the application.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The initial implementation of the image field consists of two separate fields, the <code>PictureField</code> and the <code>PictureUrlField</code>. To allow the user to edit the picture&#x2019;s URL an &quot;Edit URL&quot; menu and a small form is also added during the refactoring of this field.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>TODO refactor picture field</p> 
+       </div> 
+       <div id="lst-contacts_refactor_picture" class="listingblock"> 
+        <div class="title">
+         Listing 39. The refactored picture field.
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@FormData</span>(value = AbstractUrlImageFieldData.class, <i class="conum" data-value="1"></i><b>(1)</b>
+    sdkCommand = FormData.SdkCommand.CREATE,
+    defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">AbstractUrlImageField</span> <span class="directive">extends</span> AbstractImageField {
+
+  <span class="directive">private</span> <span class="predefined-type">String</span> url; <i class="conum" data-value="2"></i><b>(2)</b>
+
+  <span class="annotation">@FormData</span> <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="directive">public</span> <span class="predefined-type">String</span> getUrl() {
+    <span class="keyword">return</span> url;
+  }
+
+  <span class="annotation">@FormData</span> <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="directive">public</span> <span class="type">void</span> setUrl(<span class="predefined-type">String</span> url) {
+    <span class="local-variable">this</span>.url = url;
+    updateImage();
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredLabelVisible() {
+    <span class="keyword">return</span> <span class="predefined-constant">false</span>;
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="type">int</span> getConfiguredGridH() {
+    <span class="keyword">return</span> <span class="integer">5</span>;
+  }
+
+  <span class="directive">protected</span> <span class="type">void</span> updateImage() {
+    clearErrorStatus();
+
+    <span class="keyword">if</span> (url == <span class="predefined-constant">null</span>) {
+      setImage(<span class="predefined-constant">null</span>);
+    }
+    <span class="keyword">else</span> {
+      <span class="keyword">try</span> {
+        setImage(IOUtility.readFromUrl(<span class="keyword">new</span> <span class="predefined-type">URL</span>((<span class="predefined-type">String</span>) url)));
+        setAutoFit(<span class="predefined-constant">true</span>);
+      }
+      <span class="keyword">catch</span> (<span class="exception">Exception</span> e) {
+        addErrorStatus(<span class="keyword">new</span> Status(TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">FailedToAccessImageFromUrl</span><span class="delimiter">&quot;</span></span>), IStatus.WARNING));
+      }
+    }
+  }
+}</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>TODO Edit Url form</p> 
+       </div> 
+       <div id="lst-contacts_refactor_picture" class="listingblock"> 
+        <div class="title">
+         Listing 40. The form to edit the picture URL
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">PictureUrlForm</span> <span class="directive">extends</span> AbstractForm {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredTitle() {
+    <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">PictureURL</span><span class="delimiter">&quot;</span></span>);
+  }
+
+  <span class="directive">public</span> <span class="type">void</span> startModify() {
+    startInternal(<span class="keyword">new</span> ModifyHandler());
+  }
+
+  <span class="directive">public</span> UrlField getUrlField() {
+    <span class="keyword">return</span> getFieldByClass(UrlField.class);
+  }
+
+  <span class="annotation">@Order</span>(<span class="integer">10</span>)
+  <span class="directive">public</span> <span class="type">class</span> <span class="class">MainBox</span> <span class="directive">extends</span> AbstractGroupBox {
+
+    <span class="annotation">@Order</span>(<span class="integer">10</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">UrlBox</span> <span class="directive">extends</span> AbstractGroupBox {
+
+      <span class="annotation">@Order</span>(<span class="integer">10</span>)
+      <span class="directive">public</span> <span class="type">class</span> <span class="class">UrlField</span> <span class="directive">extends</span> AbstractStringField {
+
+        <span class="annotation">@Override</span>
+        <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredLabelVisible() { <i class="conum" data-value="1"></i><b>(1)</b>
+          <span class="keyword">return</span> <span class="predefined-constant">false</span>;
+        }
+      }
+    }
+
+    <span class="annotation">@Order</span>(<span class="integer">20</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">OkButton</span> <span class="directive">extends</span> AbstractOkButton {
+    }
+
+    <span class="annotation">@Order</span>(<span class="integer">30</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">CancelButton</span> <span class="directive">extends</span> AbstractCancelButton {
+    }
+  }
+
+  <span class="directive">public</span> <span class="type">class</span> <span class="class">ModifyHandler</span> <span class="directive">extends</span> AbstractFormHandler { <i class="conum" data-value="2"></i><b>(2)</b>
+  }
+}</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>TODO Edit menu</p> 
+       </div> 
+       <div id="lst-contacts_refactor_picture" class="listingblock"> 
+        <div class="title">
+         Listing 41. The &quot;Edit URL&quot; menu for the refactored picture field
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">AbstractUrlImageField</span> <span class="directive">extends</span> AbstractImageField {
+
+
+  <span class="annotation">@Order</span>(<span class="integer">10</span>)
+  <span class="directive">public</span> <span class="type">class</span> <span class="class">EditURLMenu</span> <span class="directive">extends</span> AbstractMenu {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredText() {
+      <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">EditURL</span><span class="delimiter">&quot;</span></span>);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="type">void</span> execAction() {
+      updateUrl();
+    }
+  }
+  <span class="directive">protected</span> <span class="type">void</span> updateUrl() {
+    PictureUrlForm form = <span class="keyword">new</span> PictureUrlForm();
+    <span class="predefined-type">String</span> oldUrl = getUrl();
+
+    <span class="keyword">if</span> (StringUtility.hasText(oldUrl)) {
+      form.getUrlField().setValue(oldUrl);
+    }
+
+    form.startModify();
+    form.waitFor();
+
+    <span class="keyword">if</span> (form.isFormStored()) {
+      setUrl(form.getUrlField().getValue());
+    }
+  }
+}</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>TODO refactor address box</p> 
+       </div> 
+       <div id="lst-contacts_refactor_addressbox" class="listingblock"> 
+        <div class="title">
+         Listing 42. The &quot;Edit URL&quot; menu for the refactored picture field
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@FormData</span>(value = AbstractAddressBoxData.class, <i class="conum" data-value="1"></i><b>(1)</b>
+    sdkCommand = FormData.SdkCommand.CREATE,
+    defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
+<span class="directive">public</span> <span class="directive">abstract</span> <span class="type">class</span> <span class="class">AbstractAddressBox</span> <span class="directive">extends</span> AbstractGroupBox {
+  <span class="comment">// no modifications to the content of the address box necessary</span>
+}</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="sec-contacts_form_add_company"><a class="anchor" href="#sec-contacts_form_add_company"></a>4.6.8. Adding the Company Form</h4> 
        <div class="paragraph"> 
         <p>Add the Company Form: Copy &amp; Paste</p> 
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="sec-contacts_forms_summary"><a class="anchor" href="#sec-contacts_forms_summary"></a>4.6.8. What have we achieved?</h4> 
+       <h4 id="sec-contacts_forms_summary"><a class="anchor" href="#sec-contacts_forms_summary"></a>4.6.9. What have we achieved?</h4> 
        <div class="paragraph"> 
-        <p>In the third step of the &quot;Contacts&quot; tutorial we have added Scout forms to edit and create persons and organisations in the &quot;Contacts&quot; application. TODO: put more details here</p> 
+        <p>In the third step of the &quot;Contacts&quot; tutorial we have added Scout forms to edit and create persons and organisations in the &quot;Contacts&quot; application.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>TODO: put more details here</p> 
        </div> 
        <div class="paragraph"> 
         <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. Person and company data is now visible in the user interface as shown in &lt;&lt;img-contacts_tutorial_result_step_4]].</p> 
@@ -4485,469 +4926,221 @@ contacts.superuser=system</code></pre>
    <div class="sect1"> 
     <h2 id="old-stuff"><a class="anchor" href="#old-stuff"></a>5. OLD STUFF</h2> 
     <div class="sectionbody"> 
-     <div class="sect2"> 
-      <h3 id="creating-the-person-form"><a class="anchor" href="#creating-the-person-form"></a>5.1. Creating the Person Form</h3> 
-      <div id="img-new_form_person" class="imageblock"> 
+     <div class="sect3"> 
+      <h4 id="a-simple-form-to-edit-the-picture-url"><a class="anchor" href="#a-simple-form-to-edit-the-picture-url"></a>5.1. A simple Form to edit the Picture URL</h4> 
+      <div id="img-new_form_url" class="imageblock"> 
        <div class="content"> 
-        <img src="images/new_form_person_contextmenu.png" alt="new form person contextmenu" /> 
+        <img src="images/new_form_url_1.png" alt="new form url 1" /> 
        </div> 
       </div> 
       <div class="imageblock"> 
        <div class="content"> 
-        <img src="images/new_form_person.png" alt="new form person" /> 
+        <img src="images/new_form_url_2.png" alt="new form url 2" /> 
        </div> 
        <div class="title">
-        Figure 39. Add the person form.
+        Figure 39. Add the URL editor form. This form does not need any connections to the server. Therefore, the related components such as services and the form data can be removed in the second wizard step shown on the right side.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In this section we will create the person form that is used to display and edit the persons stored in the &#x201c;My Contacts&#x201d; application. To add the person form use the Scout SDK <em class="wizard">New Form</em> wizard as shown in <a href="#img-new_form_person">Figure 39</a>. In the first wizard step you just need to enter &#x201c;Person&#x201d; as a new translated text into the <em class="field">Name</em> field and add &#x201c;ui.forms&#x201d; as the sub-package name in the corresponding wizard field. Then click the <b class="button">Finish</b> button.</p> 
+       <p>To edit a person&#x2019;s picture link, we create a simple URL editor form as shown in <a href="#img-new_form_url">Figure 39</a>. As we only need this form to update the URL information of a person&#x2019;s picture field, we do not need any connectivity to the backend of the &#x201c;My Contacts&#x201d; application. That is why almost all form and service artefacts are deselected in the second wizard step shown on the right side of <a href="#img-new_form_url">Figure 39</a>.</p> 
+      </div> 
+      <div id="lst-mycontacts.client.forms.pictureurl" class="listingblock"> 
+       <div class="title">
+        Listing 43. The UI structure of the 
+        <span class="java">PictureURLForm</span> used to update the URL of the picture field in the person form.
+       </div> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PictureURLForm.java[lines=<span class="integer">24</span>.<span class="float">.25</span>;<span class="integer">99</span>.<span class="float">.113</span>;<span class="integer">122</span>.<span class="float">.122</span>;<span class="integer">126</span>.<span class="float">.127</span>]</code></pre> 
+       </div> 
       </div> 
       <div class="paragraph"> 
-       <p>The wizard will create the necessary artefacts in the application&#x2019;s client, the shared and the server plugin projects. On the client side the <span class="java">PersonForm</span> class with the necessary form handlers is created, in the shared part, the <span class="java">PersonFormData</span> transfer object is added. On the server side, a <span class="java">PersonProcessService</span> with all necessary service operations referenced by the form handlers is implemented.</p> 
+       <p>As this form only holds a single URL field, we omit the description of the creation of the URL editor form&#x2019;s content and provide the resulting Java code instead. In <a href="#lst-mycontacts.client.forms.pictureurl">Listing 43</a> just the form&#x2019;s <span class="java">MainBox</span> code is shown.</p> 
       </div> 
-      <div id="img-new_bean_personid" class="imageblock"> 
+      <div id="img-new_menu_editurl" class="imageblock"> 
        <div class="content"> 
-        <img src="images/new_bean_personid_contextmenu.png" alt="new bean personid contextmenu" /> 
+        <img src="images/new_menu_editurl_contextmenu.png" alt="new menu editurl contextmenu" /> 
        </div> 
       </div> 
       <div class="imageblock"> 
        <div class="content"> 
-        <img src="images/new_bean_personid.png" alt="new bean personid" /> 
+        <img src="images/new_menu_editurl.png" alt="new menu editurl" /> 
        </div> 
        <div class="title">
-        Figure 40. Add the 
-        <em class="element">PersonId</em> variable to the person form.
+        Figure 40. Add the URL edit menu to the picture field.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>To hold the persons primary key in the person form we also need to add a corresponding variable. For this, use the <em class="wizard">New Property Bean</em> wizard as shown in <a href="#img-new_bean_personid">Figure 40</a>. In the wizard dialog, enter &#x201c;PersonId&#x201d; into the <em class="field">Name</em> field and pick <span class="java">String</span> from the dropdown list provided in the <em class="field">Bean type</em> field. Then, click the <b class="button">Finish</b> button to close the wizard.</p> 
+       <p>This form is then started via an &#x201c;Edit URL &#x2026;&#x200b;&#x201d; contextmenu on the image field. The creation of this contextmenu is shown in <a href="#img-new_menu_editurl">Figure 40</a>. See <a href="#lst-mycontacts.client.forms.person.picturefield.editmenu">Listing 44</a> for the actual implementation of the <span class="java">execAction</span> for this contextmenu.</p> 
       </div> 
-      <div class="sect3"> 
-       <h4 id="creating-the-form-layout-with-from-fields"><a class="anchor" href="#creating-the-form-layout-with-from-fields"></a>5.1.1. Creating the Form Layout with From Fields</h4> 
-       <div id="img-new_field_personbox" class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_field_personbox.png" alt="new field personbox" /> 
-        </div> 
+      <div class="paragraph"> 
+       <p></p> 
+      </div> 
+      <div id="lst-mycontacts.client.forms.person.picturefield.editmenu" class="listingblock"> 
+       <div class="title">
+        Listing 44. The edit menu implemented in class 
+        <span class="java">EditURLMenu</span> of the picture field. If the URL was changed the picture URL field of the person form is set accordingly in method 
+        <span class="java">execAction</span>
        </div> 
-       <div class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_field_personbox_name.png" alt="new field personbox name" /> 
-        </div> 
-        <div class="title">
-         Figure 41. Add the first group box field to the person form.
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>As a next step we create the main layout structure of the person form. According to the screenshot of the person form shown in <a href="#img-my_contacts_swt">[img-my_contacts_swt]</a> the form is organized into an upper box including the first name, the last name and a picture field. In the &#x201c;Details&#x201d; box in the lower half of the form some additional fields are found, such as the date of birth field. And the bottom of the form holds a &#x201c;Show Map &#x2026;&#x200b;&#x201d; link. We start with the general layout by adding the <span class="java">PersonBox</span> according to <a href="#img-new_field_personbox">Figure 41</a>. In the first step (omitted in <a href="#img-new_field_personbox">Figure 41</a>) of the new form field wizard the field type <span class="java">GroupBox</span> has to be selected. Below the person box we add the detail group box. As before, we select the <span class="java">GroupBox</span> field type and click on the <b class="button">Next</b> button. In the second wizard step we then enter the text &#x201c;Detail&#x201d; into the <em class="field">Name</em> field.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>We now add the form fields listed below using the the <em class="wizard">New Form Field</em> wizard multiple times. Most fields are of type <span class="java">StringField</span> and different field types are separately indicated.</p> 
-       </div> 
-       <div class="ulist"> 
-        <ul> 
-         <li> <p><code>PersonBox</code></p> 
-          <div class="ulist"> 
-           <ul> 
-            <li> <p>&#x201c;First Name&#x201d;</p> </li> 
-            <li> <p>&#x201c;Last Name&#x201d;</p> </li> 
-            <li> <p>&#x201c;Picture URL&#x201d;</p> </li> 
-            <li> <p>PictureField (<code>ImageField</code>)</p> </li> 
-           </ul> 
-          </div> </li> 
-         <li> <p>&#x201c;Detail&#x201d; DetailBox</p> 
-          <div class="ulist"> 
-           <ul> 
-            <li> <p>&#x201c;Headline&#x201d;</p> </li> 
-            <li> <p>&#x201c;Location&#x201d;</p> </li> 
-            <li> <p>&#x201c;Date of Birth&#x201d; (<code>DateField</code>)</p> </li> 
-           </ul> 
-          </div> </li> 
-        </ul> 
-       </div> 
-       <div id="img-new_field_picture" class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_field_picture_contextmenu.png" alt="new field picture contextmenu" /> 
-        </div> 
-       </div> 
-       <div class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_field_picture.png" alt="new field picture" /> 
-        </div> 
-        <div class="title">
-         Figure 42. Add the picture field to the first group box of the person form.
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>As an example for adding the form fields, the process is illustrated in <a href="#img-new_field_picture">Figure 42</a> for the creation of the picture field. In the field list we need to set non default properties for the <em class="field">PictureUrlField</em> field and the <em class="field">PictureField</em> field. The picture URL field will hold an URL pointing to the picture of the person to be displayed. As in the person form only the picture is to be displayed but not the picture URL, we need to make this field invisible. For this, select the <em class="node">PictureUrlField</em> node in the Scout Explorer and then untick the <em class="field">Visible</em> field in the Scout Object Properties. Note that to access the visibility property you need to open the section <em class="element">Advanced Properties</em> first.</p> 
-       </div> 
-       <div id="img-picture_field_properties" class="imageblock"> 
-        <div class="content"> 
-         <img src="images/picture_field_properties_1.png" alt="picture field properties 1" /> 
-        </div> 
-       </div> 
-       <div class="imageblock"> 
-        <div class="content"> 
-         <img src="images/picture_field_properties_2.png" alt="picture field properties 2" /> 
-        </div> 
-        <div class="title">
-         Figure 43. Set the properties for the picture field of the person form.
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>As the configuration of the picture field is more complex than the other fields, the changed properties are shown in the screenshots provided in <a href="#img-picture_field_properties">Figure 43</a>. First, no label is shown for the picture field as shown in the unticked <em class="field">Label Visible</em> field of the Scout Object Properties. Then, property <em class="element">Grid H</em> is set to 5. This results in the picture to cover the vertical space of 5 form fields.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p></p> 
-       </div> 
-       <div id="lst-mycontacts.client.forms.person.picturefield" class="listingblock"> 
-        <div class="title">
-         Listing 36. The behaviour of the person form&#x2019;s 
-         <span class="java">PictureField</span> is triggered by changes in field 
-         <span class="java">PictureUrlField</span>.
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=<span class="integer">233</span>.<span class="float">.235</span>;<span class="integer">251</span>.<span class="float">.267</span>;<span class="integer">286</span>.<span class="float">.287</span>]</code></pre> 
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>Finally, we want the picture to be refreshed whenever the content of the picture URL is changed. For this, the property <em class="element">Master Field</em> is set to the <span class="java">PictureUrlField</span>. The implementation of the corresponding method <span class="java">execChangedMasterValue</span> is provided in <a href="#lst-mycontacts.client.forms.person.picturefield">Listing 36</a>. As we can see, the Scout helper class <span class="java">IOUtility</span> is used to read the image content from the provided URL. This content is then used to assign the image content with the image field&#x2019;s method <span class="java">setImage</span>. Method <span class="java">setAutoFit</span> is called to adapt the picture to the dimensions available to the image field.</p> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=<span class="integer">268</span>.<span class="float">.285</span>]</code></pre> 
        </div> 
       </div> 
-      <div class="sect3"> 
-       <h4 id="a-simple-form-to-edit-the-picture-url"><a class="anchor" href="#a-simple-form-to-edit-the-picture-url"></a>5.1.2. A simple Form to edit the Picture URL</h4> 
-       <div id="img-new_form_url" class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_form_url_1.png" alt="new form url 1" /> 
-        </div> 
+      <div class="paragraph"> 
+       <p>Once the edit URL form is started with <span class="java">form.startModify()</span> the client waits in method <span class="java">form.waitFor</span> until the form is closed by the user. If the user has changed any field content (the picture URL in our case) and closed the form with the <b class="button">OK</b> button, the method <span class="java">form.isFormStored</span> returns true, and we can copy the new URL from the editor form field into the picture URL field of the person form. Such a change will then trigger method <span class="java">execChangedMasterValue</span> of the <span class="java">PictureField</span> which in turn updates the image shown in the person form.</p> 
+      </div> 
+     </div> 
+     <div class="sect3"> 
+      <h4 id="sec-adding_the_smartfield"><a class="anchor" href="#sec-adding_the_smartfield"></a>5.2. Adding the Company Smartfield</h4> 
+      <div class="paragraph"> 
+       <p>At the current stage of the &#x201c;My Contacts&#x201d; application, we have no option to manage the relationship between people and companies. To manage this relation, we now add a company smart field to the person form. This smart field will then hold the current assignment of the person represented in the person form.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>A Scout smart field can be viewed as user friendly dropdown field on steroids that also implements <em class="element">search-as-you-type</em> to pick a specific entry. In the simplest case the smart field provides access to a small and locally provided list of key value pairs. But for the intended use in the &#x201c;My Contacts&#x201d; application, we will need to access a list of elements provided by the server that will be compiled dynamically at runtime.</p> 
+      </div> 
+      <div id="img-new_lookupcall_company_contextmenu" class="imageblock"> 
+       <div class="content"> 
+        <img src="images/new_lookupcall_company_contextmenu.png" alt="new lookupcall company contextmenu" /> 
        </div> 
-       <div class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_form_url_2.png" alt="new form url 2" /> 
-        </div> 
-        <div class="title">
-         Figure 44. Add the URL editor form. This form does not need any connections to the server. Therefore, the related components such as services and the form data can be removed in the second wizard step shown on the right side.
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>To edit a person&#x2019;s picture link, we create a simple URL editor form as shown in <a href="#img-new_form_url">Figure 44</a>. As we only need this form to update the URL information of a person&#x2019;s picture field, we do not need any connectivity to the backend of the &#x201c;My Contacts&#x201d; application. That is why almost all form and service artefacts are deselected in the second wizard step shown on the right side of <a href="#img-new_form_url">Figure 44</a>.</p> 
-       </div> 
-       <div id="lst-mycontacts.client.forms.pictureurl" class="listingblock"> 
-        <div class="title">
-         Listing 37. The UI structure of the 
-         <span class="java">PictureURLForm</span> used to update the URL of the picture field in the person form.
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PictureURLForm.java[lines=<span class="integer">24</span>.<span class="float">.25</span>;<span class="integer">99</span>.<span class="float">.113</span>;<span class="integer">122</span>.<span class="float">.122</span>;<span class="integer">126</span>.<span class="float">.127</span>]</code></pre> 
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>As this form only holds a single URL field, we omit the description of the creation of the URL editor form&#x2019;s content and provide the resulting Java code instead. In <a href="#lst-mycontacts.client.forms.pictureurl">Listing 37</a> just the form&#x2019;s <span class="java">MainBox</span> code is shown.</p> 
-       </div> 
-       <div id="img-new_menu_editurl" class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_menu_editurl_contextmenu.png" alt="new menu editurl contextmenu" /> 
-        </div> 
-       </div> 
-       <div class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_menu_editurl.png" alt="new menu editurl" /> 
-        </div> 
-        <div class="title">
-         Figure 45. Add the URL edit menu to the picture field.
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>This form is then started via an &#x201c;Edit URL &#x2026;&#x200b;&#x201d; contextmenu on the image field. The creation of this contextmenu is shown in <a href="#img-new_menu_editurl">Figure 45</a>. See <a href="#lst-mycontacts.client.forms.person.picturefield.editmenu">Listing 38</a> for the actual implementation of the <span class="java">execAction</span> for this contextmenu.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p></p> 
-       </div> 
-       <div id="lst-mycontacts.client.forms.person.picturefield.editmenu" class="listingblock"> 
-        <div class="title">
-         Listing 38. The edit menu implemented in class 
-         <span class="java">EditURLMenu</span> of the picture field. If the URL was changed the picture URL field of the person form is set accordingly in method 
-         <span class="java">execAction</span>
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=<span class="integer">268</span>.<span class="float">.285</span>]</code></pre> 
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>Once the edit URL form is started with <span class="java">form.startModify()</span> the client waits in method <span class="java">form.waitFor</span> until the form is closed by the user. If the user has changed any field content (the picture URL in our case) and closed the form with the <b class="button">OK</b> button, the method <span class="java">form.isFormStored</span> returns true, and we can copy the new URL from the editor form field into the picture URL field of the person form. Such a change will then trigger method <span class="java">execChangedMasterValue</span> of the <span class="java">PictureField</span> which in turn updates the image shown in the person form.</p> 
+       <div class="title">
+        Figure 41. Add a lookup call to the applications shared node.
        </div> 
       </div> 
-      <div class="sect3"> 
-       <h4 id="linking-the-person-form-to-the-person-page"><a class="anchor" href="#linking-the-person-form-to-the-person-page"></a>5.1.3. Linking the Person Form to the Person Page</h4> 
-       <div id="img-new_menu_editperson" class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_menu_editperson_contextmenu.png" alt="new menu editperson contextmenu" /> 
-        </div> 
-       </div> 
-       <div class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_menu_editperson.png" alt="new menu editperson" /> 
-        </div> 
-        <div class="title">
-         Figure 46. Add the Person edit menu to the person page.
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p></p> 
-       </div> 
-       <div id="lst-mycontacts.client.forms.person.picturefield.editmenu" class="listingblock"> 
-        <div class="title">
-         Listing 39. The 
-         <span class="java">EditPersonMenu</span> to edit the person selected in the person table. The person id taken from the corresponding (invisible) column is transferred to the person form before the form is started.
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=<span class="integer">123</span>.<span class="float">.142</span>]</code></pre> 
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>The user of the &#x201c;My Contacts&#x201d; application wants to use the person form to show/edit attributes of a specific person. To support this use case, we need to link this form with the &#x201c;My Contacts&#x201d; application. As we already have person pages that show some of the person&#x2019;s attribute, we can now add context menus to this list to open/edit existing persons in the person form and to create new persons as well. This is achieved by using the <em class="wizard">New Menu</em> wizard on the <em class="node">Menus</em> node of the table of the person page according to <a href="#img-new_menu_editperson">Figure 46</a>. In the <em class="field">Name</em> field enter the new translated text &#x201c;Edit Person &#x2026;&#x200b;&#x201d;. The form to start is the <span class="java">PersonForm</span> and the <span class="java">ModifyHandler</span> is the form handler to be used to start the form. As we have defined a meaningful primary key column on the person page and a matching variable is available for the person form, the Scout SDK wizard is generating the necessary code automatically. The implementation of the <span class="java">execAction</span> method provided in <a href="#lst-mycontacts.desktop.outline.personpage.editmenu">[lst-mycontacts.desktop.outline.personpage.editmenu]</a> works out of the box and should not need any manual tuning. Now, you may also add the &#x201c;New Person &#x2026;&#x200b;&#x201d; menu in the same way. Except that you pick the <span class="java">NewHander</span> in the <em class="wizard">New Menu</em> wizard instead of the modify handler.</p> 
-       </div> 
-       <div id="img-person_table_properties" class="imageblock"> 
-        <div class="content"> 
-         <img src="images/person_table_explorer.png" alt="person table explorer" /> 
-        </div> 
-       </div> 
-       <div class="imageblock"> 
-        <div class="content"> 
-         <img src="images/person_table_properties.png" alt="person table properties" /> 
-        </div> 
-        <div class="title">
-         Figure 47. Set the behaviour for the row level action on the person table.
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p></p> 
-       </div> 
-       <div id="lst-mycontacts.desktop.outline.personpage.execrowaction" class="listingblock"> 
-        <div class="title">
-         Listing 40. The 
-         <span class="java">execRowAction</span> method on table pages is used to trigger an action when a row is selected with a double click or 
-         <code>&lt;Enter&gt;</code>.
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=<span class="integer">63</span>.<span class="float">.67</span>]</code></pre> 
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>To open the person form with a double click on a person row or by hitting the <kbd>Enter</kbd> key, you may add a corresponding <span class="java">execRowAction</span> on the person page. This method can be added to the person table by clicking on the green plus icon next to the operation <em class="element">Exec Row Action</em> as shown in <a href="#img-person_table_properties">Figure 47</a>. For the implementation of this method you may reuse the functionality implemented for the context menu according to <a href="#lst-mycontacts.desktop.outline.personpage.execrowaction">Listing 40</a>.</p> 
+      <div id="img-new_lookupcall_company" class="imageblock"> 
+       <div class="content"> 
+        <img src="images/new_lookupcall_company_1.png" alt="new lookupcall company 1" /> 
        </div> 
       </div> 
-      <div class="sect3"> 
-       <h4 id="sec-adding_the_smartfield"><a class="anchor" href="#sec-adding_the_smartfield"></a>5.1.4. Adding the Company Smartfield</h4> 
-       <div class="paragraph"> 
-        <p>At the current stage of the &#x201c;My Contacts&#x201d; application, we have no option to manage the relationship between people and companies. To manage this relation, we now add a company smart field to the person form. This smart field will then hold the current assignment of the person represented in the person form.</p> 
+      <div class="imageblock"> 
+       <div class="content"> 
+        <img src="images/new_lookupcall_company_2.png" alt="new lookupcall company 2" /> 
        </div> 
-       <div class="paragraph"> 
-        <p>A Scout smart field can be viewed as user friendly dropdown field on steroids that also implements <em class="element">search-as-you-type</em> to pick a specific entry. In the simplest case the smart field provides access to a small and locally provided list of key value pairs. But for the intended use in the &#x201c;My Contacts&#x201d; application, we will need to access a list of elements provided by the server that will be compiled dynamically at runtime.</p> 
-       </div> 
-       <div id="img-new_lookupcall_company_contextmenu" class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_lookupcall_company_contextmenu.png" alt="new lookupcall company contextmenu" /> 
-        </div> 
-        <div class="title">
-         Figure 48. Add a lookup call to the applications shared node.
-        </div> 
-       </div> 
-       <div id="img-new_lookupcall_company" class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_lookupcall_company_1.png" alt="new lookupcall company 1" /> 
-        </div> 
-       </div> 
-       <div class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_lookupcall_company_2.png" alt="new lookupcall company 2" /> 
-        </div> 
-        <div class="title">
-         Figure 49. The two wizard steps to enter the details of the company lookup call.
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>To create the access to this list, we start with the creation of the company lookup call. As shown in <a href="#img-new_lookupcall_company_contextmenu">Figure 48</a> the lookup call is added on the <em class="folder">Lookup Calls</em> folder under the green shared node of the &#x201c;My Contacts&#x201d; application. This opens the <em class="wizard">New Lookup Call</em> wizard as shown in <a href="#img-new_lookupcall_company">Figure 49</a>. In the first wizard step, enter &#x201c;Company&#x201d; into the <em class="field">Class Name</em> field, &#x201c;services.lookup&#x201d; into the <em class="field">Sub Package</em> field and &#x201c;String&#x201d; into the <em class="field">Key Type</em> field. Now verify that the wizard step looks the same as the screenshot shown on the left hand side of <a href="#img-new_lookupcall_company">Figure 49</a>. Before the wizard is closed, click on the <b class="button">Next</b> button to move to the second wizard step. As shown on the right hand side of <a href="#img-new_lookupcall_company">Figure 49</a>, the wizard will also create a corresponding <span class="java">CompanyLookupService</span> on the application&#x2019;s server. We can now close this wizard with the <b class="button">Finish</b> button and add the business logic to this company lookup service.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p></p> 
-       </div> 
-       <div id="lst-mycontacts.shared.lookup.companylookupcall" class="listingblock"> 
-        <div class="title">
-         Listing 41. The company lookup call with its 
-         <span class="java">getConfiguredService</span> method in the application&#x2019;s shared plugin.
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.shared/src/org/eclipsescout/contacts/shared/services/lookup/CompanyLookupCall.java[lines=<span class="integer">12</span>.<span class="float">.21</span>]</code></pre> 
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p></p> 
-       </div> 
-       <div id="lst-mycontacts.server.lookup.companylookupservice" class="listingblock"> 
-        <div class="title">
-         Listing 42. The company lookup service in the application&#x2019;s server plugin. The 
-         <span class="java">key</span> and the 
-         <span class="java">text</span> criteria are used to search for values by key or by the provided name substring.
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/lookup/CompanyLookupService.java[lines=<span class="integer">6</span>.<span class="float">.20</span>]</code></pre> 
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>The <span class="java">CompanyLookupCall</span> just created by the Scout SDK wizard is provided in <a href="#lst-mycontacts.shared.lookup.companylookupcall">Listing 41</a>. As we can see, the only method implemented is <span class="java">getConfiguredService</span> that points to the specific server service to be used. In the Scout Explorer, the new company lookup service can be found in the <em class="folder">Lookup Services</em> folder under the blue server node of the application. In this service, we need to implement method <span class="java">getConfiguredSqlSelect</span> as shown in <a href="#lst-mycontacts.server.lookup.companylookupservice">Listing 42</a>. For Scout lookup services, specific <em class="element">key</em>, <em class="element">text</em> and <em class="element">all</em> criteria blocks need to be provided. This criteria are included in the <span class="java">SELECT</span> statement using the <span class="java">&lt;key&gt;</span>, <span class="java">&lt;text&gt;</span> and <span class="java">&lt;all&gt;</span> tags as shown in the listing. The Scout runtime uses the <span class="java">&lt;key&gt;</span>-block in cases where a specific key is already assigned to the smart field. The <span class="java">&lt;text&gt;</span>-block is used as a query criteria to create the dynamic <em class="element">search-as-you-type</em> hit list based on the (sub)string entered by the user so far. Finally, the <span class="java">&lt;all&gt;</span>-block is used to define the hit list to be shown when the user does not enter any text into the smart field but clicks on the field&#x2019;s search icon instead. The bind variable <span class="java">:key</span> and <span class="java">:text</span> are provided by Scout and hold the value of the assigned key or the text entered into the smart field.</p> 
-       </div> 
-       <div id="img-new_smartfield_company_contextmenu" class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_smartfield_company_contextmenu.png" alt="new smartfield company contextmenu" /> 
-        </div> 
-        <div class="title">
-         Figure 50. Add a smart field to the person form.
-        </div> 
-       </div> 
-       <div id="img-new_smartfield_company" class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_smartfield_company_1.png" alt="new smartfield company 1" /> 
-        </div> 
-       </div> 
-       <div class="imageblock"> 
-        <div class="content"> 
-         <img src="images/new_smartfield_company_2.png" alt="new smartfield company 2" /> 
-        </div> 
-        <div class="title">
-         Figure 51. Create the company smart field for the person form. In the second wizard step shown on the right side, first remove the content in the 
-         <em class="field">Generic Type</em> field and then select the company lookup call into the corresponding field.
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>We are now ready to add the company smart field to the person form. To start the <em class="wizard">New Form Field</em> wizard we use the context menu on the <span class="java">DetailBox</span> of the person form as shown in <a href="#img-new_smartfield_company">Figure 51</a>. In the first wizard step, we chose the <em class="element">SmartField</em> entry as the field type and click the <b class="button">Next</b> button. Then, we enter &#x201c;Company&#x201d; into the <em class="field">Name</em> field as shown on the right hand side of <a href="#img-new_smartfield_company">Figure 51</a>. Make sure that you select the <em class="element">String</em> entry in the <em class="field">Generic Type</em> field as we are using string values to identify companies in the &#x201c;My Contacts&#x201d; application. And in the <em class="field">LookupCall</em> field, we can now select the <em class="element">CompanyLookupCall</em> that we have just created before. Finally, the position of the new company smart field can be set in the <em class="field">Sibling</em> field before the location field before the wizard is closed with the <b class="button">Finish</b> button.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p></p> 
-       </div> 
-       <div id="lst-mycontacts.client.forms.person.companyfield" class="listingblock"> 
-        <div class="title">
-         Listing 43. The smart field 
-         <span class="java">CompanyField</span> of the person form and its wiring with the company lookup call.
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=<span class="integer">324</span>.<span class="float">.337</span>]</code></pre> 
-        </div> 
-       </div> 
-       <div class="paragraph"> 
-        <p>The implementation of the company smart field created by the Scout SDK wizard is provided in <a href="#lst-mycontacts.client.forms.person.companyfield">Listing 43</a>. A look at the implementation of the <span class="java">CompanyField</span> class shows the wiring with the company lookup service.</p> 
+       <div class="title">
+        Figure 42. The two wizard steps to enter the details of the company lookup call.
        </div> 
       </div> 
-      <div class="sect3"> 
-       <h4 id="adding-the-map-form"><a class="anchor" href="#adding-the-map-form"></a>5.1.5. Adding the Map Form</h4> 
-       <div class="paragraph"> 
-        <p>We now want to add the &#x201c;Map&#x201d; form shown in the front of <a href="#img-my_contacts_swt">[img-my_contacts_swt]</a>. The purpose of this form is to show a map corresponding to the address entered into the <em class="field">location</em> field of the person form using the Google Maps Image API.<sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnote_18" title="View footnote.">18</a>]</sup>. This implies that map images will only be shown in the map form if the entered address can be parsed by the Google Maps Image API.</p> 
+      <div class="paragraph"> 
+       <p>To create the access to this list, we start with the creation of the company lookup call. As shown in <a href="#img-new_lookupcall_company_contextmenu">Figure 41</a> the lookup call is added on the <em class="folder">Lookup Calls</em> folder under the green shared node of the &#x201c;My Contacts&#x201d; application. This opens the <em class="wizard">New Lookup Call</em> wizard as shown in <a href="#img-new_lookupcall_company">Figure 42</a>. In the first wizard step, enter &#x201c;Company&#x201d; into the <em class="field">Class Name</em> field, &#x201c;services.lookup&#x201d; into the <em class="field">Sub Package</em> field and &#x201c;String&#x201d; into the <em class="field">Key Type</em> field. Now verify that the wizard step looks the same as the screenshot shown on the left hand side of <a href="#img-new_lookupcall_company">Figure 42</a>. Before the wizard is closed, click on the <b class="button">Next</b> button to move to the second wizard step. As shown on the right hand side of <a href="#img-new_lookupcall_company">Figure 42</a>, the wizard will also create a corresponding <span class="java">CompanyLookupService</span> on the application&#x2019;s server. We can now close this wizard with the <b class="button">Finish</b> button and add the business logic to this company lookup service.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p></p> 
+      </div> 
+      <div id="lst-mycontacts.shared.lookup.companylookupcall" class="listingblock"> 
+       <div class="title">
+        Listing 45. The company lookup call with its 
+        <span class="java">getConfiguredService</span> method in the application&#x2019;s shared plugin.
        </div> 
-       <div class="paragraph"> 
-        <p>To create the maps form we start the <em class="wizard">New Form</em> wizard and enter the new translated text &#x201c;Map&#x201d; into the <em class="field">Name</em> field and &#x201c;ui.forms&#x201d; into the <em class="field">Sub Package</em> field of the first wizard step. Then, we click the <b class="button">Next</b> button to configure the artefacts to be created by the wizard. For the map form we can use the configuration as shown on the right hand side of <a href="#img-new_form_url">Figure 44</a> with the difference that we do not need the cancel button. Having deselected all artefacts except for the ok button and the modify handler, the wizard can be closed with the <b class="button">Finish</b> button.</p> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.shared/src/org/eclipsescout/contacts/shared/services/lookup/CompanyLookupCall.java[lines=<span class="integer">12</span>.<span class="float">.21</span>]</code></pre> 
        </div> 
-       <div class="paragraph"> 
-        <p>After the form creation wizard has been closed, we can add an &#x201c;Address&#x201d; variable to the form by starting the <em class="wizard">New Property Bean</em> wizard on the <em class="node">Variables</em> node of the newly created map form. In the property bean wizard, enter &#x201c;Address&#x201d; into the <em class="field">Name</em> field and set the <em class="field">Bean type</em> field to <em class="element">String</em>.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p></p> 
+      </div> 
+      <div id="lst-mycontacts.server.lookup.companylookupservice" class="listingblock"> 
+       <div class="title">
+        Listing 46. The company lookup service in the application&#x2019;s server plugin. The 
+        <span class="java">key</span> and the 
+        <span class="java">text</span> criteria are used to search for values by key or by the provided name substring.
        </div> 
-       <div class="paragraph"> 
-        <p>As the next step, the map image field is added to the from. For this, start the <em class="wizard">New Form Field</em> wizard directly on the form&#x2019;s <em class="node">MainBox</em> node. In the first form field wizard step, select <em class="element">ImageField</em> as the field type and click on the <b class="button">Next</b> button. Now enter &#x201c;Map&#x201d; into the <em class="field">Class Name</em> field and close the second wizard step with the <b class="button">Finish</b> button. To set the properties of the new map field, select the <em class="node">MapField</em> node below the main box node of the map form. In the <span class="java">MapField</span>'s Scout Object Properties untick the <em class="property">Label Visible</em> property and add an <span class="java">execInitField</span> method by clicking on the green plus icon next to this operation. The configuration of the map field can then be completed in section <em class="element">Advanced Properties</em>. Here, we set the <em class="property">Grid H</em> property to 6 and update the <em class="property">Width in Pixel</em> property and the <em class="property">Height in Pixel</em> property to a value of 400 each.</p> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/lookup/CompanyLookupService.java[lines=<span class="integer">6</span>.<span class="float">.20</span>]</code></pre> 
        </div> 
-       <div class="paragraph"> 
-        <p></p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The <span class="java">CompanyLookupCall</span> just created by the Scout SDK wizard is provided in <a href="#lst-mycontacts.shared.lookup.companylookupcall">Listing 45</a>. As we can see, the only method implemented is <span class="java">getConfiguredService</span> that points to the specific server service to be used. In the Scout Explorer, the new company lookup service can be found in the <em class="folder">Lookup Services</em> folder under the blue server node of the application. In this service, we need to implement method <span class="java">getConfiguredSqlSelect</span> as shown in <a href="#lst-mycontacts.server.lookup.companylookupservice">Listing 46</a>. For Scout lookup services, specific <em class="element">key</em>, <em class="element">text</em> and <em class="element">all</em> criteria blocks need to be provided. This criteria are included in the <span class="java">SELECT</span> statement using the <span class="java">&lt;key&gt;</span>, <span class="java">&lt;text&gt;</span> and <span class="java">&lt;all&gt;</span> tags as shown in the listing. The Scout runtime uses the <span class="java">&lt;key&gt;</span>-block in cases where a specific key is already assigned to the smart field. The <span class="java">&lt;text&gt;</span>-block is used as a query criteria to create the dynamic <em class="element">search-as-you-type</em> hit list based on the (sub)string entered by the user so far. Finally, the <span class="java">&lt;all&gt;</span>-block is used to define the hit list to be shown when the user does not enter any text into the smart field but clicks on the field&#x2019;s search icon instead. The bind variable <span class="java">:key</span> and <span class="java">:text</span> are provided by Scout and hold the value of the assigned key or the text entered into the smart field.</p> 
+      </div> 
+      <div id="img-new_smartfield_company_contextmenu" class="imageblock"> 
+       <div class="content"> 
+        <img src="images/new_smartfield_company_contextmenu.png" alt="new smartfield company contextmenu" /> 
        </div> 
-       <div id="lst-mycontacts.client.forms.map" class="listingblock"> 
-        <div class="title">
-         Listing 44. In the 
-         <span class="java">execInitField</span> method of the map form the image content is fetched from the Google Maps API.
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/MapForm.java[lines=<span class="integer">115</span>.<span class="float">.133</span>]</code></pre> 
-        </div> 
+       <div class="title">
+        Figure 43. Add a smart field to the person form.
        </div> 
-       <div class="paragraph"> 
-        <p>To add the Java code to display the map in the image field, click on the <em class="link">execInitField</em> link in the Scout Object Properties of the map field. According to the implementation provided in <a href="#lst-mycontacts.client.forms.map">Listing 44</a>, an URL for the Maps Image API is first constructed. This url also contains the content of the map form&#x2019;s address variable and the configured dimension of the map field. The map picture returned by the Google API is then read using <span class="java">IOUtility.getContent</span> and directly fed into the image fields <code>setImage</code> method.</p> 
+      </div> 
+      <div id="img-new_smartfield_company" class="imageblock"> 
+       <div class="content"> 
+        <img src="images/new_smartfield_company_1.png" alt="new smartfield company 1" /> 
        </div> 
-       <div class="paragraph"> 
-        <p>The last step involving the implementation of the map form feature is its integration into the person form. As visible on the lower left part of the person form shown in <a href="#img-my_contacts_swt">[img-my_contacts_swt]</a>, a <em class="link">Show Map &#x2026;&#x200b;</em> link is available. We now add such a link to the person form including the necessary wiring for opening the newly created map form. For this, navigate to the person form in the Scout SDK and click on its <em class="node">MainBox</em> node below. Then, open the context menu on the <em class="node">MainBox</em> node and start the <em class="wizard">New Form Field</em> wizard. In the first wizard step, select the <em class="element">LinkButton</em> from the available field types and click the <b class="button">Next</b> button to load the second wizard step. Here, just enter the new translated text &#x201c;Show Map &#x2026;&#x200b;&#x201d; into the <em class="field">Name</em> field and close the wizard with the <b class="button">Finish</b> button.</p> 
+      </div> 
+      <div class="imageblock"> 
+       <div class="content"> 
+        <img src="images/new_smartfield_company_2.png" alt="new smartfield company 2" /> 
        </div> 
-       <div class="paragraph"> 
-        <p></p> 
+       <div class="title">
+        Figure 44. Create the company smart field for the person form. In the second wizard step shown on the right side, first remove the content in the 
+        <em class="field">Generic Type</em> field and then select the company lookup call into the corresponding field.
        </div> 
-       <div id="lst-mycontacts.client.forms.person.clickmaplink" class="listingblock"> 
-        <div class="title">
-         Listing 45. The implementation of the &#x201c;Show Map &#x2026;&#x200b;&#x201d; link button. %In method 
-         <code>execClickAction</code> a new map form is first created, the the address variable is set with the content of the person&#x2019;s location and the form is opened with 
-         <code>startModify</code>.
-        </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=<span class="integer">347</span>.<span class="float">.362</span>]</code></pre> 
-        </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>We are now ready to add the company smart field to the person form. To start the <em class="wizard">New Form Field</em> wizard we use the context menu on the <span class="java">DetailBox</span> of the person form as shown in <a href="#img-new_smartfield_company">Figure 44</a>. In the first wizard step, we chose the <em class="element">SmartField</em> entry as the field type and click the <b class="button">Next</b> button. Then, we enter &#x201c;Company&#x201d; into the <em class="field">Name</em> field as shown on the right hand side of <a href="#img-new_smartfield_company">Figure 44</a>. Make sure that you select the <em class="element">String</em> entry in the <em class="field">Generic Type</em> field as we are using string values to identify companies in the &#x201c;My Contacts&#x201d; application. And in the <em class="field">LookupCall</em> field, we can now select the <em class="element">CompanyLookupCall</em> that we have just created before. Finally, the position of the new company smart field can be set in the <em class="field">Sibling</em> field before the location field before the wizard is closed with the <b class="button">Finish</b> button.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p></p> 
+      </div> 
+      <div id="lst-mycontacts.client.forms.person.companyfield" class="listingblock"> 
+       <div class="title">
+        Listing 47. The smart field 
+        <span class="java">CompanyField</span> of the person form and its wiring with the company lookup call.
        </div> 
-       <div class="paragraph"> 
-        <p>To add the necessary wiring code to the link button double click the <em class="node">ShowMapButton</em> node in the Scout Explorer and implement its <span class="java">execClickAction</span> method. As shown in <a href="#lst-mycontacts.client.forms.person.clickmaplink">Listing 45</a>, we only need to create a new map form in the click action, set its address variable and open the form with <span class="java">form.startModify</span>.</p> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=<span class="integer">324</span>.<span class="float">.337</span>]</code></pre> 
        </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The implementation of the company smart field created by the Scout SDK wizard is provided in <a href="#lst-mycontacts.client.forms.person.companyfield">Listing 47</a>. A look at the implementation of the <span class="java">CompanyField</span> class shows the wiring with the company lookup service.</p> 
+      </div> 
+     </div> 
+     <div class="sect3"> 
+      <h4 id="adding-the-map-form"><a class="anchor" href="#adding-the-map-form"></a>5.3. Adding the Map Form</h4> 
+      <div class="paragraph"> 
+       <p>We now want to add the &#x201c;Map&#x201d; form shown in the front of <a href="#img-my_contacts_swt">[img-my_contacts_swt]</a>. The purpose of this form is to show a map corresponding to the address entered into the <em class="field">location</em> field of the person form using the Google Maps Image API.<sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnote_18" title="View footnote.">18</a>]</sup>. This implies that map images will only be shown in the map form if the entered address can be parsed by the Google Maps Image API.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>To create the maps form we start the <em class="wizard">New Form</em> wizard and enter the new translated text &#x201c;Map&#x201d; into the <em class="field">Name</em> field and &#x201c;ui.forms&#x201d; into the <em class="field">Sub Package</em> field of the first wizard step. Then, we click the <b class="button">Next</b> button to configure the artefacts to be created by the wizard. For the map form we can use the configuration as shown on the right hand side of <a href="#img-new_form_url">Figure 39</a> with the difference that we do not need the cancel button. Having deselected all artefacts except for the ok button and the modify handler, the wizard can be closed with the <b class="button">Finish</b> button.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>After the form creation wizard has been closed, we can add an &#x201c;Address&#x201d; variable to the form by starting the <em class="wizard">New Property Bean</em> wizard on the <em class="node">Variables</em> node of the newly created map form. In the property bean wizard, enter &#x201c;Address&#x201d; into the <em class="field">Name</em> field and set the <em class="field">Bean type</em> field to <em class="element">String</em>.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>As the next step, the map image field is added to the from. For this, start the <em class="wizard">New Form Field</em> wizard directly on the form&#x2019;s <em class="node">MainBox</em> node. In the first form field wizard step, select <em class="element">ImageField</em> as the field type and click on the <b class="button">Next</b> button. Now enter &#x201c;Map&#x201d; into the <em class="field">Class Name</em> field and close the second wizard step with the <b class="button">Finish</b> button. To set the properties of the new map field, select the <em class="node">MapField</em> node below the main box node of the map form. In the <span class="java">MapField</span>'s Scout Object Properties untick the <em class="property">Label Visible</em> property and add an <span class="java">execInitField</span> method by clicking on the green plus icon next to this operation. The configuration of the map field can then be completed in section <em class="element">Advanced Properties</em>. Here, we set the <em class="property">Grid H</em> property to 6 and update the <em class="property">Width in Pixel</em> property and the <em class="property">Height in Pixel</em> property to a value of 400 each.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p></p> 
+      </div> 
+      <div id="lst-mycontacts.client.forms.map" class="listingblock"> 
+       <div class="title">
+        Listing 48. In the 
+        <span class="java">execInitField</span> method of the map form the image content is fetched from the Google Maps API.
+       </div> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/MapForm.java[lines=<span class="integer">115</span>.<span class="float">.133</span>]</code></pre> 
+       </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>To add the Java code to display the map in the image field, click on the <em class="link">execInitField</em> link in the Scout Object Properties of the map field. According to the implementation provided in <a href="#lst-mycontacts.client.forms.map">Listing 48</a>, an URL for the Maps Image API is first constructed. This url also contains the content of the map form&#x2019;s address variable and the configured dimension of the map field. The map picture returned by the Google API is then read using <span class="java">IOUtility.getContent</span> and directly fed into the image fields <code>setImage</code> method.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The last step involving the implementation of the map form feature is its integration into the person form. As visible on the lower left part of the person form shown in <a href="#img-my_contacts_swt">[img-my_contacts_swt]</a>, a <em class="link">Show Map &#x2026;&#x200b;</em> link is available. We now add such a link to the person form including the necessary wiring for opening the newly created map form. For this, navigate to the person form in the Scout SDK and click on its <em class="node">MainBox</em> node below. Then, open the context menu on the <em class="node">MainBox</em> node and start the <em class="wizard">New Form Field</em> wizard. In the first wizard step, select the <em class="element">LinkButton</em> from the available field types and click the <b class="button">Next</b> button to load the second wizard step. Here, just enter the new translated text &#x201c;Show Map &#x2026;&#x200b;&#x201d; into the <em class="field">Name</em> field and close the wizard with the <b class="button">Finish</b> button.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p></p> 
+      </div> 
+      <div id="lst-mycontacts.client.forms.person.clickmaplink" class="listingblock"> 
+       <div class="title">
+        Listing 49. The implementation of the &#x201c;Show Map &#x2026;&#x200b;&#x201d; link button. %In method 
+        <code>execClickAction</code> a new map form is first created, the the address variable is set with the content of the person&#x2019;s location and the form is opened with 
+        <code>startModify</code>.
+       </div> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=<span class="integer">347</span>.<span class="float">.362</span>]</code></pre> 
+       </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>To add the necessary wiring code to the link button double click the <em class="node">ShowMapButton</em> node in the Scout Explorer and implement its <span class="java">execClickAction</span> method. As shown in <a href="#lst-mycontacts.client.forms.person.clickmaplink">Listing 49</a>, we only need to create a new map form in the click action, set its address variable and open the form with <span class="java">form.startModify</span>.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="managing-person-data-on-the-server-side"><a class="anchor" href="#managing-person-data-on-the-server-side"></a>5.2. Managing Person Data on the Server Side</h3> 
-      <div class="paragraph"> 
-       <p></p> 
-      </div> 
-      <div id="lst-mycontacts.client.personform.modifyhandler" class="listingblock"> 
-       <div class="title">
-        Listing 46. The 
-        <span class="java">execLoad</span> and the 
-        <span class="java">execStore</span> methods of the person form&#x2019;s modify handler.
-       </div> 
-       <div class="content"> 
-        <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=<span class="integer">364</span>.<span class="float">.384</span>]</code></pre> 
-       </div> 
-      </div> 
-      <div class="paragraph"> 
-       <p>In the &#x201c;My Contacts&#x201d; client application the person form is opened via the context menues &#x201c;Edit Person &#x2026;&#x200b;&#x201d; and &#x201c;New Person &#x2026;&#x200b;&#x201d; on the person page. And for each context menu, the person form is started with the corresponding form handler. The new handler is used to start the form in the mode to create new persons while the modify handler is implemented to start the form for updating existing persons. When we look at the implementation of the modify handler provided in <a href="#lst-mycontacts.client.personform.modifyhandler">Listing 46</a>, we see that it only contains the two methods <span class="java">execLoad</span> and <span class="java">execStore</span>. As described in Section <a href="#sec-helloworld.formhandler">[sec-helloworld.formhandler]</a> of the &#x201c;Hello World&#x201d; tutorial, <span class="java">execLoad</span> is called by the Scout framework when the form is started. And method <span class="java">execStore</span> is called by the Scout framework after the user has clicked the <b class="button">OK</b> button of a form.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p></p> 
-      </div> 
-      <div id="lst-mycontacts.server.services.personservice.load" class="listingblock"> 
-       <div class="title">
-        Listing 47. The 
-        <span class="java">load</span> and the 
-        <span class="java">store</span> methods of the server&#x2019;s 
-        <span class="java">PersonService</span>.
-       </div> 
-       <div class="content"> 
-        <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=<span class="integer">24</span>.<span class="float">.25</span>;<span class="integer">55</span>.<span class="float">.104</span>]</code></pre> 
-       </div> 
-      </div> 
-      <div class="paragraph"> 
-       <p>In both the <span class="java">execLoad</span> and the <span class="java">execStore</span> methods, the person service is used. In <span class="java">execLoad</span> by calling <span class="java">service.load</span> to fetch the person&#x2019;s data from the Scout server, and in <span class="java">execStore</span> by calling <span class="java">service.store</span> to transfer the updated data to the Scout server. The implementation of the Scout server&#x2019;s <span class="java">load</span> and <span class="java">store</span> methods for the <span class="java">PersonService</span> is provided in <a href="#lst-mycontacts.server.services.personservice.load">Listing 47</a>. To load the correct person data, the <span class="java">load</span> method expects the person&#x2019;s id as an input parameter <span class="java">personId</span> in the <span class="java">formData</span>.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>For the data binding between the <span class="java">formData</span> and the attributes in the database tables Scout provides support in the methods of the <span class="java">SQL</span> class. This support is first searching for the pattern &#x201c;:&lt;variable&gt;&#x201d; in the provided SQL statement. For all such patterns found, the binding to the corresponding <span class="java">getVariable</span> and <span class="java">setVariable</span> methods of the form data object is performed by the Scout framework at runtime.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>The implementation of the person form&#x2019;s new handler is implemented similar to it&#x2019;s modify handler. Instead of calling the service operations <span class="java">load</span> and <span class="java">store</span>, the methods <span class="java">prepareCreate</span> and <span class="java">create</span> are used. In principle, method <span class="java">prepareCreate</span> is not needed for the &#x201c;My Contacts&#x201d; application. As its implementation has been created by the Scout SDK wizard, it does not do any harm and the method can be left unchanged.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p></p> 
-      </div> 
-      <div id="lst-mycontacts.server.services.personservice.create" class="listingblock"> 
-       <div class="title">
-        Listing 48. The 
-        <span class="java">create</span> method of the server&#x2019;s 
-        <span class="java">PersonService</span>.
-       </div> 
-       <div class="content"> 
-        <pre class="CodeRay highlight"><code data-lang="java">TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=<span class="integer">24</span>.<span class="float">.25</span>;<span class="integer">35</span>.<span class="float">.54</span>;<span class="integer">103</span>.<span class="float">.104</span>]</code></pre> 
-       </div> 
-      </div> 
-      <div class="paragraph"> 
-       <p>In <a href="#lst-mycontacts.server.services.personservice.create">Listing 48</a> the implementation of the <span class="java">PersonService</span>'s <span class="java">create</span> method is provided. First, the implementation checks if the provided form data contains a person id. If the person has been entered manually, a person id is initially missing and a new one needs to be created and assigned. For this, method <span class="java">randomUUID()</span> of the Java class <span class="java">java.util.UUID</span> is used. The only responsibility of the <span class="java">INSERT</span> statement following the person id check is to make sure we will have a row in the <span class="java">PERSON</span> table for the person to be created. To save all the other form data parameters, we can reuse the previously implemented <span class="java">store</span> method.</p> 
-      </div> 
-     </div> 
-     <div class="sect2"> 
-      <h3 id="creating-the-company-form"><a class="anchor" href="#creating-the-company-form"></a>5.3. Creating the Company Form</h3> 
+      <h3 id="creating-the-company-form"><a class="anchor" href="#creating-the-company-form"></a>5.4. Creating the Company Form</h3> 
       <div class="paragraph"> 
        <p>Creating the company form and the necessary backend services is not described here. Instead, this task is left as an exercise to the reader and in the text below some minimal guidelines are provided.</p> 
       </div> 
@@ -5060,14 +5253,14 @@ contacts.superuser=system</code></pre>
        <p>For Windows, the steps necessary to determine your hardware architecture are described on Microsoft&#x2019;s support site.<sup class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnote_21" title="View footnote.">21</a>]</sup>. For Linux several ways to determine if your os is running with 32 or with 64 bits can be found on the web.<sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnote_22" title="View footnote.">22</a>]</sup> For Mac this step is simple, as only a 64 bit package is provided on JDK the download page.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Once you know your hardware architecture, go to Oracle&#x2019;s official download site.<sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnote_23" title="View footnote.">23</a>]</sup> and accept the licence agreement by clicking on the appropriate radio button. Then, select the <em>Windows x64</em> package if you are running 64-bit Windows as shown in <a href="#img-jdk_download_oracle">Figure 52</a>. If you are running 32-bit Windows, go for the <em>Windows x86</em> package. It is also recommended to download the <em>Java SE 8 Documentation</em>. The Java API documentation package is available from the official download site.<sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnote_24" title="View footnote.">24</a>]</sup>, located further down under section <em>Additional Resources</em>.</p> 
+       <p>Once you know your hardware architecture, go to Oracle&#x2019;s official download site.<sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnote_23" title="View footnote.">23</a>]</sup> and accept the licence agreement by clicking on the appropriate radio button. Then, select the <em>Windows x64</em> package if you are running 64-bit Windows as shown in <a href="#img-jdk_download_oracle">Figure 45</a>. If you are running 32-bit Windows, go for the <em>Windows x86</em> package. It is also recommended to download the <em>Java SE 8 Documentation</em>. The Java API documentation package is available from the official download site.<sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnote_24" title="View footnote.">24</a>]</sup>, located further down under section <em>Additional Resources</em>.</p> 
       </div> 
       <div id="img-jdk_download_oracle" class="imageblock"> 
        <div class="content"> 
         <img src="images/oracle_jdk_download.png" alt="oracle jdk download" /> 
        </div> 
        <div class="title">
-        Figure 52. Installer download for Oracle JDK 8.
+        Figure 45. Installer download for Oracle JDK 8.
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -5080,18 +5273,18 @@ contacts.superuser=system</code></pre>
      <div class="sect2"> 
       <h3 id="sec-download_install"><a class="anchor" href="#sec-download_install"></a>B.3. Download and Install Scout</h3> 
       <div class="paragraph"> 
-       <p>Before you can install Scout make sure that you have a working Java Development Kit (JDK) installation version 8. To download the Eclipse Scout package visit the official Eclipse download page as shown in <a href="#img-scout_download">Figure 53</a>.</p> 
+       <p>Before you can install Scout make sure that you have a working Java Development Kit (JDK) installation version 8. To download the Eclipse Scout package visit the official Eclipse download page as shown in <a href="#img-scout_download">Figure 46</a>.</p> 
       </div> 
       <div id="img-scout_download" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_download.png" alt="scout download" /> 
        </div> 
        <div class="title">
-        Figure 53. The Eclipse download page. The platform filter is set to Windows and the available Packages are filtered for Scout.
+        Figure 46. The Eclipse download page. The platform filter is set to Windows and the available Packages are filtered for Scout.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>If the download page shows the wrong platform, manually select the correct platform in the dropdown list. As shown in <a href="#img-scout_download">Figure 53</a>, the Scout package is available as a 32 bit and a 46 bit package. Make sure to pick the package that matches your JDK installation. You can check your installation on the command line as follows.</p> 
+       <p>If the download page shows the wrong platform, manually select the correct platform in the dropdown list. As shown in <a href="#img-scout_download">Figure 46</a>, the Scout package is available as a 32 bit and a 46 bit package. Make sure to pick the package that matches your JDK installation. You can check your installation on the command line as follows.</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -5102,47 +5295,47 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.77-b28, mixed mode)</pre>
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>If the output explicitly mentions the 64 bit installation as shown above, you have a 64 bit installation. Otherwise, you have a 32 bit JDK installed. Now you can select the correct Scout package from the Eclipse download site. After the package selection, confirm the suggested download mirror as shown in <a href="#img-scout_download_mirror">Figure 54</a>.</p> 
+       <p>If the output explicitly mentions the 64 bit installation as shown above, you have a 64 bit installation. Otherwise, you have a 32 bit JDK installed. Now you can select the correct Scout package from the Eclipse download site. After the package selection, confirm the suggested download mirror as shown in <a href="#img-scout_download_mirror">Figure 47</a>.</p> 
       </div> 
       <div id="img-scout_download_mirror" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_download_mirror.png" alt="scout download mirror" /> 
        </div> 
        <div class="title">
-        Figure 54. Downloading the Scout package from a mirror.
+        Figure 47. Downloading the Scout package from a mirror.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>As the Scout package is a simple ZIP (or tar.gz) file, you may unpack its content to a folder of your choice. Inside the eclipse sub-folder, you will then find the Eclipse executable file, such as the <code>eclipse.exe</code> file on a Windows plattform. Starting the Eclipse executable brings up the workspace launcher as shown in <a href="#img-scout_start">Figure 55</a>.</p> 
+       <p>As the Scout package is a simple ZIP (or tar.gz) file, you may unpack its content to a folder of your choice. Inside the eclipse sub-folder, you will then find the Eclipse executable file, such as the <code>eclipse.exe</code> file on a Windows plattform. Starting the Eclipse executable brings up the workspace launcher as shown in <a href="#img-scout_start">Figure 48</a>.</p> 
       </div> 
       <div id="img-scout_start" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_startup_select_workspace.png" alt="scout startup select workspace" /> 
        </div> 
        <div class="title">
-        Figure 55. Starting the Eclipse Scout package and selecting an empty workspace.
+        Figure 48. Starting the Eclipse Scout package and selecting an empty workspace.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Into the <em class="field">Workspace</em> field you enter an empty target directory for your first Scout project. After clicking the <b class="button">Ok</b> button, the Eclipse IDE creates any directories that do not yet exist and opens the specified workspace. When opening a new workspace for the first time, Eclipse then displays the welcome screen shown in <a href="#img-scout_welcome">Figure 56</a>.</p> 
+       <p>Into the <em class="field">Workspace</em> field you enter an empty target directory for your first Scout project. After clicking the <b class="button">Ok</b> button, the Eclipse IDE creates any directories that do not yet exist and opens the specified workspace. When opening a new workspace for the first time, Eclipse then displays the welcome screen shown in <a href="#img-scout_welcome">Figure 49</a>.</p> 
       </div> 
       <div id="img-scout_welcome" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_startup_welcome.png" alt="scout startup welcome" /> 
        </div> 
        <div class="title">
-        Figure 56. Eclipse Scout welcome screen.
+        Figure 49. Eclipse Scout welcome screen.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>To close the welcome page and open the Scout perspective in the Eclipse IDE click on the <em class="icon">Workbench</em> icon. As a result the empty Java perspective is displayed according to <a href="#img-scout_perspective">Figure 57</a>.</p> 
+       <p>To close the welcome page and open the Scout perspective in the Eclipse IDE click on the <em class="icon">Workbench</em> icon. As a result the empty Java perspective is displayed according to <a href="#img-scout_perspective">Figure 50</a>.</p> 
       </div> 
       <div id="img-scout_perspective" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_startup_scout_explorer.png" alt="scout startup scout explorer" /> 
        </div> 
        <div class="title">
-        Figure 57. Eclipse Scout started in the Scout SDK perspective.
+        Figure 50. Eclipse Scout started in the Scout SDK perspective.
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -5191,33 +5384,33 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
         <img src="images/eclipse_install_new_software.png" alt="eclipse install new software" /> 
        </div> 
        <div class="title">
-        Figure 58. Eclipse menu to install additional software
+        Figure 51. Eclipse menu to install additional software
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>To add Scout to your existing Eclipse installation, you need to start Eclipse. Then select the <span class="menuseq"><span class="menu">Help</span>&nbsp;&#x25b8; <span class="menuitem">Install New Software&#x2026;&#x200b;</span></span> menu as shown in <a href="#img-eclipse_install_new_software">Figure 58</a> to open the install dialog.</p> 
+       <p>To add Scout to your existing Eclipse installation, you need to start Eclipse. Then select the <span class="menuseq"><span class="menu">Help</span>&nbsp;&#x25b8; <span class="menuitem">Install New Software&#x2026;&#x200b;</span></span> menu as shown in <a href="#img-eclipse_install_new_software">Figure 51</a> to open the install dialog.</p> 
       </div> 
       <div id="img-eclipse_add_repository" class="imageblock"> 
        <div class="content"> 
         <img src="images/eclipse_add_repository.png" alt="eclipse add repository" /> 
        </div> 
        <div class="title">
-        Figure 59. Add the current Scout repository
+        Figure 52. Add the current Scout repository
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In the install dialog, click on the <b class="button">Add&#x2026;&#x200b;</b> button to enter the link to the Scout repository. This opens the popup dialog <em>Add Repository</em> As shown in <a href="#img-eclipse_add_repository">Figure 59</a>, you may use &#x201c;Scout Luna&#x201d; for the <em class="field">Name</em> field. For the <em class="field">Location</em> field enter the Scout release repository as specified below. <a href="http://download.eclipse.org/scout/releases/4.0" class="bare">http://download.eclipse.org/scout/releases/4.0</a>.</p> 
+       <p>In the install dialog, click on the <b class="button">Add&#x2026;&#x200b;</b> button to enter the link to the Scout repository. This opens the popup dialog <em>Add Repository</em> As shown in <a href="#img-eclipse_add_repository">Figure 52</a>, you may use &#x201c;Scout Luna&#x201d; for the <em class="field">Name</em> field. For the <em class="field">Location</em> field enter the Scout release repository as specified below. <a href="http://download.eclipse.org/scout/releases/4.0" class="bare">http://download.eclipse.org/scout/releases/4.0</a>.</p> 
       </div> 
       <div id="img-eclipse_select_scout_features" class="imageblock"> 
        <div class="content"> 
         <img src="images/eclipse_select_scout_features.png" alt="eclipse select scout features" /> 
        </div> 
        <div class="title">
-        Figure 60. Select the Scout features to add to the Eclipse installation
+        Figure 53. Select the Scout features to add to the Eclipse installation
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>After the Eclipse IDE has connected to the Scout repository, select the Scout feature <em>Scout Application Development</em> as shown in <a href="#img-eclipse_select_scout_features">Figure 60</a>. Then, move through the installation with the <b class="button">Next</b> button. On the last installation step, accept the presented EPL terms by clicking on the appropriate radio button. To complete the installation, click the <b class="button">Finish</b> button and accept the request for a restart of Eclipse. After the restart of the Eclipse IDE, you may add the Scout perspective using the <span class="menuseq"><span class="menu">Window</span>&nbsp;&#x25b8; <span class="submenu">Open Perspective</span>&nbsp;&#x25b8; <span class="menuitem">Other &#x2026;&#x200b;</span></span> menu and selecting the Scout perspective from the presented list. Clicking on the Scout perspective button should then result in a state very similar to <a href="#img-scout_perspective">Figure 57</a>.</p> 
+       <p>After the Eclipse IDE has connected to the Scout repository, select the Scout feature <em>Scout Application Development</em> as shown in <a href="#img-eclipse_select_scout_features">Figure 53</a>. Then, move through the installation with the <b class="button">Next</b> button. On the last installation step, accept the presented EPL terms by clicking on the appropriate radio button. To complete the installation, click the <b class="button">Finish</b> button and accept the request for a restart of Eclipse. After the restart of the Eclipse IDE, you may add the Scout perspective using the <span class="menuseq"><span class="menu">Window</span>&nbsp;&#x25b8; <span class="submenu">Open Perspective</span>&nbsp;&#x25b8; <span class="menuitem">Other &#x2026;&#x200b;</span></span> menu and selecting the Scout perspective from the presented list. Clicking on the Scout perspective button should then result in a state very similar to <a href="#img-scout_perspective">Figure 50</a>.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -5242,11 +5435,11 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        <img src="images/tomcat_install.png" alt="tomcat install" /> 
       </div> 
       <div class="title">
-       Figure 61. A successful Tomcat 7 installation.
+       Figure 54. A successful Tomcat 7 installation.
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>Once you have downloaded and installed Tomcat 8 (see the sections below for plattform specific guidelines) you can start the corresponding service or deamon. To verify that Tomcat is actually running open a web browser of your choice and type <a href="http://localhost:8080" class="bare">http://localhost:8080</a> into the address bar. You should then see a confirmation of the successful installation according to <a href="#img-tomcat_install">Figure 61</a>.</p> 
+      <p>Once you have downloaded and installed Tomcat 8 (see the sections below for plattform specific guidelines) you can start the corresponding service or deamon. To verify that Tomcat is actually running open a web browser of your choice and type <a href="http://localhost:8080" class="bare">http://localhost:8080</a> into the address bar. You should then see a confirmation of the successful installation according to <a href="#img-tomcat_install">Figure 54</a>.</p> 
      </div> 
      <div class="sect2"> 
       <h3 id="platform-specific-instructions"><a class="anchor" href="#platform-specific-instructions"></a>C.1. Platform Specific Instructions</h3> 
@@ -5270,12 +5463,12 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
         <img src="images/tomcat_install_dir.png" alt="tomcat install dir" /> 
        </div> 
        <div class="title">
-        Figure 62. The organisation of a Tomcat installation including specific files of interest. As an example, the &#x201c;Hello World&#x201d; server application is contained in subdirectory 
+        Figure 55. The organisation of a Tomcat installation including specific files of interest. As an example, the &#x201c;Hello World&#x201d; server application is contained in subdirectory 
         <code>webapps</code>.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Note that some folders and many files of a Tomcat installation are not represented in <a href="#img-tomcat_install_dir">Figure 62</a>. We just want to provide a basic understanding of the most important parts to operate the web server in the context of this book. In the <span class="filename">bin</span> folder, the executable programs are contained, including scripts to start and stop the Tomcat instance.</p> 
+       <p>Note that some folders and many files of a Tomcat installation are not represented in <a href="#img-tomcat_install_dir">Figure 55</a>. We just want to provide a basic understanding of the most important parts to operate the web server in the context of this book. In the <span class="filename">bin</span> folder, the executable programs are contained, including scripts to start and stop the Tomcat instance.</p> 
       </div> 
       <div class="paragraph"> 
        <p>The <span class="filename">conf</span> folder contains a set of XML and property configuration file. The file <span class="filename">server.xml</span> represents Tomcat&#x2019;s main configuration file. It is used to configure general web server aspects such as the port number of its connectors for the client server communication. For the default setup, port number 8080 is used for the communication between clients applications and the web server. The file <span class="filename">tomcat-users.xml</span> contains a database of users, passwords and associated roles.</p> 
@@ -5284,7 +5477,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        <p>Folder <span class="filename">logs</span> contains various logfiles of Tomcat itself as well as host and web application log files. XXX need to provide more on what is where (especially application logs and exact setup to generate log entries from scout apps).</p> 
       </div> 
       <div class="paragraph"> 
-       <p>The folder needed for deploying web applications into a Tomcat instance is called <span class="filename">webapps</span>. It can be used as the target for copying WAR files into the web server. The installation of the WAR file then extracts its content into the corresponding directory structure as shown in <a href="#img-tomcat_install_dir">Figure 62</a> in the case of the file <span class="filename">helloworld_server.war</span>.</p> 
+       <p>The folder needed for deploying web applications into a Tomcat instance is called <span class="filename">webapps</span>. It can be used as the target for copying WAR files into the web server. The installation of the WAR file then extracts its content into the corresponding directory structure as shown in <a href="#img-tomcat_install_dir">Figure 55</a> in the case of the file <span class="filename">helloworld_server.war</span>.</p> 
       </div> 
       <div class="paragraph"> 
        <p>Finally, folder <span class="filename">work</span> contains Tomcat&#x2019;s runtime &#x201c;cache&#x201d; for the deployed web applications. It is organized according to the hierarchy of the engine (Catalina), the host (localhost), and the web application (<span class="filename">helloworld_server</span>).</p> 
@@ -5296,7 +5489,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        <p>Tomcat comes with the pre installed &#x201c;Manager App&#x201d;. This application is useful to manage web applications and perform tasks such as deploying a web application from a WAR file, or starting and stopping installed web applications. A comprehensive documentation for the &#x201c;Manager App&#x201d; can be found under the Tomcat homepage.<sup class="footnote">[<a id="_footnoteref_37" class="footnote" href="#_footnote_37" title="View footnote.">37</a>]</sup>. Here we only show how to start this application from the hompage of a running Tomcat installation.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>To access this application you can switch to the &#x201c;Manager App&#x201d; with a click on the corresponding button on the right hand side. The button can be found on the right hand side of <a href="#img-tomcat_install">Figure 61</a>. Before you are allowed to start this application, you need to provide username and password credentials of a user associated with Tomcats&#x2019;s <span class="java">manager-gui</span> role.</p> 
+       <p>To access this application you can switch to the &#x201c;Manager App&#x201d; with a click on the corresponding button on the right hand side. The button can be found on the right hand side of <a href="#img-tomcat_install">Figure 54</a>. Before you are allowed to start this application, you need to provide username and password credentials of a user associated with Tomcats&#x2019;s <span class="java">manager-gui</span> role.</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -5484,7 +5677,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0.0-SNAPSHOT
-    <br /> Last updated 2016-06-02 10:47:53 CEST 
+    <br /> Last updated 2016-06-03 09:14:04 CEST 
    </div> 
   </div>  
  </body>
