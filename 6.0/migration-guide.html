@@ -1208,6 +1208,9 @@ ClientSessionProvider.currentSession().getDesktop()
         <li> <p>Changed <code>ILookupRow</code> to fluent API: use with&#x2026;&#x200b; instead of set&#x2026;&#x200b;</p> </li> 
         <li> <p><code>IClientSession.stopSession()</code> was renamed to <code>stop()</code> to match <code>IServerSession.stop()</code>.</p> </li> 
         <li> <p>Deleted validation rule infrastructure: Deleted package org.eclipse.scout.rt.shared.validate with all subpackages and the containing classes. Furthermore the class org.eclipse.scout.rt.shared.data.form.ValidationRule has been deleted.</p> </li> 
+        <li> <p><code>UiLayer</code>: Removed values <code>JSP</code>, <code>JSF</code>, <code>RAP</code>, <code>SWING</code> and added value <code>HTML</code>.</p> </li> 
+        <li> <p><code>UserAgentUtility</code>: API removed <code>isRapUi()</code>, <code>isSwingUi()</code></p> </li> 
+        <li> <p>The unused, obsolete classes <code>org.eclipse.scout.rt.client.ui.form.fields.ValueFieldEvent</code> and <code>org.eclipse.scout.rt.client.ui.form.fields.ValueFieldListener</code> were removed.</p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -2475,7 +2478,7 @@ SERVICES.getService(IClientNotificationConsumerService.class)
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0.0-SNAPSHOT
-    <br /> Last updated 2016-06-02 10:47:53 CEST 
+    <br /> Last updated 2016-06-03 10:28:13 CEST 
    </div> 
   </div>  
  </body>
