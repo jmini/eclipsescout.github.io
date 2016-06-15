@@ -551,6 +551,7 @@ table.CodeRay td.code>pre{padding:0}
       <ul class="sectlevel2"> 
        <li><a href="#validate-on-any-key">Validate on any Key</a></li> 
        <li><a href="#string-field">String Field</a></li> 
+       <li><a href="#button">Button</a></li> 
        <li><a href="#browser-field">Browser Field</a></li> 
        <li><a href="#date-field">Date Field</a></li> 
        <li><a href="#html-field">HTML Field</a></li> 
@@ -1106,6 +1107,14 @@ ClientSessionProvider.currentSession().getDesktop()
         <li> <p>Method renaming/signature change: <code>execLinkAction(java.net.URL)</code> &#x2192; <code>execAction()</code>. <code>execAction()</code> can access value using <code>getValue()</code>, it could create the old URL using <code>org.eclipse.scout.commons.IOUtility.urlTextToUrl(getValue())</code>.</p> </li> 
         <li> <p>Removed <code>IStringField.isSpellCheckAsYouTypeEnabled()</code>, <code>IStringField.setSpellCheckAsYouTypeEnabled(boolean)</code> added <code>IStringField.setSpellCheckEnabled(boolean)</code> new ui delegates spell checker to browser, new property can be used to enable/disable spell checker for certain fields (by default it is enabled for multi-line fields, see <code>AbstractStringField.computeSpellCheckEnabled()</code>).</p> </li> 
         <li> <p>Removed <code>IStringField.isSelectAllOnFocus()</code>, <code>IStringField.setSelectAllOnFocus(boolean)</code>, <code>IStringColumn.isSelectAllOnEdit()</code>, <code>IStringColumn.setSelectAllOnEdit(boolean)</code>.</p> </li> 
+       </ul> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="button"><a class="anchor" href="#button"></a>Button</h3> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p>The default of <code>getConfiguredGridUseUiWidth</code> was changed from true to false. This was done so that buttons are aligned with other fields by default. This only affects the grid cell, the button itself is still as width as it used to be because of <code>fillHorizontal = false</code>.</p> </li> 
        </ul> 
       </div> 
      </div> 
@@ -2547,7 +2556,7 @@ SERVICES.getService(IClientNotificationConsumerService.class)
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0
-    <br /> Last updated 2016-06-07 14:25:21 CEST 
+    <br /> Last updated 2016-06-08 09:26:30 CEST 
    </div> 
   </div>  
  </body>
