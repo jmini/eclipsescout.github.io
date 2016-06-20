@@ -610,6 +610,27 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#move-elements">10.4. Move elements</a></li> 
        <li><a href="#migration">10.5. Migration</a></li> 
       </ul> </li> 
+     <li><a href="#code-type">11. Code Type</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#description">11.1. Description</a></li> 
+       <li><a href="#using-a-codetype">11.2. Using a CodeType</a></li> 
+       <li><a href="#static-codetype">11.3. Static CodeType</a></li> 
+       <li><a href="#dynamic-codetype">11.4. Dynamic CodeType</a></li> 
+      </ul> </li> 
+     <li><a href="#icons">12. Icons</a></li> 
+     <li><a href="#lookup-call">13. Lookup Call</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#description-2">13.1. Description</a></li> 
+       <li><a href="#input">13.2. Input</a></li> 
+       <li><a href="#members">13.3. Members</a></li> 
+       <li><a href="#type-of-lookup-calls">13.4. Type of lookup calls</a></li> 
+      </ul> </li> 
+     <li><a href="#texts">14. Texts</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#text-properties-files">14.1. Text properties files</a></li> 
+       <li><a href="#text-provider-service">14.2. Text Provider Service</a></li> 
+      </ul> </li> 
+     <li><a href="#threading-and-jobs">15. Threading and Jobs</a></li> 
      <li><a href="#apx-cclicence">Appendix A: Licence and Copyright</a> 
       <ul class="sectlevel2"> 
        <li><a href="#licence-summary">A.1. Licence Summary</a></li> 
@@ -5900,20 +5921,34 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
       <div class="paragraph"> 
        <p>Extensions contain methods for all Scout Operations (see <a href="https://wiki.eclipse.org/Scout/Concepts/Exec_Methods">Exec Methods</a>). Those methods have the same signature except that they have one more input parameter. This method allows you to intercept the given Scout Operation and execute your own code even though the declaring class exists in a binary library. It is then your decision if you call the original code or completely replace it. To achieve this the <a href="http://en.wikipedia.org/wiki/Chain-of-responsibility_pattern">Chain Pattern</a> is used: All extensions for a target class are called as part of a chain. The order is given by the order in which the extensions are registered. And the original method of the Scout element is an extension as well.</p> 
       </div> 
+      <div class="paragraph"> 
+       <p>Extensions to specific types of elements are prepared as abstract classes:</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p>AbstractGroupBoxExtension</p> </li> 
+        <li> <p>AbstractImageFieldExtension</p> </li> 
+       </ul> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The following image visualizes the extension chain used to intercept the default behavior of a component:</p> 
+      </div> 
       <div class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_extensibility_chain_concept.png" alt="scout extensibility chain concept" /> 
        </div> 
       </div> 
-      <div class="paragraph"> 
-       <p>The following example changes the initial value of a <a href="https://wiki.eclipse.org/Scout/Concepts/StringField">StringField</a> called <code>NameField</code>:</p> 
-      </div> 
-      <div class="listingblock"> 
-       <div class="title">
-        Listing 81. Extension for NameField
+      <div class="sect3"> 
+       <h4 id="extending-a-stringfield-example"><a class="anchor" href="#extending-a-stringfield-example"></a>10.2.1. Extending a StringField example</h4> 
+       <div class="paragraph"> 
+        <p>The following example changes the initial value of a <a href="https://wiki.eclipse.org/Scout/Concepts/StringField">StringField</a> called <code>NameField</code>:</p> 
        </div> 
-       <div class="content"> 
-        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">NameFieldExtension</span> <span class="directive">extends</span> AbstractStringFieldExtension&lt;NameField&gt; {
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 81. Extension for NameField
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">NameFieldExtension</span> <span class="directive">extends</span> AbstractStringFieldExtension&lt;NameField&gt; {
 
   <span class="directive">public</span> NameFieldExtension(NameField owner) {
     <span class="local-variable">super</span>(owner);
@@ -5925,17 +5960,20 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
     getOwner().setValue(<span class="string"><span class="delimiter">&quot;</span><span class="content">FirstName LastName</span><span class="delimiter">&quot;</span></span>); <span class="comment">// overwrite the initial value of the name field</span>
   }
 }</code></pre> 
+        </div> 
        </div> 
-      </div> 
-      <div class="paragraph"> 
-       <p>The extension needs to be registeres when starting the application:</p> 
-      </div> 
-      <div class="listingblock"> 
-       <div class="title">
-        Listing 82. Register extension for NameField
+       <div class="paragraph"> 
+        <p>Note: The type parameter of the extension (e.g. <code>NameField</code>) denotes the element which is extended.</p> 
        </div> 
-       <div class="content"> 
-        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
+       <div class="paragraph"> 
+        <p>The extension needs to be registeres when starting the application:</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 82. Register extension for NameField
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
   <span class="annotation">@Override</span>
   <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
     BEANS.get(IExtensionRegistry.class).register(NameFieldExtension.class);
@@ -5943,6 +5981,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
 }, Jobs.newInput()
     .withRunContext(ClientRunContexts.copyCurrent())
     .withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">register extension</span><span class="delimiter">&quot;</span></span>));</code></pre> 
+        </div> 
        </div> 
       </div> 
      </div> 
@@ -6132,6 +6171,523 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
     </div> 
    </div> 
    <div class="sect1"> 
+    <h2 id="code-type"><a class="anchor" href="#code-type"></a>11. Code Type</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>A CodeType is a structure to represent a tree key-code association. They are used in SmartField and SmartColumn.</p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>implements: <code>ICodeType&lt;T&gt;</code></p> </li> 
+       <li> <p>extends: <code>AbstractCodeType&lt;T&gt;</code></p> </li> 
+      </ul> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="description"><a class="anchor" href="#description"></a>11.1. Description</h3> 
+      <div class="paragraph"> 
+       <p>CodeType are used in <a href="https://wiki.eclipse.org/Scout/Concepts/SmartField">SmartField</a> to let the user choose between a finish list of values. The value stored by the field correspond to the key of the selected code.</p> 
+      </div> 
+      <div class="imageblock"> 
+       <div class="content"> 
+        <img src="images/Scout_SmartField_Hierarchy_SWT.png" alt="Scout SmartField Hierarchy SWT" /> 
+       </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>A CodeType can be seen as a tree of <a href="https://wiki.eclipse.org/Scout/Concepts/Code">Codes</a>. Each code associate to the key (the Id) other properties: among others a Text and an IconId.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>In order to have the same resolving mechanism (getting the display text of a key) CodeType are also used in <a href="https://wiki.eclipse.org/Scout/Concepts/SmartColumn">SmartColumn</a>. To chose multiple value of the list, the fields <a href="https://wiki.eclipse.org/Scout/Concepts/ListBox">ListBox</a> (flat CodeType) and <a href="https://wiki.eclipse.org/Scout/Concepts/TreeBox">TreeBox</a> (hierarchical CodeType) can be used.</p> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="organisation-of-the-codes"><a class="anchor" href="#organisation-of-the-codes"></a>11.1.1. Organisation of the codes</h4> 
+       <div class="paragraph"> 
+        <p>The codes are organized in a tree. Therefore a CodeType can have one or more child codes at the root level, and each code can have other child codes. In lot of cases a list of codes (meaning a tree containing only leafs at the first level) is sufficient to cover most of the need.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Child codes are ordered in their parent code. This is realized with the <a href="https://wiki.eclipse.org/Scout/Concepts/Order_Annotation">order annotation</a>.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="type-of-the-key"><a class="anchor" href="#type-of-the-key"></a>11.1.2. Type of the key</h4> 
+       <div class="paragraph"> 
+        <p>The type of the key is defined by its generic parameter <code>&lt;T&gt;</code>. It is very common to use a type from the <code>java.lang.*</code> package (like <code>Integer</code> or <code>String</code>) but any Java Object is suitable. It must:</p> 
+       </div> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p>implements <code>Serializable</code></p> </li> 
+         <li> <p>have correctly implemented <code>equals()</code> and <code>hashCode()</code> functions</p> </li> 
+         <li> <p>present in the server and the client</p> </li> 
+        </ul> 
+       </div> 
+       <div class="paragraph"> 
+        <p>There is no obligation to have the same type for the Id between the codes of a CodeType (meaning the same generic type parameter for the codes inner-class). However it is a good practice to have the same type between the codes of a CodeType, because the Id are used as value of <a href="https://wiki.eclipse.org/Scout/Concepts/SmartField">SmartFields</a>. Therefore the generic parameter describing the type of value of a SmartField must be compatible with the type of the codes contained in the CodeType.</p> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="using-a-codetype"><a class="anchor" href="#using-a-codetype"></a>11.2. Using a CodeType</h3> 
+      <div class="sect3"> 
+       <h4 id="smartfield-or-smartcolumn"><a class="anchor" href="#smartfield-or-smartcolumn"></a>11.2.1. SmartField or SmartColumn</h4> 
+       <div class="paragraph"> 
+        <p>CodeType in a SmartField (or SmartColumn).</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">YesOrNoSmartField</span> <span class="directive">extends</span> AbstractSmartField&lt;<span class="predefined-type">Boolean</span>&gt; {
+
+  <span class="comment">// other configuration of properties.</span>
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> ICodeType&lt;?, <span class="predefined-type">Boolean</span>&gt;&gt; getConfiguredCodeType() {
+    <span class="keyword">return</span> YesOrNoCodeType.class;
+  }
+}</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>If the SmartField (or SmartColumn) works with a CodeType, a specific LookupCall is instantiated to get the LookupRows based on the Codes contained in a CodeType.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="accessing-a-code-directly"><a class="anchor" href="#accessing-a-code-directly"></a>11.2.2. Accessing a code directly</h4> 
+       <div class="paragraph"> 
+        <p>Scout-runtime will handle the instantiation and the caching of CodeTypes.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>This function returns the text corresponding to the key using a CodeType:</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">  <span class="directive">public</span> <span class="predefined-type">String</span> getCodeText(<span class="type">boolean</span> key) {
+    ICode c = BEANS.get(YesOrNoCodeType.class).getCode(key);
+    <span class="keyword">if</span> (c != <span class="predefined-constant">null</span>) {
+      <span class="keyword">return</span> c.getText();
+    }
+    <span class="keyword">return</span> <span class="predefined-constant">null</span>;
+  }</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="static-codetype"><a class="anchor" href="#static-codetype"></a>11.3. Static CodeType</h3> 
+      <div class="sect3"> 
+       <h4 id="java-code-and-structure"><a class="anchor" href="#java-code-and-structure"></a>11.3.1. Java Code and structure</h4> 
+       <div class="imageblock"> 
+        <div class="content"> 
+         <img src="images/Scout_CodeType_Structure.png" alt="Scout CodeType Structure" /> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The common way to define a CodeType is to extend AbstractCodeType. Each code is an inner-class extending AbstractCode. Like usual the properties of Codes and CodeTypes can be set with <a href="https://wiki.eclipse.org/Scout/Concepts/GetConfigured_Methods">getConfiguredXxxxxx()</a> methods.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>See the Java Code of a simple <code>YesOrNoCodeType</code> having just two codes:</p> 
+       </div> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p><code>YesOrNoCodeType.YesCode</code></p> </li> 
+         <li> <p><code>YesOrNoCodeType.NoCode</code></p> </li> 
+        </ul> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="with-the-sdk"><a class="anchor" href="#with-the-sdk"></a>11.3.2. With the SDK</h4> 
+       <div class="paragraph"> 
+        <p>The SDK provides some help to generate CodeTypes and Codes. Use File &#x2192; New &#x2192; Scout &#x2192; Scout Code Type to generate a new code.</p> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="dynamic-codetype"><a class="anchor" href="#dynamic-codetype"></a>11.4. Dynamic CodeType</h3> 
+      <div class="paragraph"> 
+       <p>Code types are not necessary hardcoded. It is possible to implement other mechanisms to load CodeType dynamically.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The description of the Codes can come from a database or from an XML files. If you want to do so, you just need to implement the method corresponding to the event LoadCodes.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>It is possible to use the static and the dynamic approach together. In this case, if there is a conflict (2 codes for the same id) the event OverwriteCode is triggered.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Note for advanced users:</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Each CodeType is instantiated for</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p>each language</p> </li> 
+        <li> <p>each partition</p> </li> 
+       </ul> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Note: A drawback that the CodeType Class is not aware of the language and the partition it is instantiate for. Only the <code>CodeTypeStore</code> that manage the CodeType instances knows for which language and which partition they have been instantiated.</p> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="icons"><a class="anchor" href="#icons"></a>12. Icons</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Class that contains as static members the icons that are available.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Everywhere icons are needed, a String <code>IconId</code> is requested. (for example property <em>IconId</em> of a Code).</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Static members mapping from the requested IconId String values to the name of the icon image files.</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> UserHome =<span class="string"><span class="delimiter">&quot;</span><span class="content">home_red</span><span class="delimiter">&quot;</span></span>;</code></pre> 
+      </div> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
+<span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredIconId(){
+  <span class="keyword">return</span> Icons.UserHome;
+ }</code></pre> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="lookup-call"><a class="anchor" href="#lookup-call"></a>13. Lookup Call</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Lookup calls are mainly used by SmartFields and SmartColumns to look up single or multiple LookupRows.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Class: <code>LookupCall</code></p> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="description-2"><a class="anchor" href="#description-2"></a>13.1. Description</h3> 
+      <div class="paragraph"> 
+       <p>The Lookup call mechanism is used to lookup up a set of key-text pairs. Whereas the key can be of any Java type the text must be of the type String. Each entry in this set is called LookupRow. In addition to the key and the text a LookupRow can also define and icon, font, colors and a tooltiptext.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>This schema explains the role of a LookupCall in a SmartField:</p> 
+      </div> 
+      <div class="imageblock"> 
+       <div class="content"> 
+        <img src="images/Schema_LookupCall.png" alt="Schema LookupCall" /> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="input"><a class="anchor" href="#input"></a>13.2. Input</h3> 
+      <div class="paragraph"> 
+       <p>Lookup calls provide different method to compute the set of LookupRows :</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p><strong>getDataByKey():</strong> Retrieves a single lookup row for a specific key value. Used by SmartFields and SmatColumns to get the display text for a given key value.</p> </li> 
+        <li> <p><strong>getDataByText():</strong> Retrieve multiple lookup rows which match a certain String. Used by SmartFields when the user starts to enter some text in the field.</p> </li> 
+        <li> <p><strong>getDataByAll():</strong> Retrieves all available lookup rows. Used by SmartFields when the user clicks on the browse icon.</p> </li> 
+        <li> <p><strong>getDataByRec():</strong> This can only be used for hierarchical lookup calls. It retrieves all available sub-tree lookup rows for a given parent.</p> </li> 
+       </ul> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="members"><a class="anchor" href="#members"></a>13.3. Members</h3> 
+      <div class="paragraph"> 
+       <p>The Lookup call contains attributes (accessible with getter and setter) that can be used to compute the list of lookups rows. Out of the box you have:</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p>key: contains the key value when the lookup is queried by key.</p> </li> 
+        <li> <p>text: contains the text input in case of a text lookup (typically this is the text entered by the user smart field).</p> </li> 
+        <li> <p>all: contains the browse hint in case of a lookup by all (typically when a user click on the button to see all proposal in a smart field).</p> </li> 
+        <li> <p>rec: contains the key of the parent entry, in when the children of a node are loaded.</p> </li> 
+        <li> <p>master: contains the value of the master field (if a master field is associated to the field using the lookup call).</p> </li> 
+       </ul> 
+      </div> 
+      <div class="paragraph"> 
+       <p>It is possible to add you own additional attributes, for example validityFrom, validityTo as date parameter. Just add them as field with getter and setter:</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">LanguageLookupCall</span> <span class="directive">extends</span> LookupCall&lt;<span class="predefined-type">String</span>&gt; <span class="directive">implements</span> ILookupCall&lt;<span class="predefined-type">String</span>&gt; {
+  <span class="comment">// other stuff like serialVersionUID, Lookup Service definition...</span>
+
+  <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="type">long</span> serialVersionUID = <span class="integer">1L</span>;
+
+  <span class="directive">private</span> <span class="predefined-type">Date</span> m_validityFrom;
+  <span class="directive">private</span> <span class="predefined-type">Date</span> m_validityTo;
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> ILookupService&lt;<span class="predefined-type">String</span>&gt;&gt; getConfiguredService() {
+    <span class="keyword">return</span> ILanguageLookupService.class;
+  }
+
+  <span class="directive">public</span> <span class="predefined-type">Date</span> getValidityFrom() {
+    <span class="keyword">return</span> m_validityFrom;
+  }
+
+  <span class="directive">public</span> <span class="type">void</span> setValidityFrom(<span class="predefined-type">Date</span> validityFrom) {
+    <span class="local-variable">this</span>.m_validityFrom = validityFrom;
+  }
+
+  <span class="directive">public</span> <span class="predefined-type">Date</span> getValidityTo() {
+    <span class="keyword">return</span> m_validityTo;
+  }
+
+  <span class="directive">public</span> <span class="type">void</span> setValidityTo(<span class="predefined-type">Date</span> validityTo) {
+    <span class="local-variable">this</span>.m_validityTo = validityTo;
+  }
+}</code></pre> 
+       </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>In this case, you might want to set your properties bevor the lookupcall query is sent. This can be done with the PrepareLookup event of the SmartField or the ListBox:</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java">    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="type">void</span> execPrepareLookup(ILookupCall&lt;<span class="predefined-type">String</span>&gt; call) {
+      LanguageLookupCall c = (LanguageLookupCall) call;
+      c.setValidityFrom(DateUtility.parse(<span class="string"><span class="delimiter">&quot;</span><span class="content">2012-02-26</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">yyyy-mm-dd</span><span class="delimiter">&quot;</span></span>));
+      c.setValidityTo(DateUtility.parse(<span class="string"><span class="delimiter">&quot;</span><span class="content">2013-02-27</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">yyyy-mm-dd</span><span class="delimiter">&quot;</span></span>));
+    }</code></pre> 
+       </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>If you follow this pattern, you will consume the values in the server, by casting the call:</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java">  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="predefined-type">List</span>&lt;? <span class="directive">extends</span> ILookupRow&lt;<span class="predefined-type">String</span>&gt;&gt; getDataByAll(ILookupCall&lt;<span class="predefined-type">String</span>&gt; call) {
+    LanguageLookupCall c = (LanguageLookupCall) call;
+    <span class="predefined-type">Date</span> validityFrom = c.getValidityFrom();
+    <span class="predefined-type">Date</span> validityTo = c.getValidityTo();
+
+    <span class="predefined-type">List</span>&lt;? <span class="directive">extends</span> ILookupRow&lt;<span class="predefined-type">String</span>&gt;&gt; result = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;ILookupRow&lt;<span class="predefined-type">String</span>&gt;&gt;();
+    <span class="comment">//compute result: corresponding lookup rows (depending on validityFrom and validityTo).</span>
+    <span class="keyword">return</span> result;
+  }</code></pre> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="type-of-lookup-calls"><a class="anchor" href="#type-of-lookup-calls"></a>13.4. Type of lookup calls</h3> 
+      <div class="sect3"> 
+       <h4 id="with-a-lookup-service"><a class="anchor" href="#with-a-lookup-service"></a>13.4.1. With a Lookup Service</h4> 
+       <div class="paragraph"> 
+        <p>Delegation to the Lookup Service on server side.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>They are not necessarily restricted to a fix number of records. Instead they should be favoured if the set of records is rather large.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="directy"><a class="anchor" href="#directy"></a>13.4.2. Directy</h4> 
+       <div class="paragraph"> 
+        <p>Principe of the Local Lookup Calls</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>An example of this approach is when a SmartField or a SmartColumn is configured to be use with a CodeType. A <code>CodeLookupCall</code> is instantiated for the CodeType. It creates the LookupRows corresponding to the codes in the CodeType.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="overview-2"><a class="anchor" href="#overview-2"></a>13.4.3. Overview</h4> 
+       <div class="imageblock"> 
+        <div class="content"> 
+         <img src="images/LookupCall.png" alt="LookupCall" /> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="properties"><a class="anchor" href="#properties"></a>13.4.4. Properties</h4> 
+       <div class="paragraph"> 
+        <p>Defined with <code>getConfiguredXxxxxx()</code> methods.</p> 
+       </div> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p>Service: Defines which service is used to retrieve lookup rows</p> </li> 
+         <li> <p>MasterRequired: Defines whether a master value must be set in order to query for multiple lookup rows</p> </li> 
+        </ul> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="code-examples"><a class="anchor" href="#code-examples"></a>13.4.5. Code examples</h4> 
+       <div class="paragraph"> 
+        <p><strong>Using a LookupCall in a SmartField:</strong></p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> ILookupCall&lt;<span class="predefined-type">String</span>&gt;&gt; getConfiguredLookupCall() {
+      <span class="keyword">return</span> LanguageLookupCall.class;
+    }</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p><strong>Accessing a LookupRow directly:</strong></p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>It is possible to access a LookupRow direclty. In this example the input is a key (thisKey) and the method getDataByKey() is used. Before accessing the text, we ensure that a LookupRow has been retrived.</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">    <span class="comment">//Execute the LookupCall (using DataByKey)</span>
+    LookupCall&lt;<span class="predefined-type">String</span>&gt; call = <span class="keyword">new</span> LanguageLookupCall();
+    call.setKey(thisKey);
+    <span class="predefined-type">List</span>&lt;? <span class="directive">extends</span> ILookupRow&lt;<span class="predefined-type">String</span>&gt;&gt; rows = call.getDataByKey();
+
+    <span class="comment">//Get the text (with a null check)</span>
+    <span class="predefined-type">String</span> text = <span class="predefined-constant">null</span>;
+    <span class="keyword">if</span> (rows != <span class="predefined-constant">null</span> &amp;&amp; !rows.isEmpty()) {
+      text = rows.get(<span class="integer">0</span>).getText();
+    }</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="texts"><a class="anchor" href="#texts"></a>14. Texts</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>The <code>TEXTS</code> class is a convenience class to access the default Text Provider Service used for the localization of the texts in the user interface.</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="title">
+       Listing 89. Text lookup
+      </div> 
+      <div class="content"> 
+       <pre class="CodeRay highlight"><code data-lang="java">TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">persons</span><span class="delimiter">&quot;</span></span>);</code></pre> 
+      </div> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Its also possible to use some parameters:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="title">
+       Listing 90. Text lookup
+      </div> 
+      <div class="content"> 
+       <pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> name = <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>;
+<span class="type">int</span> age = <span class="integer">13</span>;
+
+TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">NameWithAge</span><span class="delimiter">&quot;</span></span>, name, age);</code></pre> 
+      </div> 
+     </div> 
+     <div class="paragraph"> 
+      <p>In this case, some placeholders for the parameters are needed in the translated text:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="title">
+       Listing 91. Text lookup
+      </div> 
+      <div class="content"> 
+       <pre class="CodeRay highlight"><code data-lang="java"> NameWithAge={<span class="integer">0</span>} is {<span class="integer">1</span>} years old;</code></pre> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="text-properties-files"><a class="anchor" href="#text-properties-files"></a>14.1. Text properties files</h3> 
+      <div class="paragraph"> 
+       <p>Scout uses the java.util.ResourceBundle mechanism for native language support. So whatever language files you have in your <code>&lt;project-prefix&gt;.shared/resources/texts/*.properties</code> are taken as translation base.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Example setup:</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p>&lt;project-prefix&gt;.shared/resources/texts/Texts.properties</p> </li> 
+        <li> <p>&lt;project-prefix&gt;.shared/resources/texts/Texts_fr.properties</p> </li> 
+       </ul> 
+      </div> 
+      <div class="paragraph"> 
+       <p>If your application starts with the <code>-vmargs -Duser.language=fr</code> or <code>eclipse.exe -nl=fr</code> the translations in Texts_fr.properties are considered. In case of any other user language the translations in Texts.properties are considered.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>It is possible to edit these files in the Eclipse Scout SDK with the NLS Editor.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="text-provider-service"><a class="anchor" href="#text-provider-service"></a>14.2. Text Provider Service</h3> 
+      <div class="paragraph"> 
+       <p>Text Provider Services are services responsible to provide localization for texts in the user interface. A typical application contains a such service contributed by the Shared Project.</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p>implements: <code>ITextProviderService</code></p> </li> 
+        <li> <p>extends: <code>AbstractDynamicNlsTextProviderService</code> (default, translations are stored in properties files)</p> </li> 
+       </ul> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Using Text Provider Services developers can decide to store the translations in a custom container like a database or XML files. Furthermore using TextProviderServices it is very easy to overwrite any translated text in the application (also texts used in Scout itself) using the service ranking.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The mechanism is aligned with the icon retrieval which is also managed using <a href="https://wiki.eclipse.org/index.php?title=Scout/Concepts/Icon_Provider_Service&amp;action=edit&amp;redlink=1">Icon Provider Services</a>.</p> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="localization-using-properties-files"><a class="anchor" href="#localization-using-properties-files"></a>14.2.1. Localization using .properties files</h4> 
+       <div class="paragraph"> 
+        <p>By default the internationalization mechanism relies on .properties files using a reference implementation of the TextProviderServices:</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Service extending the <code>AbstractDynamicNlsTextProviderService</code> class.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>A Text Provider Service working with the default implementation need to define where the properties files are located. This is realized by overriding the getter getDynamicNlsBaseName(). Here an example:</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 92. Text lookup
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="predefined-type">String</span> getDynamicNlsBaseName() {
+    <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">resources.texts.Texts</span><span class="delimiter">&quot;</span></span>;
+  }</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>If configured like this, it means that the .properties files will be located in the same plug-in at the location:</p> 
+       </div> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p><code>/resources/texts/Texts.properties</code> (default)</p> </li> 
+         <li> <p><code>/resources/texts/Texts_fr.properties</code> (french)</p> </li> 
+         <li> <p><code>/resources/texts/Texts_de.properties</code> (german)</p> </li> 
+         <li> <p><code>&#x2026;&#x200b;</code> (additional languages)</p> </li> 
+        </ul> 
+       </div> 
+       <div class="paragraph"> 
+        <p>If you decide to store your translated texts in .properties files, you migth want to use the <a href="https://wiki.eclipse.org/Scout/SDK/NLS_Editor">NLS Editor</a> to edit them.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>You need to respect the format defined by the Java Properties class. In particular the encoding of a .properties file is ISO-8859-1 (also known as Latin-1). All non-Latin-1 characters must be encoded. Examples:</p> 
+       </div> 
+       <div class="literalblock"> 
+        <div class="content"> 
+         <pre>'&agrave;' =&gt; &quot;\u00E0&quot;
+'&ccedil;' =&gt; &quot;\u00E7&quot;
+'&szlig;' =&gt; &quot;\u00DF&quot;</pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The encoding is the &quot;Unicode escape characters&quot;: \uXXXX where XXXX is a hexadecimal id of the character in the <a href="http://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode character table</a>. Read more on the .properties File on <a href="http://en.wikipedia.org/wiki/.properties">wikipedia</a>.</p> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="threading-and-jobs"><a class="anchor" href="#threading-and-jobs"></a>15. Threading and Jobs</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Another fundament of Eclipse Scout&#x2019;s simplicity is the Client Job Queue. Every logic processed on client side like calling services, opening a form, validating a field, etc. is run inside a ClientSyncJob and therefore synchronously. As soon the processing is finished and the data ready to be displayed the GUI Thread takes over and displays the data. This approach minimizes the execution time of the GUI Thread and therefore reduces the time of a blocking or freezing window.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
     <h2 id="apx-cclicence"><a class="anchor" href="#apx-cclicence"></a>Appendix A: Licence and Copyright</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
@@ -6293,7 +6849,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0
-    <br /> Last updated 2016-06-17 15:01:30 MESZ 
+    <br /> Last updated 2016-06-20 12:42:59 MESZ 
    </div> 
   </div>  
  </body>
