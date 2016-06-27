@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
   <meta name="generator" content="Asciidoctor 1.5.4" /> 
   <meta name="author" content="Matthias Zimmermann" /> 
-  <title>Eclipse Scout: an Introduction</title> 
+  <title>Eclipse Scout Beginners Guide</title> 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700" /> 
   <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,7 +512,7 @@ table.CodeRay td.code>pre{padding:0}
  </head> 
  <body class="book toc2 toc-left"> 
   <div id="header"> 
-   <h1>Eclipse Scout: an Introduction</h1> 
+   <h1>Eclipse Scout Beginners Guide</h1> 
    <div class="details"> 
     <span id="author" class="author">Matthias Zimmermann</span>
     <br /> 
@@ -526,12 +526,7 @@ table.CodeRay td.code>pre{padding:0}
     </div> 
     <ul class="sectlevel1"> 
      <li><a href="#preface">Preface</a></li> 
-     <li><a href="#introduction">1. Introduction</a> 
-      <ul class="sectlevel2"> 
-       <li><a href="#sec-what_is_scout">1.1. What is Scout?</a></li> 
-       <li><a href="#sec-why_scout">1.2. Why Scout?</a></li> 
-       <li><a href="#sec-whatshouldiread">1.3. What should I read?</a></li> 
-      </ul> </li> 
+     <li><a href="#introduction">1. Introduction</a></li> 
      <li><a href="#cha-helloworld">2. &#x201c;Hello World&#x201d; Tutorial</a> 
       <ul class="sectlevel2"> 
        <li><a href="#installation-and-setup">2.1. Installation and Setup</a></li> 
@@ -590,150 +585,60 @@ table.CodeRay td.code>pre{padding:0}
     <h2 id="preface"><a class="anchor" href="#preface"></a>Preface</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p>Today, the Java platform is widely seen as the primary choice for implementing enterprise applications. While many successful frameworks support the development of persistence layers and business services, implementing front-ends in a simple and clean way remains a challenge. This is exactly where Eclipse Scout fits in. The primary goal of Scout is to make your life as a developer easier and to help organisations to save money and time. For this, the Scout framework covers most of the recurring front-end aspects such as user authentication, client-server communication and the user interface. This comprehensive scope reduces the amount of necessary boiler plate code, and let developers concentrate on understanding and implementing business functionality.</p> 
+      <p>The goal of this book is to get you familiar with the Scout framework in a short time. Scout&#x2019;s core features and concepts are introduced and explained by writing actual Scout applications. As Scout applications are written in Java, we make the assumption that you are familiar with the Java language and its core concepts.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>The purpose of this book is to get the reader familiar with the Scout framework. In this book Scout&#x2019;s core features are introduced and explained using many practical examples. And as both the Scout framework and Scout applications are written in Java, we make the assumption that you are familiar with the language too. Ideally, you have worked with Java for some time now and feel comfortable with the basic language features.</p> 
+      <p>We hope that this book helps you to get started quickly and would love to get your feedback. This feedback is very valuable to us as it helps to improve both the book&#x2019;s content and the quality for all future readers.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>Last but not least, we thank you for your interest in Scout, for being part of our community and for your friendly support of new community members. To allow for contributions to this book, the technical setup and the book&#x2019;s licence have been selected to minimize restrictions. According to the terms of the Creative Commons (CC-BY) license, you are allowed to freely use, share and adapt this book. All source files of the book including the Scout projects described in the book are available on github. For the first edition of this book, we did already receive a number of bug reports and comments that were pointing out mistakes, inconsistencies and suggestions for changes. This feedback is very valuable to us as it helps to improve both the book&#x2019;s content and the quality for all future readers. We hope that this book helps you to get started quickly and would love to get your feedback.</p> 
+      <p>To allow for contributions to this book, the technical setup and the book&#x2019;s licence have been selected to minimize restrictions. According to the terms of the Creative Commons (CC-BY) license, you are allowed to freely use, share and adapt this book. All source files of the book including the Scout projects described in the book are available on <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs">Github</a>.</p> 
      </div> 
     </div> 
    </div> 
    <div class="sect1"> 
     <h2 id="introduction"><a class="anchor" href="#introduction"></a>1. Introduction</h2> 
     <div class="sectionbody"> 
-     <div class="sect2"> 
-      <h3 id="sec-what_is_scout"><a class="anchor" href="#sec-what_is_scout"></a>1.1. What is Scout?</h3> 
-      <div class="paragraph"> 
-       <p>Scout is an open source framework for building business applications. The Scout framework covers most recurring aspects of a classical client server architecture with a strong focus on the application&#x2019;s front-end. Scout applications are Single Page Applications that run in the browser optimized for sesktop, mobile and tablet devices.</p> 
+     <div class="paragraph"> 
+      <p>Scout is an open source framework for implementing business applications. The framework is based on Java and HTML5 and covers most recurring aspects of enterprise applications.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Scout defines an abstract application model that makes developing applications faster and helps to decouple the business code as much as possible from any specific technologies. This is particularly useful as the life span of today&#x2019;s web technologies is substantially shorter then the life span of large enterprise applications.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Scout comes with multi-device support. With a single code base Scout applications run on desktop, tablet and mobile devices. The framework automatically adapts the rendering of the application to the form factor of the used device. An example of a commercial application built with Scout is provided in <a href="#img-bsi_crm_indigo">Figure 1</a>.</p> 
+     </div> 
+     <div id="img-bsi_crm_indigo" class="imageblock"> 
+      <div class="content"> 
+       <img src="images/bsi_crm_indigo.png" alt="bsi crm indigo" /> 
       </div> 
-      <div class="paragraph"> 
-       <p>To different groups of people, Scout means different things. End users are interested in a good usability, the management cares about the benefits a new framework can offers to the organisation and developers want to know if a framework is simple to use and helps them to solve practical issues. This is why the text below describes Scout from the perspective of these three roles.</p> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="end-user-perspective"><a class="anchor" href="#end-user-perspective"></a>1.1.1. End User Perspective</h4> 
-       <div class="paragraph"> 
-        <p>End users of enterprise applications care about friendly user interfaces (UI) and well designed functionality that support them in their everyday work. Depending on the current device of an end user, either desktop web or mobile clients work best.</p> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="management-perspective"><a class="anchor" href="#management-perspective"></a>1.1.2. Management Perspective</h4> 
-       <div class="paragraph"> 
-        <p>For the management, Scout is best explained in terms of benefits it brings to the organisation in question. This is why we are going to concentrate on a (typical) application migration scenario here. Let us assume that to support the company&#x2019;s business, a fairly large landscape of multi-tier applications has to be maintained and developed.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>As Scout is an open source project, no licence fees are collected. Taking advantage of the growing popularity of Scout, free community support is available via a dedicated forum. At the same time, professional support is available if the organisation decides for it.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>As the migration of aging applications to current technology is always a challenge, it surely helps to have Scout in the technology portfolio. Not only is it a low risk choice, but also boosts developer productivity and helps to motivate the development team. Additional reasons on why Scout helps to drive down cost and risks are discussed in Section <a href="#sec-why_scout">Why Scout?</a>.</p> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="developer-perspective"><a class="anchor" href="#developer-perspective"></a>1.1.3. Developer Perspective</h4> 
-       <div class="paragraph"> 
-        <p>From the perspective of application developers, Scout offers a Java based framework that covers the complete client server architecture. This implies that&#x2009;&#x2014;&#x2009;once familiar with the Scout framework&#x2009;&#x2014;&#x2009;the developer can concentrate on a single framework language (Java) and a single set of development tools.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>As Scout is completely based on Java and Eclipse, Scout developers can take full advantage of existing knowledge and experience in these domains. And to make learning Scout as simple as possible, Scout includes a comprehensive software development kit (SDK), the Scout SDK. The Scout SDK helps to create a robust initial project setup for client server applications and includes a large set of wizards for repetitive and error prone tasks.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>On the client-side Scout&#x2019;s flexible client model allows the developer to create a good user experience without having to care about specific UI technologies. The reason for this can be found in Scout&#x2019;s client architecture that cleanly separates the UI model from the UI technology.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>Although the Scout SDK wizards can generate a significant amount of code, there is no one-way code generation and no meta data in a Scout application. Just the Java code. Developers preferring to write the necessary code manually, may do so. The Scout SDK parses the application&#x2019;s Java code in the background to present the updated Scout application model to the developers preferring to work with the Scout SDK.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>Finally, Scout is an open source framework hosted at the Eclipse foundation. This provides a number of interesting options to developers that are not available for closed source frameworks. First of all, it is simple to get all the source code of Scout and the underlying Eclipse platform. This allows for complete debugging of all problems and errors found in Scout applications. Starting from the application code, including the Scout framework, Eclipse and down to the Java platform.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>Scout developer can also profit from an increasing amount of free and publicly available documentation, such as this book or the other guides. And problems with Scout or questions that are not clearly addressed by existing documentation can be discussed in the Scout forum. The forum is also a great place for Scout developers to help out in tricky situation and learn from others.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>At times, framework bugs can be identified from questions asked in the forum. As all other enhancement requests and issues, such bugs can be reported in Bugzilla by the Scout developer. Using Bugzilla, Scout developers can also contribute bug analysis and patch proposals to solve the reported issue. With this process, Scout developers can actively contribute to the code base of Eclipse Scout. This has the advantage, that workarounds in existing Scout applications can be removed when an upgrade of the Scout framework is made.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>Having provided a significant number of high quality patches and a meaningful involvement in the Scout community, the Scout project can nominate a Scout developer as a new Scout committer. Fundamentally, such a nomination is based on the trust of Scout committers in the candidate. To quote the official guidelines.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup> for nominating and electing a new committer:</p> 
-       </div> 
-       <div class="quoteblock"> 
-        <blockquote>
-          A Committer gains voting rights allowing them to affect the future of the Project. Becoming a Committer is a privilege that is earned by contributing and showing discipline and good judgment. It is a responsibility that should be neither given nor taken lightly, nor is it a right based on employment by an Eclipse Member company or any company employing existing committers. 
-        </blockquote> 
-       </div> 
-       <div class="paragraph"> 
-        <p>After a successful election process (existing committers voting for and not against the candidate) the Scout developer effectively becomes a Scout committer. With this new status, the Scout developer then gets write access to the Eclipse Scout repositories and gains voting rights and the possibility to shape the future of Scout.</p> 
-       </div> 
+      <div class="title">
+       Figure 1. A commercial enterprise application built with Eclipse Scout.
       </div> 
      </div> 
-     <div class="sect2"> 
-      <h3 id="sec-why_scout"><a class="anchor" href="#sec-why_scout"></a>1.2. Why Scout?</h3> 
-      <div class="paragraph"> 
-       <p>Most large organizations develop and maintain enterprise applications that have a direct impact on the success of the ongoing business. And at the same time, those responsible for the development and maintenance of these applications struggle with this task. It is a big challenge to adapt to changing business demands and complying with the latest legal requirements in time. And the increasing pressure to lower recurring maintenance costs does not make the situation any easier.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>It often seems that too many resources are required to keep a heterogeneous set of legacy technologies alive. In this situation, modernizing mission critical applications can help to improve over the current situation. For the target platform stack, Java is a natural choice as it is mature, widely adopted by in the industries and unlikely to become legacy in the foreseeable future. While for the back-end side of enterprise applications well-known and proven frameworks do exist, the situation on the client side is less clear. Unfortunately, user interface (UI) technologies often have lifetimes that are substantially shorter than the lifetimes of larger mission critical applications. This is particularly true for the web, where many of today&#x2019;s frameworks will no longer be relevant in five or more years.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>Enter Eclipse Scout. This open source framework covers most of the recurring needs that are relevant to the front-end development of business applications. And Scout forces a clean separation between the user interface and the specific UI technology used for rendering. This has two major benefits. First, Scout developers implement the user interface against an abstraction layer, which helps to focus on the business functionality and saves development time. And second, long term maintenance costs are lower, as the Scout code remains valid even when the rendering technology needs to be exchanged. Therefore, Scout helps to improve the productivity of the development teams and reduces the risk of major application rewrites.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>To provide a first impression on the scope and goals of the Scout framework, a number of scenarios where Scout typically contributes to your projects success are listed below .</p> 
-      </div> 
-      <div class="ulist"> 
-       <ul> 
-        <li> <p>You are looking for a reasonable framework for your business application.</p> </li> 
-        <li> <p>You need a Single Page Application optimized for browsers runing on a desktop or on mobiles devices.</p> </li> 
-        <li> <p>You don&#x2019;t have the time to evaluate and learn a new UI technology.</p> </li> 
-        <li> <p>You need a working prototype application by the end of the week.</p> </li> 
-        <li> <p>Your application&#x2019;s expected lifespan is 10 years or more.</p> </li> 
-       </ul> 
-      </div> 
-      <div class="paragraph"> 
-       <p>That Scout should help in the last two situations mentioned above seems to be contradictory at first but is just based on a simple principle. Where possible, the Scout framework provides abstractions for areas/topics.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup> that need to be implemented for business applications again and again. And for each of these abstractions Scout provides a default implementation out of the box. Typically, the default implementation of such an abstraction integrates a framework or technology that is commonly used.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>When needing a working prototype application by the end of the week, the developer just needs to care about the desired functionality. The necessary default implementations are then automatically included by the Scout tooling into the Scout project setup. The provided Scout SDK tooling also helps to get started quickly with Scout. It also allows to efficiently implement application components such as user interface components, server services or connections to databases.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>In the case of applications with long lifespans, the abstractions provided by Scout help the developer to stay productive and concentrate on the actual business functionality. At the same time, this keeps the code base as independent of specific technologies and frameworks as possible. This is a big advantage when individual technologies incorporated in the application reach their end of life. As all the implemented business functionality is written against abstractions only, no big rewrite of the application is necessary. Instead, it is sufficient to exchange the implementation for the legacy technology with a new one. And often, an implementation for a new technology/framework is already provided by a more recent version of Scout.</p> 
-      </div> 
+     <div class="paragraph"> 
+      <p>Scout supports a modularization of applications into layers and slices. This helps to define a clean architecture for large applications. The layering is driven by the fact the Scout applications have a rending part, a frontend part and a backend part. The modularization into slices is controlled by different business needs such as front office, back office, reporting or the administraion of application users, roles and permissions.</p> 
      </div> 
-     <div class="sect2"> 
-      <h3 id="sec-whatshouldiread"><a class="anchor" href="#sec-whatshouldiread"></a>1.3. What should I read?</h3> 
-      <div class="paragraph"> 
-       <p>The text below provides guidelines on what to read (or what to skip) depending on your existing background. We first address the needs of junior Java developers that like to learn more about developing enterprise applications. Then, we suggest a list of sections relevant for software wizards that already have a solid understanding of the Eclipse platform, Java enterprise technologies, and real world applications. Finally, the information needs of IT managers are considered.</p> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="i-know-java"><a class="anchor" href="#i-know-java"></a>1.3.1. I know Java</h4> 
-       <div class="paragraph"> 
-        <p>The good news first. This book is written for you! For the purpose of this book we do not assume that you have a solid understanding of the Java Enterprise Edition (Java EE) is required.<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup> . However, having prior experience in client server programming with Java will be useful occasionally and having used the Eclipse IDE for Java development before is certainly a plus.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>The &#x201c;bad&#x201d; news is, that writing Scout applications requires a solid understanding of Java. To properly benefit from this book, we assume that you have been developing software for a year or more. And you should have mastered the Java Standard Edition (Java SE).<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</sup> to a significant extent. To be more explicit, you are expected to be comfortable with all material required for the Java Programmer Level I Exam.<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</sup> and most of the material required for Level II.<sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnote_6" title="View footnote.">6</a>]</sup>.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>We now propose to start downloading and installing Scout as described in Appendix <a href="#apx-install_scout">Scout Installation</a> and do some actual coding. To do so, please continue with the &#x201c;Hello World&#x201d; example provided in Chapter <a href="#cha-helloworld">&#x201c;Hello World&#x201d; Tutorial</a>. You can expect to complete this example in less than one hour including the necessary download and installation steps. Afterwards, you might want to continue with the remaining material in &#x201c;Getting Started&#x201d;. Working through the complete book should take no more than two days.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>Once you work with the Scout framework on a regular basis, you might want to ask questions in the Scout forum.<sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnote_7" title="View footnote.">7</a>]</sup>. When your question gets answered, please ask yourself if your initial problem could have been solved by better documentation. In that case, you might want to help the Scout community by fixing or amending the Scout wiki pages.<sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</sup>. Or this book. If you find a bug in Eclipse Scout that makes your life miserable you can report it or even propose a patch. And when your bug is fixed, you can test the fix. All of these actions will add to the healthy grow of the Scout community.</p> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="i-am-a-manager"><a class="anchor" href="#i-am-a-manager"></a>1.3.2. I am a manager</h4> 
-       <div class="paragraph"> 
-        <p>Being a manager and actually reading this book may indicate one of the following situations:</p> 
-       </div> 
-       <div class="ulist"> 
-        <ul> 
-         <li> <p>Your developer tried to convince you that Eclipse Scout can help you with implementing business applications in a shorter time and for less money. And you did not understand why (again) a new technology should work better than the ones you already use.</p> </li> 
-         <li> <p>Your are a product manager of a valuable product that is based on legacy technology. And you are now evaluating options to modernize your product.</p> </li> 
-         <li> <p>Think about your current situation. There must be a reason why you are checking out this book.</p> </li> 
-        </ul> 
-       </div> 
-       <div class="paragraph"> 
-        <p>To learn about Scout and about its benefits first go through Section <a href="#sec-what_is_scout">What is Scout?</a> and Section <a href="#sec-why_scout">Why Scout?</a>. Then, flip through Section <a href="#sec-my_contacts_guide">The &#x201c;Contacts&#x201d; Application</a> to get an impression of the &#x201c;My Contacts&#x201d; application. In case you like the idea that your developers should be able to build such an application in a single day, you might want to talk to us.<sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</sup>.</p> 
-       </div> 
-      </div> 
+     <div class="paragraph"> 
+      <p>The goals of the Scout framework can be summarized as follows.</p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Boost developer productivity</p> </li> 
+       <li> <p>Make the framwork simple to learn</p> </li> 
+       <li> <p>Support building large applications with long life spans</p> </li> 
+      </ul> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Boosting developer productivity is of a very high importance and developers should be able to focus on the business value of the application. This is why Scout provides abstractions for areas/topics that are needed in most business applications again and again. Example areas/topics that are abstracted by the Scout framework are user interface (UI) technologies, databases, client-server communication or logging. For each of these abstractions Scout provides a default implementation out of the box. Typically, the default implementation of such an abstraction integrates a framework or technology that is commonly used.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Learning a new framework should be efficient and enjoyable. For developers that have a good understanding of the Java language learning the Scout framework will be straight forward. The required skill level roughly corresponds to the Oracle Certified Professional Java SE Programmer for Java version 7 or higher. As the Scout framework takes care of the transformation of the user interface from Java to HTML5, Scout developers only needs a minimal understanding of HTML5/CSS3/JavaScript. In the case of writing project specific UI components a deeper understanding of today&#x2019;s web technologies might be required of course.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>When needing a working prototype application by the end of the week, the developer just needs to care about the desired functionality. The necessary default implementations are then automatically included by the Scout tooling into the Scout project setup. The provided Scout SDK tooling also helps to get started quickly with Scout. It also allows to efficiently implement application components such as user interface components, server services or connections to databases.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>In the case of applications with long life spans, the abstractions provided by Scout help the developer to concentrate on the actual business functionality. As all the implemented business functionality is written against abstractions only, no big rewrite of the application is necessary when individual technologies reach their end of life. In such cases it is sufficient to exchange the implementation of the adaptor for the legacy technology with a new one.</p> 
      </div> 
     </div> 
    </div> 
@@ -741,13 +646,10 @@ table.CodeRay td.code>pre{padding:0}
     <h2 id="cha-helloworld"><a class="anchor" href="#cha-helloworld"></a>2. &#x201c;Hello World&#x201d; Tutorial</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p>The &#x201c;Hello World&#x201d; chapter walks you through the creation of an Eclipse Scout client server application. When the user starts the client part of this application, the client connects to the server.<sup class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</sup> and asks for some text content that is to be displayed to the user. Next, the server retrieves the desired information and sends it back to the client. The client then copies the content obtained from the server into a text field widget. Finally, the client displays the message obtained from the server in a text field widget.</p> 
+      <p>The &#x201c;Hello World&#x201d; chapter walks you through the creation of an Eclipse Scout client server application. When the user starts the client part of this application, the client connects to the server.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup> and asks for some text content that is to be displayed to the user. Next, the server retrieves the desired information and sends it back to the client. The client then copies the content obtained from the server into a text field widget. Finally, the client displays the message obtained from the server in a text field widget.</p> 
      </div> 
      <div class="paragraph"> 
       <p>The goal of this chapter is to provide a first impression of working with the Scout framework using the Scout SDK. We will start by building the application from scratch and then we&#x2019;ll deploy the complete application to a Tomcat web server.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Based on this simple &#x201c;Hello World&#x201d; applications a large number of Scout concepts can be illustrated. Rather than including such background material in this tutorial, this information is provided separately in Chapter <a href="#cha-helloworld_background">[cha-helloworld_background]</a>.</p> 
      </div> 
      <div class="sect2"> 
       <h3 id="installation-and-setup"><a class="anchor" href="#installation-and-setup"></a>2.1. Installation and Setup</h3> 
@@ -761,53 +663,53 @@ table.CodeRay td.code>pre{padding:0}
        <p></p> 
       </div> 
       <div class="paragraph"> 
-       <p>Start your Eclipse IDE and select an empty directory for your workspace as shown in <a href="#img-sdk_start_new_workspace">Figure 1</a>. This workspace directory will then hold all the project code for the <code>Hello World</code> application. Once the Eclipse IDE is running it will show the Java perspective.</p> 
+       <p>Start your Eclipse IDE and select an empty directory for your workspace as shown in <a href="#img-sdk_start_new_workspace">Figure 2</a>. This workspace directory will then hold all the project code for the <code>Hello World</code> application. Once the Eclipse IDE is running it will show the Java perspective.</p> 
       </div> 
       <div id="img-sdk_start_new_workspace" class="imageblock"> 
        <div class="content"> 
         <img src="images/sdk_start_new_workspace.png" alt="sdk start new workspace" /> 
        </div> 
        <div class="title">
-        Figure 1. Select a new empty folder to hold your project workspace
+        Figure 2. Select a new empty folder to hold your project workspace
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>To create a new Scout project select the menu <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Project&#x2026;&#x200b;</span></span> and type &#x201c;Scout Project&#x201d; in the wizard search field. Select the Scout Project wizard and press <b class="button">Next</b>. The <em class="wizard">New Scout Project</em> wizard is then started as shown in <a href="#img-sdk_new_project_wizard">Figure 2</a>.</p> 
+       <p>To create a new Scout project select the menu <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Project&#x2026;&#x200b;</span></span> and type &#x201c;Scout Project&#x201d; in the wizard search field. Select the Scout Project wizard and press <b class="button">Next</b>. The <em class="wizard">New Scout Project</em> wizard is then started as shown in <a href="#img-sdk_new_project_wizard">Figure 3</a>.</p> 
       </div> 
       <div id="img-sdk_new_project_wizard" class="imageblock"> 
        <div class="content"> 
         <img src="images/sdk_new_project.png" alt="sdk new project" /> 
        </div> 
        <div class="title">
-        Figure 2. The new Scout project wizard.
+        Figure 3. The new Scout project wizard.
        </div> 
       </div> 
       <div class="paragraph"> 
        <p>In the <em class="wizard">New Scout Project</em> wizard you have to enter a <code>group id</code>, <code>artifact id</code> and a <code>display name</code> for your Scout project. As the created project will make use of <a href="https://maven.apache.org/">Apache Maven</a> please refer to the <a href="https://maven.apache.org/guides/mini/guide-naming-conventions.html">Maven naming conventions</a> to choose <code>group id</code> and <code>artifact id</code> for your project. The <code>artifact id</code> will then also be the project name in the Eclipse workspace. The <code>display name</code> is used as the application name presented to the user (e.g. in the Browser title bar).</p> 
       </div> 
       <div class="paragraph"> 
-       <p>For the <code>Hello World</code> application just use the already prefilled values as sown in <a href="#img-sdk_new_project_wizard">Figure 2</a>. Then, click the <b class="button">Finish</b> button to let the Scout SDK create the initial project code for you.</p> 
+       <p>For the <code>Hello World</code> application just use the already prefilled values as sown in <a href="#img-sdk_new_project_wizard">Figure 3</a>. Then, click the <b class="button">Finish</b> button to let the Scout SDK create the initial project code for you.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Depending on your Eclipse installation some <code>Maven plugin connectors</code> may be missing initially. In that case a dialog as shown in <a href="#img-sdk_new_project_connector">Figure 3</a> may be shown. To continue click on <b class="button">Finish</b> to resolve the selected connectors. Afterwards confirm the installation, accept the license and the message that some content has not been signed. Finally, the installation of the maven plugin connectors requires a restart of the Eclipse IDE.</p> 
+       <p>Depending on your Eclipse installation some <code>Maven plugin connectors</code> may be missing initially. In that case a dialog as shown in <a href="#img-sdk_new_project_connector">Figure 4</a> may be shown. To continue click on <b class="button">Finish</b> to resolve the selected connectors. Afterwards confirm the installation, accept the license and the message that some content has not been signed. Finally, the installation of the maven plugin connectors requires a restart of the Eclipse IDE.</p> 
       </div> 
       <div id="img-sdk_new_project_connector" class="imageblock"> 
        <div class="content"> 
         <img src="images/sdk_new_project_connectors.png" alt="sdk new project connectors" /> 
        </div> 
        <div class="title">
-        Figure 3. The Maven plugin connector installation dialog.
+        Figure 4. The Maven plugin connector installation dialog.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>After the <em class="wizard">New Scout Project</em> wizard has created the initial Maven modules for the <code>Hello World</code> application these modules are compiled and built by the Eclipse IDE. In case of a successful Eclipse Scout installation your Eclipse IDE should display all created Maven modules in the Package Explorer and have an empty Problems view as shown in <a href="#img-sdk_new_project_initial_helloworld">Figure 4</a>.</p> 
+       <p>After the <em class="wizard">New Scout Project</em> wizard has created the initial Maven modules for the <code>Hello World</code> application these modules are compiled and built by the Eclipse IDE. In case of a successful Eclipse Scout installation your Eclipse IDE should display all created Maven modules in the Package Explorer and have an empty Problems view as shown in <a href="#img-sdk_new_project_initial_helloworld">Figure 5</a>.</p> 
       </div> 
       <div id="img-sdk_new_project_initial_helloworld" class="imageblock"> 
        <div class="content"> 
         <img src="images/sdk_new_project_initial_helloworld.png" alt="sdk new project initial helloworld" /> 
        </div> 
        <div class="title">
-        Figure 4. The inital set of Maven modules created for the Hello World application.
+        Figure 5. The inital set of Maven modules created for the Hello World application.
        </div> 
       </div> 
      </div> 
@@ -824,14 +726,14 @@ table.CodeRay td.code>pre{padding:0}
        </ol> 
       </div> 
       <div class="paragraph"> 
-       <p>To start the Scout backend server we first select the <code>[webapp] dev server.launch</code> file in the Package Explorer view of the Eclipse IDE and then use the <em class="menu">Run As</em> menu as shown in <a href="#img-start_client">Figure 5</a>.</p> 
+       <p>To start the Scout backend server we first select the <code>[webapp] dev server.launch</code> file in the Package Explorer view of the Eclipse IDE and then use the <em class="menu">Run As</em> menu as shown in <a href="#img-start_client">Figure 6</a>.</p> 
       </div> 
       <div id="img-start_client" class="imageblock"> 
        <div class="content"> 
         <img src="images/sdk_start_client_product.png" alt="sdk start client product" /> 
        </div> 
        <div class="title">
-        Figure 5. Starting the Hello World application.
+        Figure 6. Starting the Hello World application.
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -841,14 +743,14 @@ table.CodeRay td.code>pre{padding:0}
        <p>During startup of the Scout applications you should see console output providing information about the startup. After having successfully started the Scout backend and frontend servers the Hello World application can then be accessed by navigating to <a href="http://localhost:8082/" class="bare">http://localhost:8082/</a> in your favorite web browser.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>The running Hello World application should then be started in your browser as shown in <a href="#img-start_browser">Figure 6</a>.</p> 
+       <p>The running Hello World application should then be started in your browser as shown in <a href="#img-start_browser">Figure 7</a>.</p> 
       </div> 
       <div id="img-start_browser" class="imageblock"> 
        <div class="content"> 
         <img src="images/run_helloworld_in_browser.png" alt="run helloworld in browser" /> 
        </div> 
        <div class="title">
-        Figure 6. The Hello World application in the browser.
+        Figure 7. The Hello World application in the browser.
        </div> 
       </div> 
      </div> 
@@ -959,20 +861,20 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3"> 
        <h4 id="create-war-files"><a class="anchor" href="#create-war-files"></a>2.4.4. Create WAR Files</h4> 
        <div class="paragraph"> 
-        <p>We are now ready to move the <code>Hello World</code> application from our development environment to a productive setup. The simplest option to move our application into the 'wild' is to build it using Maven. This produces two WAR files <sup class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnote_11" title="View footnote.">11</a>]</sup>.</p> 
+        <p>We are now ready to move the <code>Hello World</code> application from our development environment to a productive setup. The simplest option to move our application into the 'wild' is to build it using Maven. This produces two WAR files <sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup>.</p> 
        </div> 
        <div class="paragraph"> 
         <p>The first WAR file contains the Scout backend server with all business logic. The second WAR file contains the Scout frontend server that is responsible for communicating with the web browser part of the Scout application.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>To start the build right click on the project <code>helloworld</code> and select the context menu <span class="menu">Run As &#x2192; Maven build&#x2026;&#x200b;</span> as shown in <a href="#img-sdk_export_war">Figure 7</a>. In the dialog that appears enter <code>clean verify</code> into the <code>Goals</code> field and press <b class="button">Run</b>.</p> 
+        <p>To start the build right click on the project <code>helloworld</code> and select the context menu <span class="menu">Run As &#x2192; Maven build&#x2026;&#x200b;</span> as shown in <a href="#img-sdk_export_war">Figure 8</a>. In the dialog that appears enter <code>clean verify</code> into the <code>Goals</code> field and press <b class="button">Run</b>.</p> 
        </div> 
        <div id="img-sdk_export_war" class="imageblock"> 
         <div class="content"> 
          <img src="images/sdk_export_war_menu.png" alt="sdk export war menu" /> 
         </div> 
         <div class="title">
-         Figure 7. Starting the Maven build.
+         Figure 8. Starting the Maven build.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -992,29 +894,29 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2"> 
       <h3 id="sec-helloworld_deploy"><a class="anchor" href="#sec-helloworld_deploy"></a>2.5. Deploy to Tomcat</h3> 
       <div class="paragraph"> 
-       <p>As the final step of this tutorial, we deploy the two WAR files representing our &#x201c;Hello World&#x201d; application to a Tomcat web server. For this, we first need a working Tomcat installation. If you do not yet have such an installation you may want to read and follow the instructions provided in Appendix <a href="#apx-install_tomcat">Apache Tomcat Installation</a>. To verify a running Tomcat instance, type <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a> into the address bar of the web browser of your choice. You should then see the page shown in <a href="#img-deploy_tomcat_1">Figure 8</a>.</p> 
+       <p>As the final step of this tutorial, we deploy the two WAR files representing our &#x201c;Hello World&#x201d; application to a Tomcat web server. For this, we first need a working Tomcat installation. If you do not yet have such an installation you may want to read and follow the instructions provided in Appendix <a href="#apx-install_tomcat">Apache Tomcat Installation</a>. To verify a running Tomcat instance, type <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a> into the address bar of the web browser of your choice. You should then see the page shown in <a href="#img-deploy_tomcat_1">Figure 9</a>.</p> 
       </div> 
       <div id="img-deploy_tomcat_1" class="imageblock"> 
        <div class="content"> 
         <img src="images/tomcat_managerapp_login.png" alt="tomcat managerapp login" /> 
        </div> 
        <div class="title">
-        Figure 8. The Tomcat shown after a successful installation. After clicking on the &#x201c;Manager App&#x201d; button (highlighted in red) the login box is shown in front. A successful login shows the &#x201c;Tomcat Web Application Manager&#x201d;.
+        Figure 9. The Tomcat shown after a successful installation. After clicking on the &#x201c;Manager App&#x201d; button (highlighted in red) the login box is shown in front. A successful login shows the &#x201c;Tomcat Web Application Manager&#x201d;.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Once the web browser displays the successful running of your Tomcat instance, switch to its &#x201c;Manager App&#x201d; by clicking on the button highlighted in <a href="#img-deploy_tomcat_1">Figure 8</a>. After entering user name and password the browser will display the &#x201c;Tomcat Web Application Manager&#x201d; as shown in <a href="#img-deploy_tomcat_2">Figure 9</a>. If you don&#x2019;t know the correct username or password you may look it up in the file <span class="filename">tomcat-users.xml</span> as described in Appendix <a href="#apx-tomcat_dirs_and_files">Directories and Files</a>.</p> 
+       <p>Once the web browser displays the successful running of your Tomcat instance, switch to its &#x201c;Manager App&#x201d; by clicking on the button highlighted in <a href="#img-deploy_tomcat_1">Figure 9</a>. After entering user name and password the browser will display the &#x201c;Tomcat Web Application Manager&#x201d; as shown in <a href="#img-deploy_tomcat_2">Figure 10</a>. If you don&#x2019;t know the correct username or password you may look it up in the file <span class="filename">tomcat-users.xml</span> as described in Appendix <a href="#apx-tomcat_dirs_and_files">Directories and Files</a>.</p> 
       </div> 
       <div id="img-deploy_tomcat_2" class="imageblock"> 
        <div class="content"> 
         <img src="images/tomcat_managerapp_selectwar.png" alt="tomcat managerapp selectwar" /> 
        </div> 
        <div class="title">
-        Figure 9. The &#x201c;Tomcat Web Application Manager&#x201d;. The WAR files to be deployed can then be selected using button &#x201c;Choose File&#x201d; highlighted in red.
+        Figure 10. The &#x201c;Tomcat Web Application Manager&#x201d;. The WAR files to be deployed can then be selected using button &#x201c;Choose File&#x201d; highlighted in red.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>After logging into Tomcat&#x2019;s manager application, you can select the WAR files to be deployed using button &#x201c;Choose File&#x201d; according to the right hand side of <a href="#img-deploy_tomcat_2">Figure 9</a>. After picking your just built <span class="filename">org.eclipse.scout.apps.helloworld.server.war</span> and closing the file chooser, click on button &#x201c;Deploy&#x201d; (located below button &#x201c;Choose File&#x201d;) to deploy the application to the Tomcat web server. Then we repeat this step with the second WAR file <span class="filename">org.eclipse.scout.apps.helloworld.ui.html.war</span>.</p> 
+       <p>After logging into Tomcat&#x2019;s manager application, you can select the WAR files to be deployed using button &#x201c;Choose File&#x201d; according to the right hand side of <a href="#img-deploy_tomcat_2">Figure 10</a>. After picking your just built <span class="filename">org.eclipse.scout.apps.helloworld.server.war</span> and closing the file chooser, click on button &#x201c;Deploy&#x201d; (located below button &#x201c;Choose File&#x201d;) to deploy the application to the Tomcat web server. Then we repeat this step with the second WAR file <span class="filename">org.eclipse.scout.apps.helloworld.ui.html.war</span>.</p> 
       </div> 
       <div class="paragraph"> 
        <p>This will copy the selected WAR files into Tomcats <span class="filename">webapps</span> directory and unpack its contents into subdirectories with the same name. You can now connect to the application using the browser of your choice and enter the following address:</p> 
@@ -1029,14 +931,14 @@ table.CodeRay td.code>pre{padding:0}
         <img src="images/tomcat_helloworld_download.png" alt="tomcat helloworld download" /> 
        </div> 
        <div class="title">
-        Figure 10. The &#x201c;Hello World&#x201d; login page.
+        Figure 11. The &#x201c;Hello World&#x201d; login page.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Then you will see the login page as shown in <a href="#img-helloworld_running_download">Figure 10</a>. Two users have been pre defined: &#x201c;admin&#x201d; with password &#x201c;admin&#x201d; and &#x201c;scott&#x201d; with password &#x201c;tiger&#x201d;. You can find this configuration in the <span class="filename">config.properties</span> file of the application.</p> 
+       <p>Then you will see the login page as shown in <a href="#img-helloworld_running_download">Figure 11</a>. Two users have been pre defined: &#x201c;admin&#x201d; with password &#x201c;admin&#x201d; and &#x201c;scott&#x201d; with password &#x201c;tiger&#x201d;. You can find this configuration in the <span class="filename">config.properties</span> file of the application.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Please note: In a productive environment it is recommended to deploy the server and the user interface into two different servlet containers running on dedicated machines. This because these two tiers have different requirements on resources, load balancing and access protection. Furthermore, it is strongly recommended to use an encrypted connection (e.g. TLS 1.2 <sup class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnote_12" title="View footnote.">12</a>]</sup>) between client browsers and the Scout frontend server AND between the Scout frontend and and backend server!</p> 
+       <p>Please note: In a productive environment it is recommended to deploy the server and the user interface into two different servlet containers running on dedicated machines. This because these two tiers have different requirements on resources, load balancing and access protection. Furthermore, it is strongly recommended to use an encrypted connection (e.g. TLS 1.2 <sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup>) between client browsers and the Scout frontend server AND between the Scout frontend and and backend server!</p> 
       </div> 
      </div> 
     </div> 
@@ -1235,14 +1137,14 @@ table.CodeRay td.code>pre{padding:0}
        <p>The Scout SDK provides a set of wizards to create new Scout projects and various components for your Scout applications.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>To start any of these wizards press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> or use menu <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Other&#x2026;&#x200b;</span></span>. In the first wizard step type &quot;<em>Scout</em>&quot; into the <strong>Wizards</strong> field as shown in <a href="#img-sdk_wizard_new">Figure 11</a>.</p> 
+       <p>To start any of these wizards press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> or use menu <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Other&#x2026;&#x200b;</span></span>. In the first wizard step type &quot;<em>Scout</em>&quot; into the <strong>Wizards</strong> field as shown in <a href="#img-sdk_wizard_new">Figure 12</a>.</p> 
       </div> 
       <div id="img-sdk_wizard_new" class="imageblock"> 
        <div class="content"> 
         <img src="images/sdk_new_wizard.png" alt="sdk new wizard" /> 
        </div> 
        <div class="title">
-        Figure 11. Selecting Scout Wizards in the Eclipse wizard dialog
+        Figure 12. Selecting Scout Wizards in the Eclipse wizard dialog
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -1264,18 +1166,18 @@ table.CodeRay td.code>pre{padding:0}
         <p>The <em>New Scout Project</em> wizard can be used to create a new Scout project from scratch.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>To open the wizard press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> or use <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Other&#x2026;&#x200b;</span></span> and type &quot;<em>Scout</em>&quot; into the <strong>Wizards</strong> search field. Then, select the entry &quot;<em>Scout Project</em>&quot; and click on <b class="button">Next</b>. This leads to the initial dialog of the <em>New Scout Project</em> wizard as shown in <a href="#img-sdk_wizard_project">Figure 12</a>.</p> 
+        <p>To open the wizard press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> or use <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Other&#x2026;&#x200b;</span></span> and type &quot;<em>Scout</em>&quot; into the <strong>Wizards</strong> search field. Then, select the entry &quot;<em>Scout Project</em>&quot; and click on <b class="button">Next</b>. This leads to the initial dialog of the <em>New Scout Project</em> wizard as shown in <a href="#img-sdk_wizard_project">Figure 13</a>.</p> 
        </div> 
        <div id="img-sdk_wizard_project" class="imageblock"> 
         <div class="content"> 
          <img src="images/sdk_new_project.png" alt="sdk new project" /> 
         </div> 
         <div class="title">
-         Figure 12. The new Project Wizard
+         Figure 13. The new Project Wizard
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>A detailed description of the indiviudal wizard fields of <a href="#img-sdk_wizard_project">Figure 12</a> is provided in the next section.</p> 
+        <p>A detailed description of the indiviudal wizard fields of <a href="#img-sdk_wizard_project">Figure 13</a> is provided in the next section.</p> 
        </div> 
        <div class="paragraph"> 
         <p>By clicking on the <b class="button">Finish</b> button the wizard is started and a new Scout client server application is created in the form of a Maven multi-module project.</p> 
@@ -1283,7 +1185,7 @@ table.CodeRay td.code>pre{padding:0}
        <div class="sect4"> 
         <h5 id="wizard-fields-and-default-values"><a class="anchor" href="#wizard-fields-and-default-values"></a>Wizard Fields and Default Values</h5> 
         <div class="paragraph"> 
-         <p>All fields of the <a href="#img-sdk_wizard_project">Figure 12</a> are initially filled with default values.</p> 
+         <p>All fields of the <a href="#img-sdk_wizard_project">Figure 13</a> are initially filled with default values.</p> 
         </div> 
         <div class="dlist"> 
          <dl> 
@@ -1314,7 +1216,7 @@ table.CodeRay td.code>pre{padding:0}
        <div class="sect4"> 
         <h5 id="created-components"><a class="anchor" href="#created-components"></a>Created Components</h5> 
         <div class="paragraph"> 
-         <p>With the <a href="#img-sdk_wizard_project">Figure 12</a> wizard a complete Maven multi-module project is created. Using the default artifact Id <strong>helloworld</strong> the following Maven modules are created.</p> 
+         <p>With the <a href="#img-sdk_wizard_project">Figure 13</a> wizard a complete Maven multi-module project is created. Using the default artifact Id <strong>helloworld</strong> the following Maven modules are created.</p> 
         </div> 
         <div class="ulist"> 
          <ul> 
@@ -1406,11 +1308,11 @@ table.CodeRay td.code>pre{padding:0}
          <img src="images/sdk_new_page.png" alt="sdk new page" /> 
         </div> 
         <div class="title">
-         Figure 13. The new Page Wizard
+         Figure 14. The new Page Wizard
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>In the case of <a href="#img-sdk_wizard_page">Figure 13</a> the package <code>org.eclipse.scout.apps.helloworld.client.helloworld</code> has been selected in the Package Explorer. The only wizard field that then needs to be filled in manually is the <strong>Name</strong> field.</p> 
+        <p>In the case of <a href="#img-sdk_wizard_page">Figure 14</a> the package <code>org.eclipse.scout.apps.helloworld.client.helloworld</code> has been selected in the Package Explorer. The only wizard field that then needs to be filled in manually is the <strong>Name</strong> field.</p> 
        </div> 
        <div class="paragraph"> 
         <p>By clicking on the <b class="button">Finish</b> button the wizard is started and the specified components are created.</p> 
@@ -1418,7 +1320,7 @@ table.CodeRay td.code>pre{padding:0}
        <div class="sect4"> 
         <h5 id="wizard-fields-and-default-values-2"><a class="anchor" href="#wizard-fields-and-default-values-2"></a>Wizard Fields and Default Values</h5> 
         <div class="paragraph"> 
-         <p>Most of the fields of the <a href="#img-sdk_wizard_page">Figure 13</a> will be filled with default values depending on the current context of the IDE. The context can be derived from a package selected in the Package Explorer or from the class in the active Java Editor.</p> 
+         <p>Most of the fields of the <a href="#img-sdk_wizard_page">Figure 14</a> will be filled with default values depending on the current context of the IDE. The context can be derived from a package selected in the Package Explorer or from the class in the active Java Editor.</p> 
         </div> 
         <div class="dlist"> 
          <dl> 
@@ -1464,7 +1366,7 @@ table.CodeRay td.code>pre{padding:0}
        <div class="sect4"> 
         <h5 id="created-components-2"><a class="anchor" href="#created-components-2"></a>Created Components</h5> 
         <div class="paragraph"> 
-         <p>In the <a href="#img-sdk_wizard_page">Figure 13</a> example shown above the Scout SDK will create the following components.</p> 
+         <p>In the <a href="#img-sdk_wizard_page">Figure 14</a> example shown above the Scout SDK will create the following components.</p> 
         </div> 
         <div class="ulist"> 
          <ul> 
@@ -1504,11 +1406,11 @@ table.CodeRay td.code>pre{padding:0}
          <img src="images/sdk_new_form.png" alt="sdk new form" /> 
         </div> 
         <div class="title">
-         Figure 14. The new Form Wizard
+         Figure 15. The new Form Wizard
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>In the case of <a href="#img-sdk_wizard_form">Figure 14</a> the package <code>org.eclipse.scout.apps.helloworld.client.helloworld</code> has been selected in the Package Explorer. The only wizard field that then needs to be filled in manually is the <strong>Name</strong> field.</p> 
+        <p>In the case of <a href="#img-sdk_wizard_form">Figure 15</a> the package <code>org.eclipse.scout.apps.helloworld.client.helloworld</code> has been selected in the Package Explorer. The only wizard field that then needs to be filled in manually is the <strong>Name</strong> field.</p> 
        </div> 
        <div class="paragraph"> 
         <p>By clicking on the <b class="button">Finish</b> button the wizard is started and the specified components are created.</p> 
@@ -1516,7 +1418,7 @@ table.CodeRay td.code>pre{padding:0}
        <div class="sect4"> 
         <h5 id="wizard-fields-and-default-values-3"><a class="anchor" href="#wizard-fields-and-default-values-3"></a>Wizard Fields and Default Values</h5> 
         <div class="paragraph"> 
-         <p>Most of the fields of the <a href="#img-sdk_wizard_form">Figure 14</a> will be filled with default values depending on the current context of the IDE. The context can be derived from a package selected in the Package Explorer or from the class in the active Java Editor.</p> 
+         <p>Most of the fields of the <a href="#img-sdk_wizard_form">Figure 15</a> will be filled with default values depending on the current context of the IDE. The context can be derived from a package selected in the Package Explorer or from the class in the active Java Editor.</p> 
         </div> 
         <div class="dlist"> 
          <dl> 
@@ -1580,7 +1482,7 @@ table.CodeRay td.code>pre{padding:0}
        <div class="sect4"> 
         <h5 id="created-components-3"><a class="anchor" href="#created-components-3"></a>Created Components</h5> 
         <div class="paragraph"> 
-         <p>In the <a href="#img-sdk_wizard_form">Figure 14</a> example shown above the Scout SDK will create the following components.</p> 
+         <p>In the <a href="#img-sdk_wizard_form">Figure 15</a> example shown above the Scout SDK will create the following components.</p> 
         </div> 
         <div class="ulist"> 
          <ul> 
@@ -1629,14 +1531,14 @@ table.CodeRay td.code>pre{padding:0}
         <p></p> 
        </div> 
        <div class="paragraph"> 
-        <p>To add additional form fields to a form the current edit position needs to be inside of a Scout group box. Typing <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Space</kbd></span> then provides access to the most frequently used Scout widgets as shown in <a href="#img-java_proposals_groupbox">Figure 15</a>.</p> 
+        <p>To add additional form fields to a form the current edit position needs to be inside of a Scout group box. Typing <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Space</kbd></span> then provides access to the most frequently used Scout widgets as shown in <a href="#img-java_proposals_groupbox">Figure 16</a>.</p> 
        </div> 
        <div id="img-java_proposals_groupbox" class="imageblock"> 
         <div class="content"> 
          <img src="images/java_proposals_groupbox2.png" alt="java proposals groupbox2" /> 
         </div> 
         <div class="title">
-         Figure 15. Proposals to create new form fields in a GroupBox
+         Figure 16. Proposals to create new form fields in a GroupBox
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -1649,31 +1551,31 @@ table.CodeRay td.code>pre{padding:0}
         <p></p> 
        </div> 
        <div class="paragraph"> 
-        <p>For adding new columns in a table the set the current edit position inside a Scout table. The Scout table itself may be located inside of a TableField as shown in <a href="#img-java_proposals_table">Figure 16</a> or can also be located inside of a Scout TablePage.</p> 
+        <p>For adding new columns in a table the set the current edit position inside a Scout table. The Scout table itself may be located inside of a TableField as shown in <a href="#img-java_proposals_table">Figure 17</a> or can also be located inside of a Scout TablePage.</p> 
        </div> 
        <div id="img-java_proposals_table" class="imageblock"> 
         <div class="content"> 
          <img src="images/java_proposals_table2.png" alt="java proposals table2" /> 
         </div> 
         <div class="title">
-         Figure 16. Proposals to create new columns in a Table
+         Figure 17. Proposals to create new columns in a Table
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>Next to adding columns the content assist shown in <a href="#img-java_proposals_table">Figure 16</a> can also be used to add key stroke actions and menus to tables.</p> 
+        <p>Next to adding columns the content assist shown in <a href="#img-java_proposals_table">Figure 17</a> can also be used to add key stroke actions and menus to tables.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
        <h4 id="create-new-codes"><a class="anchor" href="#create-new-codes"></a>3.5.3. Create new Codes</h4> 
        <div class="paragraph"> 
-        <p>Adding new Codes to an existing CodeType is supported by the content assist as shown in <a href="#img-java_proposals_code">Figure 17</a>.</p> 
+        <p>Adding new Codes to an existing CodeType is supported by the content assist as shown in <a href="#img-java_proposals_code">Figure 18</a>.</p> 
        </div> 
        <div id="img-java_proposals_code" class="imageblock"> 
         <div class="content"> 
          <img src="images/java_proposals_code.png" alt="java proposals code" /> 
         </div> 
         <div class="title">
-         Figure 17. Proposals to create new codes in a CodeType
+         Figure 18. Proposals to create new codes in a CodeType
         </div> 
        </div> 
       </div> 
@@ -1692,14 +1594,14 @@ table.CodeRay td.code>pre{padding:0}
         <p>Translated text entries are most frequently added when working in the Java editor view.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>When the the current edit position is inside the String parameter of the <code>TEXTS.get()</code> code, the content assist (opened with <kbd>Ctrl</kbd> + <kbd>Space</kbd>) provides support for the NLS entries as shown in <a href="#img-java_proposals_texts">Figure 18</a>.</p> 
+        <p>When the the current edit position is inside the String parameter of the <code>TEXTS.get()</code> code, the content assist (opened with <kbd>Ctrl</kbd> + <kbd>Space</kbd>) provides support for the NLS entries as shown in <a href="#img-java_proposals_texts">Figure 19</a>.</p> 
        </div> 
        <div id="img-java_proposals_texts" class="imageblock"> 
         <div class="content"> 
          <img src="images/java_proposals_texts.png" alt="java proposals texts" /> 
         </div> 
         <div class="title">
-         Figure 18. Proposals corresponding to NLS Support.
+         Figure 19. Proposals corresponding to NLS Support.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -1884,14 +1786,14 @@ table.CodeRay td.code>pre{padding:0}
       <p>The application is kept small enough to complete this tutorial within less than a day. An extended version of &#x201c;Contacts&#x201d; is available as a Scout sample application on <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts">Github</a>.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>As a prerequisite to this tutorial we assume that the reader has successfully completed the chapters &quot;Hello World Tutorial&quot; and &quot;Import the Scout Demo Applications&quot; as described in the Eclipse Scout user guide. To access the Scout user guide help hit <kbd>F1</kbd> in the Eclipse IDE. This opens the Eclipse help view that includes the Eclipse Scout User Guide as shown in <a href="#img-sdk_f1">Figure 19</a>.</p> 
+      <p>As a prerequisite to this tutorial we assume that the reader has successfully completed the chapters &quot;Hello World Tutorial&quot; and &quot;Import the Scout Demo Applications&quot; as described in the Eclipse Scout user guide. To access the Scout user guide help hit <kbd>F1</kbd> in the Eclipse IDE. This opens the Eclipse help view that includes the Eclipse Scout User Guide as shown in <a href="#img-sdk_f1">Figure 20</a>.</p> 
      </div> 
      <div id="img-sdk_f1" class="imageblock"> 
       <div class="content"> 
        <img src="images/sdk_f1.png" alt="sdk f1" /> 
       </div> 
       <div class="title">
-       Figure 19. The Eclipse help view including the Eclipse Scout User Guide.
+       Figure 20. The Eclipse help view including the Eclipse Scout User Guide.
       </div> 
      </div> 
      <div class="paragraph"> 
@@ -1903,17 +1805,17 @@ table.CodeRay td.code>pre{padding:0}
        <p>The &#x201c;Contacts&#x201d; demo application is a client server application to manage personal contacts, organizations and events. The persistence of entered data is achieved via simple JDBC access to a Derby database.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>It is recommended that you first import the full &#x201c;Contacts&#x201d; demo application as described in the Eclipse Scout User Guide into a separate workspace. This gives you the possibility to check your source code against the full implementation during the various steps of the tutorial. Alternatively, you can also view the source code of the &#x201c;Contacts&#x201d; demo application on Github.<sup class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnote_13" title="View footnote.">13</a>]</sup>.</p> 
+       <p>It is recommended that you first import the full &#x201c;Contacts&#x201d; demo application as described in the Eclipse Scout User Guide into a separate workspace. This gives you the possibility to check your source code against the full implementation during the various steps of the tutorial. Alternatively, you can also view the source code of the &#x201c;Contacts&#x201d; demo application on Github.<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</sup>.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Figure <a href="#img-app_contacts_personpage">Figure 20</a> below shows the &#x201c;Contacts&#x201d; application after connecting to the Scout UI application.</p> 
+       <p>Figure <a href="#img-app_contacts_personpage">Figure 21</a> below shows the &#x201c;Contacts&#x201d; application after connecting to the Scout UI application.</p> 
       </div> 
       <div id="img-app_contacts_personpage" class="imageblock"> 
        <div class="content"> 
         <img src="images/app_contacts_personpage.png" alt="app contacts personpage" /> 
        </div> 
        <div class="title">
-        Figure 20. The &#x201c;Contacts&#x201d; application with the person page.
+        Figure 21. The &#x201c;Contacts&#x201d; application with the person page.
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -1925,7 +1827,7 @@ table.CodeRay td.code>pre{padding:0}
          Outline Button
         </dt> 
         <dd> 
-         <p>In <a href="#img-app_contacts_personpage">Figure 20</a> the top left area shows a folder icon that represents the &quot;Contacts&quot; outline. The small down arrow at the folder icon indicates that additional outlines are available when clicking on this view button. On the right of to button with the folder icon is second outline button that activates a search outline (not implemented yet).</p> 
+         <p>In <a href="#img-app_contacts_personpage">Figure 21</a> the top left area shows a folder icon that represents the &quot;Contacts&quot; outline. The small down arrow at the folder icon indicates that additional outlines are available when clicking on this view button. On the right of to button with the folder icon is second outline button that activates a search outline (not implemented yet).</p> 
         </dd> 
         <dt class="hdlist1">
          Navigation Tree
@@ -1943,19 +1845,19 @@ table.CodeRay td.code>pre{padding:0}
          Bench
         </dt> 
         <dd> 
-         <p>The bench represents the main display area of a Scout application. When selecting the &quot;Persons&quot; page, a table provides access to all available persons as shown in <a href="#img-app_contacts_personpage">Figure 20</a>. Selecting a specific person the provides access to all actions that are available for the selected person. The selected person can then be opened with the <em class="menu">Edit</em> menu which opens the person in a view that is displayed in the bench area again as shown in <a href="#img-app_contacts_personform">Figure 21</a>.</p> 
+         <p>The bench represents the main display area of a Scout application. When selecting the &quot;Persons&quot; page, a table provides access to all available persons as shown in <a href="#img-app_contacts_personpage">Figure 21</a>. Selecting a specific person the provides access to all actions that are available for the selected person. The selected person can then be opened with the <em class="menu">Edit</em> menu which opens the person in a view that is displayed in the bench area again as shown in <a href="#img-app_contacts_personform">Figure 22</a>.</p> 
         </dd> 
        </dl> 
       </div> 
       <div class="paragraph"> 
-       <p>For entering and editing of data in Scout applications views are used in most cases. Views are displayed in the bench area of a Scout application. Several views can also be opened simultaneously. To show a specific view the user has to click on the view button associated with the desired view. An example of an opened view is shown for person &quot;Alice&quot; in in <a href="#img-app_contacts_personform">Figure 21</a>.</p> 
+       <p>For entering and editing of data in Scout applications views are used in most cases. Views are displayed in the bench area of a Scout application. Several views can also be opened simultaneously. To show a specific view the user has to click on the view button associated with the desired view. An example of an opened view is shown for person &quot;Alice&quot; in in <a href="#img-app_contacts_personform">Figure 22</a>.</p> 
       </div> 
       <div id="img-app_contacts_personform" class="imageblock"> 
        <div class="content"> 
         <img src="images/app_contacts_personform.png" alt="app contacts personform" /> 
        </div> 
        <div class="title">
-        Figure 21. The &#x201c;Contacts&#x201d; application with a person opened in a form.
+        Figure 22. The &#x201c;Contacts&#x201d; application with a person opened in a form.
        </div> 
       </div> 
      </div> 
@@ -1981,7 +1883,7 @@ table.CodeRay td.code>pre{padding:0}
          <a href="#sec-contacts_pages">Adding the Person and Organization Page</a>
         </dt> 
         <dd> 
-         <p>The second step adds the user interface components to display persons and organizations. For this a &quot;Persons&quot; page and an &quot;Organizations&quot; page are created and added to the &quot;Contacts&quot; outline as shown in <a href="#img-app_contacts_personpage">Figure 20</a>.</p> 
+         <p>The second step adds the user interface components to display persons and organizations. For this a &quot;Persons&quot; page and an &quot;Organizations&quot; page are created and added to the &quot;Contacts&quot; outline as shown in <a href="#img-app_contacts_personpage">Figure 21</a>.</p> 
         </dd> 
         <dt class="hdlist1">
          Step 3: 
@@ -2051,7 +1953,7 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3"> 
        <h4 id="sec-contacts_initial_codebase"><a class="anchor" href="#sec-contacts_initial_codebase"></a>4.3.1. Creating the initial Codebase</h4> 
        <div class="paragraph"> 
-        <p>The initial code for the &#x201c;Contacts&#x201d; application is generated using the <em class="wizard">New Scout Project</em> wizard. For the wizard fields you may use the values below and as shown in <a href="#img-sdk_new_project_tutorial">Figure 22</a></p> 
+        <p>The initial code for the &#x201c;Contacts&#x201d; application is generated using the <em class="wizard">New Scout Project</em> wizard. For the wizard fields you may use the values below and as shown in <a href="#img-sdk_new_project_tutorial">Figure 23</a></p> 
        </div> 
        <div class="ulist"> 
         <ul> 
@@ -2065,25 +1967,25 @@ table.CodeRay td.code>pre{padding:0}
          <img src="images/sdk_new_project_tutorial.png" alt="sdk new project tutorial" /> 
         </div> 
         <div class="title">
-         Figure 22. The creation of the initial &quot;Contacts&quot; application.
+         Figure 23. The creation of the initial &quot;Contacts&quot; application.
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>To create this initial application click on <b class="button">Finish</b>. The project wizard then creates a number of Maven modules as shown in <a href="#img-contacts_package_explorer">Figure 23</a>.</p> 
+        <p>To create this initial application click on <b class="button">Finish</b>. The project wizard then creates a number of Maven modules as shown in <a href="#img-contacts_package_explorer">Figure 24</a>.</p> 
        </div> 
        <div id="img-contacts_package_explorer" class="imageblock"> 
         <div class="content"> 
          <img src="images/app_contacts_package_explorer_initial.png" alt="app contacts package explorer initial" /> 
         </div> 
         <div class="title">
-         Figure 23. The package explorer with the initial Maven modules created for the &quot;Contacts&quot; application.
+         Figure 24. The package explorer with the initial Maven modules created for the &quot;Contacts&quot; application.
         </div> 
        </div> 
       </div> 
       <div class="sect3"> 
        <h4 id="sec-contacts_remove_stuff"><a class="anchor" href="#sec-contacts_remove_stuff"></a>4.3.2. Removing unnecessery Components</h4> 
        <div class="paragraph"> 
-        <p>We start with removing the <code>*.helloworld</code> and <code>\*.settings</code> packages in all Maven modules of the &quot;Contacts&quot; application. To delete a packages first select an individual package or packages in the Eclipse package explorer as shown in <a href="#img-contacts_package_explorer">Figure 23</a> and then hit the <kbd>Delete</kbd> key.</p> 
+        <p>We start with removing the <code>*.helloworld</code> and <code>\*.settings</code> packages in all Maven modules of the &quot;Contacts&quot; application. To delete a packages first select an individual package or packages in the Eclipse package explorer as shown in <a href="#img-contacts_package_explorer">Figure 24</a> and then hit the <kbd>Delete</kbd> key.</p> 
        </div> 
        <div class="paragraph"> 
         <p>The packages to delete is provided per Maven module in the list below.</p> 
@@ -2406,7 +2308,7 @@ scout.application.name=Contacts</code></pre>
         <p>In the first step of the &quot;Contacts&quot; tutorial we have created the initial project setup that will serve as the basis for all the following tutorial steps.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>As the &quot;Contacts&quot; application is in a clean state you can now test the application using the following steps. The user interface of the application will now look as shown in <a href="#img-contacts_tutorial_result_step_1">Figure 24</a>.</p> 
+        <p>As the &quot;Contacts&quot; application is in a clean state you can now test the application using the following steps. The user interface of the application will now look as shown in <a href="#img-contacts_tutorial_result_step_1">Figure 25</a>.</p> 
        </div> 
        <div class="ulist"> 
         <ul> 
@@ -2420,7 +2322,7 @@ scout.application.name=Contacts</code></pre>
          <img src="images/contacts_tutorial_result_step_1.png" alt="contacts tutorial result step 1" /> 
         </div> 
         <div class="title">
-         Figure 24. The &quot;Contacts&quot; application at the end of tutorial step 1.
+         Figure 25. The &quot;Contacts&quot; application at the end of tutorial step 1.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -2462,7 +2364,7 @@ scout.application.name=Contacts</code></pre>
          <li> <p>Select the Java package <code>org.eclipse.scout.contacts.client</code> in folder <code>src/main/java</code></p> </li> 
          <li> <p>Press <kbd>Ctrl</kbd>+<kbd>N</kbd>, enter &quot;package&quot; into the search field</p> </li> 
          <li> <p>Select the <em class="wizard">Package</em> wizard in the proposal box and click <em class="button">Next</em></p> </li> 
-         <li> <p>Enter <code>org.eclipse.scout.contacts.client.person</code> and click <em class="button">Finish</em> as shown in <a href="#img-contacts_person_package">Figure 25</a></p> </li> 
+         <li> <p>Enter <code>org.eclipse.scout.contacts.client.person</code> and click <em class="button">Finish</em> as shown in <a href="#img-contacts_person_package">Figure 26</a></p> </li> 
          <li> <p>Make sure the newly created person package is selected in the Eclipse Package Explorer</p> </li> 
         </ul> 
        </div> 
@@ -2471,7 +2373,7 @@ scout.application.name=Contacts</code></pre>
          <img src="images/sdk_new_package_wizard.png" alt="sdk new package wizard" /> 
         </div> 
         <div class="title">
-         Figure 25. Add the person package to the &quot;Contacts&quot; application.
+         Figure 26. Add the person package to the &quot;Contacts&quot; application.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -2547,7 +2449,7 @@ scout.application.name=Contacts</code></pre>
          <li> <p>Select the newly created package <code>org.eclipse.scout.contacts.client.person</code> in the Package Explorer</p> </li> 
          <li> <p>Press <kbd>Ctrl</kbd>+<kbd>N</kbd>, enter &quot;scout page&quot; into the search field</p> </li> 
          <li> <p>Select the <em class="wizard">Scout Page</em> wizard in the proposal box and click <em class="button">Next</em></p> </li> 
-         <li> <p>Enter <code>PersonTablePage</code> as the class name and click <em class="button">Finish</em> as shown in <a href="#img-contacts_new_person_page">Figure 26</a></p> </li> 
+         <li> <p>Enter <code>PersonTablePage</code> as the class name and click <em class="button">Finish</em> as shown in <a href="#img-contacts_new_person_page">Figure 27</a></p> </li> 
         </ul> 
        </div> 
        <div id="img-contacts_new_person_page" class="imageblock"> 
@@ -2555,7 +2457,7 @@ scout.application.name=Contacts</code></pre>
          <img src="images/sdk_new_personpage_wizard.png" alt="sdk new personpage wizard" /> 
         </div> 
         <div class="title">
-         Figure 26. Add the person page to the &quot;Contacts&quot; application.
+         Figure 27. Add the person page to the &quot;Contacts&quot; application.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -2673,25 +2575,25 @@ scout.application.name=Contacts</code></pre>
         </table> 
        </div> 
        <div class="paragraph"> 
-        <p>To add the first column <code>PersonIdColumn</code> we open class <code>PersonTable</code> in the Java editor and place the cursor inside of the body of the inner <code>Table</code> class. We then open the Scout content assist with <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Space</kbd></span> and select the <em class="element">Column</em> proposal as shown in <a href="#img-sdk_new_page_column_contacts">Figure 27</a>.</p> 
+        <p>To add the first column <code>PersonIdColumn</code> we open class <code>PersonTable</code> in the Java editor and place the cursor inside of the body of the inner <code>Table</code> class. We then open the Scout content assist with <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Space</kbd></span> and select the <em class="element">Column</em> proposal as shown in <a href="#img-sdk_new_page_column_contacts">Figure 28</a>.</p> 
        </div> 
        <div id="img-sdk_new_page_column_contacts" class="imageblock"> 
         <div class="content"> 
          <img src="images/sdk_new_page_column_contacts.png" alt="sdk new page column contacts" /> 
         </div> 
         <div class="title">
-         Figure 27. Adding a column to the person page table.
+         Figure 28. Adding a column to the person page table.
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>In the first edit box we type &quot;PersonId&quot; as shown in <a href="#img-sdk_new_page_column_personid">Figure 28</a> and press <kbd>Enter</kbd>.</p> 
+        <p>In the first edit box we type &quot;PersonId&quot; as shown in <a href="#img-sdk_new_page_column_personid">Figure 29</a> and press <kbd>Enter</kbd>.</p> 
        </div> 
        <div id="img-sdk_new_page_column_personid" class="imageblock"> 
         <div class="content"> 
          <img src="images/sdk_new_page_column_personid.png" alt="sdk new page column personid" /> 
         </div> 
         <div class="title">
-         Figure 28. Adding a column to the person page table.
+         Figure 29. Adding a column to the person page table.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -2806,7 +2708,7 @@ scout.application.name=Contacts</code></pre>
          Listing 10. Implementation of the (initially invisible) phone column.
         </div> 
         <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java">Unresolved directive in _TutorialStep2.adoc - include::C:<span class="error">\</span>Users<span class="error">\</span>cgu<span class="error">\</span>git<span class="error">\</span>org.eclipse.scout.docs_6_0<span class="error">\</span>docs<span class="error">\</span>build<span class="error">\</span>beginners_guide/../../../code/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage        .java[tags=PhoneColumn]</code></pre> 
+         <pre class="CodeRay highlight"><code data-lang="java">Unresolved directive in _TutorialStep2.adoc - include::C:<span class="error">\</span>Users<span class="error">\</span>mzi<span class="error">\</span>Desktop<span class="error">\</span>oss<span class="error">\</span>github<span class="error">\</span>org.eclipse.scout.docs<span class="error">\</span>docs<span class="error">\</span>build<span class="error">\</span>beginners_guide/../../../code/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage        .java[tags=PhoneColumn]</code></pre> 
         </div> 
        </div> 
        <div class="colist arabic"> 
@@ -2963,14 +2865,14 @@ scout.application.name=Contacts</code></pre>
         <p>In the second step of the &quot;Contacts&quot; tutorial we have created a person page and an organization page to display data of persons and organizations.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the user interface in your browser. The user interface should the look as the screenshot provided in <a href="#img-contacts_tutorial_result_step_2">Figure 29</a>.</p> 
+        <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the user interface in your browser. The user interface should the look as the screenshot provided in <a href="#img-contacts_tutorial_result_step_2">Figure 30</a>.</p> 
        </div> 
        <div id="img-contacts_tutorial_result_step_2" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_tutorial_result_step_2.png" alt="contacts tutorial result step 2" /> 
         </div> 
         <div class="title">
-         Figure 29. The &quot;Contacts&quot; application with the person and organization pages at the end of tutorial step 2.
+         Figure 30. The &quot;Contacts&quot; application with the person and organization pages at the end of tutorial step 2.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -3059,14 +2961,14 @@ scout.application.name=Contacts</code></pre>
         </table> 
        </div> 
        <div class="paragraph"> 
-        <p>After adding the database dependencies to the server&#x2019;s pom.xml file we need to update all Maven server modules for the &quot;Contacts&quot; app. To do this, select the three modules <code>org.eclipse.scout.contacts.server.*</code> and hit <span class="keyseq"><kbd>Alt</kbd>+<kbd>F5</kbd></span> as shown in <a href="#img-contacts_tutorial_update_server_modules">Figure 30</a>. Start the update with <b class="button">OK</b>.</p> 
+        <p>After adding the database dependencies to the server&#x2019;s pom.xml file we need to update all Maven server modules for the &quot;Contacts&quot; app. To do this, select the three modules <code>org.eclipse.scout.contacts.server.*</code> and hit <span class="keyseq"><kbd>Alt</kbd>+<kbd>F5</kbd></span> as shown in <a href="#img-contacts_tutorial_update_server_modules">Figure 31</a>. Start the update with <b class="button">OK</b>.</p> 
        </div> 
        <div id="img-contacts_tutorial_update_server_modules" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_tutorial_update_server_modules.png" alt="contacts tutorial update server modules" /> 
         </div> 
         <div class="title">
-         Figure 30. Update the Maven server modules for the &quot;Contacts&quot; application.
+         Figure 31. Update the Maven server modules for the &quot;Contacts&quot; application.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -3088,14 +2990,14 @@ scout.application.name=Contacts</code></pre>
         <p>The simplest way to do this is to open a second Eclipse IDE with the workspace where you have imported the Scout demo applications. If you have not done this yet go to the beginning of this tutorial <a href="#cha-large_example">A One Day Tutorial</a> and catch up now.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>In the demo application workspace navigate to the same package <code>org.eclipse.scout.contacts.server.sql</code> and copy over all its classes. After copying these classes make sure that the structure of your server Maven module looks as shown in <a href="#img-contacts_tutorial_copied_db_classes">Figure 31</a>.</p> 
+        <p>In the demo application workspace navigate to the same package <code>org.eclipse.scout.contacts.server.sql</code> and copy over all its classes. After copying these classes make sure that the structure of your server Maven module looks as shown in <a href="#img-contacts_tutorial_copied_db_classes">Figure 32</a>.</p> 
        </div> 
        <div id="img-contacts_tutorial_copied_db_classes" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_tutorial_copied_db_classes.png" alt="contacts tutorial copied db classes" /> 
         </div> 
         <div class="title">
-         Figure 31. The copied database classes in the tutorial workspace.
+         Figure 32. The copied database classes in the tutorial workspace.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -3342,7 +3244,7 @@ contacts.superuser=system</code></pre>
         <div class="content"> 
          <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ApplicationScoped</span>
 <span class="annotation">@CreateImmediately</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">DatabaseSetupService</span> {
+<span class="directive">public</span> <span class="type">class</span> <span class="class">DatabaseSetupService</span> <span class="directive">implements</span> IDataStoreService {
   <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">Logger</span> LOG = LoggerFactory.getLogger(DatabaseSetupService.class);
 
   <span class="annotation">@PostConstruct</span>
@@ -3635,14 +3537,14 @@ contacts.superuser=system</code></pre>
         <p>In the third step of the &quot;Contacts&quot; tutorial we have added the infrastructure to work with a Derby database. The infrastructure is used to create and populate the initial database. In addition person and organization data is now fetched from the database on the &quot;Contacts&quot; backend server and handed to the &quot;Contacts&quot; frontend server via a page data object.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. Person and company data is now visible in the user interface as shown in <a href="#img-contacts_tutorial_result_step_3">Figure 32</a>.</p> 
+        <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. Person and company data is now visible in the user interface as shown in <a href="#img-contacts_tutorial_result_step_3">Figure 33</a>.</p> 
        </div> 
        <div id="img-contacts_tutorial_result_step_3" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_tutorial_result_step_3.png" alt="contacts tutorial result step 3" /> 
         </div> 
         <div class="title">
-         Figure 32. The &quot;Contacts&quot; application displaying person data at the end of tutorial step 3.
+         Figure 33. The &quot;Contacts&quot; application displaying person data at the end of tutorial step 3.
         </div> 
        </div> 
       </div> 
@@ -3669,14 +3571,14 @@ contacts.superuser=system</code></pre>
       <div class="sect3"> 
        <h4 id="sec-contacts_form_design"><a class="anchor" href="#sec-contacts_form_design"></a>4.6.1. Designing the Person Form</h4> 
        <div class="paragraph"> 
-        <p>We start with the sketch of the form layout as shown in <a href="#img-contacts_tutorial_person_form_1">Figure 33</a>.</p> 
+        <p>We start with the sketch of the form layout as shown in <a href="#img-contacts_tutorial_person_form_1">Figure 34</a>.</p> 
        </div> 
        <div id="img-contacts_tutorial_person_form_1" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_person_form.png" alt="contacts person form" /> 
         </div> 
         <div class="title">
-         Figure 33. A sketch of the target layout for the person form.
+         Figure 34. A sketch of the target layout for the person form.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -3686,28 +3588,28 @@ contacts.superuser=system</code></pre>
         <p>The lower half of the form contains tab boxes. A &quot;Details&quot; tab provides contact details of the person and adding notes for the person in the form of free text is possible in the &quot;Comments&quot; tab.</p> 
        </div> 
        <div class="paragraph"> 
-        <p><a href="#img-contacts_person_form_grid">Figure 34</a> below shows how the sketched form can fit with the logical grid layout of the Scout framework. Scout containers have two columns (indicated in red) per default and as many rows (indicated in yellow) as are needed.</p> 
+        <p><a href="#img-contacts_person_form_grid">Figure 35</a> below shows how the sketched form can fit with the logical grid layout of the Scout framework. Scout containers have two columns (indicated in red) per default and as many rows (indicated in yellow) as are needed.</p> 
        </div> 
        <div id="img-contacts_person_form_grid" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_person_form_grid.png" alt="contacts person form grid" /> 
         </div> 
         <div class="title">
-         Figure 34. Logical columns and rows of the Scout form layout. Scout containers have two columns per default.
+         Figure 35. Logical columns and rows of the Scout form layout. Scout containers have two columns per default.
         </div> 
        </div> 
        <div class="paragraph"> 
         <p>Individual form fields consist of a label part and a field part and occupy a single cell in the logical grid. Examples for fields using the default configuration are the first name field or the email field. When needed, fields can be configured to occupy several columns or rows. An example for this case is the image field that will hold the picture of the person. This field is configured to occupy 5 logical rows.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>With Scout&#x2019;s container widgets such as group boxes, tab boxes and sequence boxes complex layouts can be achieved. Containers provide a lot of flexibility as these widgets can be nested hierarchically as shown in <a href="#img-contacts_person_form_groups">Figure 35</a></p> 
+        <p>With Scout&#x2019;s container widgets such as group boxes, tab boxes and sequence boxes complex layouts can be achieved. Containers provide a lot of flexibility as these widgets can be nested hierarchically as shown in <a href="#img-contacts_person_form_groups">Figure 36</a></p> 
        </div> 
        <div id="img-contacts_person_form_groups" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_person_form_groups.png" alt="contacts person form groups" /> 
         </div> 
         <div class="title">
-         Figure 35. The hierarchical organization of the form including Scout group boxes, tab boxes and a sequence box.
+         Figure 36. The hierarchical organization of the form including Scout group boxes, tab boxes and a sequence box.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -3734,7 +3636,7 @@ contacts.superuser=system</code></pre>
          <li> <p>Select package <code>org.eclipse.scout.contacts.client.person</code> in folder <code>src/main/java</code></p> </li> 
          <li> <p>Press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> and enter &quot;form&quot; into the search field of the wizard selection dialog</p> </li> 
          <li> <p>Select the <em class="element">Scout Form</em> proposal and click the <b class="button">Next</b> button</p> </li> 
-         <li> <p>Enter &quot;Person&quot; into the <em class="field">Name</em> and verify that the field contents match <a href="#img-contacts_create_new_person_form">Figure 36</a></p> </li> 
+         <li> <p>Enter &quot;Person&quot; into the <em class="field">Name</em> and verify that the field contents match <a href="#img-contacts_create_new_person_form">Figure 37</a></p> </li> 
          <li> <p>Click <b class="button">Finish</b> to start the creation of the form and its related components</p> </li> 
         </ol> 
        </div> 
@@ -3743,7 +3645,7 @@ contacts.superuser=system</code></pre>
          <img src="images/contacts_create_new_person_form.png" alt="contacts create new person form" /> 
         </div> 
         <div class="title">
-         Figure 36. Use the 
+         Figure 37. Use the 
          <em class="wizard">New Scout Form</em> to create the person form.
         </div> 
        </div> 
@@ -4020,14 +3922,14 @@ contacts.superuser=system</code></pre>
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>We have now created the initial implementation of the person form including context menus to open the form from the person page and the &quot;Quick Access&quot; top level menu of the &quot;Contacts&quot; application. At this point it is already possible to verify that the person form can be opened on the user interface via the context menus. A screenshot of the current state is shown in <a href="#img-contacts_tutorial_result_step_4_intermediate">Figure 37</a>.</p> 
+        <p>We have now created the initial implementation of the person form including context menus to open the form from the person page and the &quot;Quick Access&quot; top level menu of the &quot;Contacts&quot; application. At this point it is already possible to verify that the person form can be opened on the user interface via the context menus. A screenshot of the current state is shown in <a href="#img-contacts_tutorial_result_step_4_intermediate">Figure 38</a>.</p> 
        </div> 
        <div id="img-contacts_tutorial_result_step_4_intermediate" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_tutorial_result_step_4_intermediate.png" alt="contacts tutorial result step 4 intermediate" /> 
         </div> 
         <div class="title">
-         Figure 37. The initial person form and the top level menu &quot;Create new person&quot;.
+         Figure 38. The initial person form and the top level menu &quot;Create new person&quot;.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -4051,7 +3953,7 @@ contacts.superuser=system</code></pre>
          <li> <p>Select package <code>org.eclipse.scout.contacts.shared.person</code> in folder <code>src/main/java</code></p> </li> 
          <li> <p>Press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> and enter &quot;code&quot; into the search field of the wizard selection dialog</p> </li> 
          <li> <p>Select the <em class="element">Scout CodeType</em> proposal and click the <b class="button">Next</b> button</p> </li> 
-         <li> <p>Enter &quot;Gender&quot; into the <em class="field">Name</em> field and use the type <code>String</code> for the first and second type argument according to <a href="#img-contacts_tutorial_new_gender_codetype">Figure 38</a></p> </li> 
+         <li> <p>Enter &quot;Gender&quot; into the <em class="field">Name</em> field and use the type <code>String</code> for the first and second type argument according to <a href="#img-contacts_tutorial_new_gender_codetype">Figure 39</a></p> </li> 
         </ol> 
        </div> 
        <div id="img-contacts_tutorial_new_gender_codetype" class="imageblock"> 
@@ -4059,7 +3961,7 @@ contacts.superuser=system</code></pre>
          <img src="images/contacts_tutorial_new_gender_codetype.png" alt="contacts tutorial new gender codetype" /> 
         </div> 
         <div class="title">
-         Figure 38. Create the gender code using the Scout new code wizard.
+         Figure 39. Create the gender code using the Scout new code wizard.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -4677,14 +4579,14 @@ contacts.superuser=system</code></pre>
         <p>We have also seen how we can use context menus to integrate the forms in the user interface of the application and have implemented the interaction of the frontend with the backend application including the persistance of person data in the database.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. We can now verify the creation of new person entries and the modification of existing person data in the current state of the &quot;Contacts&quot; application. The created person form is shown in <a href="#img-contacts_tutorial_result_step_4">Figure 39</a>.</p> 
+        <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. We can now verify the creation of new person entries and the modification of existing person data in the current state of the &quot;Contacts&quot; application. The created person form is shown in <a href="#img-contacts_tutorial_result_step_4">Figure 40</a>.</p> 
        </div> 
        <div id="img-contacts_tutorial_result_step_4" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_tutorial_result_step_4.png" alt="contacts tutorial result step 4" /> 
         </div> 
         <div class="title">
-         Figure 39. The &quot;Contacts&quot; application with the person form at the end of tutorial step 4.
+         Figure 40. The &quot;Contacts&quot; application with the person form at the end of tutorial step 4.
         </div> 
        </div> 
       </div> 
@@ -4915,14 +4817,14 @@ contacts.superuser=system</code></pre>
         </table> 
        </div> 
        <div class="paragraph"> 
-        <p>As we have now implemented a number of form field validations we are now ready to test the result in the running application. Re-start the &quot;Contacts&quot; application and try to trigger the different validation rules. <a href="#img-contacts_tutorial_result_step_5a">Figure 40</a> shows the response of the user interface when trying to save invalid person data.</p> 
+        <p>As we have now implemented a number of form field validations we are now ready to test the result in the running application. Re-start the &quot;Contacts&quot; application and try to trigger the different validation rules. <a href="#img-contacts_tutorial_result_step_5a">Figure 41</a> shows the response of the user interface when trying to save invalid person data.</p> 
        </div> 
        <div id="img-contacts_tutorial_result_step_5a" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_tutorial_result_step_5a.png" alt="contacts tutorial result step 5a" /> 
         </div> 
         <div class="title">
-         Figure 40. The form field validation implemented for the person form.
+         Figure 41. The form field validation implemented for the person form.
         </div> 
        </div> 
       </div> 
@@ -5095,7 +4997,7 @@ contacts.superuser=system</code></pre>
       <div class="sect3"> 
        <h4 id="sec-contacts_form_urleditform"><a class="anchor" href="#sec-contacts_form_urleditform"></a>4.7.4. Adding a simple URL Input Form to the Picture Field</h4> 
        <div class="paragraph"> 
-        <p>Using the refactored picture template field we want the user to be able to enter and update the URL of the shown picture. For this we add simple form with a single field and a context menu to the picture template field using the Scout new form wizard as shown in <a href="#img-sdk_new_form_pictureurl">Figure 41</a>.</p> 
+        <p>Using the refactored picture template field we want the user to be able to enter and update the URL of the shown picture. For this we add simple form with a single field and a context menu to the picture template field using the Scout new form wizard as shown in <a href="#img-sdk_new_form_pictureurl">Figure 42</a>.</p> 
        </div> 
        <div class="ulist"> 
         <ul> 
@@ -5110,7 +5012,7 @@ contacts.superuser=system</code></pre>
          <img src="images/sdk_new_form_pictureurl.png" alt="sdk new form pictureurl" /> 
         </div> 
         <div class="title">
-         Figure 41. Creating the picture URL form with the new form wizard.
+         Figure 42. Creating the picture URL form with the new form wizard.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -5288,14 +5190,14 @@ contacts.superuser=system</code></pre>
         </ul> 
        </div> 
        <div class="paragraph"> 
-        <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. Using the created picture template field we can now update the image in the picture form as shown in <a href="#img-contacts_tutorial_result_step_5b">Figure 42</a>.</p> 
+        <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. Using the created picture template field we can now update the image in the picture form as shown in <a href="#img-contacts_tutorial_result_step_5b">Figure 43</a>.</p> 
        </div> 
        <div id="img-contacts_tutorial_result_step_5b" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_tutorial_result_step_5b.png" alt="contacts tutorial result step 5b" /> 
         </div> 
         <div class="title">
-         Figure 42. The person form with the refactored picture template field including a menu (red square) and a URL edit form.
+         Figure 43. The person form with the refactored picture template field including a menu (red square) and a URL edit form.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -5313,11 +5215,11 @@ contacts.superuser=system</code></pre>
         <img src="images/contacts_organization_form.png" alt="contacts organization form" /> 
        </div> 
        <div class="title">
-        Figure 43. The sketch of the organization form layout.
+        Figure 44. The sketch of the organization form layout.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Considering the layout sketch for the organization form shown in <a href="#img-contacts_organization_form">Figure 43</a> we can already see how we can reuse the following fields / templates.</p> 
+       <p>Considering the layout sketch for the organization form shown in <a href="#img-contacts_organization_form">Figure 44</a> we can already see how we can reuse the following fields / templates.</p> 
       </div> 
       <div class="ulist"> 
        <ul> 
@@ -5557,14 +5459,14 @@ contacts.superuser=system</code></pre>
         <p>In the sixth step of the &quot;Contacts&quot; tutorial we have added the Scout form to edit and create organizations. The focus of this part of the tutorial was on re-using previous work and applying the concepts that have been introduced in previous tutorial steps.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. As shown in <a href="#img-contacts_tutorial_result_step_6">Figure 44</a> company data can now be viewed and entered in the user interface.</p> 
+        <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. As shown in <a href="#img-contacts_tutorial_result_step_6">Figure 45</a> company data can now be viewed and entered in the user interface.</p> 
        </div> 
        <div id="img-contacts_tutorial_result_step_6" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_tutorial_result_step_6.png" alt="contacts tutorial result step 6" /> 
         </div> 
         <div class="title">
-         Figure 44. The &quot;Contacts&quot; application with the newly created organization form.
+         Figure 45. The &quot;Contacts&quot; application with the newly created organization form.
         </div> 
        </div> 
       </div> 
@@ -5611,7 +5513,7 @@ contacts.superuser=system</code></pre>
          <li> <p>Enter &quot;lookup&quot; into the search field of the wizard selection and double click on propsal <em class="element">Scout LookupCall</em></p> </li> 
          <li> <p>Use &quot;OrganizationLookupCall&quot; as class name</p> </li> 
          <li> <p>Enter &quot;String&quot; as the key class and use service super class &quot;AbstractSqlLookupService&quot; in the wizard</p> </li> 
-         <li> <p>Verify that the fields in the wizard match the values provided in <a href="#img-sdk_new_lookupcall_organization">Figure 45</a></p> </li> 
+         <li> <p>Verify that the fields in the wizard match the values provided in <a href="#img-sdk_new_lookupcall_organization">Figure 46</a></p> </li> 
          <li> <p>Click <b class="button">Finish</b> to start the Scout lookup call wizard.</p> </li> 
         </ol> 
        </div> 
@@ -5620,7 +5522,7 @@ contacts.superuser=system</code></pre>
          <img src="images/sdk_new_lookupcall_organization.png" alt="sdk new lookupcall organization" /> 
         </div> 
         <div class="title">
-         Figure 45. Using the Scout lookup call wizard for creating class OrganizationLookupCall.
+         Figure 46. Using the Scout lookup call wizard for creating class OrganizationLookupCall.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -5790,14 +5692,14 @@ contacts.superuser=system</code></pre>
         <p>In this section we will implement a drill-down functionality on the organization page. The goal is to let the user of the application expand a row in the organization page to provide access to the persons of the organization.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Scout node pages are useful when we want to display different entities that are related to a specific entry in a parent page. In the &quot;Contacts&quot; demo application this mechanism is used to link both persons and events to an organization as shown in <a href="#img-contacts_demo_organization_nodepage">Figure 46</a>. The coloring of the application has been modified to indicate that this is a screenshot of the &quot;Contacts&quot; demo application, not the tutorial application that we are building here.</p> 
+        <p>Scout node pages are useful when we want to display different entities that are related to a specific entry in a parent page. In the &quot;Contacts&quot; demo application this mechanism is used to link both persons and events to an organization as shown in <a href="#img-contacts_demo_organization_nodepage">Figure 47</a>. The coloring of the application has been modified to indicate that this is a screenshot of the &quot;Contacts&quot; demo application, not the tutorial application that we are building here.</p> 
        </div> 
        <div id="img-contacts_demo_organization_nodepage" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_demo_organization_nodepage.png" alt="contacts demo organization nodepage" /> 
         </div> 
         <div class="title">
-         Figure 46. A drill-down on an organization in the &quot;Contacts&quot; demo application provides access to related persons and events.
+         Figure 47. A drill-down on an organization in the &quot;Contacts&quot; demo application provides access to related persons and events.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -5963,7 +5865,7 @@ contacts.superuser=system</code></pre>
          <li> <p>Enter &quot;scout page&quot; into the search field of the wizard selection and double click on propsal <em class="element">Scout Page</em></p> </li> 
          <li> <p>Add &quot;Organization&quot; to the class name field</p> </li> 
          <li> <p>Switch the super class field to &quot;AbstractPageWithNodes&quot;</p> </li> 
-         <li> <p>Verify that the fields in the wizard match the values provided in <a href="#img-sdk_new_lookupcall_organization">Figure 45</a></p> </li> 
+         <li> <p>Verify that the fields in the wizard match the values provided in <a href="#img-sdk_new_lookupcall_organization">Figure 46</a></p> </li> 
          <li> <p>Click <b class="button">Finish</b> to start the Scout page wizard</p> </li> 
         </ol> 
        </div> 
@@ -5972,7 +5874,7 @@ contacts.superuser=system</code></pre>
          <img src="images/sdk_new_organization_nodepage.png" alt="sdk new organization nodepage" /> 
         </div> 
         <div class="title">
-         Figure 47. Creating the organization node page.
+         Figure 48. Creating the organization node page.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -6056,14 +5958,14 @@ contacts.superuser=system</code></pre>
         <p>To implement a drill-down functionality for the organization table we have created a page hierarchy using the existing organization page and person page. To link the two table pages we have also created and integrated a Scout node page.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. As shown in <a href="#img-contacts_tutorial_result_step_7">Figure 48</a> the organizaion specific person data is now presented in a hierarchical form in the navigation area of the application.</p> 
+        <p>The &quot;Contacts&quot; application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. As shown in <a href="#img-contacts_tutorial_result_step_7">Figure 49</a> the organizaion specific person data is now presented in a hierarchical form in the navigation area of the application.</p> 
        </div> 
        <div id="img-contacts_tutorial_result_step_7" class="imageblock"> 
         <div class="content"> 
          <img src="images/contacts_tutorial_result_step_7.png" alt="contacts tutorial result step 7" /> 
         </div> 
         <div class="title">
-         Figure 48. The linked person page only shows person related to the parent organization page.
+         Figure 49. The linked person page only shows person related to the parent organization page.
         </div> 
        </div> 
       </div> 
@@ -6087,7 +5989,7 @@ contacts.superuser=system</code></pre>
        <h4 id="sec-contacts_theming_styling"><a class="anchor" href="#sec-contacts_theming_styling"></a>4.10.1. Theming and Styling</h4> 
        <div class="ulist"> 
         <ul> 
-         <li> <p>theme switching form for top level options menu <a href="#img-contacts_theming_styling">Figure 49</a></p> </li> 
+         <li> <p>theme switching form for top level options menu <a href="#img-contacts_theming_styling">Figure 50</a></p> </li> 
          <li> <p>project specific themes &quot;rayo&quot; and &quot;dark&quot;</p> </li> 
         </ul> 
        </div> 
@@ -6096,7 +5998,7 @@ contacts.superuser=system</code></pre>
          <img src="images/contacts_theming_styling.png" alt="contacts theming styling" /> 
         </div> 
         <div class="title">
-         Figure 49. Scout application can change between different themes at runtime.
+         Figure 50. Scout application can change between different themes at runtime.
         </div> 
        </div> 
       </div> 
@@ -6215,7 +6117,7 @@ contacts.superuser=system</code></pre>
      <div class="sect2"> 
       <h3 id="overview"><a class="anchor" href="#overview"></a>B.1. Overview</h3> 
       <div class="paragraph"> 
-       <p>This chapter walks you through the installation of Eclipse Scout. The installation description (as well as the rest of this book) is written and tested for Eclipse Scout 6.0 which is delivered as integral part of the Eclipse Neon release train, 2016. Detailed information regarding the scheduling of this release train is provided in the Eclipse wiki.<sup class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnote_14" title="View footnote.">14</a>]</sup>.</p> 
+       <p>This chapter walks you through the installation of Eclipse Scout. The installation description (as well as the rest of this book) is written and tested for Eclipse Scout 6.0 which is delivered as integral part of the Eclipse Neon release train, 2016. Detailed information regarding the scheduling of this release train is provided in the Eclipse wiki.<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</sup>.</p> 
       </div> 
       <div class="paragraph"> 
        <p>We assume that you have not installed any software relevant for the content of this book. This is why the Scout installation chapter starts with the installation of the Java Development Kit (JDK). Consequently, you will have to skip some of the sections depending on your existing setup.</p> 
@@ -6233,41 +6135,41 @@ contacts.superuser=system</code></pre>
        <p>Currently, we recommend to install the Oracle JDK 8 together with Scout. Although, using OpenJDK with Scout should work too. To successfully install the JDK you need to have at least local admin rights. You also need to know your hardware architecture in order to download the correct JDK installer.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>For Windows, the steps necessary to determine your hardware architecture are described on Microsoft&#x2019;s support site.<sup class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnote_15" title="View footnote.">15</a>]</sup>. For Linux several ways to determine if your os is running with 32 or with 64 bits can be found on the web.<sup class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnote_16" title="View footnote.">16</a>]</sup> For Mac this step is simple, as only a 64 bit package is provided on JDK the download page.</p> 
+       <p>For Windows, the steps necessary to determine your hardware architecture are described on Microsoft&#x2019;s support site.<sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnote_6" title="View footnote.">6</a>]</sup>. For Linux several ways to determine if your os is running with 32 or with 64 bits can be found on the web.<sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnote_7" title="View footnote.">7</a>]</sup> For Mac this step is simple, as only a 64 bit package is provided on JDK the download page.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Once you know your hardware architecture, go to Oracle&#x2019;s official download site.<sup class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnote_17" title="View footnote.">17</a>]</sup> and accept the licence agreement by clicking on the appropriate radio button. Then, select the <em>Windows x64</em> package if you are running 64-bit Windows as shown in <a href="#img-jdk_download_oracle">Figure 50</a>. If you are running 32-bit Windows, go for the <em>Windows x86</em> package. It is also recommended to download the <em>Java SE 8 Documentation</em>. The Java API documentation package is available from the official download site.<sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnote_18" title="View footnote.">18</a>]</sup>, located further down under section <em>Additional Resources</em>.</p> 
+       <p>Once you know your hardware architecture, go to Oracle&#x2019;s official download site.<sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</sup> and accept the licence agreement by clicking on the appropriate radio button. Then, select the <em>Windows x64</em> package if you are running 64-bit Windows as shown in <a href="#img-jdk_download_oracle">Figure 51</a>. If you are running 32-bit Windows, go for the <em>Windows x86</em> package. It is also recommended to download the <em>Java SE 8 Documentation</em>. The Java API documentation package is available from the official download site.<sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</sup>, located further down under section <em>Additional Resources</em>.</p> 
       </div> 
       <div id="img-jdk_download_oracle" class="imageblock"> 
        <div class="content"> 
         <img src="images/oracle_jdk_download.png" alt="oracle jdk download" /> 
        </div> 
        <div class="title">
-        Figure 50. Installer download for Oracle JDK 8.
+        Figure 51. Installer download for Oracle JDK 8.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Once you have successfully downloaded the JDK installer, follow the Windows installation guide.<sup class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnote_19" title="View footnote.">19</a>]</sup>. To verify the installation you might want to go through this Java &#x201c;Hello World!&#x201d; tutorial.<sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnote_20" title="View footnote.">20</a>]</sup>.</p> 
+       <p>Once you have successfully downloaded the JDK installer, follow the Windows installation guide.<sup class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</sup>. To verify the installation you might want to go through this Java &#x201c;Hello World!&#x201d; tutorial.<sup class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnote_11" title="View footnote.">11</a>]</sup>.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Installation instructions for Linux.<sup class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnote_21" title="View footnote.">21</a>]</sup> and Mac.<sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnote_22" title="View footnote.">22</a>]</sup> are also available from Oracle.</p> 
+       <p>Installation instructions for Linux.<sup class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnote_12" title="View footnote.">12</a>]</sup> and Mac.<sup class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnote_13" title="View footnote.">13</a>]</sup> are also available from Oracle.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
       <h3 id="sec-download_install"><a class="anchor" href="#sec-download_install"></a>B.3. Download and Install Scout</h3> 
       <div class="paragraph"> 
-       <p>Before you can install Scout make sure that you have a working Java Development Kit (JDK) installation version 8. To download the Eclipse Scout package visit the official Eclipse download page as shown in <a href="#img-scout_download">Figure 51</a>.</p> 
+       <p>Before you can install Scout make sure that you have a working Java Development Kit (JDK) installation version 8. To download the Eclipse Scout package visit the official Eclipse download page as shown in <a href="#img-scout_download">Figure 52</a>.</p> 
       </div> 
       <div id="img-scout_download" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_download.png" alt="scout download" /> 
        </div> 
        <div class="title">
-        Figure 51. The Eclipse download page. The platform filter is set to Windows and the available Packages are filtered for Scout.
+        Figure 52. The Eclipse download page. The platform filter is set to Windows and the available Packages are filtered for Scout.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>If the download page shows the wrong platform, manually select the correct platform in the dropdown list. As shown in <a href="#img-scout_download">Figure 51</a>, the Scout package is available as a 32 bit and a 46 bit package. Make sure to pick the package that matches your JDK installation. You can check your installation on the command line as follows.</p> 
+       <p>If the download page shows the wrong platform, manually select the correct platform in the dropdown list. As shown in <a href="#img-scout_download">Figure 52</a>, the Scout package is available as a 32 bit and a 46 bit package. Make sure to pick the package that matches your JDK installation. You can check your installation on the command line as follows.</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -6278,47 +6180,47 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.77-b28, mixed mode)</pre>
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>If the output explicitly mentions the 64 bit installation as shown above, you have a 64 bit installation. Otherwise, you have a 32 bit JDK installed. Now you can select the correct Scout package from the Eclipse download site. After the package selection, confirm the suggested download mirror as shown in <a href="#img-scout_download_mirror">Figure 52</a>.</p> 
+       <p>If the output explicitly mentions the 64 bit installation as shown above, you have a 64 bit installation. Otherwise, you have a 32 bit JDK installed. Now you can select the correct Scout package from the Eclipse download site. After the package selection, confirm the suggested download mirror as shown in <a href="#img-scout_download_mirror">Figure 53</a>.</p> 
       </div> 
       <div id="img-scout_download_mirror" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_download_mirror.png" alt="scout download mirror" /> 
        </div> 
        <div class="title">
-        Figure 52. Downloading the Scout package from a mirror.
+        Figure 53. Downloading the Scout package from a mirror.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>As the Scout package is a simple ZIP (or tar.gz) file, you may unpack its content to a folder of your choice. Inside the eclipse sub-folder, you will then find the Eclipse executable file, such as the <code>eclipse.exe</code> file on a Windows plattform. Starting the Eclipse executable brings up the workspace launcher as shown in <a href="#img-scout_start">Figure 53</a>.</p> 
+       <p>As the Scout package is a simple ZIP (or tar.gz) file, you may unpack its content to a folder of your choice. Inside the eclipse sub-folder, you will then find the Eclipse executable file, such as the <code>eclipse.exe</code> file on a Windows plattform. Starting the Eclipse executable brings up the workspace launcher as shown in <a href="#img-scout_start">Figure 54</a>.</p> 
       </div> 
       <div id="img-scout_start" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_startup_select_workspace.png" alt="scout startup select workspace" /> 
        </div> 
        <div class="title">
-        Figure 53. Starting the Eclipse Scout package and selecting an empty workspace.
+        Figure 54. Starting the Eclipse Scout package and selecting an empty workspace.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Into the <em class="field">Workspace</em> field you enter an empty target directory for your first Scout project. After clicking the <b class="button">Ok</b> button, the Eclipse IDE creates any directories that do not yet exist and opens the specified workspace. When opening a new workspace for the first time, Eclipse then displays the welcome screen shown in <a href="#img-scout_welcome">Figure 54</a>.</p> 
+       <p>Into the <em class="field">Workspace</em> field you enter an empty target directory for your first Scout project. After clicking the <b class="button">Ok</b> button, the Eclipse IDE creates any directories that do not yet exist and opens the specified workspace. When opening a new workspace for the first time, Eclipse then displays the welcome screen shown in <a href="#img-scout_welcome">Figure 55</a>.</p> 
       </div> 
       <div id="img-scout_welcome" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_startup_welcome.png" alt="scout startup welcome" /> 
        </div> 
        <div class="title">
-        Figure 54. Eclipse Scout welcome screen.
+        Figure 55. Eclipse Scout welcome screen.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>To close the welcome page and open the Scout perspective in the Eclipse IDE click on the <em class="icon">Workbench</em> icon. As a result the empty Java perspective is displayed according to <a href="#img-scout_perspective">Figure 55</a>.</p> 
+       <p>To close the welcome page and open the Scout perspective in the Eclipse IDE click on the <em class="icon">Workbench</em> icon. As a result the empty Java perspective is displayed according to <a href="#img-scout_perspective">Figure 56</a>.</p> 
       </div> 
       <div id="img-scout_perspective" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_startup_scout_explorer.png" alt="scout startup scout explorer" /> 
        </div> 
        <div class="title">
-        Figure 55. Eclipse Scout started in the Scout SDK perspective.
+        Figure 56. Eclipse Scout started in the Scout SDK perspective.
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -6367,33 +6269,33 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
         <img src="images/eclipse_install_new_software.png" alt="eclipse install new software" /> 
        </div> 
        <div class="title">
-        Figure 56. Eclipse menu to install additional software
+        Figure 57. Eclipse menu to install additional software
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>To add Scout to your existing Eclipse installation, you need to start Eclipse. Then select the <span class="menuseq"><span class="menu">Help</span>&nbsp;&#x25b8; <span class="menuitem">Install New Software&#x2026;&#x200b;</span></span> menu as shown in <a href="#img-eclipse_install_new_software">Figure 56</a> to open the install dialog.</p> 
+       <p>To add Scout to your existing Eclipse installation, you need to start Eclipse. Then select the <span class="menuseq"><span class="menu">Help</span>&nbsp;&#x25b8; <span class="menuitem">Install New Software&#x2026;&#x200b;</span></span> menu as shown in <a href="#img-eclipse_install_new_software">Figure 57</a> to open the install dialog.</p> 
       </div> 
       <div id="img-eclipse_add_repository" class="imageblock"> 
        <div class="content"> 
         <img src="images/eclipse_add_repository.png" alt="eclipse add repository" /> 
        </div> 
        <div class="title">
-        Figure 57. Add the current Scout repository
+        Figure 58. Add the current Scout repository
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In the install dialog, click on the <b class="button">Add&#x2026;&#x200b;</b> button to enter the link to the Scout repository. This opens the popup dialog <em>Add Repository</em> As shown in <a href="#img-eclipse_add_repository">Figure 57</a>, you may use &#x201c;Scout Luna&#x201d; for the <em class="field">Name</em> field. For the <em class="field">Location</em> field enter the Scout release repository as specified below. <a href="http://download.eclipse.org/scout/releases/4.0" class="bare">http://download.eclipse.org/scout/releases/4.0</a>.</p> 
+       <p>In the install dialog, click on the <b class="button">Add&#x2026;&#x200b;</b> button to enter the link to the Scout repository. This opens the popup dialog <em>Add Repository</em> As shown in <a href="#img-eclipse_add_repository">Figure 58</a>, you may use &#x201c;Scout Luna&#x201d; for the <em class="field">Name</em> field. For the <em class="field">Location</em> field enter the Scout release repository as specified below. <a href="http://download.eclipse.org/scout/releases/4.0" class="bare">http://download.eclipse.org/scout/releases/4.0</a>.</p> 
       </div> 
       <div id="img-eclipse_select_scout_features" class="imageblock"> 
        <div class="content"> 
         <img src="images/eclipse_select_scout_features.png" alt="eclipse select scout features" /> 
        </div> 
        <div class="title">
-        Figure 58. Select the Scout features to add to the Eclipse installation
+        Figure 59. Select the Scout features to add to the Eclipse installation
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>After the Eclipse IDE has connected to the Scout repository, select the Scout feature <em>Scout Application Development</em> as shown in <a href="#img-eclipse_select_scout_features">Figure 58</a>. Then, move through the installation with the <b class="button">Next</b> button. On the last installation step, accept the presented EPL terms by clicking on the appropriate radio button. To complete the installation, click the <b class="button">Finish</b> button and accept the request for a restart of Eclipse. After the restart of the Eclipse IDE, you may add the Scout perspective using the <span class="menuseq"><span class="menu">Window</span>&nbsp;&#x25b8; <span class="submenu">Open Perspective</span>&nbsp;&#x25b8; <span class="menuitem">Other &#x2026;&#x200b;</span></span> menu and selecting the Scout perspective from the presented list. Clicking on the Scout perspective button should then result in a state very similar to <a href="#img-scout_perspective">Figure 55</a>.</p> 
+       <p>After the Eclipse IDE has connected to the Scout repository, select the Scout feature <em>Scout Application Development</em> as shown in <a href="#img-eclipse_select_scout_features">Figure 59</a>. Then, move through the installation with the <b class="button">Next</b> button. On the last installation step, accept the presented EPL terms by clicking on the appropriate radio button. To complete the installation, click the <b class="button">Finish</b> button and accept the request for a restart of Eclipse. After the restart of the Eclipse IDE, you may add the Scout perspective using the <span class="menuseq"><span class="menu">Window</span>&nbsp;&#x25b8; <span class="submenu">Open Perspective</span>&nbsp;&#x25b8; <span class="menuitem">Other &#x2026;&#x200b;</span></span> menu and selecting the Scout perspective from the presented list. Clicking on the Scout perspective button should then result in a state very similar to <a href="#img-scout_perspective">Figure 56</a>.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -6408,32 +6310,32 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
     <h2 id="apx-install_tomcat"><a class="anchor" href="#apx-install_tomcat"></a>Appendix C: Apache Tomcat Installation</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p>Apache Tomcat is an open source web server that is a widely used implementation of the Java Servlet Specification. Specifically, Tomcat works very well to run Scout applications. In case you are interested in getting some general context around Tomcat you could start with the Wikipedia article.<sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnote_23" title="View footnote.">23</a>]</sup>. Then get introduced to its core component &#x201c;Tomcat Catalina&#x201d;.<sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnote_24" title="View footnote.">24</a>]</sup> before you switch to the official Tomcat homepage.<sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnote_25" title="View footnote.">25</a>]</sup>.</p> 
+      <p>Apache Tomcat is an open source web server that is a widely used implementation of the Java Servlet Specification. Specifically, Tomcat works very well to run Scout applications. In case you are interested in getting some general context around Tomcat you could start with the Wikipedia article.<sup class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnote_14" title="View footnote.">14</a>]</sup>. Then get introduced to its core component &#x201c;Tomcat Catalina&#x201d;.<sup class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnote_15" title="View footnote.">15</a>]</sup> before you switch to the official Tomcat homepage.<sup class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnote_16" title="View footnote.">16</a>]</sup>.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>This section is not really a step by step download and installation guide. Rather, it points you to the proper places for downloading and installing Tomcat. We recommend to work with Tomcat version 8.0. Start your download from the official download site.<sup class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnote_26" title="View footnote.">26</a>]</sup>.</p> 
+      <p>This section is not really a step by step download and installation guide. Rather, it points you to the proper places for downloading and installing Tomcat. We recommend to work with Tomcat version 8.0. Start your download from the official download site.<sup class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnote_17" title="View footnote.">17</a>]</sup>.</p> 
      </div> 
      <div id="img-tomcat_install" class="imageblock"> 
       <div class="content"> 
        <img src="images/tomcat_install.png" alt="tomcat install" /> 
       </div> 
       <div class="title">
-       Figure 59. A successful Tomcat 7 installation.
+       Figure 60. A successful Tomcat 7 installation.
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>Once you have downloaded and installed Tomcat 8 (see the sections below for plattform specific guidelines) you can start the corresponding service or deamon. To verify that Tomcat is actually running open a web browser of your choice and type <a href="http://localhost:8080" class="bare">http://localhost:8080</a> into the address bar. You should then see a confirmation of the successful installation according to <a href="#img-tomcat_install">Figure 59</a>.</p> 
+      <p>Once you have downloaded and installed Tomcat 8 (see the sections below for plattform specific guidelines) you can start the corresponding service or deamon. To verify that Tomcat is actually running open a web browser of your choice and type <a href="http://localhost:8080" class="bare">http://localhost:8080</a> into the address bar. You should then see a confirmation of the successful installation according to <a href="#img-tomcat_install">Figure 60</a>.</p> 
      </div> 
      <div class="sect2"> 
       <h3 id="platform-specific-instructions"><a class="anchor" href="#platform-specific-instructions"></a>C.1. Platform Specific Instructions</h3> 
       <div class="paragraph"> 
-       <p>According to the Tomcat setup installation for Windows.<sup class="footnote">[<a id="_footnoteref_27" class="footnote" href="#_footnote_27" title="View footnote.">27</a>]</sup> download the package &#x201c;32-bit/64-bit Windows Service Installer&#x201d; from the <a href="http://tomcat.apache.org/download-80.cgi">Tomcat 8 download site</a>. Then, start the installer and accept the proposed default settings.</p> 
+       <p>According to the Tomcat setup installation for Windows.<sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnote_18" title="View footnote.">18</a>]</sup> download the package &#x201c;32-bit/64-bit Windows Service Installer&#x201d; from the <a href="http://tomcat.apache.org/download-80.cgi">Tomcat 8 download site</a>. Then, start the installer and accept the proposed default settings.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>For installing Tomcat on OS X systems download the &#x201c;tar.gz&#x201d; package from the <a href="http://tomcat.apache.org/download-80.cgi">Tomcat 8 download site</a>. Then, follow the installation guide.<sup class="footnote">[<a id="_footnoteref_28" class="footnote" href="#_footnote_28" title="View footnote.">28</a>]</sup> provided by Wolf Paulus.</p> 
+       <p>For installing Tomcat on OS X systems download the &#x201c;tar.gz&#x201d; package from the <a href="http://tomcat.apache.org/download-80.cgi">Tomcat 8 download site</a>. Then, follow the installation guide.<sup class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnote_19" title="View footnote.">19</a>]</sup> provided by Wolf Paulus.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>For Linux systems download the &#x201c;tar.gz&#x201d; package from the <a href="http://tomcat.apache.org/download-80.cgi">Tomcat 8 download site</a>. Then, follow the description of the Unix setup.<sup class="footnote">[<a id="_footnoteref_29" class="footnote" href="#_footnote_29" title="View footnote.">29</a>]</sup> to run Tomcat as a deamon. If you use Ubuntu, you may want to follow the tutorial.<sup class="footnote">[<a id="_footnoteref_30" class="footnote" href="#_footnote_30" title="View footnote.">30</a>]</sup> for downloading and installing Tomcat provided by Lars Vogel.</p> 
+       <p>For Linux systems download the &#x201c;tar.gz&#x201d; package from the <a href="http://tomcat.apache.org/download-80.cgi">Tomcat 8 download site</a>. Then, follow the description of the Unix setup.<sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnote_20" title="View footnote.">20</a>]</sup> to run Tomcat as a deamon. If you use Ubuntu, you may want to follow the tutorial.<sup class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnote_21" title="View footnote.">21</a>]</sup> for downloading and installing Tomcat provided by Lars Vogel.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -6446,12 +6348,12 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
         <img src="images/tomcat_install_dir.png" alt="tomcat install dir" /> 
        </div> 
        <div class="title">
-        Figure 60. The organisation of a Tomcat installation including specific files of interest. As an example, the &#x201c;Hello World&#x201d; server application is contained in subdirectory 
+        Figure 61. The organisation of a Tomcat installation including specific files of interest. As an example, the &#x201c;Hello World&#x201d; server application is contained in subdirectory 
         <code>webapps</code>.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Note that some folders and many files of a Tomcat installation are not represented in <a href="#img-tomcat_install_dir">Figure 60</a>. We just want to provide a basic understanding of the most important parts to operate the web server in the context of this book. In the <span class="filename">bin</span> folder, the executable programs are contained, including scripts to start and stop the Tomcat instance.</p> 
+       <p>Note that some folders and many files of a Tomcat installation are not represented in <a href="#img-tomcat_install_dir">Figure 61</a>. We just want to provide a basic understanding of the most important parts to operate the web server in the context of this book. In the <span class="filename">bin</span> folder, the executable programs are contained, including scripts to start and stop the Tomcat instance.</p> 
       </div> 
       <div class="paragraph"> 
        <p>The <span class="filename">conf</span> folder contains a set of XML and property configuration file. The file <span class="filename">server.xml</span> represents Tomcat&#x2019;s main configuration file. It is used to configure general web server aspects such as the port number of its connectors for the client server communication. For the default setup, port number 8080 is used for the communication between clients applications and the web server. The file <span class="filename">tomcat-users.xml</span> contains a database of users, passwords and associated roles.</p> 
@@ -6460,7 +6362,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        <p>Folder <span class="filename">logs</span> contains various logfiles of Tomcat itself as well as host and web application log files. XXX need to provide more on what is where (especially application logs and exact setup to generate log entries from scout apps).</p> 
       </div> 
       <div class="paragraph"> 
-       <p>The folder needed for deploying web applications into a Tomcat instance is called <span class="filename">webapps</span>. It can be used as the target for copying WAR files into the web server. The installation of the WAR file then extracts its content into the corresponding directory structure as shown in <a href="#img-tomcat_install_dir">Figure 60</a> in the case of the file <span class="filename">helloworld_server.war</span>.</p> 
+       <p>The folder needed for deploying web applications into a Tomcat instance is called <span class="filename">webapps</span>. It can be used as the target for copying WAR files into the web server. The installation of the WAR file then extracts its content into the corresponding directory structure as shown in <a href="#img-tomcat_install_dir">Figure 61</a> in the case of the file <span class="filename">helloworld_server.war</span>.</p> 
       </div> 
       <div class="paragraph"> 
        <p>Finally, folder <span class="filename">work</span> contains Tomcat&#x2019;s runtime &#x201c;cache&#x201d; for the deployed web applications. It is organized according to the hierarchy of the engine (Catalina), the host (localhost), and the web application (<span class="filename">helloworld_server</span>).</p> 
@@ -6469,10 +6371,10 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
      <div class="sect2"> 
       <h3 id="apx-tomcat_manager_app"><a class="anchor" href="#apx-tomcat_manager_app"></a>C.3. The Tomcat Manager Application</h3> 
       <div class="paragraph"> 
-       <p>Tomcat comes with the pre installed &#x201c;Manager App&#x201d;. This application is useful to manage web applications and perform tasks such as deploying a web application from a WAR file, or starting and stopping installed web applications. A comprehensive documentation for the &#x201c;Manager App&#x201d; can be found under the Tomcat homepage.<sup class="footnote">[<a id="_footnoteref_31" class="footnote" href="#_footnote_31" title="View footnote.">31</a>]</sup>. Here we only show how to start this application from the hompage of a running Tomcat installation.</p> 
+       <p>Tomcat comes with the pre installed &#x201c;Manager App&#x201d;. This application is useful to manage web applications and perform tasks such as deploying a web application from a WAR file, or starting and stopping installed web applications. A comprehensive documentation for the &#x201c;Manager App&#x201d; can be found under the Tomcat homepage.<sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnote_22" title="View footnote.">22</a>]</sup>. Here we only show how to start this application from the hompage of a running Tomcat installation.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>To access this application you can switch to the &#x201c;Manager App&#x201d; with a click on the corresponding button on the right hand side. The button can be found on the right hand side of <a href="#img-tomcat_install">Figure 59</a>. Before you are allowed to start this application, you need to provide username and password credentials of a user associated with Tomcats&#x2019;s <span class="java">manager-gui</span> role.</p> 
+       <p>To access this application you can switch to the &#x201c;Manager App&#x201d; with a click on the corresponding button on the right hand side. The button can be found on the right hand side of <a href="#img-tomcat_install">Figure 60</a>. Before you are allowed to start this application, you need to provide username and password credentials of a user associated with Tomcats&#x2019;s <span class="java">manager-gui</span> role.</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -6509,130 +6411,97 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
   <div id="footnotes"> 
    <hr /> 
    <div class="footnote" id="_footnote_1"> 
-    <a href="#_footnoteref_1">1</a>. Nominating and electing a new Eclipse Scout committer: 
-    <a href="http://wiki.eclipse.org/Development_Resources/HOWTO/Nominating_and_Electing_a_New_Committer#Guidelines_for_Nominating_and_Electing_a_New_Committer" class="bare">http://wiki.eclipse.org/Development_Resources/HOWTO/Nominating_and_Electing_a_New_Committer#Guidelines_for_Nominating_and_Electing_a_New_Committer</a>. 
+    <a href="#_footnoteref_1">1</a>. The Scout server part of the &#x201c;Hello World&#x201d; application will be running on a web server. 
    </div> 
    <div class="footnote" id="_footnote_2"> 
-    <a href="#_footnoteref_2">2</a>. Example areas/topics that are abstracted by the Scout framework are user interface (UI) technologies, databases, client-server communication or logging. 
-   </div> 
-   <div class="footnote" id="_footnote_3"> 
-    <a href="#_footnoteref_3">3</a>. Java Enterprise Edition: 
-    <a href="http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition" class="bare">http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition</a> 
-   </div> 
-   <div class="footnote" id="_footnote_4"> 
-    <a href="#_footnoteref_4">4</a>. Java Standard Edition: 
-    <a href="http://en.wikipedia.org/wiki/Java_SE" class="bare">http://en.wikipedia.org/wiki/Java_SE</a> 
-   </div> 
-   <div class="footnote" id="_footnote_5"> 
-    <a href="#_footnoteref_5">5</a>. Level I Exam: docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer1.html 
-   </div> 
-   <div class="footnote" id="_footnote_6"> 
-    <a href="#_footnoteref_6">6</a>. Level II Exam: docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer2.html 
-   </div> 
-   <div class="footnote" id="_footnote_7"> 
-    <a href="#_footnoteref_7">7</a>. Eclipse Scout forum: 
-    <a href="http://www.eclipse.org/forums/eclipse.scout" class="bare">http://www.eclipse.org/forums/eclipse.scout</a> 
-   </div> 
-   <div class="footnote" id="_footnote_8"> 
-    <a href="#_footnoteref_8">8</a>. Eclipse Scout wiki: 
-    <a href="http://wiki.eclipse.org/Scout" class="bare">http://wiki.eclipse.org/Scout</a> 
-   </div> 
-   <div class="footnote" id="_footnote_9"> 
-    <a href="#_footnoteref_9">9</a>. To contact the Scout team, use the feedback provided on the Scout homepage: 
-    <a href="https://eclipse.org/scout" class="bare">https://eclipse.org/scout</a>. 
-   </div> 
-   <div class="footnote" id="_footnote_10"> 
-    <a href="#_footnoteref_10">10</a>. The Scout server part of the &#x201c;Hello World&#x201d; application will be running on a web server. 
-   </div> 
-   <div class="footnote" id="_footnote_11"> 
-    <a href="#_footnoteref_11">11</a>. Web application ARchive (WAR): 
+    <a href="#_footnoteref_2">2</a>. Web application ARchive (WAR): 
     <a href="http://en.wikipedia.org/wiki/WAR_file_format_%28Sun%29" class="bare">http://en.wikipedia.org/wiki/WAR_file_format_%28Sun%29</a> 
    </div> 
-   <div class="footnote" id="_footnote_12"> 
-    <a href="#_footnoteref_12">12</a>. TLS: 
+   <div class="footnote" id="_footnote_3"> 
+    <a href="#_footnoteref_3">3</a>. TLS: 
     <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security" class="bare">https://en.wikipedia.org/wiki/Transport_Layer_Security</a> 
    </div> 
-   <div class="footnote" id="_footnote_13"> 
-    <a href="#_footnoteref_13">13</a>. &#x201c;Contacts&#x201d; on Github: 
+   <div class="footnote" id="_footnote_4"> 
+    <a href="#_footnoteref_4">4</a>. &#x201c;Contacts&#x201d; on Github: 
     <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts" class="bare">https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts</a> 
    </div> 
-   <div class="footnote" id="_footnote_14"> 
-    <a href="#_footnoteref_14">14</a>. Luna release plan: 
+   <div class="footnote" id="_footnote_5"> 
+    <a href="#_footnoteref_5">5</a>. Luna release plan: 
     <a href="http://wiki.eclipse.org/Neon/Simultaneous_Release_Plan" class="bare">http://wiki.eclipse.org/Neon/Simultaneous_Release_Plan</a> 
    </div> 
-   <div class="footnote" id="_footnote_15"> 
-    <a href="#_footnoteref_15">15</a>. Windows 32/64-bit installation: 
+   <div class="footnote" id="_footnote_6"> 
+    <a href="#_footnoteref_6">6</a>. Windows 32/64-bit installation: 
     <a href="http://support.microsoft.com/kb/827218" class="bare">http://support.microsoft.com/kb/827218</a> 
    </div> 
-   <div class="footnote" id="_footnote_16"> 
-    <a href="#_footnoteref_16">16</a>. Linux 32/64-bit installation example page: 
+   <div class="footnote" id="_footnote_7"> 
+    <a href="#_footnoteref_7">7</a>. Linux 32/64-bit installation example page: 
     <a href="http://mylinuxbook.com/5-ways-to-check-if-linux-is-32-bit-or-64-bit/" class="bare">http://mylinuxbook.com/5-ways-to-check-if-linux-is-32-bit-or-64-bit/</a> 
    </div> 
-   <div class="footnote" id="_footnote_17"> 
-    <a href="#_footnoteref_17">17</a>. Official JDK 8 download: 
+   <div class="footnote" id="_footnote_8"> 
+    <a href="#_footnoteref_8">8</a>. Official JDK 8 download: 
     <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" class="bare">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a> 
    </div> 
-   <div class="footnote" id="_footnote_18"> 
-    <a href="#_footnoteref_18">18</a>. Java API documentation download: 
+   <div class="footnote" id="_footnote_9"> 
+    <a href="#_footnoteref_9">9</a>. Java API documentation download: 
     <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" class="bare">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a> 
    </div> 
-   <div class="footnote" id="_footnote_19"> 
-    <a href="#_footnoteref_19">19</a>. Install the JDK on Windows: 
+   <div class="footnote" id="_footnote_10"> 
+    <a href="#_footnoteref_10">10</a>. Install the JDK on Windows: 
     <a href="http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jdk-installation-windows.html#Run" class="bare">http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jdk-installation-windows.html#Run</a> 
    </div> 
-   <div class="footnote" id="_footnote_20"> 
-    <a href="#_footnoteref_20">20</a>. Windows Java &#x201c;Hello World!&#x201d;: 
+   <div class="footnote" id="_footnote_11"> 
+    <a href="#_footnoteref_11">11</a>. Windows Java &#x201c;Hello World!&#x201d;: 
     <a href="http://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html" class="bare">http://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html</a> 
    </div> 
-   <div class="footnote" id="_footnote_21"> 
-    <a href="#_footnoteref_21">21</a>. Install the JDK on Linux: 
+   <div class="footnote" id="_footnote_12"> 
+    <a href="#_footnoteref_12">12</a>. Install the JDK on Linux: 
     <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jdk.html" class="bare">https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jdk.html</a> 
    </div> 
-   <div class="footnote" id="_footnote_22"> 
-    <a href="#_footnoteref_22">22</a>. Install the JDK on Mac: 
+   <div class="footnote" id="_footnote_13"> 
+    <a href="#_footnoteref_13">13</a>. Install the JDK on Mac: 
     <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_jdk.html" class="bare">https://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_jdk.html</a>. 
    </div> 
-   <div class="footnote" id="_footnote_23"> 
-    <a href="#_footnoteref_23">23</a>. Apache Tomcat Wikipedia: 
+   <div class="footnote" id="_footnote_14"> 
+    <a href="#_footnoteref_14">14</a>. Apache Tomcat Wikipedia: 
     <a href="http://en.wikipedia.org/wiki/Apache_Tomcat" class="bare">http://en.wikipedia.org/wiki/Apache_Tomcat</a>. 
    </div> 
-   <div class="footnote" id="_footnote_24"> 
-    <a href="#_footnoteref_24">24</a>. Mulesoft&#x2019;s introduction to Tomcat Catalina: 
+   <div class="footnote" id="_footnote_15"> 
+    <a href="#_footnoteref_15">15</a>. Mulesoft&#x2019;s introduction to Tomcat Catalina: 
     <a href="http://www.mulesoft.com/tomcat-catalina" class="bare">http://www.mulesoft.com/tomcat-catalina</a>. 
    </div> 
-   <div class="footnote" id="_footnote_25"> 
-    <a href="#_footnoteref_25">25</a>. Apache Tomcat Homepage: 
+   <div class="footnote" id="_footnote_16"> 
+    <a href="#_footnoteref_16">16</a>. Apache Tomcat Homepage: 
     <a href="http://tomcat.apache.org/" class="bare">http://tomcat.apache.org/</a> 
    </div> 
-   <div class="footnote" id="_footnote_26"> 
-    <a href="#_footnoteref_26">26</a>. Tomcat 8 Downloads: 
+   <div class="footnote" id="_footnote_17"> 
+    <a href="#_footnoteref_17">17</a>. Tomcat 8 Downloads: 
     <a href="http://tomcat.apache.org/download-80.cgi" class="bare">http://tomcat.apache.org/download-80.cgi</a> 
    </div> 
-   <div class="footnote" id="_footnote_27"> 
-    <a href="#_footnoteref_27">27</a>. Tomcat Windows setup: 
+   <div class="footnote" id="_footnote_18"> 
+    <a href="#_footnoteref_18">18</a>. Tomcat Windows setup: 
     <a href="http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Windows" class="bare">http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Windows</a> 
    </div> 
-   <div class="footnote" id="_footnote_28"> 
-    <a href="#_footnoteref_28">28</a>. Installing Tomcat on OS X: 
+   <div class="footnote" id="_footnote_19"> 
+    <a href="#_footnoteref_19">19</a>. Installing Tomcat on OS X: 
     <a href="http://wolfpaulus.com/journal/mac/tomcat8" class="bare">http://wolfpaulus.com/journal/mac/tomcat8</a> 
    </div> 
-   <div class="footnote" id="_footnote_29"> 
-    <a href="#_footnoteref_29">29</a>. Tomcat Linux setup: 
+   <div class="footnote" id="_footnote_20"> 
+    <a href="#_footnoteref_20">20</a>. Tomcat Linux setup: 
     <a href="http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Unix_daemon" class="bare">http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Unix_daemon</a> 
    </div> 
-   <div class="footnote" id="_footnote_30"> 
-    <a href="#_footnoteref_30">30</a>. Apache Tomcat Tutorial: 
+   <div class="footnote" id="_footnote_21"> 
+    <a href="#_footnoteref_21">21</a>. Apache Tomcat Tutorial: 
     <a href="http://www.vogella.com/articles/ApacheTomcat/article.html" class="bare">http://www.vogella.com/articles/ApacheTomcat/article.html</a> 
    </div> 
-   <div class="footnote" id="_footnote_31"> 
-    <a href="#_footnoteref_31">31</a>. The Tomcat Manager Application: 
+   <div class="footnote" id="_footnote_22"> 
+    <a href="#_footnoteref_22">22</a>. The Tomcat Manager Application: 
     <a href="http://tomcat.apache.org/tomcat-8.0-doc/manager-howto.html" class="bare">http://tomcat.apache.org/tomcat-8.0-doc/manager-howto.html</a>. 
    </div> 
   </div> 
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0
-    <br /> Last updated 2016-06-06 09:19:58 CEST 
+    <br /> Last updated 2016-06-20 08:50:09 CEST 
    </div> 
   </div>  
  </body>
