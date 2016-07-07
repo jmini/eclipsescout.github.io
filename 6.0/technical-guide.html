@@ -610,22 +610,30 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#move-elements">12.4. Move elements</a></li> 
        <li><a href="#migration">12.5. Migration</a></li> 
       </ul> </li> 
-     <li><a href="#security">13. Security</a> 
+     <li><a href="#mobile-support">13. Mobile Support</a> 
       <ul class="sectlevel2"> 
-       <li><a href="#default-http-response-headers">13.1. Default HTTP Response Headers</a></li> 
-       <li><a href="#session-cookie-jsessionid-cookie-configuration-validation">13.2. Session Cookie (JSESSIONID Cookie) Configuration Validation</a></li> 
-       <li><a href="#secure-output">13.3. Secure Output</a></li> 
+       <li><a href="#responsive-and-touch-capable-widgets">13.1. Responsive and Touch Capable Widgets</a></li> 
+       <li><a href="#device-transformation">13.2. Device Transformation</a></li> 
+       <li><a href="#adapt-specific-components">13.3. Adapt specific Components</a></li> 
+       <li><a href="#user-agent">13.4. User Agent</a></li> 
+       <li><a href="#best-practices">13.5. Best Practices</a></li> 
       </ul> </li> 
-     <li><a href="#webservices-with-jax-ws">14. Webservices with JAX-WS</a> 
+     <li><a href="#security">14. Security</a> 
       <ul class="sectlevel2"> 
-       <li><a href="#functionality-2">14.1. Functionality</a></li> 
-       <li><a href="#jax-ws-implementor-and-deployment">14.2. JAX-WS implementor and deployment</a></li> 
-       <li><a href="#jaxws.modularization">14.3. Modularization</a></li> 
-       <li><a href="#build-webservice-stubs-and-artifacts">14.4. Build webservice stubs and artifacts</a></li> 
-       <li><a href="#provide-a-webservice">14.5. Provide a webservice</a></li> 
-       <li><a href="#consume-a-webservice">14.6. Consume a webservice</a></li> 
-       <li><a href="#jaxws.xmladapters">14.7. XML adapters to work with java.util.Date and java.util.Calendar</a></li> 
-       <li><a href="#jax-ws-appendix">14.8. JAX-WS Appendix</a></li> 
+       <li><a href="#default-http-response-headers">14.1. Default HTTP Response Headers</a></li> 
+       <li><a href="#session-cookie-jsessionid-cookie-configuration-validation">14.2. Session Cookie (JSESSIONID Cookie) Configuration Validation</a></li> 
+       <li><a href="#secure-output">14.3. Secure Output</a></li> 
+      </ul> </li> 
+     <li><a href="#webservices-with-jax-ws">15. Webservices with JAX-WS</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#functionality-2">15.1. Functionality</a></li> 
+       <li><a href="#jax-ws-implementor-and-deployment">15.2. JAX-WS implementor and deployment</a></li> 
+       <li><a href="#jaxws.modularization">15.3. Modularization</a></li> 
+       <li><a href="#build-webservice-stubs-and-artifacts">15.4. Build webservice stubs and artifacts</a></li> 
+       <li><a href="#provide-a-webservice">15.5. Provide a webservice</a></li> 
+       <li><a href="#consume-a-webservice">15.6. Consume a webservice</a></li> 
+       <li><a href="#jaxws.xmladapters">15.7. XML adapters to work with java.util.Date and java.util.Calendar</a></li> 
+       <li><a href="#jax-ws-appendix">15.8. JAX-WS Appendix</a></li> 
       </ul> </li> 
      <li><a href="#apx-cclicence">Appendix A: Licence and Copyright</a> 
       <ul class="sectlevel2"> 
@@ -648,7 +656,7 @@ table.CodeRay td.code>pre{padding:0}
        <tbody>
         <tr> 
          <td class="icon"> <i class="fa icon-warning" title="Warning"></i> </td> 
-         <td class="content"> This document is not complete. Contributions are are welcome!<br /> If you like to help, please create a pull request thanks!<br /> <br /> Repository:<br /> <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs" class="bare">https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs</a> </td> 
+         <td class="content"> This document is not complete. Contributions are welcome!<br /> If you like to help, please create a pull request. Thanks!<br /> <br /> Repository:<br /> <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs" class="bare">https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs</a> </td> 
         </tr> 
        </tbody>
       </table> 
@@ -4311,10 +4319,140 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="security"><a class="anchor" href="#security"></a>13. Security</h2> 
+    <h2 id="mobile-support"><a class="anchor" href="#mobile-support"></a>13. Mobile Support</h2> 
+    <div class="sectionbody"> 
+     <div id="img-mobile-support" class="imageblock"> 
+      <div class="content"> 
+       <img src="images/multi_device.png" alt="multi device" /> 
+      </div> 
+      <div class="title">
+       Figure 7. Scout apps run on desktops, tablets and mobile phones
+      </div> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Scout applications are mobile capable, meaning that they can be used on portable touch devices like smart phones and tablets. This capability is based on 2 main parts:</p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Responsive and Touch Capable Widgets</p> </li> 
+       <li> <p>Device Transformation</p> </li> 
+      </ul> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="responsive-and-touch-capable-widgets"><a class="anchor" href="#responsive-and-touch-capable-widgets"></a>13.1. Responsive and Touch Capable Widgets</h3> 
+      <div class="paragraph"> 
+       <p>Responsive design in context of a web application means that the design reacts to screen size changes. A Scout application does not use responsive design for the whole page, but many widgets itself may change the appearance when they don&#x2019;t fit into screen.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>One example is the menu bar that stacks all menus which don&#x2019;t fit into an ellipsis menu.</p> 
+      </div> 
+      <div id="img-responsive-menubar" class="imageblock"> 
+       <div class="content"> 
+        <img src="images/responsive_menubar.png" alt="responsive menubar" /> 
+       </div> 
+       <div class="title">
+        Figure 8. Responsive menu bar
+       </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Beside being responsive, the widgets may deal with touch devices as well. This means they are big enough to be used with the finger. And they don&#x2019;t need a mouse, especially the right mouse button.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>One example is the tooltip of a form field which is reflected by an info icon on the right side of the field. Instead of hovering over the field the user can press that info icon to bring up the tooltip. This approach not only provides an indicator where tooltips are available, it also works for mouse and touch based devices.</p> 
+      </div> 
+      <div id="img-field-tooltip" class="imageblock"> 
+       <div class="content"> 
+        <img src="images/tooltip.png" alt="tooltip" /> 
+       </div> 
+       <div class="title">
+        Figure 9. Touch friendly widgets
+       </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="device-transformation"><a class="anchor" href="#device-transformation"></a>13.2. Device Transformation</h3> 
+      <div class="paragraph"> 
+       <p>The second part of the mobile support is called device transformation. Transformation means the adaptation of model properties for different devices. Example: Setting the property labelPosition from 'left' to 'top' in order to move the label to the top.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Such transformations are done on the UI server by so called device transformers. Currently 3 device transformers are available:</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p>Mobile Device Transformer</p> </li> 
+        <li> <p>Tablet Device Transformer</p> </li> 
+        <li> <p>Touch Device Transformer</p> </li> 
+       </ul> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Which transformer is active depends on the used user agent. The mobile transformer is active if the Scout app is used on a smart phone, the tablet one is active if it is used from a tablet, and the touch transformer is active in both cases. And may also be active if a desktop device supports touch. The order in which these transformers are processed is defined using the <code>@Order</code> annotation which is possible because they are regular Scout beans. This also means you can add your own transformer if you need custom transformations.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The transformations are mainly limited to the adjustment of properties, although some properties have a bigger effect than others. The property <code>displayStyle</code> of the desktop for example controls the look of the desktop and setting it to <code>COMPACT</code> rearranges the desktop in a mobile friendly way.</p> 
+      </div> 
+      <div id="img-mobile-desktop" class="imageblock"> 
+       <div class="content"> 
+        <img src="images/contacts_mobile.png" alt="contacts mobile" /> 
+       </div> 
+       <div class="title">
+        Figure 10. Desktop with displayStyle set to 'compact'
+       </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>All the transformations are triggered by extensions to components like form fields or the desktop. These extensions are registered by <code>DeviceTransformationPlatformListener</code>. If you don&#x2019;t want any of these transformers to be active you could simply replace this listener and do nothing.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="adapt-specific-components"><a class="anchor" href="#adapt-specific-components"></a>13.3. Adapt specific Components</h3> 
+      <div class="paragraph"> 
+       <p>The device transformers take care of global transformations which should be applied for most of the components. If you need to adapt a specific component you can do it at the component itself. Let&#x2019;s say you want to hide a field if the application is running on a smart phone, you could do the following.</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Order</span>(<span class="integer">20</span>)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">MyField</span> <span class="directive">extends</span> AbstractStringField {
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="type">void</span> execInitField() {
+    <span class="keyword">if</span> (UserAgentUtility.isMobileDevice()) {
+      setVisibleGranted(<span class="predefined-constant">false</span>);
+    }
+  }
+}</code></pre> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="user-agent"><a class="anchor" href="#user-agent"></a>13.4. User Agent</h3> 
+      <div class="paragraph"> 
+       <p>The class <code>UserAgent</code> is essential for the mobile support. It stores information about the running device like the used browser or OS. The user agent is available on the UI server as well as on the backend server and can be accessed using the static method <code>UserAgent.get()</code>.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The class <code>UserAgentUtility</code> provides some useful helper methods to check which type of device is running, like if it&#x2019;s a mobile phone, a tablet, or a desktop device.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="best-practices"><a class="anchor" href="#best-practices"></a>13.5. Best Practices</h3> 
+      <div class="paragraph"> 
+       <p>When creating a Scout application which should run on touch devices as well, the following tipps may help you.</p> 
+      </div> 
+      <div class="olist arabic"> 
+       <ol class="arabic"> 
+        <li> <p>Focus on the essential. Even though most of the application should run fine on a mobile device, some parts may not make sense. Identify those parts and make them invisible using <code>setVisibleGranted(false)</code>. The advantage of using setVisibleGranted over setVisible is that the model of the invisible components won&#x2019;t be sent to the client at all, which might increase the performance a little. But remember: The users nowadays might expect every functionality to be available even on a mobile phone, so don&#x2019;t take them away too much.</p> </li> 
+        <li> <p>Limit the usage of custom HTML. Custom HTML cannot be automatically transformed, so you need to do it by yourself. Example: You created a table with several columns using HTML. On a small screen this table will be too large, so you have to make sure that your table is responsive, or provide other HTML code when running on a mobile device.</p> </li> 
+        <li> <p>Don&#x2019;t use too large values for gridH. GridH actually is the minimum grid height, so if you set gridH to 10 the field will always be at least 10 logical grid rows height. This may be too big on a mobile device.</p> </li> 
+        <li> <p>Use appropriate values for table column width. Tables are displayed the same way on a mobile phone as on the desktop device, if the content is not fully visible the user can scroll. If you have tables with <code>autoResizeColumns</code> set to true, you should make sure that the column widths are set properly. Just check how the table looks on a small screen and adjust the values accordingly.</p> </li> 
+        <li> <p>Know the difference between small screens and touch capable. If you do checks against different device types, you should be aware that a touch device is not necessarily a small device. That means <code>UserAgentUtility.isTouchDevice()</code> may be true on a laptop as well, so use it with care.</p> </li> 
+       </ol> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="security"><a class="anchor" href="#security"></a>14. Security</h2> 
     <div class="sectionbody"> 
      <div class="sect2"> 
-      <h3 id="default-http-response-headers"><a class="anchor" href="#default-http-response-headers"></a>13.1. Default HTTP Response Headers</h3> 
+      <h3 id="default-http-response-headers"><a class="anchor" href="#default-http-response-headers"></a>14.1. Default HTTP Response Headers</h3> 
       <div class="paragraph"> 
        <p>All Scout HTTP servlets delegate to a central authority to append HTTP response headers. This is the bean <code>HttpServletControl</code>. It enables developers to control which headers that should be added to the HTTP response for each servlet and request.</p> 
       </div> 
@@ -4339,7 +4477,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
        </table> 
       </div> 
       <div class="sect3"> 
-       <h4 id="x-frame-options"><a class="anchor" href="#x-frame-options"></a>13.1.1. X-Frame-Options</h4> 
+       <h4 id="x-frame-options"><a class="anchor" href="#x-frame-options"></a>14.1.1. X-Frame-Options</h4> 
        <div class="paragraph"> 
         <p>The X-Frame-Options HTTP response header <sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup> can be used to indicate whether or not a user agent should be allowed to render a page in a <code>&lt;frame&gt;</code>, <code>&lt;iframe&gt;</code> or <code>&lt;object&gt;</code>. Sites can use this to avoid clickjacking <sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</sup> attacks, by ensuring that their content is not embedded into other sites. The X-Frame-Options header is described in RFC 7034 <sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</sup>.</p> 
        </div> 
@@ -4348,7 +4486,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="x-xss-protection"><a class="anchor" href="#x-xss-protection"></a>13.1.2. X-XSS-Protection</h4> 
+       <h4 id="x-xss-protection"><a class="anchor" href="#x-xss-protection"></a>14.1.2. X-XSS-Protection</h4> 
        <div class="paragraph"> 
         <p>This header enables the XSS <sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnote_6" title="View footnote.">6</a>]</sup> filter built into most recent user agents. It&#x2019;s usually enabled by default anyway, so the role of this header is to re-enable the filter for the website if it was disabled by the user. The X-XSS-Protection header is described in <a href="https://blogs.msdn.microsoft.com/ieinternals/2011/01/31/controlling-the-xss-filter/">controlling-the-xss-filter</a>.</p> 
        </div> 
@@ -4357,7 +4495,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="content-security-policy"><a class="anchor" href="#content-security-policy"></a>13.1.3. Content Security Policy</h4> 
+       <h4 id="content-security-policy"><a class="anchor" href="#content-security-policy"></a>14.1.3. Content Security Policy</h4> 
        <div class="paragraph"> 
         <p>Content Security Policy is a HTTP response header that helps you reduce XSS risks on modern user agents by declaring what dynamic resources are allowed to load <sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnote_7" title="View footnote.">7</a>]</sup>. The CSP header is described in <a href="http://www.w3.org/TR/CSP1/">Level 1</a> and <a href="http://www.w3.org/TR/CSP2/">Level 2</a>. There is also a working draft for a <a href="http://www.w3.org/TR/CSP3/">Level 3</a>.</p> 
        </div> 
@@ -4378,7 +4516,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="session-cookie-jsessionid-cookie-configuration-validation"><a class="anchor" href="#session-cookie-jsessionid-cookie-configuration-validation"></a>13.2. Session Cookie (JSESSIONID Cookie) Configuration Validation</h3> 
+      <h3 id="session-cookie-jsessionid-cookie-configuration-validation"><a class="anchor" href="#session-cookie-jsessionid-cookie-configuration-validation"></a>14.2. Session Cookie (JSESSIONID Cookie) Configuration Validation</h3> 
       <div class="paragraph"> 
        <p>The UiServlet checks if the session cookie is configured safely. The validation is only performed on first access to the <code>UiServlet</code>. There is no automatic validation on the backend server side or on any custom servlets!</p> 
       </div> 
@@ -4386,7 +4524,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
        <p>If the validation fails, a corresponding error message is logged to the server and an exception is thrown making the <code>UiServlet</code> inaccessible. Because of security reasons the exception shown to the user includes no details about the error. These can only be seen on the server side log.</p> 
       </div> 
       <div class="sect3"> 
-       <h4 id="httponly"><a class="anchor" href="#httponly"></a>13.2.1. HttpOnly</h4> 
+       <h4 id="httponly"><a class="anchor" href="#httponly"></a>14.2.1. HttpOnly</h4> 
        <div class="paragraph"> 
         <p>First the existence of the <code>HttpOnly</code> flag is checked. The servlet container will then add this flag to the <code>Set-Cookie</code> HTTP response header. If the user agent supports this flag, the cookie cannot be accessed through a client side script. As a result even if a cross-site scripting (XSS) flaw exists and a user accidentally accesses a link that exploits this flaw, the user agent will not reveal the cookie to a third party. For a list of user agents supporting this feature please refer to <a href="https://www.owasp.org/index.php/HTTPOnly#Browsers_Supporting_HttpOnly">OWASP</a>.</p> 
        </div> 
@@ -4429,7 +4567,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="secure"><a class="anchor" href="#secure"></a>13.2.2. Secure</h4> 
+       <h4 id="secure"><a class="anchor" href="#secure"></a>14.2.2. Secure</h4> 
        <div class="paragraph"> 
         <p>Second the existence of the <code>Secure</code> flag is checked. The servlet container will then add this flag to the <code>Set-Cookie</code> HTTP response header. The purpose of the secure flag is to prevent cookies from being observed by unauthorized parties due to the transmission of a the cookie in clear text. Therefore setting this flag will prevent the user agent from transmitting the session id over an unencrypted channel.</p> 
        </div> 
@@ -4485,7 +4623,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="secure-output"><a class="anchor" href="#secure-output"></a>13.3. Secure Output</h3> 
+      <h3 id="secure-output"><a class="anchor" href="#secure-output"></a>14.3. Secure Output</h3> 
       <div class="paragraph"> 
        <p>This chapter describes how HTML Output can be handled in a secure way.</p> 
       </div> 
@@ -4493,7 +4631,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
        <p>Scout applications often display potentially dangerous data, e.g. user input or data from other systems. Encoding this input in such a way, that it can not be executed, prevents security vulnerabilities like cross-site scripting.</p> 
       </div> 
       <div class="sect3"> 
-       <h4 id="encoding-by-default"><a class="anchor" href="#encoding-by-default"></a>13.3.1. Encoding by Default</h4> 
+       <h4 id="encoding-by-default"><a class="anchor" href="#encoding-by-default"></a>14.3.1. Encoding by Default</h4> 
        <div class="paragraph"> 
         <p>By default, all input in the Scout model is encoded. Examples are values/labels in value fields, cells in tables, message in message box. The reason behind this default choice is that developers do not have to think about output encoding in the standard case and are therefore less likely to forget output encoding and introduce a security vulnerability.</p> 
        </div> 
@@ -4516,7 +4654,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="html-enabled"><a class="anchor" href="#html-enabled"></a>13.3.2. Html Enabled</h4> 
+       <h4 id="html-enabled"><a class="anchor" href="#html-enabled"></a>14.3.2. Html Enabled</h4> 
        <div class="paragraph"> 
         <p>Sometimes developers may want to use HTML in the Scout model.</p> 
        </div> 
@@ -4591,7 +4729,7 @@ protected void execInitField() {
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="webservices-with-jax-ws"><a class="anchor" href="#webservices-with-jax-ws"></a>14. Webservices with JAX-WS</h2> 
+    <h2 id="webservices-with-jax-ws"><a class="anchor" href="#webservices-with-jax-ws"></a>15. Webservices with JAX-WS</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>The Java API for XML-Based Web Services (JAX-WS) is a Java programming language API for creating web services. JAX-WS is one of the Java XML programming APIs, and is part of the Java EE platform.</p> 
@@ -4600,7 +4738,7 @@ protected void execInitField() {
       <p>Scout facilitates working with webservices, supports you in the generation of artifacts, and provides the following functionality:</p> 
      </div> 
      <div class="sect2"> 
-      <h3 id="functionality-2"><a class="anchor" href="#functionality-2"></a>14.1. Functionality</h3> 
+      <h3 id="functionality-2"><a class="anchor" href="#functionality-2"></a>15.1. Functionality</h3> 
       <div class="ulist"> 
        <ul> 
         <li> <p>ready to go Maven profile for easy webservice stub and artifact generation</p> </li> 
@@ -4615,9 +4753,9 @@ protected void execInitField() {
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jax-ws-implementor-and-deployment"><a class="anchor" href="#jax-ws-implementor-and-deployment"></a>14.2. JAX-WS implementor and deployment</h3> 
+      <h3 id="jax-ws-implementor-and-deployment"><a class="anchor" href="#jax-ws-implementor-and-deployment"></a>15.2. JAX-WS implementor and deployment</h3> 
       <div class="sect3"> 
-       <h4 id="jax-ws-version-and-implementor"><a class="anchor" href="#jax-ws-version-and-implementor"></a>14.2.1. JAX-WS version and implementor</h4> 
+       <h4 id="jax-ws-version-and-implementor"><a class="anchor" href="#jax-ws-version-and-implementor"></a>15.2.1. JAX-WS version and implementor</h4> 
        <div class="paragraph"> 
         <p>The JAX-WS Scout integration provides a thin layer on top of JAX-WS implementors to facilitate working with webservices. It depends on the JAX-WS 2.2.x API as specified in JSR 224. It is implementor neutral, and was tested with with the following implementations:</p> 
        </div> 
@@ -4633,7 +4771,7 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="running-jax-ws-in-a-servlet-container"><a class="anchor" href="#running-jax-ws-in-a-servlet-container"></a>14.2.2. Running JAX-WS in a servlet container</h4> 
+       <h4 id="running-jax-ws-in-a-servlet-container"><a class="anchor" href="#running-jax-ws-in-a-servlet-container"></a>15.2.2. Running JAX-WS in a servlet container</h4> 
        <div class="paragraph"> 
         <p>A servlet container like Apache Tomcat typically does not ship with a JAX-WS implementor. As the actual implementor, you can either use <em>JAX-WS RI</em> as shipped with the JRE, or provide a separate implementor like <em>JAX-WS METRO</em> or <em>Apache CXF</em> in the form of a Maven dependency. However, <em>JAX-WS RI</em> does not provide a servlet based entry point, because the Servlet API is not part of the Java SE specification.</p> 
        </div> 
@@ -4642,13 +4780,13 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="running-jax-ws-in-a-ee-container"><a class="anchor" href="#running-jax-ws-in-a-ee-container"></a>14.2.3. Running JAX-WS in a EE container</h4> 
+       <h4 id="running-jax-ws-in-a-ee-container"><a class="anchor" href="#running-jax-ws-in-a-ee-container"></a>15.2.3. Running JAX-WS in a EE container</h4> 
        <div class="paragraph"> 
         <p>When running in an EE container, the container typically ships with a JAX-WS implementor. It is highly recommended to use that implementor, primarily to avoid classloading issues, and to further profit from the container&#x2019;s monitoring and authentication facility. Refer to the containers documentation for more information.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jaxws.implementor.configuration"><a class="anchor" href="#jaxws.implementor.configuration"></a>14.2.4. Configure JAX-WS implementor</h4> 
+       <h4 id="jaxws.implementor.configuration"><a class="anchor" href="#jaxws.implementor.configuration"></a>15.2.4. Configure JAX-WS implementor</h4> 
        <div class="paragraph"> 
         <p>JAX-WS Scout integration is prepared to run with different implementors. Unfortunately, some implementors do not implement the JSR exactly, or some important functionality is missing in the JSR. To address this fact without loosing implementor independence, the delegate bean <a href="#JaxWsImplementorSpecifics">JaxWsImplementorSpecifics</a> exists.</p> 
        </div> 
@@ -4872,7 +5010,7 @@ protected void execInitField() {
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jaxws.modularization"><a class="anchor" href="#jaxws.modularization"></a>14.3. Modularization</h3> 
+      <h3 id="jaxws.modularization"><a class="anchor" href="#jaxws.modularization"></a>15.3. Modularization</h3> 
       <div class="paragraph"> 
        <p>Scout JAX-WS integration does not prescribe how to organize your webservices in terms of Maven modules. You could either put all your webservices directly into the server module, or create a separate <em>jaxws</em> module containing all webservices, or even create a separate <em>jaxws</em> module for each webservice. Most often, the second approach of a single, separate <em>jaxws</em> module, which the server module depends on, is chosen.</p> 
       </div> 
@@ -4891,7 +5029,7 @@ protected void execInitField() {
         <img src="images/jaxws_modularization.png" alt="jaxws modularization" /> 
        </div> 
        <div class="title">
-        Figure 7. typical modularization
+        Figure 11. typical modularization
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -4905,9 +5043,9 @@ protected void execInitField() {
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="build-webservice-stubs-and-artifacts"><a class="anchor" href="#build-webservice-stubs-and-artifacts"></a>14.4. Build webservice stubs and artifacts</h3> 
+      <h3 id="build-webservice-stubs-and-artifacts"><a class="anchor" href="#build-webservice-stubs-and-artifacts"></a>15.4. Build webservice stubs and artifacts</h3> 
       <div class="sect3"> 
-       <h4 id="jaxws.stub.generation"><a class="anchor" href="#jaxws.stub.generation"></a>14.4.1. Configure webservice stub generation via wsimport</h4> 
+       <h4 id="jaxws.stub.generation"><a class="anchor" href="#jaxws.stub.generation"></a>15.4.1. Configure webservice stub generation via wsimport</h4> 
        <div class="paragraph"> 
         <p>The Maven plugin 'org.codehaus.mojo:jaxws-maven-plugin' with the goal 'wsimport' is used to generate a webservice stub from a WSDL file and its referenced XSD schema files. If your Maven module inherits from the Scout module 'maven_rt_plugin_config-master', the 'jaxws' profile is available, which activates automatically upon the presence of a 'WEB-INF/wsdl' folder. Instead of inheriting from that module, you can alternatively copy the 'jaxws' profile into your projects parent POM module.</p> 
        </div> 
@@ -5049,7 +5187,7 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="customize-wsdl-components-and-xsd-schema-elements-via-binding-files"><a class="anchor" href="#customize-wsdl-components-and-xsd-schema-elements-via-binding-files"></a>14.4.2. Customize WSDL components and XSD schema elements via binding files</h4> 
+       <h4 id="customize-wsdl-components-and-xsd-schema-elements-via-binding-files"><a class="anchor" href="#customize-wsdl-components-and-xsd-schema-elements-via-binding-files"></a>15.4.2. Customize WSDL components and XSD schema elements via binding files</h4> 
        <div class="paragraph"> 
         <p>By default, all XML files contained in folder 'WEB-INF/binding' are used as binding files. But, most often, you will have a global binding file, which applies to all your WSDL files, and some custom binding files different per WSDL file and XSD schema files. See how to explicitly configure binding files in <a href="#lst-jaxws.pom.multiple-binding">Listing 75</a>.</p> 
        </div> 
@@ -5232,7 +5370,7 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="annotation-processing-tool-apt"><a class="anchor" href="#annotation-processing-tool-apt"></a>14.4.3. Annotation Processing Tool (APT)</h4> 
+       <h4 id="annotation-processing-tool-apt"><a class="anchor" href="#annotation-processing-tool-apt"></a>15.4.3. Annotation Processing Tool (APT)</h4> 
        <div class="paragraph"> 
         <p>Annotation Processing (APT) is a tool which can be enabled to fire for annotated types during compilation. In JAX-WS Scout integration, it is used as a trigger to generate webservice port type implementations. Such an auto-generated port type implementation is called an entry point. It is to be published as the webservice&#x2019;s endpoint, and acts as an interceptor for webservice requests. It optionally enforces for authentication, and makes the request to be executed in a <a href="#runcontext">RunContext</a>. Then, it handles the web request to the effectively implementing port type bean for actual processing.</p> 
        </div> 
@@ -5274,13 +5412,13 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="generate_artifacts_from_console"><a class="anchor" href="#generate_artifacts_from_console"></a>14.4.4. Build webservice stubs and APT artifacts from console</h4> 
+       <h4 id="generate_artifacts_from_console"><a class="anchor" href="#generate_artifacts_from_console"></a>15.4.4. Build webservice stubs and APT artifacts from console</h4> 
        <div class="paragraph"> 
         <p>Simply run <em>mvn clean compile</em> on the project. If you are experiencing some problems, run with -X debug flag to get a more detailed error message.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="generate_artifacts_from_eclipse"><a class="anchor" href="#generate_artifacts_from_eclipse"></a>14.4.5. Build webservice stubs and APT artifacts from within Eclipse IDE</h4> 
+       <h4 id="generate_artifacts_from_eclipse"><a class="anchor" href="#generate_artifacts_from_eclipse"></a>15.4.5. Build webservice stubs and APT artifacts from within Eclipse IDE</h4> 
        <div class="paragraph"> 
         <p>In the Eclipse IDE, there are three ways to generate webservice stubs and APT artifacts.</p> 
        </div> 
@@ -5296,37 +5434,37 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="exclude-derived-resources-from-version-control"><a class="anchor" href="#exclude-derived-resources-from-version-control"></a>14.4.6. Exclude derived resources from version control</h4> 
+       <h4 id="exclude-derived-resources-from-version-control"><a class="anchor" href="#exclude-derived-resources-from-version-control"></a>15.4.6. Exclude derived resources from version control</h4> 
        <div class="paragraph"> 
         <p>Stub and APT artifacts are derived resources, and should be excluded from version control. When working with Eclipse IDE, this is done automatically by eGit, because it adds derived resources to <em>.gitignore</em> (if configured to do so).</p> 
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jaxwsannotationprocessor"><a class="anchor" href="#jaxwsannotationprocessor"></a>14.4.7. JaxWsAnnotationProcessor</h4> 
+       <h4 id="jaxwsannotationprocessor"><a class="anchor" href="#jaxwsannotationprocessor"></a>15.4.7. JaxWsAnnotationProcessor</h4> 
        <div class="paragraph"> 
         <p><code>JaxWsAnnotationProcessor</code> is an annotation processor provided by Scout JAX-WS integration to generate an entry point for an endpoint interface during compilation. The instructions how to generate the entry point is given via a Java class or Java interface annotated with <a href="#WebServiceEntryPoint">WebServiceEntryPoint</a> annotation.</p> 
        </div> 
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="provide-a-webservice"><a class="anchor" href="#provide-a-webservice"></a>14.5. Provide a webservice</h3> 
+      <h3 id="provide-a-webservice"><a class="anchor" href="#provide-a-webservice"></a>15.5. Provide a webservice</h3> 
       <div class="paragraph"> 
        <p>In this chapter, you will learn how to publish a webservice provider via an entry point.</p> 
       </div> 
       <div class="sect3"> 
-       <h4 id="WebServiceEntryPoint"><a class="anchor" href="#WebServiceEntryPoint"></a>14.5.1. The concept of an Entry Point</h4> 
+       <h4 id="WebServiceEntryPoint"><a class="anchor" href="#WebServiceEntryPoint"></a>15.5.1. The concept of an Entry Point</h4> 
        <div class="paragraph"> 
         <p>An entry point implements the endpoint interface (or port type interface), and is published as the webservice endpoint for that endpoint interface. The entry point itself is auto generated by <a href="#jaxwsannotationprocessor">JaxWsAnnotationProcessor</a> during compile time, based on instructions as given by the respective class/interface annotated with <code>WebServiceEntryPoint</code> annotation. The entry point is responsible to enforce authentication and to run the web request in a <code>RunContext</code>. In turn, the request is propagated to the bean implementing the endpoint interface.</p> 
        </div> 
        <div class="paragraph"> 
-        <p><a href="#img-interaction_entrypoint_porttype">Figure 8</a> illustrates the endpoint&#x2019;s class hierarchy and the message flow for a web request.</p> 
+        <p><a href="#img-interaction_entrypoint_porttype">Figure 12</a> illustrates the endpoint&#x2019;s class hierarchy and the message flow for a web request.</p> 
        </div> 
        <div id="img-interaction_entrypoint_porttype" class="imageblock"> 
         <div class="content"> 
          <img src="images/jaxws_interaction_entrypoint_porttype.png" alt="jaxws interaction entrypoint porttype" /> 
         </div> 
         <div class="title">
-         Figure 8. Interaction of entry point and port type
+         Figure 12. Interaction of entry point and port type
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -5347,7 +5485,7 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="generate-an-entry-point-as-an-endpoint-interface"><a class="anchor" href="#generate-an-entry-point-as-an-endpoint-interface"></a>14.5.2. Generate an Entry Point as an endpoint interface</h4> 
+       <h4 id="generate-an-entry-point-as-an-endpoint-interface"><a class="anchor" href="#generate-an-entry-point-as-an-endpoint-interface"></a>15.5.2. Generate an Entry Point as an endpoint interface</h4> 
        <div class="paragraph"> 
         <p>This section describes the steps required to generate an entry point. For demonstration purposes, a simple ping webservice is used, which provides a single method 'ping' to accept and return a <code>String</code> object.</p> 
        </div> 
@@ -5389,7 +5527,7 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="instrument-the-entry-point-generation"><a class="anchor" href="#instrument-the-entry-point-generation"></a>14.5.3. Instrument the Entry Point generation</h4> 
+       <h4 id="instrument-the-entry-point-generation"><a class="anchor" href="#instrument-the-entry-point-generation"></a>15.5.3. Instrument the Entry Point generation</h4> 
        <div class="paragraph"> 
         <p>This section gives an overview on how to configure the entry point to be generated.</p> 
        </div> 
@@ -5537,7 +5675,7 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="example.entrypoint.definition"><a class="anchor" href="#example.entrypoint.definition"></a>14.5.4. Example of an Entry Point definition</h4> 
+       <h4 id="example.entrypoint.definition"><a class="anchor" href="#example.entrypoint.definition"></a>15.5.4. Example of an Entry Point definition</h4> 
        <div id="jaxws.listing.porttypedefinition" class="listingblock"> 
         <div class="title">
          Listing 79. Example configuration for an entry point definition
@@ -5617,7 +5755,7 @@ protected void execInitField() {
          <img src="images/jaxws_example_pingws_artifacts_generated.png" alt="jaxws example pingws artifacts generated" /> 
         </div> 
         <div class="title">
-         Figure 9. generated artifacts
+         Figure 13. generated artifacts
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -5679,7 +5817,7 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jaxws.provider.handlerChain"><a class="anchor" href="#jaxws.provider.handlerChain"></a>14.5.5. Configure JAX-WS Handlers</h4> 
+       <h4 id="jaxws.provider.handlerChain"><a class="anchor" href="#jaxws.provider.handlerChain"></a>15.5.5. Configure JAX-WS Handlers</h4> 
        <div class="paragraph"> 
         <p>See <a href="#example.entrypoint.definition">listing</a> for an example of how to configure JAX-WS handlers.</p> 
        </div> 
@@ -5755,7 +5893,7 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jaxws.provider.statepropagation"><a class="anchor" href="#jaxws.provider.statepropagation"></a>14.5.6. Propagate state among Handlers and port type</h4> 
+       <h4 id="jaxws.provider.statepropagation"><a class="anchor" href="#jaxws.provider.statepropagation"></a>15.5.6. Propagate state among Handlers and port type</h4> 
        <div class="paragraph"> 
         <p>Sometimes it is useful to share state among handlers, and even with the port type. This can be done via <code>javax.xml.ws.handler.MessageContext</code>. By default, a property put onto message context is only available in the handler chain. To make it available to the port type as well, set its scope to 'APPLICATION' accordingly.</p> 
        </div> 
@@ -5882,7 +6020,7 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jax-ws-correlation-id-propagation"><a class="anchor" href="#jax-ws-correlation-id-propagation"></a>14.5.7. JAX-WS Correlation ID Propagation</h4> 
+       <h4 id="jax-ws-correlation-id-propagation"><a class="anchor" href="#jax-ws-correlation-id-propagation"></a>15.5.7. JAX-WS Correlation ID Propagation</h4> 
        <div class="paragraph"> 
         <p>Scout&#x2019;s JAX-WS integration already provides complete support for reading a correlation ID from the HTTP header named <code>X-Scout-Correlation-Id</code> of the incoming web service request and propagates it to the <a href="#runcontext">RunContext</a> that executes the actual service operation. A new correlation ID is created if the HTTP header is empty or missing.</p> 
        </div> 
@@ -5938,7 +6076,7 @@ protected void execInitField() {
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="registration-of-webservice-endpoints"><a class="anchor" href="#registration-of-webservice-endpoints"></a>14.5.8. Registration of webservice endpoints</h4> 
+       <h4 id="registration-of-webservice-endpoints"><a class="anchor" href="#registration-of-webservice-endpoints"></a>15.5.8. Registration of webservice endpoints</h4> 
        <div class="paragraph"> 
         <p>The registration of webservice endpoints depends on the implementor you use, and whether you are running in an EE container with webservice auto discovery enabled.</p> 
        </div> 
@@ -6018,7 +6156,7 @@ protected void execInitField() {
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="consume-a-webservice"><a class="anchor" href="#consume-a-webservice"></a>14.6. Consume a webservice</h3> 
+      <h3 id="consume-a-webservice"><a class="anchor" href="#consume-a-webservice"></a>15.6. Consume a webservice</h3> 
       <div class="paragraph"> 
        <p>Communication with a webservice endpoint is done based on the webservice&#x2019;s port generated by 'wsimport'. Learn more how to <a href="#jaxws.stub.generation">generate a webservice stub from a WSDL file</a>.</p> 
       </div> 
@@ -6103,7 +6241,7 @@ protected void execInitField() {
        </table> 
       </div> 
       <div class="sect3"> 
-       <h4 id="invoke-a-webservice"><a class="anchor" href="#invoke-a-webservice"></a>14.6.1. Invoke a webservice</h4> 
+       <h4 id="invoke-a-webservice"><a class="anchor" href="#invoke-a-webservice"></a>15.6.1. Invoke a webservice</h4> 
        <div class="paragraph"> 
         <p>A webservice operation is invoked on behalf of an invocation context, which is associated with a dedicated port, and which specifies the data to be included in the web request. Upon a webservice call, the invocation context should be discarded.</p> 
        </div> 
@@ -6196,13 +6334,13 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="cancel-a-webservice-request"><a class="anchor" href="#cancel-a-webservice-request"></a>14.6.2. Cancel a webservice request</h4> 
+       <h4 id="cancel-a-webservice-request"><a class="anchor" href="#cancel-a-webservice-request"></a>15.6.2. Cancel a webservice request</h4> 
        <div class="paragraph"> 
         <p>The WS-Client supports for cancellation of webservice requests. Internally, every web request is run in another thread, which the calling thread waits for to complete. Upon cancellation, that other thread is interrupted, and the calling thread released with a <code>WebServiceRequestCancelledException</code>. However, depending on the JAX-WS implementor, the web request may still be running, because JAX-WS API does not support the cancellation of a web request.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="get-information-about-the-last-web-request"><a class="anchor" href="#get-information-about-the-last-web-request"></a>14.6.3. Get information about the last web request</h4> 
+       <h4 id="get-information-about-the-last-web-request"><a class="anchor" href="#get-information-about-the-last-web-request"></a>15.6.3. Get information about the last web request</h4> 
        <div class="paragraph"> 
         <p>The invocation context allows you to access HTTP status code and HTTP headers of the last web request.</p> 
        </div> 
@@ -6221,7 +6359,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="propagate-state-to-handlers"><a class="anchor" href="#propagate-state-to-handlers"></a>14.6.4. Propagate state to Handlers</h4> 
+       <h4 id="propagate-state-to-handlers"><a class="anchor" href="#propagate-state-to-handlers"></a>15.6.4. Propagate state to Handlers</h4> 
        <div class="paragraph"> 
         <p>An invocation context can be associated with request context properties, which are propagated to handlers and JAX-WS implementor.</p> 
        </div> 
@@ -6251,7 +6389,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="install-handlers-and-provide-credentials-for-authentication"><a class="anchor" href="#install-handlers-and-provide-credentials-for-authentication"></a>14.6.5. Install handlers and provide credentials for authentication</h4> 
+       <h4 id="install-handlers-and-provide-credentials-for-authentication"><a class="anchor" href="#install-handlers-and-provide-credentials-for-authentication"></a>15.6.5. Install handlers and provide credentials for authentication</h4> 
        <div class="paragraph"> 
         <p>To install a handler, overwrite <code>execInstallHandlers</code> and add the handler to the given List. The handlers are invoked in the order as added to the handler-chain. By default, there is no handler installed.</p> 
        </div> 
@@ -6288,7 +6426,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jax-ws-client-correlation-id-propagation"><a class="anchor" href="#jax-ws-client-correlation-id-propagation"></a>14.6.6. JAX-WS Client Correlation ID Propagation</h4> 
+       <h4 id="jax-ws-client-correlation-id-propagation"><a class="anchor" href="#jax-ws-client-correlation-id-propagation"></a>15.6.6. JAX-WS Client Correlation ID Propagation</h4> 
        <div class="paragraph"> 
         <p>The current context&#x2019;s correlation ID can be forwarded to the consumed web service. Scout provides a handler that sets the <code>X-Scout-Correlation-Id</code> HTTP header on the outgoing request.</p> 
        </div> 
@@ -6317,7 +6455,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="jaxws.consumer.configuration"><a class="anchor" href="#jaxws.consumer.configuration"></a>14.6.7. Default configuration of WS-Clients</h4> 
+       <h4 id="jaxws.consumer.configuration"><a class="anchor" href="#jaxws.consumer.configuration"></a>15.6.7. Default configuration of WS-Clients</h4> 
        <div class="paragraph"> 
         <p>The following properties can be set globally for all WS-Clients. However, a WS-Client can overwrite any of this values.</p> 
        </div> 
@@ -6365,7 +6503,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jaxws.xmladapters"><a class="anchor" href="#jaxws.xmladapters"></a>14.7. XML adapters to work with java.util.Date and java.util.Calendar</h3> 
+      <h3 id="jaxws.xmladapters"><a class="anchor" href="#jaxws.xmladapters"></a>15.7. XML adapters to work with java.util.Date and java.util.Calendar</h3> 
       <div class="paragraph"> 
        <p>Scout ships with some XML adapters to not have to work with <code>XMLGregorianCalendar</code>, but with <code>java.util.Date</code> instead.<br /> It is recommended to configure your global binding file accordingly. See <a href="#lst-jaxws.example.globalbindingfile">Listing 76</a> for an example.</p> 
       </div> 
@@ -6461,9 +6599,9 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
       </table> 
      </div> 
      <div class="sect2"> 
-      <h3 id="jax-ws-appendix"><a class="anchor" href="#jax-ws-appendix"></a>14.8. JAX-WS Appendix</h3> 
+      <h3 id="jax-ws-appendix"><a class="anchor" href="#jax-ws-appendix"></a>15.8. JAX-WS Appendix</h3> 
       <div class="sect3"> 
-       <h4 id="PingWebService.wsdl"><a class="anchor" href="#PingWebService.wsdl"></a>14.8.1. PingWebService.wsdl</h4> 
+       <h4 id="PingWebService.wsdl"><a class="anchor" href="#PingWebService.wsdl"></a>15.8.1. PingWebService.wsdl</h4> 
        <div class="listingblock"> 
         <div class="content"> 
          <pre class="CodeRay highlight"><code data-lang="xml"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;</span>
@@ -6514,7 +6652,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="PingWebServicePortType.java"><a class="anchor" href="#PingWebServicePortType.java"></a>14.8.2. PingWebServicePortType.java</h4> 
+       <h4 id="PingWebServicePortType.java"><a class="anchor" href="#PingWebServicePortType.java"></a>15.8.2. PingWebServicePortType.java</h4> 
        <div class="listingblock"> 
         <div class="content"> 
          <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@WebService</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">PingWebServicePortType</span><span class="delimiter">&quot;</span></span>, targetNamespace = <span class="string"><span class="delimiter">&quot;</span><span class="content">http://scout.eclipse.org/docs/ws/PingWebService/</span><span class="delimiter">&quot;</span></span>)
@@ -6529,7 +6667,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="PingWebServicePortTypeEntryPoint.java"><a class="anchor" href="#PingWebServicePortTypeEntryPoint.java"></a>14.8.3. PingWebServicePortTypeEntryPoint.java</h4> 
+       <h4 id="PingWebServicePortTypeEntryPoint.java"><a class="anchor" href="#PingWebServicePortTypeEntryPoint.java"></a>15.8.3. PingWebServicePortTypeEntryPoint.java</h4> 
        <div class="listingblock"> 
         <div class="content"> 
          <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Generated</span>(value = <span class="string"><span class="delimiter">&quot;</span><span class="content">org.eclipse.scout.jaxws.apt.JaxWsAnnotationProcessor</span><span class="delimiter">&quot;</span></span>, date = <span class="string"><span class="delimiter">&quot;</span><span class="content">2016-01-25T14:22:58:583+0100</span><span class="delimiter">&quot;</span></span>, comments = <span class="string"><span class="delimiter">&quot;</span><span class="content">EntryPoint to run webservice requests on behalf of a RunContext</span><span class="delimiter">&quot;</span></span>)
@@ -6581,7 +6719,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="PingWebServicePortTypeBean.java"><a class="anchor" href="#PingWebServicePortTypeBean.java"></a>14.8.4. PingWebServicePortTypeBean.java</h4> 
+       <h4 id="PingWebServicePortTypeBean.java"><a class="anchor" href="#PingWebServicePortTypeBean.java"></a>15.8.4. PingWebServicePortTypeBean.java</h4> 
        <div class="listingblock"> 
         <div class="content"> 
          <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ApplicationScoped</span>
@@ -6596,7 +6734,7 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="settings_org.eclipse.jdt.core.prefs"><a class="anchor" href="#settings_org.eclipse.jdt.core.prefs"></a>14.8.5. .settings/org.eclipse.jdt.core.prefs file to enable APT in Eclipse IDE</h4> 
+       <h4 id="settings_org.eclipse.jdt.core.prefs"><a class="anchor" href="#settings_org.eclipse.jdt.core.prefs"></a>15.8.5. .settings/org.eclipse.jdt.core.prefs file to enable APT in Eclipse IDE</h4> 
        <div class="listingblock"> 
         <div class="content"> 
          <pre class="CodeRay highlight"><code data-lang="xml">...
@@ -6606,7 +6744,7 @@ org.eclipse.jdt.core.compiler.processAnnotations=enabled
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="settings_org.eclipse.jdt.apt.core.prefs"><a class="anchor" href="#settings_org.eclipse.jdt.apt.core.prefs"></a>14.8.6. .settings/org.eclipse.jdt.apt.core.prefs file to enable APT in Eclipse IDE</h4> 
+       <h4 id="settings_org.eclipse.jdt.apt.core.prefs"><a class="anchor" href="#settings_org.eclipse.jdt.apt.core.prefs"></a>15.8.6. .settings/org.eclipse.jdt.apt.core.prefs file to enable APT in Eclipse IDE</h4> 
        <div class="listingblock"> 
         <div class="content"> 
          <pre class="CodeRay highlight"><code data-lang="xml">org.eclipse.jdt.apt.aptEnabled=true
@@ -6617,7 +6755,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="factorypath"><a class="anchor" href="#factorypath"></a>14.8.7. .factorypath file to enable APT in Eclipse IDE</h4> 
+       <h4 id="factorypath"><a class="anchor" href="#factorypath"></a>15.8.7. .factorypath file to enable APT in Eclipse IDE</h4> 
        <div class="listingblock"> 
         <div class="content"> 
          <pre class="CodeRay highlight"><code data-lang="xml"><span class="comment">&lt;!-- Replace 'XXX-VERSION-XXX' by the respective Scout RT version --&gt;</span>
@@ -6633,7 +6771,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="IAuthenticationMethod"><a class="anchor" href="#IAuthenticationMethod"></a>14.8.8. Authentication Method</h4> 
+       <h4 id="IAuthenticationMethod"><a class="anchor" href="#IAuthenticationMethod"></a>15.8.8. Authentication Method</h4> 
        <div class="paragraph"> 
         <p>The authentication method specifies the protocol to challenge the webservice client to provide credentials.<br /> Scout provides an implementation for <em>BASIC</em> and <em>WSSE_UsernameToken</em>. You can implement your own authentication method by implementing <code>IAuthenticationMethod</code> interface.</p> 
        </div> 
@@ -6663,7 +6801,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="ICredentialVerifier"><a class="anchor" href="#ICredentialVerifier"></a>14.8.9. Credential Verifier</h4> 
+       <h4 id="ICredentialVerifier"><a class="anchor" href="#ICredentialVerifier"></a>15.8.9. Credential Verifier</h4> 
        <div class="paragraph"> 
         <p>Verifies user&#x2019;s credentials against a data source like <em>database</em>, <em>config.properties</em>, <em>Active Directory</em>, or others.<br /> Scout provides an implementation for verification against users in <em>config.properties</em>. You can implement your own verifier by implementing <code>ICredentialVerifier</code> interface.</p> 
        </div> 
@@ -6861,7 +6999,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0
-    <br /> Last updated 2016-06-28 14:34:18 CEST 
+    <br /> Last updated 2016-07-07 10:20:19 CEST 
    </div> 
   </div>  
  </body>
