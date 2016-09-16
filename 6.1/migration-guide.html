@@ -525,18 +525,40 @@ table.CodeRay td.code>pre{padding:0}
      Table of Contents
     </div> 
     <ul class="sectlevel1"> 
+     <li><a href="#webcontent-resources">WebContent Resources</a></li> 
      <li><a href="#text-provider-service">Text Provider Service</a></li> 
      <li><a href="#content-security-policy-csp">Content Security Policy (CSP)</a> 
       <ul class="sectlevel2"> 
        <li><a href="#customizing-csp-directives">Customizing CSP directives</a></li> 
       </ul> </li> 
      <li><a href="#scout-graphics-prefsize-js">scout.graphics.prefSize() [JS]</a></li> 
-     <li><a href="#scout-modeladapter-_send-js">scout.ModelAdapter._send() [JS]</a></li> 
+     <li><a href="#scout-modeladapter-js">scout.ModelAdapter [JS]</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#_send">_send()</a></li> 
+      </ul> </li> 
+     <li><a href="#scout-widget-js">scout.Widget [JS]</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#destroy">destroy()</a></li> 
+       <li><a href="#eventsupport">EventSupport</a></li> 
+       <li><a href="#keystrokecontext">KeyStrokeContext</a></li> 
+      </ul> </li> 
      <li><a href="#mnemonics">Mnemonics</a></li> 
+     <li><a href="#changes-in-objecttype-syntax-and-scout-create-js">Changes in objectType syntax and scout.create() [JS]</a></li> 
+     <li><a href="#getfocusowner">getFocusOwner</a></li> 
+     <li><a href="#finalvalue">FinalValue</a></li> 
+     <li><a href="#postconstruct">@PostConstruct</a></li> 
     </ul> 
    </div> 
   </div> 
   <div id="content"> 
+   <div class="sect1"> 
+    <h2 id="webcontent-resources"><a class="anchor" href="#webcontent-resources"></a>WebContent Resources</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>The *.html files (index.html, login.html, logout.html etc.) have been changed. The simplest way to migrate these files is to create them anew using the Scout SDK or maven archetype and compare them with your files. For details see chapter <a href="#content-security-policy-csp">Content Security Policy (CSP)</a>.</p> 
+     </div> 
+    </div> 
+   </div> 
    <div class="sect1"> 
     <h2 id="text-provider-service"><a class="anchor" href="#text-provider-service"></a>Text Provider Service</h2> 
     <div class="sectionbody"> 
@@ -685,36 +707,100 @@ table.CodeRay td.code>pre{padding:0}
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="scout-modeladapter-_send-js"><a class="anchor" href="#scout-modeladapter-_send-js"></a>scout.ModelAdapter._send() [JS]</h2> 
+    <h2 id="scout-modeladapter-js"><a class="anchor" href="#scout-modeladapter-js"></a>scout.ModelAdapter [JS]</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p>The signature of JavaScript method <code>scout.ModelAdapter._send()</code> has changed:</p> 
-     </div> 
-     <div class="ulist"> 
-      <ul> 
-       <li> <p><strong>Old</strong>: scout.ModelAdapter._send(type, data, <span class="line-through">delay, coalesceFunc, noBusyIndicator</span>)</p> </li> 
-       <li> <p><strong>New</strong>: scout.ModelAdapter._send(type, data, options)</p> </li> 
-      </ul> 
+      <p>If you have not created any custom widgets, you can skip this. If you only used <code>BeanFields</code> for customizing you can skip it as well.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>Instead of passing individual arguments, pass all but the first two arguments in an options object: * <code>delay</code> * <code>coalesce</code> * <code>showBusyIndicator</code></p> 
+      <p>Previously every widget with a corresponding part on the server extended <code>scout.ModelAdapter</code>. A model adapter is the connector with the server, it takes the events sent from the server and calls the corresponding methods on the widget. It also sends events to the server whenever an action happens on the widget. To make the widgets usable without a server, they don&#x2019;t extend from <code>scout.ModelAdapter</code> anymore but directly from <code>scout.Widget</code>. That means every widget with a server counter part have been separated into widget and model adapter, similarly to the server side where a <code>IJsonAdapter</code> exists for every model object. The model adapter creates the widget and attaches itself to it meaning it listens for events triggered by the widget and sends elected ones to the server. It also takes the events from the server and calls the corresponding methods of the widget.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>Old:</p> 
+      <p>So if you created custom widgets you have to separate them as well. Create for each widget a separate file called the same way as the Widget + 'Adapter'. That adapter extends either directly from <code>scout.ModelAdapter</code> or from the corresponding adapter of the parent widget.</p> 
      </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="CodeRay highlight"><code data-lang="javascript"><span class="local-variable">this</span>._send(<span class="string"><span class="delimiter">'</span><span class="content">selected</span><span class="delimiter">'</span></span>, eventData, <span class="predefined-constant">null</span>, <span class="keyword">function</span>() { ... });</code></pre> 
+     <div class="paragraph"> 
+      <p>Example: You have created a <code>XyField.js</code> which extends from <code>FormField.js</code>. Now create a file called <code>XyFieldAdapter.js</code> and extend it from <code>FormFieldAdapter.js</code>.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>You now have to move the server event handling methods to the adapter, if there are any at all. If your widget does not contain a method called <code>onModelAction</code>, you are fine. Beside these action events the server may send property change events as well. For every property change event the adapter will automatically call the corresponding setter method. If there is none it will call the generic method <code>Widget.setProperty</code> which eventually calls the <code>_sync</code> and <code>_render</code> methods of the property. So if your widget contains <code>_sync</code> methods they will still be called on a server property change like before. But now you should create a JS property event to inform other widgets by using <code>Widget._setProperty</code> (note the _). This was previously done automatically for every property which is still done if there is no <code>_sync</code> method. If there is one you have to take care of it by yourself.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>For the opposite direction meaning events from UI to server you have to more or less replace the calls of <code>_send()</code> with <code>trigger()</code>. In the adapter you have to handle these widget events and call the <code>_send()</code> method accordingly. If it is a property change event it is even simpler. Just call <code>_addRemoteProperties</code> in the constructor of the model adapter for every property which should be sent to the server.</p> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="_send"><a class="anchor" href="#_send"></a>_send()</h3> 
+      <div class="paragraph"> 
+       <p>The signature of JavaScript method <code>scout.ModelAdapter._send()</code> has changed:</p> 
       </div> 
-     </div> 
-     <div class="paragraph"> 
-      <p>New:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="CodeRay highlight"><code data-lang="javascript"><span class="local-variable">this</span>._send(<span class="string"><span class="delimiter">'</span><span class="content">selected</span><span class="delimiter">'</span></span>, eventData, {
+      <div class="ulist"> 
+       <ul> 
+        <li> <p><strong>Old</strong>: scout.ModelAdapter._send(type, data, <span class="line-through">delay, coalesceFunc, noBusyIndicator</span>)</p> </li> 
+        <li> <p><strong>New</strong>: scout.ModelAdapter._send(type, data, options)</p> </li> 
+       </ul> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Instead of passing individual arguments, pass all but the first two arguments in an options object: * <code>delay</code> * <code>coalesce</code> * <code>showBusyIndicator</code></p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Old:</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="javascript"><span class="local-variable">this</span>._send(<span class="string"><span class="delimiter">'</span><span class="content">selected</span><span class="delimiter">'</span></span>, eventData, <span class="predefined-constant">null</span>, <span class="keyword">function</span>() { ... });</code></pre> 
+       </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>New:</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="javascript"><span class="local-variable">this</span>._send(<span class="string"><span class="delimiter">'</span><span class="content">selected</span><span class="delimiter">'</span></span>, eventData, {
   <span class="function">coalesce</span>: <span class="keyword">function</span>() { ... }
 });</code></pre> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="scout-widget-js"><a class="anchor" href="#scout-widget-js"></a>scout.Widget [JS]</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>If you have not created any custom widgets, you can skip this.</p> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="destroy"><a class="anchor" href="#destroy"></a>destroy()</h3> 
+      <div class="paragraph"> 
+       <p>With the separation of widget and model adapter the destroy handling has been refactored. This means every widget may now be destroyed. Previously only the widgets which extended from <code>scout.ModelAdapter</code> could be destroyed. The big advantage is that every widget now behaves the same and that there finally is a counter part for the <code>_init()</code> called <code>_destroy()</code> which makes it possible to do cleanup like removing listeners.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>For you it means you have to decide whether you want to destroy or only remove your widgets. A widget knows the following states:</p> 
+      </div> 
+      <div class="olist arabic"> 
+       <ol class="arabic"> 
+        <li> <p>initialized</p> </li> 
+        <li> <p>rendered</p> </li> 
+        <li> <p>removed</p> </li> 
+        <li> <p>destroyed</p> </li> 
+       </ol> 
+      </div> 
+      <div class="paragraph"> 
+       <p>You can remove and render the same widget as many times you want, but if you destroy it you may not use it again and you would have to create a new one. It eventually has to be destroyed though for a proper cleanup. Normally this is done by the parent widget, but in some rare cases you have to take care of it by your own.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>So check all the occurrences of <code>YourWidget.remove()</code> and maybe replace them with destroy.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="eventsupport"><a class="anchor" href="#eventsupport"></a>EventSupport</h3> 
+      <div class="paragraph"> 
+       <p>Every widget now installs the event support by default. Previously <code>_addEventSupport</code> had to be called in the constructor of the widget. This may now be removed.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="keystrokecontext"><a class="anchor" href="#keystrokecontext"></a>KeyStrokeContext</h3> 
+      <div class="paragraph"> 
+       <p>The method <code>_addKeyStrokeContextSupport</code> has been removed. If your widget needs keystroke support override <code>_createKeyStrokeContext</code> and provide one. You can probably use the default <code>scout.KeyStrokeContext</code>. The parameter of <code>_initKeyStrokeContext</code> has been removed as well. Just use <code>this.keyStrokeContext</code> instead.</p> 
       </div> 
      </div> 
     </div> 
@@ -739,6 +825,54 @@ table.CodeRay td.code>pre{padding:0}
        <li> <p><code>strings.removeMnemonic</code></p> </li> 
        <li> <p><code>strings.removeAmpersand</code></p> </li> 
       </ul> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="changes-in-objecttype-syntax-and-scout-create-js"><a class="anchor" href="#changes-in-objecttype-syntax-and-scout-create-js"></a>Changes in objectType syntax and scout.create() [JS]</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>The &quot;objectType&quot; is a string describing which JavaScipt &quot;class&quot; to use when creating an object instance using <code>scout.create()</code> (roughly similar to a Java class name). To make the object factory more robust, the separator between the type and the model variant was change from <code>.</code> to <code>:</code>. The namespace separator remains <code>.</code>. This allows the following forms of object types:.</p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p><code>&quot;StringField&quot;</code>: name without namespace, i.e. a type in the default namespace (resolves to <code>scout.StringField</code>)</p> </li> 
+       <li> <p><code>&quot;myproject.StringField&quot;</code>: namespace qualified name</p> </li> 
+       <li> <p><code>&quot;StringField:MyVariant&quot;</code>: type with variant (resolves to <code>scout.MyVariantStringField</code>), can also be combined with a namespace</p> </li> 
+      </ul> 
+     </div> 
+     <div class="paragraph"> 
+      <p><strong>Migration:</strong> Check your <em>objectFactories.js</em> and <em>defaultValues.json</em> files (if you have any in your project) for types with variant and convert the separator from <code>.</code> to <code>:</code>.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="getfocusowner"><a class="anchor" href="#getfocusowner"></a>getFocusOwner</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Method getFocusOwner() was removed from IDesktop, IForm and DesktopEvent. Since replacing the old rich client ui technologies (swing, swt) with the modern html ui, this method didn&#x2019;t work correctly anymore.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>There are no plans to implement correctly because of multiple reasons. It would increase network traffic between browser and ui server and also would be quite unreliable. The old behaviour was a synchronious result from the ui (swing, swt), which was feasible in rich client environments. But with a distant browser, a realtime result is hard to achieve and might already by outdated by its arrival at the ui server.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>If such functionality is needed, it has to be programmed with java script within the browser.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="finalvalue"><a class="anchor" href="#finalvalue"></a>FinalValue</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>setIfAbsent has been renamed to setIfAbsentAndGet. setIfAbsent now returns a boolean denoting, if a value was set or not.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="postconstruct"><a class="anchor" href="#postconstruct"></a>@PostConstruct</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>A method annotated with @PostConstruct in a Bean is now guaranteed to run exactly once. The constructor may still run more than once.</p> 
      </div> 
      <div class="admonitionblock tip"> 
       <table> 

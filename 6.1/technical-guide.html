@@ -934,7 +934,7 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3"> 
        <h4 id="bean-creation"><a class="anchor" href="#bean-creation"></a>2.3.3. Bean Creation</h4> 
        <div class="paragraph"> 
-        <p>It is not only possible to influence the number of instances to be created as learned before. It is also possible to create beans eagerly, execute methods after creation (like constructors) or to delegate the bean creation completely. These topics are described in the next sections.</p> 
+        <p>It is not only possible to influence the number of instances to be created (see <a href="#bean-scopes">Bean Scopes</a>), but also to create beans eagerly, execute methods after creation (like constructors) or to delegate the bean creation completely. These topics are described in the next sections.</p> 
        </div> 
        <div class="sect4"> 
         <h5 id="eager-beans"><a class="anchor" href="#eager-beans"></a>Eager Beans</h5> 
@@ -949,6 +949,16 @@ table.CodeRay td.code>pre{padding:0}
         <h5 id="constructors"><a class="anchor" href="#constructors"></a>Constructors</h5> 
         <div class="paragraph"> 
          <p>Beans must have empty constructors so that the bean manager can create instances. But furthermore it is possible to mark methods with the <code>javax.annotation.@PostConstruct</code> annotation. Those methods must have no parameters and will be called after the instance have been created.</p> 
+        </div> 
+        <div class="admonitionblock tip"> 
+         <table> 
+          <tbody>
+           <tr> 
+            <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
+            <td class="content"> When querying the bean manager for an application scoped bean, it will always return the same instance. However, the constructor of an application scoped bean may run more than once, whereas a method annotated with @PostConstruct in an application scoped been is guaranteed to run exactly once. </td> 
+           </tr> 
+          </tbody>
+         </table> 
         </div> 
        </div> 
       </div> 
@@ -5690,15 +5700,15 @@ protected void execInitField() {
     portName = <span class="string"><span class="delimiter">&quot;</span><span class="content">PingWebServicePort</span><span class="delimiter">&quot;</span></span>,
     handlerChain = {<i class="conum" data-value="2"></i><b>(2)</b>
         <span class="annotation">@Handler</span>(<span class="annotation">@Clazz</span>(CorrelationIdHandler.class)), <i class="conum" data-value="3"></i><b>(3)</b>
-        <span class="annotation">@Handler</span>(value = <span class="annotation">@Clazz</span>(IPAddressFilter.class) , initParams = { <i class="conum" data-value="4"></i><b>(4)</b>
+        <span class="annotation">@Handler</span>(value = <span class="annotation">@Clazz</span>(IPAddressFilter.class), initParams = { <i class="conum" data-value="4"></i><b>(4)</b>
             <span class="annotation">@InitParam</span>(key = <span class="string"><span class="delimiter">&quot;</span><span class="content">rangeFrom</span><span class="delimiter">&quot;</span></span>, value = <span class="string"><span class="delimiter">&quot;</span><span class="content">192.200.0.0</span><span class="delimiter">&quot;</span></span>),
             <span class="annotation">@InitParam</span>(key = <span class="string"><span class="delimiter">&quot;</span><span class="content">rangeTo</span><span class="delimiter">&quot;</span></span>, value = <span class="string"><span class="delimiter">&quot;</span><span class="content">192.255.0.0</span><span class="delimiter">&quot;</span></span>)}),
         <span class="annotation">@Handler</span>(<span class="annotation">@Clazz</span>(LogHandler.class)), <i class="conum" data-value="5"></i><b>(5)</b>
     },
     authentication = <span class="annotation">@Authentication</span>( <i class="conum" data-value="6"></i><b>(6)</b>
         order = <span class="integer">2</span>, <i class="conum" data-value="7"></i><b>(7)</b>
-        method = <span class="annotation">@Clazz</span>(BasicAuthenticationMethod.class) , <i class="conum" data-value="8"></i><b>(8)</b>
-        verifier = <span class="annotation">@Clazz</span>(ConfigFileCredentialVerifier.class) ) ) <i class="conum" data-value="9"></i><b>(9)</b>
+        method = <span class="annotation">@Clazz</span>(BasicAuthenticationMethod.class), <i class="conum" data-value="8"></i><b>(8)</b>
+        verifier = <span class="annotation">@Clazz</span>(ConfigFileCredentialVerifier.class))) <i class="conum" data-value="9"></i><b>(9)</b>
 <span class="annotation">@MTOM</span> <i class="conum" data-value="10"></i><b>(10)</b></code></pre> 
         </div> 
        </div> 
@@ -6061,8 +6071,8 @@ protected void execInitField() {
         <span class="annotation">@Handler</span>(<span class="annotation">@Clazz</span>(LogHandler.class)),
     },
     authentication = <span class="annotation">@Authentication</span>(
-        method = <span class="annotation">@Clazz</span>(BasicAuthenticationMethod.class) ,
-        verifier = <span class="annotation">@Clazz</span>(ConfigFileCredentialVerifier.class) ) )</code></pre> 
+        method = <span class="annotation">@Clazz</span>(BasicAuthenticationMethod.class),
+        verifier = <span class="annotation">@Clazz</span>(ConfigFileCredentialVerifier.class)))</code></pre> 
         </div> 
        </div> 
        <div class="colist arabic"> 
@@ -6680,25 +6690,11 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
 
   <span class="annotation">@Override</span>
   <span class="directive">public</span> <span class="predefined-type">String</span> ping(<span class="directive">final</span> <span class="predefined-type">String</span> ping) {
-    <span class="directive">final</span> RunContext servletRunContext = JaxWsServletRunContexts.copyCurrent().withWebServiceContext(m_webServiceContext);
-    <span class="directive">final</span> RunContext requestRunContext = MessageContexts.getRunContext(m_webServiceContext.getMessageContext());
     <span class="keyword">try</span> {
-      <span class="keyword">return</span> servletRunContext.call(<span class="keyword">new</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">String</span>&gt;() {
-
+      <span class="keyword">return</span> lookupRunContext().call(<span class="keyword">new</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">String</span>&gt;() {
         <span class="annotation">@Override</span>
         <span class="directive">public</span> <span class="directive">final</span> <span class="predefined-type">String</span> call() <span class="directive">throws</span> <span class="exception">Exception</span> {
-          <span class="keyword">if</span> (requestRunContext == <span class="predefined-constant">null</span>) {
-            <span class="keyword">return</span> BEANS.get(org.eclipse.scout.docs.ws.pingwebservice.PingWebServicePortType.class).ping(ping);
-          }
-          <span class="keyword">else</span> {
-            <span class="keyword">return</span> requestRunContext.call(<span class="keyword">new</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">String</span>&gt;() {
-
-              <span class="annotation">@Override</span>
-              <span class="directive">public</span> <span class="directive">final</span> <span class="predefined-type">String</span> call() <span class="directive">throws</span> <span class="exception">Exception</span> {
-                <span class="keyword">return</span> BEANS.get(org.eclipse.scout.docs.ws.pingwebservice.PingWebServicePortType.class).ping(ping);
-              }
-            }, DefaultExceptionTranslator.class);
-          }
+          <span class="keyword">return</span> BEANS.get(PingWebServicePortType.class).ping(ping);
         }
       }, DefaultExceptionTranslator.class);
     }
@@ -6708,12 +6704,11 @@ port.ping(<span class="string"><span class="delimiter">&quot;</span><span class=
   }
 
   <span class="directive">protected</span> <span class="exception">RuntimeException</span> handleUndeclaredFault(<span class="directive">final</span> <span class="exception">Exception</span> e) {
-    <span class="keyword">if</span> (e <span class="keyword">instanceof</span> <span class="exception">RuntimeException</span>) {
-      <span class="keyword">throw</span> (<span class="exception">RuntimeException</span>) e;
-    }
-    <span class="keyword">else</span> {
-      <span class="keyword">throw</span> <span class="keyword">new</span> HTTPException(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-    }
+    <span class="keyword">throw</span> BEANS.get(JaxWsUndeclaredExceptionTranslator.class).translate(e);
+  }
+
+  <span class="directive">protected</span> RunContext lookupRunContext() {
+    <span class="keyword">return</span> BEANS.get(JaxWsRunContextLookup.class).lookup(m_webServiceContext);
   }
 }</code></pre> 
         </div> 

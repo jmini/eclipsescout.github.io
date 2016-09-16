@@ -527,8 +527,10 @@ table.CodeRay td.code>pre{padding:0}
     <ul class="sectlevel0"> 
      <li><a href="#what-s-new">What&#x2019;s New</a> 
       <ul class="sectlevel1"> 
-       <li><a href="#mnemonics">Mnemonics</a></li> 
        <li><a href="#strong-content-security-policy-csp">Strong content security policy CSP</a></li> 
+       <li><a href="#binary-resources-support-for-htmlfield-and-beanfield">Binary resources support for HtmlField and BeanField</a></li> 
+       <li><a href="#tristate-capability-for-checkbox-and-boolean-column">Tristate capability for checkbox and boolean column</a></li> 
+       <li><a href="#mnemonics">Mnemonics</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -536,18 +538,54 @@ table.CodeRay td.code>pre{padding:0}
   <div id="content"> 
    <h1 id="what-s-new" class="sect0"><a class="anchor" href="#what-s-new"></a>What&#x2019;s New</h1> 
    <div class="sect1"> 
-    <h2 id="mnemonics"><a class="anchor" href="#mnemonics"></a>Mnemonics</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>Mnemonics are not supported anymore. All affected texts were either edited or removed because they are not used anymore.</p> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
     <h2 id="strong-content-security-policy-csp"><a class="anchor" href="#strong-content-security-policy-csp"></a>Strong content security policy CSP</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>The stronger CSP disables inline javscript in html. Therefore the 'New Scout Project' wizard now creates a js file per html file and includes it using the script element.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="binary-resources-support-for-htmlfield-and-beanfield"><a class="anchor" href="#binary-resources-support-for-htmlfield-and-beanfield"></a>Binary resources support for HtmlField and BeanField</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Binary resources such as images or videos can now be used in the following widgets: * HtmlField * BeanField</p> 
+     </div> 
+     <div id="img-binary_resource_field" class="imageblock"> 
+      <div class="content"> 
+       <img src="images/binary_resource_field.png" alt="binary resource field" /> 
+      </div> 
+      <div class="title">
+       Figure 1. Binary resource on a model field.
+      </div> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Html enabled StringColumn</p> </li> 
+       <li> <p>BeanColumn .Binary resource on a column image::C:\Users\jgu\git\old\6.1\org.eclipse.scout.docs\docs\build\scout_releasenotes/../../imgs/binary_resource_column.png[]</p> </li> 
+      </ul> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="tristate-capability-for-checkbox-and-boolean-column"><a class="anchor" href="#tristate-capability-for-checkbox-and-boolean-column"></a>Tristate capability for checkbox and boolean column</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Added support for tristate to checkbox and boolean column.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>The new property tristateEnabled controls whether the checkbox/column behaves as a normal checkbox (false) or a tristate checkbox (true).</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>A normal checkbox has values true/false. A tristate checkbox has values true/false/null. The null value is interpreted as undefined and rendered as a filled square.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="mnemonics"><a class="anchor" href="#mnemonics"></a>Mnemonics</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Mnemonics are not supported anymore. All affected texts were either edited or removed because they are not used anymore.</p> 
      </div> 
      <div class="admonitionblock tip"> 
       <table> 
