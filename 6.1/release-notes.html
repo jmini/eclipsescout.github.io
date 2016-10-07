@@ -529,13 +529,26 @@ table.CodeRay td.code>pre{padding:0}
       <ul class="sectlevel1"> 
        <li><a href="#strong-content-security-policy-csp">Strong content security policy CSP</a></li> 
        <li><a href="#binary-resources-support-for-htmlfield-and-beanfield">Binary resources support for HtmlField and BeanField</a></li> 
-       <li><a href="#tristate-capability-for-checkbox-and-boolean-column">Tristate capability for checkbox and boolean column</a></li> 
+       <li><a href="#tristate-capability-for-check-boxes">TriState capability for check boxes</a></li> 
        <li><a href="#mnemonics">Mnemonics</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
   </div> 
   <div id="content"> 
+   <div id="preamble"> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Oxygen (latest version):</p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Download SDK: <a href="http://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenm2">Eclipse for Scout Developers</a></p> </li> 
+       <li> <p>Runtime on Maven Central: <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22">6.1.0.x</a></p> </li> 
+      </ul> 
+     </div> 
+    </div> 
+   </div> 
    <h1 id="what-s-new" class="sect0"><a class="anchor" href="#what-s-new"></a>What&#x2019;s New</h1> 
    <div class="sect1"> 
     <h2 id="strong-content-security-policy-csp"><a class="anchor" href="#strong-content-security-policy-csp"></a>Strong content security policy CSP</h2> 
@@ -568,16 +581,16 @@ table.CodeRay td.code>pre{padding:0}
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="tristate-capability-for-checkbox-and-boolean-column"><a class="anchor" href="#tristate-capability-for-checkbox-and-boolean-column"></a>Tristate capability for checkbox and boolean column</h2> 
+    <h2 id="tristate-capability-for-check-boxes"><a class="anchor" href="#tristate-capability-for-check-boxes"></a>TriState capability for check boxes</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p>Added support for tristate to checkbox and boolean column.</p> 
+      <p>Added support for tri-state value (<code>true</code>, <code>false</code> and <code>null</code> instead of just <code>true</code> and <code>false</code>) to boolean field and boolean column.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>The new property tristateEnabled controls whether the checkbox/column behaves as a normal checkbox (false) or a tristate checkbox (true).</p> 
+      <p>The new property <code>triStateEnabled</code> controls whether the boolean field/column behaves as a normal checkbox (false) or a tri-state checkbox (true).</p> 
      </div> 
      <div class="paragraph"> 
-      <p>A normal checkbox has values true/false. A tristate checkbox has values true/false/null. The null value is interpreted as undefined and rendered as a filled square.</p> 
+      <p>A normal checkbox has values true/false. A tri-state checkbox has values true/false/null. The null value is interpreted as &quot;undefined&quot; and rendered as a filled square.</p> 
      </div> 
     </div> 
    </div> 

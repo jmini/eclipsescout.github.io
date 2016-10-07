@@ -547,6 +547,8 @@ table.CodeRay td.code>pre{padding:0}
      <li><a href="#getfocusowner">getFocusOwner</a></li> 
      <li><a href="#finalvalue">FinalValue</a></li> 
      <li><a href="#postconstruct">@PostConstruct</a></li> 
+     <li><a href="#tree">Tree</a></li> 
+     <li><a href="#changed-behavior-of-scout-htmlcomponent-constructor-function-js">Changed behavior of scout.HtmlComponent() constructor function [JS]</a></li> 
     </ul> 
    </div> 
   </div> 
@@ -873,6 +875,39 @@ table.CodeRay td.code>pre{padding:0}
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>A method annotated with @PostConstruct in a Bean is now guaranteed to run exactly once. The constructor may still run more than once.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="tree"><a class="anchor" href="#tree"></a>Tree</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>The method <code>AbstractTree#execAutoCheckChildNodes</code> got two new parameters and the default implementation now considers <code>enabledNodesOnly</code> and does not always ignore disabled nodes.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="changed-behavior-of-scout-htmlcomponent-constructor-function-js"><a class="anchor" href="#changed-behavior-of-scout-htmlcomponent-constructor-function-js"></a>Changed behavior of scout.HtmlComponent() constructor function [JS]</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>The constructor function scout.HtmlComponent() no longer links the $comp to the new instance. Instead, the static function scout.HtmlComponent.install() should be used to create a new HtmlComponent and link it to $comp. The constructor function should never be used anymore in custom code. (If you do, you will get errors.)</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>The new static method makes it clearer that it will alter the state of $comp. For a normal constructor, such behavior is unexpected and thus discouraged.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p><strong>Migration:</strong> Check all <em>*.js</em> files in your project for occurences of <code>new scout.HtlmComponent</code> and replace them with <code>scout.HtmlComponent.install</code>.</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="CodeRay highlight"><code data-lang="javascript">  <span class="comment">// Old, do not use anymore!</span>
+  <span class="local-variable">this</span>.<span class="predefined">$container</span> = <span class="predefined">$parent</span>.appendDiv(<span class="string"><span class="delimiter">'</span><span class="content">my-widget</span><span class="delimiter">'</span></span>);
+  <span class="keyword">new</span> scout.HtmlComponent(<span class="local-variable">this</span>.<span class="predefined">$container</span>, <span class="local-variable">this</span>.session);
+
+  <span class="comment">// New, change your code to this (no change in first line):</span>
+  <span class="local-variable">this</span>.<span class="predefined">$container</span> = <span class="predefined">$parent</span>.appendDiv(<span class="string"><span class="delimiter">'</span><span class="content">my-widget</span><span class="delimiter">'</span></span>);
+  scout.HtmlComponent.install(<span class="local-variable">this</span>.<span class="predefined">$container</span>, <span class="local-variable">this</span>.session);</code></pre> 
+      </div> 
      </div> 
      <div class="admonitionblock tip"> 
       <table> 

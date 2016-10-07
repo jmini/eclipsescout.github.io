@@ -4617,7 +4617,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
         </table> 
        </div> 
        <div class="paragraph"> 
-        <p>This of course only makes sense if the application is exposed to the end user using an encrypted channel like <a href="https://en.wikipedia.org/wiki/HTTPS">HTTPS</a> (which is hardly recommended).</p> 
+        <p>This of course only makes sense if the application is exposed to the end user using an encrypted channel like <a href="https://en.wikipedia.org/wiki/HTTPS">HTTPS</a> (which is strongly recommended).</p> 
        </div> 
        <div class="paragraph"> 
         <p>Unfortunately for the UI server it is not possible to detect if an application uses a secured channel. Consider the following example: The servlet container is protected by a reverse proxy. The communication between the user agent and the proxy is encrypted while the channel between the proxy and the servlet container is not. In this scenario the container cannot know that from a user agent point of view the channel is secured.</p> 
