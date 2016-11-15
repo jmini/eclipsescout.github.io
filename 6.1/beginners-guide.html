@@ -2701,7 +2701,7 @@ scout.application.name=Contacts</code></pre>
         </table> 
        </div> 
        <div class="paragraph"> 
-        <p>After the country column we add the three columns <code>PhoneColumn</code>, <code>MobilePhoneColumn</code>, <code>EmailColumn</code> and <code>OrganizationColumn</code> that are initially not visible in the user interface. As an example for such a column <a href="#lst-contacts_PhoneColumn">Listing 10</a> is provided below.</p> 
+        <p>After the country column we add the three columns <code>PhoneColumn</code>, <code>MobileColumn</code>, <code>EmailColumn</code> and <code>OrganizationColumn</code> that are initially not visible in the user interface. As an example for such a column <a href="#lst-contacts_PhoneColumn">Listing 10</a> is provided below.</p> 
        </div> 
        <div id="lst-contacts_PhoneColumn" class="listingblock"> 
         <div class="title">
@@ -4336,7 +4336,7 @@ contacts.superuser=system</code></pre>
               }
 
               <span class="annotation">@Override</span>
-              <span class="directive">protected</span> <span class="type">int</span> getConfiguredLabelPosition() {
+              <span class="directive">protected</span> <span class="type">byte</span> getConfiguredLabelPosition() {
                 <span class="keyword">return</span> LABEL_POSITION_ON_FIELD; <i class="conum" data-value="5"></i><b>(5)</b>
               }
             }
@@ -4350,7 +4350,7 @@ contacts.superuser=system</code></pre>
               }
 
               <span class="annotation">@Override</span>
-              <span class="directive">protected</span> <span class="type">int</span> getConfiguredLabelPosition() {
+              <span class="directive">protected</span> <span class="type">byte</span> getConfiguredLabelPosition() {
                 <span class="keyword">return</span> LABEL_POSITION_ON_FIELD;
               }
 
@@ -6134,7 +6134,7 @@ contacts.superuser=system</code></pre>
      <div class="sect2"> 
       <h3 id="overview"><a class="anchor" href="#overview"></a>B.1. Overview</h3> 
       <div class="paragraph"> 
-       <p>This chapter walks you through the installation of Eclipse Scout. The installation description (as well as the rest of this book) is written and tested for Eclipse Scout 6.0 which is delivered as integral part of the Eclipse Neon release train, 2016. Detailed information regarding the scheduling of this release train is provided in the Eclipse wiki.<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</sup>.</p> 
+       <p>This chapter walks you through the installation of Eclipse Scout. The installation description (as well as the rest of this book) is written and tested for Eclipse Scout 6.1 which is delivered as integral part of the Eclipse Oxygen release train, 2017. Detailed information regarding the scheduling of this release train is provided in the Eclipse wiki.<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</sup>.</p> 
       </div> 
       <div class="paragraph"> 
        <p>We assume that you have not installed any software relevant for the content of this book. This is why the Scout installation chapter starts with the installation of the Java Development Kit (JDK). Consequently, you will have to skip some of the sections depending on your existing setup.</p> 
@@ -6186,7 +6186,7 @@ contacts.superuser=system</code></pre>
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>If the download page shows the wrong platform, manually select the correct platform in the dropdown list. As shown in <a href="#img-scout_download">Figure 52</a>, the Scout package is available as a 32 bit and a 46 bit package. Make sure to pick the package that matches your JDK installation. You can check your installation on the command line as follows.</p> 
+       <p>If the download page shows the wrong platform, manually select the correct platform in the dropdown list. As shown in <a href="#img-scout_download">Figure 52</a>, the Scout package is available as a 32 bit and a 64 bit package. Make sure to pick the package that matches your JDK installation. You can check your installation on the command line as follows.</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -6256,7 +6256,7 @@ C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll</pre>
        <p>where the second line specifies the exact path to the JRE to be used to start your Eclipse Scout installation.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>If you have explicitly specified the JRE to be used you verify this in the running Eclipse installation. Fist, select the <span class="menuseq"><span class="menu">Help</span>&nbsp;&#x25b8; <span class="menuitem">About Eclipse</span></span> menu to open the about dialog. Then, click on the <b class="button">Installation Details</b> button and switch to the <em class="tab">Configuration</em> tab. In the long list of system properties you will find lines similar to the ones shown below.</p> 
+       <p>If you have explicitly specified the JRE to be used you verify this in the running Eclipse installation. First, select the <span class="menuseq"><span class="menu">Help</span>&nbsp;&#x25b8; <span class="menuitem">About Eclipse</span></span> menu to open the about dialog. Then, click on the <b class="button">Installation Details</b> button and switch to the <em class="tab">Configuration</em> tab. In the long list of system properties you will find lines similar to the ones shown below.</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -6301,7 +6301,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In the install dialog, click on the <b class="button">Add&#x2026;&#x200b;</b> button to enter the link to the Scout repository. This opens the popup dialog <em>Add Repository</em> As shown in <a href="#img-eclipse_add_repository">Figure 58</a>, you may use &#x201c;Scout Luna&#x201d; for the <em class="field">Name</em> field. For the <em class="field">Location</em> field enter the Scout release repository as specified below. <a href="http://download.eclipse.org/scout/releases/4.0" class="bare">http://download.eclipse.org/scout/releases/4.0</a>.</p> 
+       <p>In the install dialog, click on the <b class="button">Add&#x2026;&#x200b;</b> button to enter the link to the Scout repository. This opens the popup dialog <em>Add Repository</em> As shown in <a href="#img-eclipse_add_repository">Figure 58</a>, you may use &#x201c;Scout Oxygen&#x201d; for the <em class="field">Name</em> field. For the <em class="field">Location</em> field enter the Scout release repository as specified below. <a href="http://download.eclipse.org/scout/releases/6.1" class="bare">http://download.eclipse.org/scout/releases/6.1</a>.</p> 
       </div> 
       <div id="img-eclipse_select_scout_features" class="imageblock"> 
        <div class="content"> 
@@ -6443,8 +6443,8 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
     <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.1.x/code/contacts" class="bare">https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.1.x/code/contacts</a> 
    </div> 
    <div class="footnote" id="_footnote_5"> 
-    <a href="#_footnoteref_5">5</a>. Luna release plan: 
-    <a href="http://wiki.eclipse.org/Neon/Simultaneous_Release_Plan" class="bare">http://wiki.eclipse.org/Neon/Simultaneous_Release_Plan</a> 
+    <a href="#_footnoteref_5">5</a>. Release plan: 
+    <a href="http://wiki.eclipse.org/Oxygen/Simultaneous_Release_Plan" class="bare">http://wiki.eclipse.org/Oxygen/Simultaneous_Release_Plan</a> 
    </div> 
    <div class="footnote" id="_footnote_6"> 
     <a href="#_footnoteref_6">6</a>. Windows 32/64-bit installation: 

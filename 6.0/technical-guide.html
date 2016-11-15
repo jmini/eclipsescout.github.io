@@ -1645,7 +1645,7 @@ TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class=
      <div class="sect2"> 
       <h3 id="description-2"><a class="anchor" href="#description-2"></a>6.1. Description</h3> 
       <div class="paragraph"> 
-       <p>CodeType are used in <a href="https://wiki.eclipse.org/Scout/Concepts/SmartField">SmartField</a> to let the user choose between a finish list of values. The value stored by the field correspond to the key of the selected code.</p> 
+       <p>CodeTypes are used in <a href="https://wiki.eclipse.org/Scout/Concepts/SmartField">SmartField</a> to let the user choose between a finite list of values. The value stored by the field corresponds to the key of the selected code.</p> 
       </div> 
       <div class="imageblock"> 
        <div class="content"> 
@@ -1653,15 +1653,15 @@ TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class=
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>A CodeType can be seen as a tree of <a href="https://wiki.eclipse.org/Scout/Concepts/Code">Codes</a>. Each code associate to the key (the Id) other properties: among others a Text and an IconId.</p> 
+       <p>A CodeType can be seen as a tree of <a href="https://wiki.eclipse.org/Scout/Concepts/Code">Codes</a>. Each code associates to the key (the Id) other properties: among others a Text and an IconId.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>In order to have the same resolving mechanism (getting the display text of a key) CodeType are also used in <a href="https://wiki.eclipse.org/Scout/Concepts/SmartColumn">SmartColumn</a>. To chose multiple value of the list, the fields <a href="https://wiki.eclipse.org/Scout/Concepts/ListBox">ListBox</a> (flat CodeType) and <a href="https://wiki.eclipse.org/Scout/Concepts/TreeBox">TreeBox</a> (hierarchical CodeType) can be used.</p> 
+       <p>In order to have the same resolving mechanism (getting the display text of a key), CodeTypes are also used in <a href="https://wiki.eclipse.org/Scout/Concepts/SmartColumn">SmartColumns</a>. To choose multiple values in the list, the fields <a href="https://wiki.eclipse.org/Scout/Concepts/ListBox">ListBox</a> (flat CodeType) and <a href="https://wiki.eclipse.org/Scout/Concepts/TreeBox">TreeBox</a> (hierarchical CodeType) can be used.</p> 
       </div> 
       <div class="sect3"> 
        <h4 id="organisation-of-the-codes"><a class="anchor" href="#organisation-of-the-codes"></a>6.1.1. Organisation of the codes</h4> 
        <div class="paragraph"> 
-        <p>The codes are organized in a tree. Therefore a CodeType can have one or more child codes at the root level, and each code can have other child codes. In lot of cases a list of codes (meaning a tree containing only leafs at the first level) is sufficient to cover most of the need.</p> 
+        <p>The codes are organized in a tree. Therefore a CodeType can have one or more child codes at the root level, and each code can have other child codes. In a lot of cases a list of codes (meaning a tree containing only leaves at the first level) is sufficient to cover most of the need.</p> 
        </div> 
        <div class="paragraph"> 
         <p>Child codes are ordered in their parent code. This is realized with the <a href="https://wiki.eclipse.org/Scout/Concepts/Order_Annotation">order annotation</a>.</p> 
@@ -1670,13 +1670,13 @@ TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class=
       <div class="sect3"> 
        <h4 id="type-of-the-key"><a class="anchor" href="#type-of-the-key"></a>6.1.2. Type of the key</h4> 
        <div class="paragraph"> 
-        <p>The type of the key is defined by its generic parameter <code>&lt;T&gt;</code>. It is very common to use a type from the <code>java.lang.*</code> package (like <code>Integer</code> or <code>String</code>) but any Java Object is suitable. It must:</p> 
+        <p>The type of the key is defined by its generic parameter <code>&lt;T&gt;</code>. It is very common to use a type from the <code>java.lang.*</code> package (like <code>Integer</code> or <code>String</code>), but any Java Object is suitable. It must:</p> 
        </div> 
        <div class="ulist"> 
         <ul> 
-         <li> <p>implements <code>Serializable</code></p> </li> 
+         <li> <p>implement <code>Serializable</code></p> </li> 
          <li> <p>have correctly implemented <code>equals()</code> and <code>hashCode()</code> functions</p> </li> 
-         <li> <p>present in the server and the client</p> </li> 
+         <li> <p>be present in the server and the client</p> </li> 
         </ul> 
        </div> 
        <div class="paragraph"> 
@@ -1739,7 +1739,7 @@ TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class=
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>The common way to define a CodeType is to extend AbstractCodeType. Each code is an inner-class extending AbstractCode. Like usual the properties of Codes and CodeTypes can be set with <a href="https://wiki.eclipse.org/Scout/Concepts/GetConfigured_Methods">getConfiguredXxxxxx()</a> methods.</p> 
+        <p>The common way to define a CodeType is to extend AbstractCodeType. Each code is an inner-class extending AbstractCode. Like usual the properties of Codes and CodeTypes can be set using the <a href="https://wiki.eclipse.org/Scout/Concepts/GetConfigured_Methods">getConfiguredXxxxxx()</a> methods.</p> 
        </div> 
        <div class="paragraph"> 
         <p>See the Java Code of a simple <code>YesOrNoCodeType</code> having just two codes:</p> 
@@ -1761,7 +1761,7 @@ TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class=
      <div class="sect2"> 
       <h3 id="dynamic-codetype"><a class="anchor" href="#dynamic-codetype"></a>6.4. Dynamic CodeType</h3> 
       <div class="paragraph"> 
-       <p>Code types are not necessary hardcoded. It is possible to implement other mechanisms to load CodeType dynamically.</p> 
+       <p>Code types are not necessarily hardcoded. It is possible to implement other mechanisms to load a CodeType dynamically.</p> 
       </div> 
       <div class="paragraph"> 
        <p>The description of the Codes can come from a database or from an XML files. If you want to do so, you just need to implement the method corresponding to the event LoadCodes.</p> 
@@ -1782,7 +1782,7 @@ TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class=
        </ul> 
       </div> 
       <div class="paragraph"> 
-       <p>Note: A drawback that the CodeType Class is not aware of the language and the partition it is instantiate for. Only the <code>CodeTypeStore</code> that manage the CodeType instances knows for which language and which partition they have been instantiated.</p> 
+       <p>Note: A drawback is that the CodeType class is not aware of the language and the partition it is instantiated for. Only the <code>CodeTypeStore</code> that manages the CodeType instances knows for which language and which partition they have been instantiated.</p> 
       </div> 
      </div> 
     </div> 

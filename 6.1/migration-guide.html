@@ -525,212 +525,242 @@ table.CodeRay td.code>pre{padding:0}
      Table of Contents
     </div> 
     <ul class="sectlevel1"> 
-     <li><a href="#webcontent-resources">WebContent Resources</a></li> 
-     <li><a href="#text-provider-service">Text Provider Service</a></li> 
-     <li><a href="#content-security-policy-csp">Content Security Policy (CSP)</a> 
+     <li><a href="#api-changes-java">API Changes (Java)</a> 
       <ul class="sectlevel2"> 
+       <li><a href="#text-provider-service">Text Provider Service</a></li> 
+       <li><a href="#mnemonics">Mnemonics</a></li> 
+       <li><a href="#getfocusowner">getFocusOwner</a></li> 
+       <li><a href="#finalvalue">FinalValue</a></li> 
+       <li><a href="#postconstruct">@PostConstruct</a></li> 
+       <li><a href="#tree">Tree</a></li> 
+       <li><a href="#cookieutility">CookieUtility</a></li> 
+       <li><a href="#pair">Pair</a></li> 
        <li><a href="#customizing-csp-directives">Customizing CSP directives</a></li> 
+       <li><a href="#stringutility-contains-deprecated">StringUtility.contains() deprecated</a></li> 
+       <li><a href="#browserinfo">BrowserInfo</a></li> 
+       <li><a href="#virtual-tree-node">Virtual Tree Node</a></li> 
+       <li><a href="#enabled-property-of-form-fields">Enabled Property of Form Fields</a></li> 
+       <li><a href="#numberutility-nvl-dateutility-nvl">NumberUtility.nvl(), DateUtility.nvl()</a></li> 
+       <li><a href="#compareutility">CompareUtility</a></li> 
       </ul> </li> 
-     <li><a href="#scout-graphics-prefsize-js">scout.graphics.prefSize() [JS]</a></li> 
-     <li><a href="#scout-modeladapter-js">scout.ModelAdapter [JS]</a> 
+     <li><a href="#api-changes-js">API Changes (JS)</a> 
       <ul class="sectlevel2"> 
-       <li><a href="#_send">_send()</a></li> 
-      </ul> </li> 
-     <li><a href="#scout-widget-js">scout.Widget [JS]</a> 
-      <ul class="sectlevel2"> 
+       <li><a href="#scout-graphics-prefsize">scout.graphics.prefSize()</a></li> 
+       <li><a href="#scout-modeladapter">scout.ModelAdapter</a></li> 
+       <li><a href="#scout-modeladapter-_send">scout.ModelAdapter._send()</a></li> 
+       <li><a href="#scout-widget">scout.Widget</a></li> 
        <li><a href="#destroy">destroy()</a></li> 
        <li><a href="#eventsupport">EventSupport</a></li> 
        <li><a href="#keystrokecontext">KeyStrokeContext</a></li> 
+       <li><a href="#changes-in-objecttype-syntax-and-scout-create">Changes in objectType syntax and scout.create()</a></li> 
+       <li><a href="#changed-behavior-of-scout-htmlcomponent-constructor-function">Changed behavior of scout.HtmlComponent() constructor function</a></li> 
       </ul> </li> 
-     <li><a href="#mnemonics">Mnemonics</a></li> 
-     <li><a href="#changes-in-objecttype-syntax-and-scout-create-js">Changes in objectType syntax and scout.create() [JS]</a></li> 
-     <li><a href="#getfocusowner">getFocusOwner</a></li> 
-     <li><a href="#finalvalue">FinalValue</a></li> 
-     <li><a href="#postconstruct">@PostConstruct</a></li> 
-     <li><a href="#tree">Tree</a></li> 
-     <li><a href="#changed-behavior-of-scout-htmlcomponent-constructor-function-js">Changed behavior of scout.HtmlComponent() constructor function [JS]</a></li> 
+     <li><a href="#other-changes">Other Changes</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#csp-report-url">CSP report URL</a></li> 
+       <li><a href="#reorganized-html-files-due-to-strict-csp-rules">Reorganized *.html files due to strict CSP rules</a></li> 
+      </ul> </li> 
     </ul> 
    </div> 
   </div> 
   <div id="content"> 
    <div class="sect1"> 
-    <h2 id="webcontent-resources"><a class="anchor" href="#webcontent-resources"></a>WebContent Resources</h2> 
+    <h2 id="api-changes-java"><a class="anchor" href="#api-changes-java"></a>API Changes (Java)</h2> 
     <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>The *.html files (index.html, login.html, logout.html etc.) have been changed. The simplest way to migrate these files is to create them anew using the Scout SDK or maven archetype and compare them with your files. For details see chapter <a href="#content-security-policy-csp">Content Security Policy (CSP)</a>.</p> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
-    <h2 id="text-provider-service"><a class="anchor" href="#text-provider-service"></a>Text Provider Service</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>The method <code>AbstractDynamicNlsTextProviderService#getDynamicNlsBaseName</code> has been made public. Adjust the method in your text provider service accordingly.</p> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
-    <h2 id="content-security-policy-csp"><a class="anchor" href="#content-security-policy-csp"></a>Content Security Policy (CSP)</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p><strong class="red yellow-background">TODO IMO:</strong> Describe CSP, its implications on Scout applications and how to configure it.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>By default, inline <code>&lt;script&gt;</code> tags in HTML files are prohibited by CSP rules. Bootstrapping JavaScript code was therefore moved to dedicated <em>*.js</em> files in the <code>WebContent/res</code> folder. Existing projects using CSP have to manually perform the following steps:</p> 
-     </div> 
-     <div class="olist arabic"> 
-      <ol class="arabic"> 
-       <li> <p>Open each <em>*.html</em> file in <code>your.project.ui.html/src/main/resources/WebContent</code> folder and check if there are any inline script parts. Only <code>&lt;script&gt;</code> tags with embedded JavaScript code are considered &quot;inline&quot;. Tags with a <code>src</code> attribute don&#x2019;t need to be changed.</p> </li> 
-       <li> <p>Transfer the content of each script part to a <em>*.js</em> file in the <code>res</code> subdirectory (e.g. <em>index.html</em> &#x21d2; <em>res/index.js</em>) and delete the now empty &lt;script&gt; part.</p> </li> 
-       <li> <p>Add a reference to the <em>*.js</em> file in the <code>&lt;head&gt;</code> section using the <code>&lt;scout:script&gt;</code> tag, e.g.:<br /> <code>&lt;scout:script src=&quot;res/index.js&quot; /&gt;</code></p> </li> 
-       <li> <p>If the extracted <em>*.js</em> file contains <code>&lt;scout:message&gt;</code> tags, they have to be moved back to the <code>&lt;body&gt;</code> of the corresponding <em>*.html</em> file (because the NLS translation can only process HTML files). The attribute <code>style</code> has to be changed from <code>javascript</code> to <code>tag</code>.</p> </li> 
-      </ol> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Example:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="title">
-       Listing 1. login.html before migration (Scout 6.0)
-      </div> 
-      <div class="content"> 
-       <pre class="CodeRay highlight"><code data-lang="html"><span class="doctype">&lt;!DOCTYPE html&gt;</span>
-<span class="tag">&lt;html&gt;</span>
-  <span class="tag">&lt;head&gt;</span>
-    <span class="tag">&lt;meta</span> <span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">UTF-8</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-    <span class="tag">&lt;title&gt;</span>Contacts Application<span class="tag">&lt;/title&gt;</span>
-    <span class="tag">&lt;scout:include</span> <span class="attribute-name">template</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">head.html</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
-    <span class="tag">&lt;scout:stylesheet</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/scout-login-module.css</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
-    <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/jquery-all-macro.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
-    <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/scout-login-module.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
-    <span class="tag">&lt;script&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
-<span class="inline"> <span class="predefined">$</span>(document).ready(<span class="keyword">function</span>() { scout.login.init({<span class="key">texts</span>: <span class="tag">&lt;scout:message</span> <span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="key">javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.Login</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.LoginFailed</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.User</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.Password</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span> }); });</span>
-    <span class="tag">&lt;/script&gt;</span>
-  <span class="tag">&lt;/head&gt;</span>
-  <span class="tag">&lt;body&gt;</span>
-    <span class="tag">&lt;scout:include</span> <span class="attribute-name">template</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">no-script.html</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
-  <span class="tag">&lt;/body&gt;</span>
-<span class="tag">&lt;/html&gt;</span></code></pre> 
+     <div class="sect2"> 
+      <h3 id="text-provider-service"><a class="anchor" href="#text-provider-service"></a>Text Provider Service</h3> 
+      <div class="paragraph"> 
+       <p>The method <code>AbstractDynamicNlsTextProviderService#getDynamicNlsBaseName</code> has been made public. Adjust the method in your text provider service accordingly.</p> 
       </div> 
      </div> 
-     <div class="colist arabic"> 
-      <table> 
-       <tbody>
-        <tr> 
-         <td><i class="conum" data-value="1"></i><b>1</b></td> 
-         <td>Prohibited inline script.</td> 
-        </tr> 
-       </tbody>
-      </table> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="title">
-       Listing 2. login.html after migration (Scout 6.1)
+     <div class="sect2"> 
+      <h3 id="mnemonics"><a class="anchor" href="#mnemonics"></a>Mnemonics</h3> 
+      <div class="paragraph"> 
+       <p>Mnemonics are not supported anymore. All affected texts were either edited or removed because they are not used anymore.</p> 
       </div> 
-      <div class="content"> 
-       <pre class="CodeRay highlight"><code data-lang="html"><span class="doctype">&lt;!DOCTYPE html&gt;</span>
-<span class="tag">&lt;html&gt;</span>
-  <span class="tag">&lt;head&gt;</span>
-    <span class="tag">&lt;meta</span> <span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">UTF-8</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-    <span class="tag">&lt;title&gt;</span>Contacts Application<span class="tag">&lt;/title&gt;</span>
-    <span class="tag">&lt;scout:include</span> <span class="attribute-name">template</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">head.html</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
-    <span class="tag">&lt;scout:stylesheet</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/scout-login-module.css</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
-    <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/jquery-all-macro.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
-    <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/scout-login-module.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
-    <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/login.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
-  <span class="tag">&lt;/head&gt;</span>
-  <span class="tag">&lt;body&gt;</span>
-    <span class="tag">&lt;scout:include</span> <span class="attribute-name">template</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">no-script.html</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
-    <span class="tag">&lt;scout:message</span> <span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="key">tag</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.Login</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.LoginFailed</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.User</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.Password</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
-  <span class="tag">&lt;/body&gt;</span>
-<span class="tag">&lt;/html&gt;</span></code></pre> 
+      <div class="paragraph"> 
+       <p>Migration: Remove all mnemonics (<code>&amp;</code>) from your text files as they will not be considered anymore. Replace <code>&amp;&amp;</code> with <code>&amp;</code>. (<code>&amp;&amp;</code> was used to escape the mnemonic behaviour and display a single <code>&amp;</code> in a text.)</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The following methods were or will be removed:</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p><code>StringUtility.removeMnemonic</code></p> </li> 
+        <li> <p><code>StringUtility.getMnemonic</code></p> </li> 
+        <li> <p><code>IAction.PROP_TEXT_WITH_MNEMONIC</code></p> </li> 
+        <li> <p><code>IAction.PROP_MNEMONIC</code></p> </li> 
+        <li> <p><code>IAction.getTextWithMnemonic</code></p> </li> 
+        <li> <p><code>IAction.getMnemonic</code></p> </li> 
+        <li> <p><code>strings.removeMnemonic</code></p> </li> 
+        <li> <p><code>strings.removeAmpersand</code></p> </li> 
+       </ul> 
       </div> 
      </div> 
-     <div class="colist arabic"> 
-      <table> 
-       <tbody>
-        <tr> 
-         <td><i class="conum" data-value="1"></i><b>1</b></td> 
-         <td>External script reference allowed by CSP.</td> 
-        </tr> 
-        <tr> 
-         <td><i class="conum" data-value="2"></i><b>2</b></td> 
-         <td>Moved from JavaScript call to <code>&lt;body&gt;</code>, changed style to <code>tag</code>.</td> 
-        </tr> 
-       </tbody>
-      </table> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="title">
-       Listing 3. res/login.js after migration (Scout 6.1)
+     <div class="sect2"> 
+      <h3 id="getfocusowner"><a class="anchor" href="#getfocusowner"></a>getFocusOwner</h3> 
+      <div class="paragraph"> 
+       <p>Method getFocusOwner() was removed from IDesktop, IForm and DesktopEvent. Since replacing the old rich client ui technologies (swing, swt) with the modern html ui, this method didn&#x2019;t work correctly anymore.</p> 
       </div> 
-      <div class="content"> 
-       <pre class="CodeRay highlight"><code data-lang="javascript"><span class="predefined">$</span>(document).ready(<span class="keyword">function</span>() {
-  scout.login.init(); <i class="conum" data-value="1"></i><b>(1)</b>
-});</code></pre> 
+      <div class="paragraph"> 
+       <p>There are no plans to implement correctly because of multiple reasons. It would increase network traffic between browser and ui server and also would be quite unreliable. The old behaviour was a synchronious result from the ui (swing, swt), which was feasible in rich client environments. But with a distant browser, a realtime result is hard to achieve and might already by outdated by its arrival at the ui server.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>If such functionality is needed, it has to be programmed with java script within the browser.</p> 
       </div> 
      </div> 
-     <div class="colist arabic"> 
-      <table> 
-       <tbody>
-        <tr> 
-         <td><i class="conum" data-value="1"></i><b>1</b></td> 
-         <td>Translated texts are extracted automatically from DOM.</td> 
-        </tr> 
-       </tbody>
-      </table> 
+     <div class="sect2"> 
+      <h3 id="finalvalue"><a class="anchor" href="#finalvalue"></a>FinalValue</h3> 
+      <div class="paragraph"> 
+       <p><code>setIfAbsent</code> has been renamed to <code>setIfAbsentAndGet</code>. <code>setIfAbsent</code> now returns a boolean denoting, if a value was set or not.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="postconstruct"><a class="anchor" href="#postconstruct"></a>@PostConstruct</h3> 
+      <div class="paragraph"> 
+       <p>A method annotated with <code>@PostConstruct</code> in a Bean is now guaranteed to run exactly once. The constructor may still run more than once.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="tree"><a class="anchor" href="#tree"></a>Tree</h3> 
+      <div class="paragraph"> 
+       <p>The method <code>AbstractTree#execAutoCheckChildNodes</code> got two new parameters and the default implementation now considers <code>enabledNodesOnly</code> and does not always ignore disabled nodes.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="cookieutility"><a class="anchor" href="#cookieutility"></a>CookieUtility</h3> 
+      <div class="paragraph"> 
+       <p><code>CookieUtility</code> was moved from <em>org.eclipse.scout.rt.ui.html</em> to <em>org.eclipse.scout.rt.server.commons</em>. Migrate by updating your imports. The Method <code>addCookie()</code> is now called <code>addPersistentCookie()</code>. Additional methods are available (to add a session cookie, or delete an existing cookie).</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="pair"><a class="anchor" href="#pair"></a>Pair</h3> 
+      <div class="paragraph"> 
+       <p>The <code>Pair</code> class was made abstract and two default implementations for a mutable pair (class <code>MutablePair</code>) and immutable pair (<code>ImmutablePair</code>) were added. Since the former <code>Pair</code> class was immutable, all occurences were changed to use the new <code>ImmutablePair</code> class. Migrate by update all occurences to use the new <code>ImmutablePair</code>.</p> 
+      </div> 
      </div> 
      <div class="sect2"> 
       <h3 id="customizing-csp-directives"><a class="anchor" href="#customizing-csp-directives"></a>Customizing CSP directives</h3> 
       <div class="paragraph"> 
        <p>The method <code>org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.getCspDirectives()</code> is no longer available. CSP directives are now configured by the the bean <code>org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy</code>. To customize the rules, replace this bean with your own implementation and override the method <code>initDirectives()</code>. The bean provides fluent-style with_XXX_() methods.</p> 
       </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="stringutility-contains-deprecated"><a class="anchor" href="#stringutility-contains-deprecated"></a>StringUtility.contains() deprecated</h3> 
       <div class="paragraph"> 
-       <p>By default, the <code>report-uri</code> for CSP violations is now called <strong>/csp-report</strong> (instead of /csp.cgi).</p> 
+       <p>The method <code>StringUtility.contains()</code> was marked as deprecated and will be removed in the P-release. The method was often used incorrectly due to poor documentation and unconventional implementation. The utility provides multiple new methods that can be used as a replacement:</p> 
+      </div> 
+      <div class="dlist"> 
+       <dl> 
+        <dt class="hdlist1">
+         containsString()
+        </dt> 
+        <dd> 
+         <p>null-safe variant of String.contains()</p> 
+        </dd> 
+        <dt class="hdlist1">
+         containsStringIgnoreCase()
+        </dt> 
+        <dd> 
+         <p>like containsString(), but ignores capitaliziation. Make sure to read the JavaDoc!</p> 
+        </dd> 
+        <dt class="hdlist1">
+         containsRegEx()
+        </dt> 
+        <dd> 
+         <p>checks if the given regular expression matches part of the given string (essentially, this method automatically adds <code>.*</code> on both sides of the regular expression)</p> 
+        </dd> 
+        <dt class="hdlist1">
+         matches()
+        </dt> 
+        <dd> 
+         <p>null-safe variant of String.matches(), also allows to set the pattern flags</p> 
+        </dd> 
+       </dl> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="browserinfo"><a class="anchor" href="#browserinfo"></a>BrowserInfo</h3> 
+      <div class="paragraph"> 
+       <p>The class <code>BrowserInfo</code> was renamed to a more generic <code>HttpClientInfo</code> name, since the HTTP client can either be a browser, but may also be another server using the built-in HTTP client of the VM.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Futher the <code>HttpClientInfo</code> instance for each request is cached on the current HTTP session, if a session is available. Use the new <code>HttpClientInfo get(HttpServletRequest request)</code> method to get the cached HTTP client info.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="virtual-tree-node"><a class="anchor" href="#virtual-tree-node"></a>Virtual Tree Node</h3> 
+      <div class="paragraph"> 
+       <p>The Virtual tree node has been deleted. The main reason for this was because of table pages: If an <code>AbstractPageWithTable</code> contains a lot of rows, for each of them a child page is created. To have these child pages as lightweight as possible the virtual node was introduced. This node was created for each row and only after activating a row (click by the user) the real child page has been created.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Now instead of creating a virtual node first an probably the real page afterwards the real page is created directly. Therefore the instance creation of pages below table pages should be very fast and not perform any backend calls. To assure this it is recommended to move any expensive operation currently implemented in the <code>execInit()</code> method to <code>execCreateChildPages()</code> or <code>execPageActivated()</code>.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="enabled-property-of-form-fields"><a class="anchor" href="#enabled-property-of-form-fields"></a>Enabled Property of Form Fields</h3> 
+      <div class="paragraph"> 
+       <p>The inheritance of the enabled property of form fields has been changed so that changing this property on a composite field does no longer automatically propagate the value to the children. Instead a form field is only considered to be enabled if all parent fields are enabled too.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>To have the same behaviour you can use the method <code>formField.setEnabled(yourValue, true /* update parents */, true /* update children */)</code> which also propagates the value to parent and child fields. The same method also exists for the enabled-granted property: <code>formField.setEnabledGranted(yourValue, true, true)</code>. However often it may no longer be required to actively propagate the new value to children. Therefore it is recommended to check the business logic manually where possible.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="numberutility-nvl-dateutility-nvl"><a class="anchor" href="#numberutility-nvl-dateutility-nvl"></a>NumberUtility.nvl(), DateUtility.nvl()</h3> 
+      <div class="paragraph"> 
+       <p>The nvl() methods on NumberUtility and DateUtility were moved to a generic ObjectUtility.nvl(). The existing methods were deprecated and will be removed with next Scout release. Additionally the existing methods were restricted to use Number respectively Date only.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="compareutility"><a class="anchor" href="#compareutility"></a>CompareUtility</h3> 
+      <div class="paragraph"> 
+       <p>The various null-safe compare methods on CompareUtility were moved to the new generic ObjectUtility. The existing methods were deprecated and will be removed with next Scout release.</p> 
       </div> 
      </div> 
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="scout-graphics-prefsize-js"><a class="anchor" href="#scout-graphics-prefsize-js"></a>scout.graphics.prefSize() [JS]</h2> 
+    <h2 id="api-changes-js"><a class="anchor" href="#api-changes-js"></a>API Changes (JS)</h2> 
     <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>The signature of JavaScript method <code>scout.graphics.prefSize()</code> has changed:</p> 
-     </div> 
-     <div class="ulist"> 
-      <ul> 
-       <li> <p><strong>Old</strong>: scout.graphics.prefSize($elem, <span class="line-through">includeMargin</span>, options)</p> </li> 
-       <li> <p><strong>New</strong>: scout.graphics.prefSize($elem, options)</p> </li> 
-      </ul> 
-     </div> 
-     <div class="paragraph"> 
-      <p>The argument <em>includeMargin</em> was moved to the options object. See code documentation for a description of all options.</p> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
-    <h2 id="scout-modeladapter-js"><a class="anchor" href="#scout-modeladapter-js"></a>scout.ModelAdapter [JS]</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>If you have not created any custom widgets, you can skip this. If you only used <code>BeanFields</code> for customizing you can skip it as well.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Previously every widget with a corresponding part on the server extended <code>scout.ModelAdapter</code>. A model adapter is the connector with the server, it takes the events sent from the server and calls the corresponding methods on the widget. It also sends events to the server whenever an action happens on the widget. To make the widgets usable without a server, they don&#x2019;t extend from <code>scout.ModelAdapter</code> anymore but directly from <code>scout.Widget</code>. That means every widget with a server counter part have been separated into widget and model adapter, similarly to the server side where a <code>IJsonAdapter</code> exists for every model object. The model adapter creates the widget and attaches itself to it meaning it listens for events triggered by the widget and sends elected ones to the server. It also takes the events from the server and calls the corresponding methods of the widget.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>So if you created custom widgets you have to separate them as well. Create for each widget a separate file called the same way as the Widget + 'Adapter'. That adapter extends either directly from <code>scout.ModelAdapter</code> or from the corresponding adapter of the parent widget.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Example: You have created a <code>XyField.js</code> which extends from <code>FormField.js</code>. Now create a file called <code>XyFieldAdapter.js</code> and extend it from <code>FormFieldAdapter.js</code>.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>You now have to move the server event handling methods to the adapter, if there are any at all. If your widget does not contain a method called <code>onModelAction</code>, you are fine. Beside these action events the server may send property change events as well. For every property change event the adapter will automatically call the corresponding setter method. If there is none it will call the generic method <code>Widget.setProperty</code> which eventually calls the <code>_sync</code> and <code>_render</code> methods of the property. So if your widget contains <code>_sync</code> methods they will still be called on a server property change like before. But now you should create a JS property event to inform other widgets by using <code>Widget._setProperty</code> (note the _). This was previously done automatically for every property which is still done if there is no <code>_sync</code> method. If there is one you have to take care of it by yourself.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>For the opposite direction meaning events from UI to server you have to more or less replace the calls of <code>_send()</code> with <code>trigger()</code>. In the adapter you have to handle these widget events and call the <code>_send()</code> method accordingly. If it is a property change event it is even simpler. Just call <code>_addRemoteProperties</code> in the constructor of the model adapter for every property which should be sent to the server.</p> 
+     <div class="sect2"> 
+      <h3 id="scout-graphics-prefsize"><a class="anchor" href="#scout-graphics-prefsize"></a>scout.graphics.prefSize()</h3> 
+      <div class="paragraph"> 
+       <p>The signature of JavaScript method <code>scout.graphics.prefSize()</code> has changed:</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p><strong>Old</strong>: scout.graphics.prefSize($elem, <span class="line-through">includeMargin</span>, options)</p> </li> 
+        <li> <p><strong>New</strong>: scout.graphics.prefSize($elem, options)</p> </li> 
+       </ul> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The argument <em>includeMargin</em> was moved to the options object. See code documentation for a description of all options.</p> 
+      </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="_send"><a class="anchor" href="#_send"></a>_send()</h3> 
+      <h3 id="scout-modeladapter"><a class="anchor" href="#scout-modeladapter"></a>scout.ModelAdapter</h3> 
+      <div class="paragraph"> 
+       <p>If you have not created any custom widgets, you can skip this. If you only used <code>BeanFields</code> for customizing you can skip it as well.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Previously every widget with a corresponding part on the server extended <code>scout.ModelAdapter</code>. A model adapter is the connector with the server, it takes the events sent from the server and calls the corresponding methods on the widget. It also sends events to the server whenever an action happens on the widget. To make the widgets usable without a server, they don&#x2019;t extend from <code>scout.ModelAdapter</code> anymore but directly from <code>scout.Widget</code>. That means every widget with a server counter part have been separated into widget and model adapter, similarly to the server side where a <code>IJsonAdapter</code> exists for every model object. The model adapter creates the widget and attaches itself to it meaning it listens for events triggered by the widget and sends elected ones to the server. It also takes the events from the server and calls the corresponding methods of the widget.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>So if you created custom widgets you have to separate them as well. Create for each widget a separate file called the same way as the Widget + 'Adapter'. That adapter extends either directly from <code>scout.ModelAdapter</code> or from the corresponding adapter of the parent widget.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Example: You have created a <code>XyField.js</code> which extends from <code>FormField.js</code>. Now create a file called <code>XyFieldAdapter.js</code> and extend it from <code>FormFieldAdapter.js</code>.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>You now have to move the server event handling methods to the adapter, if there are any at all. If your widget does not contain a method called <code>onModelAction</code>, you are fine. Beside these action events the server may send property change events as well. For every property change event the adapter will automatically call the corresponding setter method. If there is none it will call the generic method <code>Widget.setProperty</code> which eventually calls the <code>_sync</code> and <code>_render</code> methods of the property. So if your widget contains <code>_sync</code> methods they will still be called on a server property change like before. But now you should create a JS property event to inform other widgets by using <code>Widget._setProperty</code> (note the _). This was previously done automatically for every property which is still done if there is no <code>_sync</code> method. If there is one you have to take care of it by yourself.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>For the opposite direction meaning events from UI to server you have to more or less replace the calls of <code>_send()</code> with <code>trigger()</code>. In the adapter you have to handle these widget events and call the <code>_send()</code> method accordingly. If it is a property change event it is even simpler. Just call <code>_addRemoteProperties</code> in the constructor of the model adapter for every property which should be sent to the server.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="scout-modeladapter-_send"><a class="anchor" href="#scout-modeladapter-_send"></a>scout.ModelAdapter._send()</h3> 
       <div class="paragraph"> 
        <p>The signature of JavaScript method <code>scout.ModelAdapter._send()</code> has changed:</p> 
       </div> 
@@ -762,13 +792,11 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
      </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
-    <h2 id="scout-widget-js"><a class="anchor" href="#scout-widget-js"></a>scout.Widget [JS]</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>If you have not created any custom widgets, you can skip this.</p> 
+     <div class="sect2"> 
+      <h3 id="scout-widget"><a class="anchor" href="#scout-widget"></a>scout.Widget</h3> 
+      <div class="paragraph"> 
+       <p>If you have not created any custom widgets, you can skip this.</p> 
+      </div> 
      </div> 
      <div class="sect2"> 
       <h3 id="destroy"><a class="anchor" href="#destroy"></a>destroy()</h3> 
@@ -805,119 +833,179 @@ table.CodeRay td.code>pre{padding:0}
        <p>The method <code>_addKeyStrokeContextSupport</code> has been removed. If your widget needs keystroke support override <code>_createKeyStrokeContext</code> and provide one. You can probably use the default <code>scout.KeyStrokeContext</code>. The parameter of <code>_initKeyStrokeContext</code> has been removed as well. Just use <code>this.keyStrokeContext</code> instead.</p> 
       </div> 
      </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
-    <h2 id="mnemonics"><a class="anchor" href="#mnemonics"></a>Mnemonics</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>Mnemonics are not supported anymore. Remove all mnemonics (&amp;) from your text files as they will not be considered anymore! &amp;&amp; was used escape the mnemonic behaviour and display a single '&amp;' in a text. Replace &amp;&amp; with &amp;!</p> 
+     <div class="sect2"> 
+      <h3 id="changes-in-objecttype-syntax-and-scout-create"><a class="anchor" href="#changes-in-objecttype-syntax-and-scout-create"></a>Changes in objectType syntax and scout.create()</h3> 
+      <div class="paragraph"> 
+       <p>The &quot;objectType&quot; is a string describing which JavaScipt &quot;class&quot; to use when creating an object instance using <code>scout.create()</code> (roughly similar to a Java class name). To make the object factory more robust, the separator between the type and the model variant was change from <code>.</code> to <code>:</code>. The namespace separator remains <code>.</code>. This allows the following forms of object types:.</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p><code>&quot;StringField&quot;</code>: name without namespace, i.e. a type in the default namespace (resolves to <code>scout.StringField</code>)</p> </li> 
+        <li> <p><code>&quot;myproject.StringField&quot;</code>: namespace qualified name</p> </li> 
+        <li> <p><code>&quot;StringField:MyVariant&quot;</code>: type with variant (resolves to <code>scout.MyVariantStringField</code>), can also be combined with a namespace</p> </li> 
+       </ul> 
+      </div> 
+      <div class="paragraph"> 
+       <p><strong>Migration:</strong> Check your <em>objectFactories.js</em> and <em>defaultValues.json</em> files (if you have any in your project) for types with variant and convert the separator from <code>.</code> to <code>:</code>.</p> 
+      </div> 
      </div> 
-     <div class="paragraph"> 
-      <p>The following methods were or will be removed:</p> 
-     </div> 
-     <div class="ulist"> 
-      <ul> 
-       <li> <p><code>StringUtility.removeMnemonic</code></p> </li> 
-       <li> <p><code>StringUtility.getMnemonic</code></p> </li> 
-       <li> <p><code>IAction.PROP_TEXT_WITH_MNEMONIC</code></p> </li> 
-       <li> <p><code>IAction.PROP_MNEMONIC</code></p> </li> 
-       <li> <p><code>IAction.getTextWithMnemonic</code></p> </li> 
-       <li> <p><code>IAction.getMnemonic</code></p> </li> 
-       <li> <p><code>strings.removeMnemonic</code></p> </li> 
-       <li> <p><code>strings.removeAmpersand</code></p> </li> 
-      </ul> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
-    <h2 id="changes-in-objecttype-syntax-and-scout-create-js"><a class="anchor" href="#changes-in-objecttype-syntax-and-scout-create-js"></a>Changes in objectType syntax and scout.create() [JS]</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>The &quot;objectType&quot; is a string describing which JavaScipt &quot;class&quot; to use when creating an object instance using <code>scout.create()</code> (roughly similar to a Java class name). To make the object factory more robust, the separator between the type and the model variant was change from <code>.</code> to <code>:</code>. The namespace separator remains <code>.</code>. This allows the following forms of object types:.</p> 
-     </div> 
-     <div class="ulist"> 
-      <ul> 
-       <li> <p><code>&quot;StringField&quot;</code>: name without namespace, i.e. a type in the default namespace (resolves to <code>scout.StringField</code>)</p> </li> 
-       <li> <p><code>&quot;myproject.StringField&quot;</code>: namespace qualified name</p> </li> 
-       <li> <p><code>&quot;StringField:MyVariant&quot;</code>: type with variant (resolves to <code>scout.MyVariantStringField</code>), can also be combined with a namespace</p> </li> 
-      </ul> 
-     </div> 
-     <div class="paragraph"> 
-      <p><strong>Migration:</strong> Check your <em>objectFactories.js</em> and <em>defaultValues.json</em> files (if you have any in your project) for types with variant and convert the separator from <code>.</code> to <code>:</code>.</p> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
-    <h2 id="getfocusowner"><a class="anchor" href="#getfocusowner"></a>getFocusOwner</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>Method getFocusOwner() was removed from IDesktop, IForm and DesktopEvent. Since replacing the old rich client ui technologies (swing, swt) with the modern html ui, this method didn&#x2019;t work correctly anymore.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>There are no plans to implement correctly because of multiple reasons. It would increase network traffic between browser and ui server and also would be quite unreliable. The old behaviour was a synchronious result from the ui (swing, swt), which was feasible in rich client environments. But with a distant browser, a realtime result is hard to achieve and might already by outdated by its arrival at the ui server.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>If such functionality is needed, it has to be programmed with java script within the browser.</p> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
-    <h2 id="finalvalue"><a class="anchor" href="#finalvalue"></a>FinalValue</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>setIfAbsent has been renamed to setIfAbsentAndGet. setIfAbsent now returns a boolean denoting, if a value was set or not.</p> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
-    <h2 id="postconstruct"><a class="anchor" href="#postconstruct"></a>@PostConstruct</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>A method annotated with @PostConstruct in a Bean is now guaranteed to run exactly once. The constructor may still run more than once.</p> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
-    <h2 id="tree"><a class="anchor" href="#tree"></a>Tree</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>The method <code>AbstractTree#execAutoCheckChildNodes</code> got two new parameters and the default implementation now considers <code>enabledNodesOnly</code> and does not always ignore disabled nodes.</p> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
-    <h2 id="changed-behavior-of-scout-htmlcomponent-constructor-function-js"><a class="anchor" href="#changed-behavior-of-scout-htmlcomponent-constructor-function-js"></a>Changed behavior of scout.HtmlComponent() constructor function [JS]</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>The constructor function scout.HtmlComponent() no longer links the $comp to the new instance. Instead, the static function scout.HtmlComponent.install() should be used to create a new HtmlComponent and link it to $comp. The constructor function should never be used anymore in custom code. (If you do, you will get errors.)</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>The new static method makes it clearer that it will alter the state of $comp. For a normal constructor, such behavior is unexpected and thus discouraged.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p><strong>Migration:</strong> Check all <em>*.js</em> files in your project for occurences of <code>new scout.HtlmComponent</code> and replace them with <code>scout.HtmlComponent.install</code>.</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="CodeRay highlight"><code data-lang="javascript">  <span class="comment">// Old, do not use anymore!</span>
+     <div class="sect2"> 
+      <h3 id="changed-behavior-of-scout-htmlcomponent-constructor-function"><a class="anchor" href="#changed-behavior-of-scout-htmlcomponent-constructor-function"></a>Changed behavior of scout.HtmlComponent() constructor function</h3> 
+      <div class="paragraph"> 
+       <p>The constructor function scout.HtmlComponent() no longer links the $comp to the new instance. Instead, the static function scout.HtmlComponent.install() should be used to create a new HtmlComponent and link it to $comp. The constructor function should never be used anymore in custom code. (If you do, you will get errors.)</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The new static method makes it clearer that it will alter the state of $comp. For a normal constructor, such behavior is unexpected and thus discouraged.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p><strong>Migration:</strong> Check all <em>*.js</em> files in your project for occurences of <code>new scout.HtlmComponent</code> and replace them with <code>scout.HtmlComponent.install</code>.</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="javascript">  <span class="comment">// Old, do not use anymore!</span>
   <span class="local-variable">this</span>.<span class="predefined">$container</span> = <span class="predefined">$parent</span>.appendDiv(<span class="string"><span class="delimiter">'</span><span class="content">my-widget</span><span class="delimiter">'</span></span>);
   <span class="keyword">new</span> scout.HtmlComponent(<span class="local-variable">this</span>.<span class="predefined">$container</span>, <span class="local-variable">this</span>.session);
 
   <span class="comment">// New, change your code to this (no change in first line):</span>
   <span class="local-variable">this</span>.<span class="predefined">$container</span> = <span class="predefined">$parent</span>.appendDiv(<span class="string"><span class="delimiter">'</span><span class="content">my-widget</span><span class="delimiter">'</span></span>);
   scout.HtmlComponent.install(<span class="local-variable">this</span>.<span class="predefined">$container</span>, <span class="local-variable">this</span>.session);</code></pre> 
+       </div> 
       </div> 
      </div> 
-     <div class="admonitionblock tip"> 
-      <table> 
-       <tbody>
-        <tr> 
-         <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
-         <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/6.1.x/docs/build/scout_migration/src/docs/migration-guide.adoc">edit this page</a> on GitHub. </td> 
-        </tr> 
-       </tbody>
-      </table> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="other-changes"><a class="anchor" href="#other-changes"></a>Other Changes</h2> 
+    <div class="sectionbody"> 
+     <div class="sect2"> 
+      <h3 id="csp-report-url"><a class="anchor" href="#csp-report-url"></a>CSP report URL</h3> 
+      <div class="paragraph"> 
+       <p>By default, the <code>report-uri</code> for CSP violations is now called <strong>/csp-report</strong> (instead of /csp.cgi).</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="reorganized-html-files-due-to-strict-csp-rules"><a class="anchor" href="#reorganized-html-files-due-to-strict-csp-rules"></a>Reorganized *.html files due to strict CSP rules</h3> 
+      <div class="paragraph"> 
+       <p>The *.html files (index.html, login.html, logout.html etc.) have been changed to comply with the default Content Security Policy (CSP) rules.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The simplest way to migrate these files is to create them anew using the Scout SDK or maven archetype and compare them with your files. Otherwise, following this guide:</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>By default, inline <code>&lt;script&gt;</code> tags in HTML files are prohibited by CSP rules. Bootstrapping JavaScript code was therefore moved to dedicated <em>*.js</em> files in the <code>WebContent/res</code> folder. Existing projects using CSP have to manually perform the following steps:</p> 
+      </div> 
+      <div class="olist arabic"> 
+       <ol class="arabic"> 
+        <li> <p>Open each <em>*.html</em> file in <code>your.project.ui.html/src/main/resources/WebContent</code> folder and check if there are any inline script parts. Only <code>&lt;script&gt;</code> tags with embedded JavaScript code are considered &quot;inline&quot;. Tags with a <code>src</code> attribute don&#x2019;t need to be changed.</p> </li> 
+        <li> <p>Transfer the content of each script part to a <em>*.js</em> file in the <code>res</code> subdirectory (e.g. <em>index.html</em> &#x21d2; <em>res/index.js</em>) and delete the now empty &lt;script&gt; part.</p> </li> 
+        <li> <p>Add a reference to the <em>*.js</em> file in the <code>&lt;head&gt;</code> section using the <code>&lt;scout:script&gt;</code> tag, e.g.:<br /> <code>&lt;scout:script src=&quot;res/index.js&quot; /&gt;</code></p> </li> 
+        <li> <p>If the extracted <em>*.js</em> file contains <code>&lt;scout:message&gt;</code> tags, they have to be moved back to the <code>&lt;body&gt;</code> of the corresponding <em>*.html</em> file (because the NLS translation can only process HTML files). The attribute <code>style</code> has to be changed from <code>javascript</code> to <code>tag</code>.</p> </li> 
+       </ol> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Example:</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="title">
+        Listing 1. login.html before migration (Scout 6.0)
+       </div> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="html"><span class="doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+  <span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">UTF-8</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Contacts Application<span class="tag">&lt;/title&gt;</span>
+    <span class="tag">&lt;scout:include</span> <span class="attribute-name">template</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">head.html</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;scout:stylesheet</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/scout-login-module.css</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/jquery-all-macro.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/scout-login-module.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;script&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="inline"> <span class="predefined">$</span>(document).ready(<span class="keyword">function</span>() { scout.login.init({<span class="key">texts</span>: <span class="tag">&lt;scout:message</span> <span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="key">javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.Login</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.LoginFailed</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.User</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.Password</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span> }); });</span>
+    <span class="tag">&lt;/script&gt;</span>
+  <span class="tag">&lt;/head&gt;</span>
+  <span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;scout:include</span> <span class="attribute-name">template</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">no-script.html</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
+  <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre> 
+       </div> 
+      </div> 
+      <div class="colist arabic"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td><i class="conum" data-value="1"></i><b>1</b></td> 
+          <td>Prohibited inline script.</td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="title">
+        Listing 2. login.html after migration (Scout 6.1)
+       </div> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="html"><span class="doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+  <span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">UTF-8</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Contacts Application<span class="tag">&lt;/title&gt;</span>
+    <span class="tag">&lt;scout:include</span> <span class="attribute-name">template</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">head.html</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;scout:stylesheet</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/scout-login-module.css</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/jquery-all-macro.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/scout-login-module.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/login.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="tag">&lt;/head&gt;</span>
+  <span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;scout:include</span> <span class="attribute-name">template</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">no-script.html</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;scout:message</span> <span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="key">tag</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.Login</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.LoginFailed</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.User</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui.Password</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre> 
+       </div> 
+      </div> 
+      <div class="colist arabic"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td><i class="conum" data-value="1"></i><b>1</b></td> 
+          <td>External script reference allowed by CSP.</td> 
+         </tr> 
+         <tr> 
+          <td><i class="conum" data-value="2"></i><b>2</b></td> 
+          <td>Moved from JavaScript call to <code>&lt;body&gt;</code>, changed style to <code>tag</code>.</td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="title">
+        Listing 3. res/login.js after migration (Scout 6.1)
+       </div> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="javascript"><span class="predefined">$</span>(document).ready(<span class="keyword">function</span>() {
+  scout.login.init(); <i class="conum" data-value="1"></i><b>(1)</b>
+});</code></pre> 
+       </div> 
+      </div> 
+      <div class="colist arabic"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td><i class="conum" data-value="1"></i><b>1</b></td> 
+          <td>Translated texts are extracted automatically from DOM.</td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
+      <div class="admonitionblock tip"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
+          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/6.1.x/docs/build/scout_migration/src/docs/migration-guide.adoc">edit this page</a> on GitHub. </td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
      </div> 
     </div> 
    </div> 
