@@ -525,19 +525,19 @@ table.CodeRay td.code>pre{padding:0}
      Table of Contents
     </div> 
     <ul class="sectlevel0"> 
-     <li><a href="#releases">Releases</a> 
+     <li><a href="#releases">Releases</a></li> 
+     <li><a href="#what-s-new">What&#x2019;s New</a> 
       <ul class="sectlevel1"> 
-       <li><a href="#what-s-new">What&#x2019;s New</a> 
-        <ul class="sectlevel2"> 
-         <li><a href="#strong-content-security-policy-csp">Strong content security policy CSP</a></li> 
-         <li><a href="#binary-resources-support-for-htmlfield-and-beanfield">Binary resources support for HtmlField and BeanField</a></li> 
-         <li><a href="#tristate-capability-for-check-boxes">TriState capability for check boxes</a></li> 
-         <li><a href="#new-uriopenaction-same_window">New UriOpenAction: SAME_WINDOW</a></li> 
-         <li><a href="#new-methods-in-stringutility">New methods in StringUtility</a></li> 
-         <li><a href="#new-form-field-property-preventinitialfocus">New form field property &quot;preventInitialFocus&quot;</a></li> 
-         <li><a href="#multiple-dimensions-support">Multiple Dimensions Support</a></li> 
-         <li><a href="#form-field-enabled-inheritance">Form Field Enabled Inheritance</a></li> 
-        </ul> </li> 
+       <li><a href="#strong-content-security-policy-csp">Strong content security policy CSP</a></li> 
+       <li><a href="#enforcement-of-model-thread">Enforcement of Model Thread</a></li> 
+       <li><a href="#binary-resources-support-for-htmlfield-and-beanfield">Binary resources support for HtmlField and BeanField</a></li> 
+       <li><a href="#tristate-capability-for-check-boxes">TriState capability for check boxes</a></li> 
+       <li><a href="#new-uriopenaction-same_window">New UriOpenAction: SAME_WINDOW</a></li> 
+       <li><a href="#new-methods-in-stringutility">New methods in StringUtility</a></li> 
+       <li><a href="#new-objectutility">New ObjectUtility</a></li> 
+       <li><a href="#new-form-field-property-preventinitialfocus">New form field property &quot;preventInitialFocus&quot;</a></li> 
+       <li><a href="#multiple-dimensions-support">Multiple Dimensions Support</a></li> 
+       <li><a href="#form-field-enabled-inheritance">Form Field Enabled Inheritance</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -553,136 +553,180 @@ table.CodeRay td.code>pre{padding:0}
      <li> <p>Runtime on Maven Central: <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22">6.1.0.x</a></p> </li> 
     </ul> 
    </div> 
+   <h1 id="what-s-new" class="sect0"><a class="anchor" href="#what-s-new"></a>What&#x2019;s New</h1> 
    <div class="sect1"> 
-    <h2 id="what-s-new"><a class="anchor" href="#what-s-new"></a>What&#x2019;s New</h2> 
+    <h2 id="strong-content-security-policy-csp"><a class="anchor" href="#strong-content-security-policy-csp"></a>Strong content security policy CSP</h2> 
     <div class="sectionbody"> 
-     <div class="sect2"> 
-      <h3 id="strong-content-security-policy-csp"><a class="anchor" href="#strong-content-security-policy-csp"></a>Strong content security policy CSP</h3> 
-      <div class="paragraph"> 
-       <p>The stronger CSP disables inline javscript in html. Therefore the 'New Scout Project' wizard now creates a js file per html file and includes it using the script element. To migrate existing projects, see the <a href="https://eclipsescout.github.io/6.1/migration-guide.html">Scout Migration Guide</a>.</p> 
+     <div class="paragraph"> 
+      <p>The stronger CSP disables inline javscript in html. Therefore the 'New Scout Project' wizard now creates a js file per html file and includes it using the script element. To migrate existing projects, see the <a href="https://eclipsescout.github.io/6.1/migration-guide.html">Scout Migration Guide</a>.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="enforcement-of-model-thread"><a class="anchor" href="#enforcement-of-model-thread"></a>Enforcement of Model Thread</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Every operation which results in a modification of the model and eventually of the ui has to be performed by the model thread. This has been true for a long time and still is. If the wrong thread was used, unexpected behavior was the result, like a delayed update of the ui or concurrency exceptions. To prevent such behavior in the future, an exception will be thrown if an operation is executed in the wrong thread.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>If you get such an exception, you&#x2019;ll need to wrap your operation in a model job and schedule it using <code>ModelJobs.schedule()</code>, see the chapter ModelJobs in the <a href="https://eclipsescout.github.io/6.1/technical-guide.html#modeljobs">Scout Technical Documentation</a> for details.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="binary-resources-support-for-htmlfield-and-beanfield"><a class="anchor" href="#binary-resources-support-for-htmlfield-and-beanfield"></a>Binary resources support for HtmlField and BeanField</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Binary resources such as images or videos can now be used in the following widgets:</p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>HtmlField</p> </li> 
+       <li> <p>BeanField</p> </li> 
+      </ul> 
+     </div> 
+     <div id="img-binary_resource_field" class="imageblock"> 
+      <div class="content"> 
+       <img src="images/binary_resource_field.png" alt="binary resource field" /> 
+      </div> 
+      <div class="title">
+       Figure 1. Binary resource on a model field.
       </div> 
      </div> 
-     <div class="sect2"> 
-      <h3 id="binary-resources-support-for-htmlfield-and-beanfield"><a class="anchor" href="#binary-resources-support-for-htmlfield-and-beanfield"></a>Binary resources support for HtmlField and BeanField</h3> 
-      <div class="paragraph"> 
-       <p>Binary resources such as images or videos can now be used in the following widgets:</p> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Html enabled StringColumn</p> </li> 
+       <li> <p>BeanColumn</p> </li> 
+      </ul> 
+     </div> 
+     <div id="img-binary_resource_column" class="imageblock"> 
+      <div class="content"> 
+       <img src="images/binary_resource_column.png" alt="binary resource column" /> 
       </div> 
-      <div class="ulist"> 
-       <ul> 
-        <li> <p>HtmlField</p> </li> 
-        <li> <p>BeanField</p> </li> 
-       </ul> 
-      </div> 
-      <div id="img-binary_resource_field" class="imageblock"> 
-       <div class="content"> 
-        <img src="images/binary_resource_field.png" alt="binary resource field" /> 
-       </div> 
-       <div class="title">
-        Figure 1. Binary resource on a model field.
-       </div> 
-      </div> 
-      <div class="ulist"> 
-       <ul> 
-        <li> <p>Html enabled StringColumn</p> </li> 
-        <li> <p>BeanColumn</p> </li> 
-       </ul> 
-      </div> 
-      <div id="img-binary_resource_column" class="imageblock"> 
-       <div class="content"> 
-        <img src="images/binary_resource_column.png" alt="binary resource column" /> 
-       </div> 
-       <div class="title">
-        Figure 2. Binary resource on a column
-       </div> 
+      <div class="title">
+       Figure 2. Binary resource on a column
       </div> 
      </div> 
-     <div class="sect2"> 
-      <h3 id="tristate-capability-for-check-boxes"><a class="anchor" href="#tristate-capability-for-check-boxes"></a>TriState capability for check boxes</h3> 
-      <div class="paragraph"> 
-       <p>Added support for tri-state value (<code>true</code>, <code>false</code> and <code>null</code> instead of just <code>true</code> and <code>false</code>) to boolean field and boolean column.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>The new property <code>triStateEnabled</code> controls whether the boolean field/column behaves as a normal checkbox (false) or a tri-state checkbox (true).</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>A normal checkbox has values true/false. A tri-state checkbox has values true/false/null. The null value is interpreted as &quot;undefined&quot; and rendered as a filled square.</p> 
-      </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="tristate-capability-for-check-boxes"><a class="anchor" href="#tristate-capability-for-check-boxes"></a>TriState capability for check boxes</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Added support for tri-state value (<code>true</code>, <code>false</code> and <code>null</code> instead of just <code>true</code> and <code>false</code>) to boolean field and boolean column.</p> 
      </div> 
-     <div class="sect2"> 
-      <h3 id="new-uriopenaction-same_window"><a class="anchor" href="#new-uriopenaction-same_window"></a>New UriOpenAction: SAME_WINDOW</h3> 
-      <div class="paragraph"> 
-       <p>The enum <code>UriOpenAction</code> provides a new value to open a URI in the current window: <code>SAME_WINDOW</code></p> 
-      </div> 
+     <div class="paragraph"> 
+      <p>The new property <code>triStateEnabled</code> controls whether the boolean field/column behaves as a normal checkbox (false) or a tri-state checkbox (true).</p> 
      </div> 
-     <div class="sect2"> 
-      <h3 id="new-methods-in-stringutility"><a class="anchor" href="#new-methods-in-stringutility"></a>New methods in StringUtility</h3> 
-      <div class="paragraph"> 
-       <p><code>StringUtility</code> provides the following new methods:</p> 
-      </div> 
-      <div class="ulist"> 
-       <ul> 
-        <li> <p><code>containsString()</code></p> </li> 
-        <li> <p><code>containsStringIgnoreCase()</code></p> </li> 
-        <li> <p><code>containsRegEx()</code></p> </li> 
-        <li> <p><code>matches()</code></p> </li> 
-        <li> <p><code>endsWidth()</code></p> </li> 
-        <li> <p><code>startsWith()</code></p> </li> 
-        <li> <p><code>length()</code></p> </li> 
-        <li> <p><code>indexOf()</code></p> </li> 
-        <li> <p><code>lastIndexOf()</code></p> </li> 
-       </ul> 
-      </div> 
-      <div class="paragraph"> 
-       <p>All methods are null-safe, unit tested and documented with JavaDoc.</p> 
-      </div> 
+     <div class="paragraph"> 
+      <p>A normal checkbox has values true/false. A tri-state checkbox has values true/false/null. The null value is interpreted as &quot;undefined&quot; and rendered as a filled square.</p> 
      </div> 
-     <div class="sect2"> 
-      <h3 id="new-form-field-property-preventinitialfocus"><a class="anchor" href="#new-form-field-property-preventinitialfocus"></a>New form field property &quot;preventInitialFocus&quot;</h3> 
-      <div class="paragraph"> 
-       <p>By default, the first enabled field on a form gets the focus when the form is opened. This may not be desired in some cases (e.g. if the first field is a HTML field that contains app links). The new property <code>PROP_PREVENT_INITIAL_FOCUS</code> can be used to prevent the initial focus to be set to this field. The default value is <code>false</code>. For <code>AbstractHtmlField</code> and <code>AbstractBeanField</code>, the default is set to <code>true</code>.</p> 
-      </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="new-uriopenaction-same_window"><a class="anchor" href="#new-uriopenaction-same_window"></a>New UriOpenAction: SAME_WINDOW</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>The enum <code>UriOpenAction</code> provides a new value to open a URI in the current window: <code>SAME_WINDOW</code></p> 
      </div> 
-     <div class="sect2"> 
-      <h3 id="multiple-dimensions-support"><a class="anchor" href="#multiple-dimensions-support"></a>Multiple Dimensions Support</h3> 
-      <div class="paragraph"> 
-       <p>Some components now support more dimensions for various attributes. E.g. until now there have been two dimensions for Form Field visibility: visible and visible-granted. Now there are also custom dimensions available. See the chapter 'Multiple Dimensions Support' in the <a href="https://eclipsescout.github.io/6.1/technical-guide.html">Scout Technical Documentation</a> for details and examples.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>Currently the following attributes support multiple dimensions:</p> 
-      </div> 
-      <div class="ulist"> 
-       <ul> 
-        <li> <p>Actions: visible, enabled</p> </li> 
-        <li> <p>Columns: visible</p> </li> 
-        <li> <p>Tree Nodes: visible, enabled</p> </li> 
-        <li> <p>Outlines: visible</p> </li> 
-        <li> <p>Form Fields: visible, enabled, label-visible</p> </li> 
-        <li> <p>Data Model Attributes: visible</p> </li> 
-        <li> <p>Data Model Entity: visible</p> </li> 
-        <li> <p>Wizard Steps: visible, enabled</p> </li> 
-        <li> <p>Trees: enabled</p> </li> 
-        <li> <p>Tables: enabled</p> </li> 
-       </ul> 
-      </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="new-methods-in-stringutility"><a class="anchor" href="#new-methods-in-stringutility"></a>New methods in StringUtility</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p><code>StringUtility</code> provides the following new methods:</p> 
      </div> 
-     <div class="sect2"> 
-      <h3 id="form-field-enabled-inheritance"><a class="anchor" href="#form-field-enabled-inheritance"></a>Form Field Enabled Inheritance</h3> 
-      <div class="paragraph"> 
-       <p>The inheritance of the enabled property for Form Fields has been changed. Now the enabled properties are no longer propagated to children if it is changed on a composite field. Instead a field is only considered to be enabled if itself and all of its parents are enabled. This allows to toggle an entire box to disabled and back to enabled without touching the child fields. This has the advantage that the original state is restored when the box is set back to enabled.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>With this change the <code>getConfiguredEnabled</code> on composite fields now also automatically affects children. There is no need to overwrite <code>execInit()</code> and call <code>setEnabled(false)</code> anymore.</p> 
-      </div> 
-      <div class="admonitionblock tip"> 
-       <table> 
-        <tbody>
-         <tr> 
-          <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
-          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/6.1.x/docs/build/scout_releasenotes/src/docs/release-notes.adoc">edit this page</a> on GitHub. </td> 
-         </tr> 
-        </tbody>
-       </table> 
-      </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p><code>containsString()</code></p> </li> 
+       <li> <p><code>containsStringIgnoreCase()</code></p> </li> 
+       <li> <p><code>containsRegEx()</code></p> </li> 
+       <li> <p><code>matches()</code></p> </li> 
+       <li> <p><code>endsWidth()</code></p> </li> 
+       <li> <p><code>startsWith()</code></p> </li> 
+       <li> <p><code>length()</code></p> </li> 
+       <li> <p><code>indexOf()</code></p> </li> 
+       <li> <p><code>lastIndexOf()</code></p> </li> 
+       <li> <p><code>split()</code> (with <em>limit</em> argument)</p> </li> 
+      </ul> 
+     </div> 
+     <div class="paragraph"> 
+      <p>All methods are null-safe, unit tested and documented with JavaDoc.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="new-objectutility"><a class="anchor" href="#new-objectutility"></a>New ObjectUtility</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>ObjectUtility was added as new utility for generic object methods and provides null-safe implementations of various Object methods. Various methods from former <code>CompareUtility</code>:</p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p><code>equals()</code></p> </li> 
+       <li> <p><code>notEquals()</code></p> </li> 
+       <li> <p><code>nvl()</code></p> </li> 
+       <li> <p><code>isOneOf()</code></p> </li> 
+       <li> <p><code>compareTo()</code></p> </li> 
+      </ul> 
+     </div> 
+     <div class="paragraph"> 
+      <p>And a new method <code>ObjectUtility.toString(Object)</code> providing a null-safe implementation of <code>Object.toString()</code> returning <code>null</code> if specified object is <code>null</code>.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="new-form-field-property-preventinitialfocus"><a class="anchor" href="#new-form-field-property-preventinitialfocus"></a>New form field property &quot;preventInitialFocus&quot;</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>By default, the first enabled field on a form gets the focus when the form is opened. This may not be desired in some cases (e.g. if the first field is a HTML field that contains app links). The new property <code>PROP_PREVENT_INITIAL_FOCUS</code> can be used to prevent the initial focus to be set to this field. The default value is <code>false</code>. For <code>AbstractHtmlField</code> and <code>AbstractBeanField</code>, the default is set to <code>true</code>.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="multiple-dimensions-support"><a class="anchor" href="#multiple-dimensions-support"></a>Multiple Dimensions Support</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Some components now support more dimensions for various attributes. E.g. until now there have been two dimensions for Form Field visibility: visible and visible-granted. Now there are also custom dimensions available. See the chapter 'Multiple Dimensions Support' in the <a href="https://eclipsescout.github.io/6.1/technical-guide.html">Scout Technical Documentation</a> for details and examples.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Currently the following attributes support multiple dimensions:</p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Actions: visible, enabled</p> </li> 
+       <li> <p>Columns: visible</p> </li> 
+       <li> <p>Tree Nodes: visible, enabled</p> </li> 
+       <li> <p>Outlines: visible</p> </li> 
+       <li> <p>Form Fields: visible, enabled, label-visible</p> </li> 
+       <li> <p>Data Model Attributes: visible</p> </li> 
+       <li> <p>Data Model Entity: visible</p> </li> 
+       <li> <p>Wizard Steps: visible, enabled</p> </li> 
+       <li> <p>Trees: enabled</p> </li> 
+       <li> <p>Tables: enabled</p> </li> 
+      </ul> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="form-field-enabled-inheritance"><a class="anchor" href="#form-field-enabled-inheritance"></a>Form Field Enabled Inheritance</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>The inheritance of the enabled property for Form Fields has been changed. Now the enabled properties are no longer propagated to children if it is changed on a composite field. Instead a field is only considered to be enabled if itself and all of its parents are enabled. This allows to toggle an entire box to disabled and back to enabled without touching the child fields. This has the advantage that the original state is restored when the box is set back to enabled.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>With this change the <code>getConfiguredEnabled</code> on composite fields now also automatically affects children. There is no need to overwrite <code>execInit()</code> and call <code>setEnabled(false)</code> anymore.</p> 
+     </div> 
+     <div class="admonitionblock tip"> 
+      <table> 
+       <tbody>
+        <tr> 
+         <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
+         <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/6.1.x/docs/build/scout_releasenotes/src/docs/release-notes.adoc">edit this page</a> on GitHub. </td> 
+        </tr> 
+       </tbody>
+      </table> 
      </div> 
     </div> 
    </div> 
@@ -690,7 +734,7 @@ table.CodeRay td.code>pre{padding:0}
   <div id="footer"> 
    <div id="footer-text">
      Version 6.1
-    <br /> Last updated 2016-07-11 16:09:53 CEST 
+    <br /> Last updated 2016-11-29 08:57:33 CET 
    </div> 
   </div>  
  </body>

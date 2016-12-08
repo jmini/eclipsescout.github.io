@@ -567,7 +567,7 @@ table.CodeRay td.code>pre{padding:0}
       </ul> </li> 
      <li><a href="#working-with-exceptions">8. Working with exceptions</a> 
       <ul class="sectlevel2"> 
-       <li><a href="#scout-runtime-exceptions">8.1. Scout Runtime Exceptions</a></li> 
+       <li><a href="#scout-throwables">8.1. Scout Throwables</a></li> 
        <li><a href="#exception-handling">8.2. Exception handling</a></li> 
        <li><a href="#exception-translation">8.3. Exception translation</a></li> 
        <li><a href="#exception-logging">8.4. Exception Logging</a></li> 
@@ -1919,27 +1919,38 @@ TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class=
     <h2 id="working-with-exceptions"><a class="anchor" href="#working-with-exceptions"></a>8. Working with exceptions</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p>Exceptions can be logged via SLF4J Logger, or given to exception handler for centralized, consistent exception handling, or translated into other exceptions. Scout provides some few exceptions, which are used by the framework. They all are runtime exceptions, and typically inherit from <a href="#platformexception">PlatformException</a>.</p> 
+      <p>Exceptions can be logged via SLF4J Logger, or given to exception handler for centralized, consistent exception handling, or translated into other exceptions. Scout provides some few exceptions/errors, which are used by the framework.</p> 
      </div> 
      <div class="sect2"> 
-      <h3 id="scout-runtime-exceptions"><a class="anchor" href="#scout-runtime-exceptions"></a>8.1. Scout Runtime Exceptions</h3> 
+      <h3 id="scout-throwables"><a class="anchor" href="#scout-throwables"></a>8.1. Scout Throwables</h3> 
+      <div class="paragraph"> 
+       <p>All scout throwables are unchecked and typically implementing the <code>IThrowableWithContextInfo</code> interface, which provides functionality for associating context information with the occurred error.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Most scout throwables are runtime exceptions, and typically inherit from <a href="#platformexception">PlatformException</a>. See <a href="#scout-runtime-exceptions">Scout Runtime Exceptions</a> for more information.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Some scout throwables are instances of <code>java.lang.Error</code> by extending <a href="#platformerror">PlatformError</a>. Those errors usually provide functionality to interrupt Jobs, for example when a user is canceling a long running operation.<br /> Note: <strong><a href="#platformerror">PlatformError</a>s should never be catched by business logic!</strong> See <a href="#scout-runtime-errors">Scout Runtime Errors</a> for more information.</p> 
+      </div> 
       <div class="sect3"> 
-       <h4 id="platformexception"><a class="anchor" href="#platformexception"></a>8.1.1. PlatformException</h4> 
-       <div class="paragraph"> 
-        <p>Base runtime exception of the Scout platform, which allows for message formatting anchors and context information to be associated.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>There is a single constructor which accepts the exception&#x2019;s message, and optionally a variable number of arguments. Typically, a potential cause is given as its argument. The message allows further the use of formatting anchors in the form of {} pairs. The respective formatting arguments are provided via the constructor&#x2019;s <em>varArg</em> parameter. If the last argument is of the type <code>Throwable</code> and not referenced as formatting anchor in the message, that <code>Throwable</code> is used as the exception&#x2019;s cause. Internally, SLF4J <code>MessageFormatter</code> is used to provide substitution functionality. Hence, The format is the very same as if using SLF4j Logger.</p> 
-       </div> 
-       <div class="paragraph"> 
-        <p>Further, <code>PlatformException</code> allows to associate context information, which are available in Log4j <em>diagnostic context map</em> (MDC) upon logging the exception.</p> 
-       </div> 
-       <div class="listingblock"> 
-        <div class="title">
-         Listing 17. PlatformException examples
+       <h4 id="scout-runtime-exceptions"><a class="anchor" href="#scout-runtime-exceptions"></a>8.1.1. Scout Runtime Exceptions</h4> 
+       <div class="sect4"> 
+        <h5 id="platformexception"><a class="anchor" href="#platformexception"></a>PlatformException</h5> 
+        <div class="paragraph"> 
+         <p>Base runtime exception of the Scout platform, which allows for message formatting anchors and context information to be associated.</p> 
         </div> 
-        <div class="content"> 
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="exception">Exception</span> cause = <span class="keyword">new</span> <span class="exception">Exception</span>();
+        <div class="paragraph"> 
+         <p>There is a single constructor which accepts the exception&#x2019;s message, and optionally a variable number of arguments. Typically, a potential cause is given as its argument. The message allows further the use of formatting anchors in the form of {} pairs. The respective formatting arguments are provided via the constructor&#x2019;s <em>varArg</em> parameter. If the last argument is of the type <code>Throwable</code> and not referenced as formatting anchor in the message, that <code>Throwable</code> is used as the exception&#x2019;s cause. Internally, SLF4J <code>MessageFormatter</code> is used to provide substitution functionality. Hence, The format is the very same as if using SLF4j Logger.</p> 
+        </div> 
+        <div class="paragraph"> 
+         <p>Further, <code>PlatformException</code> allows to associate context information, which are available in Log4j <em>diagnostic context map</em> (MDC) upon logging the exception.</p> 
+        </div> 
+        <div class="listingblock"> 
+         <div class="title">
+          Listing 17. PlatformException examples
+         </div> 
+         <div class="content"> 
+          <pre class="CodeRay highlight"><code data-lang="java"><span class="exception">Exception</span> cause = <span class="keyword">new</span> <span class="exception">Exception</span>();
 
 <span class="comment">// Create a PlatformException with a message</span>
 <span class="keyword">new</span> PlatformException(<span class="string"><span class="delimiter">&quot;</span><span class="content">Failed to persist data</span><span class="delimiter">&quot;</span></span>);
@@ -1957,56 +1968,72 @@ TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class=
 <span class="keyword">new</span> PlatformException(<span class="string"><span class="delimiter">&quot;</span><span class="content">Failed to persist data</span><span class="delimiter">&quot;</span></span>, cause)
     .withContextInfo(<span class="string"><span class="delimiter">&quot;</span><span class="content">entity</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">person</span><span class="delimiter">&quot;</span></span>)
     .withContextInfo(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">123</span>);</code></pre> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="sect4"> 
+        <h5 id="processingexception"><a class="anchor" href="#processingexception"></a>ProcessingException</h5> 
+        <div class="paragraph"> 
+         <p>Represents a <a href="#platformexception">PlatformException</a> and is thrown in case of a processing failure, and which can be associated with an exception error code and severity.</p> 
+        </div> 
+       </div> 
+       <div class="sect4"> 
+        <h5 id="vetoexception"><a class="anchor" href="#vetoexception"></a>VetoException</h5> 
+        <div class="paragraph"> 
+         <p>Represents a <a href="#processingexception">ProcessingException</a> with VETO character. If thrown server-side, exceptions of this type are transported to the client and typically visualized in the form of a message box.</p> 
+        </div> 
+       </div> 
+       <div class="sect4"> 
+        <h5 id="assertionexception"><a class="anchor" href="#assertionexception"></a>AssertionException</h5> 
+        <div class="paragraph"> 
+         <p>Represents a <a href="#platformexception">PlatformException</a> and indicates an assertion error about the application&#x2019;s assumptions about expected values.</p> 
+        </div> 
+       </div> 
+       <div class="sect4"> 
+        <h5 id="transactionrequiredexception"><a class="anchor" href="#transactionrequiredexception"></a>TransactionRequiredException</h5> 
+        <div class="paragraph"> 
+         <p>Represents a <a href="#platformexception">PlatformException</a> and is thrown if a ServerRunContext requires a transaction to be available.</p> 
         </div> 
        </div> 
       </div> 
       <div class="sect3"> 
-       <h4 id="processingexception"><a class="anchor" href="#processingexception"></a>8.1.2. ProcessingException</h4> 
+       <h4 id="scout-runtime-errors"><a class="anchor" href="#scout-runtime-errors"></a>8.1.2. Scout Runtime Errors</h4> 
        <div class="paragraph"> 
-        <p>Represents a <a href="#platformexception">PlatformException</a> and is thrown in case of a processing failure, and which can be associated with an exception error code and severity.</p> 
+        <p>Runtime Errors are used to indicate an error, that shouldn&#x2019;t be catched/treated by business logic and therefore bubble up to the appropriate <a href="#exception-handling">exception handler</a> in the scout framework. Because those errors are handled by the framework internals, they should never be catched on the server (Services etc.) nor on the client side (Pages, Forms, etc.).</p> 
        </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="vetoexception"><a class="anchor" href="#vetoexception"></a>8.1.3. VetoException</h4> 
        <div class="paragraph"> 
-        <p>Represents a <a href="#processingexception">ProcessingException</a> with VETO character. If thrown server-side, exceptions of this type are transported to the client and typically visualized in the form of a message box.</p> 
+        <p>All Scout Runtime Errors extend <a href="#platformerror">PlatformError</a>.</p> 
        </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="assertionexception"><a class="anchor" href="#assertionexception"></a>8.1.4. AssertionException</h4> 
-       <div class="paragraph"> 
-        <p>Represents a <a href="#platformexception">PlatformException</a> and indicates an assertion error about the application&#x2019;s assumptions about expected values.</p> 
+       <div class="sect4"> 
+        <h5 id="platformerror"><a class="anchor" href="#platformerror"></a>PlatformError</h5> 
+        <div class="paragraph"> 
+         <p>Like <a href="#platformexception">PlatformException</a>, PlatformErrors implement <code>IThrowableWithContextInfo</code> for associating context information with the occurred error. See <a href="#platformexception">PlatformException</a> for usage and example code.</p> 
+        </div> 
        </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="threadinterruptedexception"><a class="anchor" href="#threadinterruptedexception"></a>8.1.5. ThreadInterruptedException</h4> 
-       <div class="paragraph"> 
-        <p>Represents a <a href="#platformexception">PlatformException</a> and indicates that a thread was interrupted while waiting for some condition to become true, e.g. while waiting for a job to complete. Unlike <code>java.lang.InterruptedException</code>, the thread&#x2019;s interrupted status is not cleared when catching this exception.</p> 
+       <div class="sect4"> 
+        <h5 id="threadinterruptederror"><a class="anchor" href="#threadinterruptederror"></a>ThreadInterruptedError</h5> 
+        <div class="paragraph"> 
+         <p>Represents a <a href="#platformerror">PlatformError</a> and indicates that a thread was interrupted while waiting for some condition to become true, e.g. while waiting for a job to complete. Unlike <code>java.lang.InterruptedException</code>, the thread&#x2019;s interrupted status is not cleared when catching this exception.</p> 
+        </div> 
        </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="futurecancelledexception"><a class="anchor" href="#futurecancelledexception"></a>8.1.6. FutureCancelledException</h4> 
-       <div class="paragraph"> 
-        <p>Represents a <a href="#platformexception">PlatformException</a> and indicates that the result of a job cannot be retrieved, or the IFuture&#x2019;s completion not be awaited because the job was cancelled.</p> 
+       <div class="sect4"> 
+        <h5 id="futurecancellederror"><a class="anchor" href="#futurecancellederror"></a>FutureCancelledError</h5> 
+        <div class="paragraph"> 
+         <p>Represents a <a href="#platformerror">PlatformError</a> and indicates that the result of a job cannot be retrieved, or the IFuture&#x2019;s completion not be awaited because the job was cancelled.</p> 
+        </div> 
        </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="timedoutexception"><a class="anchor" href="#timedoutexception"></a>8.1.7. TimedOutException</h4> 
-       <div class="paragraph"> 
-        <p>Represents a <a href="#platformexception">PlatformException</a> and indicates that the maximal wait time elapsed while waiting for some condition to become true, e.g. while waiting a job to complete.</p> 
-       </div> 
-      </div> 
-      <div class="sect3"> 
-       <h4 id="transactionrequiredexception"><a class="anchor" href="#transactionrequiredexception"></a>8.1.8. TransactionRequiredException</h4> 
-       <div class="paragraph"> 
-        <p>Represents a <a href="#platformexception">PlatformException</a> and is thrown if a ServerRunContext requires a transaction to be available.</p> 
+       <div class="sect4"> 
+        <h5 id="timedouterror"><a class="anchor" href="#timedouterror"></a>TimedOutError</h5> 
+        <div class="paragraph"> 
+         <p>Represents a <a href="#platformerror">PlatformError</a> and indicates that the maximal wait time elapsed while waiting for some condition to become true, e.g. while waiting a job to complete.</p> 
+        </div> 
        </div> 
       </div> 
      </div> 
      <div class="sect2"> 
       <h3 id="exception-handling"><a class="anchor" href="#exception-handling"></a>8.2. Exception handling</h3> 
       <div class="paragraph"> 
-       <p>An exception handler is the central point for exception handling. It provides a single method 'handle' which accepts a <code>Throwable</code>, and which never throws an exception. It is implemented as a bean, meaning managed by the bean manager to allow easy replacement, e.g. to use a different handler when running client or server side. By default, a <a href="#processingexception">ProcessingException</a> is logged according to its severity, a <a href="#vetoexception">VetoException</a>, <a href="#threadinterruptedexception">ThreadInterruptedException</a> or <a href="#futurecancelledexception">FutureCancelledException</a> logged in <em>DEBUG</em> level, and any other exception logged as an <em>ERROR</em>. If running client side, exceptions are additionally visualized and showed to the user.</p> 
+       <p>An exception handler is the central point for exception handling. It provides a single method 'handle' which accepts a <code>Throwable</code>, and which never throws an exception. It is implemented as a bean, meaning managed by the bean manager to allow easy replacement, e.g. to use a different handler when running client or server side. By default, a <a href="#processingexception">ProcessingException</a> is logged according to its severity, a <a href="#vetoexception">VetoException</a>, <a href="#threadinterruptederror">ThreadInterruptedError</a> or <a href="#futurecancellederror">FutureCancelledError</a> logged in <em>DEBUG</em> level, and any other exception logged as an <em>ERROR</em>. If running client side, exceptions are additionally visualized and showed to the user.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -2044,7 +2071,7 @@ TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class=
         <p>If given a <a href="#platformexception">PlatformException</a>, it is returned as given. For all other exceptions (checked or unchecked), a <a href="#platformexception">PlatformException</a> is returned which wraps the given exception.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Typically, this translator is used if you require to add some context information via <code>PlatformException.withContextInfo(String, Object, Object)</code>.</p> 
+        <p>Typically, this translator is used if you require to add some context information via <code>IThrowableWithContextInfo.withContextInfo(String, Object, Object)</code>.</p> 
        </div> 
        <div class="listingblock"> 
         <div class="title">
@@ -2072,7 +2099,7 @@ TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class=
         <p>Also, if given a wrapped exception like <code>UndeclaredThrowableException</code>, <code>InvocationTargetException</code> or <code>ExecutionException</code>, that exception is returned as given without unwrapping its cause.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>For instance, this translator can be used if working with the Job API, e.g. to distinguish between a <a href="#futurecancelledexception">FutureCancelledException</a> thrown by the job&#x2019;s runnable, or because the job was effectively cancelled.</p> 
+        <p>For instance, this translator can be used if working with the Job API, e.g. to distinguish between a <a href="#futurecancellederror">FutureCancelledError</a> thrown by the job&#x2019;s runnable, or because the job was effectively cancelled.</p> 
        </div> 
       </div> 
      </div> 
@@ -2860,7 +2887,7 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
       <div class="sect3"> 
        <h4 id="awaiting-a-single-future-s-done-state"><a class="anchor" href="#awaiting-a-single-future-s-done-state"></a>9.11.2. Awaiting a single future&#x2019;s 'done' state</h4> 
        <div class="paragraph"> 
-        <p>Besides of some overloaded methods, <a href="#ifuture">IFuture</a> basically provides two methods to wait for a future to enter 'done' state, namely <code>awaitDone</code> and <code>awaitDoneAndGet</code>, with the difference that the latter additionally returns the job&#x2019;s result or exception. If the future is already done, those methods will return immediately. For both methods, there exists an overloaded version to wait for at most a given time, which once elapsed results in a <code>TimedOutException</code> thrown.</p> 
+        <p>Besides of some overloaded methods, <a href="#ifuture">IFuture</a> basically provides two methods to wait for a future to enter 'done' state, namely <code>awaitDone</code> and <code>awaitDoneAndGet</code>, with the difference that the latter additionally returns the job&#x2019;s result or exception. If the future is already done, those methods will return immediately. For both methods, there exists an overloaded version to wait for at most a given time, which once elapsed results in a <code>TimedOutError</code> thrown.</p> 
        </div> 
        <div class="paragraph"> 
         <p>Further, <code>awaitDoneAndGet</code> allows to specify an <a href="#IExceptionTranslator">[IExceptionTranslator]</a> to control exception translation. By default, <a href="#defaultruntimeexceptiontranslator">DefaultRuntimeExceptionTranslator</a> is used, meaning that a <code>RuntimeException</code> is propagated as it is, whereas a checked exception would be wrapped into a <a href="#platformexception">PlatformException</a>. If you require checked exceptions to be thrown as they are, use <a href="#defaultexceptiontranslator">DefaultExceptionTranslator</a> instead, or even <a href="#nullexceptiontranslator">NullExceptionTranslator</a> to work with the raw <code>ExecutionException</code> as being thrown by Java Executor framework.</p> 
@@ -2897,27 +2924,27 @@ result = future.awaitDoneAndGet(<span class="integer">10</span>, <span class="pr
          <tbody>
           <tr> 
            <td><i class="conum" data-value="1"></i><b>1</b></td> 
-           <td>Waits if necessary for the job to complete, or until cancelled. This method does not throw an exception if cancelled or the computation failed, but throws <a href="#threadinterruptedexception">ThreadInterruptedException</a> if the current thread was interrupted while waiting.</td> 
+           <td>Waits if necessary for the job to complete, or until cancelled. This method does not throw an exception if cancelled or the computation failed, but throws <a href="#threadinterruptederror">ThreadInterruptedError</a> if the current thread was interrupted while waiting.</td> 
           </tr> 
           <tr> 
            <td><i class="conum" data-value="2"></i><b>2</b></td> 
-           <td>Waits if necessary for at most 10 seconds for the job to complete, or until cancelled, or the timeout elapses. This method does not throw an exception if cancelled, or the computation failed, but throws <a href="#timedoutexception">TimedOutException</a> if waiting timeout elapsed, or throws <a href="#threadinterruptedexception">ThreadInterruptedException</a> if the current thread was interrupted while waiting.</td> 
+           <td>Waits if necessary for at most 10 seconds for the job to complete, or until cancelled, or the timeout elapses. This method does not throw an exception if cancelled, or the computation failed, but throws <a href="#timedouterror">TimedOutError</a> if waiting timeout elapsed, or throws <a href="#threadinterruptederror">ThreadInterruptedError</a> if the current thread was interrupted while waiting.</td> 
           </tr> 
           <tr> 
            <td><i class="conum" data-value="3"></i><b>3</b></td> 
-           <td>Waits if necessary for the job to complete, and then returns its result, if available, or throws its exception according to <a href="#defaultruntimeexceptiontranslator">DefaultRuntimeExceptionTranslator</a>, or throws <a href="#futurecancelledexception">FutureCancelledException</a> if cancelled, or throws <a href="#threadinterruptedexception">ThreadInterruptedException</a> if the current thread was interrupted while waiting.</td> 
+           <td>Waits if necessary for the job to complete, and then returns its result, if available, or throws its exception according to <a href="#defaultruntimeexceptiontranslator">DefaultRuntimeExceptionTranslator</a>, or throws <a href="#futurecancellederror">FutureCancelledError</a> if cancelled, or throws <a href="#threadinterruptederror">ThreadInterruptedError</a> if the current thread was interrupted while waiting.</td> 
           </tr> 
           <tr> 
            <td><i class="conum" data-value="4"></i><b>4</b></td> 
-           <td>Waits if necessary for at most 10 seconds for the job to complete, and then returns its result, if available, or throws its exception according to <a href="#defaultruntimeexceptiontranslator">DefaultRuntimeExceptionTranslator</a>, or throws <a href="#futurecancelledexception">FutureCancelledException</a> if cancelled, or throws <a href="#timedoutexception">TimedOutException</a> if waiting timeout elapsed, or throws <a href="#threadinterruptedexception">ThreadInterruptedException</a> if the current thread was interrupted while waiting.</td> 
+           <td>Waits if necessary for at most 10 seconds for the job to complete, and then returns its result, if available, or throws its exception according to <a href="#defaultruntimeexceptiontranslator">DefaultRuntimeExceptionTranslator</a>, or throws <a href="#futurecancellederror">FutureCancelledError</a> if cancelled, or throws <a href="#timedouterror">TimedOutError</a> if waiting timeout elapsed, or throws <a href="#threadinterruptederror">ThreadInterruptedError</a> if the current thread was interrupted while waiting.</td> 
           </tr> 
           <tr> 
            <td><i class="conum" data-value="5"></i><b>5</b></td> 
-           <td>Waits if necessary for the job to complete, and then returns its result, if available, or throws its exception according to the given <a href="#defaultexceptiontranslator">DefaultExceptionTranslator</a>, or throws <a href="#futurecancelledexception">FutureCancelledException</a> if cancelled, or throws <a href="#threadinterruptedexception">ThreadInterruptedException</a> if the current thread was interrupted while waiting.</td> 
+           <td>Waits if necessary for the job to complete, and then returns its result, if available, or throws its exception according to the given <a href="#defaultexceptiontranslator">DefaultExceptionTranslator</a>, or throws <a href="#futurecancellederror">FutureCancelledError</a> if cancelled, or throws <a href="#threadinterruptederror">ThreadInterruptedError</a> if the current thread was interrupted while waiting.</td> 
           </tr> 
           <tr> 
            <td><i class="conum" data-value="6"></i><b>6</b></td> 
-           <td>Waits if necessary for at most the given time for the job to complete, and then returns its result, if available, or throws its exception according to the given <a href="#defaultexceptiontranslator">DefaultExceptionTranslator</a>, or throws <a href="#futurecancelledexception">FutureCancelledException</a> if cancelled, or throws <a href="#timedoutexception">TimedOutException</a> if waiting timeout elapsed, or throws <a href="#threadinterruptedexception">ThreadInterruptedException</a> if the current thread was interrupted while waiting.</td> 
+           <td>Waits if necessary for at most the given time for the job to complete, and then returns its result, if available, or throws its exception according to the given <a href="#defaultexceptiontranslator">DefaultExceptionTranslator</a>, or throws <a href="#futurecancellederror">FutureCancelledError</a> if cancelled, or throws <a href="#timedouterror">TimedOutError</a> if waiting timeout elapsed, or throws <a href="#threadinterruptederror">ThreadInterruptedError</a> if the current thread was interrupted while waiting.</td> 
           </tr> 
          </tbody>
         </table> 
@@ -7113,7 +7140,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
   <div id="footer"> 
    <div id="footer-text">
      Version 6.1
-    <br /> Last updated 2016-11-15 14:18:41 CET 
+    <br /> Last updated 2016-11-29 08:57:33 CET 
    </div> 
   </div>  
  </body>

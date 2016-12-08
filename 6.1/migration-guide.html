@@ -540,8 +540,10 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#browserinfo">BrowserInfo</a></li> 
        <li><a href="#virtual-tree-node">Virtual Tree Node</a></li> 
        <li><a href="#enabled-property-of-form-fields">Enabled Property of Form Fields</a></li> 
-       <li><a href="#numberutility-nvl-dateutility-nvl">NumberUtility.nvl(), DateUtility.nvl()</a></li> 
+       <li><a href="#numberutility-nvl-dateutility-nvl-stringutility-nvl">NumberUtility.nvl(), DateUtility.nvl(), StringUtility.nvl()</a></li> 
+       <li><a href="#stringutility-substitutewhenempty">StringUtility.substituteWhenEmpty()</a></li> 
        <li><a href="#compareutility">CompareUtility</a></li> 
+       <li><a href="#strong-threadinterrupted-timedout-and-futurecancelled-exception-strong-em-extends-java-lang-runtimeexception-em-are-now-strong-platofromerrors-strong-em-extends-java-lang-error-em"><strong>ThreadInterrupted-, TimedOut- and FutureCancelled-Exception</strong> <em>(extends java.lang.RuntimeException)</em> are now <strong>PlatofromErrors</strong> <em>(extends java.lang.Error)</em></a></li> 
       </ul> </li> 
      <li><a href="#api-changes-js">API Changes (JS)</a> 
       <ul class="sectlevel2"> 
@@ -549,16 +551,14 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#scout-modeladapter">scout.ModelAdapter</a></li> 
        <li><a href="#scout-modeladapter-_send">scout.ModelAdapter._send()</a></li> 
        <li><a href="#scout-widget">scout.Widget</a></li> 
-       <li><a href="#destroy">destroy()</a></li> 
-       <li><a href="#eventsupport">EventSupport</a></li> 
-       <li><a href="#keystrokecontext">KeyStrokeContext</a></li> 
-       <li><a href="#changes-in-objecttype-syntax-and-scout-create">Changes in objectType syntax and scout.create()</a></li> 
+       <li><a href="#changes-in-objecttype-syntax-and-scout-create">Changes in &quot;objectType&quot; syntax and scout.create()</a></li> 
        <li><a href="#changed-behavior-of-scout-htmlcomponent-constructor-function">Changed behavior of scout.HtmlComponent() constructor function</a></li> 
       </ul> </li> 
      <li><a href="#other-changes">Other Changes</a> 
       <ul class="sectlevel2"> 
        <li><a href="#csp-report-url">CSP report URL</a></li> 
        <li><a href="#reorganized-html-files-due-to-strict-csp-rules">Reorganized *.html files due to strict CSP rules</a></li> 
+       <li><a href="#renamed-css-files-to-less">Renamed *.css files to *.less</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -642,7 +642,7 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2"> 
       <h3 id="customizing-csp-directives"><a class="anchor" href="#customizing-csp-directives"></a>Customizing CSP directives</h3> 
       <div class="paragraph"> 
-       <p>The method <code>org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.getCspDirectives()</code> is no longer available. CSP directives are now configured by the the bean <code>org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy</code>. To customize the rules, replace this bean with your own implementation and override the method <code>initDirectives()</code>. The bean provides fluent-style with_XXX_() methods.</p> 
+       <p>The method <code>org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.getCspDirectives()</code> is no longer available. CSP directives are now configured by the the bean <code>org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy</code>. To customize the rules, replace this bean with your own implementation and override the method <code>initDirectives()</code>. The bean provides fluent-style <em>withXXX()</em> methods.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -705,17 +705,35 @@ table.CodeRay td.code>pre{padding:0}
       <div class="paragraph"> 
        <p>To have the same behaviour you can use the method <code>formField.setEnabled(yourValue, true /* update parents */, true /* update children */)</code> which also propagates the value to parent and child fields. The same method also exists for the enabled-granted property: <code>formField.setEnabledGranted(yourValue, true, true)</code>. However often it may no longer be required to actively propagate the new value to children. Therefore it is recommended to check the business logic manually where possible.</p> 
       </div> 
+      <div class="paragraph"> 
+       <p>Furthermore the meaning of property change listeners changed. Check all the listeners using the <code>org.eclipse.scout.rt.client.ui.form.fields.IFormField.PROP_ENABLED</code> property. This property is now only fired if the state of the form field itself has changed. If the enabled state of a parent field is modified, this property change event will no longer be fired. The actual enabled state of the field could have changed even though because the parents have an influence now. If the listener should also be notified about changes of the parents use the new property <code>org.eclipse.scout.rt.client.ui.form.fields.IFormField.PROP_ENABLED_COMPUTED</code>.</p> 
+      </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="numberutility-nvl-dateutility-nvl"><a class="anchor" href="#numberutility-nvl-dateutility-nvl"></a>NumberUtility.nvl(), DateUtility.nvl()</h3> 
+      <h3 id="numberutility-nvl-dateutility-nvl-stringutility-nvl"><a class="anchor" href="#numberutility-nvl-dateutility-nvl-stringutility-nvl"></a>NumberUtility.nvl(), DateUtility.nvl(), StringUtility.nvl()</h3> 
       <div class="paragraph"> 
-       <p>The nvl() methods on NumberUtility and DateUtility were moved to a generic ObjectUtility.nvl(). The existing methods were deprecated and will be removed with next Scout release. Additionally the existing methods were restricted to use Number respectively Date only.</p> 
+       <p>The <code>nvl()</code> methods on NumberUtility, DateUtility and StringUtiltiy were moved to a generic <code>ObjectUtility.nvl()</code>. The existing methods were deprecated and will be removed with next Scout release. Additionally the existing methods were restricted to use Number respectively Date only.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="stringutility-substitutewhenempty"><a class="anchor" href="#stringutility-substitutewhenempty"></a>StringUtility.substituteWhenEmpty()</h3> 
+      <div class="paragraph"> 
+       <p>The existing methods was deprecated and will be removed with next Scout release. Use StringUtility.hasText() and StringUtility.emptyIfNull() or StringUtility.nullIfEmpty() instead.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
       <h3 id="compareutility"><a class="anchor" href="#compareutility"></a>CompareUtility</h3> 
       <div class="paragraph"> 
        <p>The various null-safe compare methods on CompareUtility were moved to the new generic ObjectUtility. The existing methods were deprecated and will be removed with next Scout release.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="strong-threadinterrupted-timedout-and-futurecancelled-exception-strong-em-extends-java-lang-runtimeexception-em-are-now-strong-platofromerrors-strong-em-extends-java-lang-error-em"><a class="anchor" href="#strong-threadinterrupted-timedout-and-futurecancelled-exception-strong-em-extends-java-lang-runtimeexception-em-are-now-strong-platofromerrors-strong-em-extends-java-lang-error-em"></a><strong>ThreadInterrupted-, TimedOut- and FutureCancelled-Exception</strong> <em>(extends java.lang.RuntimeException)</em> are now <strong>PlatofromErrors</strong> <em>(extends java.lang.Error)</em></h3> 
+      <div class="paragraph"> 
+       <p>There were circumstances where the cancellation of long-running actions did not work or lead to unpleasant behaviors (for example multiple <code>ExceptionForm</code>, that is displayed after a cancellation by the user). Most of time caught exceptions where the reason for such behaviors.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>In order to get rid of those problems, we have decided that the former <code>RuntimeExceptions</code> will become <code>Errors</code> and therefore should no longer be swallowed by <code>catch(RuntimeException e)</code>. See <strong>Eclipse Scout: Technical Guide</strong> for more information about the new <code>Throwable</code> hierarchy.</p> 
       </div> 
      </div> 
     </div> 
@@ -730,8 +748,8 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p><strong>Old</strong>: scout.graphics.prefSize($elem, <span class="line-through">includeMargin</span>, options)</p> </li> 
-        <li> <p><strong>New</strong>: scout.graphics.prefSize($elem, options)</p> </li> 
+        <li> <p>Old: <code>scout.graphics.prefSize($elem, <span class="line-through">includeMargin</span>, options)</code></p> </li> 
+        <li> <p>New: <code>scout.graphics.prefSize($elem, options)</code></p> </li> 
        </ul> 
       </div> 
       <div class="paragraph"> 
@@ -766,8 +784,8 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="ulist"> 
        <ul> 
-        <li> <p><strong>Old</strong>: scout.ModelAdapter._send(type, data, <span class="line-through">delay, coalesceFunc, noBusyIndicator</span>)</p> </li> 
-        <li> <p><strong>New</strong>: scout.ModelAdapter._send(type, data, options)</p> </li> 
+        <li> <p>Old: <code>scout.ModelAdapter._send(type, data, <span class="line-through">delay, coalesceFunc, noBusyIndicator</span>)</code></p> </li> 
+        <li> <p>New: <code>scout.ModelAdapter._send(type, data, options)</code></p> </li> 
        </ul> 
       </div> 
       <div class="paragraph"> 
@@ -797,46 +815,46 @@ table.CodeRay td.code>pre{padding:0}
       <div class="paragraph"> 
        <p>If you have not created any custom widgets, you can skip this.</p> 
       </div> 
+      <div class="sect3"> 
+       <h4 id="destroy"><a class="anchor" href="#destroy"></a>destroy()</h4> 
+       <div class="paragraph"> 
+        <p>With the separation of widget and model adapter the destroy handling has been refactored. This means every widget may now be destroyed. Previously only the widgets which extended from <code>scout.ModelAdapter</code> could be destroyed. The big advantage is that every widget now behaves the same and that there finally is a counter part for the <code>_init()</code> called <code>_destroy()</code> which makes it possible to do cleanup like removing listeners.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>For you it means you have to decide whether you want to destroy or only remove your widgets. A widget knows the following states:</p> 
+       </div> 
+       <div class="olist arabic"> 
+        <ol class="arabic"> 
+         <li> <p>initialized</p> </li> 
+         <li> <p>rendered</p> </li> 
+         <li> <p>removed</p> </li> 
+         <li> <p>destroyed</p> </li> 
+        </ol> 
+       </div> 
+       <div class="paragraph"> 
+        <p>You can remove and render the same widget as many times you want, but if you destroy it you may not use it again and you would have to create a new one. It eventually has to be destroyed though for a proper cleanup. Normally this is done by the parent widget, but in some rare cases you have to take care of it by your own.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>So check all the occurrences of <code>YourWidget.remove()</code> and maybe replace them with destroy.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="eventsupport"><a class="anchor" href="#eventsupport"></a>EventSupport</h4> 
+       <div class="paragraph"> 
+        <p>Every widget now installs the event support by default. Previously <code>_addEventSupport</code> had to be called in the constructor of the widget. This may now be removed.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="keystrokecontext"><a class="anchor" href="#keystrokecontext"></a>KeyStrokeContext</h4> 
+       <div class="paragraph"> 
+        <p>The method <code>_addKeyStrokeContextSupport</code> has been removed. If your widget needs keystroke support override <code>_createKeyStrokeContext</code> and provide one. You can probably use the default <code>scout.KeyStrokeContext</code>. The parameter of <code>_initKeyStrokeContext</code> has been removed as well. Just use <code>this.keyStrokeContext</code> instead.</p> 
+       </div> 
+      </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="destroy"><a class="anchor" href="#destroy"></a>destroy()</h3> 
+      <h3 id="changes-in-objecttype-syntax-and-scout-create"><a class="anchor" href="#changes-in-objecttype-syntax-and-scout-create"></a>Changes in &quot;objectType&quot; syntax and scout.create()</h3> 
       <div class="paragraph"> 
-       <p>With the separation of widget and model adapter the destroy handling has been refactored. This means every widget may now be destroyed. Previously only the widgets which extended from <code>scout.ModelAdapter</code> could be destroyed. The big advantage is that every widget now behaves the same and that there finally is a counter part for the <code>_init()</code> called <code>_destroy()</code> which makes it possible to do cleanup like removing listeners.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>For you it means you have to decide whether you want to destroy or only remove your widgets. A widget knows the following states:</p> 
-      </div> 
-      <div class="olist arabic"> 
-       <ol class="arabic"> 
-        <li> <p>initialized</p> </li> 
-        <li> <p>rendered</p> </li> 
-        <li> <p>removed</p> </li> 
-        <li> <p>destroyed</p> </li> 
-       </ol> 
-      </div> 
-      <div class="paragraph"> 
-       <p>You can remove and render the same widget as many times you want, but if you destroy it you may not use it again and you would have to create a new one. It eventually has to be destroyed though for a proper cleanup. Normally this is done by the parent widget, but in some rare cases you have to take care of it by your own.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>So check all the occurrences of <code>YourWidget.remove()</code> and maybe replace them with destroy.</p> 
-      </div> 
-     </div> 
-     <div class="sect2"> 
-      <h3 id="eventsupport"><a class="anchor" href="#eventsupport"></a>EventSupport</h3> 
-      <div class="paragraph"> 
-       <p>Every widget now installs the event support by default. Previously <code>_addEventSupport</code> had to be called in the constructor of the widget. This may now be removed.</p> 
-      </div> 
-     </div> 
-     <div class="sect2"> 
-      <h3 id="keystrokecontext"><a class="anchor" href="#keystrokecontext"></a>KeyStrokeContext</h3> 
-      <div class="paragraph"> 
-       <p>The method <code>_addKeyStrokeContextSupport</code> has been removed. If your widget needs keystroke support override <code>_createKeyStrokeContext</code> and provide one. You can probably use the default <code>scout.KeyStrokeContext</code>. The parameter of <code>_initKeyStrokeContext</code> has been removed as well. Just use <code>this.keyStrokeContext</code> instead.</p> 
-      </div> 
-     </div> 
-     <div class="sect2"> 
-      <h3 id="changes-in-objecttype-syntax-and-scout-create"><a class="anchor" href="#changes-in-objecttype-syntax-and-scout-create"></a>Changes in objectType syntax and scout.create()</h3> 
-      <div class="paragraph"> 
-       <p>The &quot;objectType&quot; is a string describing which JavaScipt &quot;class&quot; to use when creating an object instance using <code>scout.create()</code> (roughly similar to a Java class name). To make the object factory more robust, the separator between the type and the model variant was change from <code>.</code> to <code>:</code>. The namespace separator remains <code>.</code>. This allows the following forms of object types:.</p> 
+       <p>The &quot;objectType&quot; is a string describing which JavaScipt &quot;class&quot; to use when creating an object instance using <code>scout.create()</code> (roughly similar to a Java class name). To make the object factory more robust, the separator between the type and the model variant (e.g. defined by <code>@ModelVariant</code> annotation in Java) was change from <code>.</code> to <code>:</code>. The namespace separator remains <code>.</code>. This allows the following forms of object types:.</p> 
       </div> 
       <div class="ulist"> 
        <ul> 
@@ -950,7 +968,7 @@ table.CodeRay td.code>pre{padding:0}
     <span class="tag">&lt;meta</span> <span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">UTF-8</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
     <span class="tag">&lt;title&gt;</span>Contacts Application<span class="tag">&lt;/title&gt;</span>
     <span class="tag">&lt;scout:include</span> <span class="attribute-name">template</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">head.html</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
-    <span class="tag">&lt;scout:stylesheet</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/scout-login-module.css</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;scout:stylesheet</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/scout-login-module.less</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
     <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/jquery-all-macro.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
     <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/scout-login-module.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>
     <span class="tag">&lt;scout:script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">res/login.js</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
@@ -996,6 +1014,44 @@ table.CodeRay td.code>pre{padding:0}
         </tbody>
        </table> 
       </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="renamed-css-files-to-less"><a class="anchor" href="#renamed-css-files-to-less"></a>Renamed *.css files to *.less</h3> 
+      <div class="paragraph"> 
+       <p>Because the former <em>*.css</em> files actually were <a href="http://lesscss.org">LESS</a> files, we&#x2019;ve changed the wrong file extension from <code>.css</code> to <code>.less</code>. This allows editors with LESS support/validation to properly work with the LESS syntax and simplifies the usage of the LESS <em>@import</em> clause, since the <code>(less)</code> hint is not required anymore.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Steps required to migrate from an older Scout version to version 6.1:</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p>Rename all <em>*.css</em> files in directory <code>/WebContent/res</code> to <em>*.less</em></p> </li> 
+        <li> <p>Chane the include syntax in <em>*-macro.less</em> and <em>*-module.less</em>:</p> 
+         <div class="ulist"> 
+          <ul> 
+           <li> <p>Old: <code>//@include(&quot;scout-module.css&quot;)</code></p> </li> 
+           <li> <p>New: <code>@import &quot;scout-module.less&quot;;</code></p> </li> 
+          </ul> 
+         </div> </li> 
+        <li> <p>In each <em>*.html</em> file in directory <code>/WebContent</code>, use <em>*.less</em> extension in stylesheet tag:</p> 
+         <div class="ulist"> 
+          <ul> 
+           <li> <p>Old: <code>&lt;scout:stylesheet src=&quot;res/bsicrm-all-macro.css&quot; /&gt;</code></p> </li> 
+           <li> <p>New: <code>&lt;scout:stylesheet src=&quot;res/bsicrm-all-macro.less&quot; /&gt;</code></p> </li> 
+          </ul> 
+         </div> </li> 
+       </ul> 
+      </div> 
+      <div class="admonitionblock note"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td class="icon"> <i class="fa icon-note" title="Note"></i> </td> 
+          <td class="content"> Importing regular <code>.css</code> files in module files (<em>*-module.less</em>) is still supported, and required in some cases. Just make sure that all stylesheets using LESS do have a <em>*.less</em> file extension. Macros and modules must always be LESS files. </td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
       <div class="admonitionblock tip"> 
        <table> 
         <tbody>
@@ -1013,7 +1069,7 @@ table.CodeRay td.code>pre{padding:0}
   <div id="footer"> 
    <div id="footer-text">
      Version 6.1
-    <br /> Last updated 2016-07-11 16:09:53 CEST 
+    <br /> Last updated 2016-11-29 08:57:33 CET 
    </div> 
   </div>  
  </body>
