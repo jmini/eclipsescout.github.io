@@ -915,7 +915,7 @@ table.CodeRay td.code>pre{padding:0}
       <div class="olist arabic"> 
        <ol class="arabic"> 
         <li> <p>Open each <em>*.html</em> file in <code>your.project.ui.html/src/main/resources/WebContent</code> folder and check if there are any inline script parts. Only <code>&lt;script&gt;</code> tags with embedded JavaScript code are considered &quot;inline&quot;. Tags with a <code>src</code> attribute don&#x2019;t need to be changed.</p> </li> 
-        <li> <p>Transfer the content of each script part to a <em>*.js</em> file in the <code>res</code> subdirectory (e.g. <em>index.html</em> &#x21d2; <em>res/index.js</em>) and delete the now empty &lt;script&gt; part.</p> </li> 
+        <li> <p>Transfer the content of each script part to a <em>*.js</em> file in the <code>res</code> subdirectory (e.g. <em>index.html</em> &#x21d2; <em>res/index.js</em>) and delete the now empty &lt;script&gt; part. Note that the content has changed as well, to initialize the application the new app object has to be used (scout.init &#x2192; new scout.RemoteApp().init, scout.login.init &#x2192; new scout.LoginApp().init, scout.logout.init &#x2192; new scout.LogoutApp().init)).</p> </li> 
         <li> <p>Add a reference to the <em>*.js</em> file in the <code>&lt;head&gt;</code> section using the <code>&lt;scout:script&gt;</code> tag, e.g.:<br /> <code>&lt;scout:script src=&quot;res/index.js&quot; /&gt;</code></p> </li> 
         <li> <p>If the extracted <em>*.js</em> file contains <code>&lt;scout:message&gt;</code> tags, they have to be moved back to the <code>&lt;body&gt;</code> of the corresponding <em>*.html</em> file (because the NLS translation can only process HTML files). The attribute <code>style</code> has to be changed from <code>javascript</code> to <code>tag</code>.</p> </li> 
        </ol> 
@@ -1000,7 +1000,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
        <div class="content"> 
         <pre class="CodeRay highlight"><code data-lang="javascript"><span class="predefined">$</span>(document).ready(<span class="keyword">function</span>() {
-  scout.login.init(); <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="keyword">new</span> scout.LoginApp().init(); <i class="conum" data-value="1"></i><b>(1)</b>
 });</code></pre> 
        </div> 
       </div> 
@@ -1069,7 +1069,7 @@ table.CodeRay td.code>pre{padding:0}
   <div id="footer"> 
    <div id="footer-text">
      Version 6.1
-    <br /> Last updated 2016-11-29 08:57:33 CET 
+    <br /> Last updated 2016-07-07 09:10:23 CEST 
    </div> 
   </div>  
  </body>
