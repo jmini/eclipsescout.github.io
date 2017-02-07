@@ -530,6 +530,7 @@ table.CodeRay td.code>pre{padding:0}
       <ul class="sectlevel1"> 
        <li><a href="#strong-content-security-policy-csp">Strong content security policy CSP</a></li> 
        <li><a href="#enforcement-of-model-thread">Enforcement of Model Thread</a></li> 
+       <li><a href="#properties-support-for-lists-maps-and-imports">Properties support for Lists, Maps and imports</a></li> 
        <li><a href="#binary-resources-support-for-htmlfield-and-beanfield">Binary resources support for HtmlField and BeanField</a></li> 
        <li><a href="#tristate-capability-for-check-boxes">TriState capability for check boxes</a></li> 
        <li><a href="#new-uriopenaction-same_window">New UriOpenAction: SAME_WINDOW</a></li> 
@@ -538,6 +539,8 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#new-form-field-property-preventinitialfocus">New form field property &quot;preventInitialFocus&quot;</a></li> 
        <li><a href="#multiple-dimensions-support">Multiple Dimensions Support</a></li> 
        <li><a href="#form-field-enabled-inheritance">Form Field Enabled Inheritance</a></li> 
+       <li><a href="#table-new-property-groupingstyle">Table: new property &quot;groupingStyle&quot;</a></li> 
+       <li><a href="#unloadrequesthandler-for-code-navigator-sendbeacon-code">UnloadRequestHandler for <code>navigator.sendBeacon()</code></a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -570,6 +573,14 @@ table.CodeRay td.code>pre{padding:0}
      </div> 
      <div class="paragraph"> 
       <p>If you get such an exception, you&#x2019;ll need to wrap your operation in a model job and schedule it using <code>ModelJobs.schedule()</code>, see the chapter ModelJobs in the <a href="https://eclipsescout.github.io/6.1/technical-guide.html#modeljobs">Scout Technical Documentation</a> for details.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="properties-support-for-lists-maps-and-imports"><a class="anchor" href="#properties-support-for-lists-maps-and-imports"></a>Properties support for Lists, Maps and imports</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Config properties support list- and map-data-structures. Furthermore other properties files can be imported. See the tech documentation section &quot;Configuration Management&quot; for more details.</p> 
      </div> 
     </div> 
    </div> 
@@ -718,6 +729,28 @@ table.CodeRay td.code>pre{padding:0}
      <div class="paragraph"> 
       <p>With this change the <code>getConfiguredEnabled</code> on composite fields now also automatically affects children. There is no need to overwrite <code>execInit()</code> and call <code>setEnabled(false)</code> anymore.</p> 
      </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="table-new-property-groupingstyle"><a class="anchor" href="#table-new-property-groupingstyle"></a>Table: new property &quot;groupingStyle&quot;</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>The new property <code>groupingStyle</code> can be set to <code>bottom</code> (default) or <code>top</code>. Depending on the value aggregate rows are rendered on the bottom of grouped rows or on the top of grouped rows. The new top style can be set to have an aggregate row as a title for a group of table rows, this is useful for separating a table into multiple categories.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="unloadrequesthandler-for-code-navigator-sendbeacon-code"><a class="anchor" href="#unloadrequesthandler-for-code-navigator-sendbeacon-code"></a>UnloadRequestHandler for <code>navigator.sendBeacon()</code></h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>When a client leaves the application (e.g. puts <code>about:blank</code> in the address bar) one last &quot;unload&quot; request to the UI server is sent in order to property clean up the session on the server.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>If the browser supports the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon">Beacon API</a> <code>navigator.sendBeacon()</code> is used for this request. Unfortunately <code>application/json</code> is not a CORS-safelisted request-header which implies that we can&#x2019;t use the <code>JsonMessageRequestHandler</code> for the unload handling. Therefore a separate <code>UnloadRequestHandler</code> was introduced which handles all requests to <code>/unload/[UiSessionId]</code>. (For more Information, see <a href="https://git.eclipse.org/r/#/c/89422/" class="bare">https://git.eclipse.org/r/#/c/89422/</a>)</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>To cut a long story short, new traffic to /unload will be sent by the clients. Please check your container and firewall configuration.</p> 
+     </div> 
      <div class="admonitionblock tip"> 
       <table> 
        <tbody>
@@ -734,7 +767,7 @@ table.CodeRay td.code>pre{padding:0}
   <div id="footer"> 
    <div id="footer-text">
      Version 6.1
-    <br /> Last updated 2016-11-29 08:57:33 CET 
+    <br /> Last updated 2017-01-18 20:14:27 CET 
    </div> 
   </div>  
  </body>

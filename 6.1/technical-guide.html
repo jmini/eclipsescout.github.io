@@ -1224,20 +1224,32 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
         <li> <p>In the properties file. The properties file can be</p> 
          <div class="olist loweralpha"> 
           <ol class="loweralpha" type="a"> 
-           <li> <p>a file on the local filesystem where the system property with key <code>config.properties</code> holds the absolute path to the file or</p> </li> 
+           <li> <p>a file on the local filesystem where the system property with key <code>config.properties</code> holds an absolute URL to the file or</p> </li> 
            <li> <p>a file on the classpath with path <code>/config.properties</code> (recommended).</p> </li> 
           </ol> 
          </div> </li> 
         <li> <p>In the environment variables of the system (<code>java.lang.System.getenv(String)</code>).</p> </li> 
        </ol> 
       </div> 
+      <div class="paragraph"> 
+       <p>Supported formats are simple key-value pairs, list values and map values. For more details about the format please refer to the JavaDoc of the <code>org.eclipse.scout.rt.platform.config.PropertiesHelper</code> class.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>A properties file may import other config files from the classpath or any other absolute URL. This is done using the special key <code>import</code>. It can be a single value or a list:</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p><code>import[0]=classpath:myConfigs/other.properties</code></p> </li> 
+        <li> <p><code>import[1]=file:/C:/path/to/my/settings.properties</code></p> </li> 
+       </ul> 
+      </div> 
       <div class="sect3"> 
        <h4 id="additional-examples"><a class="anchor" href="#additional-examples"></a>2.4.1. Additional examples</h4> 
        <div class="paragraph"> 
-        <p>Because the property a class are managed by the bean manager, you can use all the mechanisms to change the behavior (<code>@Replace</code> in particular).</p> 
+        <p>Because the property classes are managed by the bean manager, you can use all the mechanisms to change the behavior (<code>@Replace</code> in particular).</p> 
        </div> 
        <div class="paragraph"> 
-        <p><a href="#lst-PropertyConstant">Listing 10</a> demonstrates how you can use the replace annotation to change the existing <code>ApplicationNameProperty</code> class. The value is no longer fetched via the config mechanism, because the <code>createValue()</code> method is overriden. In this case a fixed value is returned.</p> 
+        <p><a href="#lst-PropertyConstant">Listing 10</a> demonstrates how you can use the replace annotation to change the existing <code>ApplicationNameProperty</code> class. The value is no longer fetched via the config mechanism, because the <code>getValue(String)</code> method is overriden. In this case a fixed value is returned.</p> 
        </div> 
        <div id="lst-PropertyConstant" class="listingblock"> 
         <div class="title">
@@ -1251,7 +1263,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
 <span class="annotation">@Replace</span>
 <span class="directive">public</span> <span class="type">class</span> <span class="class">ApplicationNameConstant</span> <span class="directive">extends</span> ApplicationNameProperty {
   <span class="annotation">@Override</span>
-  <span class="directive">protected</span> <span class="predefined-type">String</span> createValue() {
+  <span class="directive">protected</span> <span class="predefined-type">String</span> readFromSource(<span class="predefined-type">String</span> namespace) {
     <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Contacts Application</span><span class="delimiter">&quot;</span></span>;
   }
 }</code></pre> 
@@ -7140,7 +7152,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
   <div id="footer"> 
    <div id="footer-text">
      Version 6.1
-    <br /> Last updated 2016-11-29 08:57:33 CET 
+    <br /> Last updated 2017-01-18 20:14:27 CET 
    </div> 
   </div>  
  </body>

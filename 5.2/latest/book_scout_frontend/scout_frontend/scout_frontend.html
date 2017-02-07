@@ -961,7 +961,7 @@ table.CodeRay td.code>pre{padding:0}
        <p></p> 
       </div> 
       <div class="paragraph"> 
-       <p>Start your Eclipse IDE and select an empty directory for your workspace as shown in <a href="#img-sdk_start_new_workspace">Figure 6</a>.</p> 
+       <p>Start your Eclipse IDE and select an empty directory for your workspace as shown in <a href="#img-sdk_start_new_workspace">Figure 6</a>. This workspace directory will then hold all the project code for the <code>Hello World</code> application. Once the Eclipse IDE is running it will show the Java perspective.</p> 
       </div> 
       <div id="img-sdk_start_new_workspace" class="imageblock"> 
        <div class="content"> 
@@ -972,13 +972,7 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>This workspace directory will then hold all the project code for the <code>Hello World</code> application. Once the Eclipse IDE is running it will show the Java perspective. To create a new Scout project select the menu <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Project&#x2026;&#x200b;</span></span> and type &#x201c;Scout Project&#x201d; in the wizard search field. Select the Scout Project wizard and press <b class="button">Next</b>.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>In the <em class="wizard">New Scout Project</em> wizard you have to enter a <code>group id</code>, <code>artifact id</code> and a <code>display name</code> for your Scout project. As the created project will make use of <a href="https://maven.apache.org/">Apache Maven</a> please refer to the <a href="https://maven.apache.org/guides/mini/guide-naming-conventions.html">Maven naming conventions</a> to choose <code>group id</code> and <code>artifact id</code> for your project. The <code>artifact id</code> will then also be the project name in the Eclipse workspace. The <code>display name</code> is used as the application name presented to the user (e.g. in the Browser title bar).</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>For the <code>Hello World</code> application just use the already prefilled values as sown in <a href="#img-sdk_new_project_wizard">Figure 7</a>. Then, click the <b class="button">Finish</b> button to let the Scout SDK create the initial project code for you.</p> 
+       <p>To create a new Scout project select the menu <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Project&#x2026;&#x200b;</span></span> and type &#x201c;Scout Project&#x201d; in the wizard search field. Select the Scout Project wizard and press <b class="button">Next</b>. The <em class="wizard">New Scout Project</em> wizard is then started as shown in <a href="#img-sdk_new_project_wizard">Figure 7</a>.</p> 
       </div> 
       <div id="img-sdk_new_project_wizard" class="imageblock"> 
        <div class="content"> 
@@ -989,7 +983,13 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Depending on your Eclipse installation some <code>Maven plugin connectors</code> may be missing initially. In that case a dialog as shown in <a href="#img-sdk_new_project_connector">Figure 8</a> may be shown. Please choose the desired actions from the combo box in the <code>Action</code> column until all mappings are green. E.g. for the <code>compiler-plugin</code> choose <code>Install M2E connector for the Eclipse JDT Compiler</code> from the combo box. Afterwards the selected connectors are resolved and you need to confirm the installation, accept the license, accept that some content has not been signed and restart Eclipse afterwards. To read more about <code>Maven plugin connectors</code> please refer to the <a href="https://www.eclipse.org/m2e/documentation/m2e-execution-not-covered.html">m2e documentation</a>.</p> 
+       <p>In the <em class="wizard">New Scout Project</em> wizard you have to enter a <code>group id</code>, <code>artifact id</code> and a <code>display name</code> for your Scout project. As the created project will make use of <a href="https://maven.apache.org/">Apache Maven</a> please refer to the <a href="https://maven.apache.org/guides/mini/guide-naming-conventions.html">Maven naming conventions</a> to choose <code>group id</code> and <code>artifact id</code> for your project. The <code>artifact id</code> will then also be the project name in the Eclipse workspace. The <code>display name</code> is used as the application name presented to the user (e.g. in the Browser title bar).</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>For the <code>Hello World</code> application just use the already prefilled values as sown in <a href="#img-sdk_new_project_wizard">Figure 7</a>. Then, click the <b class="button">Finish</b> button to let the Scout SDK create the initial project code for you.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Depending on your Eclipse installation some <code>Maven plugin connectors</code> may be missing initially. In that case a dialog as shown in <a href="#img-sdk_new_project_connector">Figure 8</a> may be shown. To continue click on <b class="button">Finish</b> to resolve the selected connectors. Afterwards confirm the installation, accept the license and the message that some content has not been signed. Finally, the installation of the maven plugin connectors requires a restart of the Eclipse IDE.</p> 
       </div> 
       <div id="img-sdk_new_project_connector" class="imageblock"> 
        <div class="content"> 
@@ -1014,13 +1014,17 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2"> 
       <h3 id="sec-run_initial"><a class="anchor" href="#sec-run_initial"></a>2.3. Run the Initial Application</h3> 
       <div class="paragraph"> 
-       <p>After the initial project creation step we can start the Scout application for the first time. For this, we use the <code>Run</code> toolbar button as shown in <a href="#img-start_client">Figure 10</a>. Two launch configurations have already been created. One for the backend server and one for the HTML user interface server. Please launch the server first and the HTML UI afterwards.</p> 
+       <p>After the initial project creation step we can start the Scout application for the first time. For this, the following three steps are necessary</p> 
+      </div> 
+      <div class="olist arabic"> 
+       <ol class="arabic"> 
+        <li> <p>Start the Scout backend server</p> </li> 
+        <li> <p>Start the Scout frontend server</p> </li> 
+        <li> <p>Open the application in the browser</p> </li> 
+       </ol> 
       </div> 
       <div class="paragraph"> 
-       <p>In case the launch configurations are not shown in the toolbar under the debug/run icons, you may find the <code>server-dev.launch</code> launch file under project <code>helloworld.server.app.dev</code> and the <code>ui-html-dev.launch</code> launch file under <code>helloworld.ui.html.app.dev</code>. These launch files can be started using the context menu <em class="menu">Run As</em> which will add the launch file to the <em class="button">Run</em> toolbar button.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>During startup of the Scout applications you should see console output providing information about the startup. After both have been started successfully the HTML user interface can be accessed by navigating to <a href="http://localhost:8082/" class="bare">http://localhost:8082/</a> in your favorite web browser.</p> 
+       <p>To start the Scout backend server we first select the <code>[webapp] dev server.launch</code> file in the Package Explorer view of the Eclipse IDE and then use the <em class="menu">Run As</em> menu as shown in <a href="#img-start_client">Figure 10</a>.</p> 
       </div> 
       <div id="img-start_client" class="imageblock"> 
        <div class="content"> 
@@ -1028,6 +1032,23 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
        <div class="title">
         Figure 10. Starting the Hello World application.
+       </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Starting the Scout frontend server works exactely the same. But first select the <code>[webapp] dev ui.launch</code> file in the Eclipse IDE. This launch file is located under module <code>helloworld.ui.html.app.dev</code> in the Package Explorer.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>During startup of the Scout applications you should see console output providing information about the startup. After having successfully started the Scout backend and frontend servers the Hello World application can then be accessed by navigating to <a href="http://localhost:8082/" class="bare">http://localhost:8082/</a> in your favorite web browser.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>The running Hello World application should then be started in your browser as shown in <a href="#img-start_browser">Figure 11</a>.</p> 
+      </div> 
+      <div id="img-start_browser" class="imageblock"> 
+       <div class="content"> 
+        <img src="images/run_helloworld_in_browser.png" alt="run helloworld in browser" /> 
+       </div> 
+       <div class="title">
+        Figure 11. The Hello World application in the browser.
        </div> 
       </div> 
      </div> 
@@ -1044,7 +1065,7 @@ table.CodeRay td.code>pre{padding:0}
         <img src="images/sdk_export_war_menu.png" alt="sdk export war menu" /> 
        </div> 
        <div class="title">
-        Figure 11. Starting the 
+        Figure 12. Starting the 
         <em class="wizard">Export Scout Project</em> wizard in the Scout SDK with the context menu. In the first wizard step, the target directory for the WAR files and the artefacts to export are specified.
        </div> 
       </div> 
@@ -1053,50 +1074,50 @@ table.CodeRay td.code>pre{padding:0}
         <img src="images/export_wizard_1.png" alt="export wizard 1" /> 
        </div> 
        <div class="title">
-        Figure 12. The first dialog of the 
+        Figure 13. The first dialog of the 
         <em class="wizard">Export Scout Project</em> wizard. Here, the target directory for the WAR files that will be generated by the wizard is specified.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>To start the export wizard, we start the Scout SDK with the &#x201c;Hello World&#x201d; Scout project. In the Scout Explorer we then select the corresponding <span class="menu">Export Scout Project&#x2026;&#x200b;</span> context menu on the &#x201c;Hello World&#x201d; top level application node as shown in <a href="#img-sdk_export_war">Figure 11</a>. In the first wizard dialog shown in <a href="#img-export_wizard_1">Figure 12</a>, the target directory for the WAR files needs to be specified. You may choose any directory as the target directory.<sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnote_18" title="View footnote.">18</a>]</sup>. After clicking <b class="button">Next</b> button the second wizard step proposes the server product file that specifies the artefacts to be exported including the file name for the WAR file for the &#x201c;Hello World&#x201d; server application. Typically, the proposed default values are fine. Move to the third dialog with <b class="button">Next</b> button.</p> 
+       <p>To start the export wizard, we start the Scout SDK with the &#x201c;Hello World&#x201d; Scout project. In the Scout Explorer we then select the corresponding <span class="menu">Export Scout Project&#x2026;&#x200b;</span> context menu on the &#x201c;Hello World&#x201d; top level application node as shown in <a href="#img-sdk_export_war">Figure 12</a>. In the first wizard dialog shown in <a href="#img-export_wizard_1">Figure 13</a>, the target directory for the WAR files needs to be specified. You may choose any directory as the target directory.<sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnote_18" title="View footnote.">18</a>]</sup>. After clicking <b class="button">Next</b> button the second wizard step proposes the server product file that specifies the artefacts to be exported including the file name for the WAR file for the &#x201c;Hello World&#x201d; server application. Typically, the proposed default values are fine. Move to the third dialog with <b class="button">Next</b> button.</p> 
       </div> 
       <div id="img-export_wizard_3" class="imageblock"> 
        <div class="content"> 
         <img src="images/export_wizard_3.png" alt="export wizard 3" /> 
        </div> 
        <div class="title">
-        Figure 13. The third dialog of the 
+        Figure 14. The third dialog of the 
         <em class="wizard">Export Scout Project</em> wizard defines the client application to be included in the 
         <code>helloworld_server.war</code> file. In the last step of the export wizard the RAP sever is exported to the specified file name (right).
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In the third dialog of the <em class="wizard">Export Scout Project</em> wizard the desktop client to be included in the WAR file needs to be specified. The default selection is set to the SWT client application. For the &#x201c;Hello World&#x201d; example, we want to include the Swing client application with the Rayo Look and Feel. For this, we need to change the selected product to <em class="element">helloworld-swing-client.product (production)</em> according to <a href="#img-export_wizard_3">Figure 13</a>. With <b class="button">Next</b> button we move to the last wizard step.</p> 
+       <p>In the third dialog of the <em class="wizard">Export Scout Project</em> wizard the desktop client to be included in the WAR file needs to be specified. The default selection is set to the SWT client application. For the &#x201c;Hello World&#x201d; example, we want to include the Swing client application with the Rayo Look and Feel. For this, we need to change the selected product to <em class="element">helloworld-swing-client.product (production)</em> according to <a href="#img-export_wizard_3">Figure 14</a>. With <b class="button">Next</b> button we move to the last wizard step.</p> 
       </div> 
       <div id="img-export_wizard_4" class="imageblock"> 
        <div class="content"> 
         <img src="images/export_wizard_4.png" alt="export wizard 4" /> 
        </div> 
        <div class="title">
-        Figure 14. The last dialog of the 
+        Figure 15. The last dialog of the 
         <em class="wizard">Export Scout Project</em> wizard defines the export of the RAP server. Normally, the proposed field values do not need any adjustments.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In the last wizard dialog shown in <a href="#img-export_wizard_4">Figure 14</a>, the RAP server product and the corresponding WAR file name are specified. Normally, the proposed field values are fine and we can close the wizard with <b class="button">Finish</b> button. After this last step, the Scout SDK is assembling the necessary artefacts and building the two &#x201c;Hello World&#x201d; WAR files. These two WAR files are the only items needed for deploying the &#x201c;Hello World&#x201d; application to a web server</p> 
+       <p>In the last wizard dialog shown in <a href="#img-export_wizard_4">Figure 15</a>, the RAP server product and the corresponding WAR file name are specified. Normally, the proposed field values are fine and we can close the wizard with <b class="button">Finish</b> button. After this last step, the Scout SDK is assembling the necessary artefacts and building the two &#x201c;Hello World&#x201d; WAR files. These two WAR files are the only items needed for deploying the &#x201c;Hello World&#x201d; application to a web server</p> 
       </div> 
      </div> 
      <div class="sect2"> 
       <h3 id="sec-helloworld_deploy"><a class="anchor" href="#sec-helloworld_deploy"></a>2.5. Deploying to Tomcat</h3> 
       <div class="paragraph"> 
-       <p>As the final step of this tutorial, we deploy the two WAR files representing our &#x201c;Hello World&#x201d; application to a Tomcat web server. For this, we first need a working Tomcat installation. If you do not yet have such an installation you may want to read and follow the instructions provided in Appendix <a href="#apx-install_tomcat">Apache Tomcat Installation</a>. To verify a running Tomcat instance, type <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a> into the address bar of the web browser of your choice. You should then see the page shown in <a href="#img-deploy_tomcat_1">Figure 15</a>.</p> 
+       <p>As the final step of this tutorial, we deploy the two WAR files representing our &#x201c;Hello World&#x201d; application to a Tomcat web server. For this, we first need a working Tomcat installation. If you do not yet have such an installation you may want to read and follow the instructions provided in Appendix <a href="#apx-install_tomcat">Apache Tomcat Installation</a>. To verify a running Tomcat instance, type <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a> into the address bar of the web browser of your choice. You should then see the page shown in <a href="#img-deploy_tomcat_1">Figure 16</a>.</p> 
       </div> 
       <div id="img-deploy_tomcat_1" class="imageblock"> 
        <div class="content"> 
         <img src="images/tomcat_managerapp_login.png" alt="tomcat managerapp login" /> 
        </div> 
        <div class="title">
-        Figure 15. The Tomcat shown after a successful installation. After clicking on the &#x201c;Manager App&#x201d; button (highlighted in red) the login box is shown in front. A successful login shows the &#x201c;Tomcat Web Application Manager&#x201d;.
+        Figure 16. The Tomcat shown after a successful installation. After clicking on the &#x201c;Manager App&#x201d; button (highlighted in red) the login box is shown in front. A successful login shows the &#x201c;Tomcat Web Application Manager&#x201d;.
        </div> 
       </div> 
       <div id="img-deploy_tomcat_2" class="imageblock"> 
@@ -1104,14 +1125,14 @@ table.CodeRay td.code>pre{padding:0}
         <img src="images/tomcat_managerapp_selectwar.png" alt="tomcat managerapp selectwar" /> 
        </div> 
        <div class="title">
-        Figure 16. The &#x201c;Tomcat Web Application Manager&#x201d;. The WAR files to be deployed can then be selected using button &#x201c;Choose File&#x201d; highlighted in red.
+        Figure 17. The &#x201c;Tomcat Web Application Manager&#x201d;. The WAR files to be deployed can then be selected using button &#x201c;Choose File&#x201d; highlighted in red.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Once the web browser displays the successful running of your Tomcat instance, switch to its &#x201c;Manager App&#x201d; by clicking on the button highlighted in <a href="#img-deploy_tomcat_1">Figure 15</a>. After entering user name and password the browser will display the &#x201c;Tomcat Web Application Manager&#x201d; as shown in <a href="#img-deploy_tomcat_2">Figure 16</a>. If you don&#x2019;t know the correct username or password you may look it up in the file <span class="filename">tomcat-users.xml</span> as described in Appendix <a href="#apx-tomcat_dirs_and_files">Directories and Files</a>.</p> 
+       <p>Once the web browser displays the successful running of your Tomcat instance, switch to its &#x201c;Manager App&#x201d; by clicking on the button highlighted in <a href="#img-deploy_tomcat_1">Figure 16</a>. After entering user name and password the browser will display the &#x201c;Tomcat Web Application Manager&#x201d; as shown in <a href="#img-deploy_tomcat_2">Figure 17</a>. If you don&#x2019;t know the correct username or password you may look it up in the file <span class="filename">tomcat-users.xml</span> as described in Appendix <a href="#apx-tomcat_dirs_and_files">Directories and Files</a>.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>After logging successfully into Tomcat&#x2019;s manager application, you can select the WAR file(s) to be deployed using button &#x201c;Choose File&#x201d; according to the right hand side of <a href="#img-deploy_tomcat_2">Figure 16</a>. After picking your <span class="filename">helloworld_server.war</span> and <span class="filename">helloworld.war</span> file and closing the file chooser, click on button &#x201c;Deploy&#x201d; (located below button &#x201c;Choose File&#x201d;) to deploy the application to the Tomcat web server. This will copy the selected WAR file into Tomcats <span class="filename">webapps</span> directory and unpack its content into a subdirectory with the same name. Deploying the file <span class="filename">helloworld.war</span> will extract its contents into a subdirectory named <span class="filename">helloworld</span>. And the file <span class="filename">helloworld_server.war</span> will be extracted into subdirectory <span class="filename">helloworld_server</span>. You can now connect to the deployed application using the browser of your choice and enter the following address.</p> 
+       <p>After logging successfully into Tomcat&#x2019;s manager application, you can select the WAR file(s) to be deployed using button &#x201c;Choose File&#x201d; according to the right hand side of <a href="#img-deploy_tomcat_2">Figure 17</a>. After picking your <span class="filename">helloworld_server.war</span> and <span class="filename">helloworld.war</span> file and closing the file chooser, click on button &#x201c;Deploy&#x201d; (located below button &#x201c;Choose File&#x201d;) to deploy the application to the Tomcat web server. This will copy the selected WAR file into Tomcats <span class="filename">webapps</span> directory and unpack its content into a subdirectory with the same name. Deploying the file <span class="filename">helloworld.war</span> will extract its contents into a subdirectory named <span class="filename">helloworld</span>. And the file <span class="filename">helloworld_server.war</span> will be extracted into subdirectory <span class="filename">helloworld_server</span>. You can now connect to the deployed application using the browser of your choice and enter the following address.</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -1123,11 +1144,11 @@ table.CodeRay td.code>pre{padding:0}
         <img src="images/tomcat_helloworld_download.png" alt="tomcat helloworld download" /> 
        </div> 
        <div class="title">
-        Figure 17. The &#x201c;Hello World&#x201d; home page, providing a link to download the desktop client.
+        Figure 18. The &#x201c;Hello World&#x201d; home page, providing a link to download the desktop client.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>You will then see the home page of the server of your &#x201c;Hello World&#x201d; application shown in <a href="#img-helloworld_running_download">Figure 17</a>. From here you can download the zipped client application that can be saved in a directory of your choice. After unpacking the zip file, you may start the executable file named <span class="filename">helloworld</span>. This will start the &#x201c;Hello World&#x201d; client application as shown on the left hand side of <a href="#img-helloworld_running_clients">Figure 18</a>. To start the &#x201c;Hello World&#x201d; web application, open a browser and enter the following address.</p> 
+       <p>You will then see the home page of the server of your &#x201c;Hello World&#x201d; application shown in <a href="#img-helloworld_running_download">Figure 18</a>. From here you can download the zipped client application that can be saved in a directory of your choice. After unpacking the zip file, you may start the executable file named <span class="filename">helloworld</span>. This will start the &#x201c;Hello World&#x201d; client application as shown on the left hand side of <a href="#img-helloworld_running_clients">Figure 19</a>. To start the &#x201c;Hello World&#x201d; web application, open a browser and enter the following address.</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -1149,11 +1170,11 @@ table.CodeRay td.code>pre{padding:0}
         <img src="images/helloworld_finished_rayo_rap_mobile.png" alt="helloworld finished rayo rap mobile" /> 
        </div> 
        <div class="title">
-        Figure 18. The &#x201c;Hello World&#x201d; client application running on the desktop, in the browser and on a mobile device.
+        Figure 19. The &#x201c;Hello World&#x201d; client application running on the desktop, in the browser and on a mobile device.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Depending on the device your browser is running on you will be redirected to <code>helloworld/web</code> on a desktop or laptop computer, to <code>helloworld/mobile</code> on a mobile device or to <code>helloworld/mobile</code> if you are connecting from a tablet device. <a href="#img-helloworld_running_clients">Figure 18</a> shows screenshots for a desktop client, the web application and the same application in a mobile browser. As demonstrated in these screenshots <code>helloworld/web</code> and <code>helloworld/mobile</code> lead to a different presentation of the same UI optimized to the target form factors of desktop browsers, tablets, and mobile phones.</p> 
+       <p>Depending on the device your browser is running on you will be redirected to <code>helloworld/web</code> on a desktop or laptop computer, to <code>helloworld/mobile</code> on a mobile device or to <code>helloworld/mobile</code> if you are connecting from a tablet device. <a href="#img-helloworld_running_clients">Figure 19</a> shows screenshots for a desktop client, the web application and the same application in a mobile browser. As demonstrated in these screenshots <code>helloworld/web</code> and <code>helloworld/mobile</code> lead to a different presentation of the same UI optimized to the target form factors of desktop browsers, tablets, and mobile phones.</p> 
       </div> 
      </div> 
     </div> 
@@ -1182,11 +1203,11 @@ table.CodeRay td.code>pre{padding:0}
         <img src="images/sdk_scout_explorer.png" alt="sdk scout explorer" /> 
        </div> 
        <div class="title">
-        Figure 19. The Eclipse plugin projects of the &#x201c;Hello World&#x201d; application shown by the Package Explorer in the Scout SDK on the left hand side. The corresponding view in the Scout Explorer is provided on the right hand side.
+        Figure 20. The Eclipse plugin projects of the &#x201c;Hello World&#x201d; application shown by the Package Explorer in the Scout SDK on the left hand side. The corresponding view in the Scout Explorer is provided on the right hand side.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In the case of the &#x201c;Hello World&#x201d; application, the workspace contains seven plugin projects as shown on the left side of <a href="#img-package_explorer">Figure 19</a>. In the expanded source folder of the client plugin <em class="element">org.eclipse.scout.helloworld.client</em> the organisation of the Java packages is revealed. The Scout Explorer provided on the right side of <a href="#img-package_explorer">Figure 19</a> shows three colored top level nodes below the main project <em class="element">org.eclipse.scout.helloworld</em>.</p> 
+       <p>In the case of the &#x201c;Hello World&#x201d; application, the workspace contains seven plugin projects as shown on the left side of <a href="#img-package_explorer">Figure 20</a>. In the expanded source folder of the client plugin <em class="element">org.eclipse.scout.helloworld.client</em> the organisation of the Java packages is revealed. The Scout Explorer provided on the right side of <a href="#img-package_explorer">Figure 20</a> shows three colored top level nodes below the main project <em class="element">org.eclipse.scout.helloworld</em>.</p> 
       </div> 
       <div class="paragraph"> 
        <p>In the Scout Explorer, the main project node expands to the orange client node <em class="element">org.eclipse.scout.helloworld.client</em>, the green shared node <em class="element">org.eclipse.scout.helloworld.client</em> and the blue server node <em class="element">org.eclipse.scout.helloworld.server</em>. The client node first presents the white user interface (UI) nodes <em class="element">org.eclipse.scout.helloworld.client.ui.*</em> indicating the supported UI technologies. Next, the client mobile node <em class="element">org.eclipse.scout.helloworld.client.mobile</em> is shown. It is responsible for adapting the layout of the user interface suitably for mobile and tablet devices. Finally, after the <em class="node">ClientSession</em> node and the <em class="node">Desktop</em> node, component specific folders allow for a simple navigation to the various client parts.</p> 
@@ -1247,19 +1268,19 @@ table.CodeRay td.code>pre{padding:0}
         <p>Scout forms are UI containers that hold form field widgets. A Scout form always inherits from Scout class <span class="java">AbstractForm</span> and can either be displayed as a dialog in its own window or shown as a view inside of another UI container. In the &#x201c;Hello World&#x201d; application a <span class="java">DesktopForm</span> object is created and displayed as a view inside of the desktop element.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>To find the desktop form class in the Scout Explorer, expand the orange <em class="node">client</em> node.<sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnote_20" title="View footnote.">20</a>]</sup>. Below this node, you will find the <em class="folder">Forms</em> folder. Expand this folder to show the <em class="element">DesktopForm</em> as shown in <a href="#img-helloworld_viewhandler">Figure 20</a>. In the Scout Object Property window in the screenshot, we can also see the <em class="property">Display Hint</em> property. Its value is set to &#x2018;View&#x2019; to display the desktop form as a view and not as a dialog in its own frame.</p> 
+        <p>To find the desktop form class in the Scout Explorer, expand the orange <em class="node">client</em> node.<sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnote_20" title="View footnote.">20</a>]</sup>. Below this node, you will find the <em class="folder">Forms</em> folder. Expand this folder to show the <em class="element">DesktopForm</em> as shown in <a href="#img-helloworld_viewhandler">Figure 21</a>. In the Scout Object Property window in the screenshot, we can also see the <em class="property">Display Hint</em> property. Its value is set to &#x2018;View&#x2019; to display the desktop form as a view and not as a dialog in its own frame.</p> 
        </div> 
        <div id="img-helloworld_viewhandler" class="imageblock"> 
         <div class="content"> 
          <img src="images/sdk_helloworld_viewhandler.png" alt="sdk helloworld viewhandler" /> 
         </div> 
         <div class="title">
-         Figure 20. Scout SDK showing the DesktopForm&#x2019;s 
+         Figure 21. Scout SDK showing the DesktopForm&#x2019;s 
          <em>ViewHandler</em> in the Scout Explorer and the properties of the DesktopForm in the Scout Object Properties.
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>Expand the <em class="element">DesktopForm</em> to show its children: <em class="element">Variables</em>, <em class="element">MainBox</em> and <em class="element">Handlers</em>. The <em class="element">Variables</em> sub folder contains variables. They are invisible to the application user. The &#x201c;Hello World&#x201d; application is so simple, it does not need variables. The sub folder <em class="element">MainBox</em> contains form fields. These are the visible user interface elements. The main box of our <span class="java">DesktopForm</span> holds the <span class="java">DesktopBox</span> containing the <span class="java">MessageField</span> added with the <em class="wizard">New Form Field</em> wizard. Finally, the <em class="element">Handlers</em> sub folder contains all available form handlers. The view handler shown in <a href="#img-helloworld_viewhandler">Figure 20</a> has been added in the initial project creation step.</p> 
+        <p>Expand the <em class="element">DesktopForm</em> to show its children: <em class="element">Variables</em>, <em class="element">MainBox</em> and <em class="element">Handlers</em>. The <em class="element">Variables</em> sub folder contains variables. They are invisible to the application user. The &#x201c;Hello World&#x201d; application is so simple, it does not need variables. The sub folder <em class="element">MainBox</em> contains form fields. These are the visible user interface elements. The main box of our <span class="java">DesktopForm</span> holds the <span class="java">DesktopBox</span> containing the <span class="java">MessageField</span> added with the <em class="wizard">New Form Field</em> wizard. Finally, the <em class="element">Handlers</em> sub folder contains all available form handlers. The view handler shown in <a href="#img-helloworld_viewhandler">Figure 21</a> has been added in the initial project creation step.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
@@ -1293,7 +1314,7 @@ table.CodeRay td.code>pre{padding:0}
         </ol> 
        </div> 
        <div class="paragraph"> 
-        <p>To open the <span class="java">ViewHandler</span> class in the Java editor of the Scout SDK, double click on the <em class="element">ViewHandler</em> in the Scout Explorer. Your Scout SDK should then be in a state similar to <a href="#img-helloworld_viewhandler">Figure 20</a>. In the lower part of <a href="#lst-helloworld.viewhandler">Listing 2</a> we can see the wiring between the desktop form and the view handler in method <span class="java">startView</span>. Further up, we find method <span class="java">execLoad</span> of the view handler class.</p> 
+        <p>To open the <span class="java">ViewHandler</span> class in the Java editor of the Scout SDK, double click on the <em class="element">ViewHandler</em> in the Scout Explorer. Your Scout SDK should then be in a state similar to <a href="#img-helloworld_viewhandler">Figure 21</a>. In the lower part of <a href="#lst-helloworld.viewhandler">Listing 2</a> we can see the wiring between the desktop form and the view handler in method <span class="java">startView</span>. Further up, we find method <span class="java">execLoad</span> of the view handler class.</p> 
        </div> 
        <div class="paragraph"> 
         <p>Before we discuss this method&#x2019;s implementation, let us examine when and how <span class="java">execLoad</span> is actually called. As we have seen in the <span class="java">Desktop</span> class (see <a href="#lst-helloworld.execopened">Listing 1</a>), the form&#x2019;s method <span class="java">startView</span> is executed after the desktop form is created. Inside method <span class="java">startView</span> (see <a href="#lst-helloworld.viewhandler">Listing 2</a>), the desktop form is started/opened using <span class="java">startInternal</span>. In method <span class="java">startInternal</span> a view handler is then created and passed as a parameter. This eventually leads to the call of our <span class="java">execLoad</span> custom implementation.</p> 
@@ -1311,7 +1332,7 @@ table.CodeRay td.code>pre{padding:0}
         <p>Form services and form data objects are used in the Scout framework to exchange information between the Scout client and server applications. When needed, a service implemented on the server side can register a corresponding proxy service on the client. This proxy service is invoked by the client as if it were implemented locally. In fact, when we get a service reference using <span class="java">SERVICES.getService</span>, we do not need to know if this service runs locally on the client or remotely on the server.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>In the &#x201c;Hello World&#x201d; example application, the client&#x2019;s desktop form has an associated desktop service running on the server. This correspondence between forms and form services is also reflected in the <em class="element">Links</em> section of the Scout Object Properties of the desktop form. As shown in <a href="#img-helloworld_viewhandler">Figure 20</a>, links are provided not only for the desktop form, but for its desktop form data, the corresponding desktop form service as well as for the service interface <span class="java">IDesktopService</span>. On the client, this interface is used to identify and register the proxy service for the desktop service.</p> 
+        <p>In the &#x201c;Hello World&#x201d; example application, the client&#x2019;s desktop form has an associated desktop service running on the server. This correspondence between forms and form services is also reflected in the <em class="element">Links</em> section of the Scout Object Properties of the desktop form. As shown in <a href="#img-helloworld_viewhandler">Figure 21</a>, links are provided not only for the desktop form, but for its desktop form data, the corresponding desktop form service as well as for the service interface <span class="java">IDesktopService</span>. On the client, this interface is used to identify and register the proxy service for the desktop service.</p> 
        </div> 
        <div class="paragraph"> 
         <p>To transfer data between the client and the server, the &#x201c;Hello World&#x201d; application uses a <span class="java">DesktopFormData</span> object as a DTO. This form data object holds all form variables and values for all the form fields contained in the form. Taking advantage of this correspondence, the Scout framework provides the convenience methods <span class="java">exportFormData</span> and <span class="java">importFormData</span>. As a result, the developer does not need to deal with any mapping code between the form data object and the form fields.</p> 
@@ -1326,7 +1347,7 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3"> 
        <h4 id="the-launcher-boxes"><a class="anchor" href="#the-launcher-boxes"></a>3.3.1. The Launcher Boxes</h4> 
        <div class="paragraph"> 
-        <p>To run a Scout application the Scout SDK provides launcher boxes in the Scout Object Properties as described in Section <a href="#sec-run_initial">Run the Initial Application</a>. These object properties are associated to the top level project node in the Scout Explorer. Using the <em class="icon">Edit</em> icon provided in the product launcher section of the Scout Object Properties, the list of launcher boxes can be specified as shown in <a href="#img-select_product_launchers">Figure 21</a>.</p> 
+        <p>To run a Scout application the Scout SDK provides launcher boxes in the Scout Object Properties as described in Section <a href="#sec-run_initial">Run the Initial Application</a>. These object properties are associated to the top level project node in the Scout Explorer. Using the <em class="icon">Edit</em> icon provided in the product launcher section of the Scout Object Properties, the list of launcher boxes can be specified as shown in <a href="#img-select_product_launchers">Figure 22</a>.</p> 
        </div> 
        <div id="img-select_product_launchers" class="imageblock"> 
         <div class="content"> 
@@ -1338,7 +1359,7 @@ table.CodeRay td.code>pre{padding:0}
          <img src="images/sdk_select_product_launcher.png" alt="sdk select product launcher" /> 
         </div> 
         <div class="title">
-         Figure 21. Using the 
+         Figure 22. Using the 
          <em class="icon">Edit Content&#x2026;&#x200b;</em> icon shown on the left hand side, the product selection dialog shown on the right side is opened. Using this product selection dialog, the list of launcher boxes can be specified.
         </div> 
        </div> 
@@ -1346,7 +1367,7 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3"> 
        <h4 id="eclipse-product-files"><a class="anchor" href="#eclipse-product-files"></a>3.3.2. Eclipse Product Files</h4> 
        <div class="paragraph"> 
-        <p>The available products shown on the right side of <a href="#img-select_product_launchers">Figure 21</a> represent the Eclipse product files created in the initial project creation step. Product files.<sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnote_22" title="View footnote.">22</a>]</sup> are used in Eclipse to specify the configuration and content of an executable application. In the case of the &#x201c;Hello World&#x201d; project, four executable applications --- with two Eclipse product files for each application --- have been defined by the Scout SDK. The four applications, one for the server application and one for each client technology, have already been discussed in Section <a href="#sec-run_initial">Run the Initial Application</a>.</p> 
+        <p>The available products shown on the right side of <a href="#img-select_product_launchers">Figure 22</a> represent the Eclipse product files created in the initial project creation step. Product files.<sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnote_22" title="View footnote.">22</a>]</sup> are used in Eclipse to specify the configuration and content of an executable application. In the case of the &#x201c;Hello World&#x201d; project, four executable applications --- with two Eclipse product files for each application --- have been defined by the Scout SDK. The four applications, one for the server application and one for each client technology, have already been discussed in Section <a href="#sec-run_initial">Run the Initial Application</a>.</p> 
        </div> 
        <div id="img-server_plugin" class="imageblock"> 
         <div class="content"> 
@@ -1358,7 +1379,7 @@ table.CodeRay td.code>pre{padding:0}
          <img src="images/sdk_server_plugin_explorer.png" alt="sdk server plugin explorer" /> 
         </div> 
         <div class="title">
-         Figure 22. The production and development launcher boxes associated with the &#x201c;Hello World&#x201d; server application are shown on the left side. In the Package Explorer shown on the right side, the production and development products are located under the 
+         Figure 23. The production and development launcher boxes associated with the &#x201c;Hello World&#x201d; server application are shown on the left side. In the Package Explorer shown on the right side, the production and development products are located under the 
          <em class="folder">products</em> folder in the server plugin project.
         </div> 
        </div> 
@@ -1366,19 +1387,19 @@ table.CodeRay td.code>pre{padding:0}
         <p>We assume that Scout applications will be run in at least two different environments. Once from within the Eclipse IDE in the development environment, and once by the actual end users outside the Eclipse IDE. This second environment is named production environment. Depending on the complexity of deployment processes there might be some more environments to consider, such as testing and integration environments. This is the reason that the Scout SDK initially creates two product files that are associated with the development and the production environment.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Even in the case of the simple &#x201c;Hello World&#x201d; example, the Scout application is started in two target environments. The development environment defines the product in the context of the Scout SDK. To export and run the Scout application outside of the Scout SDK, the production product files are used to define the application when it is to be started on a Tomcat web server. <a href="#img-server_plugin">Figure 22</a> illustrates this situation for the &#x201c;Hello World&#x201d; server application. On the left side, the blue server node is selected in the Scout Explorer. This opens the two server launcher boxes for the production and the development environment. On the right side of <a href="#img-server_plugin">Figure 22</a>, the corresponding plugin project <em class="element">org.eclipse.scout.helloworld.server</em> is expanded to show the file based organisation of the two product definitions.</p> 
+        <p>Even in the case of the simple &#x201c;Hello World&#x201d; example, the Scout application is started in two target environments. The development environment defines the product in the context of the Scout SDK. To export and run the Scout application outside of the Scout SDK, the production product files are used to define the application when it is to be started on a Tomcat web server. <a href="#img-server_plugin">Figure 23</a> illustrates this situation for the &#x201c;Hello World&#x201d; server application. On the left side, the blue server node is selected in the Scout Explorer. This opens the two server launcher boxes for the production and the development environment. On the right side of <a href="#img-server_plugin">Figure 23</a>, the corresponding plugin project <em class="element">org.eclipse.scout.helloworld.server</em> is expanded to show the file based organisation of the two product definitions.</p> 
        </div> 
        <div id="img-server_dev_product" class="imageblock"> 
         <div class="content"> 
          <img src="images/sdk_server_dev_product.png" alt="sdk server dev product" /> 
         </div> 
         <div class="title">
-         Figure 23. The Eclipse product file editor showing file 
+         Figure 24. The Eclipse product file editor showing file 
          <span class="java">helloworld-server-dev.product</span> of the &#x201c;Hello World&#x201d; application. In the Dependencies tab shown above, the list of Eclipse plugins that are required for the server application are shown.
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>For the case of the &#x201c;Hello World&#x201d; example we did not need to edit or change the product files generated by the Scout SDK. However, if your requirements are not met by the provided product files, you may use the Eclipse product file editor. A screenshot of this editor is shown in <a href="#img-server_dev_product">Figure 23</a> with the tab <em class="element">Dependencies</em> opened. In the tab Dependencies, the complete list of necessary plugins is provided. Example plugins visible in <a href="#img-server_dev_product">Figure 23</a> include the &#x201c;Hello World&#x201d; server and shared plugins, Scout framework plugins, and Jetty plugins. The Jetty.<sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnote_23" title="View footnote.">23</a>]</sup> plugins are only needed to run the &#x201c;Hello World&#x201d; server application inside the Scout SDK. Consequently, Jetty plugins are not listed as a dependency in the Scout server&#x2019;s production product file.</p> 
+        <p>For the case of the &#x201c;Hello World&#x201d; example we did not need to edit or change the product files generated by the Scout SDK. However, if your requirements are not met by the provided product files, you may use the Eclipse product file editor. A screenshot of this editor is shown in <a href="#img-server_dev_product">Figure 24</a> with the tab <em class="element">Dependencies</em> opened. In the tab Dependencies, the complete list of necessary plugins is provided. Example plugins visible in <a href="#img-server_dev_product">Figure 24</a> include the &#x201c;Hello World&#x201d; server and shared plugins, Scout framework plugins, and Jetty plugins. The Jetty.<sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnote_23" title="View footnote.">23</a>]</sup> plugins are only needed to run the &#x201c;Hello World&#x201d; server application inside the Scout SDK. Consequently, Jetty plugins are not listed as a dependency in the Scout server&#x2019;s production product file.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
@@ -1396,13 +1417,13 @@ table.CodeRay td.code>pre{padding:0}
          <img src="images/sdk_server_dev_configini.png" alt="sdk server dev configini" /> 
         </div> 
         <div class="title">
-         Figure 24. Above, the definition of the products 
+         Figure 25. Above, the definition of the products 
          <span class="java">config.ini</span> in tab 
          <em class="element">Configuration</em> of the product file editor. Below, the content of the configuration file of the &#x201c;Hello World&#x201d; server application is provided in a normal text editor.
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>Switching to tab <em class="element">Configuration</em> in the product file editor, shows the selected radio button <em class="element">Use an existing config.ini file</em> and the link to the configuration file provided in the <em class="field">File</em> field as shown in the upper part of <a href="#img-server_dev_ini">Figure 24</a>. Below, a part of the server&#x2019;s <span class="filename">config.ini</span> file is shown. Both the entry in the product file pointing to the configuration file, and the content of the <span class="filename">config.ini</span> file has been generated by the Scout SDK during the initial project creation step. As shown in the lower part of <a href="#img-server_dev_ini">Figure 24</a>, Eclipse configuration files have the format of a standard property file. The provided key value pairs are read at startup time if the <span class="filename">config.ini</span> file can be found in folder <span class="filename">configuration</span> by the Eclipse runtime.</p> 
+        <p>Switching to tab <em class="element">Configuration</em> in the product file editor, shows the selected radio button <em class="element">Use an existing config.ini file</em> and the link to the configuration file provided in the <em class="field">File</em> field as shown in the upper part of <a href="#img-server_dev_ini">Figure 25</a>. Below, a part of the server&#x2019;s <span class="filename">config.ini</span> file is shown. Both the entry in the product file pointing to the configuration file, and the content of the <span class="filename">config.ini</span> file has been generated by the Scout SDK during the initial project creation step. As shown in the lower part of <a href="#img-server_dev_ini">Figure 25</a>, Eclipse configuration files have the format of a standard property file. The provided key value pairs are read at startup time if the <span class="filename">config.ini</span> file can be found in folder <span class="filename">configuration</span> by the Eclipse runtime.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
@@ -1471,13 +1492,13 @@ table.CodeRay td.code>pre{padding:0}
         <img src="images/sdk_editor_nls.png" alt="sdk editor nls" /> 
        </div> 
        <div class="title">
-        Figure 25. The NLS editor provided by the Scout SDK. This editor is opened via the 
+        Figure 26. The NLS editor provided by the Scout SDK. This editor is opened via the 
         <em class="link">Open NLS Editor &#x2026;&#x200b;</em> link in the Scout Object Properties of the 
         <em class="node">HelloworldTextProviderService</em> node.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>When we did add the <em class="field">Message</em> field to the desktop form of the &#x201c;Hello World&#x201d; application we had to enter a new translation entry for the label of the message field as shown in <a href="#img-helloworld_stringfield">[img-helloworld_stringfield]</a>. The individual translation entries are then stored in language specific text property files. To modify translated texts we can use the NLS editor.<sup class="footnote">[<a id="_footnoteref_31" class="footnote" href="#_footnote_31" title="View footnote.">31</a>]</sup> provided by the Scout SDK as shown in <a href="#img-nls_editor">Figure 25</a>.</p> 
+       <p>When we did add the <em class="field">Message</em> field to the desktop form of the &#x201c;Hello World&#x201d; application we had to enter a new translation entry for the label of the message field as shown in <a href="#img-helloworld_stringfield">[img-helloworld_stringfield]</a>. The individual translation entries are then stored in language specific text property files. To modify translated texts we can use the NLS editor.<sup class="footnote">[<a id="_footnoteref_31" class="footnote" href="#_footnote_31" title="View footnote.">31</a>]</sup> provided by the Scout SDK as shown in <a href="#img-nls_editor">Figure 26</a>.</p> 
       </div> 
       <div class="paragraph"> 
        <p>To access the translated label field entry in the application, the Scout SDK generated the implementation of <span class="java">getConfiguredLabel</span> using <span class="java">TEXTS.get(&quot;Message&quot;)</span> as shown in <a href="#lst-helloworld.mainbox">Listing 3</a>. In the default Scout project setup, calling <span class="java">TEXTS.get</span> uses the <span class="java">DefaultTextProviderService</span> in the background. This text provider service then defines the access path for the text property files to use for the translation. To resolve the provided key, the user&#x2019;s locale settings are used to access the correct text property file.</p> 
@@ -1516,7 +1537,7 @@ table.CodeRay td.code>pre{padding:0}
          <img src="images/sdk_plugin_editor_desktopservice.png" alt="sdk plugin editor desktopservice" /> 
         </div> 
         <div class="title">
-         Figure 26. The Eclipse plugin editor for 
+         Figure 27. The Eclipse plugin editor for 
          <span class="java">plugin.xml</span> files. In the tab 
          <em class="element">Extensions</em> the &#x201c;Hello World&#x201d; desktop service is registered under the extension point 
          <span class="java">org.eclipse.scout.service.services</span>.
@@ -1536,7 +1557,7 @@ table.CodeRay td.code>pre{padding:0}
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>The registration of the desktop service under the service extension point is then defined in the <span class="filename">plugin.xml</span> file of the &#x201c;Hello World&#x201d; server plugin. As shown in <a href="#img-plugin_editor">Figure 26</a>, the <span class="filename">plugin.xml</span> file is located in the root path of plugin <span class="java">org.eclipse.scout.helloworld.server</span>. To modify a <span class="filename">plugin.xml</span>, you can either use the Eclipse plugin editor or your favorite text editor. In <a href="#img-plugin_editor">Figure 26</a>, the registration of the desktop service is shown in the <em class="element">Extensions</em> tab of the plugin editor. For the corresponding XML representation in the <span class="filename">plugin.xml</span> file, see <a href="#lst-helloworld.server_plugin_xml">Listing 6</a>.</p> 
+        <p>The registration of the desktop service under the service extension point is then defined in the <span class="filename">plugin.xml</span> file of the &#x201c;Hello World&#x201d; server plugin. As shown in <a href="#img-plugin_editor">Figure 27</a>, the <span class="filename">plugin.xml</span> file is located in the root path of plugin <span class="java">org.eclipse.scout.helloworld.server</span>. To modify a <span class="filename">plugin.xml</span>, you can either use the Eclipse plugin editor or your favorite text editor. In <a href="#img-plugin_editor">Figure 27</a>, the registration of the desktop service is shown in the <em class="element">Extensions</em> tab of the plugin editor. For the corresponding XML representation in the <span class="filename">plugin.xml</span> file, see <a href="#lst-helloworld.server_plugin_xml">Listing 6</a>.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
@@ -1595,7 +1616,7 @@ table.CodeRay td.code>pre{padding:0}
         <img src="images/helloworld_server_war_eclipse.png" alt="helloworld server war eclipse" /> 
        </div> 
        <div class="title">
-        Figure 27. The organisation of the &#x201c;Hello World&#x201d; server WAR file. The right side reveals the location of the 
+        Figure 28. The organisation of the &#x201c;Hello World&#x201d; server WAR file. The right side reveals the location of the 
         <span class="java">config.ini</span> file and the application&#x2019;s plugin files
        </div> 
       </div> 
@@ -1603,17 +1624,17 @@ table.CodeRay td.code>pre{padding:0}
        <p>The content and its organisation of the exported WAR files was not specifically designed for Scout applications. Rather, it is defined according to server-side Equinox.<sup class="footnote">[<a id="_footnoteref_37" class="footnote" href="#_footnote_37" title="View footnote.">37</a>]</sup>, the typical setup for running Eclipse based server applications on a web server. Using file <span class="filename">helloworld_server.war</span> as a concrete example, we will first describe the general organisation of the WAR file. Then, we introduce individual artefacts of interest that are contained in this WAR file.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>The explicit organisation of the server WAR file is shown in <a href="#img-helloworld_server_war">Figure 27</a>. From the left hand side of the figure we can see that on the top level only folder <span class="filename">WEB-INF</span> exists in the WAR file. This folder contains all files and directories that are private to the web application. Inside, the web deployment descriptor file <span class="filename">web.xml</span> as well as the directories <span class="filename">lib</span> and <span class="filename">eclipse</span> are located. While the <span class="filename">web.xml</span> file and directory <span class="filename">lib</span> are standard for servlet based based applications.<sup class="footnote">[<a id="_footnoteref_38" class="footnote" href="#_footnote_38" title="View footnote.">38</a>]</sup>, directory <span class="filename">eclipse</span> contains all necessary artefacts for servlet based Eclipse applications.<sup class="footnote">[<a id="_footnoteref_39" class="footnote" href="#_footnote_39" title="View footnote.">39</a>]</sup>. Such as Eclipse Scout server applications.</p> 
+       <p>The explicit organisation of the server WAR file is shown in <a href="#img-helloworld_server_war">Figure 28</a>. From the left hand side of the figure we can see that on the top level only folder <span class="filename">WEB-INF</span> exists in the WAR file. This folder contains all files and directories that are private to the web application. Inside, the web deployment descriptor file <span class="filename">web.xml</span> as well as the directories <span class="filename">lib</span> and <span class="filename">eclipse</span> are located. While the <span class="filename">web.xml</span> file and directory <span class="filename">lib</span> are standard for servlet based based applications.<sup class="footnote">[<a id="_footnoteref_38" class="footnote" href="#_footnote_38" title="View footnote.">38</a>]</sup>, directory <span class="filename">eclipse</span> contains all necessary artefacts for servlet based Eclipse applications.<sup class="footnote">[<a id="_footnoteref_39" class="footnote" href="#_footnote_39" title="View footnote.">39</a>]</sup>. Such as Eclipse Scout server applications.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>On the right hand side of <a href="#img-helloworld_server_war">Figure 27</a> the eclipse specific content of the WAR file is shown. From top to bottom we find the configuration file <span class="filename">config.ini</span> introduced in Section <a href="#sec-config_ini">Eclipse Configuration Files</a>. In folder <span class="filename">plugins</span> the necessary plugins that constitute the eclipse application are located where the plugins are available in the form of JAR files.<sup class="footnote">[<a id="_footnoteref_40" class="footnote" href="#_footnote_40" title="View footnote.">40</a>]</sup>. This includes plugins for servlet management, the eclipse platform including the servlet bridge, the scout framework parts and of course our &#x201c;Hello World&#x201d; server and shared plugin. These &#x201c;Hello World&#x201d; jar files exactly match with the plugin projects discussed in Section <a href="#sec-create_project_simple_background">Create a new Project</a>.</p> 
+       <p>On the right hand side of <a href="#img-helloworld_server_war">Figure 28</a> the eclipse specific content of the WAR file is shown. From top to bottom we find the configuration file <span class="filename">config.ini</span> introduced in Section <a href="#sec-config_ini">Eclipse Configuration Files</a>. In folder <span class="filename">plugins</span> the necessary plugins that constitute the eclipse application are located where the plugins are available in the form of JAR files.<sup class="footnote">[<a id="_footnoteref_40" class="footnote" href="#_footnote_40" title="View footnote.">40</a>]</sup>. This includes plugins for servlet management, the eclipse platform including the servlet bridge, the scout framework parts and of course our &#x201c;Hello World&#x201d; server and shared plugin. These &#x201c;Hello World&#x201d; jar files exactly match with the plugin projects discussed in Section <a href="#sec-create_project_simple_background">Create a new Project</a>.</p> 
       </div> 
       <div id="img-helloworld_server_plugin" class="imageblock"> 
        <div class="content"> 
         <img src="images/helloworld_server_war_plugin.png" alt="helloworld server war plugin" /> 
        </div> 
        <div class="title">
-        Figure 28. The content of the &#x201c;Hello World&#x201d; server plugin contained in the 
+        Figure 29. The content of the &#x201c;Hello World&#x201d; server plugin contained in the 
         <span class="java">helloworld_server.war</span> file. The necessary files for the download page including the zipped client application are in the 
         <span class="java">resources/html</span> directory.
        </div> 
@@ -1628,19 +1649,19 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In <a href="#img-helloworld_server_plugin">Figure 28</a> some of the content of the &#x201c;Hello World&#x201d; server plugin is shown. The first thing to note is that the plugin file conforms to the JAR file format including a <span class="filename">META-INF/MANIFEST.MF</span> file and the directory tree containing the Java class files, as the <span class="filename">DesktopService.class</span> implemented in Section <a href="#sec-helloworld.server">[sec-helloworld.server]</a> of the &#x201c;Hello World&#x201d; tutorial. In folder <span class="filename">resources/html</span> the necessary files for the download page shown in <a href="#img-helloworld_running_download">Figure 17</a> including the zipped desktop client are contained. To access this download page the Scout server&#x2019;s resource servlet <span class="java">ResourceServlet</span> is responsible. It is registered under the servlet registry as shown in <a href="#lst-helloworld.server_plugin_xml.resourceservlet">Listing 8</a>. With setting &quot;/&quot; of the <span class="java">alias</span> parameter the download page becomes available under the root path of the Scout server application. For the mapping to the contents <span class="filename">resources/html</span> the parameter <span class="java">bundle-path</span> is used.</p> 
+       <p>In <a href="#img-helloworld_server_plugin">Figure 29</a> some of the content of the &#x201c;Hello World&#x201d; server plugin is shown. The first thing to note is that the plugin file conforms to the JAR file format including a <span class="filename">META-INF/MANIFEST.MF</span> file and the directory tree containing the Java class files, as the <span class="filename">DesktopService.class</span> implemented in Section <a href="#sec-helloworld.server">[sec-helloworld.server]</a> of the &#x201c;Hello World&#x201d; tutorial. In folder <span class="filename">resources/html</span> the necessary files for the download page shown in <a href="#img-helloworld_running_download">Figure 18</a> including the zipped desktop client are contained. To access this download page the Scout server&#x2019;s resource servlet <span class="java">ResourceServlet</span> is responsible. It is registered under the servlet registry as shown in <a href="#lst-helloworld.server_plugin_xml.resourceservlet">Listing 8</a>. With setting &quot;/&quot; of the <span class="java">alias</span> parameter the download page becomes available under the root path of the Scout server application. For the mapping to the contents <span class="filename">resources/html</span> the parameter <span class="java">bundle-path</span> is used.</p> 
       </div> 
       <div id="img-helloworld_server_explorer" class="imageblock"> 
        <div class="content"> 
         <img src="images/helloworld_server_plugin.png" alt="helloworld server plugin" /> 
        </div> 
        <div class="title">
-        Figure 29. The &#x201c;Hello World&#x201d; server plugin shown in the Eclipse package explorer. The files for the download page are located under 
+        Figure 30. The &#x201c;Hello World&#x201d; server plugin shown in the Eclipse package explorer. The files for the download page are located under 
         <span class="java">resources/html</span>.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Revisiting the &#x201c;Hello World&#x201d; server plugin project in the Eclipse package explorer as shown in <a href="#img-helloworld_server_explorer">Figure 29</a>, we can see how the plugin project elements are transformed and copied into the JAR file. Examples files are <span class="filename">plugin.xml</span> and <span class="filename">MANIFEST.MF</span> as well as static HTML content of the download page (files <span class="filename">index.html</span> and <span class="filename">scout.gif</span>). The zipped client is missing of course. It is assembled, zipped and added into the Scout server JAR file by the <em class="wizard">Export Scout Project</em> wizard of the Scout SDK. In case you need to change/brand/amend the download page for the desktop client, you have now learned where to add and change the corresponding HTML files.</p> 
+       <p>Revisiting the &#x201c;Hello World&#x201d; server plugin project in the Eclipse package explorer as shown in <a href="#img-helloworld_server_explorer">Figure 30</a>, we can see how the plugin project elements are transformed and copied into the JAR file. Examples files are <span class="filename">plugin.xml</span> and <span class="filename">MANIFEST.MF</span> as well as static HTML content of the download page (files <span class="filename">index.html</span> and <span class="filename">scout.gif</span>). The zipped client is missing of course. It is assembled, zipped and added into the Scout server JAR file by the <em class="wizard">Export Scout Project</em> wizard of the Scout SDK. In case you need to change/brand/amend the download page for the desktop client, you have now learned where to add and change the corresponding HTML files.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -1828,11 +1849,11 @@ table.CodeRay td.code>pre{padding:0}
          <img src="images/hierarchicalcodetype.png" alt="hierarchicalcodetype" /> 
         </div> 
         <div class="title">
-         Figure 30. A hierarchical code type class shown in the Scout SDK.
+         Figure 31. A hierarchical code type class shown in the Scout SDK.
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>The corresponding code for the ICB code type is provided in Listing <a href="#lst-codetype.hierarchical">Listing 11</a> where its hierarchical nature is reflected by method <span class="java">getConfiguredIsHierarchy</span>. The actual hierarchical codes are then implemented as nested inner code classes that are derived from Scout class <span class="java">AbstractCode</span>. See <a href="#img-hierarchicalcodetype">Figure 30</a> for a screenshot of the partially expanded ICB code type class in the Scout SDK.</p> 
+        <p>The corresponding code for the ICB code type is provided in Listing <a href="#lst-codetype.hierarchical">Listing 11</a> where its hierarchical nature is reflected by method <span class="java">getConfiguredIsHierarchy</span>. The actual hierarchical codes are then implemented as nested inner code classes that are derived from Scout class <span class="java">AbstractCode</span>. See <a href="#img-hierarchicalcodetype">Figure 31</a> for a screenshot of the partially expanded ICB code type class in the Scout SDK.</p> 
        </div> 
       </div> 
       <div class="sect3"> 
@@ -1913,14 +1934,14 @@ table.CodeRay td.code>pre{padding:0}
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>TODO: fix <a href="#img-lookup_call">Figure 31</a>: MyLookupService extends AbstractLookupService and implements IMyLookupService that extends ILookupService which</p> 
+       <p>TODO: fix <a href="#img-lookup_call">Figure 32</a>: MyLookupService extends AbstractLookupService and implements IMyLookupService that extends ILookupService which</p> 
       </div> 
       <div id="img-lookup_call" class="imageblock"> 
        <div class="content"> 
         <img src="images/lookup_call.png" alt="lookup call" /> 
        </div> 
        <div class="title">
-        Figure 31. Implementing a lookup call with a corresponding lookup service. Scout framework components are shown in orange, user code in blue.
+        Figure 32. Implementing a lookup call with a corresponding lookup service. Scout framework components are shown in orange, user code in blue.
        </div> 
       </div> 
       <div class="literalblock"> 
@@ -2015,7 +2036,7 @@ table.CodeRay td.code>pre{padding:0}
         <img src="images/scoutclientmodel.png" alt="scoutclientmodel" /> 
        </div> 
        <div class="title">
-        Figure 32. A class diagram for the Scout&#x2019;s client model
+        Figure 33. A class diagram for the Scout&#x2019;s client model
        </div> 
       </div> 
      </div> 
@@ -2330,26 +2351,26 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2"> 
       <h3 id="sec-widgetdemo_ui"><a class="anchor" href="#sec-widgetdemo_ui"></a>6.1. The User Interface</h3> 
       <div class="paragraph"> 
-       <p>The application is organized into separate outlines for thematic groups of widgets. Each of the application&#x2019;s outline then presents a list of widgets in a navigation tree. This is shown in <a href="#img-widgetapp_github">Figure 33</a> for the <em class="outline">Simple Widgets</em> outline that contains examples for simple UI widgets such as label fields or string fields.</p> 
+       <p>The application is organized into separate outlines for thematic groups of widgets. Each of the application&#x2019;s outline then presents a list of widgets in a navigation tree. This is shown in <a href="#img-widgetapp_github">Figure 34</a> for the <em class="outline">Simple Widgets</em> outline that contains examples for simple UI widgets such as label fields or string fields.</p> 
       </div> 
       <div id="img-widgetapp_github" class="imageblock"> 
        <div class="content"> 
         <img src="images/widgetapp_github_menu.png" alt="widgetapp github menu" /> 
        </div> 
        <div class="title">
-        Figure 33. The &quot;Scout Widgets Demo App&quot;. The widgets demo application features examples of the most commonly used Scout widgets. For each widget shown, example use cases are presented in a individual form. As shown in the screenshot, the corresponding Scout source code is made available via the 
+        Figure 34. The &quot;Scout Widgets Demo App&quot;. The widgets demo application features examples of the most commonly used Scout widgets. For each widget shown, example use cases are presented in a individual form. As shown in the screenshot, the corresponding Scout source code is made available via the 
         <span class="menu">View Source on GitHub</span> context menu.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>For each UI widget a corresponding example form presents a number of typical use cases and configuration options. The example forms are designed to be independent from each other. It should therefore be possible to read and understand the source code of each example form with minimal effort. Via the <span class="menu">Open in Dialog &#x2026;&#x200b;</span> context menu the content of the view is displayed in a modal scout form. As shown in <a href="#img-widgetapp_github">Figure 33</a>, the complete source code for the selected form can be accessd via the <span class="menu">View Source on GitHub</span> context menu.</p> 
+       <p>For each UI widget a corresponding example form presents a number of typical use cases and configuration options. The example forms are designed to be independent from each other. It should therefore be possible to read and understand the source code of each example form with minimal effort. Via the <span class="menu">Open in Dialog &#x2026;&#x200b;</span> context menu the content of the view is displayed in a modal scout form. As shown in <a href="#img-widgetapp_github">Figure 34</a>, the complete source code for the selected form can be accessd via the <span class="menu">View Source on GitHub</span> context menu.</p> 
       </div> 
       <div id="img-widgetapp_swt" class="imageblock"> 
        <div class="content"> 
         <img src="images/widgetapp_swt.png" alt="widgetapp swt" /> 
        </div> 
        <div class="title">
-        Figure 34. The &quot;Scout Widgets Demo App&quot; running as an SWT desktop application.
+        Figure 35. The &quot;Scout Widgets Demo App&quot; running as an SWT desktop application.
        </div> 
       </div> 
       <div id="img-widgetapp_web" class="imageblock"> 
@@ -2357,11 +2378,11 @@ table.CodeRay td.code>pre{padding:0}
         <img src="images/widgetapp_web.png" alt="widgetapp web" /> 
        </div> 
        <div class="title">
-        Figure 35. The &quot;Scout Widgets Demo App&quot; running in the browser.
+        Figure 36. The &quot;Scout Widgets Demo App&quot; running in the browser.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>The widget demo application can also be run as a native SWT desktop application. This is shown in <a href="#img-widgetapp_swt">Figure 34</a>. And the exact same application also runs in a browser as a web application shown in <a href="#img-widgetapp_web">Figure 35</a>.</p> 
+       <p>The widget demo application can also be run as a native SWT desktop application. This is shown in <a href="#img-widgetapp_swt">Figure 35</a>. And the exact same application also runs in a browser as a web application shown in <a href="#img-widgetapp_web">Figure 36</a>.</p> 
       </div> 
       <div id="img-widgetapp_mobile" class="imageblock"> 
        <div class="content"> 
@@ -2378,11 +2399,11 @@ table.CodeRay td.code>pre{padding:0}
         <img src="images/widgetapp_mobile3.png" alt="widgetapp mobile3" /> 
        </div> 
        <div class="title">
-        Figure 36. The &quot;Scout Widgets Demo App&quot; running on a mobile device. On the left, all outlines of the application are displayed on the home screen. The screens shown in the middle allows to navigate through &#x201c;Simple Widgets&#x201d; outline while the selected &#x201c;StringField&#x201d; form is shown on the right.
+        Figure 37. The &quot;Scout Widgets Demo App&quot; running on a mobile device. On the left, all outlines of the application are displayed on the home screen. The screens shown in the middle allows to navigate through &#x201c;Simple Widgets&#x201d; outline while the selected &#x201c;StringField&#x201d; form is shown on the right.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In <a href="#img-widgetapp_mobile">Figure 36</a>, the content of the widget demo application is shown on a mobile device. On the home screen of the mobile application, the available outlines are presented. When the user selects a specific outline, the associated navigation tree is then shown as a scrollable list. Finally, when the user selects a specific widget, the associated example form is shown.</p> 
+       <p>In <a href="#img-widgetapp_mobile">Figure 37</a>, the content of the widget demo application is shown on a mobile device. On the home screen of the mobile application, the available outlines are presented. When the user selects a specific outline, the associated navigation tree is then shown as a scrollable list. Finally, when the user selects a specific widget, the associated example form is shown.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -2620,11 +2641,11 @@ image::{imgsdir}/decimalfield.png[]</pre>
         <img src="images/datetimefield.png" alt="datetimefield" /> 
        </div> 
        <div class="title">
-        Figure 37. Example use cases for a date, a time and a combined date/time field.
+        Figure 38. Example use cases for a date, a time and a combined date/time field.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>The form <span class="java">DateTimeFieldsForm</span> of the Scout widget application shown in <a href="#img-datetimefield">Figure 37</a> contains examples for the date and time fields of Scout. Separate buttons are available to provide samle values and to demonstrate the formatting options for displaying date and time values. Displaying dates and times is highly depending on the used locale. That is why the currently used locale is shown in the example section of the form.</p> 
+       <p>The form <span class="java">DateTimeFieldsForm</span> of the Scout widget application shown in <a href="#img-datetimefield">Figure 38</a> contains examples for the date and time fields of Scout. Separate buttons are available to provide samle values and to demonstrate the formatting options for displaying date and time values. Displaying dates and times is highly depending on the used locale. That is why the currently used locale is shown in the example section of the form.</p> 
       </div> 
       <div class="paragraph"> 
        <p>To enter date and time values the user can either click on the date and time icons/buttons provided by the fields or directly enter text into the fields. For entering dates the key arrows provide a number of shortcuts. Entering the currnt date can be done by pressing the <kbd>Up</kbd>. Once a day is entered in a date or a combined day time field, the <kbd>Up</kbd> and the <kbd>Down</kbd> can be used to step to the next/previous day. Simultaneously pressing the <kbd>Shift</kbd> or the <kbd>Ctrl</kbd> allows to step to the next/previous month or year.</p> 
@@ -2644,7 +2665,7 @@ image::{imgsdir}/decimalfield.png[]</pre>
        <p>The code of the <span class="java">DateTimeDisabledField</span> field shown in Listing <a href="#lst-field.datetime.disabled">Listing 21</a> represents the disabled combined date time in the example form. Before the form is opened Scout executes its <span class="java">execInitField</span> method and sets the fields value to the current date and time.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>In the configuration section the local can be used at runtime to test the effect of the locale to displaying date and time fields. As changing the locale at runtime only works reliably in rich clients the field is only editable in the Swing or the SWT client. To specify the exact formatting of the displayed date and time values a specific format can be set in the <span class="java">getConfiguredFormat</span> method of the date and time fields. Internally, Scout is using the provided string to create a Java <span class="java">SimpleDateFormat</span> for formatting. Valid examples for the formatting are entered into the format fields of the example dialog by pressing the <b class="button">Sample Formats</b> button. The string &#x201c;EEEE&#x201d; shown in date field format field represents the day of the week as shown in configuration section of <a href="#img-datetimefield">Figure 37</a>. As expected, the textual representation of the day of the week is depending on the used locale.</p> 
+       <p>In the configuration section the local can be used at runtime to test the effect of the locale to displaying date and time fields. As changing the locale at runtime only works reliably in rich clients the field is only editable in the Swing or the SWT client. To specify the exact formatting of the displayed date and time values a specific format can be set in the <span class="java">getConfiguredFormat</span> method of the date and time fields. Internally, Scout is using the provided string to create a Java <span class="java">SimpleDateFormat</span> for formatting. Valid examples for the formatting are entered into the format fields of the example dialog by pressing the <b class="button">Sample Formats</b> button. The string &#x201c;EEEE&#x201d; shown in date field format field represents the day of the week as shown in configuration section of <a href="#img-datetimefield">Figure 38</a>. As expected, the textual representation of the day of the week is depending on the used locale.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -2657,11 +2678,11 @@ image::{imgsdir}/decimalfield.png[]</pre>
         <img src="images/checkboxfield.png" alt="checkboxfield" /> 
        </div> 
        <div class="title">
-        Figure 38. Check box field and example use cases.
+        Figure 39. Check box field and example use cases.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In the Scout widget application the use of check boxes is demonstrated in the form <span class="java">CheckboxFieldForm</span> that is shown in <a href="#img-checkboxfield">Figure 38</a>. To access the current value, Scout provides the method <span class="java">isChecked</span> for check box fields. This naming reflects the boolean state of a check boxes and differs from the other Scout value fields that provide a <span class="java">getValue</span> method.</p> 
+       <p>In the Scout widget application the use of check boxes is demonstrated in the form <span class="java">CheckboxFieldForm</span> that is shown in <a href="#img-checkboxfield">Figure 39</a>. To access the current value, Scout provides the method <span class="java">isChecked</span> for check box fields. This naming reflects the boolean state of a check boxes and differs from the other Scout value fields that provide a <span class="java">getValue</span> method.</p> 
       </div> 
       <div class="paragraph"> 
        <p></p> 
@@ -2823,14 +2844,14 @@ image::{imgsdir}/messagebox.png[]</pre>
      <div class="sect2"> 
       <h3 id="list-box"><a class="anchor" href="#list-box"></a>8.1. List Box</h3> 
       <div class="paragraph"> 
-       <p>List boxes allow a user to select a subset of a predefined list of elements. The individual elements are displayed in the form of checkable options. To check or uncheck a specific element, the user may click on a element or press the <kbd>Space</kbd> when an element has the focus. To define the list of elements that are presented in a list box, code types or a lookup calls can be used. Example use cases using both code types and lookup calls for the definition of the presented elements are implemented in class <span class="java">ListBoxForm</span> of the Scout widget application. See <a href="#img-listbox">Figure 39</a> for a screenshot of the example form.</p> 
+       <p>List boxes allow a user to select a subset of a predefined list of elements. The individual elements are displayed in the form of checkable options. To check or uncheck a specific element, the user may click on a element or press the <kbd>Space</kbd> when an element has the focus. To define the list of elements that are presented in a list box, code types or a lookup calls can be used. Example use cases using both code types and lookup calls for the definition of the presented elements are implemented in class <span class="java">ListBoxForm</span> of the Scout widget application. See <a href="#img-listbox">Figure 40</a> for a screenshot of the example form.</p> 
       </div> 
       <div id="img-listbox" class="imageblock"> 
        <div class="content"> 
         <img src="images/listbox.png" alt="listbox" /> 
        </div> 
        <div class="title">
-        Figure 39. List boxes to select elements represented by code types and lookup calls.
+        Figure 40. List boxes to select elements represented by code types and lookup calls.
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -2846,10 +2867,10 @@ image::{imgsdir}/messagebox.png[]</pre>
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In the example section of <a href="#img-listbox">Figure 39</a> the list boxes in the left column retrieve the elements to be displayed from code types. And in the right column, the displayed elements are retrieved from lookup calls. The implementation of the top left <em class="field">Default</em> field is provided in Listing <a href="#lst-field.listbox">Listing 28</a>. List boxes are derived from class <span class="java">AbstractListBox</span> and parameterized by the type of keys of the elements. Please note that the specified key type of a list box must match the key type of the elements provided by code types or lookup calls. In our example, the list box type <span class="java">Color</span> matches the key type of the code type <span class="java">ColorsCodeType</span> configured in method <span class="java">getConfiguredCodeType</span>.</p> 
+       <p>In the example section of <a href="#img-listbox">Figure 40</a> the list boxes in the left column retrieve the elements to be displayed from code types. And in the right column, the displayed elements are retrieved from lookup calls. The implementation of the top left <em class="field">Default</em> field is provided in Listing <a href="#lst-field.listbox">Listing 28</a>. List boxes are derived from class <span class="java">AbstractListBox</span> and parameterized by the type of keys of the elements. Please note that the specified key type of a list box must match the key type of the elements provided by code types or lookup calls. In our example, the list box type <span class="java">Color</span> matches the key type of the code type <span class="java">ColorsCodeType</span> configured in method <span class="java">getConfiguredCodeType</span>.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>In the <em class="field">List Content</em> field located on the right hand side of the configuration section of <a href="#img-listbox">Figure 39</a> it is also possible to enter user defined content. After entering some example data and pressing the <kbd>Tab</kbd>, the user content is parsed and used to update the elements displayed in the <em class="field">ListBox</em> field. To get the initial example data shown in <a href="#img-listbox">Figure 39</a>, use the <b class="button">Sample Content</b> button of the list box example form. Basically, the content of each text row is parsed into a lookup row according to the format provided in the first row of the sample content: <code># key;text;iconId;&#x2026;&#x200b;</code>. The resulting lookup rows are then used to dynamically update the content of the lookup call associated with the <em class="field">ListBox</em> field. List boxes can be configured to only display the checked elements. For this, the configuration method <span class="java">getConfiguredFilterCheckedNodes</span> may be used.</p> 
+       <p>In the <em class="field">List Content</em> field located on the right hand side of the configuration section of <a href="#img-listbox">Figure 40</a> it is also possible to enter user defined content. After entering some example data and pressing the <kbd>Tab</kbd>, the user content is parsed and used to update the elements displayed in the <em class="field">ListBox</em> field. To get the initial example data shown in <a href="#img-listbox">Figure 40</a>, use the <b class="button">Sample Content</b> button of the list box example form. Basically, the content of each text row is parsed into a lookup row according to the format provided in the first row of the sample content: <code># key;text;iconId;&#x2026;&#x200b;</code>. The resulting lookup rows are then used to dynamically update the content of the lookup call associated with the <em class="field">ListBox</em> field. List boxes can be configured to only display the checked elements. For this, the configuration method <span class="java">getConfiguredFilterCheckedNodes</span> may be used.</p> 
       </div> 
       <div class="paragraph"> 
        <p></p> 
@@ -2876,14 +2897,14 @@ image::{imgsdir}/messagebox.png[]</pre>
        <p>Tree box fields allow a user to select a subset of a predefined list of elements. The difference to list boxes lies in the organisation of the presented elements. Instead of presenting the elements as a list, a tree structure is used with tree box fields.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>To check and uncheck a specific element, the user may click on a element or press the <kbd>Space</kbd> when an element has the focus. In addition, tree boxes can also be configured to check or uncheck the complete sub tree when clicking on an element. To define the trees presented in tree boxes, hierarchical code types and lookup calls can be used. Example use cases for tree box fields are implemented in class <span class="java">TreeBoxForm</span> of the Scout widget application. A screenshot of the tree box example form is shown in <a href="#img-treebox">Figure 40</a>.</p> 
+       <p>To check and uncheck a specific element, the user may click on a element or press the <kbd>Space</kbd> when an element has the focus. In addition, tree boxes can also be configured to check or uncheck the complete sub tree when clicking on an element. To define the trees presented in tree boxes, hierarchical code types and lookup calls can be used. Example use cases for tree box fields are implemented in class <span class="java">TreeBoxForm</span> of the Scout widget application. A screenshot of the tree box example form is shown in <a href="#img-treebox">Figure 41</a>.</p> 
       </div> 
       <div id="img-treebox" class="imageblock"> 
        <div class="content"> 
         <img src="images/treebox.png" alt="treebox" /> 
        </div> 
        <div class="title">
-        Figure 40. Tree box fields displaying elements defined by hierarchical code types and lookup calls.
+        Figure 41. Tree box fields displaying elements defined by hierarchical code types and lookup calls.
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -2899,10 +2920,10 @@ image::{imgsdir}/messagebox.png[]</pre>
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In the example section of <a href="#img-treebox">Figure 40</a> the tree boxes in the left column retrieve the elements to be displayed from hierarchical code types. And in the right column, the displayed elements are retrieved from hierarchical lookup calls. The implementation of the top right <em class="field">Default</em> field is provided in Listing <a href="#lst-field.treebox">Listing 30</a>. Tree boxes are derived from class <span class="java">AbstractTreeBox</span> and parameterized by the type of keys of the tree elements. As in the case of list box fields, the the specified type of a tree box must match the key type of the code type or the lookup call. In our example, the tree box type <span class="java">String</span> matches the type of the lookup call <span class="java">YearsMonthsLookupCall</span> configured in method <span class="java">getConfiguredLookupCall</span>.</p> 
+       <p>In the example section of <a href="#img-treebox">Figure 41</a> the tree boxes in the left column retrieve the elements to be displayed from hierarchical code types. And in the right column, the displayed elements are retrieved from hierarchical lookup calls. The implementation of the top right <em class="field">Default</em> field is provided in Listing <a href="#lst-field.treebox">Listing 30</a>. Tree boxes are derived from class <span class="java">AbstractTreeBox</span> and parameterized by the type of keys of the tree elements. As in the case of list box fields, the the specified type of a tree box must match the key type of the code type or the lookup call. In our example, the tree box type <span class="java">String</span> matches the type of the lookup call <span class="java">YearsMonthsLookupCall</span> configured in method <span class="java">getConfiguredLookupCall</span>.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>In the configuration section of the form shown in <a href="#img-treebox">Figure 40</a> the user may enter any tree data into the <em class="field">Tree Content</em> field. To get the initial tree data shown in <a href="#img-treebox">Figure 40</a>, use the <b class="button">Sample Content</b> button. Tree boxes can be configured in several ways. Using method <span class="java">getConfiguredAutoExpandAll</span>, the element tree will be initially expanded. Configuration method <span class="java">getConfiguredFilterCheckedNodes</span> hides all elements that are not checked. And with method <span class="java">getConfiguredAutoCheckChildNodes</span>, checking or unchecking a tree element automatically updates the elements in the subtree accordingly.</p> 
+       <p>In the configuration section of the form shown in <a href="#img-treebox">Figure 41</a> the user may enter any tree data into the <em class="field">Tree Content</em> field. To get the initial tree data shown in <a href="#img-treebox">Figure 41</a>, use the <b class="button">Sample Content</b> button. Tree boxes can be configured in several ways. Using method <span class="java">getConfiguredAutoExpandAll</span>, the element tree will be initially expanded. Configuration method <span class="java">getConfiguredFilterCheckedNodes</span> hides all elements that are not checked. And with method <span class="java">getConfiguredAutoCheckChildNodes</span>, checking or unchecking a tree element automatically updates the elements in the subtree accordingly.</p> 
       </div> 
       <div class="paragraph"> 
        <p>To access the currently selected elements, the tree box method <span class="java">getCheckedKeys</span> returns a typed set of keys. The type of the key set is determined by the type of the tree box. To read or write the content of a tree box field on the server side, methods <span class="java">getValue</span> and[java]setValue have to be used. Both methods work with typed sets, requiring the type defined for the tree box field.</p> 
@@ -2921,11 +2942,11 @@ image::{imgsdir}/messagebox.png[]</pre>
         <img src="images/smartfield.png" alt="smartfield" /> 
        </div> 
        <div class="title">
-        Figure 41. Smart field examples. Smart fields support &#x201c;search-as-you-type&#x201d; and are used to select a value from of a list of elements or a tree.
+        Figure 42. Smart field examples. Smart fields support &#x201c;search-as-you-type&#x201d; and are used to select a value from of a list of elements or a tree.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Example use cases for smart fields are provided in class <span class="java">SmartFieldForm</span> of the Scout widget application and a screenshot of this example form is shown in <a href="#img-smartfield">Figure 41</a>. The left hand side of the demo form contains smart fields based on list content and on the right hand side smart fields backed with hierarchical content are shown. In the example section of the demo form, some smart fields are backed by code types and others by lookup calls. And in the configuration section the content shown in the smart fields can be entered manually at runtime. To obtain the content shown in <a href="#img-smartfield">Figure 41</a>, use the <b class="button">Sample Content</b> button.</p> 
+       <p>Example use cases for smart fields are provided in class <span class="java">SmartFieldForm</span> of the Scout widget application and a screenshot of this example form is shown in <a href="#img-smartfield">Figure 42</a>. The left hand side of the demo form contains smart fields based on list content and on the right hand side smart fields backed with hierarchical content are shown. In the example section of the demo form, some smart fields are backed by code types and others by lookup calls. And in the configuration section the content shown in the smart fields can be entered manually at runtime. To obtain the content shown in <a href="#img-smartfield">Figure 42</a>, use the <b class="button">Sample Content</b> button.</p> 
       </div> 
       <div class="paragraph"> 
        <p>Existing Documentation</p> 
@@ -2946,7 +2967,7 @@ image::{imgsdir}/messagebox.png[]</pre>
          <img src="images/smartfieldmenu.png" alt="smartfieldmenu" /> 
         </div> 
         <div class="title">
-         Figure 42. Menus attached to a smart field.
+         Figure 43. Menus attached to a smart field.
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -2964,7 +2985,7 @@ image::{imgsdir}/messagebox.png[]</pre>
         <img src="images/treefield.png" alt="treefield" /> 
        </div> 
        <div class="title">
-        Figure 43. Tree fields and example use cases. More text.
+        Figure 44. Tree fields and example use cases. More text.
        </div> 
       </div> 
      </div> 
@@ -2978,7 +2999,7 @@ image::{imgsdir}/messagebox.png[]</pre>
         <img src="images/tablefield.png" alt="tablefield" /> 
        </div> 
        <div class="title">
-        Figure 44. Table fields and example use cases. More text.
+        Figure 45. Table fields and example use cases. More text.
        </div> 
       </div> 
       <div id="img-editabletablefield" class="imageblock"> 
@@ -2986,7 +3007,7 @@ image::{imgsdir}/messagebox.png[]</pre>
         <img src="images/editabletablefield.png" alt="editabletablefield" /> 
        </div> 
        <div class="title">
-        Figure 45. An editable table field. More text.
+        Figure 46. An editable table field. More text.
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -3010,7 +3031,7 @@ image::{imgsdir}/messagebox.png[]</pre>
         <img src="images/imagefield.png" alt="imagefield" /> 
        </div> 
        <div class="title">
-        Figure 46. Image fields are used to display images and icons.
+        Figure 47. Image fields are used to display images and icons.
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -3032,7 +3053,7 @@ image::{imgsdir}/messagebox.png[]</pre>
         <img src="images/svgfield.png" alt="svgfield" /> 
        </div> 
        <div class="title">
-        Figure 47. SVG fields and example use cases. More text.
+        Figure 48. SVG fields and example use cases. More text.
        </div> 
       </div> 
       <div class="literalblock"> 
@@ -3096,7 +3117,7 @@ image::{imgsdir}/messagebox.png[]</pre>
         <img src="images/groupbox.png" alt="groupbox" /> 
        </div> 
        <div class="title">
-        Figure 48. Group boxes and example use cases. More text.
+        Figure 49. Group boxes and example use cases. More text.
        </div> 
       </div> 
      </div> 
@@ -3110,7 +3131,7 @@ image::{imgsdir}/messagebox.png[]</pre>
         <img src="images/tabbox.png" alt="tabbox" /> 
        </div> 
        <div class="title">
-        Figure 49. Tab boxes and example use cases. More text.
+        Figure 50. Tab boxes and example use cases. More text.
        </div> 
       </div> 
      </div> 
@@ -3124,7 +3145,7 @@ image::{imgsdir}/messagebox.png[]</pre>
         <img src="images/sequencebox.png" alt="sequencebox" /> 
        </div> 
        <div class="title">
-        Figure 50. Sequence boxes and example use cases. More text.
+        Figure 51. Sequence boxes and example use cases. More text.
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -3148,7 +3169,7 @@ image::{imgsdir}/messagebox.png[]</pre>
         <img src="images/splitbox.png" alt="splitbox" /> 
        </div> 
        <div class="title">
-        Figure 51. Split boxes and example use cases. More text.
+        Figure 52. Split boxes and example use cases. More text.
        </div> 
       </div> 
      </div> 
@@ -3650,14 +3671,14 @@ image::{imgsdir}/messagebox.png[]</pre>
        <p>For Windows, the steps necessary to determine your hardware architecture are described on Microsoft&#x2019;s support site.<sup class="footnote">[<a id="_footnoteref_47" class="footnote" href="#_footnote_47" title="View footnote.">47</a>]</sup>. For Linux several ways to determine if your os is running with 32 or with 64 bits can be found on the web.<sup class="footnote">[<a id="_footnoteref_48" class="footnote" href="#_footnote_48" title="View footnote.">48</a>]</sup> For Mac this step is simple, as only a 64 bit package is provided on JDK the download page.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Once you know your hardware architecture, go to Oracle&#x2019;s official download site.<sup class="footnote">[<a id="_footnoteref_49" class="footnote" href="#_footnote_49" title="View footnote.">49</a>]</sup> and accept the licence agreement by clicking on the appropriate radio button. Then, select the <em>Windows x64</em> package if you are running 64-bit Windows as shown in <a href="#img-jdk_download_oracle">Figure 52</a>. If you are running 32-bit Windows, go for the <em>Windows x86</em> package. It is also recommended to download the <em>Java SE 7 Documentation</em>. The Java API documentation package is available from the official download site.<sup class="footnote">[<a id="_footnoteref_50" class="footnote" href="#_footnote_50" title="View footnote.">50</a>]</sup>, located further down under section <em>Additional Resources</em>.</p> 
+       <p>Once you know your hardware architecture, go to Oracle&#x2019;s official download site.<sup class="footnote">[<a id="_footnoteref_49" class="footnote" href="#_footnote_49" title="View footnote.">49</a>]</sup> and accept the licence agreement by clicking on the appropriate radio button. Then, select the <em>Windows x64</em> package if you are running 64-bit Windows as shown in <a href="#img-jdk_download_oracle">Figure 53</a>. If you are running 32-bit Windows, go for the <em>Windows x86</em> package. It is also recommended to download the <em>Java SE 7 Documentation</em>. The Java API documentation package is available from the official download site.<sup class="footnote">[<a id="_footnoteref_50" class="footnote" href="#_footnote_50" title="View footnote.">50</a>]</sup>, located further down under section <em>Additional Resources</em>.</p> 
       </div> 
       <div id="img-jdk_download_oracle" class="imageblock"> 
        <div class="content"> 
         <img src="images/oracle_jdk_download.png" alt="oracle jdk download" /> 
        </div> 
        <div class="title">
-        Figure 52. Installer download for Oracle JDK 8.
+        Figure 53. Installer download for Oracle JDK 8.
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -3670,18 +3691,18 @@ image::{imgsdir}/messagebox.png[]</pre>
      <div class="sect2"> 
       <h3 id="sec-download_install"><a class="anchor" href="#sec-download_install"></a>B.3. Download and Install Scout</h3> 
       <div class="paragraph"> 
-       <p>Before you can install Scout make sure that you have a working Java Development Kit (JDK) installation version 8. To download the Eclipse Scout package visit the official Eclipse download page as shown in <a href="#img-scout_download">Figure 53</a>.</p> 
+       <p>Before you can install Scout make sure that you have a working Java Development Kit (JDK) installation version 8. To download the Eclipse Scout package visit the official Eclipse download page as shown in <a href="#img-scout_download">Figure 54</a>.</p> 
       </div> 
       <div id="img-scout_download" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_download.png" alt="scout download" /> 
        </div> 
        <div class="title">
-        Figure 53. The Eclipse download page. The platform filter is set to Windows and the available Packages are filtered for Scout.
+        Figure 54. The Eclipse download page. The platform filter is set to Windows and the available Packages are filtered for Scout.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>If the download page shows the wrong platform, manually select the correct platform in the dropdown list. As shown in <a href="#img-scout_download">Figure 53</a>, the Scout package is available as a 32 bit and a 46 bit package. Make sure to pick the package that matches your JDK installation. You can check your installation on the command line as follows.</p> 
+       <p>If the download page shows the wrong platform, manually select the correct platform in the dropdown list. As shown in <a href="#img-scout_download">Figure 54</a>, the Scout package is available as a 32 bit and a 46 bit package. Make sure to pick the package that matches your JDK installation. You can check your installation on the command line as follows.</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -3692,47 +3713,47 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.77-b28, mixed mode)</pre>
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>If the output explicitly mentions the 64 bit installation as shown above, you have a 64 bit installation. Otherwise, you have a 32 bit JDK installed. Now you can select the correct Scout package from the Eclipse download site. After the package selection, confirm the suggested download mirror as shown in <a href="#img-scout_download_mirror">Figure 54</a>.</p> 
+       <p>If the output explicitly mentions the 64 bit installation as shown above, you have a 64 bit installation. Otherwise, you have a 32 bit JDK installed. Now you can select the correct Scout package from the Eclipse download site. After the package selection, confirm the suggested download mirror as shown in <a href="#img-scout_download_mirror">Figure 55</a>.</p> 
       </div> 
       <div id="img-scout_download_mirror" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_download_mirror.png" alt="scout download mirror" /> 
        </div> 
        <div class="title">
-        Figure 54. Downloading the Scout package from a mirror.
+        Figure 55. Downloading the Scout package from a mirror.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>As the Scout package is a simple ZIP (or tar.gz) file, you may unpack its content to a folder of your choice. Inside the eclipse sub-folder, you will then find the Eclipse executable file, such as the <code>eclipse.exe</code> file on a Windows plattform. Starting the Eclipse executable brings up the workspace launcher as shown in <a href="#img-scout_start">Figure 55</a>.</p> 
+       <p>As the Scout package is a simple ZIP (or tar.gz) file, you may unpack its content to a folder of your choice. Inside the eclipse sub-folder, you will then find the Eclipse executable file, such as the <code>eclipse.exe</code> file on a Windows plattform. Starting the Eclipse executable brings up the workspace launcher as shown in <a href="#img-scout_start">Figure 56</a>.</p> 
       </div> 
       <div id="img-scout_start" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_startup_select_workspace.png" alt="scout startup select workspace" /> 
        </div> 
        <div class="title">
-        Figure 55. Starting the Eclipse Scout package and selecting an empty workspace.
+        Figure 56. Starting the Eclipse Scout package and selecting an empty workspace.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Into the <em class="field">Workspace</em> field you enter an empty target directory for your first Scout project. After clicking the <b class="button">Ok</b> button, the Eclipse IDE creates any directories that do not yet exist and opens the specified workspace. When opening a new workspace for the first time, Eclipse then displays the welcome screen shown in <a href="#img-scout_welcome">Figure 56</a>.</p> 
+       <p>Into the <em class="field">Workspace</em> field you enter an empty target directory for your first Scout project. After clicking the <b class="button">Ok</b> button, the Eclipse IDE creates any directories that do not yet exist and opens the specified workspace. When opening a new workspace for the first time, Eclipse then displays the welcome screen shown in <a href="#img-scout_welcome">Figure 57</a>.</p> 
       </div> 
       <div id="img-scout_welcome" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_startup_welcome.png" alt="scout startup welcome" /> 
        </div> 
        <div class="title">
-        Figure 56. Eclipse Scout welcome screen.
+        Figure 57. Eclipse Scout welcome screen.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>To close the welcome page and open the Scout perspective in the Eclipse IDE click on the <em class="icon">Workbench</em> icon. As a result the empty Java perspective is displayed according to <a href="#img-scout_perspective">Figure 57</a>.</p> 
+       <p>To close the welcome page and open the Scout perspective in the Eclipse IDE click on the <em class="icon">Workbench</em> icon. As a result the empty Java perspective is displayed according to <a href="#img-scout_perspective">Figure 58</a>.</p> 
       </div> 
       <div id="img-scout_perspective" class="imageblock"> 
        <div class="content"> 
         <img src="images/scout_startup_scout_explorer.png" alt="scout startup scout explorer" /> 
        </div> 
        <div class="title">
-        Figure 57. Eclipse Scout started in the Scout SDK perspective.
+        Figure 58. Eclipse Scout started in the Scout SDK perspective.
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -3781,33 +3802,33 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
         <img src="images/eclipse_install_new_software.png" alt="eclipse install new software" /> 
        </div> 
        <div class="title">
-        Figure 58. Eclipse menu to install additional software
+        Figure 59. Eclipse menu to install additional software
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>To add Scout to your existing Eclipse installation, you need to start Eclipse. Then select the <span class="menuseq"><span class="menu">Help</span>&nbsp;&#x25b8; <span class="menuitem">Install New Software&#x2026;&#x200b;</span></span> menu as shown in <a href="#img-eclipse_install_new_software">Figure 58</a> to open the install dialog.</p> 
+       <p>To add Scout to your existing Eclipse installation, you need to start Eclipse. Then select the <span class="menuseq"><span class="menu">Help</span>&nbsp;&#x25b8; <span class="menuitem">Install New Software&#x2026;&#x200b;</span></span> menu as shown in <a href="#img-eclipse_install_new_software">Figure 59</a> to open the install dialog.</p> 
       </div> 
       <div id="img-eclipse_add_repository" class="imageblock"> 
        <div class="content"> 
         <img src="images/eclipse_add_repository.png" alt="eclipse add repository" /> 
        </div> 
        <div class="title">
-        Figure 59. Add the current Scout repository
+        Figure 60. Add the current Scout repository
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In the install dialog, click on the <b class="button">Add&#x2026;&#x200b;</b> button to enter the link to the Scout repository. This opens the popup dialog <em>Add Repository</em> As shown in <a href="#img-eclipse_add_repository">Figure 59</a>, you may use &#x201c;Scout Luna&#x201d; for the <em class="field">Name</em> field. For the <em class="field">Location</em> field enter the Scout release repository as specified below. <a href="http://download.eclipse.org/scout/releases/4.0" class="bare">http://download.eclipse.org/scout/releases/4.0</a>.</p> 
+       <p>In the install dialog, click on the <b class="button">Add&#x2026;&#x200b;</b> button to enter the link to the Scout repository. This opens the popup dialog <em>Add Repository</em> As shown in <a href="#img-eclipse_add_repository">Figure 60</a>, you may use &#x201c;Scout Luna&#x201d; for the <em class="field">Name</em> field. For the <em class="field">Location</em> field enter the Scout release repository as specified below. <a href="http://download.eclipse.org/scout/releases/4.0" class="bare">http://download.eclipse.org/scout/releases/4.0</a>.</p> 
       </div> 
       <div id="img-eclipse_select_scout_features" class="imageblock"> 
        <div class="content"> 
         <img src="images/eclipse_select_scout_features.png" alt="eclipse select scout features" /> 
        </div> 
        <div class="title">
-        Figure 60. Select the Scout features to add to the Eclipse installation
+        Figure 61. Select the Scout features to add to the Eclipse installation
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>After the Eclipse IDE has connected to the Scout repository, select the Scout feature <em>Scout Application Development</em> as shown in <a href="#img-eclipse_select_scout_features">Figure 60</a>. Then, move through the installation with the <b class="button">Next</b> button. On the last installation step, accept the presented EPL terms by clicking on the appropriate radio button. To complete the installation, click the <b class="button">Finish</b> button and accept the request for a restart of Eclipse. After the restart of the Eclipse IDE, you may add the Scout perspective using the <span class="menuseq"><span class="menu">Window</span>&nbsp;&#x25b8; <span class="submenu">Open Perspective</span>&nbsp;&#x25b8; <span class="menuitem">Other &#x2026;&#x200b;</span></span> menu and selecting the Scout perspective from the presented list. Clicking on the Scout perspective button should then result in a state very similar to <a href="#img-scout_perspective">Figure 57</a>.</p> 
+       <p>After the Eclipse IDE has connected to the Scout repository, select the Scout feature <em>Scout Application Development</em> as shown in <a href="#img-eclipse_select_scout_features">Figure 61</a>. Then, move through the installation with the <b class="button">Next</b> button. On the last installation step, accept the presented EPL terms by clicking on the appropriate radio button. To complete the installation, click the <b class="button">Finish</b> button and accept the request for a restart of Eclipse. After the restart of the Eclipse IDE, you may add the Scout perspective using the <span class="menuseq"><span class="menu">Window</span>&nbsp;&#x25b8; <span class="submenu">Open Perspective</span>&nbsp;&#x25b8; <span class="menuitem">Other &#x2026;&#x200b;</span></span> menu and selecting the Scout perspective from the presented list. Clicking on the Scout perspective button should then result in a state very similar to <a href="#img-scout_perspective">Figure 58</a>.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -3832,11 +3853,11 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        <img src="images/tomcat_install.png" alt="tomcat install" /> 
       </div> 
       <div class="title">
-       Figure 61. A successful Tomcat 7 installation.
+       Figure 62. A successful Tomcat 7 installation.
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>Once you have downloaded and installed Tomcat 8 (see the sections below for plattform specific guidelines) you can start the corresponding service or deamon. To verify that Tomcat is actually running open a web browser of your choice and type <a href="http://localhost:8080" class="bare">http://localhost:8080</a> into the address bar. You should then see a confirmation of the successful installation according to <a href="#img-tomcat_install">Figure 61</a>.</p> 
+      <p>Once you have downloaded and installed Tomcat 8 (see the sections below for plattform specific guidelines) you can start the corresponding service or deamon. To verify that Tomcat is actually running open a web browser of your choice and type <a href="http://localhost:8080" class="bare">http://localhost:8080</a> into the address bar. You should then see a confirmation of the successful installation according to <a href="#img-tomcat_install">Figure 62</a>.</p> 
      </div> 
      <div class="sect2"> 
       <h3 id="platform-specific-instructions"><a class="anchor" href="#platform-specific-instructions"></a>C.1. Platform Specific Instructions</h3> 
@@ -3860,12 +3881,12 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
         <img src="images/tomcat_install_dir.png" alt="tomcat install dir" /> 
        </div> 
        <div class="title">
-        Figure 62. The organisation of a Tomcat installation including specific files of interest. As an example, the &#x201c;Hello World&#x201d; server application is contained in subdirectory 
+        Figure 63. The organisation of a Tomcat installation including specific files of interest. As an example, the &#x201c;Hello World&#x201d; server application is contained in subdirectory 
         <code>webapps</code>.
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Note that some folders and many files of a Tomcat installation are not represented in <a href="#img-tomcat_install_dir">Figure 62</a>. We just want to provide a basic understanding of the most important parts to operate the web server in the context of this book. In the <span class="filename">bin</span> folder, the executable programs are contained, including scripts to start and stop the Tomcat instance.</p> 
+       <p>Note that some folders and many files of a Tomcat installation are not represented in <a href="#img-tomcat_install_dir">Figure 63</a>. We just want to provide a basic understanding of the most important parts to operate the web server in the context of this book. In the <span class="filename">bin</span> folder, the executable programs are contained, including scripts to start and stop the Tomcat instance.</p> 
       </div> 
       <div class="paragraph"> 
        <p>The <span class="filename">conf</span> folder contains a set of XML and property configuration file. The file <span class="filename">server.xml</span> represents Tomcat&#x2019;s main configuration file. It is used to configure general web server aspects such as the port number of its connectors for the client server communication. For the default setup, port number 8080 is used for the communication between clients applications and the web server. The file <span class="filename">tomcat-users.xml</span> contains a database of users, passwords and associated roles.</p> 
@@ -3874,7 +3895,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        <p>Folder <span class="filename">logs</span> contains various logfiles of Tomcat itself as well as host and web application log files. XXX need to provide more on what is where (especially application logs and exact setup to generate log entries from scout apps).</p> 
       </div> 
       <div class="paragraph"> 
-       <p>The folder needed for deploying web applications into a Tomcat instance is called <span class="filename">webapps</span>. It can be used as the target for copying WAR files into the web server. The installation of the WAR file then extracts its content into the corresponding directory structure as shown in <a href="#img-tomcat_install_dir">Figure 62</a> in the case of the file <span class="filename">helloworld_server.war</span>.</p> 
+       <p>The folder needed for deploying web applications into a Tomcat instance is called <span class="filename">webapps</span>. It can be used as the target for copying WAR files into the web server. The installation of the WAR file then extracts its content into the corresponding directory structure as shown in <a href="#img-tomcat_install_dir">Figure 63</a> in the case of the file <span class="filename">helloworld_server.war</span>.</p> 
       </div> 
       <div class="paragraph"> 
        <p>Finally, folder <span class="filename">work</span> contains Tomcat&#x2019;s runtime &#x201c;cache&#x201d; for the deployed web applications. It is organized according to the hierarchy of the engine (Catalina), the host (localhost), and the web application (<span class="filename">helloworld_server</span>).</p> 
@@ -3886,7 +3907,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        <p>Tomcat comes with the pre installed &#x201c;Manager App&#x201d;. This application is useful to manage web applications and perform tasks such as deploying a web application from a WAR file, or starting and stopping installed web applications. A comprehensive documentation for the &#x201c;Manager App&#x201d; can be found under the Tomcat homepage.<sup class="footnote">[<a id="_footnoteref_63" class="footnote" href="#_footnote_63" title="View footnote.">63</a>]</sup>. Here we only show how to start this application from the hompage of a running Tomcat installation.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>To access this application you can switch to the &#x201c;Manager App&#x201d; with a click on the corresponding button on the right hand side. The button can be found on the right hand side of <a href="#img-tomcat_install">Figure 61</a>. Before you are allowed to start this application, you need to provide username and password credentials of a user associated with Tomcats&#x2019;s <span class="java">manager-gui</span> role.</p> 
+       <p>To access this application you can switch to the &#x201c;Manager App&#x201d; with a click on the corresponding button on the right hand side. The button can be found on the right hand side of <a href="#img-tomcat_install">Figure 62</a>. Before you are allowed to start this application, you need to provide username and password credentials of a user associated with Tomcats&#x2019;s <span class="java">manager-gui</span> role.</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -4101,11 +4122,11 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
          <img src="images/eclipse_ide_parts.png" alt="eclipse ide parts" /> 
         </div> 
         <div class="title">
-         Figure 63. The Eclipse IDE with the Scout perspective. The colors indicate the different elements. View parts (blue), editor parts (green) and perspective buttons (purple).
+         Figure 64. The Eclipse IDE with the Scout perspective. The colors indicate the different elements. View parts (blue), editor parts (green) and perspective buttons (purple).
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p><a href="#img-eclipse_ide_parts">Figure 63</a> provides a screenshot of the Eclipse Scout perspective indicating the corresponding perspective button and the main view parts and editor parts involved. Using drag and drop, views and editors can be freely moved around in the Eclipse IDE to suit the developer&#x2019;s needs. Perspectives can be further individualized using the <span class="menuseq"><span class="menu">Window</span>&nbsp;&#x25b8; <span class="menuitem">Customize Perspective&#x2026;&#x200b;</span></span> menu. Here, the visibility of the toolbar items and menu entries can be defined. Once a suitable layout of all desired elements has been defined, this organisation may be saved as a personal perspective using the Eclipse IDE <span class="menuseq"><span class="menu">Window</span>&nbsp;&#x25b8; <span class="menuitem">Save Perspective As&#x2026;&#x200b;</span></span> menu.</p> 
+        <p><a href="#img-eclipse_ide_parts">Figure 64</a> provides a screenshot of the Eclipse Scout perspective indicating the corresponding perspective button and the main view parts and editor parts involved. Using drag and drop, views and editors can be freely moved around in the Eclipse IDE to suit the developer&#x2019;s needs. Perspectives can be further individualized using the <span class="menuseq"><span class="menu">Window</span>&nbsp;&#x25b8; <span class="menuitem">Customize Perspective&#x2026;&#x200b;</span></span> menu. Here, the visibility of the toolbar items and menu entries can be defined. Once a suitable layout of all desired elements has been defined, this organisation may be saved as a personal perspective using the Eclipse IDE <span class="menuseq"><span class="menu">Window</span>&nbsp;&#x25b8; <span class="menuitem">Save Perspective As&#x2026;&#x200b;</span></span> menu.</p> 
        </div> 
        <div class="paragraph"> 
         <p>In case a customizing step does not turn out as intended, with the <span class="menuseq"><span class="menu">Window</span>&nbsp;&#x25b8; <span class="menuitem">Reset Perspective&#x2026;&#x200b;</span></span> menu is always possible to go back to the last saved state of the current perspective.</p> 
@@ -4461,7 +4482,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
   <div id="footer"> 
    <div id="footer-text">
      Version 5.2.0-SNAPSHOT
-    <br /> Last updated 2016-04-07 06:50:22 CEST 
+    <br /> Last updated 2016-07-18 09:39:25 CEST 
    </div> 
   </div>  
  </body>

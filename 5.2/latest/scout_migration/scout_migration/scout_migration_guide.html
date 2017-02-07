@@ -545,6 +545,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#logging-api">Logging API</a></li> 
        <li><a href="#logging-configuration">Logging configuration</a></li> 
        <li><a href="#class-renames-or-moves">Class Renames or Moves</a></li> 
+       <li><a href="#text-cleanup">Text cleanup</a></li> 
        <li><a href="#migrate-to-the-new-job-api">Migrate to the new Job API</a></li> 
        <li><a href="#session-cookie-configuration">Session Cookie Configuration</a></li> 
       </ul> </li> 
@@ -1816,6 +1817,44 @@ replace: ERROR</pre>
       </table> 
      </div> 
      <div class="sect2"> 
+      <h3 id="text-cleanup"><a class="anchor" href="#text-cleanup"></a>Text cleanup</h3> 
+      <div class="paragraph"> 
+       <p>All unused texts in ScoutTextProviderService were removed. If you were using one of the deleted ones, you find them in:</p> 
+      </div> 
+      <div class="ulist"> 
+       <ul> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_bg.properties">ScoutTexts_bg.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_cs.properties">ScoutTexts_cs.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_da.properties">ScoutTexts_da.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_de_DE.properties">ScoutTexts_de_DE.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_de.properties">ScoutTexts_de.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_el.properties">ScoutTexts_el.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_es.properties">ScoutTexts_es.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_fi.properties">ScoutTexts_fi.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_fr_BE.properties">ScoutTexts_fr_BE.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_fr.properties">ScoutTexts_fr.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_hr.properties">ScoutTexts_hr.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_hu.properties">ScoutTexts_hu.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_it.properties">ScoutTexts_it.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_ja.properties">ScoutTexts_ja.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_nl_BE.properties">ScoutTexts_nl_BE.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_nl.properties">ScoutTexts_nl.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_no.properties">ScoutTexts_no.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_pl.properties">ScoutTexts_pl.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_pt_br.properties">ScoutTexts_pt_br.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_ru.properties">ScoutTexts_ru.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_se.properties">ScoutTexts_se.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_sk.properties">ScoutTexts_sk.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_sl.properties">ScoutTexts_sl.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_sr.properties">ScoutTexts_sr.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_tr.properties">ScoutTexts_tr.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_zh_TW.properties">ScoutTexts_zh_TW.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts_zh.properties">ScoutTexts_zh.properties</a></p> </li> 
+        <li> <p><a href="ScoutTexts/ScoutTexts.properties">ScoutTexts.properties</a></p> </li> 
+       </ul> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
       <h3 id="migrate-to-the-new-job-api"><a class="anchor" href="#migrate-to-the-new-job-api"></a>Migrate to the new Job API</h3> 
       <div class="paragraph"> 
        <p>Eclipse jobs are replaced by Scout Job Manager API.</p> 
@@ -2311,7 +2350,7 @@ job.join();
   <div id="footer"> 
    <div id="footer-text">
      Version 5.2.0-SNAPSHOT
-    <br /> Last updated 2016-04-07 06:50:22 CEST 
+    <br /> Last updated 2016-07-18 09:39:25 CEST 
    </div> 
   </div>  
  </body>

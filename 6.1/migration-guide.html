@@ -540,10 +540,13 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#browserinfo">BrowserInfo</a></li> 
        <li><a href="#virtual-tree-node">Virtual Tree Node</a></li> 
        <li><a href="#enabled-property-of-form-fields">Enabled Property of Form Fields</a></li> 
+       <li><a href="#itableholder">ITableHolder</a></li> 
        <li><a href="#numberutility-nvl-dateutility-nvl-stringutility-nvl">NumberUtility.nvl(), DateUtility.nvl(), StringUtility.nvl()</a></li> 
        <li><a href="#stringutility-substitutewhenempty">StringUtility.substituteWhenEmpty()</a></li> 
        <li><a href="#compareutility">CompareUtility</a></li> 
-       <li><a href="#strong-threadinterrupted-timedout-and-futurecancelled-exception-strong-em-extends-java-lang-runtimeexception-em-are-now-strong-platofromerrors-strong-em-extends-java-lang-error-em"><strong>ThreadInterrupted-, TimedOut- and FutureCancelled-Exception</strong> <em>(extends java.lang.RuntimeException)</em> are now <strong>PlatofromErrors</strong> <em>(extends java.lang.Error)</em></a></li> 
+       <li><a href="#threadinterrupted-timedout-and-futurecancelledexceptions-extends-java-lang-runtimeexception-are-now-platformerrors-extends-java-lang-error">ThreadInterrupted-, TimedOut- and FutureCancelledExceptions (&quot;extends java.lang.RuntimeException&quot;) are now PlatformErrors (&quot;extends java.lang.Error&quot;)</a></li> 
+       <li><a href="#type-of-labelposition-property-changed-to-byte-iformfield">Type of &quot;labelPosition&quot; property changed to &quot;byte&quot; (IFormField)</a></li> 
+       <li><a href="#idevicetransformer">IDeviceTransformer</a></li> 
       </ul> </li> 
      <li><a href="#api-changes-js">API Changes (JS)</a> 
       <ul class="sectlevel2"> 
@@ -553,12 +556,18 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#scout-widget">scout.Widget</a></li> 
        <li><a href="#changes-in-objecttype-syntax-and-scout-create">Changes in &quot;objectType&quot; syntax and scout.create()</a></li> 
        <li><a href="#changed-behavior-of-scout-htmlcomponent-constructor-function">Changed behavior of scout.HtmlComponent() constructor function</a></li> 
+       <li><a href="#popup-renamed-option-installfocuscontext-to-withfocuscontext">Popup: Renamed option &quot;installFocusContext&quot; to &quot;withFocusContext&quot;</a></li> 
       </ul> </li> 
      <li><a href="#other-changes">Other Changes</a> 
       <ul class="sectlevel2"> 
        <li><a href="#csp-report-url">CSP report URL</a></li> 
        <li><a href="#reorganized-html-files-due-to-strict-csp-rules">Reorganized *.html files due to strict CSP rules</a></li> 
        <li><a href="#renamed-css-files-to-less">Renamed *.css files to *.less</a></li> 
+       <li><a href="#uihttpsessionlistener-replaced-by-httpsessionmutex">UiHttpSessionListener replaced by HttpSessionMutex</a></li> 
+      </ul> </li> 
+     <li><a href="#jax-ws-pooled-port-provider-since-6-0-300">JAX-WS Pooled Port Provider (since 6.0.300)</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#migration">Migration</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -694,7 +703,10 @@ table.CodeRay td.code>pre{padding:0}
        <p>The Virtual tree node has been deleted. The main reason for this was because of table pages: If an <code>AbstractPageWithTable</code> contains a lot of rows, for each of them a child page is created. To have these child pages as lightweight as possible the virtual node was introduced. This node was created for each row and only after activating a row (click by the user) the real child page has been created.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Now instead of creating a virtual node first an probably the real page afterwards the real page is created directly. Therefore the instance creation of pages below table pages should be very fast and not perform any backend calls. To assure this it is recommended to move any expensive operation currently implemented in the <code>execInit()</code> method to <code>execCreateChildPages()</code> or <code>execPageActivated()</code>.</p> 
+       <p>Now instead of creating a virtual node first an probably the real page afterwards the real page is created directly. Therefore the instance creation of pages below table pages should be very fast and not perform any backend calls. To assure this it is recommended to move any expensive operation currently implemented in the <code>execInit()</code> method to <code>execCreateChildPages()</code> or <code>execPageActivated()</code>. Permission checks or similar operations, which use the <code>setVisibleGranted(boolean)</code> method, should be moved to the newly created <code>execCalculateVisible()</code> method. The default behavior is that the <code>execCalculateVisible</code> method is executed on instance creation. Subclasses of <code>AbstractPageWithTable</code> potentially have a large number of child pages. To avoid performance issues due to expensive permission checks, the <code>execCalculateVisible</code> for these children is only executed before loading the page data.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Furthermore to save memory it is recommended to create the tables below pages lazily. The table is created upon the first access to <code>IPage.getTable()</code>. Therefore try not to use <code>getTable()</code> in the page init phase. Instead a new callback <code>execInitTable</code> is available to initialize the table at the moment it is created. There is also an overload <code>getTable(boolean)</code> that can be used to access the table without automatically creating it.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -707,6 +719,12 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="paragraph"> 
        <p>Furthermore the meaning of property change listeners changed. Check all the listeners using the <code>org.eclipse.scout.rt.client.ui.form.fields.IFormField.PROP_ENABLED</code> property. This property is now only fired if the state of the form field itself has changed. If the enabled state of a parent field is modified, this property change event will no longer be fired. The actual enabled state of the field could have changed even though because the parents have an influence now. If the listener should also be notified about changes of the parents use the new property <code>org.eclipse.scout.rt.client.ui.form.fields.IFormField.PROP_ENABLED_COMPUTED</code>.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="itableholder"><a class="anchor" href="#itableholder"></a>ITableHolder</h3> 
+      <div class="paragraph"> 
+       <p>The class <code>ITableHolder</code> was part of the old array based table loaders which has been replaced with a bean based approach in the last release. Therefore the class <code>ITableHolder</code> has been removed. The constants that were present on that interface can be accessed using the interface <code>org.eclipse.scout.rt.client.ui.basic.table.ITableRow</code> from the client or <code>org.eclipse.scout.rt.platform.holders.ITableBeanRowHolder</code> from outside the client.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -728,13 +746,59 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="strong-threadinterrupted-timedout-and-futurecancelled-exception-strong-em-extends-java-lang-runtimeexception-em-are-now-strong-platofromerrors-strong-em-extends-java-lang-error-em"><a class="anchor" href="#strong-threadinterrupted-timedout-and-futurecancelled-exception-strong-em-extends-java-lang-runtimeexception-em-are-now-strong-platofromerrors-strong-em-extends-java-lang-error-em"></a><strong>ThreadInterrupted-, TimedOut- and FutureCancelled-Exception</strong> <em>(extends java.lang.RuntimeException)</em> are now <strong>PlatofromErrors</strong> <em>(extends java.lang.Error)</em></h3> 
+      <h3 id="threadinterrupted-timedout-and-futurecancelledexceptions-extends-java-lang-runtimeexception-are-now-platformerrors-extends-java-lang-error"><a class="anchor" href="#threadinterrupted-timedout-and-futurecancelledexceptions-extends-java-lang-runtimeexception-are-now-platformerrors-extends-java-lang-error"></a>ThreadInterrupted-, TimedOut- and FutureCancelledExceptions (&quot;extends java.lang.RuntimeException&quot;) are now PlatformErrors (&quot;extends java.lang.Error&quot;)</h3> 
       <div class="paragraph"> 
        <p>There were circumstances where the cancellation of long-running actions did not work or lead to unpleasant behaviors (for example multiple <code>ExceptionForm</code>, that is displayed after a cancellation by the user). Most of time caught exceptions where the reason for such behaviors.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>In order to get rid of those problems, we have decided that the former <code>RuntimeExceptions</code> will become <code>Errors</code> and therefore should no longer be swallowed by <code>catch(RuntimeException e)</code>. See <strong>Eclipse Scout: Technical Guide</strong> for more information about the new <code>Throwable</code> hierarchy.</p> 
+       <p>In order to get rid of those problems, we have decided that the former <code>RuntimeExceptions</code> will become <code>Errors</code> and therefore should no longer be swallowed by <code>catch (RuntimeException e)</code>. See <strong>Eclipse Scout: Technical Guide</strong> for more information about the new <code>Throwable</code> hierarchy.</p> 
       </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="type-of-labelposition-property-changed-to-byte-iformfield"><a class="anchor" href="#type-of-labelposition-property-changed-to-byte-iformfield"></a>Type of &quot;labelPosition&quot; property changed to &quot;byte&quot; (IFormField)</h3> 
+      <div class="paragraph"> 
+       <p>The type of the labelPosition property was changed from <code>int</code> to <code>byte</code>. This affects the setters, getters and <code>getConfiguredLabelWidth</code> methods. The position constants in <code>IFormField</code> were adjusted.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Occurrences where such methods were overridden need to be adjusted. Otherwise no changes should be necessary.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="idevicetransformer"><a class="anchor" href="#idevicetransformer"></a>IDeviceTransformer</h3> 
+      <div class="paragraph"> 
+       <p>Some methods on <code>IDeviceTransformer</code> where changed. Projects with own contributions to the device transformation process must apply these changes accordingly.</p> 
+      </div> 
+      <table class="tableblock frame-all grid-all spread"> 
+       <colgroup> 
+        <col style="width: 28.5714%;" /> 
+        <col style="width: 28.5714%;" /> 
+        <col style="width: 42.8572%;" /> 
+       </colgroup> 
+       <thead> 
+        <tr> 
+         <th class="tableblock halign-left valign-top">Old method</th> 
+         <th class="tableblock halign-left valign-top">New method</th> 
+         <th class="tableblock halign-left valign-top">Description</th> 
+        </tr> 
+       </thead> 
+       <tbody> 
+        <tr> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">&#x2009;&#x2014;&#x2009;</p></td> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock"><code>transformPageTable(table, page)</code></p></td> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">New callback that can be used to transform the page&#x2019;s table. Unlike <code>transformPage</code> this method is not called during the <em>execInitPage</em> phase, but during the <em>execInitTable</em> phase.</p></td> 
+        </tr> 
+        <tr> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock"><code>transformPageDetailForm(form)</code></p></td> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock"><code>notifyPageDetailFormChanged(form)</code></p></td> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">The existing method was renamed to avoid confusion with <code>transformPageTable</code> and to clearify that this method is called every time, the desktop&#x2019;s detail form changes (not only when the detail form is first initialized).</p></td> 
+        </tr> 
+        <tr> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock"><code>transformPageDetailTable(table)</code></p></td> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock"><code>notifyPageDetailTableChanged(table)</code></p></td> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">The existing method was renamed to match the new method <code>notifyPageDetailFormChanged</code> and to clearify that this method is called every time, the desktop&#x2019;s detail table changes (not only when the detail table is first initialized).</p></td> 
+        </tr> 
+       </tbody> 
+      </table> 
      </div> 
     </div> 
    </div> 
@@ -876,7 +940,7 @@ table.CodeRay td.code>pre{padding:0}
        <p>The new static method makes it clearer that it will alter the state of $comp. For a normal constructor, such behavior is unexpected and thus discouraged.</p> 
       </div> 
       <div class="paragraph"> 
-       <p><strong>Migration:</strong> Check all <em>*.js</em> files in your project for occurences of <code>new scout.HtlmComponent</code> and replace them with <code>scout.HtmlComponent.install</code>.</p> 
+       <p><strong>Migration:</strong> Check all <em>*.js</em> files in your project for occurences of <code>new scout.HtmlComponent</code> and replace them with <code>scout.HtmlComponent.install</code>.</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -888,6 +952,15 @@ table.CodeRay td.code>pre{padding:0}
   <span class="local-variable">this</span>.<span class="predefined">$container</span> = <span class="predefined">$parent</span>.appendDiv(<span class="string"><span class="delimiter">'</span><span class="content">my-widget</span><span class="delimiter">'</span></span>);
   scout.HtmlComponent.install(<span class="local-variable">this</span>.<span class="predefined">$container</span>, <span class="local-variable">this</span>.session);</code></pre> 
        </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="popup-renamed-option-installfocuscontext-to-withfocuscontext"><a class="anchor" href="#popup-renamed-option-installfocuscontext-to-withfocuscontext"></a>Popup: Renamed option &quot;installFocusContext&quot; to &quot;withFocusContext&quot;</h3> 
+      <div class="paragraph"> 
+       <p>The initialization option <code>installFocusContext</code> for <em>Popup.js</em> instances was renamed to <code>withFocusContext</code> to match the corresponding property name.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p><strong>Migration:</strong> Check if your project explicitly sets <code>installFocusContext = false</code> in popup widget instance (created via <code>scout.create('scout.Popup', { &#x2026;&#x200b; })</code>) or in subclasses of <code>scout.Popup</code>. If it does, rename the option name to <code>withFocusContext</code>.</p> 
       </div> 
      </div> 
     </div> 
@@ -1036,8 +1109,8 @@ table.CodeRay td.code>pre{padding:0}
         <li> <p>In each <em>*.html</em> file in directory <code>/WebContent</code>, use <em>*.less</em> extension in stylesheet tag:</p> 
          <div class="ulist"> 
           <ul> 
-           <li> <p>Old: <code>&lt;scout:stylesheet src=&quot;res/bsicrm-all-macro.css&quot; /&gt;</code></p> </li> 
-           <li> <p>New: <code>&lt;scout:stylesheet src=&quot;res/bsicrm-all-macro.less&quot; /&gt;</code></p> </li> 
+           <li> <p>Old: <code>&lt;scout:stylesheet src=&quot;res/myapp-all-macro.css&quot; /&gt;</code></p> </li> 
+           <li> <p>New: <code>&lt;scout:stylesheet src=&quot;res/myapp-all-macro.less&quot; /&gt;</code></p> </li> 
           </ul> 
          </div> </li> 
        </ul> 
@@ -1051,6 +1124,46 @@ table.CodeRay td.code>pre{padding:0}
          </tr> 
         </tbody>
        </table> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="uihttpsessionlistener-replaced-by-httpsessionmutex"><a class="anchor" href="#uihttpsessionlistener-replaced-by-httpsessionmutex"></a>UiHttpSessionListener replaced by HttpSessionMutex</h3> 
+      <div class="paragraph"> 
+       <p>The HttpSessionListener class <code>org.eclipse.scout.rt.ui.html.UiHttpSessionListener</code> has been replaced by the listener class <code>org.eclipse.scout.rt.server.commons.HttpSessionMutex</code>. Therefore if the class <code>UiHttpSessionListener</code> is registered in the <code>web.xml</code> file replace it with <code>org.eclipse.scout.rt.server.commons.HttpSessionMutex</code>.</p> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="jax-ws-pooled-port-provider-since-6-0-300"><a class="anchor" href="#jax-ws-pooled-port-provider-since-6-0-300"></a>JAX-WS Pooled Port Provider (since 6.0.300)</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Creating web service and port instances are expensive operations (at least if the reference implementation Metro or the one bundled with the JRE is used). Especially parsing the WSDL and XSD files as well as building JAXB contexts and it is even worse if they are performed in parallel (due to synchronization).</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>The <code>PooledPortProvider</code> is the new default strategy for creating ports. Actually the pooled provider uses two pools, one for service instances and another for port instances (which are created by a service instance). A Scout transaction member keeps track of leased ports and puts them back into the pool when the Scout transaction releases its resources. Further, the transaction member ensures that the same port is used within a transaction, once it has been leased.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Port instances are reset when they are put back into the pool. Some JAX-WS implementations provide a suitable operation for resetting the port (i.e. Metro as well as the RI bundled with Java 8). Otherwise the request context is cleansed as good as possible. The corresponding <code>JaxWsImplementorSpecifics.resetRequestContext(Object)</code> can be extended to customize the cleansing.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>The <code>AbstractWebServiceClient</code> does not distinguish between <code>PortProducer</code> and <code>PortCache</code> anymore. Both are <code>IPortProvider</code> strategies and the new <code>PooledPortPorvider</code> is just another one, frankly the new default. Setting the configuration property <code>jaxws.consumer.portPool.enabled</code> to <code>false</code> disables the pool and enables the previous behavior (bare <code>PortProducer</code>, wrapped by a <code>PortCache</code> instance that stashes ports).</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>The internal state of the pools is reported on the diagnostics servlet.</p> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="migration"><a class="anchor" href="#migration"></a>Migration</h3> 
+      <div class="paragraph"> 
+       <p>The following method has been renamed and the return type has been changed to <code>IPortProvider</code>. More important it returns a pooled, cached, bare provider or uses any other strategy. In other words, the <code>AbstractWebServiceClient</code> does not wrap the producer into a <code>PortCache</code> anymore.</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code>class: org.eclipse.scout.rt.server.jaxws.consumer.AbstractWebServiceClient
+old:   getConfiguredPortProducer(Class&lt;SERVICE&gt;, Class&lt;PORT&gt;, URL, String, String, IPortInitializer)
+new:   getConfiguredPortProvider(Class&lt;SERVICE&gt;, Class&lt;PORT&gt;, URL, String, String, IPortInitializer)
+                        ^^^^^^^^</code></pre> 
+       </div> 
       </div> 
       <div class="admonitionblock tip"> 
        <table> 
@@ -1069,7 +1182,7 @@ table.CodeRay td.code>pre{padding:0}
   <div id="footer"> 
    <div id="footer-text">
      Version 6.1
-    <br /> Last updated 2016-07-07 09:10:23 CEST 
+    <br /> Last updated 2017-01-18 20:14:27 CET 
    </div> 
   </div>  
  </body>

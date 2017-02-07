@@ -590,8 +590,12 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#changes-in-a-nutshell">Changes in a nutshell</a></li> 
        <li><a href="#publishing-notifications">Publishing Notifications</a></li> 
        <li><a href="#handling-notifications">Handling Notifications</a></li> 
-       <li><a href="#class-renames-or-moves">Class Renames or Moves</a></li> 
       </ul> </li> 
+     <li><a href="#jax-ws-pooled-port-provider-since-6-0-300">JAX-WS Pooled Port Provider (since 6.0.300)</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#migration">Migration</a></li> 
+      </ul> </li> 
+     <li><a href="#class-renames-or-moves">Class Renames or Moves</a></li> 
     </ul> 
    </div> 
   </div> 
@@ -2013,541 +2017,577 @@ SERVICES.getService(IClientNotificationConsumerService.class)
        </div> 
       </div> 
      </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="jax-ws-pooled-port-provider-since-6-0-300"><a class="anchor" href="#jax-ws-pooled-port-provider-since-6-0-300"></a>JAX-WS Pooled Port Provider (since 6.0.300)</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Creating web service and port instances are expensive operations (at least if the reference implementation Metro or the one bundled with the JRE is used). Especially parsing the WSDL and XSD files as well as building JAXB contexts and it is even worse if they are performed in parallel (due to synchronization).</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>The <code>PooledPortProvider</code> is the new default strategy for creating ports. Actually the pooled provider uses two pools, one for service instances and another for port instances (which are created by a service instance). A Scout transaction member keeps track of leased ports and puts them back into the pool when the Scout transaction releases its resources. Further, the transaction member ensures that the same port is used within a transaction, once it has been leased.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Port instances are reset when they are put back into the pool. Some JAX-WS implementations provide a suitable operation for resetting the port (i.e. Metro as well as the RI bundled with Java 8). Otherwise the request context is cleansed as good as possible. The corresponding <code>JaxWsImplementorSpecifics.resetRequestContext(Object)</code> can be extended to customize the cleansing.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>The <code>AbstractWebServiceClient</code> does not distinguish between <code>PortProducer</code> and <code>PortCache</code> anymore. Both are <code>IPortProvider</code> strategies and the new <code>PooledPortPorvider</code> is just another one, frankly the new default. Setting the configuration property <code>jaxws.consumer.portPool.enabled</code> to <code>false</code> disables the pool and enables the previous behavior (bare <code>PortProducer</code>, wrapped by a <code>PortCache</code> instance that stashes ports).</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>The internal state of the pools is reported on the diagnostics servlet.</p> 
+     </div> 
      <div class="sect2"> 
-      <h3 id="class-renames-or-moves"><a class="anchor" href="#class-renames-or-moves"></a>Class Renames or Moves</h3> 
+      <h3 id="migration"><a class="anchor" href="#migration"></a>Migration</h3> 
       <div class="paragraph"> 
-       <p>Excluding Tests</p> 
+       <p>The following method has been renamed and the return type has been changed to <code>IPortProvider</code>. More important it returns a pooled, cached, bare provider or uses any other strategy. In other words, the <code>AbstractWebServiceClient</code> does not wrap the producer into a <code>PortCache</code> anymore.</p> 
       </div> 
-      <table class="tableblock frame-all grid-all"> 
-       <colgroup> 
-        <col /> 
-        <col /> 
-       </colgroup> 
-       <thead> 
-        <tr> 
-         <th class="tableblock halign-left valign-top">5.1.x</th> 
-         <th class="tableblock halign-left valign-top">5.2.x/6.0.x</th> 
-        </tr> 
-       </thead> 
-       <tfoot> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.testing.commons.ScoutAssert.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.testing.platform.util.ScoutAssert.java</p></td> 
-        </tr> 
-       </tfoot> 
-       <tbody> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.ColumnData.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.dto.ColumnData.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.ConfigProperty.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.annotations.ConfigProperty.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.FormData.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.dto.FormData.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.InjectFieldTo.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.extension.InjectFieldTo.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.Internal.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.annotations.Internal.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.IOrdered.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.IOrdered.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.OrderedCollection.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.collection.OrderedCollection.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.OrderedComparator.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.OrderedComparator.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.PageData.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.dto.PageData.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.ArrayComparator.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.ArrayComparator.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.Base64Utility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.Base64Utility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.beans.AbstractPropertyObserver.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.reflect.AbstractPropertyObserver.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.beans.BasicPropertySupport.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.reflect.BasicPropertySupport.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.beans.FastBeanInfo.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.reflect.FastBeanInfo.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.beans.FastBeanUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.reflect.FastBeanUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.beans.FastPropertyDescriptor.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.reflect.FastPropertyDescriptor.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.BeanUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.BeanUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CellRange.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.CellRange.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.ClassIdentifier.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.classid.ClassIdentifier.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CollationRulesPatch.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.nls.CollationRulesPatch.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CollectionUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.CollectionUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CollectorVisitor.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.visitor.CollectorVisitor.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.ColorUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.ColorUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CompareUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.CompareUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CompositeObject.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.CompositeObject.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.ConfigUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.config.ConfigUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CSSPatch.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.CSSPatch.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.dnd.JavaTransferObject.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.ui.dnd.JavaTransferObject.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.EncryptionUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.EncryptionUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.eventlistprofiler.EventListenerProfiler.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.eventlistprofiler.EventListenerProfiler.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.eventlistprofiler.EventListenerSnapshot.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.eventlistprofiler.EventListenerSnapshot.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.exception.InitializationException.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.exception.InitializationException.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.exception.PlaceholderException.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.exception.PlaceholderException.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.FileUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.FileUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.holders.Holder.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.holders.Holder.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.holders.IBeanArrayHolder.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.holders.IBeanArrayHolder.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.holders.ITableBeanRowHolder.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.holders.ITableBeanRowHolder.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.holders.NVPair.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.holders.NVPair.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.holders.TableBeanHolderFilter.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.holders.TableBeanHolderFilter.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.holders.TableHolderFilter.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.holders.TableHolderFilter.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.HtmlBinds.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.HtmlBinds.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.IHtmlElement.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.IHtmlElement.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.IHtmlInput.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.IHtmlInput.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.IHtmlListElement.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.IHtmlListElement.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.IHtmlTable.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.IHtmlTable.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.IHtmlTableCell.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.IHtmlTableCell.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.IHtmlTableRow.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.IHtmlTableRow.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.internal.EmptyHtmlNodeBuilder.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.internal.EmptyHtmlNodeBuilder.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.internal.HtmlContentBuilder.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.internal.HtmlContentBuilder.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.internal.HtmlNodeBuilder.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.internal.HtmlNodeBuilder.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.internal.HtmlTableDataBuilder.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.internal.HtmlTableDataBuilder.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.HTMLUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.HTMLUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.index.AbstractMultiValueIndex.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.index.AbstractMultiValueIndex.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.index.AbstractSingleValueIndex.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.index.AbstractSingleValueIndex.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.index.IIndex.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.index.IIndex.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.index.IndexedStore.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.index.IndexedStore.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.internal.tripledes.TripleDES.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.TripleDES.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.LocaleUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.nls.LocaleUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.logger.LevelRangeFilter.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.logger.LevelRangeFilter.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.mail.CharsetSafeMimeMessage.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.shared.mail.CharsetSafeMimeMessage.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.MatrixUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.MatrixUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.nls.DynamicNls.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.nls.DynamicNls.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.nls.NlsLocale.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.nls.NlsLocale.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.nls.NlsResourceBundleCache.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.nls.NlsResourceBundleCache.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.nls.NlsUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.nls.NlsUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.IntoParser.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.IntoParser.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.sql.SqlParser.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.sql.SqlParser.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.sql.SqlParserToken.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.sql.SqlParserToken.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.token.DatabaseSpecificToken.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.token.DatabaseSpecificToken.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.token.FunctionInputToken.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.token.FunctionInputToken.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.token.TextToken.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.token.TextToken.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.token.ValueInputToken.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.token.ValueInputToken.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.token.ValueOutputToken.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.token.ValueOutputToken.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.PropertiesHelper.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.config.PropertiesHelper.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.PublicKeyUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.PublicKeyUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.Range.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.Range.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.ReflectionUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.reflect.ReflectionUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.resource.MimeType.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.resource.MimeType.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.RFCWrapperPart.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.shared.mail.RFCWrapperPart.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.security.SimplePrincipal.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.SimplePrincipal.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.SecurityUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.SecurityUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.serialization.BasicObjectSerializer.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.serialization.BasicObjectSerializer.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.serialization.IObjectReplacer.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.serialization.IObjectReplacer.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.serialization.IObjectSerializer.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.serialization.IObjectSerializer.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.serialization.IObjectSerializerFactory.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.serialization.IObjectSerializerFactory.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.status.IMultiStatus.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.status.IMultiStatus.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.status.IStatus.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.status.IStatus.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.status.MultiStatus.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.status.MultiStatus.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.status.Status.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.status.Status.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.StringUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.StringUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.ToStringBuilder.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.ToStringBuilder.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.TriState.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.TriState.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.TuningUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.TuningUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.TypeCastUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.TypeCastUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.VerboseUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.VerboseUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.XmlUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.XmlUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.ui.form.fields.imagebox.IImageField.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.ui.form.fields.imagefield.IImageField.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.ui.form.fields.imagebox.ImageFieldEvent.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.ui.form.fields.imagefield.ImageFieldEvent.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.service.internal.AbstractHolderArgumentVisitor.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.shared.servicetunnel.internal.AbstractHolderArgumentVisitor.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.csv.ArrayConsumer.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.shared.csv.ArrayConsumer.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.DateFormatProvider.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.date.DateFormatProvider.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.DateUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.date.DateUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.commons.servlet.filter.authentication.PathInfoFilter.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.commons.authentication.PathInfoFilter.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.commons.servlet.filter.authentication.SecureHttpServletRequestWrapper.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.commons.authentication.SecureHttpServletRequestWrapper.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.commons.authentication.ConfigFileCredentialVerifier</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.ConfigFileCredentialVerifier</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.commons.authentication.ICredentialVerifier</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.ICredentialVerifier</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.csv.CsvSqlSettings.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.csv.CsvSettings.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.AliasMapper.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.AliasMapper.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.DataModelEntityPartDefinition.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.DataModelEntityPartDefinition.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.EntityContribution.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.EntityContribution.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.EntityContributionUtility.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.EntityContributionUtility.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.FormDataStatementBuilder.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.FormDataStatementBuilder.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.FormDataStatementBuilderCheck.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.FormDataStatementBuilderCheck.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.TokenBasedStatementBuilder.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.TokenBasedStatementBuilder.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.derby.DerbySqlStyle.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.derby.DerbySqlStyle.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.fixture.ConnectionMock.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.fixture.ConnectionMock.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.fixture.PreparedStatementMock.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.fixture.PreparedStatementMock.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.fixture.ResultSetMetaDataMock.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.fixture.ResultSetMetaDataMock.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.fixture.ResultSetMock.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.fixture.ResultSetMock.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.fixture.TableFieldBeanData.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.fixture.TableFieldBeanData.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.fixture.TableFieldData.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.fixture.TableFieldData.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.internal.legacy.LegacyStatementBuilder.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.internal.legacy.LegacyStatementBuilder.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.oracle.OracleSqlStyle.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.oracle.OracleSqlStyle.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.SqlBind.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.SqlBind.java</p></td> 
-        </tr> 
-        <tr> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.style.AbstractSqlStyle.java</p></td> 
-         <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.style.AbstractSqlStyle.java</p></td> 
-        </tr> 
-       </tbody> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code>class: org.eclipse.scout.rt.server.jaxws.consumer.AbstractWebServiceClient
+old:   getConfiguredPortProducer(Class&lt;SERVICE&gt;, Class&lt;PORT&gt;, URL, String, String, IPortInitializer)
+new:   getConfiguredPortProvider(Class&lt;SERVICE&gt;, Class&lt;PORT&gt;, URL, String, String, IPortInitializer)
+                        ^^^^^^^^</code></pre> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="class-renames-or-moves"><a class="anchor" href="#class-renames-or-moves"></a>Class Renames or Moves</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Excluding Tests</p> 
+     </div> 
+     <table class="tableblock frame-all grid-all"> 
+      <colgroup> 
+       <col /> 
+       <col /> 
+      </colgroup> 
+      <thead> 
+       <tr> 
+        <th class="tableblock halign-left valign-top">5.1.x</th> 
+        <th class="tableblock halign-left valign-top">5.2.x/6.0.x</th> 
+       </tr> 
+      </thead> 
+      <tfoot> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.testing.commons.ScoutAssert.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.testing.platform.util.ScoutAssert.java</p></td> 
+       </tr> 
+      </tfoot> 
+      <tbody> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.ColumnData.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.dto.ColumnData.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.ConfigProperty.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.annotations.ConfigProperty.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.FormData.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.dto.FormData.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.InjectFieldTo.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.extension.InjectFieldTo.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.Internal.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.annotations.Internal.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.IOrdered.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.IOrdered.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.OrderedCollection.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.collection.OrderedCollection.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.OrderedComparator.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.OrderedComparator.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.annotations.PageData.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.dto.PageData.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.ArrayComparator.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.ArrayComparator.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.Base64Utility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.Base64Utility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.beans.AbstractPropertyObserver.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.reflect.AbstractPropertyObserver.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.beans.BasicPropertySupport.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.reflect.BasicPropertySupport.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.beans.FastBeanInfo.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.reflect.FastBeanInfo.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.beans.FastBeanUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.reflect.FastBeanUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.beans.FastPropertyDescriptor.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.reflect.FastPropertyDescriptor.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.BeanUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.BeanUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CellRange.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.CellRange.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.ClassIdentifier.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.classid.ClassIdentifier.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CollationRulesPatch.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.nls.CollationRulesPatch.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CollectionUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.CollectionUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CollectorVisitor.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.visitor.CollectorVisitor.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.ColorUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.ColorUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CompareUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.CompareUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CompositeObject.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.CompositeObject.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.ConfigUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.config.ConfigUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.CSSPatch.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.CSSPatch.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.dnd.JavaTransferObject.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.ui.dnd.JavaTransferObject.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.EncryptionUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.EncryptionUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.eventlistprofiler.EventListenerProfiler.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.eventlistprofiler.EventListenerProfiler.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.eventlistprofiler.EventListenerSnapshot.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.eventlistprofiler.EventListenerSnapshot.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.exception.InitializationException.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.exception.InitializationException.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.exception.PlaceholderException.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.exception.PlaceholderException.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.FileUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.FileUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.holders.Holder.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.holders.Holder.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.holders.IBeanArrayHolder.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.holders.IBeanArrayHolder.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.holders.ITableBeanRowHolder.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.holders.ITableBeanRowHolder.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.holders.NVPair.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.holders.NVPair.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.holders.TableBeanHolderFilter.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.holders.TableBeanHolderFilter.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.holders.TableHolderFilter.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.holders.TableHolderFilter.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.HtmlBinds.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.HtmlBinds.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.IHtmlElement.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.IHtmlElement.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.IHtmlInput.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.IHtmlInput.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.IHtmlListElement.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.IHtmlListElement.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.IHtmlTable.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.IHtmlTable.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.IHtmlTableCell.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.IHtmlTableCell.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.IHtmlTableRow.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.IHtmlTableRow.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.internal.EmptyHtmlNodeBuilder.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.internal.EmptyHtmlNodeBuilder.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.internal.HtmlContentBuilder.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.internal.HtmlContentBuilder.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.internal.HtmlNodeBuilder.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.internal.HtmlNodeBuilder.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.html.internal.HtmlTableDataBuilder.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.internal.HtmlTableDataBuilder.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.HTMLUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.html.HTMLUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.index.AbstractMultiValueIndex.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.index.AbstractMultiValueIndex.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.index.AbstractSingleValueIndex.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.index.AbstractSingleValueIndex.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.index.IIndex.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.index.IIndex.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.index.IndexedStore.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.index.IndexedStore.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.internal.tripledes.TripleDES.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.TripleDES.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.LocaleUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.nls.LocaleUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.logger.LevelRangeFilter.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.logger.LevelRangeFilter.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.mail.CharsetSafeMimeMessage.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.shared.mail.CharsetSafeMimeMessage.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.MatrixUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.MatrixUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.nls.DynamicNls.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.nls.DynamicNls.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.nls.NlsLocale.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.nls.NlsLocale.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.nls.NlsResourceBundleCache.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.nls.NlsResourceBundleCache.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.nls.NlsUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.nls.NlsUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.IntoParser.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.IntoParser.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.sql.SqlParser.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.sql.SqlParser.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.sql.SqlParserToken.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.sql.SqlParserToken.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.token.DatabaseSpecificToken.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.token.DatabaseSpecificToken.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.token.FunctionInputToken.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.token.FunctionInputToken.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.token.TextToken.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.token.TextToken.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.token.ValueInputToken.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.token.ValueInputToken.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.parsers.token.ValueOutputToken.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.parsers.token.ValueOutputToken.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.PropertiesHelper.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.config.PropertiesHelper.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.PublicKeyUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.PublicKeyUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.Range.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.Range.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.ReflectionUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.reflect.ReflectionUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.resource.MimeType.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.resource.MimeType.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.RFCWrapperPart.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.shared.mail.RFCWrapperPart.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.security.SimplePrincipal.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.SimplePrincipal.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.SecurityUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.SecurityUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.serialization.BasicObjectSerializer.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.serialization.BasicObjectSerializer.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.serialization.IObjectReplacer.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.serialization.IObjectReplacer.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.serialization.IObjectSerializer.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.serialization.IObjectSerializer.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.serialization.IObjectSerializerFactory.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.serialization.IObjectSerializerFactory.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.status.IMultiStatus.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.status.IMultiStatus.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.status.IStatus.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.status.IStatus.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.status.MultiStatus.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.status.MultiStatus.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.status.Status.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.status.Status.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.StringUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.StringUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.ToStringBuilder.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.ToStringBuilder.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.TriState.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.TriState.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.TuningUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.TuningUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.TypeCastUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.TypeCastUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.VerboseUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.VerboseUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.commons.XmlUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.XmlUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.ui.form.fields.imagebox.IImageField.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.ui.form.fields.imagefield.IImageField.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.ui.form.fields.imagebox.ImageFieldEvent.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.client.ui.form.fields.imagefield.ImageFieldEvent.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.service.internal.AbstractHolderArgumentVisitor.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.shared.servicetunnel.internal.AbstractHolderArgumentVisitor.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.csv.ArrayConsumer.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.shared.csv.ArrayConsumer.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.DateFormatProvider.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.date.DateFormatProvider.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.DateUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.util.date.DateUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.commons.servlet.filter.authentication.PathInfoFilter.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.commons.authentication.PathInfoFilter.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.commons.servlet.filter.authentication.SecureHttpServletRequestWrapper.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.commons.authentication.SecureHttpServletRequestWrapper.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.commons.authentication.ConfigFileCredentialVerifier</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.ConfigFileCredentialVerifier</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.commons.authentication.ICredentialVerifier</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.platform.security.ICredentialVerifier</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.csv.CsvSqlSettings.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.csv.CsvSettings.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.AliasMapper.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.AliasMapper.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.DataModelEntityPartDefinition.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.DataModelEntityPartDefinition.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.EntityContribution.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.EntityContribution.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.EntityContributionUtility.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.EntityContributionUtility.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.FormDataStatementBuilder.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.FormDataStatementBuilder.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.FormDataStatementBuilderCheck.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.FormDataStatementBuilderCheck.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.builder.TokenBasedStatementBuilder.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.builder.TokenBasedStatementBuilder.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.derby.DerbySqlStyle.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.derby.DerbySqlStyle.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.fixture.ConnectionMock.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.fixture.ConnectionMock.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.fixture.PreparedStatementMock.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.fixture.PreparedStatementMock.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.fixture.ResultSetMetaDataMock.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.fixture.ResultSetMetaDataMock.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.fixture.ResultSetMock.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.fixture.ResultSetMock.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.fixture.TableFieldBeanData.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.fixture.TableFieldBeanData.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.fixture.TableFieldData.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.fixture.TableFieldData.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.internal.legacy.LegacyStatementBuilder.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.internal.legacy.LegacyStatementBuilder.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.oracle.OracleSqlStyle.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.oracle.OracleSqlStyle.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.SqlBind.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.SqlBind.java</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.services.common.jdbc.style.AbstractSqlStyle.java</p></td> 
+        <td class="tableblock halign-left valign-top"><p class="tableblock">org.eclipse.scout.rt.server.jdbc.style.AbstractSqlStyle.java</p></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     <div class="admonitionblock tip"> 
+      <table> 
+       <tbody>
+        <tr> 
+         <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
+         <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/6.0.x/docs/build/scout_migration/src/docs/migration-guide.adoc">edit this page</a> on GitHub. </td> 
+        </tr> 
+       </tbody>
       </table> 
-      <div class="admonitionblock tip"> 
-       <table> 
-        <tbody>
-         <tr> 
-          <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
-          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/edit/releases/6.0.x/docs/build/scout_migration/src/docs/migration-guide.adoc">edit this page</a> on GitHub. </td> 
-         </tr> 
-        </tbody>
-       </table> 
-      </div> 
      </div> 
     </div> 
    </div> 
@@ -2566,7 +2606,7 @@ SERVICES.getService(IClientNotificationConsumerService.class)
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0
-    <br /> Last updated 2016-07-05 09:34:21 CEST 
+    <br /> Last updated 2017-01-31 17:46:23 CET 
    </div> 
   </div>  
  </body>

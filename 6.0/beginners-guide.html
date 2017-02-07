@@ -2959,7 +2959,7 @@ scout.application.name=Contacts</code></pre>
   <span class="tag">&lt;parent&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.eclipse.scout.contacts<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>org.eclipse.scout.contacts<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>6.0.200-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>6.0.300-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;relativePath&gt;</span>../org.eclipse.scout.contacts<span class="tag">&lt;/relativePath&gt;</span>
   <span class="tag">&lt;/parent&gt;</span>
 
@@ -4537,7 +4537,7 @@ contacts.superuser=system</code></pre>
 
   <span class="annotation">@Override</span>
   <span class="directive">public</span> PersonFormData create(PersonFormData formData) {
-    <span class="keyword">if</span> (!ACCESS.check(<span class="keyword">new</span> PersonCreatePermission())) {
+    <span class="keyword">if</span> (!ACCESS.check(<span class="keyword">new</span> CreatePersonPermission())) {
       <span class="keyword">throw</span> <span class="keyword">new</span> VetoException(TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">InsufficientPrivileges</span><span class="delimiter">&quot;</span></span>));
     }
 
@@ -4553,7 +4553,7 @@ contacts.superuser=system</code></pre>
 
   <span class="annotation">@Override</span>
   <span class="directive">public</span> PersonFormData load(PersonFormData formData) {
-    <span class="keyword">if</span> (!ACCESS.check(<span class="keyword">new</span> PersonReadPermission())) {
+    <span class="keyword">if</span> (!ACCESS.check(<span class="keyword">new</span> ReadPersonPermission())) {
       <span class="keyword">throw</span> <span class="keyword">new</span> VetoException(TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">InsufficientPrivileges</span><span class="delimiter">&quot;</span></span>));
     }
 
@@ -4564,7 +4564,7 @@ contacts.superuser=system</code></pre>
 
   <span class="annotation">@Override</span>
   <span class="directive">public</span> PersonFormData store(PersonFormData formData) {
-    <span class="keyword">if</span> (!ACCESS.check(<span class="keyword">new</span> PersonUpdatePermission())) {
+    <span class="keyword">if</span> (!ACCESS.check(<span class="keyword">new</span> UpdatePersonPermission())) {
       <span class="keyword">throw</span> <span class="keyword">new</span> VetoException(TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">InsufficientPrivileges</span><span class="delimiter">&quot;</span></span>));
     }
 
@@ -5438,7 +5438,7 @@ contacts.superuser=system</code></pre>
 
   <span class="annotation">@Override</span>
   <span class="directive">public</span> OrganizationFormData create(OrganizationFormData formData) {
-    <span class="keyword">if</span> (!ACCESS.check(<span class="keyword">new</span> OrganizationCreatePermission())) {
+    <span class="keyword">if</span> (!ACCESS.check(<span class="keyword">new</span> CreateOrganizationPermission())) {
       <span class="keyword">throw</span> <span class="keyword">new</span> VetoException(TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">InsufficientPrivileges</span><span class="delimiter">&quot;</span></span>));
     }
 
@@ -5453,7 +5453,7 @@ contacts.superuser=system</code></pre>
 
   <span class="annotation">@Override</span>
   <span class="directive">public</span> OrganizationFormData load(OrganizationFormData formData) {
-    <span class="keyword">if</span> (!ACCESS.check(<span class="keyword">new</span> OrganizationReadPermission())) {
+    <span class="keyword">if</span> (!ACCESS.check(<span class="keyword">new</span> ReadOrganizationPermission())) {
       <span class="keyword">throw</span> <span class="keyword">new</span> VetoException(TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">InsufficientPrivileges</span><span class="delimiter">&quot;</span></span>));
     }
 
@@ -5464,7 +5464,7 @@ contacts.superuser=system</code></pre>
 
   <span class="annotation">@Override</span>
   <span class="directive">public</span> OrganizationFormData store(OrganizationFormData formData) {
-    <span class="keyword">if</span> (!ACCESS.check(<span class="keyword">new</span> OrganizationUpdatePermission())) {
+    <span class="keyword">if</span> (!ACCESS.check(<span class="keyword">new</span> UpdateOrganizationPermission())) {
       <span class="keyword">throw</span> <span class="keyword">new</span> VetoException(TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">InsufficientPrivileges</span><span class="delimiter">&quot;</span></span>));
     }
 
@@ -5964,10 +5964,10 @@ contacts.superuser=system</code></pre>
          <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@PageData</span>(OrganizationTablePageData.class)
 <span class="directive">public</span> <span class="type">class</span> <span class="class">OrganizationTablePage</span> <span class="directive">extends</span> AbstractPageWithTable&lt;OrganizationTablePage.Table&gt; {
 
-  <span class="annotation">@Override</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="annotation">@Override</span>
   <span class="directive">protected</span> IPage&lt;?&gt; execCreateChildPage(ITableRow row) {
     OrganizationNodePage childPage = <span class="keyword">new</span> OrganizationNodePage();
-    childPage.setOrganizationId(getTable().getOrganizationIdColumn().getValue(row)); <i class="conum" data-value="2"></i><b>(2)</b>
+    childPage.setOrganizationId(getTable().getOrganizationIdColumn().getValue(row));
     <span class="keyword">return</span> childPage;
   }
 }</code></pre> 
@@ -6528,7 +6528,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0
-    <br /> Last updated 2016-12-13 13:08:23 CET 
+    <br /> Last updated 2017-01-31 17:46:23 CET 
    </div> 
   </div>  
  </body>
