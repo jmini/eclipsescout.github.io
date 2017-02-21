@@ -1542,7 +1542,7 @@ TEXTS.get(<span class="string"><span class="delimiter">&quot;</span><span class=
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p>The encoding is the &quot;Unicode escape characters&quot;: \uXXXX where XXXX is a hexadecimal id of the character in the <a href="http://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode character table</a>. Read more on the .properties File on <a href="http://en.wikipedia.org/wiki/.properties">wikipedia</a>.</p> 
+        <p>The encoding is the &quot;Unicode escape characters&quot;: \uHHHH where HHHH is a hexadecimal id of the character in the <a href="http://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode character table</a>. Read more on the .properties File on <a href="http://en.wikipedia.org/wiki/.properties">wikipedia</a>.</p> 
        </div> 
       </div> 
      </div> 
@@ -5558,11 +5558,13 @@ protected void execInitField() {
           <col style="width: 40%;" /> 
           <col style="width: 60%;" /> 
          </colgroup> 
-         <tbody> 
+         <thead> 
           <tr> 
-           <td class="tableblock halign-left valign-top"><p class="tableblock">file</p></td> 
-           <td class="tableblock halign-left valign-top"><p class="tableblock">description</p></td> 
+           <th class="tableblock halign-left valign-top">file</th> 
+           <th class="tableblock halign-left valign-top">description</th> 
           </tr> 
+         </thead> 
+         <tbody> 
           <tr> 
            <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#settings_org.eclipse.jdt.core.prefs">.settings/org.eclipse.jdt.core.prefs</a></p></td> 
            <td class="tableblock halign-left valign-top"><p class="tableblock">Enables APT for this module via the property <em>org.eclipse.jdt.core.compiler.processAnnotations=enabled</em></p></td> 
@@ -6983,7 +6985,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
          <p>To work with plaintext passwords, set the property <code>scout.auth.credentials.plaintext</code> to <em>true</em>.</p> 
         </div> 
         <div class="paragraph"> 
-         <p>Example of hashed passwords: <code>scott:SALT.PASSWORD-HASH;jack:SALT.PASSWORD-HASH;john:SALT.PASSWORD-HASH</code> Example of plaintext passwords: <code>scott:XXXX;jack:XXXX;john:XXXX</code></p> 
+         <p>Example of hashed passwords: <code>scott:SALT.PASSWORD-HASH;jack:SALT.PASSWORD-HASH;john:SALT.PASSWORD-HASH</code> Example of plaintext passwords: <code>scott:<strong><strong>*;jack:</strong><strong>;john:</strong></strong>*</code></p> 
         </div> 
        </div> 
       </div> 

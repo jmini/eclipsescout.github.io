@@ -2295,12 +2295,12 @@ table.CodeRay td.code>pre{padding:0}
          Listing 4. Commenting out the application specific theming re-activates the Scout default theme.
         </div> 
         <div class="content"> 
-         <pre class="CodeRay highlight"><code>### Application theming
-# scout.ui.theme=application <i class="conum" data-value="1"></i><b>(1)</b>
-
-### Application Config
+         <pre class="CodeRay highlight"><code>### Application
+scout.application.name=Contacts
 scout.application.version=1.0.0-SNAPSHOT
-scout.application.name=Contacts</code></pre> 
+
+### UI
+# scout.ui.theme=application <i class="conum" data-value="1"></i><b>(1)</b></code></pre> 
         </div> 
        </div> 
        <div class="colist arabic"> 
@@ -6387,7 +6387,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        <p>The <span class="filename">conf</span> folder contains a set of XML and property configuration files. The file <span class="filename">server.xml</span> represents Tomcat&#x2019;s main configuration file. It is used to configure general web server aspects such as the port number of its connectors for the client server communication. For the default setup, port number 8080 is used for the communication between clients applications and the web server. The file <span class="filename">tomcat-users.xml</span> contains a database of users, passwords and associated roles.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>Folder <span class="filename">logs</span> contains various logfiles of Tomcat itself as well as host and web application log files. XXX need to provide more on what is where (especially application logs and exact setup to generate log entries from scout apps).</p> 
+       <p>Folder <span class="filename">logs</span> contains various logfiles of Tomcat itself as well as host and web application log files. TODO jbr need to provide more on what is where (especially application logs and exact setup to generate log entries from scout apps).</p> 
       </div> 
       <div class="paragraph"> 
        <p>The folder needed for deploying web applications into a Tomcat instance is called <span class="filename">webapps</span>. It can be used as the target for copying WAR files into the web server. The installation of the WAR file then extracts its content into the corresponding directory structure as shown in <a href="#img-tomcat_install_dir">Figure 68</a> in the case of the file <span class="filename">helloworld_server.war</span>.</p> 

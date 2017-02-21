@@ -533,6 +533,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#finalvalue">FinalValue</a></li> 
        <li><a href="#postconstruct">@PostConstruct</a></li> 
        <li><a href="#tree">Tree</a></li> 
+       <li><a href="#table">Table</a></li> 
        <li><a href="#cookieutility">CookieUtility</a></li> 
        <li><a href="#pair">Pair</a></li> 
        <li><a href="#customizing-csp-directives">Customizing CSP directives</a></li> 
@@ -564,10 +565,6 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#reorganized-html-files-due-to-strict-csp-rules">Reorganized *.html files due to strict CSP rules</a></li> 
        <li><a href="#renamed-css-files-to-less">Renamed *.css files to *.less</a></li> 
        <li><a href="#uihttpsessionlistener-replaced-by-httpsessionmutex">UiHttpSessionListener replaced by HttpSessionMutex</a></li> 
-      </ul> </li> 
-     <li><a href="#jax-ws-pooled-port-provider-since-6-0-300">JAX-WS Pooled Port Provider (since 6.0.300)</a> 
-      <ul class="sectlevel2"> 
-       <li><a href="#migration">Migration</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -637,6 +634,12 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
      </div> 
      <div class="sect2"> 
+      <h3 id="table"><a class="anchor" href="#table"></a>Table</h3> 
+      <div class="paragraph"> 
+       <p><code>Cell.setText(null)</code> has no effect anymore. The JavaScript table has been improved so that every column is now able to compute the text based on the value of a cell. This does only happen if no explicit text is provided which means <code>cell.setText(null)</code> would trigger that behavior. If you really want to set a value but no text, you can use <code>cell.textText(&quot;&quot;)</code> instead.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
       <h3 id="cookieutility"><a class="anchor" href="#cookieutility"></a>CookieUtility</h3> 
       <div class="paragraph"> 
        <p><code>CookieUtility</code> was moved from <em>org.eclipse.scout.rt.ui.html</em> to <em>org.eclipse.scout.rt.server.commons</em>. Migrate by updating your imports. The Method <code>addCookie()</code> is now called <code>addPersistentCookie()</code>. Additional methods are available (to add a session cookie, or delete an existing cookie).</p> 
@@ -651,7 +654,7 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2"> 
       <h3 id="customizing-csp-directives"><a class="anchor" href="#customizing-csp-directives"></a>Customizing CSP directives</h3> 
       <div class="paragraph"> 
-       <p>The method <code>org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.getCspDirectives()</code> is no longer available. CSP directives are now configured by the the bean <code>org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy</code>. To customize the rules, replace this bean with your own implementation and override the method <code>initDirectives()</code>. The bean provides fluent-style <em>withXXX()</em> methods.</p> 
+       <p>The method <code>org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.getCspDirectives()</code> is no longer available. CSP directives are now configured by the the bean <code>org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy</code>. To customize the rules, replace this bean with your own implementation and override the method <code>initDirectives()</code>. The bean provides fluent-style <em>withFooBar()</em> methods.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -991,6 +994,7 @@ table.CodeRay td.code>pre{padding:0}
         <li> <p>Transfer the content of each script part to a <em>*.js</em> file in the <code>res</code> subdirectory (e.g. <em>index.html</em> &#x21d2; <em>res/index.js</em>) and delete the now empty &lt;script&gt; part. Note that the content has changed as well, to initialize the application the new app object has to be used (scout.init &#x2192; new scout.RemoteApp().init, scout.login.init &#x2192; new scout.LoginApp().init, scout.logout.init &#x2192; new scout.LogoutApp().init)).</p> </li> 
         <li> <p>Add a reference to the <em>*.js</em> file in the <code>&lt;head&gt;</code> section using the <code>&lt;scout:script&gt;</code> tag, e.g.:<br /> <code>&lt;scout:script src=&quot;res/index.js&quot; /&gt;</code></p> </li> 
         <li> <p>If the extracted <em>*.js</em> file contains <code>&lt;scout:message&gt;</code> tags, they have to be moved back to the <code>&lt;body&gt;</code> of the corresponding <em>*.html</em> file (because the NLS translation can only process HTML files). The attribute <code>style</code> has to be changed from <code>javascript</code> to <code>tag</code>.</p> </li> 
+        <li> <p>Check the web.xml files of your <em>ui.html.app.*</em> projects. If you use the scout login form and if you have listed the files to be excluded explicitly (instead of using <em>/res/*</em>), then you need to add the new <em>*.js</em> files to the <code>filter-exclude</code> section as well.</p> </li> 
        </ol> 
       </div> 
       <div class="paragraph"> 
@@ -1130,40 +1134,6 @@ table.CodeRay td.code>pre{padding:0}
       <h3 id="uihttpsessionlistener-replaced-by-httpsessionmutex"><a class="anchor" href="#uihttpsessionlistener-replaced-by-httpsessionmutex"></a>UiHttpSessionListener replaced by HttpSessionMutex</h3> 
       <div class="paragraph"> 
        <p>The HttpSessionListener class <code>org.eclipse.scout.rt.ui.html.UiHttpSessionListener</code> has been replaced by the listener class <code>org.eclipse.scout.rt.server.commons.HttpSessionMutex</code>. Therefore if the class <code>UiHttpSessionListener</code> is registered in the <code>web.xml</code> file replace it with <code>org.eclipse.scout.rt.server.commons.HttpSessionMutex</code>.</p> 
-      </div> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
-    <h2 id="jax-ws-pooled-port-provider-since-6-0-300"><a class="anchor" href="#jax-ws-pooled-port-provider-since-6-0-300"></a>JAX-WS Pooled Port Provider (since 6.0.300)</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>Creating web service and port instances are expensive operations (at least if the reference implementation Metro or the one bundled with the JRE is used). Especially parsing the WSDL and XSD files as well as building JAXB contexts and it is even worse if they are performed in parallel (due to synchronization).</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>The <code>PooledPortProvider</code> is the new default strategy for creating ports. Actually the pooled provider uses two pools, one for service instances and another for port instances (which are created by a service instance). A Scout transaction member keeps track of leased ports and puts them back into the pool when the Scout transaction releases its resources. Further, the transaction member ensures that the same port is used within a transaction, once it has been leased.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Port instances are reset when they are put back into the pool. Some JAX-WS implementations provide a suitable operation for resetting the port (i.e. Metro as well as the RI bundled with Java 8). Otherwise the request context is cleansed as good as possible. The corresponding <code>JaxWsImplementorSpecifics.resetRequestContext(Object)</code> can be extended to customize the cleansing.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>The <code>AbstractWebServiceClient</code> does not distinguish between <code>PortProducer</code> and <code>PortCache</code> anymore. Both are <code>IPortProvider</code> strategies and the new <code>PooledPortPorvider</code> is just another one, frankly the new default. Setting the configuration property <code>jaxws.consumer.portPool.enabled</code> to <code>false</code> disables the pool and enables the previous behavior (bare <code>PortProducer</code>, wrapped by a <code>PortCache</code> instance that stashes ports).</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>The internal state of the pools is reported on the diagnostics servlet.</p> 
-     </div> 
-     <div class="sect2"> 
-      <h3 id="migration"><a class="anchor" href="#migration"></a>Migration</h3> 
-      <div class="paragraph"> 
-       <p>The following method has been renamed and the return type has been changed to <code>IPortProvider</code>. More important it returns a pooled, cached, bare provider or uses any other strategy. In other words, the <code>AbstractWebServiceClient</code> does not wrap the producer into a <code>PortCache</code> anymore.</p> 
-      </div> 
-      <div class="listingblock"> 
-       <div class="content"> 
-        <pre class="CodeRay highlight"><code>class: org.eclipse.scout.rt.server.jaxws.consumer.AbstractWebServiceClient
-old:   getConfiguredPortProducer(Class&lt;SERVICE&gt;, Class&lt;PORT&gt;, URL, String, String, IPortInitializer)
-new:   getConfiguredPortProvider(Class&lt;SERVICE&gt;, Class&lt;PORT&gt;, URL, String, String, IPortInitializer)
-                        ^^^^^^^^</code></pre> 
-       </div> 
       </div> 
       <div class="admonitionblock tip"> 
        <table> 
