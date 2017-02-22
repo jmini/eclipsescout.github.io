@@ -565,6 +565,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#reorganized-html-files-due-to-strict-csp-rules">Reorganized *.html files due to strict CSP rules</a></li> 
        <li><a href="#renamed-css-files-to-less">Renamed *.css files to *.less</a></li> 
        <li><a href="#uihttpsessionlistener-replaced-by-httpsessionmutex">UiHttpSessionListener replaced by HttpSessionMutex</a></li> 
+       <li><a href="#version-check-on-startup">Version check on startup</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -1134,6 +1135,48 @@ table.CodeRay td.code>pre{padding:0}
       <h3 id="uihttpsessionlistener-replaced-by-httpsessionmutex"><a class="anchor" href="#uihttpsessionlistener-replaced-by-httpsessionmutex"></a>UiHttpSessionListener replaced by HttpSessionMutex</h3> 
       <div class="paragraph"> 
        <p>The HttpSessionListener class <code>org.eclipse.scout.rt.ui.html.UiHttpSessionListener</code> has been replaced by the listener class <code>org.eclipse.scout.rt.server.commons.HttpSessionMutex</code>. Therefore if the class <code>UiHttpSessionListener</code> is registered in the <code>web.xml</code> file replace it with <code>org.eclipse.scout.rt.server.commons.HttpSessionMutex</code>.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="version-check-on-startup"><a class="anchor" href="#version-check-on-startup"></a>Version check on startup</h3> 
+      <div class="paragraph"> 
+       <p>After a release upgrade, the cached resources (e.g. index.html, *.js, *.css) have most likely changed and must be re-downloaded from the server. Usually, this happens automatically, because the <em>index.html</em>'s ETag has changed and the server does not respond with <code>HTTP 304 Not Modified</code>. However, we have found that there are rare cases where browsers start the JS app without checking if <em>index.html</em> has to be updated (e.g. in Firefox when restoring tabs from a previous session or in Chrome when the &quot;auto discard tab&quot; feature has discarded the application&#x2019;s tab). This results in a mismatch between the UI and the UI server.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>To fix potential problems caused by old resources, a version check is performed during application startup. To enable this version check in existing applications, include the tag <code>&lt;scout:version&gt;</code> in <code>index.html</code>. New Scout projects created using the <em>helloworld</em> archetype already include the tag.</p> 
+      </div> 
+      <div class="admonitionblock note"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td class="icon"> <i class="fa icon-note" title="Note"></i> </td> 
+          <td class="content"> The current version is determined by the value of the configuration property <code>scout.application.version</code>. </td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Example:</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="html">  ...
+  <span class="tag">&lt;body&gt;</span>
+    ...
+    <span class="tag">&lt;scout:version</span> <span class="tag">/&gt;</span> <span class="comment">&lt;!-- &lt;1&gt; --&gt;</span>
+  <span class="tag">&lt;/body&gt;</span>
+  ...</code></pre> 
+       </div> 
+      </div> 
+      <div class="colist arabic"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td><i class="conum" data-value="1"></i><b>1</b></td> 
+          <td>will be replaced by the application&#x2019;s version</td> 
+         </tr> 
+        </tbody>
+       </table> 
       </div> 
       <div class="admonitionblock tip"> 
        <table> 
