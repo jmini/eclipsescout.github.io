@@ -541,6 +541,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#browserinfo">BrowserInfo</a></li> 
        <li><a href="#virtual-tree-node">Virtual Tree Node</a></li> 
        <li><a href="#enabled-property-of-form-fields">Enabled Property of Form Fields</a></li> 
+       <li><a href="#icons-in-tree">Icons in Tree</a></li> 
        <li><a href="#itableholder">ITableHolder</a></li> 
        <li><a href="#numberutility-nvl-dateutility-nvl-stringutility-nvl">NumberUtility.nvl(), DateUtility.nvl(), StringUtility.nvl()</a></li> 
        <li><a href="#stringutility-substitutewhenempty">StringUtility.substituteWhenEmpty()</a></li> 
@@ -723,6 +724,24 @@ table.CodeRay td.code>pre{padding:0}
       </div> 
       <div class="paragraph"> 
        <p>Furthermore the meaning of property change listeners changed. Check all the listeners using the <code>org.eclipse.scout.rt.client.ui.form.fields.IFormField.PROP_ENABLED</code> property. This property is now only fired if the state of the form field itself has changed. If the enabled state of a parent field is modified, this property change event will no longer be fired. The actual enabled state of the field could have changed even though because the parents have an influence now. If the listener should also be notified about changes of the parents use the new property <code>org.eclipse.scout.rt.client.ui.form.fields.IFormField.PROP_ENABLED_COMPUTED</code>.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="icons-in-tree"><a class="anchor" href="#icons-in-tree"></a>Icons in Tree</h3> 
+      <div class="paragraph"> 
+       <p>When the new Html UI was introduced the support for icons on tree nodes was dropped. But some projects really missed that feature so it was introduced again with this release. This means when your tree node provides an <code>iconId</code>, the UI will display the icon referenced by the ID. The tree supports bitmap and font-icons. Since there are Scout projects migrating from an older Scout version (before Html UI was introduced) to a Scout version with Html UI (but before 6.1) they may still have iconIds configured, but since these icons were never displayed in their application, they probably want to stick with that behavior without changing their getConfiguredIconId() methods. For that purpose the Session init property <code>showTreeIcons</code> was introduced. By default the property is false, which means you won&#x2019;t see icons in the Tree, even if your model has an iconId configured. Set the property to true, to enable the support for icons (this will be default starting from release 6.2.x). Example for <code>index.js</code>:</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="CodeRay highlight"><code data-lang="javascript"><span class="predefined">$</span>(document).ready(<span class="keyword">function</span>() {
+  <span class="keyword">var</span> app = <span class="keyword">new</span> scout.RemoteApp();
+  app.init({
+    <span class="key">session</span>: {
+      <span class="key">showTreeIcons</span>: <span class="predefined-constant">true</span>
+    }
+  });
+});</code></pre> 
+       </div> 
       </div> 
      </div> 
      <div class="sect2"> 
