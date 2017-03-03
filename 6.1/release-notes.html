@@ -543,6 +543,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#unloadrequesthandler-for-code-navigator-sendbeacon-code">UnloadRequestHandler for <code>navigator.sendBeacon()</code></a></li> 
        <li><a href="#preparations-for-scout-js">Preparations for Scout JS</a></li> 
        <li><a href="#button-new-property-defaultbutton">Button: new property 'defaultButton'</a></li> 
+       <li><a href="#icons-for-tree-nodes">Icons for tree nodes</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -790,6 +791,22 @@ table.CodeRay td.code>pre{padding:0}
      </div> 
      <div class="paragraph"> 
       <p>Note: The first button or menu which has an <code>Enter</code> keystroke will automatically get that look too. This is existing behavior and hasn&#x2019;t changed. The new property has been added to give you more control, but actually you should always prefer the <em>enter keystroke approach</em> to provide a consistent behavior.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="icons-for-tree-nodes"><a class="anchor" href="#icons-for-tree-nodes"></a>Icons for tree nodes</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>As in earlier Scout releases with Swing, SWT and RAP UI, the Outline and all Trees in Scout now support an icon per tree node. Simply set the <code>iconId</code> property on a TreeNode and reference either a character from an icon-font in your Scout project or a bitmap icon which is defined in your Scout project. See the migration guide for more details and the global property <code>showTreeIcons</code> which can turn on/off icons for all Tree instances. You should take care that all icons you use in a single tree have the same size. Here&#x2019;s an example for an outline with icons:</p> 
+     </div> 
+     <div id="img-tree_icons" class="imageblock"> 
+      <div class="content"> 
+       <img src="images/tree_icons.png" alt="tree icons" /> 
+      </div> 
+      <div class="title">
+       Figure 3. Outline with icons
+      </div> 
      </div> 
      <div class="admonitionblock tip"> 
       <table> 
