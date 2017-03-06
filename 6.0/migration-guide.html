@@ -525,6 +525,7 @@ table.CodeRay td.code>pre{padding:0}
      Table of Contents
     </div> 
     <ul class="sectlevel1"> 
+     <li><a href="#service-release-migration">Service Release Migration</a></li> 
      <li><a href="#project-structure">Project Structure</a></li> 
      <li><a href="#manifest-mf">Manifest.MF</a></li> 
      <li><a href="#accesscontrolservice">AccessControlService</a></li> 
@@ -540,7 +541,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#table-api-changes">Table API Changes</a></li> 
        <li><a href="#custom-table-sorting">Custom Table Sorting</a></li> 
        <li><a href="#table-field-page">Table Field &amp; Page</a></li> 
-       <li><a href="#changed-behavior-for-tables-with-autoresizecolumns-true-since-6-0-1">Changed behavior for tables with autoResizeColumns = true (since 6.0.1)</a></li> 
+       <li><a href="#changed-behavior-for-tables-with-autoresizecolumns-true-since-6-0-100">Changed behavior for tables with autoResizeColumns = true (since 6.0.100)</a></li> 
       </ul> </li> 
      <li><a href="#outline">Outline</a> 
       <ul class="sectlevel2"> 
@@ -600,6 +601,40 @@ table.CodeRay td.code>pre{padding:0}
    </div> 
   </div> 
   <div id="content"> 
+   <div id="preamble"> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>This document describes what needs to be done when migrating from Eclipse Scout 5.0 to Eclipse Scout 6.0. If you are updating to a 6.0 service release, see the chapter <a href="#service-release-migration">Service Release Migration</a>.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="service-release-migration"><a class="anchor" href="#service-release-migration"></a>Service Release Migration</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p><strong>Neon.3 (6.0.300)</strong></p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p><a href="#jax-ws-pooled-port-provider-since-6-0-300">JAX-WS Pooled Port Provider (since 6.0.300)</a></p> </li> 
+      </ul> 
+     </div> 
+     <div class="paragraph"> 
+      <p><strong>Neon.2 (6.0.200)</strong></p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>None.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p><strong>Neon.1 (6.0.100)</strong></p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p><a href="#changed-behavior-for-tables-with-autoresizecolumns-true-since-6-0-100">Changed behavior for tables with autoResizeColumns = true (since 6.0.100)</a></p> </li> 
+      </ul> 
+     </div> 
+    </div> 
+   </div> 
    <div class="sect1"> 
     <h2 id="project-structure"><a class="anchor" href="#project-structure"></a>Project Structure</h2> 
     <div class="sectionbody"> 
@@ -929,7 +964,7 @@ ClientSessionProvider.currentSession().getDesktop()
       </div> 
      </div> 
      <div class="sect2"> 
-      <h3 id="changed-behavior-for-tables-with-autoresizecolumns-true-since-6-0-1"><a class="anchor" href="#changed-behavior-for-tables-with-autoresizecolumns-true-since-6-0-1"></a>Changed behavior for tables with autoResizeColumns = true (since 6.0.1)</h3> 
+      <h3 id="changed-behavior-for-tables-with-autoresizecolumns-true-since-6-0-100"><a class="anchor" href="#changed-behavior-for-tables-with-autoresizecolumns-true-since-6-0-100"></a>Changed behavior for tables with autoResizeColumns = true (since 6.0.100)</h3> 
       <div class="paragraph"> 
        <p>Before 6.0.1, the column width was used as weight for the calculation of the real column width. To make sure the columns don&#x2019;t get too small on small screens, this width is now also used as minimum / preferred width. It is not a hard minimum, the user can still make the column smaller.</p> 
       </div> 
@@ -2606,7 +2641,7 @@ new:   getConfiguredPortProvider(Class&lt;SERVICE&gt;, Class&lt;PORT&gt;, URL, S
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0
-    <br /> Last updated 2017-01-31 17:46:23 CET 
+    <br /> Last updated 2017-02-28 15:00:22 CET 
    </div> 
   </div>  
  </body>
