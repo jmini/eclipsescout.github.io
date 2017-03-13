@@ -525,7 +525,10 @@ table.CodeRay td.code>pre{padding:0}
      Table of Contents
     </div> 
     <ul class="sectlevel0"> 
-     <li><a href="#overview">Overview</a></li> 
+     <li><a href="#overview">Overview</a> 
+      <ul class="sectlevel1"> 
+       <li><a href="#service-release-change-log">Service Release Change Log</a></li> 
+      </ul> </li> 
      <li><a href="#what-s-new">What&#x2019;s New</a> 
       <ul class="sectlevel1"> 
        <li><a href="#strong-content-security-policy-csp">Strong content security policy CSP</a></li> 
@@ -544,6 +547,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#preparations-for-scout-js">Preparations for Scout JS</a></li> 
        <li><a href="#button-new-property-defaultbutton">Button: new property 'defaultButton'</a></li> 
        <li><a href="#icons-for-tree-nodes">Icons for tree nodes</a></li> 
+       <li><a href="#improved-ios-homescreen-mode-since-6-0-300">Improved iOS Homescreen Mode (since 6.0.300)</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -558,6 +562,37 @@ table.CodeRay td.code>pre{padding:0}
      <li> <p>Download SDK: <a href="http://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenm2">Eclipse for Scout Developers</a></p> </li> 
      <li> <p>Runtime on Maven Central: <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%226.1.0.B006%22">6.1.0.B006</a></p> </li> 
     </ul> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="service-release-change-log"><a class="anchor" href="#service-release-change-log"></a>Service Release Change Log</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p><strong>Neon.3 (6.0.300)</strong></p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p><a href="#improved-ios-homescreen-mode-since-6-0-300">Improved iOS Homescreen Mode (since 6.0.300)</a></p> </li> 
+       <li> <p>Detailed change log: <a href="https://github.com/eclipse/scout.rt/compare/6.0.200.0%2E%2E%2E6.0.300.RC2">https://github.com/eclipse/scout.rt/compare/6.0.200.0&#x2026;&#x200b;6.0.300.RC2</a>.</p> </li> 
+      </ul> 
+     </div> 
+     <div class="paragraph"> 
+      <p><strong>Neon.2 (6.0.200)</strong></p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Detailed change log: <a href="https://github.com/eclipse/scout.rt/compare/6.0.100.RC4.2%2E%2E%2E6.0.200.0">https://github.com/eclipse/scout.rt/compare/6.0.100.RC4.2&#x2026;&#x200b;6.0.200.0</a>.</p> </li> 
+      </ul> 
+     </div> 
+     <div class="paragraph"> 
+      <p><strong>Neon.1 (6.0.100)</strong></p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p><a href="#Responsive Table (since 6.0.100)">[Responsive Table (since 6.0.100)]</a></p> </li> 
+       <li> <p>Detailed change log: <a href="https://github.com/eclipse/scout.rt/compare/6.0.0.RC4%2E%2E%2E6.0.100.RC4.2">https://github.com/eclipse/scout.rt/compare/6.0.0.RC4&#x2026;&#x200b;6.0.100.RC4.2</a>.</p> </li> 
+      </ul> 
+     </div> 
+    </div> 
    </div> 
    <h1 id="what-s-new" class="sect0"><a class="anchor" href="#what-s-new"></a>What&#x2019;s New</h1> 
    <div class="paragraph"> 
@@ -799,6 +834,17 @@ table.CodeRay td.code>pre{padding:0}
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>As in earlier Scout releases with Swing, SWT and RAP UI, the Outline and all Trees in Scout now support an icon per tree node. Simply set the <code>iconId</code> property on a TreeNode and reference either a character from an icon-font in your Scout project or a bitmap icon which is defined in your Scout project. See the migration guide for more details and the global property <code>showTreeIcons</code> which can turn on/off icons for all Tree instances. You should take care that all icons you use in a single tree have the same size. Here&#x2019;s an example for an outline with icons:</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="improved-ios-homescreen-mode-since-6-0-300"><a class="anchor" href="#improved-ios-homescreen-mode-since-6-0-300"></a>Improved iOS Homescreen Mode (since 6.0.300)</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>If the app is running in iOS home screen mode the HTTP session will be lost whenever the user leaves the app (e.g. switches to another app or just downloads a file). This means he has to login again and navigate to the previous location, again. To avoid this a persistent mode has been introduced. This means if the app is running in the home screen mode, a persistent session cookie is created so that the same http session may be used the next time the app is activated. Also, the client session id will be put in the local storage instead of the session storage. This makes sure the same client session as before is used. Deep link handling is deactivated in that case otherwise it would always navigate to the url which was active when &quot;add to home screen&quot; was pressed.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>This persistent mode is only active when the app is running on iOS with the home screen mode.</p> 
      </div> 
      <div id="img-tree_icons" class="imageblock"> 
       <div class="content"> 
