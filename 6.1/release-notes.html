@@ -545,6 +545,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#preparations-for-scout-js">Preparations for Scout JS</a></li> 
        <li><a href="#button-new-property-defaultbutton">Button: new property 'defaultButton'</a></li> 
        <li><a href="#icons-for-tree-nodes">Icons for tree nodes</a></li> 
+       <li><a href="#numbercolumn-new-property-allowedaggregationfunctions-new-aggregation-type-for-no-aggregation">NumberColumn: new property &quot;allowedAggregationFunctions&quot;, new aggregation type for no aggregation</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -816,6 +817,14 @@ table.CodeRay td.code>pre{padding:0}
       <div class="title">
        Figure 3. Outline with icons
       </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="numbercolumn-new-property-allowedaggregationfunctions-new-aggregation-type-for-no-aggregation"><a class="anchor" href="#numbercolumn-new-property-allowedaggregationfunctions-new-aggregation-type-for-no-aggregation"></a>NumberColumn: new property &quot;allowedAggregationFunctions&quot;, new aggregation type for no aggregation</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>The new property <code>allowedAggregationFunctions</code> can be set to any array of the aggregation functions <code>sum</code>, <code>avg</code>, <code>min</code>, <code>max</code> and <code>none</code> (default: all aggregation functions are allowed). It defines the allowed aggregation functions for this number column (e.g. a sum aggregation is not always useful for all number columns). Also a new aggregation type <code>none</code> was introduced, with the new type it is possible to remove an aggregation from a column which has previously been aggregated. For the new aggregation type no additional button has been introduced, if the new aggregation type <code>none</code> is enabled an aggregation which previously has been used can be removed by using the same aggregation button again.</p> 
      </div> 
      <div class="admonitionblock tip"> 
       <table> 
