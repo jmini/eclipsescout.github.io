@@ -4474,7 +4474,8 @@ contacts.superuser=system</code></pre>
       IPersonService service = BEANS.get(IPersonService.class);
       PersonFormData formData = <span class="keyword">new</span> PersonFormData();
       exportFormData(formData);
-      service.create(formData); <i class="conum" data-value="7"></i><b>(7)</b>
+      formData = service.create(formData); <i class="conum" data-value="7"></i><b>(7)</b>
+      importFormData(formData);
     }
   }
 
