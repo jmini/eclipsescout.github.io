@@ -536,16 +536,24 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#new-uriopenaction-same_window">New UriOpenAction: SAME_WINDOW</a></li> 
        <li><a href="#new-methods-in-stringutility">New methods in StringUtility</a></li> 
        <li><a href="#new-objectutility">New ObjectUtility</a></li> 
-       <li><a href="#new-form-field-property-preventinitialfocus">New form field property &quot;preventInitialFocus&quot;</a></li> 
        <li><a href="#multiple-dimensions-support">Multiple Dimensions Support</a></li> 
-       <li><a href="#form-field-enabled-inheritance">Form Field Enabled Inheritance</a></li> 
-       <li><a href="#table-new-property-groupingstyle">Table: new property &quot;groupingStyle&quot;</a></li> 
+       <li><a href="#form-field">Form Field</a> 
+        <ul class="sectlevel2"> 
+         <li><a href="#enabled-inheritance">Enabled Inheritance</a></li> 
+         <li><a href="#new-property-preventinitialfocus">New Property &quot;preventInitialFocus&quot;</a></li> 
+         <li><a href="#menus-in-tooltip">Menus in Tooltip</a></li> 
+        </ul> </li> 
+       <li><a href="#table">Table</a> 
+        <ul class="sectlevel2"> 
+         <li><a href="#new-property-groupingstyle">New property &quot;groupingStyle&quot;</a></li> 
+         <li><a href="#numbercolumn-new-property-allowedaggregationfunctions-new-aggregation-type-for-no-aggregation">NumberColumn: new property &quot;allowedAggregationFunctions&quot;, new aggregation type for no aggregation</a></li> 
+        </ul> </li> 
        <li><a href="#unloadrequesthandler-for-code-navigator-sendbeacon-code">UnloadRequestHandler for <code>navigator.sendBeacon()</code></a></li> 
        <li><a href="#new-annotation-remoteservicewithoutauthorization">New annotation RemoteServiceWithoutAuthorization</a></li> 
        <li><a href="#preparations-for-scout-js">Preparations for Scout JS</a></li> 
        <li><a href="#button-new-property-defaultbutton">Button: new property 'defaultButton'</a></li> 
        <li><a href="#icons-for-tree-nodes">Icons for tree nodes</a></li> 
-       <li><a href="#numbercolumn-new-property-allowedaggregationfunctions-new-aggregation-type-for-no-aggregation">NumberColumn: new property &quot;allowedAggregationFunctions&quot;, new aggregation type for no aggregation</a></li> 
+       <li><a href="#file-chooser-field-improved-usability">File Chooser Field: Improved Usability</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -696,14 +704,6 @@ table.CodeRay td.code>pre{padding:0}
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="new-form-field-property-preventinitialfocus"><a class="anchor" href="#new-form-field-property-preventinitialfocus"></a>New form field property &quot;preventInitialFocus&quot;</h2> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>By default, the first enabled field on a form gets the focus when the form is opened. This may not be desired in some cases (e.g. if the first field is a HTML field that contains app links). The new property <code>PROP_PREVENT_INITIAL_FOCUS</code> can be used to prevent the initial focus to be set to this field. The default value is <code>false</code>. For <code>AbstractHtmlField</code> and <code>AbstractBeanField</code>, the default is set to <code>true</code>.</p> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect1"> 
     <h2 id="multiple-dimensions-support"><a class="anchor" href="#multiple-dimensions-support"></a>Multiple Dimensions Support</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
@@ -729,21 +729,53 @@ table.CodeRay td.code>pre{padding:0}
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="form-field-enabled-inheritance"><a class="anchor" href="#form-field-enabled-inheritance"></a>Form Field Enabled Inheritance</h2> 
+    <h2 id="form-field"><a class="anchor" href="#form-field"></a>Form Field</h2> 
     <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>The inheritance of the enabled property for Form Fields has been changed. Now the enabled properties are no longer propagated to children if it is changed on a composite field. Instead a field is only considered to be enabled if itself and all of its parents are enabled. This allows to toggle an entire box to disabled and back to enabled without touching the child fields. This has the advantage that the original state is restored when the box is set back to enabled.</p> 
+     <div class="sect2"> 
+      <h3 id="enabled-inheritance"><a class="anchor" href="#enabled-inheritance"></a>Enabled Inheritance</h3> 
+      <div class="paragraph"> 
+       <p>The inheritance of the enabled property for Form Fields has been changed. Now the enabled properties are no longer propagated to children if it is changed on a composite field. Instead a field is only considered to be enabled if itself and all of its parents are enabled. This allows to toggle an entire box to disabled and back to enabled without touching the child fields. This has the advantage that the original state is restored when the box is set back to enabled.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>With this change the <code>getConfiguredEnabled</code> on composite fields now also automatically affects children. There is no need to overwrite <code>execInit()</code> and call <code>setEnabled(false)</code> anymore.</p> 
+      </div> 
      </div> 
-     <div class="paragraph"> 
-      <p>With this change the <code>getConfiguredEnabled</code> on composite fields now also automatically affects children. There is no need to overwrite <code>execInit()</code> and call <code>setEnabled(false)</code> anymore.</p> 
+     <div class="sect2"> 
+      <h3 id="new-property-preventinitialfocus"><a class="anchor" href="#new-property-preventinitialfocus"></a>New Property &quot;preventInitialFocus&quot;</h3> 
+      <div class="paragraph"> 
+       <p>By default, the first enabled field on a form gets the focus when the form is opened. This may not be desired in some cases (e.g. if the first field is a HTML field that contains app links). The new property <code>PROP_PREVENT_INITIAL_FOCUS</code> can be used to prevent the initial focus to be set to this field. The default value is <code>false</code>. For <code>AbstractHtmlField</code> and <code>AbstractBeanField</code>, the default is set to <code>true</code>.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="menus-in-tooltip"><a class="anchor" href="#menus-in-tooltip"></a>Menus in Tooltip</h3> 
+      <div class="paragraph"> 
+       <p>Form fields may have a tooltip and a context menu. Until now, it was not possible to display both simultaneously. This has been changed so that the menu items are now included in the tooltip if a tooltip text and menus are configured.</p> 
+      </div> 
+      <div id="img-tooltip_menus" class="imageblock"> 
+       <div class="content"> 
+        <img src="images/tooltip_menus.png" alt="tooltip menus" /> 
+       </div> 
+       <div class="title">
+        Figure 3. Tooltip with menus
+       </div> 
+      </div> 
      </div> 
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="table-new-property-groupingstyle"><a class="anchor" href="#table-new-property-groupingstyle"></a>Table: new property &quot;groupingStyle&quot;</h2> 
+    <h2 id="table"><a class="anchor" href="#table"></a>Table</h2> 
     <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>The new property <code>groupingStyle</code> can be set to <code>bottom</code> (default) or <code>top</code>. Depending on the value aggregate rows are rendered on the bottom of grouped rows or on the top of grouped rows. The new top style can be set to have an aggregate row as a title for a group of table rows, this is useful for separating a table into multiple categories.</p> 
+     <div class="sect2"> 
+      <h3 id="new-property-groupingstyle"><a class="anchor" href="#new-property-groupingstyle"></a>New property &quot;groupingStyle&quot;</h3> 
+      <div class="paragraph"> 
+       <p>The new property <code>groupingStyle</code> can be set to <code>bottom</code> (default) or <code>top</code>. Depending on the value aggregate rows are rendered on the bottom of grouped rows or on the top of grouped rows. The new top style can be set to have an aggregate row as a title for a group of table rows, this is useful for separating a table into multiple categories.</p> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="numbercolumn-new-property-allowedaggregationfunctions-new-aggregation-type-for-no-aggregation"><a class="anchor" href="#numbercolumn-new-property-allowedaggregationfunctions-new-aggregation-type-for-no-aggregation"></a>NumberColumn: new property &quot;allowedAggregationFunctions&quot;, new aggregation type for no aggregation</h3> 
+      <div class="paragraph"> 
+       <p>The new property <code>allowedAggregationFunctions</code> can be set to any array of the aggregation functions <code>sum</code>, <code>avg</code>, <code>min</code>, <code>max</code> and <code>none</code> (default: all aggregation functions are allowed). It defines the allowed aggregation functions for this number column (e.g. a sum aggregation is not always useful for all number columns). Also a new aggregation type <code>none</code> was introduced, with the new type it is possible to remove an aggregation from a column which has previously been aggregated. For the new aggregation type no additional button has been introduced, if the new aggregation type <code>none</code> is enabled an aggregation which previously has been used can be removed by using the same aggregation button again.</p> 
+      </div> 
      </div> 
     </div> 
    </div> 
@@ -815,16 +847,16 @@ table.CodeRay td.code>pre{padding:0}
        <img src="images/tree_icons.png" alt="tree icons" /> 
       </div> 
       <div class="title">
-       Figure 3. Outline with icons
+       Figure 4. Outline with icons
       </div> 
      </div> 
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="numbercolumn-new-property-allowedaggregationfunctions-new-aggregation-type-for-no-aggregation"><a class="anchor" href="#numbercolumn-new-property-allowedaggregationfunctions-new-aggregation-type-for-no-aggregation"></a>NumberColumn: new property &quot;allowedAggregationFunctions&quot;, new aggregation type for no aggregation</h2> 
+    <h2 id="file-chooser-field-improved-usability"><a class="anchor" href="#file-chooser-field-improved-usability"></a>File Chooser Field: Improved Usability</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p>The new property <code>allowedAggregationFunctions</code> can be set to any array of the aggregation functions <code>sum</code>, <code>avg</code>, <code>min</code>, <code>max</code> and <code>none</code> (default: all aggregation functions are allowed). It defines the allowed aggregation functions for this number column (e.g. a sum aggregation is not always useful for all number columns). Also a new aggregation type <code>none</code> was introduced, with the new type it is possible to remove an aggregation from a column which has previously been aggregated. For the new aggregation type no additional button has been introduced, if the new aggregation type <code>none</code> is enabled an aggregation which previously has been used can be removed by using the same aggregation button again.</p> 
+      <p>The file chooser field does not open an intermediate window anymore when clicked. Instead, the native file chooser is opened directly. This saves several clicks when a file needs to be uploaded. Furthermore, the whole field is now clickable. Until now the icon had to be clicked to choose a file which did not work well on touch devices.</p> 
      </div> 
      <div class="admonitionblock tip"> 
       <table> 
