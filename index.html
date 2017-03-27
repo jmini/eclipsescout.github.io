@@ -1,23 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Eclipse Scout Documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Styles -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/base.css" rel="stylesheet">
+  <link href="assets/css/prettify.css" rel="stylesheet">
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.min.js"></script>
+  <![endif]-->
 </head>
-<body>
-  <h1>Eclipse Scout Documentation</h1>
-  <hr>
+<body onload="prettyPrint()">
+  <div id="wrap">
+  <!-- Navbar -->
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Home</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="https://www.eclipse.org/scout/">project homepage</a></li>
+          <li><a href="https://www.eclipse.org/forums/eclipse.scout">forum</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://twitter.com/EclipseScout">@EclipseScout</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+  <div class="container">
 
-  <h3><a href="6.0/">Latest Stable Release (6.0)</a></h3>
-  <h3><a href="6.1/">Next Release (6.1)</a></h3>
-  <h3>Old Releases</h3>
-  <ul>
-    <li><a href="5.2/">5.2</a><br /></li>
-    <li><a href="5.0/">5.0</a><br /></li>
-    <li><a href="4.0/">4.0</a><br /></li>
-    <li><a href="3.9/">3.9</a><br /></li>
-  </ul>
-  <hr>
+  <div class="page-header">
+      <h1>Eclipse Scout Documentation</h1>
+  </div>
+
+  <p><img src="assets/img/scout_logo.gif" alt="Eclipse Scout logo"/></p>
+  <p><strong>Eclipse Scout</strong> - Future Proof Business Applications</p>
   
+  <p><img src="assets/img/scout_neon_business_application_800px.png" alt="Business Application with Eclipse Scout"/></p>
+  
+  <h3>Get Started:</h3>
+  <table border="0" cellspacing="0" style="width:100%; margin-top: 15px;">
+    <tbody>
+      <tr valign="top">
+        <th style="width:50%; padding-right: 15px;" >Latest Stable Release (Neon - 6.0.x)</th>
+        <th>Next Release (Oxygen 7.0.x)</th>
+      </tr>
+      <tr valign="top">
+        <td>
+          <ul>
+            <li><a href="6.0/beginners-guide.html#installation-and-setup">Install</a> Scout</li>
+            <li>Do the <a href="6.0/beginners-guide.html#cha-helloworld">Hello World</a></li>
+            <li>Read the <a href="6.0/">Documentation</a></li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li><a href="7.0/beginners-guide.html#installation-and-setup">Install</a> Scout</li>
+            <li>Do the <a href="7.0/beginners-guide.html#cha-helloworld">Hello World</a></li>
+            <li>Read the <a href="7.0/">Documentation</a></li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr/>
+  <table border="0" cellspacing="0" style="width:100%; margin-top: 15px;">
+    <tbody>
+      <tr valign="top">
+        <td style="width:50%; padding-right: 15px; padding-bottom: 15px;">
+          <h3><span id="Get_in_Touch">Get in Touch</span></h3>
+          <ul>
+            <li> <strong><a href="https://www.eclipse.org/scout">Scout Home</a></strong> - the Scout website </li>
+            <li> <strong><a href="https://www.eclipse.org/forums/eclipse.scout">Scout Forum</a></strong> - community discussions</li>
+            <li> <strong><a href="https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced;bug_status=UNCONFIRMED;bug_status=NEW;bug_status=ASSIGNED;bug_status=REOPENED;bug_status=RESOLVED;bug_status=VERIFIED;product=Scout&amp;columnlist=bug_id%2Cbug_severity%2Cpriority%2Ctarget_milestone%2Cbug_status%2Cresolution%2Ccomponent%2Cassigned_to%2Cshort_desc">Scout Bugs</a></strong> - all open bugs</li>
+            <li> <strong><a href="https://dev.eclipse.org/mailman/listinfo/scout-dev">Scout Newsgroup</a></strong> - scout-dev@eclipse.org</li>
+            <li> <strong><a href="https://www.ohloh.net/p/eclipsescout">Scout ohloh</a></strong> - code metrics and more</li>
+            <li> <strong><a href="https://www.bsi-software.com/">BSI Business Systems Integration AG</a></strong> - the currently contributing organization</li>
+           </ul>
+        </td>
+        <td>
+          <h3><span id="Scout_Project_News">Scout Project News</span></h3>
+          <ul>
+            <li> <strong><a href="https://twitter.com/EclipseScout">Twitter</a></strong> - follow us on Twitter</li>
+            <li> <strong><a href="https://www.bsiag.com/scout">Blog</a></strong> - News about Scout</li>
+            <li> <strong><a href="https://wiki.eclipse.org/Scout/Release/Neon" title="Scout/Release/Neon">Neon Documentation</a></strong> - Scout 6.0</li>
+            <li> <strong><a href="https://wiki.eclipse.org/Scout/Release/Oxygen" title="Scout/Release/Oxygen">Oxygen Documentation</a></strong> - Scout 7.0 (development)</li>
+            <li> <strong><a href="https://wiki.eclipse.org/images/3/3c/Factsheet_Neon_2015_16.pdf" class="internal" title="Factsheet Neon 2015 16.pdf">Scout Factsheet</a></strong> - the 2015/16 edition</li>
+            <li> <strong><a href="https://wiki.eclipse.org/Scout/Overview/Slides" title="Scout/Overview/Slides">Scout Presentations</a></strong> - slides and related materials</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <hr/>
+  <h3>All Releases</h3>
+  <ul>
+    <li><a href="7.0/">7.0.x</a> (next release)</li>
+    <li><a href="6.1/">6.1.x</a></li>
+    <li><a href="6.0/">6.0.x</a> (stable release)</li>
+    <li><a href="5.2/">5.2.x</a></li>
+    <li><a href="5.0/">5.0.x</a></li>
+    <li><a href="4.0/">4.0.x</a></li>
+    <li><a href="3.9/">3.9.x</a></li>
+  </ul>
+
+  <hr>
+      </div>
+      <div id="push"></div>
+  </div>
+
+  <div id="footer">
+    <div class="container">
+      <p class="muted credit">Mixed with <a href="https://getbootstrap.com/">Bootstrap v3.1.1</a></p>
+    </div>
+  </div>
+
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="assets/js/jquery-1.11.1.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/prettify.js"></script>  
 </body>
 </html>
