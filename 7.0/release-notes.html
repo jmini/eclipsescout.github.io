@@ -546,6 +546,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#button-new-property-defaultbutton">Button: new property 'defaultButton'</a></li> 
        <li><a href="#icons-for-tree-nodes">Icons for tree nodes</a></li> 
        <li><a href="#numbercolumn-new-property-allowedaggregationfunctions-new-aggregation-type-for-no-aggregation">NumberColumn: new property &quot;allowedAggregationFunctions&quot;, new aggregation type for no aggregation</a></li> 
+       <li><a href="#predestroy-support-for-applicationscoped-beans">@PreDestroy support for @ApplicationScoped beans</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -826,6 +827,14 @@ table.CodeRay td.code>pre{padding:0}
      <div class="paragraph"> 
       <p>The new property <code>allowedAggregationFunctions</code> can be set to any array of the aggregation functions <code>sum</code>, <code>avg</code>, <code>min</code>, <code>max</code> and <code>none</code> (default: all aggregation functions are allowed). It defines the allowed aggregation functions for this number column (e.g. a sum aggregation is not always useful for all number columns). Also a new aggregation type <code>none</code> was introduced, with the new type it is possible to remove an aggregation from a column which has previously been aggregated. For the new aggregation type no additional button has been introduced, if the new aggregation type <code>none</code> is enabled an aggregation which previously has been used can be removed by using the same aggregation button again.</p> 
      </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="predestroy-support-for-applicationscoped-beans"><a class="anchor" href="#predestroy-support-for-applicationscoped-beans"></a>@PreDestroy support for @ApplicationScoped beans</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>Application scoped beans can declare methods annotated with <code>javax.annotation.@PreDestroy</code>. These methods will be called when the Scout platform is stopping. For more details see the <a href="https://eclipsescout.github.io/6.1/technical-guide.html#destroy-beans">Scout Technical Documentation</a>.</p> 
+     </div> 
      <div class="admonitionblock tip"> 
       <table> 
        <tbody>
@@ -842,7 +851,7 @@ table.CodeRay td.code>pre{padding:0}
   <div id="footer"> 
    <div id="footer-text">
      Version 7.0
-    <br /> Last updated 2017-03-16 10:14:43 CET 
+    <br /> Last updated 2017-03-27 13:03:25 CEST 
    </div> 
   </div>  
  </body>
