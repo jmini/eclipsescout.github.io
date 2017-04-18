@@ -1329,6 +1329,83 @@ myproject.application.name=My Project Application</code></pre>
     <div class="sectionbody"> 
      <div class="sect2"> 
       <h3 id="desktop"><a class="anchor" href="#desktop"></a>3.1. Desktop</h3> 
+      <div class="sect3"> 
+       <h4 id="desktop-bench-layout"><a class="anchor" href="#desktop-bench-layout"></a>3.1.1. Desktop Bench Layout</h4> 
+       <div class="paragraph"> 
+        <p>The Desktop Layout can be configured using the <code>IDesktop.setBenchLayoutData</code> method. This property is observed and might be changed during the applications lifecycle. The desktop consists out of 9 view stacks (see <a href="#img-benchLayout-overview">Figure 2</a>). Each form can be assigned to a single view stack using the property DisplayViewId (<code>IForm.getConfiguredDisplayViewId</code>). If multiple forms are assigned to the same view stack the views will be displayed as tabs where the top form is visible and the corresponding tab selected.</p> 
+       </div> 
+       <div class="admonitionblock note"> 
+        <table> 
+         <tbody>
+          <tr> 
+           <td class="icon"> <i class="fa icon-note" title="Note"></i> </td> 
+           <td class="content"> Tabs are only visible if the form does have a title, subtitle or an image. </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </div> 
+       <div id="img-benchLayout-overview" class="imageblock"> 
+        <div class="content"> 
+         <img src="images/BenchLayout_overview.png" alt="BenchLayout overview" /> 
+        </div> 
+        <div class="title">
+         Figure 2. Desktop Bench overview
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The east, center and west columns are separated with splitters which can be moved according to the layout data properties. Each column is split into a north, center and south part. Within a column the north, center and south parts can not differ in their width.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The modifications (splitter movements) are cached when a cache key (<code>BenchLayoutData.withCacheKey</code>) is set. In case the cache key is null the layout starts always with the initial values.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>An example of a bench layout data configuration with a fixed north (N) view stack and an south (S) view stack with an minimal size. See <code>org.eclipse.scout.rt.client.ui.desktop.bench.layout.FlexboxLayoutData</code> API for the documentation of the properties.</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="java">    desktop.setBenchLayoutData( <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="keyword">new</span> BenchLayoutData()
+            .withCacheKey(<span class="string"><span class="delimiter">&quot;</span><span class="content">a-cache-key</span><span class="delimiter">&quot;</span></span>) <i class="conum" data-value="2"></i><b>(2)</b>
+            .withCenter( <i class="conum" data-value="3"></i><b>(3)</b>
+                <span class="keyword">new</span> BenchColumnData()
+                    .withNorth(<span class="keyword">new</span> FlexboxLayoutData().withGrow(<span class="integer">0</span>).withShrink(<span class="integer">0</span>).withInitial(<span class="integer">280</span>).withRelative(<span class="predefined-constant">false</span>)) <i class="conum" data-value="4"></i><b>(4)</b>
+                    .withCenter(<span class="keyword">new</span> FlexboxLayoutData()) <i class="conum" data-value="5"></i><b>(5)</b>
+                    .withSouth(<span class="keyword">new</span> FlexboxLayoutData().withShrink(<span class="integer">0</span>).withInitial(-<span class="integer">1</span>)))); <i class="conum" data-value="6"></i><b>(6)</b>
+  }
+}</code></pre> 
+        </div> 
+       </div> 
+       <div class="colist arabic"> 
+        <table> 
+         <tbody>
+          <tr> 
+           <td><i class="conum" data-value="1"></i><b>1</b></td> 
+           <td>set the <code>BenchLayoutData</code> to the desktop.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="2"></i><b>2</b></td> 
+           <td>set a cache key to store the layout modifications (dragging splitters) to the session store. Aware the settings are stored to the browsers session store they are not transfered over different browsers nor systems.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="3"></i><b>3</b></td> 
+           <td>configure the center column (N, C, S).</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="4"></i><b>4</b></td> 
+           <td>The north part is fixed in size so the splitter between north (N) and center &copy; view stack is disabled. The size is fixed to 280 pixel.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="5"></i><b>5</b></td> 
+           <td>Use default for the center &copy; view stack.</td> 
+          </tr> 
+          <tr> 
+           <td><i class="conum" data-value="6"></i><b>6</b></td> 
+           <td>The south part is using the UI height as initial size and is growable but not shrinkable.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </div> 
+      </div> 
      </div> 
      <div class="sect2"> 
       <h3 id="outlines"><a class="anchor" href="#outlines"></a>3.2. Outlines</h3> 
@@ -3906,14 +3983,14 @@ RunContexts.empty()
       <p>Furthermore, a job&#x2019;s Future is linked with the job&#x2019;s <code>RunMonitor</code>, meaning that cancellation requests targeted to the <code>Future</code> are also propagated to the <code>RunMonitor</code>, and vice versa.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>The following <a href="#img-runmonitor_associations">Figure 2</a> illustrates the <code>RunMonitor</code> and its associations.</p> 
+      <p>The following <a href="#img-runmonitor_associations">Figure 3</a> illustrates the <code>RunMonitor</code> and its associations.</p> 
      </div> 
      <div id="img-runmonitor_associations" class="imageblock"> 
       <div class="content"> 
        <img src="images/runmonitor_associations.png" alt="runmonitor associations" /> 
       </div> 
       <div class="title">
-       Figure 2. RunMonitor and its associations
+       Figure 3. RunMonitor and its associations
       </div> 
      </div> 
     </div> 
@@ -3929,7 +4006,7 @@ RunContexts.empty()
        <img src="images/clientNotifications.png" alt="clientNotifications" /> 
       </div> 
       <div class="title">
-       Figure 3. Client Notifications
+       Figure 4. Client Notifications
       </div> 
      </div> 
      <div class="sect2"> 
@@ -3967,7 +4044,7 @@ RunContexts.empty()
         <img src="images/cn_long_polling.png" alt="cn long polling" /> 
        </div> 
        <div class="title">
-        Figure 4. Long Polling
+        Figure 5. Long Polling
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -3996,7 +4073,7 @@ RunContexts.empty()
         <img src="images/cn_big_picture.png" alt="cn big picture" /> 
        </div> 
        <div class="title">
-        Figure 5. Client Notification Big Picture
+        Figure 6. Client Notification Big Picture
        </div> 
       </div> 
       <div class="sect3"> 
@@ -4006,7 +4083,7 @@ RunContexts.empty()
          <img src="images/cn_multiple_servers.png" alt="cn multiple servers" /> 
         </div> 
         <div class="title">
-         Figure 6. Client Notification Multiple Server Nodes
+         Figure 7. Client Notification Multiple Server Nodes
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -4507,7 +4584,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
        <img src="images/multi_device.png" alt="multi device" /> 
       </div> 
       <div class="title">
-       Figure 7. Scout apps run on desktops, tablets and mobile phones
+       Figure 8. Scout apps run on desktops, tablets and mobile phones
       </div> 
      </div> 
      <div class="paragraph"> 
@@ -4532,7 +4609,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
         <img src="images/responsive_menubar.png" alt="responsive menubar" /> 
        </div> 
        <div class="title">
-        Figure 8. Responsive menu bar
+        Figure 9. Responsive menu bar
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -4546,7 +4623,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
         <img src="images/tooltip.png" alt="tooltip" /> 
        </div> 
        <div class="title">
-        Figure 9. Touch friendly widgets
+        Figure 10. Touch friendly widgets
        </div> 
       </div> 
      </div> 
@@ -4576,7 +4653,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
         <img src="images/contacts_mobile.png" alt="contacts mobile" /> 
        </div> 
        <div class="title">
-        Figure 10. Desktop with displayStyle set to 'compact'
+        Figure 11. Desktop with displayStyle set to 'compact'
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -5211,7 +5288,7 @@ protected void execInitField() {
         <img src="images/jaxws_modularization.png" alt="jaxws modularization" /> 
        </div> 
        <div class="title">
-        Figure 11. typical modularization
+        Figure 12. typical modularization
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -5641,14 +5718,14 @@ protected void execInitField() {
         <p>An entry point implements the endpoint interface (or port type interface), and is published as the webservice endpoint for that endpoint interface. The entry point itself is auto generated by <a href="#jaxwsannotationprocessor">JaxWsAnnotationProcessor</a> during compile time, based on instructions as given by the respective class/interface annotated with <code>WebServiceEntryPoint</code> annotation. The entry point is responsible to enforce authentication and to run the web request in a <code>RunContext</code>. In turn, the request is propagated to the bean implementing the endpoint interface.</p> 
        </div> 
        <div class="paragraph"> 
-        <p><a href="#img-interaction_entrypoint_porttype">Figure 12</a> illustrates the endpoint&#x2019;s class hierarchy and the message flow for a web request.</p> 
+        <p><a href="#img-interaction_entrypoint_porttype">Figure 13</a> illustrates the endpoint&#x2019;s class hierarchy and the message flow for a web request.</p> 
        </div> 
        <div id="img-interaction_entrypoint_porttype" class="imageblock"> 
         <div class="content"> 
          <img src="images/jaxws_interaction_entrypoint_porttype.png" alt="jaxws interaction entrypoint porttype" /> 
         </div> 
         <div class="title">
-         Figure 12. Interaction of entry point and port type
+         Figure 13. Interaction of entry point and port type
         </div> 
        </div> 
        <div class="paragraph"> 
@@ -5939,7 +6016,7 @@ protected void execInitField() {
          <img src="images/jaxws_example_pingws_artifacts_generated.png" alt="jaxws example pingws artifacts generated" /> 
         </div> 
         <div class="title">
-         Figure 13. generated artifacts
+         Figure 14. generated artifacts
         </div> 
        </div> 
        <div class="paragraph"> 
