@@ -646,6 +646,11 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#jaxws.xmladapters">16.7. XML adapters to work with java.util.Date and java.util.Calendar</a></li> 
        <li><a href="#jax-ws-appendix">16.8. JAX-WS Appendix</a></li> 
       </ul> </li> 
+     <li><a href="#scout-js">17. Scout JS</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#widget">17.1. Widget</a></li> 
+       <li><a href="#extensibility-2">17.2. Extensibility</a></li> 
+      </ul> </li> 
      <li><a href="#apx-cclicence">Appendix A: Licence and Copyright</a> 
       <ul class="sectlevel2"> 
        <li><a href="#licence-summary">A.1. Licence Summary</a></li> 
@@ -7083,6 +7088,475 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
+    <h2 id="scout-js"><a class="anchor" href="#scout-js"></a>17. Scout JS</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>A classic Scout application has a client model written in Java, and a UI which is rendered using JavaScript. With this approach you can write your client code using a mature and type safe language. Unfortunately you cannot develop applications which have to run offline because the UI and the Java model need to be synchronized.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>With Scout JS this will change. You will be able to create applications running without a UI server because there won&#x2019;t be a Java model anymore. The client code will be written using JavaScript (or TypeScript) and executed directly in the browser.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>You still don&#x2019;t have to care about how the model will be rendered. There isn&#x2019;t a strict separation of the UI and the model anymore, but that doesn&#x2019;t mean you have to write HTML and CSS. You can of course, if you want to. But typically you will be using the Scout widgets you already know.</p> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="widget"><a class="anchor" href="#widget"></a>17.1. Widget</h3> 
+      <div class="paragraph"> 
+       <p>A widget is a component which may be rendered. It may be simple like a label, or more complex like a tree or table. A form is a widget and a form field, too. A widget contains the model, which represents the state of the widget. In a Scout Classic application, that model will be sent from the UI server to the browser and the Scout UI will use that model to create the widget. In a Scout JS app, the model may be provided using JSON or directly with JavaScript.</p> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="lifecycle"><a class="anchor" href="#lifecycle"></a>17.1.1. Lifecycle</h4> 
+       <div class="paragraph"> 
+        <p>Every widget has a lifecycle. After a widget is instantiated, it has to be initialized using <code>init</code>. If you want to display it, you have to call the <code>render</code> method. If you want to remove it from the DOM, call the <code>remove</code> method. Removing a widget is not the same as destroying it. You can still use it, you can for example change some properties and then render it again. If you really don&#x2019;t need it anymore, call the <code>destroy</code> method.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>So you see the widget actually has 3 important states:</p> 
+       </div> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p>initialized</p> </li> 
+         <li> <p>rendered</p> </li> 
+         <li> <p>destroyed</p> </li> 
+        </ul> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The big advantage of this concept is that the model of the widget may be changed any time, even if the widget is not rendered. This means you can prepare a widget like a form, prepare all its child widgets like the form fields, and then render them at once. If you want to hide the form, just remove it. It won&#x2019;t be displayed anymore, but you can still modify it, like changing the label of a field or adding rows to a table. The next time it is rendered the changes will be reflected. If you do such a modification when it is rendered, it will be reflected immediately.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Destroying a widget means it will detach itself from the parent and destroy all children. If you have attached listeners to other widgets at initialization time, now is the time to detach them. After a widget is destroyed it cannot be used anymore. Every attempt will result in a <code>Widget is destroyed</code> error.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="creating-a-widget"><a class="anchor" href="#creating-a-widget"></a>17.1.2. Creating a Widget</h4> 
+       <div class="paragraph"> 
+        <p>A widget may be created using the constructor function or <code>scout.create</code>. Best practice is to always use <code>scout.create</code> which gives you two benefits:</p> 
+       </div> 
+       <div class="olist arabic"> 
+        <ol class="arabic"> 
+         <li> <p>You don&#x2019;t have to call <code>init</code> by yourself.</p> </li> 
+         <li> <p>The widget may be extended (see chapter ObjectFactory for details).</p> </li> 
+        </ol> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The following example creates a <code>StringField</code>.</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 93. Creating a string field
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="javascript"><span class="keyword">var</span> field = scout.create(<span class="string"><span class="delimiter">'</span><span class="content">StringField</span><span class="delimiter">'</span></span>, {
+  <span class="key">parent</span>: groupBox,
+  <span class="key">label</span>: <span class="string"><span class="delimiter">'</span><span class="content">hello</span><span class="delimiter">'</span></span>,
+  <span class="key">value</span>: <span class="string"><span class="delimiter">'</span><span class="content">world</span><span class="delimiter">'</span></span>
+};</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The first parameter is the object type, which typically is the name of the constructor function preceded by the name space. <code>StringField</code> belongs to the <code>scout</code> name space which is the default and may be omitted. If the string field belonged to another name space called <code>mynamespace</code>, you would have to write the following:</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 94. Creating a field considering the name space
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="javascript">scout.create(<span class="string"><span class="delimiter">'</span><span class="content">mynamespace.StringField</span><span class="delimiter">'</span></span>, {})</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The second parameter of scout.create is the model. The model actually is the specification for your widget. In case of the <code>StringField</code> you can specify the label, the max length, whether it is enabled and visible and more. If you don&#x2019;t specify them, the defaults are used. The only needed property is the <code>parent</code>. To see what the defaults are, have a look at the source code of the widget constructor.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Every widget needs a parent. The parent is responsible to render (and remove) its children. In the example above, the parent is a group box. This group box has a property called <code>fields</code>. If the group box is rendered, it will render its fields too.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>You don&#x2019;t need a group box to render the string field, you could render it directly onto the desktop. But if you want to use a form, you need a group box and create the form, group box and the field. Doing this programmatically is time consuming, that is why we suggest to use the declarative JSON based approach.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="creating-a-widget-using-json"><a class="anchor" href="#creating-a-widget-using-json"></a>17.1.3. Creating a Widget using JSON</h4> 
+       <div class="paragraph"> 
+        <p>Using the JSON based approach makes it easier to specify multiple widgets in a structured way. The following example defines a form with a group box and a string field.</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 95. A form model defined using JSON
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="json">{
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">example.MyForm</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">model</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">My first form!</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">rootGroupBox</span><span class="delimiter">&quot;</span></span>: {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MainBox</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">GroupBox</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">mainBox</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">borderDecoration</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">empty</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">fields</span><span class="delimiter">&quot;</span></span>: [
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MyStringField</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">StringField</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">label</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">hello</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">world</span><span class="delimiter">&quot;</span></span>
+      }
+    ]
+  }
+}</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>This description of the form is put in a separate file called <code>MyForm.json</code>. Typically you would create a file called <code>MyForm.js</code> as well, which contains the logic to interact with the fields. But since we just want to open the form it is not necessary. Instead you can use the following code to create the form:</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="javascript">scout.create(<span class="string"><span class="delimiter">'</span><span class="content">Form</span><span class="delimiter">'</span></span>, scout.models.getModel(<span class="string"><span class="delimiter">'</span><span class="content">example.MyForm</span><span class="delimiter">'</span></span>, parent));</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>When the form is shown it will look like this:</p> 
+       </div> 
+       <div id="img-scoutjs_myform" class="imageblock"> 
+        <div class="content"> 
+         <img src="images/scoutjs_myform.png" alt="scoutjs myform" /> 
+        </div> 
+        <div class="title">
+         Figure 15. A form described using JSON
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="properties-2"><a class="anchor" href="#properties-2"></a>17.1.4. Properties</h4> 
+       <div class="paragraph"> 
+        <p>As seen before, every widget has a model representing its state. This model is written onto the widget at the time it is being instantiated. The properties of that model are now available as properties of the widget. So in order to access such a property, just call <code>widget.yourProperty</code>. If you want to modify the property, just call <code>widget.setYourProperty(value)</code>.</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 96. Accessing and modifying a property
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="javascript"><span class="keyword">var</span> field = scout.create(<span class="string"><span class="delimiter">'</span><span class="content">scout.StringField</span><span class="delimiter">'</span></span>, {
+  <span class="key">parent</span>: scout.sessions[<span class="integer">0</span>].desktop,
+  <span class="key">labelVisible</span>: <span class="predefined-constant">false</span>
+});
+console.log(field.labelVisible); <span class="comment">// prints false</span>
+
+field.setLabelVisible(<span class="predefined-constant">true</span>);
+console.log(field.labelVisible); <span class="comment">// prints true</span></code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>It is important to always use the setter to modify a property, because calling it does not just change the value. Instead it will call the method <code>setProperty(propertyName, value)</code> which does the following:</p> 
+       </div> 
+       <div class="olist arabic"> 
+        <ol class="arabic"> 
+         <li> <p>It will check if the property has changed at all. If the value is still the same, nothing happens. To compare the values <code>scout.objects.equals</code> is used, which uses <code>===</code> to compare and if that returns false, uses the equals methods of the given objects, if available.</p> </li> 
+         <li> <p>If the values are not equal, the model is updated using the method <code>_setProperty</code> (notice the <code>_</code>). Beside setting the value it also notifies every listener about the property change. So if another widget is interested in that property it may attach a listener and will be informed on every property change (see also the chapter <a href="#events">Events</a> for details).</p> </li> 
+         <li> <p>In order to reflect the property change in the UI, the <code>_render</code> method is called, if available. The name of this method depends on the property name, it always starts with <code>_render</code> and ends with the property name. Example: <code>_renderLabelVisible</code>. If the widget does not implement such a method, nothing happens.</p> </li> 
+        </ol> 
+       </div> 
+       <div class="paragraph"> 
+        <p>It is worth to mention that the behavior of step 2 may be influenced by the widget. If the widget provides a method called <code>_setPropertyName</code> (e.g. <code>_setLabelVisible</code>, notice the <code>_</code>), that method will be called instead of <code>_setProperty</code>. This may be useful if something other should be done beside setting the property. If that is the case, that new function is responsible to call <code>_setProperty</code> by itself in order to set the property and inform the listeners. That method may also be called by the <code>_init</code> method to make sure the additional code is also executed during initialization (calling the public setter in <code>_init</code> would not have any effect due to the equals check at the beginning).</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="widget-properties"><a class="anchor" href="#widget-properties"></a>17.1.5. Widget Properties</h4> 
+       <div class="paragraph"> 
+        <p>A widget property is a special kind of a property which references another widget.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Defining a property as widget property has the benefit that the widget is created automatically. Lets take the group box as an example. A group box has a widget property called fields. The fields are widgets, namely form fields. If I create a group box, I may specify its fields directly:</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 97. Creating the string field automatically using a widget property
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="javascript"><span class="keyword">var</span> groupBox = scout.create(<span class="string"><span class="delimiter">'</span><span class="content">GroupBox</span><span class="delimiter">'</span></span>, {
+  <span class="key">parent</span>: scout.sessions[<span class="integer">0</span>].desktop,
+  <span class="key">label</span>: <span class="string"><span class="delimiter">'</span><span class="content">My Group Box</span><span class="delimiter">'</span></span>,
+  <span class="key">fields</span>: [{
+    <span class="key">objectType</span>: <span class="string"><span class="delimiter">'</span><span class="content">StringField</span><span class="delimiter">'</span></span>,
+    <span class="key">label</span>: <span class="string"><span class="delimiter">'</span><span class="content">My String Field</span><span class="delimiter">'</span></span>
+  }]
+});
+<span class="comment">// check if the string field was created as well</span>
+console.log(groupBox.fields[<span class="integer">0</span>] <span class="keyword">instanceof</span> scout.StringField);</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>In the above example the group box is created using <code>scout.create</code>. After creating the group box you can access the property fields and you will notice that the string field was created as well, even though <code>scout.create</code> has not been called explicitly for the string field. This is because the property <code>fields</code> is defined as widget property. During the initialization of the group box it sets the property <code>fields</code> and because the value is not a widget yet (resp. the elements in the array), <code>scout.create</code> will be called.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>This will also happen if you use a setter of a widget property. You can either call the setter with a previously created widget, or just pass the model and the widget will be created automatically.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>In addition to creating widgets, calling such a setter will also make sure that obsolete widgets are destroyed. This means if the widget was created using the setter, it will be destroyed when the setter is called with another widget which replaces the previous one. If the widget was created before calling the setter, meaning the <code>owner</code> is another widget, it won&#x2019;t be destroyed.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>So if a property is defined as widget property, calling a setter will do the following:</p> 
+       </div> 
+       <div class="olist arabic"> 
+        <ol class="arabic"> 
+         <li> <p>It checks if the property has changed at all (same as for regular properties).</p> </li> 
+         <li> <p>If the values are not equal, <code>_prepareWidgetProperty</code> is called which checks if the new value already is a widget and if not creates it. It also destroys the old widget unless the property should not be preserved (see <code>_preserveOnPropertyChangeProperties</code>). If the value is an array, it does so for each element in the array (only widgets which are not part of the new array will be destroyed).</p> </li> 
+         <li> <p>If the widget is rendered, the old widget is removed unless the property should not be preserved. If there is a custom remove function (e.g. _removeXY where XY is the property name), it will be called instead of removing the widgets directly. Note that the widget may have already been removed by the destroy function at the prepare phase.</p> </li> 
+         <li> <p>The model is updated (same as for regular properties).</p> </li> 
+         <li> <p>The render method is called (same as for regular properties).</p> </li> 
+        </ol> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="events"><a class="anchor" href="#events"></a>17.1.6. Events</h4> 
+       <div class="paragraph"> 
+        <p>Every widget supports event handling by using the class <code>scout.EventSupport</code>. This allows the widgets to attach listeners to other widgets and getting informed when an event happens.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The 3 most important methods are the following:</p> 
+       </div> 
+       <div class="olist arabic"> 
+        <ol class="arabic"> 
+         <li> <p><code>on</code>: adds a listener</p> </li> 
+         <li> <p><code>off</code>: removes a listener</p> </li> 
+         <li> <p><code>trigger</code>: triggers an event</p> </li> 
+        </ol> 
+       </div> 
+       <div class="paragraph"> 
+        <p>So if a widget is interested in an event of another widget, it calls the function <code>on</code> with a callback function as parameter. If it is not interested anymore, it uses the function <code>off</code> with the same callback function as parameter.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The following example shows how to handle a button click event.</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 98. Handling an event
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="javascript"><span class="keyword">var</span> button = scout.create(<span class="string"><span class="delimiter">'</span><span class="content">scout.Button</span><span class="delimiter">'</span></span>, {
+  <span class="key">parent</span>: scout.sessions[<span class="integer">0</span>].desktop,
+  <span class="key">label</span>: <span class="string"><span class="delimiter">'</span><span class="content">click me!</span><span class="delimiter">'</span></span>
+});
+button.render(button.parent.<span class="predefined">$container</span>);
+button.on(<span class="string"><span class="delimiter">'</span><span class="content">click</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(event) {
+  <span class="comment">// print 'Button &quot;click me!&quot; has been clicked'</span>
+  console.log(<span class="string"><span class="delimiter">'</span><span class="content">Button &quot;</span><span class="delimiter">'</span></span> + event.source.label + <span class="string"><span class="delimiter">'</span><span class="content">&quot; has been clicked</span><span class="delimiter">'</span></span>);
+});</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Every click on the button will execute the callback function. To stop listening, you could call <code>button.off('click')</code>, but this would remove every listener listening to the 'click' event. Better is to pass the same reference to the callback used with <code>on</code> as parameter for <code>off</code>.</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 99. Stop listening for an event
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="javascript"><span class="keyword">var</span> button = scout.create(<span class="string"><span class="delimiter">'</span><span class="content">scout.Button</span><span class="delimiter">'</span></span>, {
+  <span class="key">parent</span>: scout.sessions[<span class="integer">0</span>].desktop,
+  <span class="key">label</span>: <span class="string"><span class="delimiter">'</span><span class="content">click me!</span><span class="delimiter">'</span></span>
+});
+button.render(button.parent.<span class="predefined">$container</span>);
+<span class="keyword">var</span> <span class="function">callback</span> = <span class="keyword">function</span>(event) {
+  <span class="comment">// print 'Button &quot;click me!&quot; has been clicked'</span>
+  console.log(<span class="string"><span class="delimiter">'</span><span class="content">Button &quot;</span><span class="delimiter">'</span></span> + event.source.label + <span class="string"><span class="delimiter">'</span><span class="content">&quot; has been clicked</span><span class="delimiter">'</span></span>);
+
+  <span class="comment">// stop listening, a second click won't print anything</span>
+  button.off(<span class="string"><span class="delimiter">'</span><span class="content">click</span><span class="delimiter">'</span></span>, callback);
+};
+button.on(<span class="string"><span class="delimiter">'</span><span class="content">click</span><span class="delimiter">'</span></span>, callback);</code></pre> 
+        </div> 
+       </div> 
+       <div class="admonitionblock note"> 
+        <table> 
+         <tbody>
+          <tr> 
+           <td class="icon"> <i class="fa icon-note" title="Note"></i> </td> 
+           <td class="content"> If the callback function is bound using <code>bind()</code>, the bound function has to be used when removing the listener using <code>off</code>. This is because <code>bind()</code> returns a new function wrapping the original callback. </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </div> 
+       <div class="paragraph"> 
+        <p>In order to trigger an event rather than listening to one, you would use the function <code>trigger</code>. This is what the button in the above example does. When it is being clicked, it calls <code>this.trigger('click')</code> (<code>this</code> points to the instance of the button). With the second parameter you may specify additional data which will be copied onto the event. By default the event contains the type (e.g. 'click') and the source which triggered it (e.g. the button).</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="title">
+         Listing 100. Triggering an event with custom event data
+        </div> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="javascript">trigger(<span class="string"><span class="delimiter">'</span><span class="content">click</span><span class="delimiter">'</span></span>, {
+  <span class="key">foo</span>: <span class="string"><span class="delimiter">'</span><span class="content">bar</span><span class="delimiter">'</span></span>
+});
+
+<span class="comment">// callback</span>
+<span class="keyword">function</span>(event) {
+  console.log(event.foo); <span class="comment">// prints bar</span>
+}</code></pre> 
+        </div> 
+       </div> 
+       <div class="sect4"> 
+        <h5 id="property-change-event"><a class="anchor" href="#property-change-event"></a>Property Change Event</h5> 
+        <div class="paragraph"> 
+         <p>A special kind of event is the property change event. Whenever a property changes, such an event is triggered.</p> 
+        </div> 
+        <div class="paragraph"> 
+         <p>The event has the following properties:</p> 
+        </div> 
+        <div class="olist arabic"> 
+         <ol class="arabic"> 
+          <li> <p><code>type</code>: the type of the event which is always <code>propertyChange</code></p> </li> 
+          <li> <p><code>source</code>: the widget which triggered the event</p> </li> 
+          <li> <p><code>name</code>: the name of the property</p> </li> 
+          <li> <p><code>newValue</code>: the new value of the property</p> </li> 
+          <li> <p><code>oldValue</code>: the old value of the property</p> </li> 
+         </ol> 
+        </div> 
+        <div class="paragraph"> 
+         <p>Listening to such an event works in the same way as for other events, just use the type <code>propertyChange</code>. The listening below shows how to handle the property change event if the <code>selected</code> property of a toggle button changes.</p> 
+        </div> 
+        <div class="listingblock"> 
+         <div class="title">
+          Listing 101. Example of a property change event
+         </div> 
+         <div class="content"> 
+          <pre class="CodeRay highlight"><code data-lang="javascript"><span class="keyword">var</span> button = scout.create(<span class="string"><span class="delimiter">'</span><span class="content">scout.Button</span><span class="delimiter">'</span></span>, {
+  <span class="key">parent</span>: scout.sessions[<span class="integer">0</span>].desktop,
+  <span class="key">label</span>: <span class="string"><span class="delimiter">'</span><span class="content">click me!</span><span class="delimiter">'</span></span>,
+  <span class="key">displayStyle</span>: scout.Button.DisplayStyle.TOGGLE
+});
+button.render(button.parent.<span class="predefined">$container</span>);
+button.on(<span class="string"><span class="delimiter">'</span><span class="content">propertyChange</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(event) {
+  <span class="comment">// prints 'Property selected changed from false to true'</span>
+  console.log(<span class="string"><span class="delimiter">'</span><span class="content">Property </span><span class="delimiter">'</span></span> + event.name + <span class="string"><span class="delimiter">'</span><span class="content"> changed from </span><span class="delimiter">'</span></span> + event.oldValue + <span class="string"><span class="delimiter">'</span><span class="content"> to </span><span class="delimiter">'</span></span> + event.newValue);
+});
+button.setSelected(<span class="predefined-constant">true</span>);</code></pre> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="icons-2"><a class="anchor" href="#icons-2"></a>17.1.7. Icons</h4> 
+       <div class="paragraph"> 
+        <p>Widgets that have a property <code>iconId</code> (for instance <code>Menu</code>) can display an icon. This iconId references an icon which can be either a bitmap image (GIF, PNG, JPEG, etc.) or a character from an icon-font. An example for an icon-font is the <em>scoutIcons.ttf</em> which comes shipped with Scout.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Depending on the type (image, font-icon) the iconId property references:</p> 
+       </div> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p><strong>Image</strong>: iconId is an URL which points to an image resource accessible via HTTP.</p> 
+          <div class="paragraph"> 
+           <p>Example: <code>/icons/person.png</code></p> 
+          </div> </li> 
+         <li> <p><strong>Font-icon</strong>: iconId has the format <code>font:[UTF-character]</code>.</p> 
+          <div class="paragraph"> 
+           <p>Example: <code>font:\uE043</code>, references a character in <em>scoutIcons.ttf</em></p> 
+          </div> 
+          <div class="paragraph"> 
+           <p>Example: <code>font:fooIcons \uE109</code>, references a character in custom font <em>fooIcons.ttf</em></p> 
+          </div> </li> 
+         <li> <p><strong>Icon Constants</strong>: iconId has the format: <code>${iconId:[constant]}</code>, where constant is a constant in <code>scout.icons</code>. This format is especially useful when you configure a Scout widget with a JSON model. The value of the constant is again either an image or a font-icon as described above.</p> 
+          <div class="paragraph"> 
+           <p>Example: <code>${iconId:ANGLE_UP}</code> uses <code>scout.icons.ANGLE_UP</code>, icons predefined by Scout</p> 
+          </div> 
+          <div class="paragraph"> 
+           <p>Example: <code>${iconId:foo.BAR}</code> uses <code>foo.icons.BAR</code>, use this for custom icon constant objects</p> 
+          </div> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="sect2"> 
+      <h3 id="extensibility-2"><a class="anchor" href="#extensibility-2"></a>17.2. Extensibility</h3> 
+      <div class="sect3"> 
+       <h4 id="how-to-extend-scout-objects"><a class="anchor" href="#how-to-extend-scout-objects"></a>17.2.1. How to extend Scout objects</h4> 
+       <div class="paragraph"> 
+        <p>The extension feature in Scout JS works by wrapping functions on the prototype of a Scout object with a wrapper function which is provided by an extension. The extension feature doesn&#x2019;t rely on subclassing, instead we simply register one or more extensions for a single Scout class. When a function is called on an extended object, the functions are called on the registered extensions first. Since a Scout class can have multiple extensions, we speak of an extension chain, where the last element of the chain is the original (extended) object.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The base class for all extensions is <code>scout.Extension</code>. This class is used to extend an existing Scout object. In order to use the extension feature you must subclass scout.Extension and implement an <code>init</code> function, where you register the functions you want to extend. Example:</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="javascript">scout.MyExtension.prototype.<span class="function">init</span> = <span class="keyword">function</span>() {
+  <span class="local-variable">this</span>.extend(scout.MyStringField.prototype, <span class="string"><span class="delimiter">'</span><span class="content">_init</span><span class="delimiter">'</span></span>);
+  <span class="local-variable">this</span>.extend(scout.MyStringField.prototype, <span class="string"><span class="delimiter">'</span><span class="content">_renderProperties</span><span class="delimiter">'</span></span>);
+};</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Then you implement functions with the same name and signature on the extension class. Example:</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="javascript">scout.MyExtension.prototype.<span class="function">_init</span> = <span class="keyword">function</span>(model) {
+  <span class="local-variable">this</span>.next(model);
+  <span class="local-variable">this</span>.extended.setProperty(<span class="string"><span class="delimiter">'</span><span class="content">bar</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">foo</span><span class="delimiter">'</span></span>);
+};</code></pre> 
+        </div> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The extension feature sets two properties on the extension instance before the extended method is called. These two properties are described below. The function scope (this) is set to the extension instance when the extended function is called.</p> 
+       </div> 
+       <div class="dlist"> 
+        <dl> 
+         <dt class="hdlist1">
+          next
+         </dt> 
+         <dd> 
+          <p>is a reference to the next extended function or the original function of the extended object, in case the current extension is the last extension in the extension chain.</p> 
+         </dd> 
+         <dt class="hdlist1">
+          extended
+         </dt> 
+         <dd> 
+          <p>is the extended or original object.</p> 
+         </dd> 
+        </dl> 
+       </div> 
+       <div class="paragraph"> 
+        <p>All extensions must be registered in the <code>installExtensions</code> function of your <code>scout.App</code>. Example:</p> 
+       </div> 
+       <div class="listingblock"> 
+        <div class="content"> 
+         <pre class="CodeRay highlight"><code data-lang="javascript">scout.MyApp.prototype.<span class="function">installExtensions</span> = <span class="keyword">function</span>() {
+  scout.Extension.install([
+    <span class="string"><span class="delimiter">'</span><span class="content">scout.FooExtension</span><span class="delimiter">'</span></span>,
+    <span class="string"><span class="delimiter">'</span><span class="content">scout.BarExtension</span><span class="delimiter">'</span></span>,
+    <span class="comment">// ...</span>
+  ]);
+};</code></pre> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="export-scout-model-from-a-scout-classic-online-application"><a class="anchor" href="#export-scout-model-from-a-scout-classic-online-application"></a>17.2.2. Export Scout model from a Scout classic (online) application</h4> 
+       <div class="paragraph"> 
+        <p>With the steps described here you can export model-data (e.g. forms, tables, etc.) from an existing classic, online Scout application into JSON format which can be used in a Scout JS application. This is a fast and convenient method to re-use an existing form in a Scout JS application, because you don&#x2019;t have to build the model manually. Here&#x2019;s how to use the export feature:</p> 
+       </div> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p>Activate the <code>TextKeyTextProviderService</code> in your Scout classic application. You can do this either by calling the static <code>register</code> Method at runtime (using the Debugger) or by setting the config property <em>scout.text.providers.show.keys</em>. Once the TextProvider is active, it returns text keys instead of localized texts. The format of the returned string is <code>${textKey:[text-key]}</code>. Strings in this format are interpreted browser side by Scout JS and are resolved and localized in <em>texts.js</em>.</p> </li> 
+         <li> <p>Call the Scout classic web application with the URL parameter <code>?adapterExportEnabled=true</code>. This parameter is checked by Scout JS and the effect of it is that Scout JS keeps adapter-data loaded from the server, so we can use it for a later export operation. Usually Scout JS deletes adapter-data right after it has been used to create an adapter instance.</p> </li> 
+         <li> <p>Start your browsers developer tools (F12) from your running Scout classic app, inspect the form or another adapter you&#x2019;d like to export, and search for the ID of that adapter by looking at the <code>data-id</code> attribute in the DOM. Then call the following JavaScript function from the console: <code>JSON.stringify(scout.exportAdapter([id]))</code>. The console will now output the JSON code for that adapter. Copy/paste that string from the console and tidy it up with a tool of your choice (for instance <a href="http://www.jsoneditoronline.org">jsoneditoronline.org</a>).</p> </li> 
+         <li> <p>Now the formatted JSON code is ready to be used in your Scout JS project. Simply store the JSON to a .json File and load it in the <code>_jsonModel</code> function of your widget by calling <code>scout.models.getModel('[ID of json model]')</code>. Most likely you must edit the JSON file and apply some changes manually. For instance:</p> 
+          <div class="ulist"> 
+           <ul> 
+            <li> <p>Replace numeric adapter IDs by human-readable, semantic string IDs. You will need these IDs to reference a model element from the JSON model in your JavaScript code, e.g. to register a listener on a Menu.</p> </li> 
+            <li> <p>Maybe you&#x2019;ll have to adjust objectType and namespace of some widgets in the JSON. This needs to be done for widgets that do not belong to the default <em>scout</em> namespace.</p> </li> 
+            <li> <p>Remove form fields and menus which are never used in your Scout JS app</p> </li> 
+            <li> <p>Remove unused menu types from the menuTypes property of a scout.Menu</p> </li> 
+           </ul> 
+          </div> </li> 
+        </ul> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Note: The function exportAdapter can be used not only for forms, but for any other widget/adapter too.</p> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
     <h2 id="apx-cclicence"><a class="anchor" href="#apx-cclicence"></a>Appendix A: Licence and Copyright</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
@@ -7244,7 +7718,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
   <div id="footer"> 
    <div id="footer-text">
      Version 7.0
-    <br /> Last updated 2017-04-18 11:23:22 CEST 
+    <br /> Last updated 2017-05-11 13:49:15 CEST 
    </div> 
   </div>  
  </body>
