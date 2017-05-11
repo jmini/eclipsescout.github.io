@@ -705,8 +705,48 @@ table.CodeRay td.code>pre{padding:0}
      </div> 
      <div class="sect2"> 
       <h3 id="api-changes-javascript"><a class="anchor" href="#api-changes-javascript"></a>API Changes (JavaScript)</h3> 
-      <div class="paragraph"> 
-       <p><mark>TODO</mark></p> 
+      <div class="sect3"> 
+       <h4 id="promises"><a class="anchor" href="#promises"></a>Promises</h4> 
+       <div class="paragraph"> 
+        <p>With jQuery 3 the promise API is now Promises/A+ compliant. This means you may need to adjust your code if you use promises.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>We noticed the following effects:</p> 
+       </div> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p>If a rejection is catched using a fail handler, the fail handler has to return a rejected promise as well, otherwise the next success handler would be called instead of the next fail handler.</p> </li> 
+         <li> <p>Every callback is now executed asynchronously. This is especially relevant for the tests.</p> </li> 
+         <li> <p>Catch has been added &#x2192; replace fail(null, func) for better readability.</p> </li> 
+        </ul> 
+       </div> 
+       <div class="paragraph"> 
+        <p>See also <a href="https://jquery.com/upgrade-guide/3.0/" class="bare">https://jquery.com/upgrade-guide/3.0/</a> for details.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="removed-addclasssvg-removeclasssvg-attrsvg-removeattrsvg"><a class="anchor" href="#removed-addclasssvg-removeclasssvg-attrsvg-removeattrsvg"></a>Removed addClassSVG, removeClassSVG, attrSVG, removeAttrSVG</h4> 
+       <div class="paragraph"> 
+        <p>These functions are now supported by jQuery directly. Just use <code>addClass</code>, <code>removeClass</code>, <code>attr</code> and <code>removeAttr</code>.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="property-change-event"><a class="anchor" href="#property-change-event"></a>Property Change Event</h4> 
+       <div class="paragraph"> 
+        <p>The property change event has been simplified.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>The event had 3 properties: - newProperties - oldProperties - changedProperties</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>This was added to be able to react to multiple property change events at once. Since 6.1, bulk property changes don&#x2019;t exist anymore, so there is no need for these properties anymore.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Now, with 7.0, the property change event has the following properties: - name - oldValue - newValue</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>This makes handling the event easier. Check your propertyChange event handlers and adjust them accordingly.</p> 
+       </div> 
       </div> 
      </div> 
      <div class="sect2"> 
