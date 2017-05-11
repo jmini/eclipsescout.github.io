@@ -7335,7 +7335,7 @@ console.log(groupBox.fields[<span class="integer">0</span>] <span class="keyword
   <span class="key">parent</span>: scout.sessions[<span class="integer">0</span>].desktop,
   <span class="key">label</span>: <span class="string"><span class="delimiter">'</span><span class="content">click me!</span><span class="delimiter">'</span></span>
 });
-button.render(button.parent.<span class="predefined">$container</span>);
+button.render();
 button.on(<span class="string"><span class="delimiter">'</span><span class="content">click</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(event) {
   <span class="comment">// print 'Button &quot;click me!&quot; has been clicked'</span>
   console.log(<span class="string"><span class="delimiter">'</span><span class="content">Button &quot;</span><span class="delimiter">'</span></span> + event.source.label + <span class="string"><span class="delimiter">'</span><span class="content">&quot; has been clicked</span><span class="delimiter">'</span></span>);
@@ -7354,7 +7354,7 @@ button.on(<span class="string"><span class="delimiter">'</span><span class="cont
   <span class="key">parent</span>: scout.sessions[<span class="integer">0</span>].desktop,
   <span class="key">label</span>: <span class="string"><span class="delimiter">'</span><span class="content">click me!</span><span class="delimiter">'</span></span>
 });
-button.render(button.parent.<span class="predefined">$container</span>);
+button.render();
 <span class="keyword">var</span> <span class="function">callback</span> = <span class="keyword">function</span>(event) {
   <span class="comment">// print 'Button &quot;click me!&quot; has been clicked'</span>
   console.log(<span class="string"><span class="delimiter">'</span><span class="content">Button &quot;</span><span class="delimiter">'</span></span> + event.source.label + <span class="string"><span class="delimiter">'</span><span class="content">&quot; has been clicked</span><span class="delimiter">'</span></span>);
@@ -7423,7 +7423,7 @@ button.on(<span class="string"><span class="delimiter">'</span><span class="cont
   <span class="key">label</span>: <span class="string"><span class="delimiter">'</span><span class="content">click me!</span><span class="delimiter">'</span></span>,
   <span class="key">displayStyle</span>: scout.Button.DisplayStyle.TOGGLE
 });
-button.render(button.parent.<span class="predefined">$container</span>);
+button.render();
 button.on(<span class="string"><span class="delimiter">'</span><span class="content">propertyChange</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(event) {
   <span class="comment">// prints 'Property selected changed from false to true'</span>
   console.log(<span class="string"><span class="delimiter">'</span><span class="content">Property </span><span class="delimiter">'</span></span> + event.name + <span class="string"><span class="delimiter">'</span><span class="content"> changed from </span><span class="delimiter">'</span></span> + event.oldValue + <span class="string"><span class="delimiter">'</span><span class="content"> to </span><span class="delimiter">'</span></span> + event.newValue);

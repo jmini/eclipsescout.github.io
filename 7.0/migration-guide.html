@@ -706,6 +706,15 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2"> 
       <h3 id="api-changes-javascript"><a class="anchor" href="#api-changes-javascript"></a>API Changes (JavaScript)</h3> 
       <div class="sect3"> 
+       <h4 id="render"><a class="anchor" href="#render"></a>render()</h4> 
+       <div class="paragraph"> 
+        <p>The parameter <code>$parent</code> has been removed from the <code>_render</code> method because <code>this.$parent</code> is available for every widget. There is no need to have a parameter <code>$parent</code> which points to the same variable. Use <code>this.$parent</code> instead.</p> 
+       </div> 
+       <div class="paragraph"> 
+        <p>Also <code>$parent</code> is now optional when calling widget.render(). The <code>$parent</code> may be resolved using <code>this.parent</code>. No need to always write <code>widget.render(this.$container)</code> anymore, instead just write <code>widget.render()</code> if the <code>$container</code> of the <code>parent</code> should be used as <code>$parent</code>.</p> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
        <h4 id="promises"><a class="anchor" href="#promises"></a>Promises</h4> 
        <div class="paragraph"> 
         <p>With jQuery 3 the promise API is now Promises/A+ compliant. This means you may need to adjust your code if you use promises.</p> 
