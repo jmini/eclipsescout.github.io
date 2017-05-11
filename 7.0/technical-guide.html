@@ -4899,7 +4899,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
         <p>By default, all input in the Scout model is encoded. Examples are values/labels in value fields, cells in tables, message in message box. The reason behind this default choice is that developers do not have to think about output encoding in the standard case and are therefore less likely to forget output encoding and introduce a security vulnerability.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Example: In the following string field, the HTML &lt;b&gt; tag is encoded as <code>&amp;lt;b&amp;gt;bold text&amp;lt;/b&amp;gt;</code>:</p> 
+        <p>Example: In the following label field, the HTML &lt;b&gt; tag is encoded as <code>&amp;lt;b&amp;gt;bold text&amp;lt;/b&amp;gt;</code>:</p> 
        </div> 
        <div class="imageblock"> 
         <div class="content"> 
@@ -4908,7 +4908,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
        </div> 
        <div class="literalblock"> 
         <div class="content"> 
-         <pre>public class StringField extends AbstractStringField {
+         <pre>public class LabelField extends AbstractLabelField {
   @Override
   protected void execInitField() {
     setValue(&quot;...&lt;b&gt;Bold text&lt;/b&gt;...&quot;);
@@ -4939,10 +4939,10 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
        </div> 
        <div class="literalblock"> 
         <div class="content"> 
-         <pre>public class NoEncodingStringField extends AbstractStringField {
+         <pre>public class NoEncodingLabelField extends AbstractLabelField {
   @Override
   protected boolean getConfiguredHtmlEnabled() {
-    return false;
+    return true;
   }</pre> 
         </div> 
        </div> 
