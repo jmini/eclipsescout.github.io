@@ -530,6 +530,7 @@ table.CodeRay td.code>pre{padding:0}
      <li><a href="#what-s-new">What&#x2019;s New</a> 
       <ul class="sectlevel1"> 
        <li><a href="#upgrade-to-jquery-3">Upgrade to jQuery 3</a></li> 
+       <li><a href="#prevent-double-clicks-on-buttons-and-menus">Prevent double clicks on buttons and menus</a></li> 
       </ul> </li> 
     </ul> 
    </div> 
@@ -570,6 +571,23 @@ table.CodeRay td.code>pre{padding:0}
      </div> 
      <div class="paragraph"> 
       <p>Along with the jQuery upgrade we decided to remove jQuery UI and jQuery Mobile completely. Scout only included parts of these libraries and the usage was limited to 2 or 3 functions. Without these dependencies it will be easier in the future to upgrade jQuery itself.</p> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
+    <h2 id="prevent-double-clicks-on-buttons-and-menus"><a class="anchor" href="#prevent-double-clicks-on-buttons-and-menus"></a>Prevent double clicks on buttons and menus</h2> 
+    <div class="sectionbody"> 
+     <div class="paragraph"> 
+      <p>If a button or a menu is clicked twice within a short period of time, the corresponding action is executed twice. This can be convenient (e.g. when inserting new rows in a table) or unproblematic (e.g. when closing a form - the second click will just be ignored). However, there are cases where executing an action twice would break things. To instruct the UI to block double clicks, a new property &quot;preventDoubleClick&quot; is provided on buttons and menus:</p> 
+     </div> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p><code>AbstractButton.getConfiguredPreventDoubleClick()</code></p> </li> 
+       <li> <p><code>AbstractMenu.getConfiguredPreventDoubleClick()</code></p> </li> 
+      </ul> 
+     </div> 
+     <div class="paragraph"> 
+      <p>The default value is <code>false</code>.</p> 
      </div> 
      <div class="admonitionblock tip"> 
       <table> 
