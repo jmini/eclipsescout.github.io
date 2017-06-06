@@ -531,6 +531,7 @@ table.CodeRay td.code>pre{padding:0}
       <ul class="sectlevel1">
        <li><a href="#upgrade-to-jquery-3">Upgrade to jQuery 3</a></li>
        <li><a href="#prevent-double-clicks-on-buttons-and-menus">Prevent double clicks on buttons and menus</a></li>
+       <li><a href="#service-tunnel-connections-now-use-google-http-client-library-for-java">Service tunnel connections now use Google HTTP Client Library for Java</a></li>
       </ul> </li>
     </ul>
    </div>
@@ -588,6 +589,28 @@ table.CodeRay td.code>pre{padding:0}
      </div>
      <div class="paragraph">
       <p>The default value is <code>false</code>.</p>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="service-tunnel-connections-now-use-google-http-client-library-for-java"><a class="anchor" href="#service-tunnel-connections-now-use-google-http-client-library-for-java"></a>Service tunnel connections now use Google HTTP Client Library for Java</h2>
+    <div class="sectionbody">
+     <div class="paragraph">
+      <p>The <code>org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel</code> class was changed to use the Google HTTP Client Library for Java 1.22. These libraries add an HTTP abstraction layer and allow to use different low-level libraries like <code>java.net.HttpURLConnection</code> (one and only layer used in previous versions) or Apache HTTP Client 4.5.3 (new default used).</p>
+     </div>
+     <div class="paragraph">
+      <p>Currently the new classes are only used for the service tunnel but applications may be able to use (custom) implementations of <code>org.eclipse.scout.rt.shared.http.IHttpTransportManager</code> also for other connections.</p>
+     </div>
+     <div class="paragraph">
+      <p>The following new configuration properties (defaults are provided for all of them) were added:</p>
+     </div>
+     <div class="ulist">
+      <ul>
+       <li> <p><code>scout.http.transport_factory</code>, possible values are <code>org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory</code> (default, see above), <code>org.eclipse.scout.rt.shared.http.NetHttpTransportFactory</code> (to use previous HttpURLConnection layer) or any custom implementation of <code>org.eclipse.scout.rt.shared.http.IHttpTransportFactory</code>.</p> </li>
+       <li> <p><code>scout.http.apache_connection_time_to_live</code>, time to live (milliseconds) for kept alive connections (default: 1 hour, for Apache HTTP Client).</p> </li>
+       <li> <p><code>scout.http.apache_max_connections_per_route</code>, maximum number of connections per route (default: 1024, for Apache HTTP Client).</p> </li>
+       <li> <p><code>scout.http.apache_max_connections_total</code>, maximum number of connections in total (default: 1024, for Apache HTTP Client).</p> </li>
+      </ul>
      </div>
      <div class="admonitionblock tip">
       <table>
