@@ -797,13 +797,19 @@ table.CodeRay td.code>pre{padding:0}
        </div>
        <div class="ulist">
         <ul>
-         <li> <p><code>name</code></p> </li>
+         <li> <p><code>propertyName</code></p> </li>
          <li> <p><code>oldValue</code></p> </li>
          <li> <p><code>newValue</code></p> </li>
         </ul>
        </div>
        <div class="paragraph">
         <p>This makes handling the event easier. Check your propertyChange event handlers and adjust them accordingly.</p>
+       </div>
+      </div>
+      <div class="sect3">
+       <h4 id="logical-grid-validation"><a class="anchor" href="#logical-grid-validation"></a>Logical Grid Validation</h4>
+       <div class="paragraph">
+        <p>Automatic Grid Data Validation has been introduced. This means there is no need to manually create a Logical Grid (e.g. <code>VerticalSmartGroupBoxBodyGrid</code> or <code>HorizontalGroupBoxBodyGrid</code> and validate it anymore, this will be done by the <code>LogicalGridLayout</code> itself. Also, check your JSON files, remove any explicit x, y grid definitions because they will be calculated by the <code>LogicalGrid</code>. Make sure to always use the property <code>gridDataHints</code> instead of <code>gridData</code>.</p>
        </div>
       </div>
      </div>

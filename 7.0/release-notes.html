@@ -530,6 +530,9 @@ table.CodeRay td.code>pre{padding:0}
      <li><a href="#what-s-new">What&#x2019;s New</a>
       <ul class="sectlevel1">
        <li><a href="#upgrade-to-jquery-3">Upgrade to jQuery 3</a></li>
+       <li><a href="#validators-parser-and-formatter-js">Validators, Parser and Formatter (JS)</a></li>
+       <li><a href="#simplified-api-js">Simplified API (JS)</a></li>
+       <li><a href="#logical-grid-validation-js">Logical Grid Validation (JS)</a></li>
        <li><a href="#prevent-double-clicks-on-buttons-and-menus">Prevent double clicks on buttons and menus</a></li>
        <li><a href="#service-tunnel-connections-now-use-google-http-client-library-for-java">Service tunnel connections now use Google HTTP Client Library for Java</a></li>
       </ul> </li>
@@ -572,6 +575,39 @@ table.CodeRay td.code>pre{padding:0}
      </div>
      <div class="paragraph">
       <p>Along with the jQuery upgrade we decided to remove jQuery UI and jQuery Mobile completely. Scout only included parts of these libraries and the usage was limited to 2 or 3 functions. Without these dependencies it will be easier in the future to upgrade jQuery itself.</p>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="validators-parser-and-formatter-js"><a class="anchor" href="#validators-parser-and-formatter-js"></a>Validators, Parser and Formatter (JS)</h2>
+    <div class="sectionbody">
+     <div class="paragraph">
+      <p>The <code>ValueField.js</code> now provides an API to add custom parse, validate and format logic. This is especially useful for the <code>StringField</code>, but you may also use it for the <code>NumberField</code> and the <code>DateField</code>. See the technical guide for details.</p>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="simplified-api-js"><a class="anchor" href="#simplified-api-js"></a>Simplified API (JS)</h2>
+    <div class="sectionbody">
+     <div class="paragraph">
+      <p>The parameter <code>$parent</code> is now optional when calling widget.render(). The <code>$parent</code> may be resolved using <code>this.parent</code>. No need to always write <code>widget.render(this.$container)</code> anymore, instead just write <code>widget.render()</code> if the <code>$container</code> of the <code>parent</code> should be used as <code>$parent</code>.</p>
+     </div>
+     <div class="paragraph">
+      <p>The property change event has been simplified. Instead of <code>newProperties</code>, <code>oldProperties</code> and <code>changedProperties</code>, the event now contains <code>propertyName</code>, <code>oldValue</code> and <code>newValue</code>. This makes handling the event easier.</p>
+     </div>
+     <div class="paragraph">
+      <p><code>DateField</code>, <code>StringField</code> and <code>NumberField</code> now use the value based API provided by <code>ValueField</code>. This means you can write the value using <code>field.setValue(value)</code>, and read it using <code>field.value</code>. The validators and formatter will be called accordingly.</p>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="logical-grid-validation-js"><a class="anchor" href="#logical-grid-validation-js"></a>Logical Grid Validation (JS)</h2>
+    <div class="sectionbody">
+     <div class="paragraph">
+      <p>When writing a Scout Form with Java, you don&#x2019;t have to care about the logical grid. You only have to specify some grid hints like width and height of a cell. The positioning of the cell is calculated automatically by the logical grid.</p>
+     </div>
+     <div class="paragraph">
+      <p>This is now also possible with JS based Scout applications. There is no need to manually create a Logical Grid (e.g. <code>VerticalSmartGroupBoxBodyGrid</code> or <code>HorizontalGroupBoxBodyGrid</code> and validate it anymore, this will be done automatically by the <code>LogicalGridLayout</code> itself.</p>
      </div>
     </div>
    </div>
