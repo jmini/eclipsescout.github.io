@@ -534,7 +534,8 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#simplified-api-js">Simplified API (JS)</a></li>
        <li><a href="#logical-grid-validation-js">Logical Grid Validation (JS)</a></li>
        <li><a href="#prevent-double-clicks-on-buttons-and-menus">Prevent double clicks on buttons and menus</a></li>
-       <li><a href="#new-http-abstraction-layer-google-http-client-for-java">New HTTP abstraction layer Google HTTP Client for Java.</a></li>
+       <li><a href="#new-http-abstraction-layer-google-http-client-for-java">New HTTP abstraction layer Google HTTP Client for Java</a></li>
+       <li><a href="#support-for-rest-services">Support for REST services</a></li>
       </ul> </li>
     </ul>
    </div>
@@ -629,7 +630,7 @@ table.CodeRay td.code>pre{padding:0}
     </div>
    </div>
    <div class="sect1">
-    <h2 id="new-http-abstraction-layer-google-http-client-for-java"><a class="anchor" href="#new-http-abstraction-layer-google-http-client-for-java"></a>New HTTP abstraction layer Google HTTP Client for Java.</h2>
+    <h2 id="new-http-abstraction-layer-google-http-client-for-java"><a class="anchor" href="#new-http-abstraction-layer-google-http-client-for-java"></a>New HTTP abstraction layer Google HTTP Client for Java</h2>
     <div class="sectionbody">
      <div class="paragraph">
       <p>The <code>org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel</code> class and other HTTP usages were changed to use the Google HTTP Client Library for Java 1.22. This library adds a HTTP abstraction layer and allows to use different low-level libraries like <code>java.net.HttpURLConnection</code> (one and only layer used in previous versions) or Apache HTTP Client 4.5.3 (new default).</p>
@@ -667,6 +668,28 @@ table.CodeRay td.code>pre{padding:0}
      </div>
      <div class="paragraph">
       <p>For each Apache HTTP Client created using the <code>org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory</code> (by default each <code>org.eclipse.scout.rt.shared.http.IHttpTransportManager</code> using the Apache HTTP Client) their own <code>org.eclipse.scout.rt.shared.http.ApacheMultiSessionCookieStore</code> and <code>org.eclipse.scout.rt.shared.http.proxy.ConfigurableProxySelector</code> (see javadoc for detailed description and configurability) are created. These instances are therefore not registered globally for the java virtual machine anymore.</p>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="support-for-rest-services"><a class="anchor" href="#support-for-rest-services"></a>Support for REST services</h2>
+    <div class="sectionbody">
+     <div class="paragraph">
+      <p>The following new Scout modules have been added to support REST services with Jackson as marshaller:</p>
+     </div>
+     <div class="ulist">
+      <ul>
+       <li> <p><code>org.eclipse.scout.rt.rest</code></p> </li>
+       <li> <p><code>org.eclipse.scout.rt.rest.test</code></p> </li>
+       <li> <p><code>org.eclipse.scout.rt.jackson</code></p> </li>
+       <li> <p><code>org.eclipse.scout.rt.jackson.test</code></p> </li>
+      </ul>
+     </div>
+     <div class="paragraph">
+      <p>The most important class is the <code>org.eclipse.scout.rt.rest.RestApplication</code> which searches for all implementations of <code>IRestResource</code> and exposes them as REST services. It also registers <code>ExceptionMappers</code> and setups Jackson to work with Jandex.</p>
+     </div>
+     <div class="paragraph">
+      <p>So if you want to use REST services, you could use the Jersey REST servlet (<code>org.glassfish.jersey.servlet.ServletContainer</code>), pass the <code>RestApplication</code> as parameter and install the <code>org.eclipse.scout.rt.server.context.ServerRunContextFilter</code> to have the proper run context for every REST call. Creating the REST resource is straight forward using the annotations from <code>javax.ws.rs</code>. Just make sure the resource implements the interface <code>IRestResource</code> so that it will be registered by the <code>RestApplication</code> on startup.</p>
      </div>
      <div class="admonitionblock tip">
       <table>
