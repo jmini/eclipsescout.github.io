@@ -534,7 +534,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#simplified-api-js">Simplified API (JS)</a></li>
        <li><a href="#logical-grid-validation-js">Logical Grid Validation (JS)</a></li>
        <li><a href="#prevent-double-clicks-on-buttons-and-menus">Prevent double clicks on buttons and menus</a></li>
-       <li><a href="#service-tunnel-connections-now-use-google-http-client-library-for-java">Service tunnel connections now use Google HTTP Client Library for Java</a></li>
+       <li><a href="#new-http-abstraction-layer-google-http-client-for-java">New HTTP abstraction layer Google HTTP Client for Java.</a></li>
       </ul> </li>
     </ul>
    </div>
@@ -629,24 +629,44 @@ table.CodeRay td.code>pre{padding:0}
     </div>
    </div>
    <div class="sect1">
-    <h2 id="service-tunnel-connections-now-use-google-http-client-library-for-java"><a class="anchor" href="#service-tunnel-connections-now-use-google-http-client-library-for-java"></a>Service tunnel connections now use Google HTTP Client Library for Java</h2>
+    <h2 id="new-http-abstraction-layer-google-http-client-for-java"><a class="anchor" href="#new-http-abstraction-layer-google-http-client-for-java"></a>New HTTP abstraction layer Google HTTP Client for Java.</h2>
     <div class="sectionbody">
      <div class="paragraph">
-      <p>The <code>org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel</code> class was changed to use the Google HTTP Client Library for Java 1.22. These libraries add an HTTP abstraction layer and allow to use different low-level libraries like <code>java.net.HttpURLConnection</code> (one and only layer used in previous versions) or Apache HTTP Client 4.5.3 (new default used).</p>
+      <p>The <code>org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel</code> class and other HTTP usages were changed to use the Google HTTP Client Library for Java 1.22. This library adds a HTTP abstraction layer and allows to use different low-level libraries like <code>java.net.HttpURLConnection</code> (one and only layer used in previous versions) or Apache HTTP Client 4.5.3 (new default).</p>
      </div>
      <div class="paragraph">
-      <p>Currently the new classes are only used for the service tunnel but applications may be able to use (custom) implementations of <code>org.eclipse.scout.rt.shared.http.IHttpTransportManager</code> also for other connections.</p>
+      <p>Different HTTP clients with different parameters (even with different low-level libraries) may be used and kept using (custom) implementations of <code>org.eclipse.scout.rt.shared.http.IHttpTransportManager</code>. Currently there are two internal implementations of this interface: <code>HttpServiceTunnelTransportManager</code> (only used by the service tunnel) and <code>DefaultHttpTransportManager</code> (used for all other HTTP connections).</p>
      </div>
      <div class="paragraph">
-      <p>The following new configuration properties (defaults are provided for all of them) were added:</p>
+      <p>The following new configuration properties (none of them is required to be set, defaults are provided for all of them) were added:</p>
      </div>
      <div class="ulist">
       <ul>
-       <li> <p><code>scout.http.transport_factory</code>, possible values are <code>org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory</code> (default, see above), <code>org.eclipse.scout.rt.shared.http.NetHttpTransportFactory</code> (to use previous HttpURLConnection layer) or any custom implementation of <code>org.eclipse.scout.rt.shared.http.IHttpTransportFactory</code>.</p> </li>
-       <li> <p><code>scout.http.apache_connection_time_to_live</code>, time to live (milliseconds) for kept alive connections (default: 1 hour, for Apache HTTP Client).</p> </li>
-       <li> <p><code>scout.http.apache_max_connections_per_route</code>, maximum number of connections per route (default: 1024, for Apache HTTP Client).</p> </li>
-       <li> <p><code>scout.http.apache_max_connections_total</code>, maximum number of connections in total (default: 1024, for Apache HTTP Client).</p> </li>
+       <li> <p><code>scout.http.transport_factory</code>, possible values are <code>org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory</code> (default, see above), <code>org.eclipse.scout.rt.shared.http.NetHttpTransportFactory</code> (to use previous HttpURLConnection layer) or any custom implementation of an <code>org.eclipse.scout.rt.shared.http.IHttpTransportFactory</code>.</p> </li>
       </ul>
+     </div>
+     <div class="paragraph">
+      <p>For the <code>HttpServiceTunnelTransportManager</code>:</p>
+     </div>
+     <div class="ulist">
+      <ul>
+       <li> <p><code>org.eclipse.scout.rt.servicetunnel.apache_connection_time_to_live</code>, time to live (milliseconds) for kept alive connections (default: 1 hour, only applicable for Apache HTTP Client).</p> </li>
+       <li> <p><code>org.eclipse.scout.rt.servicetunnel.apache_max_connections_per_route</code>, maximum number of connections per route (default: 2048, only applicable for for Apache HTTP Client).</p> </li>
+       <li> <p><code>org.eclipse.scout.rt.servicetunnel.apache_max_connections_total</code>, maximum number of connections in total (default: 2048, only applicable for for Apache HTTP Client).</p> </li>
+      </ul>
+     </div>
+     <div class="paragraph">
+      <p>For the <code>DefaultHttpTransportManager</code>:</p>
+     </div>
+     <div class="ulist">
+      <ul>
+       <li> <p><code>scout.http.apache_connection_time_to_live</code>, time to live (milliseconds) for kept alive connections (default: 1 hour, only applicable for Apache HTTP Client).</p> </li>
+       <li> <p><code>scout.http.apache_max_connections_per_route</code>, maximum number of connections per route (default: 32, only applicable for Apache HTTP Client).</p> </li>
+       <li> <p><code>scout.http.apache_max_connections_total</code>, maximum number of connections in total (default: 128, only applicable for Apache HTTP Client).</p> </li>
+      </ul>
+     </div>
+     <div class="paragraph">
+      <p>For each Apache HTTP Client created using the <code>org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory</code> (by default each <code>org.eclipse.scout.rt.shared.http.IHttpTransportManager</code> using the Apache HTTP Client) their own <code>org.eclipse.scout.rt.shared.http.ApacheMultiSessionCookieStore</code> and <code>org.eclipse.scout.rt.shared.http.proxy.ConfigurableProxySelector</code> (see javadoc for detailed description and configurability) are created. These instances are therefore not registered globally for the java virtual machine anymore.</p>
      </div>
      <div class="admonitionblock tip">
       <table>
