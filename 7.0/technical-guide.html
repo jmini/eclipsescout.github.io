@@ -649,7 +649,9 @@ table.CodeRay td.code>pre{padding:0}
      <li><a href="#scout-js">17. Scout JS</a>
       <ul class="sectlevel2">
        <li><a href="#widget">17.1. Widget</a></li>
-       <li><a href="#extensibility-2">17.2. Extensibility</a></li>
+       <li><a href="#form-field">17.2. Form Field</a></li>
+       <li><a href="#value-field">17.3. Value Field</a></li>
+       <li><a href="#extensibility-2">17.4. Extensibility</a></li>
       </ul> </li>
      <li><a href="#apx-cclicence">Appendix A: Licence and Copyright</a>
       <ul class="sectlevel2">
@@ -6933,10 +6935,13 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
       <p>A classic Scout application has a client model written in Java, and a UI which is rendered using JavaScript. With this approach you can write your client code using a mature and type safe language. Unfortunately you cannot develop applications which have to run offline because the UI and the Java model need to be synchronized.</p>
      </div>
      <div class="paragraph">
-      <p>With Scout JS this will change. You will be able to create applications running without a UI server because there won&#x2019;t be a Java model anymore. The client code will be written using JavaScript (or TypeScript) and executed directly in the browser.</p>
+      <p>With Scout JS this will change. You will be able to create applications running without a UI server because there won&#x2019;t be a Java model anymore. The client code will be written using JavaScript and executed directly in the browser.</p>
      </div>
      <div class="paragraph">
       <p>You still don&#x2019;t have to care about how the model will be rendered. There isn&#x2019;t a strict separation of the UI and the model anymore, but that doesn&#x2019;t mean you have to write HTML and CSS. You can of course, if you want to. But typically you will be using the Scout widgets you already know.</p>
+     </div>
+     <div class="paragraph">
+      <p>Scout JS is used in classic Scout applications as well. This means if you understand the concepts of Scout JS, writing custom widgets will be a lot easier.</p>
      </div>
      <div class="sect2">
       <h3 id="widget"><a class="anchor" href="#widget"></a>17.1. Widget</h3>
@@ -7302,9 +7307,50 @@ button.setSelected(<span class="predefined-constant">true</span>);</code></pre>
       </div>
      </div>
      <div class="sect2">
-      <h3 id="extensibility-2"><a class="anchor" href="#extensibility-2"></a>17.2. Extensibility</h3>
+      <h3 id="form-field"><a class="anchor" href="#form-field"></a>17.2. Form Field</h3>
+      <div class="paragraph">
+       <p>A form field is a special kind of a widget. It is mainly used on forms but may actually be added to any other widget.</p>
+      </div>
+      <div class="paragraph">
+       <p>Every form field contains of the following parts:</p>
+      </div>
+      <div id="img-formfield" class="imageblock">
+       <div class="content">
+        <img src="images/formfield.png" alt="formfield">
+       </div>
+       <div class="title">
+        Figure 16. Parts of a form field
+       </div>
+      </div>
+      <div class="paragraph">
+       <p>Typical form fields are <code>StringField</code>, <code>DateField</code> or <code>TableField</code>. All these fields have the API of <code>FormField</code> in common (like <code>setLabel()</code>, <code>setErrorStatus()</code>, etc.) but also provide additional API.</p>
+      </div>
+      <div class="paragraph">
+       <p>Some form fields are actually just a wrapper for another widget. This is for example the case for the <code>TableField</code>. The <code>Table</code> itself may be used stand-alone, just call <code>scout.create('Table', {})</code>. But if you want to use it in a <code>GroupBox</code>, which is a form field, you have to use a <code>TableField</code> wrapping the <code>Table</code>.</p>
+      </div>
+     </div>
+     <div class="sect2">
+      <h3 id="value-field"><a class="anchor" href="#value-field"></a>17.3. Value Field</h3>
+      <div class="paragraph">
+       <p>A value field extends the form field by the ability to store a value. Typical form fields are <code>StringField</code>, <code>NumberField</code>, <code>DateField</code> or <code>SmartField</code>. All these fields provide a value which is accessible using <code>field.value</code> and may be set using <code>field.setValue(value)</code>.</p>
+      </div>
       <div class="sect3">
-       <h4 id="how-to-extend-scout-objects"><a class="anchor" href="#how-to-extend-scout-objects"></a>17.2.1. How to extend Scout objects</h4>
+       <h4 id="parser-validator-formatter"><a class="anchor" href="#parser-validator-formatter"></a>17.3.1. Parser, Validator, Formatter</h4>
+       <div class="paragraph">
+        <p>The value always has the target data type of the field. When using a <code>StringField</code> the type is <code>string</code>, when using a <code>NumberField</code> the type is <code>number</code>, when using a <code>DateField</code> the type is <code>date</code>. This means you don&#x2019;t have to care about how to parse the value from the user input, this will be done by the field for you. The field also validates the value, meaning if the user entered a string in a <code>NumberField</code>, an error is shown. Furthermore, if you already have the value and want to show it in the field, you don&#x2019;t have to format the value by yourself.</p>
+       </div>
+       <div class="paragraph">
+        <p>This process of parsing, validating and formatting is provided by every value field. The responsible functions are <code>parseValue</code>, <code>validateValue</code> and <code>formatValue</code>. If a user enters text, it will be parsed to get the value with the correct type. The value will then be validated to ensure it is allowed to enter that specific value. Afterwards it will be formatted again to make sure the input looks as expected (e.g. if the user enters 2 it may be formatted to 2.0).</p>
+       </div>
+       <div class="paragraph">
+        <p>Even though the fields already provide a default implementation of this functionality, you may want to extend or replace it. For that purpose you may set a custom parser and formatter or one or more validators.</p>
+       </div>
+      </div>
+     </div>
+     <div class="sect2">
+      <h3 id="extensibility-2"><a class="anchor" href="#extensibility-2"></a>17.4. Extensibility</h3>
+      <div class="sect3">
+       <h4 id="how-to-extend-scout-objects"><a class="anchor" href="#how-to-extend-scout-objects"></a>17.4.1. How to extend Scout objects</h4>
        <div class="paragraph">
         <p>The extension feature in Scout JS works by wrapping functions on the prototype of a Scout object with a wrapper function which is provided by an extension. The extension feature doesn&#x2019;t rely on subclassing, instead we simply register one or more extensions for a single Scout class. When a function is called on an extended object, the functions are called on the registered extensions first. Since a Scout class can have multiple extensions, we speak of an extension chain, where the last element of the chain is the original (extended) object.</p>
        </div>
@@ -7365,7 +7411,7 @@ button.setSelected(<span class="predefined-constant">true</span>);</code></pre>
        </div>
       </div>
       <div class="sect3">
-       <h4 id="export-scout-model-from-a-scout-classic-online-application"><a class="anchor" href="#export-scout-model-from-a-scout-classic-online-application"></a>17.2.2. Export Scout model from a Scout classic (online) application</h4>
+       <h4 id="export-scout-model-from-a-scout-classic-online-application"><a class="anchor" href="#export-scout-model-from-a-scout-classic-online-application"></a>17.4.2. Export Scout model from a Scout classic (online) application</h4>
        <div class="paragraph">
         <p>With the steps described here you can export model-data (e.g. forms, tables, etc.) from an existing classic, online Scout application into JSON format which can be used in a Scout JS application. This is a fast and convenient method to re-use an existing form in a Scout JS application, because you don&#x2019;t have to build the model manually. Here&#x2019;s how to use the export feature:</p>
        </div>
