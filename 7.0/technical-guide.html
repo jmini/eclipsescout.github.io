@@ -7337,13 +7337,130 @@ button.setSelected(<span class="predefined-constant">true</span>);</code></pre>
       <div class="sect3">
        <h4 id="parser-validator-formatter"><a class="anchor" href="#parser-validator-formatter"></a>17.3.1. Parser, Validator, Formatter</h4>
        <div class="paragraph">
-        <p>The value always has the target data type of the field. When using a <code>StringField</code> the type is <code>string</code>, when using a <code>NumberField</code> the type is <code>number</code>, when using a <code>DateField</code> the type is <code>date</code>. This means you don&#x2019;t have to care about how to parse the value from the user input, this will be done by the field for you. The field also validates the value, meaning if the user entered a string in a <code>NumberField</code>, an error is shown. Furthermore, if you already have the value and want to show it in the field, you don&#x2019;t have to format the value by yourself.</p>
+        <p>The value always has the target data type of the field. When using a <code>StringField</code> the type is <code>string</code>, when using a <code>NumberField</code> the type is <code>number</code>, when using a <code>DateField</code> the type is <code>date</code>. This means you don&#x2019;t have to care about how to parse the value from the user input, this will be done by the field for you. The field also validates the value, meaning if the user entered an invalid value, an error is shown. Furthermore, if you already have the value and want to show it in the field, you don&#x2019;t have to format the value by yourself.</p>
        </div>
        <div class="paragraph">
-        <p>This process of parsing, validating and formatting is provided by every value field. The responsible functions are <code>parseValue</code>, <code>validateValue</code> and <code>formatValue</code>. If a user enters text, it will be parsed to get the value with the correct type. The value will then be validated to ensure it is allowed to enter that specific value. Afterwards it will be formatted again to make sure the input looks as expected (e.g. if the user enters 2 it may be formatted to 2.0).</p>
+        <p>This process of parsing, validating and formatting is provided by every value field. The responsible functions are <code>parseValue</code>, <code>validateValue</code> and <code>formatValue</code>. If a user enters text, it will be parsed to get the value with the correct type. The value will then be validated to ensure it is allowed to enter that specific value. Afterwards it will be formatted again to make sure the input looks as expected (e.g. if the user enters 2 it may be formatted to 2.0). If you set the vaue programmatically using <code>setValue</code> it is expected that the value already has the correct type, this means parse won&#x2019;t be executed. But the value will be validated, formatted and eventually displayed in the field.</p>
        </div>
        <div class="paragraph">
         <p>Even though the fields already provide a default implementation of this functionality, you may want to extend or replace it. For that purpose you may set a custom parser and formatter or one or more validators.</p>
+       </div>
+       <div class="sect4">
+        <h5 id="custom-parser-and-formatter"><a class="anchor" href="#custom-parser-and-formatter"></a>Custom Parser and Formatter</h5>
+        <div class="paragraph">
+         <p>Typically you don&#x2019;t have to add a custom parser or formatter for a <code>NumberField</code> or <code>DateField</code>. They work with a <code>DecimalFormat</code> or <code>DateFormat</code> which means you can specify a pattern how the number or date should be represented. By default, it uses the pattern of the current locale, so you don&#x2019;t even have to specify anything.</p>
+        </div>
+        <div class="paragraph">
+         <p>For a <code>StringField</code> on the other hand, adding a custom parser or formatter could make sense. Let&#x2019;s say you want to group the text into 4 digit blocks, so that if the user inputs 1111222233334444 it should be converted to 1111-2222-3333-4444. This could be done using the following formatter.</p>
+        </div>
+        <div class="listingblock">
+         <div class="title">
+          Listing 102. Example of a formatter
+         </div>
+         <div class="content">
+          <pre class="CodeRay highlight"><code data-lang="javascript"><span class="keyword">function</span> <span class="function">formatter</span>(value, defaultFormatter) {
+  <span class="keyword">var</span> displayText = defaultFormatter(value);
+  <span class="keyword">if</span> (!displayText) {
+    <span class="keyword">return</span> displayText;
+  }
+  <span class="keyword">return</span> displayText.match(<span class="regexp"><span class="delimiter">/</span><span class="content">.{4}</span><span class="delimiter">/</span><span class="modifier">g</span></span>).join(<span class="string"><span class="delimiter">'</span><span class="content">-</span><span class="delimiter">'</span></span>);
+};</code></pre>
+         </div>
+        </div>
+        <div class="paragraph">
+         <p>Keep in mind that you should call the default formatter first unless you want to replace it completely.</p>
+        </div>
+        <div class="paragraph">
+         <p>To make your formatter active, just use the corresponding setter.</p>
+        </div>
+        <div class="listingblock">
+         <div class="title">
+          Listing 103. Setting the formatter
+         </div>
+         <div class="content">
+          <pre class="CodeRay highlight"><code data-lang="javascript">field.setFormatter(formatter);</code></pre>
+         </div>
+        </div>
+        <div class="paragraph">
+         <p>Formatting the value is most of the time only half the job. You probably want to set a parser as well, so that if the user enters the text with the dashes it will be converted to a string without dashes.</p>
+        </div>
+        <div class="listingblock">
+         <div class="title">
+          Listing 104. Example of a parser
+         </div>
+         <div class="content">
+          <pre class="CodeRay highlight"><code data-lang="javascript"><span class="keyword">function</span> <span class="function">parser</span>(displayText, defaultParser) {
+  <span class="keyword">if</span> (displayText) {
+    <span class="keyword">return</span> displayText.replace(<span class="regexp"><span class="delimiter">/</span><span class="content">-</span><span class="delimiter">/</span><span class="modifier">g</span></span>, <span class="string"><span class="delimiter">'</span><span class="delimiter">'</span></span>);
+  }
+  <span class="keyword">return</span> defaultParser(displayText);
+};</code></pre>
+         </div>
+        </div>
+        <div class="paragraph">
+         <p>Use the corresponding setter to activate the parser.</p>
+        </div>
+        <div class="listingblock">
+         <div class="title">
+          Listing 105. Setting the parser
+         </div>
+         <div class="content">
+          <pre class="CodeRay highlight"><code data-lang="javascript">field.setParser(parser);</code></pre>
+         </div>
+        </div>
+       </div>
+       <div class="sect4">
+        <h5 id="custom-validator"><a class="anchor" href="#custom-validator"></a>Custom Validator</h5>
+        <div class="paragraph">
+         <p>The purpose of a validator is to only allow valid values. This mostly depends on your business rules, this is why the default validators don&#x2019;t do a whole lot of things.</p>
+        </div>
+        <div class="paragraph">
+         <p>See the following example of a validator used by a <code>DateField</code>.</p>
+        </div>
+        <div class="listingblock">
+         <div class="title">
+          Listing 106. Example of a validator
+         </div>
+         <div class="content">
+          <pre class="CodeRay highlight"><code data-lang="javascript"><span class="keyword">function</span>(value) {
+  <span class="keyword">if</span> (scout.dates.isSameDay(value, <span class="keyword">new</span> Date())) {
+    <span class="keyword">throw</span> <span class="string"><span class="delimiter">'</span><span class="content">You are not allowed to select the current date</span><span class="delimiter">'</span></span>;
+  }
+  <span class="keyword">return</span> value;
+};</code></pre>
+         </div>
+        </div>
+        <div class="paragraph">
+         <p>This validator ensures that the user may not enter the current date. If he does, en error status will be shown on the right side of the date field saying 'You are not allowed to select the current date'.</p>
+        </div>
+        <div id="img-datefield-validation-error" class="imageblock">
+         <div class="content">
+          <img src="images/datefield_validation_error.png" alt="datefield validation error">
+         </div>
+         <div class="title">
+          Figure 17. Validation error of a date field
+         </div>
+        </div>
+        <div class="paragraph">
+         <p>As you can see in the example, in order to mark a value as invalid just throw the error message you want to show to the user. You could also throw an error or a <code>scout.Status</code> object. In that case a generic error message will be displayed.</p>
+        </div>
+        <div class="paragraph">
+         <p>In order to activate your validator, you can either call <code>setValidator</code> to replace the existing validator. In that case you should consider calling the default validator first, like you did it for the formatter or parser. Or you can use <code>addValidator</code> which adds the validator to the list of validators of the field.</p>
+        </div>
+        <div class="listingblock">
+         <div class="title">
+          Listing 107. Adding a validator
+         </div>
+         <div class="content">
+          <pre class="CodeRay highlight"><code data-lang="javascript">field.addValidator(validator);</code></pre>
+         </div>
+        </div>
+        <div class="paragraph">
+         <p>Compared to parse and format you may have multiple validators. When the value is validated, every validator is called and has to aggree. If one validation fails, the value is not accepted. This should make it easier to reuse existing validators or separate your validation into tiny validators according to your business rules.</p>
+        </div>
+        <div class="paragraph">
+         <p>If you now ask yourself, why this is not possible for parsing and formatting, consider the following: <code>Validate</code> takes a value and returns a value, the data type is the same for input and output. <code>Parse</code> takes a text and creates a value, <code>format</code> takes a value and creates a text. The data type is likely not the same (besides for the <code>StringField</code>). If you had multiple parsers, the output of the previous parser would be the input of the next one, so depending on the index of your parser you would either get the text or the already parsed value as input. Confusing, isn&#x2019;t it? So in order to keep it simple, there is only one parser and only one formatter for each field.</p>
+        </div>
        </div>
       </div>
      </div>
