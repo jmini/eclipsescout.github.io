@@ -531,7 +531,8 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#new-scout-modules-for-jackson-based-rest-services">New scout modules for Jackson-based REST services</a></li>
        <li><a href="#removed-properties-enabledprocessing-on-ibutton-and-iaction">Removed properties "enabledProcessing" on IButton and IAction</a></li>
        <li><a href="#added-http-abstraction-layer-google-http-client">Added HTTP abstraction layer Google HTTP Client.</a></li>
-       <li><a href="#igroupbox-changed-behaviour-of-getgridcolumncount">IGroupBox: changed behaviour of getGridColumnCount</a></li>
+       <li><a href="#igroupbox-changed-behavior-of-getgridcolumncount">IGroupBox: changed behavior of getGridColumnCount</a></li>
+       <li><a href="#scouttexts">ScoutTexts</a></li>
       </ul> </li>
      <li><a href="#api-changes-javascript">API Changes (JavaScript)</a>
       <ul class="sectlevel2">
@@ -637,7 +638,7 @@ table.CodeRay td.code>pre{padding:0}
       </div>
      </div>
      <div class="sect2">
-      <h3 id="igroupbox-changed-behaviour-of-getgridcolumncount"><a class="anchor" href="#igroupbox-changed-behaviour-of-getgridcolumncount"></a>IGroupBox: changed behaviour of getGridColumnCount</h3>
+      <h3 id="igroupbox-changed-behavior-of-getgridcolumncount"><a class="anchor" href="#igroupbox-changed-behavior-of-getgridcolumncount"></a>IGroupBox: changed behavior of getGridColumnCount</h3>
       <div class="paragraph">
        <p>The function <code>getGridColumnCount()</code> returned the calculated column count of the grid. This has been changed so that it returns the configured one which is not necessarily the same.</p>
       </div>
@@ -646,6 +647,18 @@ table.CodeRay td.code>pre{padding:0}
       </div>
       <div class="paragraph">
        <p>So in case you used this method, you should consider calling <code>getFieldGrid().getGridColumnCount()</code> instead.</p>
+      </div>
+     </div>
+     <div class="sect2">
+      <h3 id="scouttexts"><a class="anchor" href="#scouttexts"></a>ScoutTexts</h3>
+      <div class="paragraph">
+       <p>Removed support for session scope specific <code>ScoutTexts</code> instances because support of scoped services was removed in Scout without OSGi (version &gt;= 5.0).</p>
+      </div>
+      <div class="paragraph">
+       <p>Changes: * <code>ScoutTexts</code> is now an application-scoped bean * <code>ScoutTexts.CURRENT</code> thread local removed without replacement (use <code>BEANS.get(ScoutTexts.class)</code> instead)</p>
+      </div>
+      <div class="paragraph">
+       <p>Deprecations (methods will be removed in P-release): * <code>ScoutTexts.get</code> &#x2192; <code>TEXTS.get</code> * <code>ScoutTexts.getInstance()</code> &#x2192; <code>BEANS.get(ScoutTexts.class)</code> * <code>ISession.getTexts()</code> &#x2192; <code>BEANS.get(ScoutTexts.class)</code> * <code>AbstractSqlService.getConfiguredNlsProvider()</code> &#x2192; method is not used anymore (returns <code>null</code>) * <code>AbstractSqlService.getNlsProvider()</code> &#x2192; method is not used anymore (returns <code>null</code>)</p>
       </div>
      </div>
     </div>
