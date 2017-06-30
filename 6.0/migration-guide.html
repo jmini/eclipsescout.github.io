@@ -526,7 +526,10 @@ table.CodeRay td.code>pre{padding:0}
      Table of Contents
     </div> 
     <ul class="sectlevel1"> 
-     <li><a href="#service-release-migration">Service Release Migration</a></li> 
+     <li><a href="#about-this-document">About This Document</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#service-release-migration">Service Release Migration</a></li> 
+      </ul> </li> 
      <li><a href="#project-structure">Project Structure</a></li> 
      <li><a href="#manifest-mf">Manifest.MF</a></li> 
      <li><a href="#accesscontrolservice">AccessControlService</a></li> 
@@ -569,7 +572,7 @@ table.CodeRay td.code>pre{padding:0}
      <li><a href="#logging-api">Logging API</a></li> 
      <li><a href="#logging-configuration">Logging configuration</a></li> 
      <li><a href="#text-cleanup">Text cleanup</a></li> 
-     <li><a href="#migrate-to-the-new-job-api">Migrate to the new Job API</a> 
+     <li><a href="#new-job-api">New Job API</a> 
       <ul class="sectlevel2"> 
        <li><a href="#in-a-nutshell">In a nutshell</a></li> 
        <li><a href="#static-accessors">Static accessors</a></li> 
@@ -602,37 +605,41 @@ table.CodeRay td.code>pre{padding:0}
    </div> 
   </div> 
   <div id="content"> 
-   <div id="preamble"> 
-    <div class="sectionbody"> 
-     <div class="paragraph"> 
-      <p>This document describes what needs to be done when migrating from Eclipse Scout 5.0 to Eclipse Scout 6.0. If you are updating to a 6.0 service release, see the chapter <a href="#service-release-migration">Service Release Migration</a>.</p> 
-     </div> 
-    </div> 
-   </div> 
    <div class="sect1"> 
-    <h2 id="service-release-migration"><a class="anchor" href="#service-release-migration"></a>Service Release Migration</h2> 
+    <h2 id="about-this-document"><a class="anchor" href="#about-this-document"></a>About This Document</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
-      <p><strong>Neon.3 (6.0.300)</strong></p> 
+      <p>This document describes all relevant changes <strong>from Eclipse Scout 5.0 to Eclipse Scout 6.0</strong>. If existing code has to be migrated, instructions are provided here.</p> 
      </div> 
-     <div class="ulist"> 
-      <ul> 
-       <li> <p><a href="#jax-ws-pooled-port-provider-since-6-0-300">JAX-WS Pooled Port Provider (since 6.0.300)</a></p> </li> 
-      </ul> 
-     </div> 
-     <div class="paragraph"> 
-      <p><strong>Neon.2 (6.0.200)</strong></p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>None.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p><strong>Neon.1 (6.0.100)</strong></p> 
-     </div> 
-     <div class="ulist"> 
-      <ul> 
-       <li> <p><a href="#changed-behavior-for-tables-with-autoresizecolumns-true-since-6-0-100">Changed behavior for tables with autoResizeColumns = true (since 6.0.100)</a></p> </li> 
-      </ul> 
+     <div class="sect2"> 
+      <h3 id="service-release-migration"><a class="anchor" href="#service-release-migration"></a>Service Release Migration</h3> 
+      <div class="paragraph"> 
+       <p>The following changes were made after the inital 6.0 release. Follow these instructions when updating to a <em>service release</em>.</p> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="neon-3-6-0-300"><a class="anchor" href="#neon-3-6-0-300"></a>Neon.3 (6.0.300)</h4> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p><a href="#jax-ws-pooled-port-provider-since-6-0-300">JAX-WS Pooled Port Provider (since 6.0.300)</a></p> </li> 
+        </ul> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="neon-2-6-0-200"><a class="anchor" href="#neon-2-6-0-200"></a>Neon.2 (6.0.200)</h4> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p>No migration required</p> </li> 
+        </ul> 
+       </div> 
+      </div> 
+      <div class="sect3"> 
+       <h4 id="neon-1-6-0-100"><a class="anchor" href="#neon-1-6-0-100"></a>Neon.1 (6.0.100)</h4> 
+       <div class="ulist"> 
+        <ul> 
+         <li> <p><a href="#changed-behavior-for-tables-with-autoresizecolumns-true-since-6-0-100">Changed behavior for tables with autoResizeColumns = true (since 6.0.100)</a></p> </li> 
+        </ul> 
+       </div> 
+      </div> 
      </div> 
     </div> 
    </div> 
@@ -1504,7 +1511,7 @@ replace: ERROR</pre>
     </div> 
    </div> 
    <div class="sect1"> 
-    <h2 id="migrate-to-the-new-job-api"><a class="anchor" href="#migrate-to-the-new-job-api"></a>Migrate to the new Job API</h2> 
+    <h2 id="new-job-api"><a class="anchor" href="#new-job-api"></a>New Job API</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
       <p>Eclipse jobs are replaced by Scout Job Manager API.</p> 
@@ -2620,7 +2627,7 @@ new:   getConfiguredPortProvider(Class&lt;SERVICE&gt;, Class&lt;PORT&gt;, URL, S
        <tbody>
         <tr> 
          <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
-         <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/blob/releases/6.0.x/docs/build/scout_migration/src/docs/migration-guide.adoc">edit this page</a> on GitHub. </td> 
+         <td class="content"> Do you want to improve this document? Have a look at the <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/blob/releases/6.0.x/docs/build/scout_migration/src/docs/migration-guide.adoc">sources</a> on GitHub. </td> 
         </tr> 
        </tbody>
       </table> 
@@ -2642,7 +2649,7 @@ new:   getConfiguredPortProvider(Class&lt;SERVICE&gt;, Class&lt;PORT&gt;, URL, S
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0
-    <br /> Last updated 2017-05-01 09:46:25 CEST 
+    <br /> Last updated 2017-06-21 15:22:26 CEST 
    </div> 
   </div>  
  </body>

@@ -636,6 +636,10 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#jaxws.xmladapters">15.7. XML adapters to work with java.util.Date and java.util.Calendar</a></li> 
        <li><a href="#jax-ws-appendix">15.8. JAX-WS Appendix</a></li> 
       </ul> </li> 
+     <li><a href="#html-ui">16. HTML UI</a> 
+      <ul class="sectlevel2"> 
+       <li><a href="#browser-support">16.1. Browser Support</a></li> 
+      </ul> </li> 
      <li><a href="#apx-cclicence">Appendix A: Licence and Copyright</a> 
       <ul class="sectlevel2"> 
        <li><a href="#licence-summary">A.1. Licence Summary</a></li> 
@@ -6842,6 +6846,92 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
     </div> 
    </div> 
    <div class="sect1"> 
+    <h2 id="html-ui"><a class="anchor" href="#html-ui"></a>16. HTML UI</h2> 
+    <div class="sectionbody"> 
+     <div class="sect2"> 
+      <h3 id="browser-support"><a class="anchor" href="#browser-support"></a>16.1. Browser Support</h3> 
+      <div class="paragraph"> 
+       <p>The Scout HTML UI requires a web browser with modern built-in technologies: HTML 5, CSS 3, JavaScript (ECMAScript 5). Scout does its best to support all browsers widely in use today by making use of vendor-specific prefixes, polyfills or other workarounds. However, some older or obscure browsers are not supported deliberately, simply because they are lacking basic capabilities or the required effort would be beyond reason.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Here is a non-exhaustive list of supported browsers:</p> 
+      </div> 
+      <div class="dlist"> 
+       <dl> 
+        <dt class="hdlist1">
+         Desktop
+        </dt> 
+        <dd> 
+         <div class="ulist"> 
+          <ul> 
+           <li> <p>Mozilla Firefox &gt;= 35</p> </li> 
+           <li> <p>Google Chrome &gt;= 36</p> </li> 
+           <li> <p>Microsoft Internet Explorer &gt;= 9 (preferrably 10 or later, see limitations listed below)</p> </li> 
+           <li> <p>Microsoft Edge &gt;= 12</p> </li> 
+           <li> <p>Apple Safari &gt;= 7</p> </li> 
+          </ul> 
+         </div> 
+        </dd> 
+        <dt class="hdlist1">
+         Mobile
+        </dt> 
+        <dd> 
+         <p><em>(Due to the nature of mobile operating systems, it is hard to specify exact versions of supported browsers. Usually, the screen size and the device speed are the limiting factors.)</em></p> 
+         <div class="ulist"> 
+          <ul> 
+           <li> <p>iOS &gt;= 8</p> </li> 
+           <li> <p>Android &gt;= 5</p> </li> 
+           <li> <p>Windows Mobile &gt;= 10</p> </li> 
+          </ul> 
+         </div> 
+        </dd> 
+       </dl> 
+      </div> 
+      <table class="tableblock frame-all grid-all spread"> 
+       <caption class="title">
+        Table 4. Known Limitations
+       </caption> 
+       <colgroup> 
+        <col style="width: 25%;" /> 
+        <col style="width: 75%;" /> 
+       </colgroup> 
+       <thead> 
+        <tr> 
+         <th class="tableblock halign-left valign-top">Affected System</th> 
+         <th class="tableblock halign-left valign-top">Description</th> 
+        </tr> 
+       </thead> 
+       <tbody> 
+        <tr> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Internet Explorer 9</p></td> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Drag and drop</strong> of files from disk to the file chooser is not possible. IE9 is missing the required API (and it cannot be added with a polyfill). You can also only <strong>upload one file at a time</strong>, because the File API is missing as well.</p></td> 
+        </tr> 
+        <tr> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Internet Explorer 9</p></td> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>On-field labels</strong> are not visible in IE9 because it lacks support for the &quot;placeholder&quot; attribute.</p></td> 
+        </tr> 
+        <tr> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Internet Explorer 9</p></td> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Some <strong>loading animations</strong> may appear static, because IE9 does not support CSS3 animations.</p></td> 
+        </tr> 
+        <tr> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Internet Explorer 9</p></td> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Tables and trees with many entries tend to degrade <strong>performance</strong> in IE9.</p></td> 
+        </tr> 
+        <tr> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Internet Explorer</p></td> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">If the browser is configured to enable the so-called <strong>&quot;protected mode&quot;</strong>, the state of a popup window cannot be determined correctly. This is noticeable when a <code>AbstractBrowserField</code> has the property <em>&quot;show in external window&quot;</em> set to <code>true</code>. Even though the popup window is still open, the method <code>execExternalWindowStateChanged()</code> is called immediately, telling you the window was closed (because IE reports so). There is no workaround for this problem, apart from disabling the &quot;protected mode&quot;.</p></td> 
+        </tr> 
+        <tr> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Internet Explorer and Edge</p></td> 
+         <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Performance in popup windows</strong> (e.g. opening a form with <code>DISPLAY_HINT_POPUP_WINDOW</code>) is very poor. We have <a href="https://connect.microsoft.com/IE/feedback/details/1778700/edge-manipulating-dom-from-another-window-is-slow-in-ms-edge">filed a bug</a> with the folks at Microsoft in 2015, but unfortunately the issue is still unresolved. To prevent slow forms in IE, they should be using a different display hint. Alternatively, users can use a different browser.</p></td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect1"> 
     <h2 id="apx-cclicence"><a class="anchor" href="#apx-cclicence"></a>Appendix A: Licence and Copyright</h2> 
     <div class="sectionbody"> 
      <div class="paragraph"> 
@@ -6916,7 +7006,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
         <tbody>
          <tr> 
           <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
-          <td class="content"> Do you want to improve this document? Please <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/blob/releases/6.0.x/docs/build/technical_guide/src/docs/technical-guide.adoc">edit this page</a> on GitHub. </td> 
+          <td class="content"> Do you want to improve this document? Have a look at the <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/blob/releases/6.0.x/docs/build/technical_guide/src/docs/technical-guide.adoc">sources</a> on GitHub. </td> 
          </tr> 
         </tbody>
        </table> 
@@ -7003,7 +7093,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
   <div id="footer"> 
    <div id="footer-text">
      Version 6.0
-    <br /> Last updated 2017-05-01 09:46:25 CEST 
+    <br /> Last updated 2017-06-30 14:24:05 CEST 
    </div> 
   </div>  
  </body>
