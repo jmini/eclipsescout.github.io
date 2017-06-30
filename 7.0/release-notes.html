@@ -525,107 +525,87 @@ table.CodeRay td.code>pre{padding:0}
     <div id="toctitle">
      Table of Contents
     </div>
-    <ul class="sectlevel0">
-     <li><a href="#overview">Overview</a>
-      <ul class="sectlevel1">
-       <li><a href="#lastest-stable-version">Lastest stable version</a>
-        <ul class="sectlevel2">
-         <li><a href="#runtime-scout-rt">Runtime (Scout RT)</a></li>
-         <li><a href="#eclipse-tooling-scout-sdk">Eclipse Tooling (Scout SDK)</a></li>
-         <li><a href="#demo-applications">Demo Applications</a></li>
-        </ul> </li>
+    <ul class="sectlevel1">
+     <li><a href="#about-this-release">About This Release</a>
+      <ul class="sectlevel2">
+       <li><a href="#obtaining-the-latest-version">Obtaining the Latest Version</a></li>
       </ul> </li>
-     <li><a href="#what-s-new">What&#x2019;s New</a>
-      <ul class="sectlevel1">
-       <li><a href="#upgrade-to-jquery-3">Upgrade to jQuery 3</a></li>
-       <li><a href="#scout-js">Scout JS</a>
-        <ul class="sectlevel2">
-         <li><a href="#validators-parser-and-formatter-js">Validators, Parser and Formatter (JS)</a></li>
-         <li><a href="#simplified-api-js">Simplified API (JS)</a></li>
-         <li><a href="#logical-grid-validation-js">Logical Grid Validation (JS)</a></li>
-        </ul> </li>
-       <li><a href="#new-http-abstraction-layer-google-http-client-for-java">New HTTP abstraction layer Google HTTP Client for Java</a></li>
-       <li><a href="#support-for-rest-services">Support for REST services</a></li>
-       <li><a href="#prevent-double-clicks-on-buttons-and-menus">Prevent double clicks on buttons and menus</a></li>
+     <li><a href="#upgrade-to-jquery-3">Upgrade to jQuery 3</a></li>
+     <li><a href="#scout-js">Scout JS</a>
+      <ul class="sectlevel2">
+       <li><a href="#validators-parser-and-formatter-js">Validators, Parser and Formatter (JS)</a></li>
+       <li><a href="#simplified-api-js">Simplified API (JS)</a></li>
+       <li><a href="#logical-grid-validation-js">Logical Grid Validation (JS)</a></li>
       </ul> </li>
+     <li><a href="#new-http-abstraction-layer-google-http-client-for-java">New HTTP abstraction layer Google HTTP Client for Java</a></li>
+     <li><a href="#support-for-rest-services">Support for REST services</a></li>
+     <li><a href="#prevent-double-clicks-on-buttons-and-menus">Prevent double clicks on buttons and menus</a></li>
     </ul>
    </div>
   </div>
   <div id="content">
-   <h1 id="overview" class="sect0"><a class="anchor" href="#overview"></a>Overview</h1>
-   <div class="openblock partintro">
-    <div class="content">
-     <div class="paragraph">
-      <p>Eclipse Scout 7.0 is the Eclipse Oxygen release.</p>
-     </div>
-     <div class="paragraph">
-      <p>The official release for Eclipse Oxygen is June 2017. See also <a href="https://wiki.eclipse.org/Oxygen/Simultaneous_Release_Plan" class="bare">https://wiki.eclipse.org/Oxygen/Simultaneous_Release_Plan</a> for the release schedule.</p>
-     </div>
-    </div>
-   </div>
    <div class="sect1">
-    <h2 id="lastest-stable-version"><a class="anchor" href="#lastest-stable-version"></a>Lastest stable version</h2>
+    <h2 id="about-this-release"><a class="anchor" href="#about-this-release"></a>About This Release</h2>
     <div class="sectionbody">
+     <div class="paragraph">
+      <p>Eclipse Scout 7.0 is part of the Eclipse <em>Oxygen</em> release. It was release in June 2017 (<a href="https://wiki.eclipse.org/Simultaneous_Release">release schedule</a>). The latest version of this release is <em>7.0.0.008_Oxygen</em>.</p>
+     </div>
+     <div class="admonitionblock important">
+      <table>
+       <tbody>
+        <tr>
+         <td class="icon"> <i class="fa icon-important" title="Important"></i> </td>
+         <td class="content"> If you are upgrading from version 6.0, please also read the release notes for the 6.1 (<em>Oxygen preview</em>) release:<br> <a href="https://eclipsescout.github.io/6.1/release-notes.html" class="bare">https://eclipsescout.github.io/6.1/release-notes.html</a> </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <div class="paragraph">
+      <p>You can see the <a href="https://github.com/eclipse/scout.rt/compare/releases/6.1.x%2E%2E%2Ereleases/7.0.x">detailed change log</a> on GitHub.</p>
+     </div>
      <div class="sect2">
-      <h3 id="runtime-scout-rt"><a class="anchor" href="#runtime-scout-rt"></a>Runtime (Scout RT)</h3>
-      <div class="paragraph">
-       <p>Eclipse Runtime on maven central: Version <code>7.0.0.008_Oxygen</code></p>
-      </div>
-      <div class="paragraph">
-       <p>Usage example in the parent POM of your scout application:</p>
-      </div>
-      <div class="listingblock">
-       <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+      <h3 id="obtaining-the-latest-version"><a class="anchor" href="#obtaining-the-latest-version"></a>Obtaining the Latest Version</h3>
+      <div class="sect3">
+       <h4 id="runtime-scout-rt"><a class="anchor" href="#runtime-scout-rt"></a>Runtime (Scout RT)</h4>
+       <div class="paragraph">
+        <p>Scout RT artifacts are distributed via Maven:</p>
+       </div>
+       <div class="ulist">
+        <ul>
+         <li> <p><a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%227.0.0.008_Oxygen%22">7.0.0.008_Oxygen</a> on <em>Maven Central</em></p> </li>
+         <li> <p><a href="https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.0.008_Oxygen">7.0.0.008_Oxygen</a> on <em>mvnrepository.com</em></p> </li>
+        </ul>
+       </div>
+       <div class="paragraph">
+        <p>Usage example in the parent POM of your Scout application:</p>
+       </div>
+       <div class="listingblock">
+        <div class="content">
+         <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.eclipse.scout.rt<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>org.eclipse.scout.rt<span class="tag">&lt;/artifactId&gt;</span>
     <span class="tag">&lt;version&gt;</span>7.0.0.008_Oxygen<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
     <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+        </div>
        </div>
       </div>
-      <div class="paragraph">
-       <p>See this artifact on mvnrepository.com: <a href="https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.0.008_Oxygen">org.eclipse.scout.rt</a></p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="eclipse-tooling-scout-sdk"><a class="anchor" href="#eclipse-tooling-scout-sdk"></a>Eclipse Tooling (Scout SDK)</h3>
-      <div class="paragraph">
-       <p>Eclipse IDE distribution (also called EPP): <a href="https://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygen">Eclipse for Scout Developers (Oxygen)</a></p>
-      </div>
-      <div class="paragraph">
-       <p>Update site to install the Scout SDK in your Eclipse IDE (already installed in the Scout EPP):</p>
-      </div>
-      <div class="listingblock">
-       <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="plain">http://download.eclipse.org/scout/releases/7.0/7.0.0/008_Oxygen/</code></pre>
+      <div class="sect3">
+       <h4 id="eclipse-ide-tooling-scout-sdk"><a class="anchor" href="#eclipse-ide-tooling-scout-sdk"></a>Eclipse IDE Tooling (Scout SDK)</h4>
+       <div class="paragraph">
+        <p>You can download the complete Eclipse IDE with Scout SDK included (EPP) here:<br> <a href="https://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygen">Eclipse for Scout Developers</a></p>
+       </div>
+       <div class="paragraph">
+        <p>To install the Scout SDK into your existing Eclipse IDE, use this update site:<br> <a href="http://download.eclipse.org/scout/releases/7.0/7.0.0/008_Oxygen/" class="bare">http://download.eclipse.org/scout/releases/7.0/7.0.0/008_Oxygen/</a></p>
        </div>
       </div>
-     </div>
-     <div class="sect2">
-      <h3 id="demo-applications"><a class="anchor" href="#demo-applications"></a>Demo Applications</h3>
-      <div class="paragraph">
-       <p>The demo applications using this version can be found on the <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.0.008_Oxygen">features/version/7.0.0.008_Oxygen</a> branch of our docs repository on GitHub.</p>
+      <div class="sect3">
+       <h4 id="demo-applications"><a class="anchor" href="#demo-applications"></a>Demo Applications</h4>
+       <div class="paragraph">
+        <p>The demo applications for this version can be found on the <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.0.008_Oxygen">features/version/7.0.0.008_Oxygen</a> branch of our docs repository on GitHub.</p>
+       </div>
       </div>
-     </div>
-    </div>
-   </div>
-   <h1 id="what-s-new" class="sect0"><a class="anchor" href="#what-s-new"></a>What&#x2019;s New</h1>
-   <div class="openblock partintro">
-    <div class="content">
-     <div class="paragraph">
-      <p>This document shows some of the new features delivered with the release 7.0. The release contains a lot of bugfixes and even some features not mentioned here. If you are interested in the detailed change log see <a href="https://github.com/eclipse/scout.rt/compare/releases/6.1.x%2E%2E%2Ereleases/7.0.x">https://github.com/eclipse/scout.rt/compare/releases/6.1.x&#x2026;&#x200b;releases/7.0.x</a>.</p>
-     </div>
-     <div class="admonitionblock note">
-      <table>
-       <tbody>
-        <tr>
-         <td class="icon"> <i class="fa icon-note" title="Note"></i> </td>
-         <td class="content"> If you upgrade from version 6.0, also see the release notes for the 6.1 release.<br> <a href="https://eclipsescout.github.io/6.1/release-notes.html" class="bare">https://eclipsescout.github.io/6.1/release-notes.html</a><br> </td>
-        </tr>
-       </tbody>
-      </table>
      </div>
     </div>
    </div>
@@ -776,7 +756,7 @@ table.CodeRay td.code>pre{padding:0}
   <div id="footer">
    <div id="footer-text">
      Version 7.0
-    <br> Last updated 2017-06-19 11:01:23 CEST
+    <br> Last updated 2017-06-30 14:21:49 CEST
    </div>
   </div>
  </body>

@@ -646,12 +646,16 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#jaxws.xmladapters">16.7. XML adapters to work with java.util.Date and java.util.Calendar</a></li>
        <li><a href="#jax-ws-appendix">16.8. JAX-WS Appendix</a></li>
       </ul> </li>
-     <li><a href="#scout-js">17. Scout JS</a>
+     <li><a href="#html-ui">17. HTML UI</a>
       <ul class="sectlevel2">
-       <li><a href="#widget">17.1. Widget</a></li>
-       <li><a href="#form-field">17.2. Form Field</a></li>
-       <li><a href="#value-field">17.3. Value Field</a></li>
-       <li><a href="#extensibility-2">17.4. Extensibility</a></li>
+       <li><a href="#browser-support">17.1. Browser Support</a></li>
+      </ul> </li>
+     <li><a href="#scout-js">18. Scout JS</a>
+      <ul class="sectlevel2">
+       <li><a href="#widget">18.1. Widget</a></li>
+       <li><a href="#form-field">18.2. Form Field</a></li>
+       <li><a href="#value-field">18.3. Value Field</a></li>
+       <li><a href="#extensibility-2">18.4. Extensibility</a></li>
       </ul> </li>
      <li><a href="#apx-cclicence">Appendix A: Licence and Copyright</a>
       <ul class="sectlevel2">
@@ -6929,7 +6933,93 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
     </div>
    </div>
    <div class="sect1">
-    <h2 id="scout-js"><a class="anchor" href="#scout-js"></a>17. Scout JS</h2>
+    <h2 id="html-ui"><a class="anchor" href="#html-ui"></a>17. HTML UI</h2>
+    <div class="sectionbody">
+     <div class="sect2">
+      <h3 id="browser-support"><a class="anchor" href="#browser-support"></a>17.1. Browser Support</h3>
+      <div class="paragraph">
+       <p>The Scout HTML UI requires a web browser with modern built-in technologies: HTML 5, CSS 3, JavaScript (ECMAScript 5). Scout does its best to support all browsers widely in use today by making use of vendor-specific prefixes, polyfills or other workarounds. However, some older or obscure browsers are not supported deliberately, simply because they are lacking basic capabilities or the required effort would be beyond reason.</p>
+      </div>
+      <div class="paragraph">
+       <p>Here is a non-exhaustive list of supported browsers:</p>
+      </div>
+      <div class="dlist">
+       <dl>
+        <dt class="hdlist1">
+         Desktop
+        </dt>
+        <dd>
+         <div class="ulist">
+          <ul>
+           <li> <p>Mozilla Firefox &gt;= 35</p> </li>
+           <li> <p>Google Chrome &gt;= 36</p> </li>
+           <li> <p>Microsoft Internet Explorer &gt;= 9 (preferrably 10 or later, see limitations listed below)</p> </li>
+           <li> <p>Microsoft Edge &gt;= 12</p> </li>
+           <li> <p>Apple Safari &gt;= 7</p> </li>
+          </ul>
+         </div>
+        </dd>
+        <dt class="hdlist1">
+         Mobile
+        </dt>
+        <dd>
+         <p><em>(Due to the nature of mobile operating systems, it is hard to specify exact versions of supported browsers. Usually, the screen size and the device speed are the limiting factors.)</em></p>
+         <div class="ulist">
+          <ul>
+           <li> <p>iOS &gt;= 8</p> </li>
+           <li> <p>Android &gt;= 5</p> </li>
+           <li> <p>Windows Mobile &gt;= 10</p> </li>
+          </ul>
+         </div>
+        </dd>
+       </dl>
+      </div>
+      <table class="tableblock frame-all grid-all spread">
+       <caption class="title">
+        Table 4. Known Limitations
+       </caption>
+       <colgroup>
+        <col style="width: 25%;">
+        <col style="width: 75%;">
+       </colgroup>
+       <thead>
+        <tr>
+         <th class="tableblock halign-left valign-top">Affected System</th>
+         <th class="tableblock halign-left valign-top">Description</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Internet Explorer 9</p></td>
+         <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Drag and drop</strong> of files from disk to the file chooser is not possible. IE9 is missing the required API (and it cannot be added with a polyfill). You can also only <strong>upload one file at a time</strong>, because the File API is missing as well.</p></td>
+        </tr>
+        <tr>
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Internet Explorer 9</p></td>
+         <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>On-field labels</strong> are not visible in IE9 because it lacks support for the "placeholder" attribute.</p></td>
+        </tr>
+        <tr>
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Internet Explorer 9</p></td>
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Some <strong>loading animations</strong> may appear static, because IE9 does not support CSS3 animations.</p></td>
+        </tr>
+        <tr>
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Internet Explorer 9</p></td>
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Tables and trees with many entries tend to degrade <strong>performance</strong> in IE9.</p></td>
+        </tr>
+        <tr>
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Internet Explorer</p></td>
+         <td class="tableblock halign-left valign-top"><p class="tableblock">If the browser is configured to enable the so-called <strong>"protected mode"</strong>, the state of a popup window cannot be determined correctly. This is noticeable when a <code>AbstractBrowserField</code> has the property <em>"show in external window"</em> set to <code>true</code>. Even though the popup window is still open, the method <code>execExternalWindowStateChanged()</code> is called immediately, telling you the window was closed (because IE reports so). There is no workaround for this problem, apart from disabling the "protected mode".</p></td>
+        </tr>
+        <tr>
+         <td class="tableblock halign-left valign-top"><p class="tableblock">Internet Explorer and Edge</p></td>
+         <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Performance in popup windows</strong> (e.g. opening a form with <code>DISPLAY_HINT_POPUP_WINDOW</code>) is very poor. We have <a href="https://connect.microsoft.com/IE/feedback/details/1778700/edge-manipulating-dom-from-another-window-is-slow-in-ms-edge">filed a bug</a> with the folks at Microsoft in 2015, but unfortunately the issue is still unresolved. To prevent slow forms in IE, they should be using a different display hint. Alternatively, users can use a different browser.</p></td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="scout-js"><a class="anchor" href="#scout-js"></a>18. Scout JS</h2>
     <div class="sectionbody">
      <div class="paragraph">
       <p>A classic Scout application has a client model written in Java, and a UI which is rendered using JavaScript. With this approach you can write your client code using a mature and type safe language. Unfortunately you cannot develop applications which have to run offline because the UI and the Java model need to be synchronized.</p>
@@ -6944,12 +7034,12 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
       <p>Scout JS is used in classic Scout applications as well. This means if you understand the concepts of Scout JS, writing custom widgets will be a lot easier.</p>
      </div>
      <div class="sect2">
-      <h3 id="widget"><a class="anchor" href="#widget"></a>17.1. Widget</h3>
+      <h3 id="widget"><a class="anchor" href="#widget"></a>18.1. Widget</h3>
       <div class="paragraph">
        <p>A widget is a component which may be rendered. It may be simple like a label, or more complex like a tree or table. A form is a widget and a form field, too. A widget contains the model, which represents the state of the widget. In a Scout Classic application, that model will be sent from the UI server to the browser and the Scout UI will use that model to create the widget. In a Scout JS app, the model may be provided using JSON or directly with JavaScript.</p>
       </div>
       <div class="sect3">
-       <h4 id="lifecycle"><a class="anchor" href="#lifecycle"></a>17.1.1. Lifecycle</h4>
+       <h4 id="lifecycle"><a class="anchor" href="#lifecycle"></a>18.1.1. Lifecycle</h4>
        <div class="paragraph">
         <p>Every widget has a lifecycle. After a widget is instantiated, it has to be initialized using <code>init</code>. If you want to display it, you have to call the <code>render</code> method. If you want to remove it from the DOM, call the <code>remove</code> method. Removing a widget is not the same as destroying it. You can still use it, you can for example change some properties and then render it again. If you really don&#x2019;t need it anymore, call the <code>destroy</code> method.</p>
        </div>
@@ -6971,7 +7061,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
        </div>
       </div>
       <div class="sect3">
-       <h4 id="creating-a-widget"><a class="anchor" href="#creating-a-widget"></a>17.1.2. Creating a Widget</h4>
+       <h4 id="creating-a-widget"><a class="anchor" href="#creating-a-widget"></a>18.1.2. Creating a Widget</h4>
        <div class="paragraph">
         <p>A widget may be created using the constructor function or <code>scout.create</code>. Best practice is to always use <code>scout.create</code> which gives you two benefits:</p>
        </div>
@@ -7018,7 +7108,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
        </div>
       </div>
       <div class="sect3">
-       <h4 id="creating-a-widget-using-json"><a class="anchor" href="#creating-a-widget-using-json"></a>17.1.3. Creating a Widget using JSON</h4>
+       <h4 id="creating-a-widget-using-json"><a class="anchor" href="#creating-a-widget-using-json"></a>18.1.3. Creating a Widget using JSON</h4>
        <div class="paragraph">
         <p>Using the JSON based approach makes it easier to specify multiple widgets in a structured way. The following example defines a form with a group box and a string field.</p>
        </div>
@@ -7069,7 +7159,7 @@ org.eclipse.jdt.apt.reconcileEnabled=true</code></pre>
        </div>
       </div>
       <div class="sect3">
-       <h4 id="properties-2"><a class="anchor" href="#properties-2"></a>17.1.4. Properties</h4>
+       <h4 id="properties-2"><a class="anchor" href="#properties-2"></a>18.1.4. Properties</h4>
        <div class="paragraph">
         <p>As seen before, every widget has a model representing its state. This model is written onto the widget at the time it is being instantiated. The properties of that model are now available as properties of the widget. So in order to access such a property, just call <code>widget.yourProperty</code>. If you want to modify the property, just call <code>widget.setYourProperty(value)</code>.</p>
        </div>
@@ -7102,7 +7192,7 @@ console.log(field.labelVisible); <span class="comment">// prints true</span></co
        </div>
       </div>
       <div class="sect3">
-       <h4 id="widget-properties"><a class="anchor" href="#widget-properties"></a>17.1.5. Widget Properties</h4>
+       <h4 id="widget-properties"><a class="anchor" href="#widget-properties"></a>18.1.5. Widget Properties</h4>
        <div class="paragraph">
         <p>A widget property is a special kind of a property which references another widget.</p>
        </div>
@@ -7149,7 +7239,7 @@ console.log(groupBox.fields[<span class="integer">0</span>] <span class="keyword
        </div>
       </div>
       <div class="sect3">
-       <h4 id="events"><a class="anchor" href="#events"></a>17.1.6. Events</h4>
+       <h4 id="events"><a class="anchor" href="#events"></a>18.1.6. Events</h4>
        <div class="paragraph">
         <p>Every widget supports event handling by using the class <code>scout.EventSupport</code>. This allows the widgets to attach listeners to other widgets and getting informed when an event happens.</p>
        </div>
@@ -7275,7 +7365,7 @@ button.setSelected(<span class="predefined-constant">true</span>);</code></pre>
        </div>
       </div>
       <div class="sect3">
-       <h4 id="icons-2"><a class="anchor" href="#icons-2"></a>17.1.7. Icons</h4>
+       <h4 id="icons-2"><a class="anchor" href="#icons-2"></a>18.1.7. Icons</h4>
        <div class="paragraph">
         <p>Widgets that have a property <code>iconId</code> (for instance <code>Menu</code>) can display an icon. This iconId references an icon which can be either a bitmap image (GIF, PNG, JPEG, etc.) or a character from an icon-font. An example for an icon-font is the <em>scoutIcons.ttf</em> which comes shipped with Scout.</p>
        </div>
@@ -7307,7 +7397,7 @@ button.setSelected(<span class="predefined-constant">true</span>);</code></pre>
       </div>
      </div>
      <div class="sect2">
-      <h3 id="form-field"><a class="anchor" href="#form-field"></a>17.2. Form Field</h3>
+      <h3 id="form-field"><a class="anchor" href="#form-field"></a>18.2. Form Field</h3>
       <div class="paragraph">
        <p>A form field is a special kind of a widget. It is mainly used on forms but may actually be added to any other widget.</p>
       </div>
@@ -7330,12 +7420,12 @@ button.setSelected(<span class="predefined-constant">true</span>);</code></pre>
       </div>
      </div>
      <div class="sect2">
-      <h3 id="value-field"><a class="anchor" href="#value-field"></a>17.3. Value Field</h3>
+      <h3 id="value-field"><a class="anchor" href="#value-field"></a>18.3. Value Field</h3>
       <div class="paragraph">
        <p>A value field extends the form field by the ability to store a value. Typical form fields are <code>StringField</code>, <code>NumberField</code>, <code>DateField</code> or <code>SmartField</code>. All these fields provide a value which is accessible using <code>field.value</code> and may be set using <code>field.setValue(value)</code>.</p>
       </div>
       <div class="sect3">
-       <h4 id="parser-validator-formatter"><a class="anchor" href="#parser-validator-formatter"></a>17.3.1. Parser, Validator, Formatter</h4>
+       <h4 id="parser-validator-formatter"><a class="anchor" href="#parser-validator-formatter"></a>18.3.1. Parser, Validator, Formatter</h4>
        <div class="paragraph">
         <p>The value always has the target data type of the field. When using a <code>StringField</code> the type is <code>string</code>, when using a <code>NumberField</code> the type is <code>number</code>, when using a <code>DateField</code> the type is <code>date</code>. This means you don&#x2019;t have to care about how to parse the value from the user input, this will be done by the field for you. The field also validates the value, meaning if the user entered an invalid value, an error is shown. Furthermore, if you already have the value and want to show it in the field, you don&#x2019;t have to format the value by yourself.</p>
        </div>
@@ -7465,9 +7555,9 @@ button.setSelected(<span class="predefined-constant">true</span>);</code></pre>
       </div>
      </div>
      <div class="sect2">
-      <h3 id="extensibility-2"><a class="anchor" href="#extensibility-2"></a>17.4. Extensibility</h3>
+      <h3 id="extensibility-2"><a class="anchor" href="#extensibility-2"></a>18.4. Extensibility</h3>
       <div class="sect3">
-       <h4 id="how-to-extend-scout-objects"><a class="anchor" href="#how-to-extend-scout-objects"></a>17.4.1. How to extend Scout objects</h4>
+       <h4 id="how-to-extend-scout-objects"><a class="anchor" href="#how-to-extend-scout-objects"></a>18.4.1. How to extend Scout objects</h4>
        <div class="paragraph">
         <p>The extension feature in Scout JS works by wrapping functions on the prototype of a Scout object with a wrapper function which is provided by an extension. The extension feature doesn&#x2019;t rely on subclassing, instead we simply register one or more extensions for a single Scout class. When a function is called on an extended object, the functions are called on the registered extensions first. Since a Scout class can have multiple extensions, we speak of an extension chain, where the last element of the chain is the original (extended) object.</p>
        </div>
@@ -7528,7 +7618,7 @@ button.setSelected(<span class="predefined-constant">true</span>);</code></pre>
        </div>
       </div>
       <div class="sect3">
-       <h4 id="export-scout-model-from-a-scout-classic-online-application"><a class="anchor" href="#export-scout-model-from-a-scout-classic-online-application"></a>17.4.2. Export Scout model from a Scout classic (online) application</h4>
+       <h4 id="export-scout-model-from-a-scout-classic-online-application"><a class="anchor" href="#export-scout-model-from-a-scout-classic-online-application"></a>18.4.2. Export Scout model from a Scout classic (online) application</h4>
        <div class="paragraph">
         <p>With the steps described here you can export model-data (e.g. forms, tables, etc.) from an existing classic, online Scout application into JSON format which can be used in a Scout JS application. This is a fast and convenient method to re-use an existing form in a Scout JS application, because you don&#x2019;t have to build the model manually. Here&#x2019;s how to use the export feature:</p>
        </div>
@@ -7717,7 +7807,7 @@ button.setSelected(<span class="predefined-constant">true</span>);</code></pre>
   <div id="footer">
    <div id="footer-text">
      Version 7.0
-    <br> Last updated 2017-06-19 11:01:23 CEST
+    <br> Last updated 2017-06-30 14:21:49 CEST
    </div>
   </div>
  </body>

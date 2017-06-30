@@ -526,12 +526,13 @@ table.CodeRay td.code>pre{padding:0}
      Table of Contents
     </div>
     <ul class="sectlevel1">
+     <li><a href="#about-this-document">About This Document</a></li>
      <li><a href="#api-changes-java">API Changes (Java)</a>
       <ul class="sectlevel2">
-       <li><a href="#new-scout-modules-for-jackson-based-rest-services">New scout modules for Jackson-based REST services</a></li>
+       <li><a href="#new-scout-modules-for-jackson-based-rest-services">New Scout Modules for Jackson-based REST Services</a></li>
        <li><a href="#removed-properties-enabledprocessing-on-ibutton-and-iaction">Removed properties "enabledProcessing" on IButton and IAction</a></li>
-       <li><a href="#added-http-abstraction-layer-google-http-client">Added HTTP abstraction layer Google HTTP Client.</a></li>
-       <li><a href="#igroupbox-changed-behavior-of-getgridcolumncount">IGroupBox: changed behavior of getGridColumnCount</a></li>
+       <li><a href="#added-http-abstraction-layer-google-http-client">Added HTTP Abstraction Layer Google HTTP Client.</a></li>
+       <li><a href="#igroupbox-changed-behavior-of-getgridcolumncount">IGroupBox: Changed Behavior of "getGridColumnCount"</a></li>
        <li><a href="#scouttexts">ScoutTexts</a></li>
       </ul> </li>
      <li><a href="#api-changes-javascript">API Changes (JavaScript)</a>
@@ -545,20 +546,24 @@ table.CodeRay td.code>pre{padding:0}
       </ul> </li>
      <li><a href="#other-changes">Other Changes</a>
       <ul class="sectlevel2">
-       <li><a href="#maven-provided-dependencies">Maven provided dependencies</a></li>
+       <li><a href="#maven-provided-dependencies">Maven "provided" Dependencies</a></li>
       </ul> </li>
     </ul>
    </div>
   </div>
   <div id="content">
-   <div id="preamble">
+   <div class="sect1">
+    <h2 id="about-this-document"><a class="anchor" href="#about-this-document"></a>About This Document</h2>
     <div class="sectionbody">
-     <div class="admonitionblock note">
+     <div class="paragraph">
+      <p>This document describes all relevant changes <strong>from Eclipse Scout 6.1 to Eclipse Scout 7.0</strong>. If existing code has to be migrated, instructions are provided here.</p>
+     </div>
+     <div class="admonitionblock important">
       <table>
        <tbody>
         <tr>
-         <td class="icon"> <i class="fa icon-note" title="Note"></i> </td>
-         <td class="content"> If you upgrade from version 6.0, also see the migration guide for the 6.1 release.<br> <a href="https://eclipsescout.github.io/6.1/migration-guide.html" class="bare">https://eclipsescout.github.io/6.1/migration-guide.html</a><br> </td>
+         <td class="icon"> <i class="fa icon-important" title="Important"></i> </td>
+         <td class="content"> If you are upgrading from version 6.0, please also read the migration guide for the 6.1 (<em>Oxygen preview</em>) release:<br> <a href="https://eclipsescout.github.io/6.1/migration-guide.html" class="bare">https://eclipsescout.github.io/6.1/migration-guide.html</a> </td>
         </tr>
        </tbody>
       </table>
@@ -569,7 +574,7 @@ table.CodeRay td.code>pre{padding:0}
     <h2 id="api-changes-java"><a class="anchor" href="#api-changes-java"></a>API Changes (Java)</h2>
     <div class="sectionbody">
      <div class="sect2">
-      <h3 id="new-scout-modules-for-jackson-based-rest-services"><a class="anchor" href="#new-scout-modules-for-jackson-based-rest-services"></a>New scout modules for Jackson-based REST services</h3>
+      <h3 id="new-scout-modules-for-jackson-based-rest-services"><a class="anchor" href="#new-scout-modules-for-jackson-based-rest-services"></a>New Scout Modules for Jackson-based REST Services</h3>
       <div class="paragraph">
        <p>The following new Scout modules have been added to support REST services with Jackson as marshaller:</p>
       </div>
@@ -629,7 +634,7 @@ table.CodeRay td.code>pre{padding:0}
       </div>
      </div>
      <div class="sect2">
-      <h3 id="added-http-abstraction-layer-google-http-client"><a class="anchor" href="#added-http-abstraction-layer-google-http-client"></a>Added HTTP abstraction layer Google HTTP Client.</h3>
+      <h3 id="added-http-abstraction-layer-google-http-client"><a class="anchor" href="#added-http-abstraction-layer-google-http-client"></a>Added HTTP Abstraction Layer Google HTTP Client.</h3>
       <div class="paragraph">
        <p>If your application previously used a custom (not provided by Scout) implementation of the <code>org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel</code> class a migration might be necessary. For the service tunnel and a few other HTTP usages a new HTTP abstraction layer (Google HTTP Client 1.22) was introduced to support different low-level HTTP libraries (previously just the <code>java.net.HttpURLConnection</code> was used). The new default low-level HTTP library is the Apache HTTP Client 4.5.3, more details are available in the release notes. As the <code>java.net</code> connections are not used anymore by default the MultiSessionCookieStore (for <code>java.net</code> connections) is not installed by default (could be installed manually).</p>
       </div>
@@ -638,7 +643,7 @@ table.CodeRay td.code>pre{padding:0}
       </div>
      </div>
      <div class="sect2">
-      <h3 id="igroupbox-changed-behavior-of-getgridcolumncount"><a class="anchor" href="#igroupbox-changed-behavior-of-getgridcolumncount"></a>IGroupBox: changed behavior of getGridColumnCount</h3>
+      <h3 id="igroupbox-changed-behavior-of-getgridcolumncount"><a class="anchor" href="#igroupbox-changed-behavior-of-getgridcolumncount"></a>IGroupBox: Changed Behavior of "getGridColumnCount"</h3>
       <div class="paragraph">
        <p>The function <code>getGridColumnCount()</code> returned the calculated column count of the grid. This has been changed so that it returns the configured one which is not necessarily the same.</p>
       </div>
@@ -748,45 +753,45 @@ table.CodeRay td.code>pre{padding:0}
       </div>
       <div class="ulist">
        <ul>
-        <li> <p>Rename doAction to action</p> </li>
-        <li> <p>Rename linkPageWithRow to pageRowLink</p> </li>
-        <li> <p>Rename initPage to pageInit</p> </li>
-        <li> <p>Rename exportToClipboard to clipboardExport</p> </li>
-        <li> <p>Rename parseerror to parseError</p> </li>
-        <li> <p>Rename selectionChanged to selectionChange</p> </li>
-        <li> <p>Rename callAction to action</p> </li>
-        <li> <p>Removed insertText</p> </li>
-        <li> <p>Rename popupopen to popupOpen</p> </li>
-        <li> <p>Rename locationChanged to locationChange</p> </li>
-        <li> <p>Rename sessionready to sessionReady</p> </li>
-        <li> <p>Rename desktopcreated to desktopReady</p> </li>
-        <li> <p>Rename positionChanged to positionChange</p> </li>
-        <li> <p>Rename scrollstart to scrollStart</p> </li>
-        <li> <p>Rename scrollend to scrollEnd</p> </li>
-        <li> <p>Rename clicked to click</p> </li>
-        <li> <p>Rename modelChanged to modelChange</p> </li>
-        <li> <p>Rename selectionChanged to selectionChange</p> </li>
-        <li> <p>Rename viewRangeChanged to viewRangeChange</p> </li>
-        <li> <p>Rename formActivated to formActivate</p> </li>
-        <li> <p>Rename historyEntryActivated to historyEntryActivate</p> </li>
-        <li> <p>Rename viewAdded to viewAdd</p> </li>
-        <li> <p>Rename viewRemoved to viewRemove</p> </li>
-        <li> <p>Rename viewActivated to viewActivate</p> </li>
-        <li> <p>Rename viewDeactivated to viewDeactivate</p> </li>
-        <li> <p>Rename tabClicked to click</p> </li>
-        <li> <p>Rename tabSelected to tabSelect</p> </li>
-        <li> <p>Rename nodeClicked to nodeClick</p> </li>
-        <li> <p>Rename rowClicked to rowClick</p> </li>
-        <li> <p>Rename rowsSorted to sort</p> </li>
-        <li> <p>Remove sortRows</p> </li>
-        <li> <p>Rename rowsGrouped to group</p> </li>
-        <li> <p>Remove groupRows</p> </li>
-        <li> <p>Rename exportToClipboard to clipboardExport</p> </li>
-        <li> <p>Rename rowsFiltered to filter</p> </li>
-        <li> <p>Rename addFilter to filterAdded</p> </li>
-        <li> <p>Rename removeFilter to filterRemoved</p> </li>
-        <li> <p>Rename filterResetted to filterReset</p> </li>
-        <li> <p>Remove groupingChanged</p> </li>
+        <li> <p>Rename <code>doAction</code> to <code>action</code></p> </li>
+        <li> <p>Rename <code>linkPageWithRow</code> to <code>pageRowLink</code></p> </li>
+        <li> <p>Rename <code>initPage</code> to <code>pageInit</code></p> </li>
+        <li> <p>Rename <code>exportToClipboard</code> to <code>clipboardExport</code></p> </li>
+        <li> <p>Rename <code>parseerror</code> to <code>parseError</code></p> </li>
+        <li> <p>Rename <code>selectionChanged</code> to <code>selectionChange</code></p> </li>
+        <li> <p>Rename <code>callAction</code> to <code>action</code></p> </li>
+        <li> <p>Remove <code>insertText</code></p> </li>
+        <li> <p>Rename <code>popupopen</code> to <code>popupOpen</code></p> </li>
+        <li> <p>Rename <code>locationChanged</code> to <code>locationChange</code></p> </li>
+        <li> <p>Rename <code>sessionready</code> to <code>sessionReady</code></p> </li>
+        <li> <p>Rename <code>desktopcreated</code> to <code>desktopReady</code></p> </li>
+        <li> <p>Rename <code>positionChanged</code> to <code>positionChange</code></p> </li>
+        <li> <p>Rename <code>scrollstart</code> to <code>scrollStart</code></p> </li>
+        <li> <p>Rename <code>scrollend</code> to <code>scrollEnd</code></p> </li>
+        <li> <p>Rename <code>clicked</code> to <code>click</code></p> </li>
+        <li> <p>Rename <code>modelChanged</code> to <code>modelChange</code></p> </li>
+        <li> <p>Rename <code>selectionChanged</code> to <code>selectionChange</code></p> </li>
+        <li> <p>Rename <code>viewRangeChanged</code> to <code>viewRangeChange</code></p> </li>
+        <li> <p>Rename <code>formActivated</code> to <code>formActivate</code></p> </li>
+        <li> <p>Rename <code>historyEntryActivated</code> to <code>historyEntryActivate</code></p> </li>
+        <li> <p>Rename <code>viewAdded</code> to <code>viewAdd</code></p> </li>
+        <li> <p>Rename <code>viewRemoved</code> to <code>viewRemove</code></p> </li>
+        <li> <p>Rename <code>viewActivated</code> to <code>viewActivate</code></p> </li>
+        <li> <p>Rename <code>viewDeactivated</code> to <code>viewDeactivate</code></p> </li>
+        <li> <p>Rename <code>tabClicked</code> to <code>click</code></p> </li>
+        <li> <p>Rename <code>tabSelected</code> to <code>tabSelect</code></p> </li>
+        <li> <p>Rename <code>nodeClicked</code> to <code>nodeClick</code></p> </li>
+        <li> <p>Rename <code>rowClicked</code> to <code>rowClick</code></p> </li>
+        <li> <p>Rename <code>rowsSorted</code> to <code>sort</code></p> </li>
+        <li> <p>Remove <code>sortRows</code></p> </li>
+        <li> <p>Rename <code>rowsGrouped</code> to <code>group</code></p> </li>
+        <li> <p>Remove <code>groupRows</code></p> </li>
+        <li> <p>Rename <code>exportToClipboard</code> to <code>clipboardExport</code></p> </li>
+        <li> <p>Rename <code>rowsFiltered</code> to <code>filter</code></p> </li>
+        <li> <p>Rename <code>addFilter</code> to <code>filterAdded</code></p> </li>
+        <li> <p>Rename <code>removeFilter</code> to <code>filterRemoved</code></p> </li>
+        <li> <p>Rename <code>filterResetted</code> to <code>filterReset</code></p> </li>
+        <li> <p>Remove <code>groupingChanged</code></p> </li>
        </ul>
       </div>
      </div>
@@ -796,7 +801,7 @@ table.CodeRay td.code>pre{padding:0}
     <h2 id="other-changes"><a class="anchor" href="#other-changes"></a>Other Changes</h2>
     <div class="sectionbody">
      <div class="sect2">
-      <h3 id="maven-provided-dependencies"><a class="anchor" href="#maven-provided-dependencies"></a>Maven provided dependencies</h3>
+      <h3 id="maven-provided-dependencies"><a class="anchor" href="#maven-provided-dependencies"></a>Maven "provided" Dependencies</h3>
       <div class="paragraph">
        <p>In Maven dependencies with the scope provided are not transitive. This makes sense if a dependency is set to provided depending on the environment. Any artifacts that are not intended to be used in a certain environment should not have the scope provided and are therefore now transitive. We removed any current dependency <code>javax.servlet:javax.servlet-api</code> except for the one in the artifact <code>org.eclipse.scout.rt.server.commons</code>.</p>
       </div>
@@ -840,7 +845,7 @@ table.CodeRay td.code>pre{padding:0}
   <div id="footer">
    <div id="footer-text">
      Version 7.0
-    <br> Last updated 2017-06-19 11:01:23 CEST
+    <br> Last updated 2017-06-30 14:21:49 CEST
    </div>
   </div>
  </body>
