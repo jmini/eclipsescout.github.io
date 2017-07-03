@@ -660,10 +660,25 @@ table.CodeRay td.code>pre{padding:0}
        <p>Removed support for session scope specific <code>ScoutTexts</code> instances because support of scoped services was removed in Scout without OSGi (version &gt;= 5.0).</p>
       </div>
       <div class="paragraph">
-       <p>Changes: * <code>ScoutTexts</code> is now an application-scoped bean * <code>ScoutTexts.CURRENT</code> thread local removed without replacement (use <code>BEANS.get(ScoutTexts.class)</code> instead)</p>
+       <p>Changes:</p>
+      </div>
+      <div class="ulist">
+       <ul>
+        <li> <p><code>ScoutTexts</code> is now an application-scoped bean</p> </li>
+        <li> <p><code>ScoutTexts.CURRENT</code> thread local removed without replacement (use <code>BEANS.get(ScoutTexts.class)</code> instead)</p> </li>
+       </ul>
       </div>
       <div class="paragraph">
-       <p>Deprecations (methods will be removed in P-release): * <code>ScoutTexts.get</code> &#x2192; <code>TEXTS.get</code> * <code>ScoutTexts.getInstance()</code> &#x2192; <code>BEANS.get(ScoutTexts.class)</code> * <code>ISession.getTexts()</code> &#x2192; <code>BEANS.get(ScoutTexts.class)</code> * <code>AbstractSqlService.getConfiguredNlsProvider()</code> &#x2192; method is not used anymore (returns <code>null</code>) * <code>AbstractSqlService.getNlsProvider()</code> &#x2192; method is not used anymore (returns <code>null</code>)</p>
+       <p>Deprecations (methods will be removed in P-release):</p>
+      </div>
+      <div class="ulist">
+       <ul>
+        <li> <p><code>ScoutTexts.get</code> &#x2192; <code>TEXTS.get</code></p> </li>
+        <li> <p><code>ScoutTexts.getInstance()</code> &#x2192; <code>BEANS.get(ScoutTexts.class)</code></p> </li>
+        <li> <p><code>ISession.getTexts()</code> &#x2192; <code>BEANS.get(ScoutTexts.class)</code></p> </li>
+        <li> <p><code>AbstractSqlService.getConfiguredNlsProvider()</code> &#x2192; method is not used anymore (returns <code>null</code>)</p> </li>
+        <li> <p><code>AbstractSqlService.getNlsProvider()</code> &#x2192; method is not used anymore (returns <code>null</code>)</p> </li>
+       </ul>
       </div>
      </div>
     </div>
