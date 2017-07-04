@@ -1182,7 +1182,7 @@ BeanClass beanOrNull = BEANS.opt(BeanClass.class);</code></pre>
        <p>Applications usually require some kind of configuration mechanism to use the same binaries in a different environment or situation. Scout applications provide a configuration mechanism using properties files <sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup>.</p>
       </div>
       <div class="paragraph">
-       <p>For each property a class cares about default values and value validation. These classes share the <code>org.eclipse.scout.rt.platform.config.IConfigProperty</code> interface and are normal application scoped beans providing access to a specific configuration value as shown in listing <a href="#lst-ConfigProperties">Listing 8</a>.</p>
+       <p>For each property a class cares about default values and value validation. These classes share the <code>org.eclipse.scout.rt.platform.config.IConfigProperty</code> interface and are normal application scoped beans providing access to a specific configuration value as shown in listing <a href="#lst-ConfigProperties">Listing 8</a>. If the property class is an inner class it has to be defined as a static class with the <code>static</code> modifier.</p>
       </div>
       <div id="lst-ConfigProperties" class="listingblock">
        <div class="title">
