@@ -537,9 +537,9 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#simplified-api-js">Simplified API (JS)</a></li>
        <li><a href="#logical-grid-validation-js">Logical Grid Validation (JS)</a></li>
       </ul> </li>
-     <li><a href="#new-http-abstraction-layer-google-http-client-for-java">New HTTP abstraction layer Google HTTP Client for Java</a></li>
-     <li><a href="#support-for-rest-services">Support for REST services</a></li>
-     <li><a href="#prevent-double-clicks-on-buttons-and-menus">Prevent double clicks on buttons and menus</a></li>
+     <li><a href="#new-http-abstraction-layer-google-http-client-for-java">New HTTP Abstraction Layer: Google HTTP Client for Java</a></li>
+     <li><a href="#support-for-rest-services">Support for REST Services</a></li>
+     <li><a href="#prevent-double-clicks-on-buttons-and-menus">Prevent Double Clicks on Buttons and Menus</a></li>
     </ul>
    </div>
   </div>
@@ -662,7 +662,7 @@ table.CodeRay td.code>pre{padding:0}
     </div>
    </div>
    <div class="sect1">
-    <h2 id="new-http-abstraction-layer-google-http-client-for-java"><a class="anchor" href="#new-http-abstraction-layer-google-http-client-for-java"></a>New HTTP abstraction layer Google HTTP Client for Java</h2>
+    <h2 id="new-http-abstraction-layer-google-http-client-for-java"><a class="anchor" href="#new-http-abstraction-layer-google-http-client-for-java"></a>New HTTP Abstraction Layer: Google HTTP Client for Java</h2>
     <div class="sectionbody">
      <div class="paragraph">
       <p>The <code>org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel</code> class and other HTTP usages were changed to use the Google HTTP Client Library for Java 1.22. This library adds a HTTP abstraction layer and allows to use different low-level libraries like <code>java.net.HttpURLConnection</code> (one and only layer used in previous versions) or Apache HTTP Client 4.5.3 (new default).</p>
@@ -704,7 +704,7 @@ table.CodeRay td.code>pre{padding:0}
     </div>
    </div>
    <div class="sect1">
-    <h2 id="support-for-rest-services"><a class="anchor" href="#support-for-rest-services"></a>Support for REST services</h2>
+    <h2 id="support-for-rest-services"><a class="anchor" href="#support-for-rest-services"></a>Support for REST Services</h2>
     <div class="sectionbody">
      <div class="paragraph">
       <p>The following new Scout modules have been added to support REST services with Jackson as marshaller:</p>
@@ -726,7 +726,7 @@ table.CodeRay td.code>pre{padding:0}
     </div>
    </div>
    <div class="sect1">
-    <h2 id="prevent-double-clicks-on-buttons-and-menus"><a class="anchor" href="#prevent-double-clicks-on-buttons-and-menus"></a>Prevent double clicks on buttons and menus</h2>
+    <h2 id="prevent-double-clicks-on-buttons-and-menus"><a class="anchor" href="#prevent-double-clicks-on-buttons-and-menus"></a>Prevent Double Clicks on Buttons and Menus</h2>
     <div class="sectionbody">
      <div class="paragraph">
       <p>If a button or a menu is clicked twice within a short period of time, the corresponding action is executed twice. This can be convenient (e.g. when inserting new rows in a table) or unproblematic (e.g. when closing a form - the second click will just be ignored). However, there are cases where executing an action twice would break things. To instruct the UI to block double clicks, a new property "preventDoubleClick" is provided on buttons and menus:</p>
