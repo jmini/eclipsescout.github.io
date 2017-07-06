@@ -546,6 +546,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#property-change-event">Property Change Event</a></li>
        <li><a href="#logical-grid-validation">Logical Grid Validation</a></li>
        <li><a href="#event-naming">Event Naming</a></li>
+       <li><a href="#graphic-utility-naming-since-7-0-100">Graphic Utility Naming (since 7.0.100)</a></li>
       </ul> </li>
      <li><a href="#other-changes">Other Changes</a>
       <ul class="sectlevel2">
@@ -583,7 +584,7 @@ table.CodeRay td.code>pre{padding:0}
        </div>
        <div class="ulist">
         <ul>
-         <li> <p>(No migration notes for Oxygen.1 have been created yet)</p> </li>
+         <li> <p><a href="#graphic-utility-naming-since-7-0-100">Graphic Utility Naming (since 7.0.100)</a></p> </li>
         </ul>
        </div>
       </div>
@@ -796,6 +797,7 @@ table.CodeRay td.code>pre{padding:0}
         <li> <p>Rename <code>selectionChanged</code> to <code>selectionChange</code></p> </li>
         <li> <p>Rename <code>callAction</code> to <code>action</code></p> </li>
         <li> <p>Remove <code>insertText</code></p> </li>
+        <li> <p>Rename <code>displayTextChanged</code> to <code>acceptInput</code></p> </li>
         <li> <p>Rename <code>popupopen</code> to <code>popupOpen</code></p> </li>
         <li> <p>Rename <code>locationChanged</code> to <code>locationChange</code></p> </li>
         <li> <p>Rename <code>sessionready</code> to <code>sessionReady</code></p> </li>
@@ -828,6 +830,42 @@ table.CodeRay td.code>pre{padding:0}
         <li> <p>Rename <code>filterResetted</code> to <code>filterReset</code></p> </li>
         <li> <p>Remove <code>groupingChanged</code></p> </li>
        </ul>
+      </div>
+     </div>
+     <div class="sect2">
+      <h3 id="graphic-utility-naming-since-7-0-100"><a class="anchor" href="#graphic-utility-naming-since-7-0-100"></a>Graphic Utility Naming (since 7.0.100)</h3>
+      <div class="paragraph">
+       <p>The naming of the functions of <code>scout.graphics</code> and <code>scout.HtmlComponent</code> has been harmonized. Also, they now consistently use an <code>options</code> parameter.</p>
+      </div>
+      <div class="paragraph">
+       <p>The following changes have been made:</p>
+      </div>
+      <div class="paragraph">
+       <p>scout.graphics:</p>
+      </div>
+      <div class="ulist">
+       <ul>
+        <li> <p>Rename <code>getBounds</code> to <code>cssBounds</code></p> </li>
+        <li> <p>Rename <code>getMargins</code> to <code>margins</code></p> </li>
+        <li> <p>Rename <code>getInsets</code> to <code>insets</code></p> </li>
+        <li> <p>Rename <code>getSize</code> to <code>size</code></p> </li>
+       </ul>
+      </div>
+      <div class="paragraph">
+       <p>scout.HtmlComponent:</p>
+      </div>
+      <div class="ulist">
+       <ul>
+        <li> <p>Rename <code>getBounds</code> to <code>cssBounds</code></p> </li>
+        <li> <p>Rename <code>getMargins</code> to <code>margins</code></p> </li>
+        <li> <p>Rename <code>getInsets</code> to <code>insets</code></p> </li>
+        <li> <p>Rename <code>getSize</code> to <code>size</code></p> </li>
+        <li> <p>Rename <code>getPreferredSize</code> to <code>prefSize</code></p> </li>
+        <li> <p>Rename <code>getAvailableSize</code> to <code>availableSize</code></p> </li>
+       </ul>
+      </div>
+      <div class="paragraph">
+       <p>Also note that <code>cssBounds</code> does not include margins anymore, and <code>bounds</code> and <code>offsetBounds</code> now take an <code>options</code> object instead of 2 boolean parameters.</p>
       </div>
      </div>
     </div>
