@@ -541,6 +541,7 @@ table.CodeRay td.code>pre{padding:0}
      <li><a href="#new-http-abstraction-layer-google-http-client-for-java">New HTTP Abstraction Layer: Google HTTP Client for Java</a></li>
      <li><a href="#support-for-rest-services">Support for REST Services</a></li>
      <li><a href="#prevent-double-clicks-on-buttons-and-menus">Prevent Double Clicks on Buttons and Menus</a></li>
+     <li><a href="#splitbox">SplitBox</a></li>
     </ul>
    </div>
   </div>
@@ -757,6 +758,28 @@ table.CodeRay td.code>pre{padding:0}
      </div>
      <div class="paragraph">
       <p>The default value is <code>false</code>.</p>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="splitbox"><a class="anchor" href="#splitbox"></a>SplitBox</h2>
+    <div class="sectionbody">
+     <div class="paragraph">
+      <p>The SplitBox widget now supports a minimum splitter position according to the collapsible field. The collapsible field size is limited between minimum splitter position and maximum available size. The collapse buttons now toggles between three modes of the collapsible field: <code>default</code>, <code>minimized</code> and <code>collapsed</code>. The default value for minimal splitter size is <code>null</code>, which means, no minimal splitter size is set and no change in existing behavior.</p>
+     </div>
+     <div class="paragraph">
+      <p>New API methods on <code>AbstractSplitBox</code>:</p>
+     </div>
+     <div class="ulist">
+      <ul>
+       <li> <p><code>Double getMinSplitterPosition()</code></p> </li>
+       <li> <p><code>void setMinSplitterPosition(Double minPosition)</code></p> </li>
+       <li> <p><code>boolean isFieldMinimized()</code></p> </li>
+       <li> <p><code>void setFieldMinimized(boolean minimized)</code></p> </li>
+      </ul>
+     </div>
+     <div class="paragraph">
+      <p>Additional to the existing three splitbox position types a new <code>SPLITTER_POSITION_TYPE_RELATIVE_SECOND</code> type was added. This new splitter position type allows to specify the size of the second field relative to the full size of the splitbox.</p>
      </div>
      <div class="admonitionblock tip">
       <table>
