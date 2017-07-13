@@ -847,10 +847,10 @@ table.CodeRay td.code>pre{padding:0}
       </div>
       <div class="ulist">
        <ul>
-        <li> <p>Rename <code>getBounds</code> to <code>cssBounds</code></p> </li>
         <li> <p>Rename <code>getMargins</code> to <code>margins</code></p> </li>
         <li> <p>Rename <code>getInsets</code> to <code>insets</code></p> </li>
         <li> <p>Rename <code>getSize</code> to <code>size</code></p> </li>
+        <li> <p>Remove <code>getBounds</code></p> </li>
        </ul>
       </div>
       <div class="paragraph">
@@ -858,16 +858,16 @@ table.CodeRay td.code>pre{padding:0}
       </div>
       <div class="ulist">
        <ul>
-        <li> <p>Rename <code>getBounds</code> to <code>cssBounds</code></p> </li>
         <li> <p>Rename <code>getMargins</code> to <code>margins</code></p> </li>
         <li> <p>Rename <code>getInsets</code> to <code>insets</code></p> </li>
         <li> <p>Rename <code>getSize</code> to <code>size</code></p> </li>
         <li> <p>Rename <code>getPreferredSize</code> to <code>prefSize</code></p> </li>
         <li> <p>Rename <code>getAvailableSize</code> to <code>availableSize</code></p> </li>
+        <li> <p>Remove <code>getBounds</code></p> </li>
        </ul>
       </div>
       <div class="paragraph">
-       <p>Also note that <code>cssBounds</code> does not include margins anymore, and <code>bounds</code> and <code>offsetBounds</code> now take an <code>options</code> object instead of 2 boolean parameters.</p>
+       <p>The old methods still exists but are marked as deprecated. Note that <code>getBounds</code> does not include margins anymore, and <code>bounds</code> and <code>offsetBounds</code> now take an <code>options</code> object instead of 2 boolean parameters.</p>
       </div>
      </div>
      <div class="sect2">
