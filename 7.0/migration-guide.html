@@ -538,6 +538,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#igroupbox-changed-behavior-of-getgridcolumncount">IGroupBox: Changed Behavior of "getGridColumnCount"</a></li>
        <li><a href="#scouttexts">ScoutTexts</a></li>
       </ul> </li>
+     <li><a href="#ismartfield-2-since-7-0-100">ISmartField(2) (since 7.0.100)</a></li>
      <li><a href="#api-changes-javascript">API Changes (JavaScript)</a>
       <ul class="sectlevel2">
        <li><a href="#render">render()</a></li>
@@ -587,6 +588,7 @@ table.CodeRay td.code>pre{padding:0}
         <ul>
          <li> <p><a href="#graphic-utility-naming-since-7-0-100">Graphic Utility Naming (since 7.0.100)</a></p> </li>
          <li> <p><a href="#focus-and-requestfocus-merged-since-7-0-100">Focus and RequestFocus merged (since 7.0.100)</a></p> </li>
+         <li> <p><a href="#ismartfield-2-since-7-0-100">ISmartField(2) (since 7.0.100)</a></p> </li>
         </ul>
        </div>
       </div>
@@ -703,6 +705,33 @@ table.CodeRay td.code>pre{padding:0}
         <li> <p><code>AbstractSqlService.getNlsProvider()</code> &#x2192; method is not used anymore (returns <code>null</code>)</p> </li>
        </ul>
       </div>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="ismartfield-2-since-7-0-100"><a class="anchor" href="#ismartfield-2-since-7-0-100"></a>ISmartField(2) (since 7.0.100)</h2>
+    <div class="sectionbody">
+     <div class="paragraph">
+      <p>The following methods have been removed from <code>ISmartField(2)</code>:</p>
+     </div>
+     <div class="ulist">
+      <ul>
+       <li> <p><code>String getBrowseNewText()</code></p> </li>
+       <li> <p><code>setBrowseNewText(String s)</code></p> </li>
+       <li> <p><code>void doBrowseNew(String newText)</code></p> </li>
+      </ul>
+     </div>
+     <div class="paragraph">
+      <p>The following methods have been removed from <code>AbstractSmartField(2)</code>:</p>
+     </div>
+     <div class="ulist">
+      <ul>
+       <li> <p><code>protected ILookupRow&lt;VALUE&gt; execBrowseNew(String searchText)</code></p> </li>
+       <li> <p><code>protected String getConfiguredBrowseNewText()</code></p> </li>
+      </ul>
+     </div>
+     <div class="paragraph">
+      <p>Note: with 7.0 these methods still exist on the old smart field <code>ISmartField</code> but are marked as deprecated.</p>
      </div>
     </div>
    </div>
