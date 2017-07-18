@@ -581,6 +581,24 @@ table.CodeRay td.code>pre{padding:0}
          <li> <p><a href="#new-smart-field-ismartfield2-since-7-0-100">New Smart Field: ISmartField2 (since 7.0.100)</a></p> </li>
         </ul>
        </div>
+       <div class="ulist">
+        <ul>
+         <li> <p>Minor changes for HTTP abstraction properties.</p>
+          <div class="ulist">
+           <ul>
+            <li> <p>Existing configuration property classes have been bundled in two <code>org.eclipse.scout.rt.shared.http.HttpConfigurationProperties</code> and <code>org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnelConfigurationProperties</code> classes.</p> </li>
+            <li> <p>The configuration property <code>org.eclipse.scout.rt.servicetunnel.apache_connection_time_to_live</code> has been removed (<code>scout.http.apache_connection_time_to_live</code> is used instead).</p> </li>
+            <li> <p>New configuration properties have been added:</p>
+             <div class="ulist">
+              <ul>
+               <li> <p><code>scout.http.apache_keep_alive</code> (possible values: true/false), whether to use keep-alive connections. If property is not set the system property <code>http.keepAlive</code> is evaluated, if this system property is also not set true will be used as a last resort.</p> </li>
+               <li> <p><code>scout.http.apache_retry_post</code> (possible values: true/false), whether to retry HTTP POST requests. If not property is not set the system property <code>sun.net.http.retryPost</code> is evaluated, if this system property is also not set true will be used as a last resort.</p> </li>
+              </ul>
+             </div> </li>
+           </ul>
+          </div> </li>
+        </ul>
+       </div>
       </div>
      </div>
      <div class="sect2">
@@ -713,13 +731,12 @@ table.CodeRay td.code>pre{padding:0}
      </div>
      <div class="ulist">
       <ul>
-       <li> <p><code>org.eclipse.scout.rt.servicetunnel.apache_connection_time_to_live</code>, time to live (milliseconds) for kept alive connections (default: 1 hour, only applicable for Apache HTTP Client).</p> </li>
        <li> <p><code>org.eclipse.scout.rt.servicetunnel.apache_max_connections_per_route</code>, maximum number of connections per route (default: 2048, only applicable for for Apache HTTP Client).</p> </li>
        <li> <p><code>org.eclipse.scout.rt.servicetunnel.apache_max_connections_total</code>, maximum number of connections in total (default: 2048, only applicable for for Apache HTTP Client).</p> </li>
       </ul>
      </div>
      <div class="paragraph">
-      <p>For the <code>DefaultHttpTransportManager</code>:</p>
+      <p>For the all other <code>org.eclipse.scout.rt.shared.http.AbstractHttpTransportManager</code> (if not overriding these settings):</p>
      </div>
      <div class="ulist">
       <ul>
