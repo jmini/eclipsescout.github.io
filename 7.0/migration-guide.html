@@ -550,6 +550,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#graphic-utility-naming-since-7-0-100">Graphic Utility Naming (since 7.0.100)</a></li>
        <li><a href="#focus-and-requestfocus-merged-since-7-0-100">Focus and RequestFocus merged (since 7.0.100)</a></li>
        <li><a href="#table-column-index-now-optional-since-7-0-100">Table Column Index now optional (since 7.0.100)</a></li>
+       <li><a href="#abstractlifecycle-and-formlifecycle-simplified-since-7-0-100">AbstractLifecycle and FormLifecycle simplified (since 7.0.100)</a></li>
       </ul> </li>
      <li><a href="#other-changes">Other Changes</a>
       <ul class="sectlevel2">
@@ -591,6 +592,7 @@ table.CodeRay td.code>pre{padding:0}
          <li> <p><a href="#focus-and-requestfocus-merged-since-7-0-100">Focus and RequestFocus merged (since 7.0.100)</a></p> </li>
          <li> <p><a href="#ismartfield-2-since-7-0-100">ISmartField(2) (since 7.0.100)</a></p> </li>
          <li> <p><a href="#table-column-index-now-optional-since-7-0-100">Table Column Index now optional (since 7.0.100)</a></p> </li>
+         <li> <p><a href="#abstractlifecycle-and-formlifecycle-simplified-since-7-0-100">AbstractLifecycle and FormLifecycle simplified (since 7.0.100)</a></p> </li>
         </ul>
        </div>
       </div>
@@ -913,6 +915,27 @@ table.CodeRay td.code>pre{padding:0}
        <p>When creating a table using JavaScript and <code>scout.create('Table')</code>, specifying the index for each column has been necessary. This has changed, the column indices are now set automatically based on the order of the columns. Just remove the index settings from your JSON files.</p>
       </div>
      </div>
+     <div class="sect2">
+      <h3 id="abstractlifecycle-and-formlifecycle-simplified-since-7-0-100"><a class="anchor" href="#abstractlifecycle-and-formlifecycle-simplified-since-7-0-100"></a>AbstractLifecycle and FormLifecycle simplified (since 7.0.100)</h3>
+      <div class="paragraph">
+       <p>The life cycle has been reworked and simplified:</p>
+      </div>
+      <div class="ulist">
+       <ul>
+        <li> <p>Renamed <code>AbstractLifecycle</code> to <code>Lifecycle</code>.</p> </li>
+        <li> <p>Installed form life cycle by default and added delegating functions to the form to make it easier to use.</p> </li>
+        <li> <p>Implemented reset.</p> </li>
+        <li> <p>Added default callbacks on form which may be implemented by subclasses: <code>_load</code>, <code>_save</code>, <code>importData</code>, <code>exportData</code></p> </li>
+        <li> <p>Removed <code>doFinally</code>, because it is not needed yet.</p> </li>
+        <li> <p>Renamed <code>disposeWidget</code> to <code>close</code>.</p> </li>
+        <li> <p>Removed the do prefix from all the life cycle functions.</p> </li>
+        <li> <p>Added system menus (<code>OkMenu</code>, <code>CancelMenu</code> etc.).</p> </li>
+       </ul>
+      </div>
+      <div class="paragraph">
+       <p>To migrate: check your forms, remove the life cycle, use the new callback functions and system menus if needed, adjust your custom life cycles.</p>
+      </div>
+     </div>
     </div>
    </div>
    <div class="sect1">
@@ -963,7 +986,7 @@ table.CodeRay td.code>pre{padding:0}
   <div id="footer">
    <div id="footer-text">
      Version 7.0
-    <br> Last updated 2017-07-11 15:29:53 CEST
+    <br> Last updated 2017-07-26 14:17:25 CEST
    </div>
   </div>
  </body>

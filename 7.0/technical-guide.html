@@ -654,9 +654,10 @@ table.CodeRay td.code>pre{padding:0}
       <ul class="sectlevel2">
        <li><a href="#widget">18.1. Widget</a></li>
        <li><a href="#object-factory">18.2. Object Factory</a></li>
-       <li><a href="#form-field">18.3. Form Field</a></li>
-       <li><a href="#value-field">18.4. Value Field</a></li>
-       <li><a href="#extensibility-2">18.5. Extensibility</a></li>
+       <li><a href="#form">18.3. Form</a></li>
+       <li><a href="#form-field">18.4. Form Field</a></li>
+       <li><a href="#value-field">18.5. Value Field</a></li>
+       <li><a href="#extensibility-2">18.6. Extensibility</a></li>
       </ul> </li>
      <li><a href="#apx-cclicence">Appendix A: Licence and Copyright</a>
       <ul class="sectlevel2">
@@ -7440,7 +7441,62 @@ table.init(model);</code></pre>
       </div>
      </div>
      <div class="sect2">
-      <h3 id="form-field"><a class="anchor" href="#form-field"></a>18.3. Form Field</h3>
+      <h3 id="form"><a class="anchor" href="#form"></a>18.3. Form</h3>
+      <div class="paragraph">
+       <p>A form is typically used for two purposes:</p>
+      </div>
+      <div class="olist arabic">
+       <ol class="arabic">
+        <li> <p>Allowing the user to enter data in a structured way</p> </li>
+        <li> <p>Displaying the data in a structured way</p> </li>
+       </ol>
+      </div>
+      <div class="paragraph">
+       <p>This is achieved by using <a href="#form-field">Form Field</a>s. Every form has one root group box (also called main box) which has 1:n form fields. The form fields are layouted using the logical grid layout, unless no custom layout is used. This makes it easy to arrange the fields in a uniform way.</p>
+      </div>
+      <div class="paragraph">
+       <p>A form may be displayed in various ways, mainly controlled by the property <code>displayHint</code>. The following display hints are available by default:</p>
+      </div>
+      <div class="ulist">
+       <ul>
+        <li> <p><strong>view</strong>: the form will be opened in a tab and will take full width and height of the bench</p> </li>
+        <li> <p><strong>dialog</strong>: the form will be opened as overlaying dialog and will be as width and height as necessary</p> </li>
+        <li> <p><strong>popup-window</strong>: the form will be opened in a separate browser window (please note that this feature does not work properly with Internet Explorer)</p> </li>
+       </ul>
+      </div>
+      <div class="paragraph">
+       <p>To display the form, just set one of the above display hints and call <code>form.open()</code>.</p>
+      </div>
+      <div class="paragraph">
+       <p>Beside opening the form as separate dialog or view, you can also embed it into any other widget because it is actually a widget by itself. Just call <code>form.render()</code> for that purpose.</p>
+      </div>
+      <div class="sect3">
+       <h4 id="form-life-cycle"><a class="anchor" href="#form-life-cycle"></a>18.3.1. Form Life Cycle</h4>
+       <div class="paragraph">
+        <p>When working with forms, you likely want to load, validate and save data as well. The form uses a so called <code>FormLifecycle</code> to manage the state of that data. The life cycle is installed by default, so you don&#x2019;t have to care about it. So whenever the user enters some data and presses the save button, the data is validated and if invalid, a message is shown. If it is valid the data will be saved. The following functions of a form may be used to control that behavior.</p>
+       </div>
+       <div class="ulist">
+        <ul>
+         <li> <p><strong>open</strong>: displays the form and calls <code>load</code>.</p> </li>
+         <li> <p><strong>load</strong>: calls <code>_load</code> and <code>importData</code> which you can implement to load the data and then marks the fields as saved to set their initial values.</p> </li>
+         <li> <p><strong>save</strong>: validates the data by checking the mandatory and validation state of the fields. If every mandatory field is filled and every field contains a valid value, the <code>exportData</code> and <code>_save</code> functions are called which you can implement to save the data. After that every field is marked as saved and the initial value set to the current value.</p> </li>
+         <li> <p><strong>reset</strong>: resets the value of every field to its initial value marking the fields as untouched.</p> </li>
+         <li> <p><strong>ok</strong>: saves and closes the form.</p> </li>
+         <li> <p><strong>cancel</strong>: closes the form if there are no changes made. Otherwise it shows a message box asking to save the changes.</p> </li>
+         <li> <p><strong>close</strong>: closes the form and discards any unsaved changes.</p> </li>
+         <li> <p><strong>abort</strong>: called when the user presses the "x" icon. It will call <code>close</code> if there is a close menu or button, otherwise <code>cancel</code>.</p> </li>
+        </ul>
+       </div>
+       <div class="paragraph">
+        <p>If you embed the form into another widget, you probably don&#x2019;t need the functions <code>open</code>, <code>ok</code>, <code>close</code>, <code>cancel</code> and <code>abort</code>. But <code>load</code>, <code>reset</code> and <code>save</code> may come in handy as well.</p>
+       </div>
+       <div class="paragraph">
+        <p>Because it is quite common to have a button activating one of these functions (like an 'ok' or 'cancel' button), the following buttons (resp. menus because they are used in the menu bar) are available by default: <code>OkMenu</code>, <code>CancelMenu</code>, <code>SaveMenu</code>, <code>ResetMenu</code>, <code>CloseMenu</code>.</p>
+       </div>
+      </div>
+     </div>
+     <div class="sect2">
+      <h3 id="form-field"><a class="anchor" href="#form-field"></a>18.4. Form Field</h3>
       <div class="paragraph">
        <p>A form field is a special kind of a widget. It is mainly used on forms but may actually be added to any other widget.</p>
       </div>
@@ -7463,12 +7519,12 @@ table.init(model);</code></pre>
       </div>
      </div>
      <div class="sect2">
-      <h3 id="value-field"><a class="anchor" href="#value-field"></a>18.4. Value Field</h3>
+      <h3 id="value-field"><a class="anchor" href="#value-field"></a>18.5. Value Field</h3>
       <div class="paragraph">
        <p>A value field extends the form field by the ability to store a value. Typical form fields are <code>StringField</code>, <code>NumberField</code>, <code>DateField</code> or <code>SmartField</code>. All these fields provide a value which is accessible using <code>field.value</code> and may be set using <code>field.setValue(value)</code>.</p>
       </div>
       <div class="sect3">
-       <h4 id="parser-validator-formatter"><a class="anchor" href="#parser-validator-formatter"></a>18.4.1. Parser, Validator, Formatter</h4>
+       <h4 id="parser-validator-formatter"><a class="anchor" href="#parser-validator-formatter"></a>18.5.1. Parser, Validator, Formatter</h4>
        <div class="paragraph">
         <p>The value always has the target data type of the field. When using a <code>StringField</code> the type is <code>string</code>, when using a <code>NumberField</code> the type is <code>number</code>, when using a <code>DateField</code> the type is <code>date</code>. This means you don&#x2019;t have to care about how to parse the value from the user input, this will be done by the field for you. The field also validates the value, meaning if the user entered an invalid value, an error is shown. Furthermore, if you already have the value and want to show it in the field, you don&#x2019;t have to format the value by yourself.</p>
        </div>
@@ -7598,9 +7654,9 @@ table.init(model);</code></pre>
       </div>
      </div>
      <div class="sect2">
-      <h3 id="extensibility-2"><a class="anchor" href="#extensibility-2"></a>18.5. Extensibility</h3>
+      <h3 id="extensibility-2"><a class="anchor" href="#extensibility-2"></a>18.6. Extensibility</h3>
       <div class="sect3">
-       <h4 id="how-to-extend-scout-objects"><a class="anchor" href="#how-to-extend-scout-objects"></a>18.5.1. How to extend Scout objects</h4>
+       <h4 id="how-to-extend-scout-objects"><a class="anchor" href="#how-to-extend-scout-objects"></a>18.6.1. How to extend Scout objects</h4>
        <div class="paragraph">
         <p>The extension feature in Scout JS works by wrapping functions on the prototype of a Scout object with a wrapper function which is provided by an extension. The extension feature doesn&#x2019;t rely on subclassing, instead we simply register one or more extensions for a single Scout class. When a function is called on an extended object, the functions are called on the registered extensions first. Since a Scout class can have multiple extensions, we speak of an extension chain, where the last element of the chain is the original (extended) object.</p>
        </div>
@@ -7661,7 +7717,7 @@ table.init(model);</code></pre>
        </div>
       </div>
       <div class="sect3">
-       <h4 id="export-scout-model-from-a-scout-classic-online-application"><a class="anchor" href="#export-scout-model-from-a-scout-classic-online-application"></a>18.5.2. Export Scout model from a Scout classic (online) application</h4>
+       <h4 id="export-scout-model-from-a-scout-classic-online-application"><a class="anchor" href="#export-scout-model-from-a-scout-classic-online-application"></a>18.6.2. Export Scout model from a Scout classic (online) application</h4>
        <div class="paragraph">
         <p>With the steps described here you can export model-data (e.g. forms, tables, etc.) from an existing classic, online Scout application into JSON format which can be used in a Scout JS application. This is a fast and convenient method to re-use an existing form in a Scout JS application, because you don&#x2019;t have to build the model manually. Here&#x2019;s how to use the export feature:</p>
        </div>
@@ -7850,7 +7906,7 @@ table.init(model);</code></pre>
   <div id="footer">
    <div id="footer-text">
      Version 7.0
-    <br> Last updated 2017-07-11 15:29:53 CEST
+    <br> Last updated 2017-07-26 14:17:25 CEST
    </div>
   </div>
  </body>
