@@ -551,6 +551,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#focus-and-requestfocus-merged-since-7-0-100">Focus and RequestFocus merged (since 7.0.100)</a></li>
        <li><a href="#table-column-index-now-optional-since-7-0-100">Table Column Index now optional (since 7.0.100)</a></li>
        <li><a href="#abstractlifecycle-and-formlifecycle-simplified-since-7-0-100">AbstractLifecycle and FormLifecycle simplified (since 7.0.100)</a></li>
+       <li><a href="#groupbox-mainbox-flag-now-set-automatically-since-7-0-100">GroupBox: mainBox flag now set automatically (since 7.0.100)</a></li>
       </ul> </li>
      <li><a href="#other-changes">Other Changes</a>
       <ul class="sectlevel2">
@@ -593,6 +594,7 @@ table.CodeRay td.code>pre{padding:0}
          <li> <p><a href="#ismartfield-2-since-7-0-100">ISmartField(2) (since 7.0.100)</a></p> </li>
          <li> <p><a href="#table-column-index-now-optional-since-7-0-100">Table Column Index now optional (since 7.0.100)</a></p> </li>
          <li> <p><a href="#abstractlifecycle-and-formlifecycle-simplified-since-7-0-100">AbstractLifecycle and FormLifecycle simplified (since 7.0.100)</a></p> </li>
+         <li> <p><a href="#groupbox-mainbox-flag-now-set-automatically-since-7-0-100">GroupBox: mainBox flag now set automatically (since 7.0.100)</a></p> </li>
         </ul>
        </div>
       </div>
@@ -934,6 +936,12 @@ table.CodeRay td.code>pre{padding:0}
       </div>
       <div class="paragraph">
        <p>To migrate: check your forms, remove the life cycle, use the new callback functions and system menus if needed, adjust your custom life cycles.</p>
+      </div>
+     </div>
+     <div class="sect2">
+      <h3 id="groupbox-mainbox-flag-now-set-automatically-since-7-0-100"><a class="anchor" href="#groupbox-mainbox-flag-now-set-automatically-since-7-0-100"></a>GroupBox: mainBox flag now set automatically (since 7.0.100)</h3>
+      <div class="paragraph">
+       <p>Every form needs a root group box. That box has the flag mainBox set to true. Until now, this has to be set explicitly. From now on, you can omit it. To migrate just remove the mainBox flags.</p>
       </div>
      </div>
     </div>
