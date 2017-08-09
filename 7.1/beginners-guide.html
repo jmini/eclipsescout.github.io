@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="Asciidoctor 1.5.5">
+  <meta name="generator" content="Asciidoctor 1.5.6.1">
   <meta name="author" content="Matthias Zimmermann">
   <title>Eclipse Scout Beginners Guide</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -90,13 +90,12 @@ strong,b{font-weight:bold;line-height:inherit}
 small{font-size:60%;line-height:inherit}
 code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
 ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
-ul,ol,ul.no-bullet,ol.no-bullet{margin-left:1.5em}
+ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
 ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
 ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
-ul.no-bullet{list-style:none}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -132,7 +131,11 @@ strong strong{font-weight:400}
 kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
 .keyseq kbd:first-child{margin-left:0}
 .keyseq kbd:last-child{margin-right:0}
-.menuseq,.menu{color:rgba(0,0,0,.8)}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
 b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
 b.button:before{content:"[";padding:0 3px 0 2px}
 b.button:after{content:"]";padding:0 2px 0 3px}
@@ -199,7 +202,7 @@ table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
 table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
 .admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
 .admonitionblock>table td.icon{text-align:center;width:80px}
-.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon img{max-width:initial}
 .admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
@@ -255,13 +258,13 @@ table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
 table.tableblock{max-width:100%;border-collapse:separate}
 table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
 table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
-table.grid-all th.tableblock,table.grid-all td.tableblock{border-width:0 1px 1px 0}
-table.grid-all tfoot>tr>th.tableblock,table.grid-all tfoot>tr>td.tableblock{border-width:1px 1px 0 0}
-table.grid-cols th.tableblock,table.grid-cols td.tableblock{border-width:0 1px 0 0}
-table.grid-all *>tr>.tableblock:last-child,table.grid-cols *>tr>.tableblock:last-child{border-right-width:0}
-table.grid-rows th.tableblock,table.grid-rows td.tableblock{border-width:0 0 1px 0}
-table.grid-all tbody>tr:last-child>th.tableblock,table.grid-all tbody>tr:last-child>td.tableblock,table.grid-all thead:last-child>tr>th.tableblock,table.grid-rows tbody>tr:last-child>th.tableblock,table.grid-rows tbody>tr:last-child>td.tableblock,table.grid-rows thead:last-child>tr>th.tableblock{border-bottom-width:0}
-table.grid-rows tfoot>tr>th.tableblock,table.grid-rows tfoot>tr>td.tableblock{border-width:1px 0 0 0}
+table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
+table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
+table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
+table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px 0}
+table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0 0}
+table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
+table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
 table.frame-all{border-width:1px}
 table.frame-sides{border-width:0 1px}
 table.frame-topbot{border-width:1px 0}
@@ -282,10 +285,12 @@ ul li ol{margin-left:1.5em}
 dl dd{margin-left:1.125em}
 dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
 ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
-ul.unstyled,ol.unnumbered,ul.checklist,ul.none{list-style-type:none}
-ul.unstyled,ol.unnumbered,ul.checklist{margin-left:.625em}
-ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1em;font-size:.85em}
-ul.checklist li>p:first-child>input[type="checkbox"]:first-child{width:1em;position:relative;top:1px}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
 ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
 ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
 ul.inline>li>*{display:block}
@@ -302,7 +307,8 @@ ol.lowergreek{list-style-type:lower-greek}
 td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
 td.hdlist1{font-weight:bold;padding-bottom:1.25em}
 .literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
-.colist>table tr>td:first-of-type{padding:0 .75em;line-height:1}
+.colist>table tr>td:first-of-type{padding:.4em .75em 0 .75em;line-height:1;vertical-align:top}
+.colist>table tr>td:first-of-type img{max-width:initial}
 .colist>table tr>td:last-of-type{padding:.25em 0}
 .thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
 .imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
@@ -365,6 +371,7 @@ div.unbreakable{page-break-inside:avoid}
 .yellow{color:#bfbf00}
 .yellow-background{background-color:#fafa00}
 span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
 .admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
 .admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
 .admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
@@ -655,7 +662,7 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2">
       <h3 id="installation-and-setup"><a class="anchor" href="#installation-and-setup"></a>2.1. Installation and Setup</h3>
       <div class="paragraph">
-       <p>Before you can start with the &#x201c;Hello World&#x201d; example you need to have a complete and working Scout installation. For this, see the step-by-step installation guide provided in Appendix <a href="#apx-install_scout">Scout Installation</a>. Once you have everything installed, you are ready to create your first Scout project.</p>
+       <p>Before you can start with the &#x201c;Hello World&#x201d; example you need to have a complete and working Scout installation. For this, see the step-by-step installation guide provided in Appendix <a href="#apx-install_scout">Appendix B</a>. Once you have everything installed, you are ready to create your first Scout project.</p>
       </div>
      </div>
      <div class="sect2">
@@ -675,7 +682,7 @@ table.CodeRay td.code>pre{padding:0}
        </div>
       </div>
       <div class="paragraph">
-       <p>To create a new Scout project select the menu <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Project&#x2026;&#x200b;</span></span> and type &#x201c;Scout Project&#x201d; in the wizard search field. Select the Scout Project wizard and press <b class="button">Next</b>. The <em class="wizard">New Scout Project</em> wizard is then started as shown in <a href="#img-sdk_new_project_wizard">Figure 3</a>.</p>
+       <p>To create a new Scout project select the menu <span class="menuseq"><b class="menu">File</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="submenu">New</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Project&#x2026;&#x200b;</b></span> and type &#x201c;Scout Project&#x201d; in the wizard search field. Select the Scout Project wizard and press <b class="button">Next</b>. The <em class="wizard">New Scout Project</em> wizard is then started as shown in <a href="#img-sdk_new_project_wizard">Figure 3</a>.</p>
       </div>
       <div id="img-sdk_new_project_wizard" class="imageblock">
        <div class="content">
@@ -874,7 +881,7 @@ table.CodeRay td.code>pre{padding:0}
         <p>The first WAR file contains the Scout backend server with all business logic. The second WAR file contains the Scout frontend server that is responsible for communicating with the web browser part of the Scout application.</p>
        </div>
        <div class="paragraph">
-        <p>To start the build right click on the project <code>helloworld</code> and select the context menu <span class="menu">Run As &#x2192; Maven build&#x2026;&#x200b;</span> as shown in <a href="#img-sdk_export_war">Figure 8</a>. In the dialog that appears enter <code>clean verify</code> into the <code>Goals</code> field and press <b class="button">Run</b>.</p>
+        <p>To start the build right click on the project <code>helloworld</code> and select the context menu <b class="menuref">Run As &#x2192; Maven build&#x2026;&#x200b;</b> as shown in <a href="#img-sdk_export_war">Figure 8</a>. In the dialog that appears enter <code>clean verify</code> into the <code>Goals</code> field and press <b class="button">Run</b>.</p>
        </div>
        <div id="img-sdk_export_war" class="imageblock">
         <div class="content">
@@ -901,7 +908,7 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2">
       <h3 id="sec-helloworld_deploy"><a class="anchor" href="#sec-helloworld_deploy"></a>2.5. Deploy to Tomcat</h3>
       <div class="paragraph">
-       <p>As the final step of this tutorial, we deploy the two WAR files representing our &#x201c;Hello World&#x201d; application to a Tomcat web server. For this, we first need a working Tomcat installation. If you do not yet have such an installation you may want to read and follow the instructions provided in Appendix <a href="#apx-install_tomcat">Apache Tomcat Installation</a>. To verify a running Tomcat instance, type <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a> into the address bar of the web browser of your choice. You should then see the page shown in <a href="#img-deploy_tomcat_1">Figure 9</a>.</p>
+       <p>As the final step of this tutorial, we deploy the two WAR files representing our &#x201c;Hello World&#x201d; application to a Tomcat web server. For this, we first need a working Tomcat installation. If you do not yet have such an installation you may want to read and follow the instructions provided in Appendix <a href="#apx-install_tomcat">Appendix C</a>. To verify a running Tomcat instance, type <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a> into the address bar of the web browser of your choice. You should then see the page shown in <a href="#img-deploy_tomcat_1">Figure 9</a>.</p>
       </div>
       <div id="img-deploy_tomcat_1" class="imageblock">
        <div class="content">
@@ -912,7 +919,7 @@ table.CodeRay td.code>pre{padding:0}
        </div>
       </div>
       <div class="paragraph">
-       <p>Once the web browser displays the successful running of your Tomcat instance, switch to its &#x201c;Manager App&#x201d; by clicking on the button highlighted in <a href="#img-deploy_tomcat_1">Figure 9</a>. After entering user name and password the browser will display the &#x201c;Tomcat Web Application Manager&#x201d; as shown in <a href="#img-deploy_tomcat_2">Figure 10</a>. If you don&#x2019;t know the correct username or password you may look it up in the file <span class="filename">tomcat-users.xml</span> as described in Appendix <a href="#apx-tomcat_dirs_and_files">Directories and Files</a>.</p>
+       <p>Once the web browser displays the successful running of your Tomcat instance, switch to its &#x201c;Manager App&#x201d; by clicking on the button highlighted in <a href="#img-deploy_tomcat_1">Figure 9</a>. After entering user name and password the browser will display the &#x201c;Tomcat Web Application Manager&#x201d; as shown in <a href="#img-deploy_tomcat_2">Figure 10</a>. If you don&#x2019;t know the correct username or password you may look it up in the file <span class="filename">tomcat-users.xml</span> as described in Appendix <a href="#apx-tomcat_dirs_and_files">Section C.2</a>.</p>
       </div>
       <div id="img-deploy_tomcat_2" class="imageblock">
        <div class="content">
@@ -960,7 +967,7 @@ table.CodeRay td.code>pre{padding:0}
       <p>This chapter presents the Scout SDK tooling that is included with the Eclipse Scout. The Scout SDK provides wizards to create new project and application components, adds code assistance to the Java Editor and comes with a NLS editor to manage all translated text entries of the application.</p>
      </div>
      <div class="paragraph">
-      <p>The chapter is organized as follows. Section <a href="#sec-sdk_motivation">Motivation for the Tooling</a> describes the goals and benefits of the tooling included. Because the Scout Tooling is based on the Eclipse IDE, section <a href="#sec-eclipse_ide_tooling">Eclipse IDE tooling</a> provides a short overview of frequently used Eclipse features. A high level description of the Scout tooling is provided in section <a href="#sec-sdk_overview">Scout SDK Overview</a>. Sections <a href="#sec-sdk_wizard">Scout Wizards</a>, <a href="#sec-sdk_content_assist">Scout Content Assistance</a> and <a href="#sec-sdk_nls">Scout NLS Tooling</a> then provide detailed descriptions of the functionality offered by the Scout SDK.</p>
+      <p>The chapter is organized as follows. <a href="#sec-sdk_motivation">Section 3.1</a> describes the goals and benefits of the tooling included. Because the Scout Tooling is based on the Eclipse IDE, <a href="#sec-eclipse_ide_tooling">Section 3.2</a> provides a short overview of frequently used Eclipse features. A high level description of the Scout tooling is provided in <a href="#sec-sdk_overview">Section 3.3</a>. <a href="#sec-sdk_wizard">Section 3.4</a>, <a href="#sec-sdk_content_assist">Section 3.5</a> and <a href="#sec-sdk_nls">Section 3.6</a> then provide detailed descriptions of the functionality offered by the Scout SDK.</p>
      </div>
      <div class="sect2">
       <h3 id="sec-sdk_motivation"><a class="anchor" href="#sec-sdk_motivation"></a>3.1. Motivation for the Tooling</h3>
@@ -982,7 +989,7 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3">
        <h4 id="start-the-new-wizard"><a class="anchor" href="#start-the-new-wizard"></a>3.2.1. Start the New Wizard</h4>
        <div class="paragraph">
-        <p>To start the <strong>New Wizard</strong> wizard press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> or use menu <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Other&#x2026;&#x200b;</span></span>. In the first wizard step type the name of the object you want to create into the <strong>Wizards</strong> field as shown in <a href="#img-eclipse_new_wizard">Figure 12</a>.</p>
+        <p>To start the <strong>New Wizard</strong> wizard press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> or use menu <span class="menuseq"><b class="menu">File</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="submenu">New</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Other&#x2026;&#x200b;</b></span>. In the first wizard step type the name of the object you want to create into the <strong>Wizards</strong> field as shown in <a href="#img-eclipse_new_wizard">Figure 12</a>.</p>
        </div>
        <div id="img-eclipse_new_wizard" class="imageblock">
         <div class="content">
@@ -1072,7 +1079,7 @@ table.CodeRay td.code>pre{padding:0}
           <div class="ulist">
            <ul>
             <li> <p><span class="keyseq"><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd></span></p> </li>
-            <li> <p><span class="menuseq"><span class="menu">Context Menu</span>&nbsp;&#x25b8; <span class="submenu">Refactor</span>&nbsp;&#x25b8; <span class="menuitem">Rename&#x2026;&#x200b;</span></span></p> </li>
+            <li> <p><span class="menuseq"><b class="menu">Context Menu</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="submenu">Refactor</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Rename&#x2026;&#x200b;</b></span></p> </li>
             <li> <p>Select the class in the tree and press <kbd>F2</kbd></p> </li>
            </ul>
           </div> </li>
@@ -1102,7 +1109,7 @@ table.CodeRay td.code>pre{padding:0}
           <div class="ulist">
            <ul>
             <li> <p><span class="keyseq"><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd></span></p> </li>
-            <li> <p><span class="menuseq"><span class="menu">Context Menu</span>&nbsp;&#x25b8; <span class="submenu">Refactor</span>&nbsp;&#x25b8; <span class="menuitem">Rename&#x2026;&#x200b;</span></span></p> </li>
+            <li> <p><span class="menuseq"><b class="menu">Context Menu</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="submenu">Refactor</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Rename&#x2026;&#x200b;</b></span></p> </li>
             <li> <p>Select the package in the tree and press <kbd>F2</kbd></p> </li>
            </ul>
           </div> </li>
@@ -1124,19 +1131,19 @@ table.CodeRay td.code>pre{padding:0}
          Scout Wizards
         </dt>
         <dd>
-         <p>The Scout SDK tooling includes a number of wizards for the creation of frequently used Scout components. In many cases the execution of such wizards involves the creation/editing of several source files. In the case of the creation of a new Scout form this includes the form class in the client module of the Scout application, a form data class and a service that communicates Descriptions for the individual wizards are provided in section <a href="#sec-sdk_wizard">Scout Wizards</a>.</p>
+         <p>The Scout SDK tooling includes a number of wizards for the creation of frequently used Scout components. In many cases the execution of such wizards involves the creation/editing of several source files. In the case of the creation of a new Scout form this includes the form class in the client module of the Scout application, a form data class and a service that communicates Descriptions for the individual wizards are provided in <a href="#sec-sdk_wizard">Section 3.4</a>.</p>
         </dd>
         <dt class="hdlist1">
          Content Assist
         </dt>
         <dd>
-         <p>In the Scout framework the hierarchical organization of Scout components if frequently reflected in the form of inner classes. This allows the Scout tooling to provide context specific proposals in the form of content assist proposals offered in the Java editor of the Eclipse IDE. Examples for this form of the tooling includes the creation of form fields or adding columns and context menus to tables. Content assist support is described in detail in <a href="#sec-sdk_content_assist">Scout Content Assistance</a>.</p>
+         <p>In the Scout framework the hierarchical organization of Scout components if frequently reflected in the form of inner classes. This allows the Scout tooling to provide context specific proposals in the form of content assist proposals offered in the Java editor of the Eclipse IDE. Examples for this form of the tooling includes the creation of form fields or adding columns and context menus to tables. Content assist support is described in detail in <a href="#sec-sdk_content_assist">Section 3.5</a>.</p>
         </dd>
         <dt class="hdlist1">
          NLS Tooling
         </dt>
         <dd>
-         <p>Eclipse Scout comes with NLS (National Language Support). To support Scout developers in using Scout&#x2019;s NLS (National Language Support) the Scout SDK offers corresponding tooling to work with translated texts. This tooling is described in section <a href="#sec-sdk_nls">Scout NLS Tooling</a>.</p>
+         <p>Eclipse Scout comes with NLS (National Language Support). To support Scout developers in using Scout&#x2019;s NLS (National Language Support) the Scout SDK offers corresponding tooling to work with translated texts. This tooling is described in <a href="#sec-sdk_nls">Section 3.6</a>.</p>
         </dd>
        </dl>
       </div>
@@ -1150,7 +1157,7 @@ table.CodeRay td.code>pre{padding:0}
        <p>The Scout SDK provides a set of wizards to create new Scout projects and various components for your Scout applications.</p>
       </div>
       <div class="paragraph">
-       <p>To start any of these wizards press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> or use menu <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Other&#x2026;&#x200b;</span></span>. In the first wizard step type "<em>Scout</em>" into the <strong>Wizards</strong> field as shown in <a href="#img-sdk_wizard_new">Figure 14</a>.</p>
+       <p>To start any of these wizards press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> or use menu <span class="menuseq"><b class="menu">File</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="submenu">New</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Other&#x2026;&#x200b;</b></span>. In the first wizard step type "<em>Scout</em>" into the <strong>Wizards</strong> field as shown in <a href="#img-sdk_wizard_new">Figure 14</a>.</p>
       </div>
       <div id="img-sdk_wizard_new" class="imageblock">
        <div class="content">
@@ -1165,9 +1172,9 @@ table.CodeRay td.code>pre{padding:0}
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-wizard_project">New Project Wizard</a></p> </li>
-        <li> <p><a href="#sec-wizard_page">New Page Wizard</a></p> </li>
-        <li> <p><a href="#sec-wizard_form">New Form Wizard</a></p> </li>
+        <li> <p><a href="#sec-wizard_project">Section 3.4.1</a></p> </li>
+        <li> <p><a href="#sec-wizard_page">Section 3.4.2</a></p> </li>
+        <li> <p><a href="#sec-wizard_form">Section 3.4.3</a></p> </li>
        </ul>
       </div>
       <div class="sect3">
@@ -1179,7 +1186,7 @@ table.CodeRay td.code>pre{padding:0}
         <p>The <em>New Scout Project</em> wizard can be used to create a new Scout project from scratch.</p>
        </div>
        <div class="paragraph">
-        <p>To open the wizard press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> or use <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Other&#x2026;&#x200b;</span></span> and type "<em>Scout</em>" into the <strong>Wizards</strong> search field. Then, select the entry "<em>Scout Project</em>" and click on <b class="button">Next</b>. This leads to the initial dialog of the <em>New Scout Project</em> wizard as shown in <a href="#img-sdk_wizard_project">Figure 15</a>.</p>
+        <p>To open the wizard press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span> or use <span class="menuseq"><b class="menu">File</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="submenu">New</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Other&#x2026;&#x200b;</b></span> and type "<em>Scout</em>" into the <strong>Wizards</strong> search field. Then, select the entry "<em>Scout Project</em>" and click on <b class="button">Next</b>. This leads to the initial dialog of the <em>New Scout Project</em> wizard as shown in <a href="#img-sdk_wizard_project">Figure 15</a>.</p>
        </div>
        <div id="img-sdk_wizard_project" class="imageblock">
         <div class="content">
@@ -1314,7 +1321,7 @@ table.CodeRay td.code>pre{padding:0}
         <p></p>
        </div>
        <div class="paragraph">
-        <p>The <em>New Scout Page</em> wizard can be used to create a new page and related classes. To start the wizard use <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Other&#x2026;&#x200b;</span></span> or press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span>.</p>
+        <p>The <em>New Scout Page</em> wizard can be used to create a new page and related classes. To start the wizard use <span class="menuseq"><b class="menu">File</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="submenu">New</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Other&#x2026;&#x200b;</b></span> or press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span>.</p>
        </div>
        <div id="img-sdk_wizard_page" class="imageblock">
         <div class="content">
@@ -1412,7 +1419,7 @@ table.CodeRay td.code>pre{padding:0}
         <p></p>
        </div>
        <div class="paragraph">
-        <p>The <em>New Form</em> wizard is be used to create a new form including a form data, permissions and and related service. To start the wizard use <span class="menuseq"><span class="menu">File</span>&nbsp;&#x25b8; <span class="submenu">New</span>&nbsp;&#x25b8; <span class="menuitem">Other&#x2026;&#x200b;</span></span> or press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span>.</p>
+        <p>The <em>New Form</em> wizard is be used to create a new form including a form data, permissions and and related service. To start the wizard use <span class="menuseq"><b class="menu">File</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="submenu">New</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Other&#x2026;&#x200b;</b></span> or press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>N</kbd></span>.</p>
        </div>
        <div id="img-sdk_wizard_form" class="imageblock">
         <div class="content">
@@ -1669,7 +1676,7 @@ table.CodeRay td.code>pre{padding:0}
         <p>To manage translated application texts for different languages the Scout SDK includes a NLS editor. This editor helps to efficiently deal to edit all the property files that are used with the default setup of Scout.</p>
        </div>
        <div class="paragraph">
-        <p>The NLS editor can be accessed for each text provider service of a Scout application via the <code>*.nls</code> files of the shared Maven modules of the application. In the case of the "Hello World" application you will find the <code>Texts.nls</code> file in module <code>org.eclipse.scout.helloworld.shared</code>. To open the editor for the "Hello World" application select the <code>Texts.nls</code> file first and then use context menu <span class="menuseq"><span class="menu">Open With</span>&nbsp;&#x25b8; <span class="menuitem">NLS Editor</span></span>.</p>
+        <p>The NLS editor can be accessed for each text provider service of a Scout application via the <code>*.nls</code> files of the shared Maven modules of the application. In the case of the "Hello World" application you will find the <code>Texts.nls</code> file in module <code>org.eclipse.scout.helloworld.shared</code>. To open the editor for the "Hello World" application select the <code>Texts.nls</code> file first and then use context menu <span class="menuseq"><b class="menu">Open With</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">NLS Editor</b></span>.</p>
        </div>
        <div class="paragraph">
         <p>The screenshot below shows the opened NLS editor. In the first column the <code>key</code> values are shown that are used in accessing translations through <code>TEXTS.get("key")</code>. The second columns holds the default translations followed by columns holding the translations for other translated languages.</p>
@@ -1886,56 +1893,56 @@ table.CodeRay td.code>pre{padding:0}
        <dl>
         <dt class="hdlist1">
          Step 1:
-         <a href="#sec-contacts_initial_project">Setting up the Initial Project</a>
+         <a href="#sec-contacts_initial_project">Section 4.3</a>
         </dt>
         <dd>
          <p>We start with an empty workspace and the "Hello World" project. At the end of step one we have a project setup that matches the "Contacts" application. This includes the organization and naming of Maven modules and the individual Java packages.</p>
         </dd>
         <dt class="hdlist1">
          Step 2:
-         <a href="#sec-contacts_pages">Adding the Person and Organization Page</a>
+         <a href="#sec-contacts_pages">Section 4.4</a>
         </dt>
         <dd>
          <p>The second step adds the user interface components to display persons and organizations. For this a "Persons" page and an "Organizations" page are created and added to the "Contacts" outline as shown in <a href="#img-app_contacts_personpage">Figure 24</a>.</p>
         </dd>
         <dt class="hdlist1">
          Step 3:
-         <a href="#sec-contacts_jdbc">Creating and Accessing the Database</a>
+         <a href="#sec-contacts_jdbc">Section 4.5</a>
         </dt>
         <dd>
          <p>This step concentrates on the backend of the "Contacts" application. The covered topics includes dealing with application properties, setup and access of a database and using the database to povide data for the person and organization page created in the previous step.</p>
         </dd>
         <dt class="hdlist1">
          Step 4:
-         <a href="#sec-contacts_forms">Adding a Form to Create/Edit Persons</a>
+         <a href="#sec-contacts_forms">Section 4.6</a>
         </dt>
         <dd>
          <p>Having access to the database is used in this step to add the components that allow a user to create and edit persons and organizations in the user interface of the "Contacts" application. In addition, this tutorial step also demonstrates how to design and implement complex form layouts with the Scout framework.</p>
         </dd>
         <dt class="hdlist1">
          Step 5:
-         <a href="#sec-contacts_fields">Form Field Validation and Template Fields</a>
+         <a href="#sec-contacts_fields">Section 4.7</a>
         </dt>
         <dd>
          <p>This step provides an introduction into form field validation and the creation of template fields. Validation of user input is important for many business applications and template fields help to improve code quality with a mechanism to reuse application specific user interface components.</p>
         </dd>
         <dt class="hdlist1">
          Step 6:
-         <a href="#sec-contacts_form_add_company">Adding the Company Form</a>
+         <a href="#sec-contacts_form_add_company">Section 4.8</a>
         </dt>
         <dd>
          <p>We create the organization form to create and enter organizations in the "Contacts" application. As we can reuse many of the components developed so far this is the shortest tutorial step.</p>
         </dd>
         <dt class="hdlist1">
          Step 7:
-         <a href="#sec-contacts_link_organization_person">Linking Organizations and Persons</a>
+         <a href="#sec-contacts_link_organization_person">Section 4.9</a>
         </dt>
         <dd>
          <p>In this step we modify the user interface to implement a 1:n relationship between organizations and persons. This includes the creation of a hierarchical page structure for organization, adding an organization column to the person page and adding an organization field to the person form to manage the association of a person to an organization.</p>
         </dd>
         <dt class="hdlist1">
          Step 8:
-         <a href="#sec-contacts_outlook">Additional Concepts and Features</a>
+         <a href="#sec-contacts_outlook">Section 4.10</a>
         </dt>
         <dd>
          <p>The last tutorial part discusses the gap between the tutorial application and the complete "Contacts" demo application.</p>
@@ -1953,15 +1960,15 @@ table.CodeRay td.code>pre{padding:0}
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-contacts_initial_codebase">Creating the initial Codebase</a></p> </li>
-        <li> <p><a href="#sec-contacts_remove_stuff">Removing unnecessery Components</a></p> </li>
-        <li> <p><a href="#sec-contacts_change_workoutline">Changes to Class WorkOutline</a></p> </li>
-        <li> <p><a href="#sec-contacts_change_desktop">Changes to Class Desktop</a></p> </li>
-        <li> <p><a href="#sec-contacts_default_theme">Switching to the Default Theme</a></p> </li>
+        <li> <p><a href="#sec-contacts_initial_codebase">Section 4.3.1</a></p> </li>
+        <li> <p><a href="#sec-contacts_remove_stuff">Section 4.3.2</a></p> </li>
+        <li> <p><a href="#sec-contacts_change_workoutline">Section 4.3.3</a></p> </li>
+        <li> <p><a href="#sec-contacts_change_desktop">Section 4.3.4</a></p> </li>
+        <li> <p><a href="#sec-contacts_default_theme">Section 4.3.5</a></p> </li>
        </ul>
       </div>
       <div class="paragraph">
-       <p>This first step of the "Contacts" tutorial ends with a review of the results of this first tutorial step in section <a href="#sec-contacts_summary">What have we achieved?</a>.</p>
+       <p>This first step of the "Contacts" tutorial ends with a review of the results of this first tutorial step in <a href="#sec-contacts_summary">Section 4.3.6</a>.</p>
       </div>
       <div class="sect3">
        <h4 id="sec-contacts_initial_codebase"><a class="anchor" href="#sec-contacts_initial_codebase"></a>4.3.1. Creating the initial Codebase</h4>
@@ -2336,22 +2343,22 @@ scout.application.version=1.0.0-SNAPSHOT
        <p>In the second step of the Scout tutorial the components to display persons and organizations are added to the "Contacts" outline of the user interface of the Scout application. Specifically, a "Persons" page and an "Organizations" page are created and added to the navigation tree of the "Contacts" outline.</p>
       </div>
       <div class="paragraph">
-       <p>Database access and populating the pages with actual data from the database is not part of this section but will be covered in section <a href="#sec-contacts_jdbc">Creating and Accessing the Database</a> in the next tutorial step.</p>
+       <p>Database access and populating the pages with actual data from the database is not part of this section but will be covered in <a href="#sec-contacts_jdbc">Section 4.5</a> in the next tutorial step.</p>
       </div>
       <div class="paragraph">
        <p>The addition of the "Persons" page is described in detail in the sections listed below.</p>
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-contacts_creating_person_package">Creating additional Packages</a></p> </li>
-        <li> <p><a href="#sec-contacts_country_lookup_call">Creating the Country Lookup Call</a></p> </li>
-        <li> <p><a href="#sec-contacts_creating_person_page">Creating the Person Page</a></p> </li>
-        <li> <p><a href="#sec-contacts_adding_page_columns">Adding Table Columns to the Page</a></p> </li>
-        <li> <p><a href="#sec-contacts_link_person_page">Link the Person Page to the Contacts Outline</a></p> </li>
+        <li> <p><a href="#sec-contacts_creating_person_package">Section 4.4.1</a></p> </li>
+        <li> <p><a href="#sec-contacts_country_lookup_call">Section 4.4.2</a></p> </li>
+        <li> <p><a href="#sec-contacts_creating_person_page">Section 4.4.3</a></p> </li>
+        <li> <p><a href="#sec-contacts_adding_page_columns">Section 4.4.4</a></p> </li>
+        <li> <p><a href="#sec-contacts_link_person_page">Section 4.4.5</a></p> </li>
        </ul>
       </div>
       <div class="paragraph">
-       <p>The addition of the company page is described in <a href="#sec-contacts_adding_company_page">Adding the Company Page</a>. Finally, the state of the "Contacts" application is summarized in section <a href="#sec-contacts_summary_step_2">What have we achieved?</a>.</p>
+       <p>The addition of the company page is described in <a href="#sec-contacts_adding_company_page">Section 4.4.6</a>. Finally, the state of the "Contacts" application is summarized in <a href="#sec-contacts_summary_step_2">Section 4.4.7</a>.</p>
       </div>
       <div class="sect3">
        <h4 id="sec-contacts_creating_person_package"><a class="anchor" href="#sec-contacts_creating_person_package"></a>4.4.1. Creating additional Packages</h4>
@@ -2481,6 +2488,223 @@ scout.application.version=1.0.0-SNAPSHOT
   }
   <span class="directive">public</span> <span class="type">class</span> <span class="class">Table</span> <span class="directive">extends</span> AbstractTable {
     <span class="comment">// container class to hold columns and other elements for this table page </span><i class="conum" data-value="4"></i><b>(4)</b>
+    <span class="directive">public</span> LastNameColumn getLastNameColumn() {
+      <span class="keyword">return</span> getColumnSet().getColumnByClass(LastNameColumn.class);
+    }
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredDefaultIconId() {
+      <span class="keyword">return</span> Icons.Person;
+    }
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> IMenu&gt; getConfiguredDefaultMenu() { <i class="conum" data-value="1"></i><b>(1)</b>
+      <span class="keyword">return</span> EditMenu.class;
+    }
+    <span class="directive">public</span> CountryColumn getCountryColumn() {
+      <span class="keyword">return</span> getColumnSet().getColumnByClass(CountryColumn.class);
+    }
+    <span class="directive">public</span> EmailColumn getEmailColumn() {
+      <span class="keyword">return</span> getColumnSet().getColumnByClass(PersonTablePage.Table.EmailColumn.class);
+    }
+    <span class="directive">public</span> OrganizationColumn getOrganizationColumn() {
+      <span class="keyword">return</span> getColumnSet().getColumnByClass(OrganizationColumn.class);
+    }
+    <span class="directive">public</span> CityColumn getCityColumn() {
+      <span class="keyword">return</span> getColumnSet().getColumnByClass(CityColumn.class);
+    }
+    <span class="directive">public</span> FirstNameColumn getFirstNameColumn() {
+      <span class="keyword">return</span> getColumnSet().getColumnByClass(FirstNameColumn.class);
+    }
+    <span class="directive">public</span> PersonIdColumn getPersonIdColumn() {
+      <span class="keyword">return</span> getColumnSet().getColumnByClass(PersonIdColumn.class);
+    }
+    <span class="annotation">@Order</span>(<span class="integer">10</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">EditMenu</span> <span class="directive">extends</span> AbstractMenu {
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredIconId() {
+        <span class="keyword">return</span> Icons.Pencil;
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredKeyStroke() {
+        <span class="keyword">return</span> <span class="string"><span class="delimiter">"</span><span class="content">alt-e</span><span class="delimiter">"</span></span>;
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredText() {
+        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Edit</span><span class="delimiter">"</span></span>);
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="type">void</span> execAction() {
+        PersonForm form = <span class="keyword">new</span> PersonForm();
+        form.setPersonId(getPersonIdColumn().getSelectedValue()); <i class="conum" data-value="2"></i><b>(2)</b>
+        form.addFormListener(<span class="keyword">new</span> PersonFormListener());
+        <span class="comment">// start the form using its modify handler</span>
+        form.startModify();
+      }
+    }
+    <span class="annotation">@Order</span>(<span class="integer">20</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">NewMenu</span> <span class="directive">extends</span> AbstractMenu {
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredKeyStroke() {
+        <span class="keyword">return</span> <span class="string"><span class="delimiter">"</span><span class="content">alt-n</span><span class="delimiter">"</span></span>;
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredIconId() {
+        <span class="comment">// get unicode from http://fontawesome.io/icon/magic/</span>
+        <span class="keyword">return</span> <span class="string"><span class="delimiter">"</span><span class="content">font:awesomeIcons </span><span class="char">\uf0d0</span><span class="delimiter">"</span></span>;
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredText() {
+        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">New</span><span class="delimiter">"</span></span>);
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">Set</span>&lt;? <span class="directive">extends</span> IMenuType&gt; getConfiguredMenuTypes() { <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="keyword">return</span> CollectionUtility.&lt;IMenuType&gt; hashSet(
+            TableMenuType.EmptySpace, TableMenuType.SingleSelection);
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="type">void</span> execAction() {
+        PersonForm form = <span class="keyword">new</span> PersonForm();
+        form.getOrganizationField().setValue(getOrganizationId()); <i class="conum" data-value="3"></i><b>(3)</b>
+        form.addFormListener(<span class="keyword">new</span> PersonFormListener());
+        <span class="comment">// start the form using its new handler</span>
+        form.startNew();
+      }
+    }
+    <span class="directive">private</span> <span class="type">class</span> <span class="class">PersonFormListener</span> <span class="directive">implements</span> FormListener {
+      <span class="annotation">@Override</span>
+      <span class="directive">public</span> <span class="type">void</span> formChanged(FormEvent e) {
+        <span class="comment">// reload page to reflect new/changed data after saving any changes</span>
+        <span class="keyword">if</span> (FormEvent.TYPE_CLOSED == e.getType() &amp;&amp; e.getForm().isFormStored()) {
+          reloadPage();
+        }
+      }
+    }
+    <span class="annotation">@Order</span>(<span class="integer">1</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">PersonIdColumn</span> <span class="directive">extends</span> AbstractStringColumn {
+      <span class="annotation">@Override</span> <i class="conum" data-value="1"></i><b>(1)</b>
+      <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredDisplayable() {
+        <span class="keyword">return</span> <span class="predefined-constant">false</span>;
+      }
+      <span class="annotation">@Override</span> <i class="conum" data-value="2"></i><b>(2)</b>
+      <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredPrimaryKey() {
+        <span class="keyword">return</span> <span class="predefined-constant">true</span>;
+      }
+    }
+    <span class="annotation">@Order</span>(<span class="integer">2</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">FirstNameColumn</span> <span class="directive">extends</span> AbstractStringColumn {
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
+        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">FirstName</span><span class="delimiter">"</span></span>);
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
+        <span class="keyword">return</span> <span class="integer">120</span>;
+      }
+    }
+    <span class="annotation">@Order</span>(<span class="integer">3</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">LastNameColumn</span> <span class="directive">extends</span> AbstractStringColumn {
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
+        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">LastName</span><span class="delimiter">"</span></span>);
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
+        <span class="keyword">return</span> <span class="integer">120</span>;
+      }
+    }
+    <span class="annotation">@Order</span>(<span class="integer">4</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">CityColumn</span> <span class="directive">extends</span> AbstractStringColumn {
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
+        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">City</span><span class="delimiter">"</span></span>);
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
+        <span class="keyword">return</span> <span class="integer">120</span>;
+      }
+    }
+    <span class="annotation">@Order</span>(<span class="integer">5</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">CountryColumn</span> <span class="directive">extends</span> AbstractSmartColumn2&lt;<span class="predefined-type">String</span>&gt; {
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
+        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Country</span><span class="delimiter">"</span></span>);
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
+        <span class="keyword">return</span> <span class="integer">120</span>;
+      }
+      <span class="annotation">@Override</span> <i class="conum" data-value="1"></i><b>(1)</b>
+      <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> ILookupCall&lt;<span class="predefined-type">String</span>&gt;&gt; getConfiguredLookupCall() {
+        <span class="keyword">return</span> CountryLookupCall.class;
+      }
+    }
+    <span class="annotation">@Order</span>(<span class="integer">6</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">PhoneColumn</span> <span class="directive">extends</span> AbstractStringColumn {
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
+        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Phone</span><span class="delimiter">"</span></span>);
+      }
+      <span class="annotation">@Override</span> <i class="conum" data-value="1"></i><b>(1)</b>
+      <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredVisible() {
+        <span class="keyword">return</span> <span class="predefined-constant">false</span>;
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
+        <span class="keyword">return</span> <span class="integer">120</span>;
+      }
+    }
+    <span class="annotation">@Order</span>(<span class="integer">7</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">MobileColumn</span> <span class="directive">extends</span> AbstractStringColumn {
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
+        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Mobile</span><span class="delimiter">"</span></span>);
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredVisible() {
+        <span class="keyword">return</span> <span class="predefined-constant">false</span>;
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
+        <span class="keyword">return</span> <span class="integer">120</span>;
+      }
+    }
+    <span class="annotation">@Order</span>(<span class="integer">8</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">EmailColumn</span> <span class="directive">extends</span> AbstractStringColumn {
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
+        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Email</span><span class="delimiter">"</span></span>);
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredVisible() {
+        <span class="keyword">return</span> <span class="predefined-constant">false</span>;
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
+        <span class="keyword">return</span> <span class="integer">200</span>;
+      }
+    }
+    <span class="annotation">@Order</span>(<span class="integer">9</span>)
+    <span class="directive">public</span> <span class="type">class</span> <span class="class">OrganizationColumn</span> <span class="directive">extends</span> AbstractSmartColumn2&lt;<span class="predefined-type">String</span>&gt; {
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
+        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Organization</span><span class="delimiter">"</span></span>);
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> ILookupCall&lt;<span class="predefined-type">String</span>&gt;&gt; getConfiguredLookupCall() {
+        <span class="keyword">return</span> OrganizationLookupCall.class;
+      }
+      <span class="annotation">@Override</span>
+      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
+        <span class="keyword">return</span> <span class="integer">200</span>;
+      }
+    }
+  }
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredIconId() {
+    <span class="keyword">return</span> AbstractIcons.Person;
+  }
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> ISearchForm&gt; getConfiguredSearchForm() {
+    <span class="keyword">return</span> PersonSearchForm.class;
   }
 }</code></pre>
         </div>
@@ -2493,7 +2717,7 @@ scout.application.version=1.0.0-SNAPSHOT
          <tbody>
           <tr>
            <td><i class="conum" data-value="1"></i><b>1</b></td>
-           <td>Specify the title "Persons" for the page using the Scout NLS tooling (see <a href="#sec-add_text_entry">Adding a new Translated Text Entry</a>)</td>
+           <td>Specify the title "Persons" for the page using the Scout NLS tooling (see <a href="#sec-add_text_entry">Section 3.6.1</a>)</td>
           </tr>
           <tr>
            <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -2624,7 +2848,7 @@ scout.application.version=1.0.0-SNAPSHOT
         </table>
        </div>
        <div class="paragraph">
-        <p>We can now add the additional columns <code>FirstNameColumn</code>, <code>LastNameColumn</code>, <code>CityColumn</code> below. After entering the class name press <kbd>Tab</kbd> twice to move the cursor to the label text of the field. In the case of the first name enter "FirstName" and hit <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Space</kbd></span> to open the wizard to add the translated text "First Name" as described in <a href="#sec-add_text_entry">Adding a new Translated Text Entry</a>.</p>
+        <p>We can now add the additional columns <code>FirstNameColumn</code>, <code>LastNameColumn</code>, <code>CityColumn</code> below. After entering the class name press <kbd>Tab</kbd> twice to move the cursor to the label text of the field. In the case of the first name enter "FirstName" and hit <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Space</kbd></span> to open the wizard to add the translated text "First Name" as described in <a href="#sec-add_text_entry">Section 3.6.1</a>.</p>
        </div>
        <div class="paragraph">
         <p>For these three columns the default implementation is fine and does not need any adaptations. <a href="#lst-contacts_FirstNameColumn">Listing 8</a> below provides an example for this type of columns.</p>
@@ -2765,7 +2989,7 @@ scout.application.version=1.0.0-SNAPSHOT
         </table>
        </div>
        <div class="paragraph">
-        <p>Before we can save the class <code>ContactOutline</code> we have to update its imports to include the import statement for class <code>PersonTablePage</code>. To update the imports you can either user the menu <span class="menuseq"><span class="menu">Source</span>&nbsp;&#x25b8; <span class="menuitem">Organize Imports</span></span> or use the keyboard shortcut <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>O</kbd></span>.</p>
+        <p>Before we can save the class <code>ContactOutline</code> we have to update its imports to include the import statement for class <code>PersonTablePage</code>. To update the imports you can either user the menu <span class="menuseq"><b class="menu">Source</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Organize Imports</b></span> or use the keyboard shortcut <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>O</kbd></span>.</p>
        </div>
        <div class="paragraph">
         <p>The application is now in a state where we can restart the backend and the frontend server to verify our changes in the user interface.</p>
@@ -2885,20 +3109,20 @@ scout.application.version=1.0.0-SNAPSHOT
        <p>For the "Contacts" application we will work with a <a href="https://db.apache.org/derby/index.html">Derby database</a>. The choice of Derby is based on the fact that no additional installation is required and it is possible to work with in-memory databases.</p>
       </div>
       <div class="paragraph">
-       <p>We start this tutorial step with copying the classes that handle the database creation/access from the full "Contacts" demo application as described in <a href="#sec-contacts_jdbc_infra">Adding the Infrastructure</a>. The setup is then explained in the following sections.</p>
+       <p>We start this tutorial step with copying the classes that handle the database creation/access from the full "Contacts" demo application as described in <a href="#sec-contacts_jdbc_infra">Section 4.5.1</a>. The setup is then explained in the following sections.</p>
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-contacts_jdbc_properties">Scout Config Properties</a></p> </li>
-        <li> <p><a href="#sec-contacts_jdbc_sql">The SQL Service and SQL Statements</a></p> </li>
-        <li> <p><a href="#sec-contacts_jdbc_initial_db">The Database Setup Service</a></p> </li>
+        <li> <p><a href="#sec-contacts_jdbc_properties">Section 4.5.2</a></p> </li>
+        <li> <p><a href="#sec-contacts_jdbc_sql">Section 4.5.3</a></p> </li>
+        <li> <p><a href="#sec-contacts_jdbc_initial_db">Section 4.5.4</a></p> </li>
        </ul>
       </div>
       <div class="paragraph">
-       <p>With the basic infrastructure in place we review the existing "Contacts" backend to answer the question <a href="#sec-contacts_jdbc_starting">What is missing?</a>. In section <a href="#sec-contacts_jdbc_fetching_data">Fetching Organization and Person Data</a> we then add the missing pieces.</p>
+       <p>With the basic infrastructure in place we review the existing "Contacts" backend to answer the question <a href="#sec-contacts_jdbc_starting">Section 4.5.5</a>. In <a href="#sec-contacts_jdbc_fetching_data">Section 4.5.6</a> we then add the missing pieces.</p>
       </div>
       <div class="paragraph">
-       <p>At the end of this tutorial step the "Contacts" backend server provides person and organization data to the frontend server as summarized in <a href="#sec-contacts_jdbc_summary">What have we achieved?</a>.</p>
+       <p>At the end of this tutorial step the "Contacts" backend server provides person and organization data to the frontend server as summarized in <a href="#sec-contacts_jdbc_summary">Section 4.5.7</a>.</p>
       </div>
       <div class="sect3">
        <h4 id="sec-contacts_jdbc_infra"><a class="anchor" href="#sec-contacts_jdbc_infra"></a>4.5.1. Adding the Infrastructure</h4>
@@ -2980,7 +3204,7 @@ scout.application.version=1.0.0-SNAPSHOT
         <p>We are now ready to copy the classes related to the database infrastructure from the "Contacts" demo application to our tutorial workspace.</p>
        </div>
        <div class="paragraph">
-        <p>The simplest way to do this is to open a second Eclipse IDE with the workspace where you have imported the Scout demo applications. If you have not done this yet go to the beginning of this tutorial <a href="#cha-large_example">A One Day Tutorial</a> and catch up now.</p>
+        <p>The simplest way to do this is to open a second Eclipse IDE with the workspace where you have imported the Scout demo applications. If you have not done this yet go to the beginning of this tutorial <a href="#cha-large_example">Chapter 4</a> and catch up now.</p>
        </div>
        <div class="paragraph">
         <p>In the demo application workspace navigate to the same package <code>org.eclipse.scout.contacts.server.sql</code> and copy over all its classes. After copying these classes make sure that the structure of your server Maven module looks as shown in <a href="#img-contacts_tutorial_copied_db_classes">Figure 39</a>.</p>
@@ -3519,18 +3743,18 @@ contacts.superuser=system</code></pre>
        <p>In this tutorial step we add the Scout forms that are used to create and edit persons and organizations in the user interface. This tutorial step also provides an introduction into the design and implementation complex form layouts with the Scout framework.</p>
       </div>
       <div class="paragraph">
-       <p>Before we start with the actual implementation of the form section <a href="#sec-contacts_form_design">Designing the Person Form</a> provides an introduction to the layouting concepts of the Scout framework. Based on this information we design a hierarchical form layout for the person form and can then dive into the creation of the person form.</p>
+       <p>Before we start with the actual implementation of the form <a href="#sec-contacts_form_design">Section 4.6.1</a> provides an introduction to the layouting concepts of the Scout framework. Based on this information we design a hierarchical form layout for the person form and can then dive into the creation of the person form.</p>
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-contacts_form_implement">Implementing the Form</a></p> </li>
-        <li> <p><a href="#sec-contacts_form_code">Adding a Gender Code Type</a></p> </li>
-        <li> <p><a href="#sec-contacts_form_add_fields">Adding Form Fields</a></p> </li>
-        <li> <p><a href="#sec-contacts_form_integrate_service">Person Form Handler and Person Service</a></p> </li>
+        <li> <p>Implementing the Form (<a href="#sec-contacts_form_implement">Section 4.6.2</a>)</p> </li>
+        <li> <p>Adding a Gender Code Type (<a href="#sec-contacts_form_code">Section 4.6.3</a>)</p> </li>
+        <li> <p>Adding Form Fields (<a href="#sec-contacts_form_add_fields">Section 4.6.4</a>)</p> </li>
+        <li> <p>Person Form Handler and Person Service (<a href="#sec-contacts_form_integrate_service">Section 4.6.5</a>)</p> </li>
        </ul>
       </div>
       <div class="paragraph">
-       <p>The tutorial step concludes with a summary in section <a href="#sec-contacts_forms_summary">What have we achieved?</a>.</p>
+       <p>The tutorial step concludes with a summary in <a href="#sec-contacts_forms_summary">Section 4.6.6</a>.</p>
       </div>
       <div class="sect3">
        <h4 id="sec-contacts_form_design"><a class="anchor" href="#sec-contacts_form_design"></a>4.6.1. Designing the Person Form</h4>
@@ -4155,7 +4379,7 @@ contacts.superuser=system</code></pre>
         </div>
        </div>
        <div class="paragraph">
-        <p>Next is the implementation of the address box in the "Contact Info" tab. The address box is realized as a single column group box that holds a street field, a city field and a country field. According to the form layout defined in <a href="#sec-contacts_form_design">Designing the Person Form</a> the city field and the country field will be located on the same logical row and in the same cell of the logical grid.</p>
+        <p>Next is the implementation of the address box in the "Contact Info" tab. The address box is realized as a single column group box that holds a street field, a city field and a country field. According to the form layout defined in <a href="#sec-contacts_form_design">Section 4.6.1</a> the city field and the country field will be located on the same logical row and in the same cell of the logical grid.</p>
        </div>
        <div class="paragraph">
         <p>In the Scout default layout each form field uses up a single cell of the logical grid. Whenever we like to be more economical with the space occupied by several fields, we can work with a Scout sequence box. Inner fields of a sequence box will be arranged on a single row from left to right and the spacing between the inner fields will be minimal.</p>
@@ -4468,13 +4692,13 @@ contacts.superuser=system</code></pre>
        <p>This tutorial step introduces two additional concepts that are used in most Scout applications. Form field validation and template fields. Form field validation helps to keep data quality high and template fields are used to increase the code quality of Scout application.</p>
       </div>
       <div class="paragraph">
-       <p>In addition to just retrieving and storing new data, a business application should also help the user to maintain the quality of the entered data. To validate user input, the Scout framework offers form field validation. Simple input validation is possible on the level of individual fields as shown in <a href="#sec-contacts_field_validation">Simple Form Field Validation</a>. Scout also offers mechanisms to validate field values on the level of container fields or on the level of a form as shown in <a href="#sec-contacts_field_validation_complex">Complex Form Field Validation</a>. In the text below we add a number of form field validations that implement this approach for the person form.</p>
+       <p>In addition to just retrieving and storing new data, a business application should also help the user to maintain the quality of the entered data. To validate user input, the Scout framework offers form field validation. Simple input validation is possible on the level of individual fields as shown in <a href="#sec-contacts_field_validation">Section 4.7.1</a>. Scout also offers mechanisms to validate field values on the level of container fields or on the level of a form as shown in <a href="#sec-contacts_field_validation_complex">Section 4.7.2</a>. In the text below we add a number of form field validations that implement this approach for the person form.</p>
       </div>
       <div class="paragraph">
-       <p>In section <a href="#sec-contacts_form_templatefields">Creating Template Fields</a> we refactor the picture field code into a template field that can later be re-used for the organization form. To edit the image URL we add a simple edit form to the refactored picture field in section <a href="#sec-contacts_form_urleditform">Adding a simple URL Input Form to the Picture Field</a>.</p>
+       <p>In <a href="#sec-contacts_form_templatefields">Section 4.7.3</a> we refactor the picture field code into a template field that can later be re-used for the organization form. To edit the image URL we add a simple edit form to the refactored picture field in <a href="#sec-contacts_form_urleditform">Section 4.7.4</a>.</p>
       </div>
       <div class="paragraph">
-       <p>In section <a href="#sec-contacts_form_templatefields_more">More Template Fields</a> we outline the creation of additional template fields and provide a summary of this tutorial step in <a href="#sec-contacts_form_templatefields_summary">What have we achieved?</a>.</p>
+       <p>In <a href="#sec-contacts_form_templatefields_more">Section 4.7.5</a> we outline the creation of additional template fields and provide a summary of this tutorial step in <a href="#sec-contacts_form_templatefields_summary">Section 4.7.6</a>.</p>
       </div>
       <div class="sect3">
        <h4 id="sec-contacts_field_validation"><a class="anchor" href="#sec-contacts_field_validation"></a>4.7.1. Simple Form Field Validation</h4>
@@ -4683,7 +4907,7 @@ contacts.superuser=system</code></pre>
       <div class="sect3">
        <h4 id="sec-contacts_form_templatefields"><a class="anchor" href="#sec-contacts_form_templatefields"></a>4.7.3. Creating Template Fields</h4>
        <div class="paragraph">
-        <p>In this section we show how to refactor a group of fields into a Scout template field that is ready for reuse. As an example we refactor the picture field into a template field. Later in tutorial step <a href="#sec-contacts_form_add_company">Adding the Company Form</a> we can then reuse this field in the company form to show the company&#x2019;s logo.</p>
+        <p>In this section we show how to refactor a group of fields into a Scout template field that is ready for reuse. As an example we refactor the picture field into a template field. Later in tutorial step <a href="#sec-contacts_form_add_company">Section 4.8</a> we can then reuse this field in the company form to show the company&#x2019;s logo.</p>
        </div>
        <div class="paragraph">
         <p>The generic approach to refactor a form field into a template field is listed below.</p>
@@ -5278,13 +5502,13 @@ contacts.superuser=system</code></pre>
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-contacts_company_lookup_call">Creating an Organization Lookup Call</a></p> </li>
-        <li> <p><a href="#sec-contacts_modify_person_form_and_page">Using the Lookup Call in the Person Form and the Person Table</a></p> </li>
-        <li> <p><a href="#sec-contacts_organization_node_page">Link the Person Page to Organizations</a></p> </li>
+        <li> <p><a href="#sec-contacts_company_lookup_call">Section 4.9.1</a></p> </li>
+        <li> <p><a href="#sec-contacts_modify_person_form_and_page">Section 4.9.2</a></p> </li>
+        <li> <p><a href="#sec-contacts_organization_node_page">Section 4.9.3</a></p> </li>
        </ul>
       </div>
       <div class="paragraph">
-       <p>This last tutorial step ends with a short review in section <a href="#sec-contacts_link_person_organization_summary">What have we achieved?</a></p>
+       <p>This last tutorial step ends with a short review in <a href="#sec-contacts_link_person_organization_summary">Section 4.9.4</a></p>
       </div>
       <div class="sect3">
        <h4 id="sec-contacts_company_lookup_call"><a class="anchor" href="#sec-contacts_company_lookup_call"></a>4.9.1. Creating an Organization Lookup Call</h4>
@@ -5739,9 +5963,9 @@ contacts.superuser=system</code></pre>
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-contacts_theming_styling">Theming and Styling</a></p> </li>
-        <li> <p><a href="#sec-contacts_modular_apps">Modular Scout Applications</a></p> </li>
-        <li> <p><a href="#sec-contacts_infra">Infrastructure</a></p> </li>
+        <li> <p><a href="#sec-contacts_theming_styling">Section 4.10.1</a></p> </li>
+        <li> <p><a href="#sec-contacts_modular_apps">Section 4.10.2</a></p> </li>
+        <li> <p><a href="#sec-contacts_infra">Section 4.10.3</a></p> </li>
        </ul>
       </div>
       <div class="sect3">
@@ -5998,7 +6222,7 @@ C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll</pre>
        <p>where the second line specifies the exact path to the JRE to be used to start your Eclipse Scout installation.</p>
       </div>
       <div class="paragraph">
-       <p>If you have explicitly specified the JRE to be used you verify this in the running Eclipse installation. First, select the <span class="menuseq"><span class="menu">Help</span>&nbsp;&#x25b8; <span class="menuitem">About Eclipse</span></span> menu to open the about dialog. Then, click on the <b class="button">Installation Details</b> button and switch to the <em class="tab">Configuration</em> tab. In the long list of system properties you will find lines similar to the ones shown below.</p>
+       <p>If you have explicitly specified the JRE to be used you verify this in the running Eclipse installation. First, select the <span class="menuseq"><b class="menu">Help</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">About Eclipse</b></span> menu to open the about dialog. Then, click on the <b class="button">Installation Details</b> button and switch to the <em class="tab">Configuration</em> tab. In the long list of system properties you will find lines similar to the ones shown below.</p>
       </div>
       <div class="listingblock">
        <div class="content">
@@ -6030,7 +6254,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        </div>
       </div>
       <div class="paragraph">
-       <p>To add Scout to your existing Eclipse installation, you need to start Eclipse. Then select the <span class="menuseq"><span class="menu">Help</span>&nbsp;&#x25b8; <span class="menuitem">Install New Software&#x2026;&#x200b;</span></span> menu as shown in <a href="#img-eclipse_install_new_software">Figure 64</a> to open the install dialog.</p>
+       <p>To add Scout to your existing Eclipse installation, you need to start Eclipse. Then select the <span class="menuseq"><b class="menu">Help</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Install New Software&#x2026;&#x200b;</b></span> menu as shown in <a href="#img-eclipse_install_new_software">Figure 64</a> to open the install dialog.</p>
       </div>
       <div id="img-eclipse_add_repository" class="imageblock">
        <div class="content">
@@ -6052,13 +6276,13 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        </div>
       </div>
       <div class="paragraph">
-       <p>After the Eclipse IDE has connected to the Scout repository, select the Scout feature <em>Scout Application Development</em> as shown in <a href="#img-eclipse_select_scout_features">Figure 66</a>. Then, move through the installation with the <b class="button">Next</b> button. On the last installation step, accept the presented EPL terms by clicking on the appropriate radio button. To complete the installation, click the <b class="button">Finish</b> button and accept the request for a restart of Eclipse. After the restart of the Eclipse IDE, you may add the Scout perspective using the <span class="menuseq"><span class="menu">Window</span>&nbsp;&#x25b8; <span class="submenu">Open Perspective</span>&nbsp;&#x25b8; <span class="menuitem">Other &#x2026;&#x200b;</span></span> menu and selecting the Scout perspective from the presented list. Clicking on the Scout perspective button should then result in a state very similar to <a href="#img-scout_perspective">Figure 63</a>.</p>
+       <p>After the Eclipse IDE has connected to the Scout repository, select the Scout feature <em>Scout Application Development</em> as shown in <a href="#img-eclipse_select_scout_features">Figure 66</a>. Then, move through the installation with the <b class="button">Next</b> button. On the last installation step, accept the presented EPL terms by clicking on the appropriate radio button. To complete the installation, click the <b class="button">Finish</b> button and accept the request for a restart of Eclipse. After the restart of the Eclipse IDE, you may add the Scout perspective using the <span class="menuseq"><b class="menu">Window</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="submenu">Open Perspective</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Other &#x2026;&#x200b;</b></span> menu and selecting the Scout perspective from the presented list. Clicking on the Scout perspective button should then result in a state very similar to <a href="#img-scout_perspective">Figure 63</a>.</p>
       </div>
      </div>
      <div class="sect2">
       <h3 id="verifying-the-installation"><a class="anchor" href="#verifying-the-installation"></a>B.5. Verifying the Installation</h3>
       <div class="paragraph">
-       <p>After you can start your Eclipse Scout package you need to verify that Scout is working as intended. The simplest way to verify your Scout installation is to create a &#x201c;Hello World&#x201d; Scout project and run the corresponding Scout application as described in Chapter <a href="#cha-helloworld">&#x201c;Hello World&#x201d; Tutorial</a>.</p>
+       <p>After you can start your Eclipse Scout package you need to verify that Scout is working as intended. The simplest way to verify your Scout installation is to create a &#x201c;Hello World&#x201d; Scout project and run the corresponding Scout application as described in <a href="#cha-helloworld">Chapter 2</a>.</p>
       </div>
      </div>
     </div>
@@ -6148,7 +6372,7 @@ sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs .
        <p>To get at user names and passwords you can open file <span class="filename">tomcat-users.xml</span> located in Tomcat&#x2019;s <span class="filename">conf</span> directory. In this file the active users with their passwords and associated roles are stored. See Listing <a href="#lst-tomcat.users">Listing 57</a> for an example. From the content of this file, we see that user <span class="java">admin</span> has password <span class="java">s3cret</span> and also posesses the necessary role <span class="java">manager-gui</span> to access the &#x201c;Manager App&#x201d;. If file <span class="filename">tomcat-users.xml</span> does not contain any user with this role, you can simply add new user with this role to the existing users. Alternatively, you also can add the necessary role to an existing user. Just append a comma to the existing right(s) followed by the string <span class="java">manager-gui</span>. Note that you will need to restart your Tomcat application after adapting the content of file <span class="filename">tomcat-users.xml</span>.</p>
       </div>
       <div class="paragraph">
-       <p>With working credentials you can now start the &#x201c;Manager App&#x201d; as described the &#x201c;Hello World&#x201d; tutorial in Section <a href="#sec-helloworld_deploy">Deploy to Tomcat</a>.</p>
+       <p>With working credentials you can now start the &#x201c;Manager App&#x201d; as described the &#x201c;Hello World&#x201d; tutorial in <a href="#sec-helloworld_deploy">Section 2.5</a>.</p>
       </div>
       <div class="admonitionblock tip">
        <table>
