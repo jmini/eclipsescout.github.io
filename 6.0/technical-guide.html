@@ -2747,7 +2747,7 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
         <p>Besides of some overloaded methods, <a href="#ifuture">IFuture</a> basically provides two methods to wait for a future to enter 'done' state, namely <code>awaitDone</code> and <code>awaitDoneAndGet</code>, with the difference that the latter additionally returns the job&#x2019;s result or exception. If the future is already done, those methods will return immediately. For both methods, there exists an overloaded version to wait for at most a given time, which once elapsed results in a <code>TimedOutException</code> thrown.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Further, <code>awaitDoneAndGet</code> allows to specify an <a href="#exception-translation">IExceptionTranslator</a> to control exception translation. By default, <a href="#defaultruntimeexceptiontranslator">Section 7.3.2</a> is used, meaning that a <code>RuntimeException</code> is propagated as it is, whereas a checked exception would be wrapped into a <a href="#platformexception">Section 7.1.1</a>. If you require checked exceptions to be thrown as they are, use <a href="#defaultexceptiontranslator">Section 7.3.1</a> instead, or even <a href="#nullexceptiontranslator">Section 7.3.4</a> to work with the raw <code>ExecutionException</code> as being thrown by Java Executor framework.</p> 
+        <p>Further, <code>awaitDoneAndGet</code> allows to specify an <a href="#exception-translation">IExceptionTranslator</a> to control exception translation. By default, <a href="#defaultruntimeexceptiontranslator">DefaultRuntimeExceptionTranslator</a> is used, meaning that a <code>RuntimeException</code> is propagated as it is, whereas a checked exception would be wrapped into a <a href="#platformexception">PlatformException</a>. If you require checked exceptions to be thrown as they are, use <a href="#defaultexceptiontranslator">DefaultExceptionTranslator</a> instead, or even <a href="#nullexceptiontranslator">NullExceptionTranslator</a> to work with the raw <code>ExecutionException</code> as being thrown by Java Executor framework.</p> 
        </div> 
        <div class="listingblock"> 
         <div class="title">
@@ -5052,7 +5052,7 @@ protected void execInitField() {
        <p>You may ask yourself, how the <em>jaxws</em> module can access the implementing port type and handlers located in the <em>server</em> module. That works because of the indirection via bean manager, and because there is a flat classpath at runtime.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>See <a href="#WebServiceEntryPoint">Section 15.5.1</a> for more information.</p> 
+       <p>See <a href="#WebServiceEntryPoint">WebServiceEntryPoint</a> for more information.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
