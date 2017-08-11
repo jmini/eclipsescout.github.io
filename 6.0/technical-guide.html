@@ -2747,7 +2747,7 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
         <p>Besides of some overloaded methods, <a href="#ifuture">IFuture</a> basically provides two methods to wait for a future to enter 'done' state, namely <code>awaitDone</code> and <code>awaitDoneAndGet</code>, with the difference that the latter additionally returns the job&#x2019;s result or exception. If the future is already done, those methods will return immediately. For both methods, there exists an overloaded version to wait for at most a given time, which once elapsed results in a <code>TimedOutException</code> thrown.</p> 
        </div> 
        <div class="paragraph"> 
-        <p>Further, <code>awaitDoneAndGet</code> allows to specify an <a href="#IExceptionTranslator">IExceptionTranslator</a> to control exception translation. By default, <a href="#defaultruntimeexceptiontranslator">DefaultRuntimeExceptionTranslator</a> is used, meaning that a <code>RuntimeException</code> is propagated as it is, whereas a checked exception would be wrapped into a <a href="#platformexception">PlatformException</a>. If you require checked exceptions to be thrown as they are, use <a href="#defaultexceptiontranslator">DefaultExceptionTranslator</a> instead, or even <a href="#nullexceptiontranslator">NullExceptionTranslator</a> to work with the raw <code>ExecutionException</code> as being thrown by Java Executor framework.</p> 
+        <p>Further, <code>awaitDoneAndGet</code> allows to specify an <a href="#exception-translation">IExceptionTranslator</a> to control exception translation. By default, <a href="#defaultruntimeexceptiontranslator">Section 7.3.2</a> is used, meaning that a <code>RuntimeException</code> is propagated as it is, whereas a checked exception would be wrapped into a <a href="#platformexception">Section 7.1.1</a>. If you require checked exceptions to be thrown as they are, use <a href="#defaultexceptiontranslator">Section 7.3.1</a> instead, or even <a href="#nullexceptiontranslator">Section 7.3.4</a> to work with the raw <code>ExecutionException</code> as being thrown by Java Executor framework.</p> 
        </div> 
        <div class="listingblock"> 
         <div class="title">
@@ -3029,7 +3029,7 @@ operationCompleted.waitForUninterruptibly();</code></pre>
      <div class="sect2"> 
       <h3 id="stopping-the-platform"><a class="anchor" href="#stopping-the-platform"></a>8.16. Stopping the platform</h3> 
       <div class="paragraph"> 
-       <p>Upon stopping the platform, the job manager will also be shutdown. If having a <a href="#IPlatformListener">[IPlatformListener]</a> to perform some cleanup work, and which requires the job manager to be still functional, that listener must be annotated with an <code>@Order</code> less than <code>IJobManager.DESTROY_ORDER</code>, which is 5'900. If not specifying an <code>@Order</code> explicitly, the listener will have the default order of <em>5</em>, meaning being invoked before job manager shutdown anyway.</p> 
+       <p>Upon stopping the platform, the job manager will also be shutdown. If having a <a href="#platform-listener">IPlatformListener</a> to perform some cleanup work, and which requires the job manager to be still functional, that listener must be annotated with an <code>@Order</code> less than <code>IJobManager.DESTROY_ORDER</code>, which is 5'900. If not specifying an <code>@Order</code> explicitly, the listener will have the default order of <em>5</em>, meaning being invoked before job manager shutdown anyway.</p> 
       </div> 
      </div> 
      <div class="sect2"> 
@@ -3038,7 +3038,7 @@ operationCompleted.waitForUninterruptibly();</code></pre>
        <p>Model jobs exist client side only, and are used to interact with the Scout client model to read and write model values in a serial manner per session. That enables no synchronization to be used when interacting with the model.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>By definition, a model job requires to be run on behalf of a <a href="#runcontext">RunContext</a> with a <code>IClientSession</code> set, and must have the session&#x2019;s model job semaphore set as its <a href="#executionsemaphore">ExecutionSemaphore</a>. That causes all such jobs to be run in sequence in the model thread. At any given time, there is only one model thread active per client session.</p> 
+       <p>By definition, a model job requires to be run on behalf of a <a href="#properties-of-a-runcontext">ClientRunContext</a> with a <code>IClientSession</code> set, and must have the session&#x2019;s model job semaphore set as its <a href="#executionsemaphore">ExecutionSemaphore</a>. That causes all such jobs to be run in sequence in the model thread. At any given time, there is only one model thread active per client session.</p> 
       </div> 
       <div class="paragraph"> 
        <p>The class <code>ModelJobs</code> is a helper class, and is for convenience purpose to facilitate the creation of model job related artifacts, and to schedule model jobs.</p> 
@@ -4801,7 +4801,7 @@ protected void execInitField() {
       <div class="sect3"> 
        <h4 id="jaxws.implementor.configuration"><a class="anchor" href="#jaxws.implementor.configuration"></a>15.2.4. Configure JAX-WS implementor</h4> 
        <div class="paragraph"> 
-        <p>JAX-WS Scout integration is prepared to run with different implementors. Unfortunately, some implementors do not implement the JSR exactly, or some important functionality is missing in the JSR. To address this fact without loosing implementor independence, the delegate bean <a href="#JaxWsImplementor">JaxWsImplementor</a> exists.</p> 
+        <p>JAX-WS Scout integration is prepared to run with different implementors. Unfortunately, some implementors do not implement the JSR exactly, or some important functionality is missing in the JSR. To address this fact without loosing implementor independence, the delegate bean <a href="#JaxWsImplementorSpecifics">JaxWsImplementorSpecifics</a> exists.</p> 
        </div> 
        <div class="paragraph"> 
         <p>As of now, Scout ships with three such implementor specific classes, which are activated via <em>config.properties</em> by setting the property <em>jaxws.implementor</em> with its fully qualified class name. By default, <em>JAX-WS METRO</em> implementor is installed.</p> 
@@ -5420,7 +5420,7 @@ protected void execInitField() {
           </tr> 
           <tr> 
            <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#factorypath">.factorypath</a></p></td> 
-           <td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the annotation processor to be used (<a href="#JaxWsAnnotation">JaxWsAnnotation</a>) and dependent artifacts</p></td> 
+           <td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the annotation processor to be used (<a href="#jaxwsannotationprocessor">JaxWsAnnotationProcessor</a>) and dependent artifacts</p></td> 
           </tr> 
          </tbody> 
         </table> 
@@ -5469,7 +5469,7 @@ protected void execInitField() {
       <div class="sect3"> 
        <h4 id="WebServiceEntryPoint"><a class="anchor" href="#WebServiceEntryPoint"></a>15.5.1. The concept of an Entry Point</h4> 
        <div class="paragraph"> 
-        <p>An entry point implements the endpoint interface (or port type interface), and is published as the webservice endpoint for that endpoint interface. The entry point itself is auto generated by <a href="#JaxWsAnnotation">JaxWsAnnotation</a> during compile time, based on instructions as given by the respective class/interface annotated with <code>WebServiceEntryPoint</code> annotation. The entry point is responsible to enforce authentication and to run the web request in a <code>RunContext</code>. In turn, the request is propagated to the bean implementing the endpoint interface.</p> 
+        <p>An entry point implements the endpoint interface (or port type interface), and is published as the webservice endpoint for that endpoint interface. The entry point itself is auto generated by <a href="#jaxwsannotationprocessor">JaxWsAnnotationProcessor</a> during compile time, based on instructions as given by the respective class/interface annotated with <code>WebServiceEntryPoint</code> annotation. The entry point is responsible to enforce authentication and to run the web request in a <code>RunContext</code>. In turn, the request is propagated to the bean implementing the endpoint interface.</p> 
        </div> 
        <div class="paragraph"> 
         <p><a href="#img-interaction_entrypoint_porttype">Figure 12</a> illustrates the endpoint&#x2019;s class hierarchy and the message flow for a web request.</p> 
@@ -5641,7 +5641,7 @@ protected void execInitField() {
        <div class="sect4"> 
         <h5 id="jaxws.provider.authentication"><a class="anchor" href="#jaxws.provider.authentication"></a>Configure Authentication</h5> 
         <div class="paragraph"> 
-         <p>The field 'authentication' on <code>WebServiceEntryPoint</code> configures what authentication mechanism to install on the webservice endpoint, and in which <code>RunContext</code> to run authenticated webservice requests. It consists of the <a href="#IAuthentication">IAuthentication</a> to challenge the client to provide credentials, and the <a href="#ICredential">ICredential</a> to verify request&#x2019;s credentials against a data source.</p> 
+         <p>The field 'authentication' on <code>WebServiceEntryPoint</code> configures what authentication mechanism to install on the webservice endpoint, and in which <code>RunContext</code> to run authenticated webservice requests. It consists of the <a href="#IAuthenticationMethod">IAuthenticationMethod</a> to challenge the client to provide credentials, and the <a href="#ICredentialVerifier">ICredentialVerifier</a> to verify request&#x2019;s credentials against a data source.</p> 
         </div> 
         <div class="paragraph"> 
          <p>By default, authentication is <em>disabled</em>. If <em>enabled</em>, an <code>AuthenticationHandler</code> is generated and registered in the handler chain as very first handler. The position can be changed via <em>order</em> field on <code>Authentication</code> annotation.</p> 
@@ -5657,11 +5657,11 @@ protected void execInitField() {
          <tbody> 
           <tr> 
            <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>method</strong><br /> (<em>mandatory</em>)</p></td> 
-           <td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the authentication method to be used to challenge the client to provide credentials. By default, <code>NullAuthenticationMethod</code> is used to disable authentication.<br /> See <a href="#IAuthentication">IAuthentication</a> for more information.</p></td> 
+           <td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the authentication method to be used to challenge the client to provide credentials. By default, <code>NullAuthenticationMethod</code> is used to disable authentication.<br /> See <a href="#IAuthenticationMethod">IAuthenticationMethod</a> for more information.</p></td> 
           </tr> 
           <tr> 
            <td class="tableblock halign-left valign-top"><p class="tableblock">verifier<br /></p></td> 
-           <td class="tableblock halign-left valign-top"><p class="tableblock">Specifies against which data source credentials are to be verified. By default, <code>ForbiddenCredentialVerifier</code> is used to reject any webservice request.<br /> See <a href="#ICredential">ICredential</a> for more information.</p></td> 
+           <td class="tableblock halign-left valign-top"><p class="tableblock">Specifies against which data source credentials are to be verified. By default, <code>ForbiddenCredentialVerifier</code> is used to reject any webservice request.<br /> See <a href="#ICredentialVerifier">ICredentialVerifier</a> for more information.</p></td> 
           </tr> 
           <tr> 
            <td class="tableblock halign-left valign-top"><p class="tableblock">order<br /></p></td> 
@@ -5682,7 +5682,7 @@ protected void execInitField() {
           <tbody>
            <tr> 
             <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> 
-            <td class="content"> If using container based authentication (authentication enforced by the application server), use <a href="#ContainerBasedAuthentication">ContainerBasedAuthentication</a> as authentication method, and do not configure a credential verifier. </td> 
+            <td class="content"> If using container based authentication (authentication enforced by the application server), use <a href="#containerbasedauthenticationmethod">ContainerBasedAuthenticationMethod</a> as authentication method, and do not configure a credential verifier. </td> 
            </tr> 
           </tbody>
          </table> 
