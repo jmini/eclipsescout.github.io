@@ -662,7 +662,7 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2">
       <h3 id="installation-and-setup"><a class="anchor" href="#installation-and-setup"></a>2.1. Installation and Setup</h3>
       <div class="paragraph">
-       <p>Before you can start with the &#x201c;Hello World&#x201d; example you need to have a complete and working Scout installation. For this, see the step-by-step installation guide provided in Appendix <a href="#apx-install_scout">Appendix B</a>. Once you have everything installed, you are ready to create your first Scout project.</p>
+       <p>Before you can start with the &#x201c;Hello World&#x201d; example you need to have a complete and working Scout installation. For this, see the step-by-step installation guide provided in <a href="#apx-install_scout">Appendix B</a>. Once you have everything installed, you are ready to create your first Scout project.</p>
       </div>
      </div>
      <div class="sect2">
@@ -908,7 +908,7 @@ table.CodeRay td.code>pre{padding:0}
      <div class="sect2">
       <h3 id="sec-helloworld_deploy"><a class="anchor" href="#sec-helloworld_deploy"></a>2.5. Deploy to Tomcat</h3>
       <div class="paragraph">
-       <p>As the final step of this tutorial, we deploy the two WAR files representing our &#x201c;Hello World&#x201d; application to a Tomcat web server. For this, we first need a working Tomcat installation. If you do not yet have such an installation you may want to read and follow the instructions provided in Appendix <a href="#apx-install_tomcat">Appendix C</a>. To verify a running Tomcat instance, type <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a> into the address bar of the web browser of your choice. You should then see the page shown in <a href="#img-deploy_tomcat_1">Figure 9</a>.</p>
+       <p>As the final step of this tutorial, we deploy the two WAR files representing our &#x201c;Hello World&#x201d; application to a Tomcat web server. For this, we first need a working Tomcat installation. If you do not yet have such an installation you may want to read and follow the instructions provided in <a href="#apx-install_tomcat">Appendix C</a>. To verify a running Tomcat instance, type <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a> into the address bar of the web browser of your choice. You should then see the page shown in <a href="#img-deploy_tomcat_1">Figure 9</a>.</p>
       </div>
       <div id="img-deploy_tomcat_1" class="imageblock">
        <div class="content">
@@ -919,7 +919,7 @@ table.CodeRay td.code>pre{padding:0}
        </div>
       </div>
       <div class="paragraph">
-       <p>Once the web browser displays the successful running of your Tomcat instance, switch to its &#x201c;Manager App&#x201d; by clicking on the button highlighted in <a href="#img-deploy_tomcat_1">Figure 9</a>. After entering user name and password the browser will display the &#x201c;Tomcat Web Application Manager&#x201d; as shown in <a href="#img-deploy_tomcat_2">Figure 10</a>. If you don&#x2019;t know the correct username or password you may look it up in the file <span class="filename">tomcat-users.xml</span> as described in Appendix <a href="#apx-tomcat_dirs_and_files">Section C.2</a>.</p>
+       <p>Once the web browser displays the successful running of your Tomcat instance, switch to its &#x201c;Manager App&#x201d; by clicking on the button highlighted in <a href="#img-deploy_tomcat_1">Figure 9</a>. After entering user name and password the browser will display the &#x201c;Tomcat Web Application Manager&#x201d; as shown in <a href="#img-deploy_tomcat_2">Figure 10</a>. If you don&#x2019;t know the correct username or password you may look it up in the file <span class="filename">tomcat-users.xml</span> as described in <a href="#apx-tomcat_dirs_and_files">Section C.2</a>.</p>
       </div>
       <div id="img-deploy_tomcat_2" class="imageblock">
        <div class="content">
@@ -1172,9 +1172,9 @@ table.CodeRay td.code>pre{padding:0}
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-wizard_project">Section 3.4.1</a></p> </li>
-        <li> <p><a href="#sec-wizard_page">Section 3.4.2</a></p> </li>
-        <li> <p><a href="#sec-wizard_form">Section 3.4.3</a></p> </li>
+        <li> <p>New Project Wizard (<a href="#sec-wizard_project">Section 3.4.1</a>)</p> </li>
+        <li> <p>New Page Wizard (<a href="#sec-wizard_page">Section 3.4.2</a>)</p> </li>
+        <li> <p>New Form Wizard (<a href="#sec-wizard_form">Section 3.4.3</a>)</p> </li>
        </ul>
       </div>
       <div class="sect3">
@@ -1892,57 +1892,57 @@ table.CodeRay td.code>pre{padding:0}
       <div class="dlist">
        <dl>
         <dt class="hdlist1">
-         Step 1:
-         <a href="#sec-contacts_initial_project">Section 4.3</a>
+         Step 1: Setting up the Initial Project (
+         <a href="#sec-contacts_initial_project">Section 4.3</a>)
         </dt>
         <dd>
          <p>We start with an empty workspace and the "Hello World" project. At the end of step one we have a project setup that matches the "Contacts" application. This includes the organization and naming of Maven modules and the individual Java packages.</p>
         </dd>
         <dt class="hdlist1">
-         Step 2:
-         <a href="#sec-contacts_pages">Section 4.4</a>
+         Step 2: Adding the Person and Organization Page (
+         <a href="#sec-contacts_pages">Section 4.4</a>)
         </dt>
         <dd>
          <p>The second step adds the user interface components to display persons and organizations. For this a "Persons" page and an "Organizations" page are created and added to the "Contacts" outline as shown in <a href="#img-app_contacts_personpage">Figure 24</a>.</p>
         </dd>
         <dt class="hdlist1">
-         Step 3:
-         <a href="#sec-contacts_jdbc">Section 4.5</a>
+         Step 3: Creating and Accessing the Database (
+         <a href="#sec-contacts_jdbc">Section 4.5</a>)
         </dt>
         <dd>
          <p>This step concentrates on the backend of the "Contacts" application. The covered topics includes dealing with application properties, setup and access of a database and using the database to povide data for the person and organization page created in the previous step.</p>
         </dd>
         <dt class="hdlist1">
-         Step 4:
-         <a href="#sec-contacts_forms">Section 4.6</a>
+         Step 4: Adding a Form to Create/Edit Persons (
+         <a href="#sec-contacts_forms">Section 4.6</a>)
         </dt>
         <dd>
          <p>Having access to the database is used in this step to add the components that allow a user to create and edit persons and organizations in the user interface of the "Contacts" application. In addition, this tutorial step also demonstrates how to design and implement complex form layouts with the Scout framework.</p>
         </dd>
         <dt class="hdlist1">
-         Step 5:
-         <a href="#sec-contacts_fields">Section 4.7</a>
+         Step 5: Form Field Validation and Template Fields (
+         <a href="#sec-contacts_fields">Section 4.7</a>)
         </dt>
         <dd>
          <p>This step provides an introduction into form field validation and the creation of template fields. Validation of user input is important for many business applications and template fields help to improve code quality with a mechanism to reuse application specific user interface components.</p>
         </dd>
         <dt class="hdlist1">
-         Step 6:
-         <a href="#sec-contacts_form_add_company">Section 4.8</a>
+         Step 6: Adding the Company Form (
+         <a href="#sec-contacts_form_add_company">Section 4.8</a>)
         </dt>
         <dd>
          <p>We create the organization form to create and enter organizations in the "Contacts" application. As we can reuse many of the components developed so far this is the shortest tutorial step.</p>
         </dd>
         <dt class="hdlist1">
-         Step 7:
-         <a href="#sec-contacts_link_organization_person">Section 4.9</a>
+         Step 7: Linking Organizations and Persons (
+         <a href="#sec-contacts_link_organization_person">Section 4.9</a>)
         </dt>
         <dd>
          <p>In this step we modify the user interface to implement a 1:n relationship between organizations and persons. This includes the creation of a hierarchical page structure for organization, adding an organization column to the person page and adding an organization field to the person form to manage the association of a person to an organization.</p>
         </dd>
         <dt class="hdlist1">
-         Step 8:
-         <a href="#sec-contacts_outlook">Section 4.10</a>
+         Step 8: Additional Concepts and Features (
+         <a href="#sec-contacts_outlook">Section 4.10</a>)
         </dt>
         <dd>
          <p>The last tutorial part discusses the gap between the tutorial application and the complete "Contacts" demo application.</p>
@@ -1960,11 +1960,11 @@ table.CodeRay td.code>pre{padding:0}
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-contacts_initial_codebase">Section 4.3.1</a></p> </li>
-        <li> <p><a href="#sec-contacts_remove_stuff">Section 4.3.2</a></p> </li>
-        <li> <p><a href="#sec-contacts_change_workoutline">Section 4.3.3</a></p> </li>
-        <li> <p><a href="#sec-contacts_change_desktop">Section 4.3.4</a></p> </li>
-        <li> <p><a href="#sec-contacts_default_theme">Section 4.3.5</a></p> </li>
+        <li> <p>Creating the initial Codebase (<a href="#sec-contacts_initial_codebase">Section 4.3.1</a>)</p> </li>
+        <li> <p>Removing unnecessery Components (<a href="#sec-contacts_remove_stuff">Section 4.3.2</a>)</p> </li>
+        <li> <p>Changes to Class WorkOutline (<a href="#sec-contacts_change_workoutline">Section 4.3.3</a>)</p> </li>
+        <li> <p>Changes to Class Desktop (<a href="#sec-contacts_change_desktop">Section 4.3.4</a>)</p> </li>
+        <li> <p>Switching to the Default Theme (<a href="#sec-contacts_default_theme">Section 4.3.5</a>)</p> </li>
        </ul>
       </div>
       <div class="paragraph">
@@ -2350,11 +2350,11 @@ scout.application.version=1.0.0-SNAPSHOT
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-contacts_creating_person_package">Section 4.4.1</a></p> </li>
-        <li> <p><a href="#sec-contacts_country_lookup_call">Section 4.4.2</a></p> </li>
-        <li> <p><a href="#sec-contacts_creating_person_page">Section 4.4.3</a></p> </li>
-        <li> <p><a href="#sec-contacts_adding_page_columns">Section 4.4.4</a></p> </li>
-        <li> <p><a href="#sec-contacts_link_person_page">Section 4.4.5</a></p> </li>
+        <li> <p>Creating additional Packages (<a href="#sec-contacts_creating_person_package">Section 4.4.1</a>)</p> </li>
+        <li> <p>Creating the Country Lookup Call (<a href="#sec-contacts_country_lookup_call">Section 4.4.2</a>)</p> </li>
+        <li> <p>Creating the Person Page (<a href="#sec-contacts_creating_person_page">Section 4.4.3</a>)</p> </li>
+        <li> <p>Adding Table Columns to the Page (<a href="#sec-contacts_adding_page_columns">Section 4.4.4</a>)</p> </li>
+        <li> <p>Link the Person Page to the Contacts Outline (<a href="#sec-contacts_link_person_page">Section 4.4.5</a>)</p> </li>
        </ul>
       </div>
       <div class="paragraph">
@@ -2488,223 +2488,6 @@ scout.application.version=1.0.0-SNAPSHOT
   }
   <span class="directive">public</span> <span class="type">class</span> <span class="class">Table</span> <span class="directive">extends</span> AbstractTable {
     <span class="comment">// container class to hold columns and other elements for this table page </span><i class="conum" data-value="4"></i><b>(4)</b>
-    <span class="directive">public</span> LastNameColumn getLastNameColumn() {
-      <span class="keyword">return</span> getColumnSet().getColumnByClass(LastNameColumn.class);
-    }
-    <span class="annotation">@Override</span>
-    <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredDefaultIconId() {
-      <span class="keyword">return</span> Icons.Person;
-    }
-    <span class="annotation">@Override</span>
-    <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> IMenu&gt; getConfiguredDefaultMenu() { <i class="conum" data-value="1"></i><b>(1)</b>
-      <span class="keyword">return</span> EditMenu.class;
-    }
-    <span class="directive">public</span> CountryColumn getCountryColumn() {
-      <span class="keyword">return</span> getColumnSet().getColumnByClass(CountryColumn.class);
-    }
-    <span class="directive">public</span> EmailColumn getEmailColumn() {
-      <span class="keyword">return</span> getColumnSet().getColumnByClass(PersonTablePage.Table.EmailColumn.class);
-    }
-    <span class="directive">public</span> OrganizationColumn getOrganizationColumn() {
-      <span class="keyword">return</span> getColumnSet().getColumnByClass(OrganizationColumn.class);
-    }
-    <span class="directive">public</span> CityColumn getCityColumn() {
-      <span class="keyword">return</span> getColumnSet().getColumnByClass(CityColumn.class);
-    }
-    <span class="directive">public</span> FirstNameColumn getFirstNameColumn() {
-      <span class="keyword">return</span> getColumnSet().getColumnByClass(FirstNameColumn.class);
-    }
-    <span class="directive">public</span> PersonIdColumn getPersonIdColumn() {
-      <span class="keyword">return</span> getColumnSet().getColumnByClass(PersonIdColumn.class);
-    }
-    <span class="annotation">@Order</span>(<span class="integer">10</span>)
-    <span class="directive">public</span> <span class="type">class</span> <span class="class">EditMenu</span> <span class="directive">extends</span> AbstractMenu {
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredIconId() {
-        <span class="keyword">return</span> Icons.Pencil;
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredKeyStroke() {
-        <span class="keyword">return</span> <span class="string"><span class="delimiter">"</span><span class="content">alt-e</span><span class="delimiter">"</span></span>;
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredText() {
-        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Edit</span><span class="delimiter">"</span></span>);
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="type">void</span> execAction() {
-        PersonForm form = <span class="keyword">new</span> PersonForm();
-        form.setPersonId(getPersonIdColumn().getSelectedValue()); <i class="conum" data-value="2"></i><b>(2)</b>
-        form.addFormListener(<span class="keyword">new</span> PersonFormListener());
-        <span class="comment">// start the form using its modify handler</span>
-        form.startModify();
-      }
-    }
-    <span class="annotation">@Order</span>(<span class="integer">20</span>)
-    <span class="directive">public</span> <span class="type">class</span> <span class="class">NewMenu</span> <span class="directive">extends</span> AbstractMenu {
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredKeyStroke() {
-        <span class="keyword">return</span> <span class="string"><span class="delimiter">"</span><span class="content">alt-n</span><span class="delimiter">"</span></span>;
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredIconId() {
-        <span class="comment">// get unicode from http://fontawesome.io/icon/magic/</span>
-        <span class="keyword">return</span> <span class="string"><span class="delimiter">"</span><span class="content">font:awesomeIcons </span><span class="char">\uf0d0</span><span class="delimiter">"</span></span>;
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredText() {
-        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">New</span><span class="delimiter">"</span></span>);
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">Set</span>&lt;? <span class="directive">extends</span> IMenuType&gt; getConfiguredMenuTypes() { <i class="conum" data-value="3"></i><b>(3)</b>
-        <span class="keyword">return</span> CollectionUtility.&lt;IMenuType&gt; hashSet(
-            TableMenuType.EmptySpace, TableMenuType.SingleSelection);
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="type">void</span> execAction() {
-        PersonForm form = <span class="keyword">new</span> PersonForm();
-        form.getOrganizationField().setValue(getOrganizationId()); <i class="conum" data-value="3"></i><b>(3)</b>
-        form.addFormListener(<span class="keyword">new</span> PersonFormListener());
-        <span class="comment">// start the form using its new handler</span>
-        form.startNew();
-      }
-    }
-    <span class="directive">private</span> <span class="type">class</span> <span class="class">PersonFormListener</span> <span class="directive">implements</span> FormListener {
-      <span class="annotation">@Override</span>
-      <span class="directive">public</span> <span class="type">void</span> formChanged(FormEvent e) {
-        <span class="comment">// reload page to reflect new/changed data after saving any changes</span>
-        <span class="keyword">if</span> (FormEvent.TYPE_CLOSED == e.getType() &amp;&amp; e.getForm().isFormStored()) {
-          reloadPage();
-        }
-      }
-    }
-    <span class="annotation">@Order</span>(<span class="integer">1</span>)
-    <span class="directive">public</span> <span class="type">class</span> <span class="class">PersonIdColumn</span> <span class="directive">extends</span> AbstractStringColumn {
-      <span class="annotation">@Override</span> <i class="conum" data-value="1"></i><b>(1)</b>
-      <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredDisplayable() {
-        <span class="keyword">return</span> <span class="predefined-constant">false</span>;
-      }
-      <span class="annotation">@Override</span> <i class="conum" data-value="2"></i><b>(2)</b>
-      <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredPrimaryKey() {
-        <span class="keyword">return</span> <span class="predefined-constant">true</span>;
-      }
-    }
-    <span class="annotation">@Order</span>(<span class="integer">2</span>)
-    <span class="directive">public</span> <span class="type">class</span> <span class="class">FirstNameColumn</span> <span class="directive">extends</span> AbstractStringColumn {
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
-        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">FirstName</span><span class="delimiter">"</span></span>);
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
-        <span class="keyword">return</span> <span class="integer">120</span>;
-      }
-    }
-    <span class="annotation">@Order</span>(<span class="integer">3</span>)
-    <span class="directive">public</span> <span class="type">class</span> <span class="class">LastNameColumn</span> <span class="directive">extends</span> AbstractStringColumn {
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
-        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">LastName</span><span class="delimiter">"</span></span>);
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
-        <span class="keyword">return</span> <span class="integer">120</span>;
-      }
-    }
-    <span class="annotation">@Order</span>(<span class="integer">4</span>)
-    <span class="directive">public</span> <span class="type">class</span> <span class="class">CityColumn</span> <span class="directive">extends</span> AbstractStringColumn {
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
-        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">City</span><span class="delimiter">"</span></span>);
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
-        <span class="keyword">return</span> <span class="integer">120</span>;
-      }
-    }
-    <span class="annotation">@Order</span>(<span class="integer">5</span>)
-    <span class="directive">public</span> <span class="type">class</span> <span class="class">CountryColumn</span> <span class="directive">extends</span> AbstractSmartColumn2&lt;<span class="predefined-type">String</span>&gt; {
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
-        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Country</span><span class="delimiter">"</span></span>);
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
-        <span class="keyword">return</span> <span class="integer">120</span>;
-      }
-      <span class="annotation">@Override</span> <i class="conum" data-value="1"></i><b>(1)</b>
-      <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> ILookupCall&lt;<span class="predefined-type">String</span>&gt;&gt; getConfiguredLookupCall() {
-        <span class="keyword">return</span> CountryLookupCall.class;
-      }
-    }
-    <span class="annotation">@Order</span>(<span class="integer">6</span>)
-    <span class="directive">public</span> <span class="type">class</span> <span class="class">PhoneColumn</span> <span class="directive">extends</span> AbstractStringColumn {
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
-        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Phone</span><span class="delimiter">"</span></span>);
-      }
-      <span class="annotation">@Override</span> <i class="conum" data-value="1"></i><b>(1)</b>
-      <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredVisible() {
-        <span class="keyword">return</span> <span class="predefined-constant">false</span>;
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
-        <span class="keyword">return</span> <span class="integer">120</span>;
-      }
-    }
-    <span class="annotation">@Order</span>(<span class="integer">7</span>)
-    <span class="directive">public</span> <span class="type">class</span> <span class="class">MobileColumn</span> <span class="directive">extends</span> AbstractStringColumn {
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
-        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Mobile</span><span class="delimiter">"</span></span>);
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredVisible() {
-        <span class="keyword">return</span> <span class="predefined-constant">false</span>;
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
-        <span class="keyword">return</span> <span class="integer">120</span>;
-      }
-    }
-    <span class="annotation">@Order</span>(<span class="integer">8</span>)
-    <span class="directive">public</span> <span class="type">class</span> <span class="class">EmailColumn</span> <span class="directive">extends</span> AbstractStringColumn {
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
-        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Email</span><span class="delimiter">"</span></span>);
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="type">boolean</span> getConfiguredVisible() {
-        <span class="keyword">return</span> <span class="predefined-constant">false</span>;
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
-        <span class="keyword">return</span> <span class="integer">200</span>;
-      }
-    }
-    <span class="annotation">@Order</span>(<span class="integer">9</span>)
-    <span class="directive">public</span> <span class="type">class</span> <span class="class">OrganizationColumn</span> <span class="directive">extends</span> AbstractSmartColumn2&lt;<span class="predefined-type">String</span>&gt; {
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredHeaderText() {
-        <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Organization</span><span class="delimiter">"</span></span>);
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> ILookupCall&lt;<span class="predefined-type">String</span>&gt;&gt; getConfiguredLookupCall() {
-        <span class="keyword">return</span> OrganizationLookupCall.class;
-      }
-      <span class="annotation">@Override</span>
-      <span class="directive">protected</span> <span class="type">int</span> getConfiguredWidth() {
-        <span class="keyword">return</span> <span class="integer">200</span>;
-      }
-    }
-  }
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredIconId() {
-    <span class="keyword">return</span> AbstractIcons.Person;
-  }
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> ISearchForm&gt; getConfiguredSearchForm() {
-    <span class="keyword">return</span> PersonSearchForm.class;
   }
 }</code></pre>
         </div>
@@ -3113,9 +2896,9 @@ scout.application.version=1.0.0-SNAPSHOT
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-contacts_jdbc_properties">Section 4.5.2</a></p> </li>
-        <li> <p><a href="#sec-contacts_jdbc_sql">Section 4.5.3</a></p> </li>
-        <li> <p><a href="#sec-contacts_jdbc_initial_db">Section 4.5.4</a></p> </li>
+        <li> <p>Scout Config Properties (<a href="#sec-contacts_jdbc_properties">Section 4.5.2</a>)</p> </li>
+        <li> <p>The SQL Service and SQL Statements (<a href="#sec-contacts_jdbc_sql">Section 4.5.3</a>)</p> </li>
+        <li> <p>The Database Setup Service (<a href="#sec-contacts_jdbc_initial_db">Section 4.5.4</a>)</p> </li>
        </ul>
       </div>
       <div class="paragraph">
@@ -5163,7 +4946,8 @@ contacts.superuser=system</code></pre>
         setUrl(form.getUrlField().getValue());
       }
     }
-  }</code></pre>
+  }
+}</code></pre>
         </div>
        </div>
        <div class="colist arabic">
@@ -5502,9 +5286,9 @@ contacts.superuser=system</code></pre>
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-contacts_company_lookup_call">Section 4.9.1</a></p> </li>
-        <li> <p><a href="#sec-contacts_modify_person_form_and_page">Section 4.9.2</a></p> </li>
-        <li> <p><a href="#sec-contacts_organization_node_page">Section 4.9.3</a></p> </li>
+        <li> <p>Creating an Organization Lookup Call (<a href="#sec-contacts_company_lookup_call">Section 4.9.1</a>)</p> </li>
+        <li> <p>Using the Lookup Call in the Person Form and the Person Table (<a href="#sec-contacts_modify_person_form_and_page">Section 4.9.2</a>)</p> </li>
+        <li> <p>Link the Person Page to Organizations (<a href="#sec-contacts_organization_node_page">Section 4.9.3</a>)</p> </li>
        </ul>
       </div>
       <div class="paragraph">
@@ -5963,9 +5747,9 @@ contacts.superuser=system</code></pre>
       </div>
       <div class="ulist">
        <ul>
-        <li> <p><a href="#sec-contacts_theming_styling">Section 4.10.1</a></p> </li>
-        <li> <p><a href="#sec-contacts_modular_apps">Section 4.10.2</a></p> </li>
-        <li> <p><a href="#sec-contacts_infra">Section 4.10.3</a></p> </li>
+        <li> <p>Theming and Styling (<a href="#sec-contacts_theming_styling">Section 4.10.1</a>)</p> </li>
+        <li> <p>Modular Scout Applications (<a href="#sec-contacts_modular_apps">Section 4.10.2</a>)</p> </li>
+        <li> <p>Infrastructure (<a href="#sec-contacts_infra">Section 4.10.3</a>)</p> </li>
        </ul>
       </div>
       <div class="sect3">
