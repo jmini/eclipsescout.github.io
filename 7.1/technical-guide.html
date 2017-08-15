@@ -7484,7 +7484,7 @@ table.init(model);</code></pre>
        <div class="ulist">
         <ul>
          <li> <p><strong>open</strong>: displays the form and calls <code>load</code>.</p> </li>
-         <li> <p><strong>load</strong>: calls <code>_load</code> and <code>importData</code> which you can implement to load the data and then marks the fields as saved to set their initial values.</p> </li>
+         <li> <p><strong>load</strong>: calls <code>_load</code> and <code>importData</code> which you can implement to load the data and then marks the fields as saved to set their initial values. Finally, a <code>postLoad</code> event is fired.</p> </li>
          <li> <p><strong>save</strong>: validates the data by checking the mandatory and validation state of the fields. If every mandatory field is filled and every field contains a valid value, the <code>exportData</code> and <code>_save</code> functions are called which you can implement to save the data. After that every field is marked as saved and the initial value set to the current value.</p> </li>
          <li> <p><strong>reset</strong>: resets the value of every field to its initial value marking the fields as untouched.</p> </li>
          <li> <p><strong>ok</strong>: saves and closes the form.</p> </li>
