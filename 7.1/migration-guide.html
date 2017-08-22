@@ -589,7 +589,7 @@ table.CodeRay td.code>pre{padding:0}
     <h2 id="removed-property-code-focusable-code-from-iformfield-abstractformfield"><a class="anchor" href="#removed-property-code-focusable-code-from-iformfield-abstractformfield"></a>Removed property <code>focusable</code> from IFormField, AbstractFormField</h2>
     <div class="sectionbody">
      <div class="paragraph">
-      <p>Since the new Html UI was introduced with Scout 5.2 this property has no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we removed all methods from the interface/class FormField. Removed methods/properties:</p>
+      <p>Since the new Html UI was introduced with Scout 5.2 this property had no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we removed all methods from the interface/class FormField. Removed methods/properties:</p>
      </div>
      <div class="ulist">
       <ul>
@@ -597,6 +597,8 @@ table.CodeRay td.code>pre{padding:0}
        <li> <p>void IFormField#setFocusable(boolean f)</p> </li>
        <li> <p>boolean IFormField#PROP_FOCUSABLE</p> </li>
        <li> <p>boolean AbstractFormField#getConfiguredFocusable()</p> </li>
+       <li> <p>class AbstractNonFocusableButton</p> </li>
+       <li> <p>class AbstractNonFocusableRadioButton</p> </li>
       </ul>
      </div>
      <div class="paragraph">
