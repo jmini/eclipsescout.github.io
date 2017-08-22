@@ -537,33 +537,10 @@ table.CodeRay td.code>pre{padding:0}
       <ul class="sectlevel2">
        <li><a href="#service-release-migration">Service Release Migration</a></li>
       </ul> </li>
-     <li><a href="#api-changes-java">API Changes (Java)</a>
-      <ul class="sectlevel2">
-       <li><a href="#new-scout-modules-for-jackson-based-rest-services">New Scout Modules for Jackson-based REST Services</a></li>
-       <li><a href="#removed-properties-enabledprocessing-on-ibutton-and-iaction">Removed Properties "enabledProcessing" on IButton and IAction</a></li>
-       <li><a href="#added-http-abstraction-layer-google-http-client">Added HTTP Abstraction Layer: Google HTTP Client</a></li>
-       <li><a href="#igroupbox-changed-behavior-of-getgridcolumncount">IGroupBox: Changed Behavior of "getGridColumnCount"</a></li>
-       <li><a href="#scouttexts">ScoutTexts</a></li>
-      </ul> </li>
-     <li><a href="#ismartfield-2-since-7-0-100">ISmartField(2) (since 7.0.100)</a></li>
-     <li><a href="#api-changes-javascript">API Changes (JavaScript)</a>
-      <ul class="sectlevel2">
-       <li><a href="#render">render()</a></li>
-       <li><a href="#promises">Promises</a></li>
-       <li><a href="#removed-addclasssvg-removeclasssvg-attrsvg-removeattrsvg">Removed addClassSVG, removeClassSVG, attrSVG, removeAttrSVG</a></li>
-       <li><a href="#property-change-event">Property Change Event</a></li>
-       <li><a href="#logical-grid-validation">Logical Grid Validation</a></li>
-       <li><a href="#event-naming">Event Naming</a></li>
-       <li><a href="#graphic-utility-naming-since-7-0-100">Graphic Utility Naming (since 7.0.100)</a></li>
-       <li><a href="#focus-and-requestfocus-merged-since-7-0-100">Focus and RequestFocus merged (since 7.0.100)</a></li>
-       <li><a href="#table-column-index-now-optional-since-7-0-100">Table Column Index now optional (since 7.0.100)</a></li>
-       <li><a href="#abstractlifecycle-and-formlifecycle-simplified-since-7-0-100">AbstractLifecycle and FormLifecycle simplified (since 7.0.100)</a></li>
-       <li><a href="#groupbox-mainbox-flag-now-set-automatically-since-7-0-100">GroupBox: mainBox flag now set automatically (since 7.0.100)</a></li>
-      </ul> </li>
-     <li><a href="#other-changes">Other Changes</a>
-      <ul class="sectlevel2">
-       <li><a href="#maven-provided-dependencies">Maven "provided" Dependencies</a></li>
-      </ul> </li>
+     <li><a href="#api-changes-java">API Changes (Java)</a></li>
+     <li><a href="#removed-property-code-focusable-code-from-iformfield-abstractformfield">Removed property <code>focusable</code> from IFormField, AbstractFormField</a></li>
+     <li><a href="#api-changes-javascript">API Changes (JavaScript)</a></li>
+     <li><a href="#other-changes">Other Changes</a></li>
     </ul>
    </div>
   </div>
@@ -572,37 +549,32 @@ table.CodeRay td.code>pre{padding:0}
     <h2 id="about-this-document"><a class="anchor" href="#about-this-document"></a>About This Document</h2>
     <div class="sectionbody">
      <div class="paragraph">
-      <p>This document describes all relevant changes <strong>from Eclipse Scout 6.1 to Eclipse Scout 7.0</strong>. If existing code has to be migrated, instructions are provided here.</p>
+      <p>This document describes all relevant changes <strong>from Eclipse Scout 7.0 to Eclipse Scout 7.1</strong>. If existing code has to be migrated, instructions are provided here.</p>
      </div>
      <div class="admonitionblock important">
       <table>
        <tbody>
         <tr>
          <td class="icon"> <i class="fa icon-important" title="Important"></i> </td>
-         <td class="content"> If you are upgrading from version 6.0, please also read the migration guide for the 6.1 (<em>Oxygen preview</em>) release:<br> <a href="https://eclipsescout.github.io/6.1/migration-guide.html" class="bare">https://eclipsescout.github.io/6.1/migration-guide.html</a> </td>
+         <td class="content"> If you are upgrading from version 6.1, please also read the migration guide for the 7.0 (<em>Oxygen preview</em>) release:<br> <a href="https://eclipsescout.github.io/7.0/migration-guide.html" class="bare">https://eclipsescout.github.io/7.0/migration-guide.html</a> </td>
         </tr>
        </tbody>
       </table>
      </div>
+     <div class="ulist">
+      <ul>
+       <li> <p><a href="#Removed property <code>focusable</code> from IFormField">AbstractFormField</a></p> </li>
+      </ul>
+     </div>
      <div class="sect2">
       <h3 id="service-release-migration"><a class="anchor" href="#service-release-migration"></a>Service Release Migration</h3>
       <div class="paragraph">
-       <p>The following changes were made after the initial 7.0 release (Eclipse Oxygen release). Additionally follow these instructions when updating to a <em>service release</em>.</p>
+       <p>The following changes were made after the initial 7.1 release (Eclipse Photon release). Additionally follow these instructions when updating to a <em>service release</em>.</p>
       </div>
       <div class="sect3">
-       <h4 id="oxygen-1-7-0-100-release-expected-on-september-27-2017"><a class="anchor" href="#oxygen-1-7-0-100-release-expected-on-september-27-2017"></a>Oxygen.1 (7.0.100) Release expected on September 27, 2017</h4>
+       <h4 id="photon-1-7-1-100-release-expected-on-september-2018"><a class="anchor" href="#photon-1-7-1-100-release-expected-on-september-2018"></a>Photon.1 (7.1.100) Release expected on September, 2018</h4>
        <div class="paragraph">
         <p><strong>Attention:</strong> The here described functionality has not yet been released and is part of an upcoming release.</p>
-       </div>
-       <div class="ulist">
-        <ul>
-         <li> <p><a href="#graphic-utility-naming-since-7-0-100">Graphic Utility Naming (since 7.0.100)</a></p> </li>
-         <li> <p><a href="#focus-and-requestfocus-merged-since-7-0-100">Focus and RequestFocus merged (since 7.0.100)</a></p> </li>
-         <li> <p><a href="#ismartfield-2-since-7-0-100">ISmartField(2) (since 7.0.100)</a></p> </li>
-         <li> <p><a href="#table-column-index-now-optional-since-7-0-100">Table Column Index now optional (since 7.0.100)</a></p> </li>
-         <li> <p><a href="#abstractlifecycle-and-formlifecycle-simplified-since-7-0-100">AbstractLifecycle and FormLifecycle simplified (since 7.0.100)</a></p> </li>
-         <li> <p><a href="#groupbox-mainbox-flag-now-set-automatically-since-7-0-100">GroupBox: mainBox flag now set automatically (since 7.0.100)</a></p> </li>
-        </ul>
        </div>
       </div>
      </div>
@@ -611,389 +583,50 @@ table.CodeRay td.code>pre{padding:0}
    <div class="sect1">
     <h2 id="api-changes-java"><a class="anchor" href="#api-changes-java"></a>API Changes (Java)</h2>
     <div class="sectionbody">
-     <div class="sect2">
-      <h3 id="new-scout-modules-for-jackson-based-rest-services"><a class="anchor" href="#new-scout-modules-for-jackson-based-rest-services"></a>New Scout Modules for Jackson-based REST Services</h3>
-      <div class="paragraph">
-       <p>The following new Scout modules have been added to support REST services with Jackson as marshaller:</p>
-      </div>
-      <div class="ulist">
-       <ul>
-        <li> <p><code>org.eclipse.scout.rt.rest</code></p> </li>
-        <li> <p><code>org.eclipse.scout.rt.rest.test</code></p> </li>
-        <li> <p><code>org.eclipse.scout.rt.jackson</code></p> </li>
-        <li> <p><code>org.eclipse.scout.rt.jackson.test</code></p> </li>
-       </ul>
-      </div>
-      <div class="paragraph">
-       <p>In order to use REST services based on the JAX-RS Jersey implementation, the following section must be added to the project <code>web.xml</code>:</p>
-      </div>
-      <div class="listingblock">
-       <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="xml"><span class="comment">&lt;!-- JAX-RS Jersey Servlet --&gt;</span>
-<span class="tag">&lt;servlet&gt;</span>
-  <span class="tag">&lt;servlet-name&gt;</span>api<span class="tag">&lt;/servlet-name&gt;</span>
-  <span class="tag">&lt;servlet-class&gt;</span>org.glassfish.jersey.servlet.ServletContainer<span class="tag">&lt;/servlet-class&gt;</span>
-  <span class="tag">&lt;init-param&gt;</span>
-    <span class="tag">&lt;param-name&gt;</span>javax.ws.rs.Application<span class="tag">&lt;/param-name&gt;</span>
-    <span class="tag">&lt;param-value&gt;</span>org.eclipse.scout.rt.rest.RestApplication<span class="tag">&lt;/param-value&gt;</span>
-  <span class="tag">&lt;/init-param&gt;</span>
-  <span class="tag">&lt;load-on-startup&gt;</span>1<span class="tag">&lt;/load-on-startup&gt;</span>
-<span class="tag">&lt;/servlet&gt;</span></code></pre>
-       </div>
-      </div>
-      <div class="paragraph">
-       <p>The <code>RestApplication</code> class searches for all implementations of <code>IRestResource</code> and exposes them as REST services.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="removed-properties-enabledprocessing-on-ibutton-and-iaction"><a class="anchor" href="#removed-properties-enabledprocessing-on-ibutton-and-iaction"></a>Removed Properties "enabledProcessing" on IButton and IAction</h3>
-      <div class="paragraph">
-       <p>When a user performs two consecutive clicks on a button or a menu within a very short period of time, the action is executed twice. In some cases, this is an unwanted behavior. A new property "preventDoubleClick" was added to IButton and IMenu to disable it (see release notes).</p>
-      </div>
-      <div class="paragraph">
-       <p>In older Scout versions, two flags (<code>m_enabledProcessing</code> and <code>m_enabledProcessingAction</code>, respectively) were use to accomplish a similar objective. Whenever the click/action handler was started, the flag was set to <code>false</code>, and set back to <code>true</code> at the end of the execution. A second call to the method had no effect. However, this logic no longer works since the introduction of the HTML UI. The new UI strictly allows <em>only one</em> UI event to work on the client model simultaneously (subsequent click events are hold back by the <em>UiSession</em> lock). Consequently, the "enabledProcessing" flag is never <code>false</code>, and no clicks are prevented.</p>
-      </div>
-      <div class="paragraph">
-       <p>Because this construct no longer works, the corresponding properties and methods were removed, namely:</p>
-      </div>
-      <div class="ulist">
-       <ul>
-        <li> <p><span class="line-through"><code>AbstractButton: m_enabledProcessing</code></span></p> </li>
-        <li> <p><span class="line-through"><code>IButton/AbstractButton: isEnabledProcessing()</code></span></p> </li>
-        <li> <p><span class="line-through"><code>IButton/AbstractButton: setEnabledProcessing()</code></span></p> </li>
-        <li> <p><span class="line-through"><code>IButton/AbstractButton: disarm()</code></span></p> </li>
-        <li> <p><span class="line-through"><code>ButtonEvent: TYPE_DISARM</code></span></p> </li>
-        <li> <p><span class="line-through"><code>AbstractAction: m_enabledProcessingAction</code></span></p> </li>
-        <li> <p><span class="line-through"><code>IAction/AbstractAction: isEnabledProcessingAction</code></span></p> </li>
-       </ul>
-      </div>
-      <div class="paragraph">
-       <p><strong>Migration</strong>: Delete any code that references any of the removed methods. There is not replacement, as the whole concept became disfunctional with the HTML UI. To prevent accidental double clicks, use the new <code>getConfiguredPreventDefault()</code> property. If for very rare and special cases such a flag is required, it has to be implemented manually by overriding <code>AbstractButton.doClick()</code> and <code>AbstractAction.doAction()</code>.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="added-http-abstraction-layer-google-http-client"><a class="anchor" href="#added-http-abstraction-layer-google-http-client"></a>Added HTTP Abstraction Layer: Google HTTP Client</h3>
-      <div class="paragraph">
-       <p>If your application previously used a custom (not provided by Scout) implementation of the <code>org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel</code> class a migration might be necessary. For the service tunnel and a few other HTTP usages a new HTTP abstraction layer (Google HTTP Client 1.22) was introduced to support different low-level HTTP libraries (previously just the <code>java.net.HttpURLConnection</code> was used). The new default low-level HTTP library is the Apache HTTP Client 4.5.3, more details are available in the release notes. As the <code>java.net</code> connections are not used anymore by default the MultiSessionCookieStore (for <code>java.net</code> connections) is not installed by default (could be installed manually).</p>
-      </div>
-      <div class="paragraph">
-       <p>For the <code>HttpServiceTunnel`class the method `URLConnection createURLConnection(ServiceTunnelRequest call, byte[] callData)</code> has been replaced by <code>HttpResponse executeRequest(ServiceTunnelRequest call, byte[] callData)</code>, also several methods (<code>addCustomHeaders</code>, <code>addSignatureHeader</code>, <code>addCorrelationId</code>, <code>createAuthToken</code> and <code>interceptHttpResponse</code>) signatures have changed their <code>URLConnection</code> parameter to either a <code>HttpRequest</code> or <code>HttpResponse</code> parameter. The same migration applies for subclasses of the <code>org.eclipse.scout.rt.server.commons.servlet.HttpProxy</code> class.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="igroupbox-changed-behavior-of-getgridcolumncount"><a class="anchor" href="#igroupbox-changed-behavior-of-getgridcolumncount"></a>IGroupBox: Changed Behavior of "getGridColumnCount"</h3>
-      <div class="paragraph">
-       <p>The function <code>getGridColumnCount()</code> returned the calculated column count of the grid. This has been changed so that it returns the configured one which is not necessarily the same.</p>
-      </div>
-      <div class="paragraph">
-       <p>Example: the default of the property <code>gridColumnCount</code> is -1 which will typically result in 2 columns.</p>
-      </div>
-      <div class="paragraph">
-       <p>So in case you used this method, you should consider calling <code>getFieldGrid().getGridColumnCount()</code> instead.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="scouttexts"><a class="anchor" href="#scouttexts"></a>ScoutTexts</h3>
-      <div class="paragraph">
-       <p>Removed support for session scope specific <code>ScoutTexts</code> instances because support of scoped services was removed in Scout without OSGi (version &gt;= 5.0).</p>
-      </div>
-      <div class="paragraph">
-       <p>Changes:</p>
-      </div>
-      <div class="ulist">
-       <ul>
-        <li> <p><code>ScoutTexts</code> is now an application-scoped bean</p> </li>
-        <li> <p><code>ScoutTexts.CURRENT</code> thread local removed without replacement (use <code>BEANS.get(ScoutTexts.class)</code> instead)</p> </li>
-       </ul>
-      </div>
-      <div class="paragraph">
-       <p>Deprecations (methods will be removed in P-release):</p>
-      </div>
-      <div class="ulist">
-       <ul>
-        <li> <p><code>ScoutTexts.get</code> &#x2192; <code>TEXTS.get</code></p> </li>
-        <li> <p><code>ScoutTexts.getInstance()</code> &#x2192; <code>BEANS.get(ScoutTexts.class)</code></p> </li>
-        <li> <p><code>ISession.getTexts()</code> &#x2192; <code>BEANS.get(ScoutTexts.class)</code></p> </li>
-        <li> <p><code>AbstractSqlService.getConfiguredNlsProvider()</code> &#x2192; method is not used anymore (returns <code>null</code>)</p> </li>
-        <li> <p><code>AbstractSqlService.getNlsProvider()</code> &#x2192; method is not used anymore (returns <code>null</code>)</p> </li>
-       </ul>
-      </div>
-     </div>
     </div>
    </div>
    <div class="sect1">
-    <h2 id="ismartfield-2-since-7-0-100"><a class="anchor" href="#ismartfield-2-since-7-0-100"></a>ISmartField(2) (since 7.0.100)</h2>
+    <h2 id="removed-property-code-focusable-code-from-iformfield-abstractformfield"><a class="anchor" href="#removed-property-code-focusable-code-from-iformfield-abstractformfield"></a>Removed property <code>focusable</code> from IFormField, AbstractFormField</h2>
     <div class="sectionbody">
      <div class="paragraph">
-      <p>The following methods have been removed from <code>ISmartField(2)</code>:</p>
+      <p>Since the new Html UI was introduced with Scout 5.2 this property has no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we removed all methods from the interface/class FormField. Removed methods/properties:</p>
      </div>
      <div class="ulist">
       <ul>
-       <li> <p><code>String getBrowseNewText()</code></p> </li>
-       <li> <p><code>setBrowseNewText(String s)</code></p> </li>
-       <li> <p><code>void doBrowseNew(String newText)</code></p> </li>
+       <li> <p>boolean IFormField#isFocusable()</p> </li>
+       <li> <p>void IFormField#setFocusable(boolean f)</p> </li>
+       <li> <p>boolean IFormField#PROP_FOCUSABLE</p> </li>
+       <li> <p>boolean AbstractFormField#getConfiguredFocusable()</p> </li>
       </ul>
      </div>
      <div class="paragraph">
-      <p>The following methods have been removed from <code>AbstractSmartField(2)</code>:</p>
-     </div>
-     <div class="ulist">
-      <ul>
-       <li> <p><code>protected ILookupRow&lt;VALUE&gt; execBrowseNew(String searchText)</code></p> </li>
-       <li> <p><code>protected String getConfiguredBrowseNewText()</code></p> </li>
-      </ul>
-     </div>
-     <div class="paragraph">
-      <p>Note: with 7.0 these methods still exist on the old smart field <code>ISmartField</code> but are marked as deprecated.</p>
+      <p>Since there is no replacement for the focusable property, remove all code that uses one of the methods/properties listed above.</p>
      </div>
     </div>
    </div>
    <div class="sect1">
     <h2 id="api-changes-javascript"><a class="anchor" href="#api-changes-javascript"></a>API Changes (JavaScript)</h2>
     <div class="sectionbody">
-     <div class="sect2">
-      <h3 id="render"><a class="anchor" href="#render"></a>render()</h3>
-      <div class="paragraph">
-       <p>The parameter <code>$parent</code> has been removed from the <code>_render</code> method because <code>this.$parent</code> is available for every widget. There is no need to have a parameter <code>$parent</code> which points to the same variable. Use <code>this.$parent</code> instead.</p>
-      </div>
-      <div class="paragraph">
-       <p>Also <code>$parent</code> is now optional when calling widget.render(). The <code>$parent</code> may be resolved using <code>this.parent</code>. No need to always write <code>widget.render(this.$container)</code> anymore, instead just write <code>widget.render()</code> if the <code>$container</code> of the <code>parent</code> should be used as <code>$parent</code>.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="promises"><a class="anchor" href="#promises"></a>Promises</h3>
-      <div class="paragraph">
-       <p>With jQuery 3 the promise API is now Promises/A+ compliant. This means you may need to adjust your code if you use promises.</p>
-      </div>
-      <div class="paragraph">
-       <p>We noticed the following effects:</p>
-      </div>
-      <div class="ulist">
-       <ul>
-        <li> <p>If a rejection is catched using a fail handler, the fail handler has to return a rejected promise as well, otherwise the next success handler would be called instead of the next fail handler.</p> </li>
-        <li> <p>Every callback is now executed asynchronously. This is especially relevant for the tests.</p> </li>
-        <li> <p>Catch has been added &#x2192; replace fail(null, func) for better readability.</p> </li>
-       </ul>
-      </div>
-      <div class="paragraph">
-       <p>See also <a href="https://jquery.com/upgrade-guide/3.0/" class="bare">https://jquery.com/upgrade-guide/3.0/</a> for details.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="removed-addclasssvg-removeclasssvg-attrsvg-removeattrsvg"><a class="anchor" href="#removed-addclasssvg-removeclasssvg-attrsvg-removeattrsvg"></a>Removed addClassSVG, removeClassSVG, attrSVG, removeAttrSVG</h3>
-      <div class="paragraph">
-       <p>These functions are now supported by jQuery directly. Just use <code>addClass</code>, <code>removeClass</code>, <code>attr</code> and <code>removeAttr</code>.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="property-change-event"><a class="anchor" href="#property-change-event"></a>Property Change Event</h3>
-      <div class="paragraph">
-       <p>The property change event has been simplified.</p>
-      </div>
-      <div class="paragraph">
-       <p>The event had 3 properties:</p>
-      </div>
-      <div class="ulist">
-       <ul>
-        <li> <p><span class="line-through"><code>newProperties</code></span></p> </li>
-        <li> <p><span class="line-through"><code>oldProperties</code></span></p> </li>
-        <li> <p><span class="line-through"><code>changedProperties</code></span></p> </li>
-       </ul>
-      </div>
-      <div class="paragraph">
-       <p>This was added to be able to react to multiple property change events at once. Since 6.1, bulk property changes don&#x2019;t exist anymore, so there is no need for these properties anymore.</p>
-      </div>
-      <div class="paragraph">
-       <p>Now, with 7.0, the property change event has the following properties:</p>
-      </div>
-      <div class="ulist">
-       <ul>
-        <li> <p><code>propertyName</code></p> </li>
-        <li> <p><code>oldValue</code></p> </li>
-        <li> <p><code>newValue</code></p> </li>
-       </ul>
-      </div>
-      <div class="paragraph">
-       <p>This makes handling the event easier. Check your propertyChange event handlers and adjust them accordingly.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="logical-grid-validation"><a class="anchor" href="#logical-grid-validation"></a>Logical Grid Validation</h3>
-      <div class="paragraph">
-       <p>Automatic Grid Data Validation has been introduced. This means there is no need to manually create a Logical Grid (e.g. <code>VerticalSmartGroupBoxBodyGrid</code> or <code>HorizontalGroupBoxBodyGrid</code> and validate it anymore, this will be done by the <code>LogicalGridLayout</code> itself. Also, check your JSON files, remove any explicit x, y grid definitions because they will be calculated by the <code>LogicalGrid</code>. Make sure to always use the property <code>gridDataHints</code> instead of <code>gridData</code>.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="event-naming"><a class="anchor" href="#event-naming"></a>Event Naming</h3>
-      <div class="paragraph">
-       <p>The naming of the events has been harmonized to conform with the event naming guide. This is only relevant, if you attached listeners using JavaScript or if you do some kind of load testing using the events in the requests.</p>
-      </div>
-      <div class="paragraph">
-       <p>The following changes have been made:</p>
-      </div>
-      <div class="ulist">
-       <ul>
-        <li> <p>Rename <code>doAction</code> to <code>action</code></p> </li>
-        <li> <p>Rename <code>linkPageWithRow</code> to <code>pageRowLink</code></p> </li>
-        <li> <p>Rename <code>initPage</code> to <code>pageInit</code></p> </li>
-        <li> <p>Rename <code>exportToClipboard</code> to <code>clipboardExport</code></p> </li>
-        <li> <p>Rename <code>parseerror</code> to <code>parseError</code></p> </li>
-        <li> <p>Rename <code>selectionChanged</code> to <code>selectionChange</code></p> </li>
-        <li> <p>Rename <code>callAction</code> to <code>action</code></p> </li>
-        <li> <p>Remove <code>insertText</code></p> </li>
-        <li> <p>Rename <code>displayTextChanged</code> to <code>acceptInput</code></p> </li>
-        <li> <p>Rename <code>popupopen</code> to <code>popupOpen</code></p> </li>
-        <li> <p>Rename <code>locationChanged</code> to <code>locationChange</code></p> </li>
-        <li> <p>Rename <code>sessionready</code> to <code>sessionReady</code></p> </li>
-        <li> <p>Rename <code>desktopcreated</code> to <code>desktopReady</code></p> </li>
-        <li> <p>Rename <code>positionChanged</code> to <code>positionChange</code></p> </li>
-        <li> <p>Rename <code>scrollstart</code> to <code>scrollStart</code></p> </li>
-        <li> <p>Rename <code>scrollend</code> to <code>scrollEnd</code></p> </li>
-        <li> <p>Rename <code>clicked</code> to <code>click</code></p> </li>
-        <li> <p>Rename <code>modelChanged</code> to <code>modelChange</code></p> </li>
-        <li> <p>Rename <code>selectionChanged</code> to <code>selectionChange</code></p> </li>
-        <li> <p>Rename <code>viewRangeChanged</code> to <code>viewRangeChange</code></p> </li>
-        <li> <p>Rename <code>formActivated</code> to <code>formActivate</code></p> </li>
-        <li> <p>Rename <code>historyEntryActivated</code> to <code>historyEntryActivate</code></p> </li>
-        <li> <p>Rename <code>viewAdded</code> to <code>viewAdd</code></p> </li>
-        <li> <p>Rename <code>viewRemoved</code> to <code>viewRemove</code></p> </li>
-        <li> <p>Rename <code>viewActivated</code> to <code>viewActivate</code></p> </li>
-        <li> <p>Rename <code>viewDeactivated</code> to <code>viewDeactivate</code></p> </li>
-        <li> <p>Rename <code>tabClicked</code> to <code>click</code></p> </li>
-        <li> <p>Rename <code>tabSelected</code> to <code>tabSelect</code></p> </li>
-        <li> <p>Rename <code>nodeClicked</code> to <code>nodeClick</code></p> </li>
-        <li> <p>Rename <code>rowClicked</code> to <code>rowClick</code></p> </li>
-        <li> <p>Rename <code>rowsSorted</code> to <code>sort</code></p> </li>
-        <li> <p>Remove <code>sortRows</code></p> </li>
-        <li> <p>Rename <code>rowsGrouped</code> to <code>group</code></p> </li>
-        <li> <p>Remove <code>groupRows</code></p> </li>
-        <li> <p>Rename <code>exportToClipboard</code> to <code>clipboardExport</code></p> </li>
-        <li> <p>Rename <code>rowsFiltered</code> to <code>filter</code></p> </li>
-        <li> <p>Rename <code>addFilter</code> to <code>filterAdded</code></p> </li>
-        <li> <p>Rename <code>removeFilter</code> to <code>filterRemoved</code></p> </li>
-        <li> <p>Rename <code>filterResetted</code> to <code>filterReset</code></p> </li>
-        <li> <p>Remove <code>groupingChanged</code></p> </li>
-       </ul>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="graphic-utility-naming-since-7-0-100"><a class="anchor" href="#graphic-utility-naming-since-7-0-100"></a>Graphic Utility Naming (since 7.0.100)</h3>
-      <div class="paragraph">
-       <p>The naming of the functions of <code>scout.graphics</code> and <code>scout.HtmlComponent</code> has been harmonized. Also, they now consistently use an <code>options</code> parameter.</p>
-      </div>
-      <div class="paragraph">
-       <p>The following changes have been made:</p>
-      </div>
-      <div class="paragraph">
-       <p>scout.graphics:</p>
-      </div>
-      <div class="ulist">
-       <ul>
-        <li> <p>Rename <code>getMargins</code> to <code>margins</code></p> </li>
-        <li> <p>Rename <code>getInsets</code> to <code>insets</code></p> </li>
-        <li> <p>Rename <code>getSize</code> to <code>size</code></p> </li>
-        <li> <p>Remove <code>getBounds</code></p> </li>
-       </ul>
-      </div>
-      <div class="paragraph">
-       <p>scout.HtmlComponent:</p>
-      </div>
-      <div class="ulist">
-       <ul>
-        <li> <p>Rename <code>getMargins</code> to <code>margins</code></p> </li>
-        <li> <p>Rename <code>getInsets</code> to <code>insets</code></p> </li>
-        <li> <p>Rename <code>getSize</code> to <code>size</code></p> </li>
-        <li> <p>Rename <code>getPreferredSize</code> to <code>prefSize</code></p> </li>
-        <li> <p>Rename <code>getAvailableSize</code> to <code>availableSize</code></p> </li>
-        <li> <p>Remove <code>getBounds</code></p> </li>
-       </ul>
-      </div>
-      <div class="paragraph">
-       <p>The old methods still exists but are marked as deprecated. Note that <code>getBounds</code> does not include margins anymore, and <code>bounds</code> and <code>offsetBounds</code> now take an <code>options</code> object instead of 2 boolean parameters.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="focus-and-requestfocus-merged-since-7-0-100"><a class="anchor" href="#focus-and-requestfocus-merged-since-7-0-100"></a>Focus and RequestFocus merged (since 7.0.100)</h3>
-      <div class="paragraph">
-       <p><code>scout.Widget</code> had a function called <code>requestFocus</code>. Some concrete widgets provided a function named <code>focus</code>. Because there is no need to have two methods doing the same, these functions have been merged. <code>scout.Widget</code> now provides a function <code>focus</code>. <code>RequestFocus</code> has been deprecated.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="table-column-index-now-optional-since-7-0-100"><a class="anchor" href="#table-column-index-now-optional-since-7-0-100"></a>Table Column Index now optional (since 7.0.100)</h3>
-      <div class="paragraph">
-       <p>When creating a table using JavaScript and <code>scout.create('Table')</code>, specifying the index for each column has been necessary. This has changed, the column indices are now set automatically based on the order of the columns. Just remove the index settings from your JSON files.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="abstractlifecycle-and-formlifecycle-simplified-since-7-0-100"><a class="anchor" href="#abstractlifecycle-and-formlifecycle-simplified-since-7-0-100"></a>AbstractLifecycle and FormLifecycle simplified (since 7.0.100)</h3>
-      <div class="paragraph">
-       <p>The life cycle has been reworked and simplified:</p>
-      </div>
-      <div class="ulist">
-       <ul>
-        <li> <p>Renamed <code>AbstractLifecycle</code> to <code>Lifecycle</code>.</p> </li>
-        <li> <p>Installed form life cycle by default and added delegating functions to the form to make it easier to use.</p> </li>
-        <li> <p>Implemented reset.</p> </li>
-        <li> <p>Added default callbacks on form which may be implemented by subclasses: <code>_load</code>, <code>_save</code>, <code>importData</code>, <code>exportData</code></p> </li>
-        <li> <p>Removed <code>doFinally</code>, because it is not needed yet.</p> </li>
-        <li> <p>Renamed <code>disposeWidget</code> to <code>close</code>.</p> </li>
-        <li> <p>Removed the do prefix from all the life cycle functions.</p> </li>
-        <li> <p>Added system menus (<code>OkMenu</code>, <code>CancelMenu</code> etc.).</p> </li>
-       </ul>
-      </div>
-      <div class="paragraph">
-       <p>To migrate: check your forms, remove the life cycle, use the new callback functions and system menus if needed, adjust your custom life cycles.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="groupbox-mainbox-flag-now-set-automatically-since-7-0-100"><a class="anchor" href="#groupbox-mainbox-flag-now-set-automatically-since-7-0-100"></a>GroupBox: mainBox flag now set automatically (since 7.0.100)</h3>
-      <div class="paragraph">
-       <p>Every form needs a root group box. That box has the flag mainBox set to true. Until now, this has to be set explicitly. From now on, you can omit it. To migrate just remove the mainBox flags.</p>
-      </div>
+     <div class="paragraph">
+      <p>N/A</p>
      </div>
     </div>
    </div>
    <div class="sect1">
     <h2 id="other-changes"><a class="anchor" href="#other-changes"></a>Other Changes</h2>
     <div class="sectionbody">
-     <div class="sect2">
-      <h3 id="maven-provided-dependencies"><a class="anchor" href="#maven-provided-dependencies"></a>Maven "provided" Dependencies</h3>
-      <div class="paragraph">
-       <p>In Maven dependencies with the scope provided are not transitive. This makes sense if a dependency is set to provided depending on the environment. Any artifacts that are not intended to be used in a certain environment should not have the scope provided and are therefore now transitive. We removed any current dependency <code>javax.servlet:javax.servlet-api</code> except for the one in the artifact <code>org.eclipse.scout.rt.server.commons</code>.</p>
-      </div>
-      <div class="paragraph">
-       <p>To migrate your project, remove any dependency to <code>javax.servlet:javax.servlet-api</code>, <code>javax.xml.ws:jaxws-api</code> or <code>javax.ws.rs:javax.ws.rs-api</code>. Then add to all artifacts with packaging type war the dependency to <code>javax.servlet:javax.servlet-api</code> with scope provided. Depending on the container, you may want also to add the depdendency <code>javax.xml.ws:jaxws-api</code> with scope provided to the war artifact.</p>
-      </div>
-      <div class="listingblock">
-       <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;project&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>myproject.server.war<span class="tag">&lt;/artifactId&gt;</span>
-  <span class="tag">&lt;packaging&gt;</span>war<span class="tag">&lt;/packaging&gt;</span>
-  <span class="tag">&lt;dependencies&gt;</span>
-    <span class="tag">&lt;dependency&gt;</span>
-      <span class="tag">&lt;groupId&gt;</span>myproject<span class="tag">&lt;/groupId&gt;</span>
-      <span class="tag">&lt;artifactId&gt;</span>myproject.server<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;/dependency&gt;</span>
-    <span class="comment">&lt;!-- provided by container --&gt;</span>
-    <span class="tag">&lt;dependency&gt;</span>
-      <span class="tag">&lt;groupId&gt;</span>javax.servlet<span class="tag">&lt;/groupId&gt;</span>
-      <span class="tag">&lt;artifactId&gt;</span>javax.servlet-api<span class="tag">&lt;/artifactId&gt;</span>
-      <span class="tag">&lt;scope&gt;</span>provided<span class="tag">&lt;/scope&gt;</span>
-    <span class="tag">&lt;/dependency&gt;</span>
-  <span class="tag">&lt;/dependencies&gt;</span>
-<span class="tag">&lt;/project&gt;</span></code></pre>
-       </div>
-      </div>
-      <div class="admonitionblock tip">
-       <table>
-        <tbody>
-         <tr>
-          <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td>
-          <td class="content"> Do you want to improve this document? Have a look at the <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/blob/releases/7.1.x/docs/build/scout_migration/src/docs/migration-guide.adoc">sources</a> on GitHub. </td>
-         </tr>
-        </tbody>
-       </table>
-      </div>
+     <div class="paragraph">
+      <p>N/A</p>
+     </div>
+     <div class="admonitionblock tip">
+      <table>
+       <tbody>
+        <tr>
+         <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td>
+         <td class="content"> Do you want to improve this document? Have a look at the <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/blob/releases/7.1.x/docs/build/scout_migration/src/docs/migration-guide.adoc">sources</a> on GitHub. </td>
+        </tr>
+       </tbody>
+      </table>
      </div>
     </div>
    </div>

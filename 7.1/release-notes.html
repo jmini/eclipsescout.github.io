@@ -538,23 +538,6 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#service-releases">Service Releases</a></li>
        <li><a href="#obtaining-the-latest-version">Obtaining the Latest Version</a></li>
       </ul> </li>
-     <li><a href="#upgrade-to-jquery-3">Upgrade to jQuery 3</a></li>
-     <li><a href="#scout-js">Scout JS</a>
-      <ul class="sectlevel2">
-       <li><a href="#validators-parser-and-formatter-js">Validators, Parser and Formatter (JS)</a></li>
-       <li><a href="#simplified-api-js">Simplified API (JS)</a></li>
-       <li><a href="#logical-grid-validation-js">Logical Grid Validation (JS)</a></li>
-      </ul> </li>
-     <li><a href="#new-http-abstraction-layer-google-http-client-for-java">New HTTP Abstraction Layer: Google HTTP Client for Java</a></li>
-     <li><a href="#support-for-rest-services">Support for REST Services</a></li>
-     <li><a href="#prevent-double-clicks-on-buttons-and-menus">Prevent Double Clicks on Buttons and Menus</a></li>
-     <li><a href="#minimized-mode-for-split-box-since-7-0-100">Minimized Mode for Split Box (since 7.0.100)</a></li>
-     <li><a href="#new-smart-field-ismartfield2-since-7-0-100">New Smart Field: ISmartField2 (since 7.0.100)</a></li>
-     <li><a href="#time-picker-for-date-field-since-7-0-100">Time Picker for Date Field (since 7.0.100)</a></li>
-     <li><a href="#clear-icon-for-input-fields-since-7-0-100">Clear Icon for Input Fields (since 7.0.100)</a></li>
-     <li><a href="#improved-touch-popups-since-7-0-100">Improved Touch Popups (since 7.0.100)</a></li>
-     <li><a href="#sorting-of-filter-table-since-7-0-100">Sorting of Filter Table (since 7.0.100)</a></li>
-     <li><a href="#auto-optimize-column-width-since-7-0-100">Auto Optimize Column Width (since 7.0.100)</a></li>
     </ul>
    </div>
   </div>
@@ -563,59 +546,35 @@ table.CodeRay td.code>pre{padding:0}
     <h2 id="about-this-release"><a class="anchor" href="#about-this-release"></a>About This Release</h2>
     <div class="sectionbody">
      <div class="paragraph">
-      <p>Eclipse Scout 7.0 is part of the Eclipse <em>Oxygen</em> release. It was released in June 2017 (<a href="https://wiki.eclipse.org/Simultaneous_Release">release schedule</a>). The latest version of this release is <em>7.0.0.008_Oxygen</em>.</p>
+      <p>Eclipse Scout 7.1 is part of the Eclipse <em>Photon</em> release. It was released in June 2018 (<a href="https://wiki.eclipse.org/Simultaneous_Release">release schedule</a>). The latest version of this release is <em>7.1.0.001_Photon</em>.</p>
      </div>
      <div class="admonitionblock important">
       <table>
        <tbody>
         <tr>
          <td class="icon"> <i class="fa icon-important" title="Important"></i> </td>
-         <td class="content"> If you are upgrading from version 6.0, please also read the release notes for the 6.1 (<em>Oxygen preview</em>) release:<br> <a href="https://eclipsescout.github.io/6.1/release-notes.html" class="bare">https://eclipsescout.github.io/6.1/release-notes.html</a> </td>
+         <td class="content"> If you are upgrading from version 6.1, please also read the migration guide for the 7.0 (<em>Oxygen preview</em>) release:<br> <a href="https://eclipsescout.github.io/7.0/migration-guide.html" class="bare">https://eclipsescout.github.io/7.0/migration-guide.html</a> </td>
         </tr>
        </tbody>
       </table>
      </div>
+     <div class="ulist">
+      <ul>
+       <li> <p><a href="#PLACEHOLDER">[PLACEHOLDER]</a></p> </li>
+      </ul>
+     </div>
      <div class="paragraph">
-      <p>You can see the <a href="https://github.com/eclipse/scout.rt/compare/releases/6.1.x%2E%2E%2Ereleases/7.0.x">detailed change log</a> on GitHub.</p>
+      <p>You can see the <a href="https://github.com/eclipse/scout.rt/compare/releases/7.0.x%2E%2E%2Ereleases/7.1.x">detailed change log</a> on GitHub.</p>
      </div>
      <div class="sect2">
       <h3 id="service-releases"><a class="anchor" href="#service-releases"></a>Service Releases</h3>
       <div class="paragraph">
-       <p>The following changes were made after the initial 7.0 release (Eclipse Oxygen release). The following notes relate to a <em>service release</em>.</p>
+       <p>The following changes were made after the initial 7.1 release (Eclipse Photon release). The following notes relate to a <em>service release</em>.</p>
       </div>
       <div class="sect3">
-       <h4 id="oxygen-1-7-0-100-release-expected-on-september-27-2017"><a class="anchor" href="#oxygen-1-7-0-100-release-expected-on-september-27-2017"></a>Oxygen.1 (7.0.100) Release expected on September 27, 2017</h4>
+       <h4 id="photon-1-7-1-100-release-expected-on-september-2018"><a class="anchor" href="#photon-1-7-1-100-release-expected-on-september-2018"></a>Photon.1 (7.1.100) Release expected on September, 2018</h4>
        <div class="paragraph">
         <p><strong>Attention:</strong> The here described functionality has not yet been released and is part of an upcoming release.</p>
-       </div>
-       <div class="ulist">
-        <ul>
-         <li> <p><a href="#minimized-mode-for-split-box-since-7-0-100"><em>Minimized Mode for Split Box (since 7.0.100)</em></a></p> </li>
-         <li> <p><a href="#new-smart-field-ismartfield2-since-7-0-100"><em>New Smart Field: ISmartField2 (since 7.0.100)</em></a></p> </li>
-         <li> <p><a href="#time-picker-for-date-field-since-7-0-100"><em>Time Picker for Date Field (since 7.0.100)</em></a></p> </li>
-         <li> <p><a href="#clear-icon-for-input-fields-since-7-0-100"><em>Clear Icon for Input Fields (since 7.0.100)</em></a></p> </li>
-         <li> <p><a href="#improved-touch-popups-since-7-0-100"><em>Improved Touch Popups (since 7.0.100)</em></a></p> </li>
-         <li> <p><a href="#sorting-of-filter-table-since-7-0-100"><em>Sorting of Filter Table (since 7.0.100)</em></a></p> </li>
-         <li> <p><a href="#auto-optimize-column-width-since-7-0-100"><em>Auto Optimize Column Width (since 7.0.100)</em></a></p> </li>
-        </ul>
-       </div>
-       <div class="ulist">
-        <ul>
-         <li> <p>Minor changes for HTTP abstraction properties.</p>
-          <div class="ulist">
-           <ul>
-            <li> <p>Existing configuration property classes have been bundled in two <code>org.eclipse.scout.rt.shared.http.HttpConfigurationProperties</code> and <code>org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnelConfigurationProperties</code> classes.</p> </li>
-            <li> <p>The configuration property <code>org.eclipse.scout.rt.servicetunnel.apache_connection_time_to_live</code> has been removed (<code>scout.http.apache_connection_time_to_live</code> is used instead).</p> </li>
-            <li> <p>New configuration properties have been added:</p>
-             <div class="ulist">
-              <ul>
-               <li> <p><code>scout.http.apache_keep_alive</code> (possible values: true/false), whether to use keep-alive connections. If property is not set the system property <code>http.keepAlive</code> is evaluated, if this system property is also not set true will be used as a last resort.</p> </li>
-               <li> <p><code>scout.http.apache_retry_post</code> (possible values: true/false), whether to retry HTTP POST requests. If not property is not set the system property <code>sun.net.http.retryPost</code> is evaluated, if this system property is also not set true will be used as a last resort.</p> </li>
-              </ul>
-             </div> </li>
-           </ul>
-          </div> </li>
-        </ul>
        </div>
       </div>
      </div>
@@ -628,8 +587,8 @@ table.CodeRay td.code>pre{padding:0}
        </div>
        <div class="ulist">
         <ul>
-         <li> <p><a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%227.0.0.008_Oxygen%22">7.0.0.008_Oxygen</a> on <em>Maven Central</em></p> </li>
-         <li> <p><a href="https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.0.008_Oxygen">7.0.0.008_Oxygen</a> on <em>mvnrepository.com</em></p> </li>
+         <li> <p><a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%227.1.0.001_Photon%22">7.1.0.001_Photon</a> on <em>Maven Central</em></p> </li>
+         <li> <p><a href="https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.1.0.001_Photon">7.1.0.001_Photon</a> on <em>mvnrepository.com</em></p> </li>
         </ul>
        </div>
        <div class="paragraph">
@@ -640,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
          <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.eclipse.scout.rt<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>org.eclipse.scout.rt<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>7.0.0.008_Oxygen<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>7.1.0.001_Photon<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
     <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
@@ -650,16 +609,16 @@ table.CodeRay td.code>pre{padding:0}
       <div class="sect3">
        <h4 id="eclipse-ide-tooling-scout-sdk"><a class="anchor" href="#eclipse-ide-tooling-scout-sdk"></a>Eclipse IDE Tooling (Scout SDK)</h4>
        <div class="paragraph">
-        <p>You can download the complete Eclipse IDE with Scout SDK included (EPP) here:<br> <a href="https://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygen">Eclipse for Scout Developers</a></p>
+        <p>You can download the complete Eclipse IDE with Scout SDK included (EPP) here:<br> <a href="https://www.eclipse.org/downloads/packages/eclipse-scout-developers/Photon">Eclipse for Scout Developers</a></p>
        </div>
        <div class="paragraph">
-        <p>To install the Scout SDK into your existing Eclipse IDE, use this update site:<br> <a href="http://download.eclipse.org/scout/releases/7.0/7.0.0/008_Oxygen/" class="bare">http://download.eclipse.org/scout/releases/7.0/7.0.0/008_Oxygen/</a></p>
+        <p>To install the Scout SDK into your existing Eclipse IDE, use this update site:<br> <a href="http://download.eclipse.org/scout/releases/7.1/7.1.0/001_Photon/" class="bare">http://download.eclipse.org/scout/releases/7.1/7.1.0/001_Photon/</a></p>
        </div>
       </div>
       <div class="sect3">
        <h4 id="demo-applications"><a class="anchor" href="#demo-applications"></a>Demo Applications</h4>
        <div class="paragraph">
-        <p>The demo applications for this version can be found on the <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.0.008_Oxygen">features/version/7.0.0.008_Oxygen</a> branch of our docs repository on GitHub.</p>
+        <p>The demo applications for this version can be found on the <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.1.0.001_Photon">features/version/7.1.0.001_Photon</a> branch of our docs repository on GitHub.</p>
        </div>
        <div class="paragraph">
         <p>If you just want to play around with them without looking at the source code, you can always use the deployed versions:</p>
@@ -671,270 +630,20 @@ table.CodeRay td.code>pre{padding:0}
          <li> <p><a href="https://scout.bsi-software.com/jswidgets/" class="bare">https://scout.bsi-software.com/jswidgets/</a></p> </li>
         </ul>
        </div>
+       <div class="paragraph">
+        <p>N/A</p>
+       </div>
+       <div class="admonitionblock tip">
+        <table>
+         <tbody>
+          <tr>
+           <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td>
+           <td class="content"> Do you want to improve this document? Have a look at the <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/blob/releases/7.1.x/docs/build/scout_releasenotes/src/docs/release-notes.adoc">sources</a> on GitHub. </td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
       </div>
-     </div>
-    </div>
-   </div>
-   <div class="sect1">
-    <h2 id="upgrade-to-jquery-3"><a class="anchor" href="#upgrade-to-jquery-3"></a>Upgrade to jQuery 3</h2>
-    <div class="sectionbody">
-     <div class="paragraph">
-      <p>We upgraded from jQuery 2.1.4 to jQuery 3.2.1. The new version contains a lot of improvements, including performance optimizations for animations and event handling. It also allowed us to remove some code which is now included in jQuery directly (e.g. addClassSVG, removeClassSVG, hasClassSVG).</p>
-     </div>
-     <div class="paragraph">
-      <p>Beside upgrading jQuery, we upgraded the Jasmine Maven Plugin to version 2.2 and the PhantomJS Maven Plugin to version 2.1.1, too. The YUI compressor has also been upgraded from 2.4.8 to version 2.4.9, but unfortunately it is not compatible with jQuery 3. To make it work again we had to fork it and now use the version 2.4.9-BSI-1.</p>
-     </div>
-     <div class="paragraph">
-      <p>Along with the jQuery upgrade we decided to remove jQuery UI and jQuery Mobile completely. Scout only included parts of these libraries and the usage was limited to 2 or 3 functions. Without these dependencies it will be easier in the future to upgrade jQuery itself.</p>
-     </div>
-    </div>
-   </div>
-   <div class="sect1">
-    <h2 id="scout-js"><a class="anchor" href="#scout-js"></a>Scout JS</h2>
-    <div class="sectionbody">
-     <div class="paragraph">
-      <p>With release 6.1 first steps had been taken to allow creating Scout applications with JavaScript only (see <a href="https://eclipsescout.github.io/6.1/release-notes.html#preparations-for-scout-js">6.1 Release Notes</a>). The development has been continued so that the current release comes with a cleaner API, more working widgets and even some documentation (<a href="https://eclipsescout.github.io/7.1/technical-guide.html#scout-js">Tech Doc</a>) and sample code (<a href="https://scout.bsi-software.com/jswidgets/" class="bare">https://scout.bsi-software.com/jswidgets/</a>). Still, it has not been finished yet and will be improved with the upcoming service releases. Let us know what you think!</p>
-     </div>
-     <div class="paragraph">
-      <p>It is important to note that <em>Scout JS</em> is not a separate framework. It actually just names the JavaScript part of the Scout framework. Classic Scout applications use it as well. This means effort made in this area also improves the stability of the Scout framework itself and even makes the development of custom widgets easier.</p>
-     </div>
-     <div class="sect2">
-      <h3 id="validators-parser-and-formatter-js"><a class="anchor" href="#validators-parser-and-formatter-js"></a>Validators, Parser and Formatter (JS)</h3>
-      <div class="paragraph">
-       <p>The <code>ValueField.js</code> now provides an API to add custom parse, validate and format logic. This is especially useful for the <code>StringField</code>, but you may also use it for the <code>NumberField</code> and the <code>DateField</code>. See the technical guide for details.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="simplified-api-js"><a class="anchor" href="#simplified-api-js"></a>Simplified API (JS)</h3>
-      <div class="paragraph">
-       <p>The parameter <code>$parent</code> is now optional when calling widget.render(). The <code>$parent</code> may be resolved using <code>this.parent</code>. No need to always write <code>widget.render(this.$container)</code> anymore, instead just write <code>widget.render()</code> if the <code>$container</code> of the <code>parent</code> should be used as <code>$parent</code>.</p>
-      </div>
-      <div class="paragraph">
-       <p>The property change event has been simplified. Instead of <code>newProperties</code>, <code>oldProperties</code> and <code>changedProperties</code>, the event now contains <code>propertyName</code>, <code>oldValue</code> and <code>newValue</code>. This makes handling the event easier.</p>
-      </div>
-      <div class="paragraph">
-       <p><code>DateField</code>, <code>StringField</code> and <code>NumberField</code> now use the value based API provided by <code>ValueField</code>. This means you can write the value using <code>field.setValue(value)</code>, and read it using <code>field.value</code>. The validators and formatter will be called accordingly.</p>
-      </div>
-     </div>
-     <div class="sect2">
-      <h3 id="logical-grid-validation-js"><a class="anchor" href="#logical-grid-validation-js"></a>Logical Grid Validation (JS)</h3>
-      <div class="paragraph">
-       <p>When writing a Scout Form with Java, you don&#x2019;t have to care about the logical grid. You only have to specify some grid hints like width and height of a cell. The positioning of the cell is calculated automatically by the logical grid.</p>
-      </div>
-      <div class="paragraph">
-       <p>This is now also possible with JS based Scout applications. There is no need to manually create a Logical Grid (e.g. <code>VerticalSmartGroupBoxBodyGrid</code> or <code>HorizontalGroupBoxBodyGrid</code> and validate it anymore, this will be done automatically by the <code>LogicalGridLayout</code> itself.</p>
-      </div>
-     </div>
-    </div>
-   </div>
-   <div class="sect1">
-    <h2 id="new-http-abstraction-layer-google-http-client-for-java"><a class="anchor" href="#new-http-abstraction-layer-google-http-client-for-java"></a>New HTTP Abstraction Layer: Google HTTP Client for Java</h2>
-    <div class="sectionbody">
-     <div class="paragraph">
-      <p>The <code>org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel</code> class and other HTTP usages were changed to use the Google HTTP Client Library for Java 1.22. This library adds a HTTP abstraction layer and allows to use different low-level libraries like <code>java.net.HttpURLConnection</code> (one and only layer used in previous versions) or Apache HTTP Client 4.5.3 (new default).</p>
-     </div>
-     <div class="paragraph">
-      <p>Different HTTP clients with different parameters (even with different low-level libraries) may be used and kept using (custom) implementations of <code>org.eclipse.scout.rt.shared.http.IHttpTransportManager</code>. Currently there are two internal implementations of this interface: <code>HttpServiceTunnelTransportManager</code> (only used by the service tunnel) and <code>DefaultHttpTransportManager</code> (used for all other HTTP connections).</p>
-     </div>
-     <div class="paragraph">
-      <p>The following new configuration properties (none of them is required to be set, defaults are provided for all of them) were added:</p>
-     </div>
-     <div class="ulist">
-      <ul>
-       <li> <p><code>scout.http.transport_factory</code>, possible values are <code>org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory</code> (default, see above), <code>org.eclipse.scout.rt.shared.http.NetHttpTransportFactory</code> (to use previous HttpURLConnection layer) or any custom implementation of an <code>org.eclipse.scout.rt.shared.http.IHttpTransportFactory</code>.</p> </li>
-      </ul>
-     </div>
-     <div class="paragraph">
-      <p>For the <code>HttpServiceTunnelTransportManager</code>:</p>
-     </div>
-     <div class="ulist">
-      <ul>
-       <li> <p><code>org.eclipse.scout.rt.servicetunnel.apache_max_connections_per_route</code>, maximum number of connections per route (default: 2048, only applicable for for Apache HTTP Client).</p> </li>
-       <li> <p><code>org.eclipse.scout.rt.servicetunnel.apache_max_connections_total</code>, maximum number of connections in total (default: 2048, only applicable for for Apache HTTP Client).</p> </li>
-      </ul>
-     </div>
-     <div class="paragraph">
-      <p>For the all other <code>org.eclipse.scout.rt.shared.http.AbstractHttpTransportManager</code> (if not overriding these settings):</p>
-     </div>
-     <div class="ulist">
-      <ul>
-       <li> <p><code>scout.http.apache_connection_time_to_live</code>, time to live (milliseconds) for kept alive connections (default: 1 hour, only applicable for Apache HTTP Client).</p> </li>
-       <li> <p><code>scout.http.apache_max_connections_per_route</code>, maximum number of connections per route (default: 32, only applicable for Apache HTTP Client).</p> </li>
-       <li> <p><code>scout.http.apache_max_connections_total</code>, maximum number of connections in total (default: 128, only applicable for Apache HTTP Client).</p> </li>
-      </ul>
-     </div>
-     <div class="paragraph">
-      <p>For each Apache HTTP Client created using the <code>org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory</code> (by default each <code>org.eclipse.scout.rt.shared.http.IHttpTransportManager</code> using the Apache HTTP Client) their own <code>org.eclipse.scout.rt.shared.http.ApacheMultiSessionCookieStore</code> and <code>org.eclipse.scout.rt.shared.http.proxy.ConfigurableProxySelector</code> (see javadoc for detailed description and configurability) are created. These instances are therefore not registered globally for the java virtual machine anymore.</p>
-     </div>
-    </div>
-   </div>
-   <div class="sect1">
-    <h2 id="support-for-rest-services"><a class="anchor" href="#support-for-rest-services"></a>Support for REST Services</h2>
-    <div class="sectionbody">
-     <div class="paragraph">
-      <p>The following new Scout modules have been added to support REST services with Jackson as marshaller:</p>
-     </div>
-     <div class="ulist">
-      <ul>
-       <li> <p><code>org.eclipse.scout.rt.rest</code></p> </li>
-       <li> <p><code>org.eclipse.scout.rt.rest.test</code></p> </li>
-       <li> <p><code>org.eclipse.scout.rt.jackson</code></p> </li>
-       <li> <p><code>org.eclipse.scout.rt.jackson.test</code></p> </li>
-      </ul>
-     </div>
-     <div class="paragraph">
-      <p>The most important class is the <code>org.eclipse.scout.rt.rest.RestApplication</code> which searches for all implementations of <code>IRestResource</code> and exposes them as REST services. It also registers <code>ExceptionMappers</code> and setups Jackson to work with Jandex.</p>
-     </div>
-     <div class="paragraph">
-      <p>So if you want to use REST services, you could use the Jersey REST servlet (<code>org.glassfish.jersey.servlet.ServletContainer</code>), pass the <code>RestApplication</code> as parameter and install the <code>org.eclipse.scout.rt.server.context.ServerRunContextFilter</code> to have the proper run context for every REST call. Creating the REST resource is straight forward using the annotations from <code>javax.ws.rs</code>. Just make sure the resource implements the interface <code>IRestResource</code> so that it will be registered by the <code>RestApplication</code> on startup.</p>
-     </div>
-    </div>
-   </div>
-   <div class="sect1">
-    <h2 id="prevent-double-clicks-on-buttons-and-menus"><a class="anchor" href="#prevent-double-clicks-on-buttons-and-menus"></a>Prevent Double Clicks on Buttons and Menus</h2>
-    <div class="sectionbody">
-     <div class="paragraph">
-      <p>If a button or a menu is clicked twice within a short period of time, the corresponding action is executed twice. This can be convenient (e.g. when inserting new rows in a table) or unproblematic (e.g. when closing a form - the second click will just be ignored). However, there are cases where executing an action twice would break things. To instruct the UI to block double clicks, a new property "preventDoubleClick" is provided on buttons and menus:</p>
-     </div>
-     <div class="ulist">
-      <ul>
-       <li> <p><code>AbstractButton.getConfiguredPreventDoubleClick()</code></p> </li>
-       <li> <p><code>AbstractMenu.getConfiguredPreventDoubleClick()</code></p> </li>
-      </ul>
-     </div>
-     <div class="paragraph">
-      <p>The default value is <code>false</code>.</p>
-     </div>
-    </div>
-   </div>
-   <div class="sect1">
-    <h2 id="minimized-mode-for-split-box-since-7-0-100"><a class="anchor" href="#minimized-mode-for-split-box-since-7-0-100"></a>Minimized Mode for Split Box (since 7.0.100)</h2>
-    <div class="sectionbody">
-     <div class="paragraph">
-      <p>The SplitBox widget now supports a minimum splitter position according to the collapsible field. The collapsible field size is limited between minimum splitter position and maximum available size. The collapse buttons now toggles between three modes of the collapsible field: <code>default</code>, <code>minimized</code> and <code>collapsed</code>. The default value for minimal splitter size is <code>null</code>, which means, no minimal splitter size is set and no change in existing behavior.</p>
-     </div>
-     <div class="paragraph">
-      <p>New API methods on <code>AbstractSplitBox</code>:</p>
-     </div>
-     <div class="ulist">
-      <ul>
-       <li> <p><code>Double getMinSplitterPosition()</code></p> </li>
-       <li> <p><code>void setMinSplitterPosition(Double minPosition)</code></p> </li>
-       <li> <p><code>boolean isFieldMinimized()</code></p> </li>
-       <li> <p><code>void setFieldMinimized(boolean minimized)</code></p> </li>
-      </ul>
-     </div>
-     <div class="paragraph">
-      <p>Additional to the existing three splitbox position types a new <code>SPLITTER_POSITION_TYPE_RELATIVE_SECOND</code> type was added. This new splitter position type allows to specify the size of the second field relative to the full size of the splitbox.</p>
-     </div>
-    </div>
-   </div>
-   <div class="sect1">
-    <h2 id="new-smart-field-ismartfield2-since-7-0-100"><a class="anchor" href="#new-smart-field-ismartfield2-since-7-0-100"></a>New Smart Field: ISmartField2 (since 7.0.100)</h2>
-    <div class="sectionbody">
-     <div class="paragraph">
-      <p>This release introduces a new smart field: <code>ISmartField2</code>. It has almost the same interface as the old smart field <code>ISmartField</code>, which still exists in this Scout release, but will be removed with 7.1. The main differences to the old smart field:</p>
-     </div>
-     <div class="ulist">
-      <ul>
-       <li> <p>In "Scout classic" (with a Java UI server) there is no longer a model representation of the proposal chooser. In the new smart field the whole state of the proposal chooser is kept on client side in the browser. The Java UI server only sends lookup rows to the client. Depending on the smart field configuration <code>SmartField2.js</code> will render either a proposal chooser with a table or a tree (hierarchical). It&#x2019;s still possible to replace the default proposal chooser, but now you have to write a bit of JavaScript code to do that.</p> </li>
-       <li> <p>The smart field can now be used with Scout JS. This means you&#x2019;re no longer restricted to "Scout classic" when you want to use a smart field and you can use the smart field with any static or dynamic data source, for instance a REST service. Take a look at the jswidgets demo app to see examples how to use the smart field with JavaScript.</p> </li>
-      </ul>
-     </div>
-     <div class="paragraph">
-      <p>Migrating from <code>ISmartField</code> to <code>ISmartField2</code> should be simple in most cases, since the interfaces of the old and the new smart field are almost identical. Differences are:</p>
-     </div>
-     <div class="ulist">
-      <ul>
-       <li> <p>There is no longer a <code>IMixedSmartField</code> with two generic types for VALUE and LOOKUP_TYPE, since these two types are identical in 99.9% of all cases. When you migrate an old Scout application that uses different types you could either provide a new LookupCall that has the same lookup type as the smart field value, or you could simply cast the value of the smart field where needed.</p> </li>
-       <li> <p>The value of the proposal field is now always a String. The generic type you pass to the proposal field is the lookup type. Use the methods <code>setValueAsString</code> and <code>getValueAsString</code> to read and write the value of the proposal field. Additionally you can still access the selected lookup row of the proposal field and get the key of the lookup row.</p> </li>
-       <li> <p>When you migrate an old Scout application that has a custom proposal chooser, you should probably create a custom JavaScript implementation for your smart field. There you can override the behavior of the default implementation.</p> </li>
-      </ul>
-     </div>
-     <div class="paragraph">
-      <p>Note: With 7.1 the old smart field will be deleted and replaced by the new smart field <code>ISmartField2</code>, additionally in 7.1 <code>ISmartField2</code> will be renamed to <code>ISmartField</code> again. When you start a new Scout project with this release you should use <code>ISmartField2</code>.</p>
-     </div>
-    </div>
-   </div>
-   <div class="sect1">
-    <h2 id="time-picker-for-date-field-since-7-0-100"><a class="anchor" href="#time-picker-for-date-field-since-7-0-100"></a>Time Picker for Date Field (since 7.0.100)</h2>
-    <div class="sectionbody">
-     <div class="paragraph">
-      <p>The date picker has been there for a long time and provides a convenient way to pick a date. To enter a time however, you had to use the keyboard. These days are now gone because with this service release a time picker has been added. It shows the hours from 0 to 23 and the commonly used minutes. The resolution is configurable, so you could change to 00, 15, 30, 45 instead of 00, 30 if you want. You can still use your keyboard, though.</p>
-     </div>
-     <div id="img-timepicker" class="imageblock">
-      <div class="content">
-       <img src="images/timepicker.png" alt="timepicker">
-      </div>
-      <div class="title">
-       Figure 1. Time picker
-      </div>
-     </div>
-    </div>
-   </div>
-   <div class="sect1">
-    <h2 id="clear-icon-for-input-fields-since-7-0-100"><a class="anchor" href="#clear-icon-for-input-fields-since-7-0-100"></a>Clear Icon for Input Fields (since 7.0.100)</h2>
-    <div class="sectionbody">
-     <div class="paragraph">
-      <p>Every input field now has a clear icon. It is active while the field has the focus. This makes it easy to clear the input with one click.</p>
-     </div>
-     <div id="img-clearable" class="imageblock">
-      <div class="content">
-       <img src="images/clearable.png" alt="clearable">
-      </div>
-      <div class="title">
-       Figure 2. Clear icon
-      </div>
-     </div>
-    </div>
-   </div>
-   <div class="sect1">
-    <h2 id="improved-touch-popups-since-7-0-100"><a class="anchor" href="#improved-touch-popups-since-7-0-100"></a>Improved Touch Popups (since 7.0.100)</h2>
-    <div class="sectionbody">
-     <div class="paragraph">
-      <p>When using the smart field or date field on a mobile phone or tablet, the popup will be shown in a different way to make it easier to pick a value with the finger. This existing behavior has been improved so that it is now easier and more intuitive to clear the value and close the popup.</p>
-     </div>
-     <div id="img-date-picker-touch-popup" class="imageblock">
-      <div class="content">
-       <img src="images/date_picker_touch_popup.png" alt="date picker touch popup">
-      </div>
-      <div class="title">
-       Figure 3. Date picker touch popup
-      </div>
-     </div>
-    </div>
-   </div>
-   <div class="sect1">
-    <h2 id="sorting-of-filter-table-since-7-0-100"><a class="anchor" href="#sorting-of-filter-table-since-7-0-100"></a>Sorting of Filter Table (since 7.0.100)</h2>
-    <div class="sectionbody">
-     <div class="paragraph">
-      <p>The column header menu shows a list of all the different values which occur in the cells of that column. If one of these values is selected the table will be filtered and will only show rows which contain that value. These values are sorted alphabetically. Because sometimes it might be useful to only display the rows which contain the most used values, a possibility was added to sort the values by the number of occurrences. Just press the icon on the left of the 'All' button.</p>
-     </div>
-     <div id="img-table-header-menu-filter-sorting" class="imageblock">
-      <div class="content">
-       <img src="images/table_header_menu_filter_sorting.png" alt="table header menu filter sorting">
-      </div>
-      <div class="title">
-       Figure 4. Column Filter Sorting
-      </div>
-     </div>
-    </div>
-   </div>
-   <div class="sect1">
-    <h2 id="auto-optimize-column-width-since-7-0-100"><a class="anchor" href="#auto-optimize-column-width-since-7-0-100"></a>Auto Optimize Column Width (since 7.0.100)</h2>
-    <div class="sectionbody">
-     <div class="paragraph">
-      <p>The column has a property called <code>autoOptimizeWidth</code>. This property has been there for a while but has not been interpreted yet. With 7.0.100 the support for this property has been implemented. If you set it to true on a specific column, the column will always be as width as its content. If not set, the user can still optimize the width manually by double clicking the separator between two columns.</p>
-     </div>
-     <div class="admonitionblock tip">
-      <table>
-       <tbody>
-        <tr>
-         <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td>
-         <td class="content"> Do you want to improve this document? Have a look at the <a href="https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/blob/releases/7.1.x/docs/build/scout_releasenotes/src/docs/release-notes.adoc">sources</a> on GitHub. </td>
-        </tr>
-       </tbody>
-      </table>
      </div>
     </div>
    </div>
