@@ -555,6 +555,7 @@ table.CodeRay td.code>pre{padding:0}
      <li><a href="#improved-touch-popups-since-7-0-100">Improved Touch Popups (since 7.0.100)</a></li>
      <li><a href="#sorting-of-filter-table-since-7-0-100">Sorting of Filter Table (since 7.0.100)</a></li>
      <li><a href="#auto-optimize-column-width-since-7-0-100">Auto Optimize Column Width (since 7.0.100)</a></li>
+     <li><a href="#new-property-for-request-timeout-since-7-0-100">New Property for Request Timeout (since 7.0.100)</a></li>
     </ul>
    </div>
   </div>
@@ -597,6 +598,7 @@ table.CodeRay td.code>pre{padding:0}
          <li> <p><a href="#improved-touch-popups-since-7-0-100"><em>Improved Touch Popups (since 7.0.100)</em></a></p> </li>
          <li> <p><a href="#sorting-of-filter-table-since-7-0-100"><em>Sorting of Filter Table (since 7.0.100)</em></a></p> </li>
          <li> <p><a href="#auto-optimize-column-width-since-7-0-100"><em>Auto Optimize Column Width (since 7.0.100)</em></a></p> </li>
+         <li> <p><a href="#new-property-for-request-timeout-since-7-0-100"><em>New Property for Request Timeout (since 7.0.100)</em></a></p> </li>
         </ul>
        </div>
        <div class="ulist">
@@ -925,6 +927,14 @@ table.CodeRay td.code>pre{padding:0}
     <div class="sectionbody">
      <div class="paragraph">
       <p>The column has a property called <code>autoOptimizeWidth</code>. This property has been there for a while but has not been interpreted yet. With 7.0.100 the support for this property has been implemented. If you set it to true on a specific column, the column will always be as width as its content. If not set, the user can still optimize the width manually by double clicking the separator between two columns.</p>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="new-property-for-request-timeout-since-7-0-100"><a class="anchor" href="#new-property-for-request-timeout-since-7-0-100"></a>New Property for Request Timeout (since 7.0.100)</h2>
+    <div class="sectionbody">
+     <div class="paragraph">
+      <p>Every ui request schedules a model job to process the user interaction and waits for this job and other scheduled model jobs to complete. During that time the ui is blocked but the user may abort the processing manually by clicking cancel. If the user does not cancel it and it takes too long to complete the model jobs are now aborted automatically to free resources. The default is set to 1 hour but you may configure it by using the new property <code>scout.ui.model.jobs.await.timeout</code> (the unit is seconds). After the abortion a message box is displayed to the user saying the request timed out.</p>
      </div>
      <div class="admonitionblock tip">
       <table>
