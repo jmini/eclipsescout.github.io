@@ -546,6 +546,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#scouttexts">ScoutTexts</a></li>
       </ul> </li>
      <li><a href="#ismartfield-2-since-7-0-100">ISmartField(2) (since 7.0.100)</a></li>
+     <li><a href="#deprecated-property-code-focusable-code-from-iformfield-abstractformfield">Deprecated property <code>focusable</code> from IFormField, AbstractFormField</a></li>
      <li><a href="#api-changes-javascript">API Changes (JavaScript)</a>
       <ul class="sectlevel2">
        <li><a href="#render">render()</a></li>
@@ -560,7 +561,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#abstractlifecycle-and-formlifecycle-simplified-since-7-0-100">AbstractLifecycle and FormLifecycle simplified (since 7.0.100)</a></li>
        <li><a href="#groupbox-mainbox-flag-now-set-automatically-since-7-0-100">GroupBox: mainBox flag now set automatically (since 7.0.100)</a></li>
       </ul> </li>
-     <li><a href="#deprecated-property-code-focusable-code-from-iformfield-abstractformfield">Deprecated property <code>focusable</code> from IFormField, AbstractFormField</a></li>
+     <li><a href="#charts-fixed-typo-in-function-name">Charts: fixed typo in function name</a></li>
      <li><a href="#other-changes">Other Changes</a>
       <ul class="sectlevel2">
        <li><a href="#maven-provided-dependencies">Maven "provided" Dependencies</a></li>
@@ -746,6 +747,27 @@ table.CodeRay td.code>pre{padding:0}
      </div>
      <div class="paragraph">
       <p>Note: with 7.0 these methods still exist on the old smart field <code>ISmartField</code> but are marked as deprecated.</p>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="deprecated-property-code-focusable-code-from-iformfield-abstractformfield"><a class="anchor" href="#deprecated-property-code-focusable-code-from-iformfield-abstractformfield"></a>Deprecated property <code>focusable</code> from IFormField, AbstractFormField</h2>
+    <div class="sectionbody">
+     <div class="paragraph">
+      <p>Since the new Html UI was introduced with Scout 5.2 this property had no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we deprecated all methods from the interface/class FormField. The following methods/properties will be removed with Scout 7.1:</p>
+     </div>
+     <div class="ulist">
+      <ul>
+       <li> <p>boolean IFormField#isFocusable()</p> </li>
+       <li> <p>void IFormField#setFocusable(boolean f)</p> </li>
+       <li> <p>boolean IFormField#PROP_FOCUSABLE</p> </li>
+       <li> <p>boolean AbstractFormField#getConfiguredFocusable()</p> </li>
+       <li> <p>class AbstractNonFocusableButton</p> </li>
+       <li> <p>class AbstractNonFocusableRadioButton</p> </li>
+      </ul>
+     </div>
+     <div class="paragraph">
+      <p>You should no longer use these methods. Since there will be no replacement in later Scout releases, you should delete code that uses these methods/properties.</p>
      </div>
     </div>
    </div>
@@ -955,23 +977,10 @@ table.CodeRay td.code>pre{padding:0}
     </div>
    </div>
    <div class="sect1">
-    <h2 id="deprecated-property-code-focusable-code-from-iformfield-abstractformfield"><a class="anchor" href="#deprecated-property-code-focusable-code-from-iformfield-abstractformfield"></a>Deprecated property <code>focusable</code> from IFormField, AbstractFormField</h2>
+    <h2 id="charts-fixed-typo-in-function-name"><a class="anchor" href="#charts-fixed-typo-in-function-name"></a>Charts: fixed typo in function name</h2>
     <div class="sectionbody">
      <div class="paragraph">
-      <p>Since the new Html UI was introduced with Scout 5.2 this property had no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we deprecated all methods from the interface/class FormField. The following methods/properties will be removed with Scout 7.1:</p>
-     </div>
-     <div class="ulist">
-      <ul>
-       <li> <p>boolean IFormField#isFocusable()</p> </li>
-       <li> <p>void IFormField#setFocusable(boolean f)</p> </li>
-       <li> <p>boolean IFormField#PROP_FOCUSABLE</p> </li>
-       <li> <p>boolean AbstractFormField#getConfiguredFocusable()</p> </li>
-       <li> <p>class AbstractNonFocusableButton</p> </li>
-       <li> <p>class AbstractNonFocusableRadioButton</p> </li>
-      </ul>
-     </div>
-     <div class="paragraph">
-      <p>You should no longer use these methods. Since there will be no replacement in later Scout releases, you should delete code that uses these methods/properties.</p>
+      <p>Incorrect function name <code>handelToBigLabels</code> in AbstractGridChartRenderer.js was renamed to <code>handleTooBigLabels</code>. You must apply this renaming to your code if this function is called or overridden.</p>
      </div>
     </div>
    </div>
