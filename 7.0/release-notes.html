@@ -548,7 +548,10 @@ table.CodeRay td.code>pre{padding:0}
      <li><a href="#new-http-abstraction-layer-google-http-client-for-java">New HTTP Abstraction Layer: Google HTTP Client for Java</a></li>
      <li><a href="#support-for-rest-services">Support for REST Services</a></li>
      <li><a href="#prevent-double-clicks-on-buttons-and-menus">Prevent Double Clicks on Buttons and Menus</a></li>
-     <li><a href="#minimized-mode-for-split-box-since-7-0-100">Minimized Mode for Split Box (since 7.0.100)</a></li>
+     <li><a href="#minimized-mode-for-split-box-since-7-0-100">Minimized Mode for Split Box (since 7.0.100)</a>
+      <ul class="sectlevel2">
+       <li><a href="#split-box-keystrokes">Split Box Keystrokes</a></li>
+      </ul> </li>
      <li><a href="#new-smart-field-ismartfield2-since-7-0-100">New Smart Field: ISmartField2 (since 7.0.100)</a></li>
      <li><a href="#time-picker-for-date-field-since-7-0-100">Time Picker for Date Field (since 7.0.100)</a></li>
      <li><a href="#clear-icon-for-input-fields-since-7-0-100">Clear Icon for Input Fields (since 7.0.100)</a></li>
@@ -822,12 +825,45 @@ table.CodeRay td.code>pre{padding:0}
       <ul>
        <li> <p><code>Double getMinSplitterPosition()</code></p> </li>
        <li> <p><code>void setMinSplitterPosition(Double minPosition)</code></p> </li>
+       <li> <p><code>Double getConfiguredMinSplitterPosition()</code></p> </li>
        <li> <p><code>boolean isFieldMinimized()</code></p> </li>
        <li> <p><code>void setFieldMinimized(boolean minimized)</code></p> </li>
+       <li> <p><code>boolean getConfiguredFieldMinimized()</code></p> </li>
       </ul>
      </div>
      <div class="paragraph">
       <p>Additional to the existing three splitbox position types a new <code>SPLITTER_POSITION_TYPE_RELATIVE_SECOND</code> type was added. This new splitter position type allows to specify the size of the second field relative to the full size of the splitbox.</p>
+     </div>
+     <div class="sect2">
+      <h3 id="split-box-keystrokes"><a class="anchor" href="#split-box-keystrokes"></a>Split Box Keystrokes</h3>
+      <div class="paragraph">
+       <p>The former <code>AbstractSplitBox.setCollapseKeyStroke()</code> and <code>AbstractSplitBox.getCollapseKeyStroke()</code> methods were deprecated and renamed, since the configured keystroke toggles between collapsed and default size of the collapsible field.</p>
+      </div>
+      <div class="paragraph">
+       <p>Renamed methods:</p>
+      </div>
+      <div class="ulist">
+       <ul>
+        <li> <p><code>AbstractSplitBox.setToggleCollapseKeyStroke(String keyStroke)</code></p> </li>
+        <li> <p><code>AbstractSplitBox.getToggleCollapseKeyStroke()</code></p> </li>
+       </ul>
+      </div>
+      <div class="paragraph">
+       <p>New API methods to define keystrokes allowing to toggle between default, minimized and collapsed mode. The <em>First</em> keystroke corresponds to the left button for a vertical split boxe and the top button for a horizontal splitbox. The <em>Second</em> keystroke corresponds to the right button for a vertical split boxe and the bottom button for a horizontal splitbox.</p>
+      </div>
+      <div class="paragraph">
+       <p>New API methods:</p>
+      </div>
+      <div class="ulist">
+       <ul>
+        <li> <p><code>AbstractSplitBox.setFirstCollapseKeyStroke(String keyStroke)</code></p> </li>
+        <li> <p><code>AbstractSplitBox.getFirstCollapseKeyStroke()</code></p> </li>
+        <li> <p><code>AbstractSplitBox.setSecondCollapseKeyStroke(String keyStroke)</code></p> </li>
+        <li> <p><code>AbstractSplitBox.getSecondCollapseKeyStroke()</code></p> </li>
+        <li> <p><code>AbstractSplitBox.getConfiguredToogleCollapseKeyStroke()</code></p> </li>
+        <li> <p><code>AbstractSplitBox.getConfiguredFirstCollapseKeyStroke()</code></p> </li>
+       </ul>
+      </div>
      </div>
     </div>
    </div>
