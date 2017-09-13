@@ -763,7 +763,7 @@ table.CodeRay td.code>pre{padding:0}
          <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">MyListener</span> <span class="directive">implements</span> IPlatformListener {
   <span class="annotation">@Override</span>
   <span class="directive">public</span> <span class="type">void</span> stateChanged(PlatformEvent event) {
-    <span class="keyword">if</span> (event.getState() == IPlatform.State.PlatformStarted) {
+    <span class="keyword">if</span> (event.getState() == State.PlatformStarted) {
       <span class="comment">// do some work as soon as the platform has been started completely</span>
     }
   }
@@ -858,7 +858,7 @@ table.CodeRay td.code>pre{padding:0}
          <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">RegisterBeansListener</span> <span class="directive">implements</span> IPlatformListener {
   <span class="annotation">@Override</span>
   <span class="directive">public</span> <span class="type">void</span> stateChanged(PlatformEvent event) {
-    <span class="keyword">if</span> (event.getState() == IPlatform.State.BeanManagerPrepared) {
+    <span class="keyword">if</span> (event.getState() == State.BeanManagerPrepared) {
       <span class="comment">// register the class directly</span>
       BEANS.getBeanManager().registerClass(BeanSingletonClass.class);
       <span class="comment">// Or register with meta information</span>
@@ -1726,7 +1726,7 @@ TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="cont
       </div>
       <div class="listingblock">
        <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">LanguageLookupCall</span> <span class="directive">extends</span> LookupCall&lt;<span class="predefined-type">String</span>&gt; <span class="directive">implements</span> ILookupCall&lt;<span class="predefined-type">String</span>&gt; {
+        <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">LanguageLookupCall</span> <span class="directive">extends</span> LookupCall&lt;<span class="predefined-type">String</span>&gt; {
   <span class="comment">// other stuff like serialVersionUID, Lookup Service definition...</span>
   <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="type">long</span> serialVersionUID = <span class="integer">1L</span>;
   <span class="directive">private</span> <span class="predefined-type">Date</span> m_validityFrom;
@@ -1773,7 +1773,7 @@ TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="cont
     LanguageLookupCall c = (LanguageLookupCall) call;
     <span class="predefined-type">Date</span> validityFrom = c.getValidityFrom();
     <span class="predefined-type">Date</span> validityTo = c.getValidityTo();
-    <span class="predefined-type">List</span>&lt;? <span class="directive">extends</span> ILookupRow&lt;<span class="predefined-type">String</span>&gt;&gt; result = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;ILookupRow&lt;<span class="predefined-type">String</span>&gt;&gt;();
+    <span class="predefined-type">List</span>&lt;? <span class="directive">extends</span> ILookupRow&lt;<span class="predefined-type">String</span>&gt;&gt; result = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
     <span class="comment">//compute result: corresponding lookup rows (depending on validityFrom and validityTo).</span>
     <span class="keyword">return</span> result;
   }</code></pre>
@@ -2208,7 +2208,7 @@ TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="cont
        </div>
        <div class="content">
         <pre class="CodeRay highlight"><code data-lang="java"><span class="exception">Exception</span> e = <span class="keyword">new</span> <span class="exception">Exception</span>();
-org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());
+<span class="predefined-type">Logger</span> logger = LoggerFactory.getLogger(getClass());
 <span class="comment">// Log a message</span>
 logger.error(<span class="string"><span class="delimiter">"</span><span class="content">Failed to persist data</span><span class="delimiter">"</span></span>);
 <span class="comment">// Log a message with exception</span>
@@ -2331,11 +2331,9 @@ logger.error(<span class="string"><span class="delimiter">"</span><span class="c
        </div>
        <div class="content">
         <pre class="CodeRay highlight"><code data-lang="java">IJobManager jobManager = BEANS.get(IJobManager.class); <i class="conum" data-value="1"></i><b>(1)</b>
-jobManager.schedule(<span class="keyword">new</span> IRunnable() { <i class="conum" data-value="2"></i><b>(2)</b>
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
+<i class="conum" data-value="2"></i><b>(2)</b>
+jobManager.schedule(() -&gt; {
+  <span class="comment">// do something</span>
 }, BEANS.get(JobInput.class)); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
        </div>
       </div>
@@ -2365,11 +2363,8 @@ jobManager.schedule(<span class="keyword">new</span> IRunnable() { <i class="con
         Listing 24. Schedule a job via Jobs helper class
        </div>
        <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
+        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(() -&gt; {
+  <span class="comment">// do something</span>
 }, Jobs.newInput());</code></pre>
        </div>
       </div>
@@ -2384,11 +2379,8 @@ jobManager.schedule(<span class="keyword">new</span> IRunnable() { <i class="con
         Listing 25. Schedule a job and control execution via JobInput
        </div>
        <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// do something</span>
-  }
+        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(() -&gt; {
+  <span class="comment">// do something</span>
 }, Jobs.newInput()
     .withName(<span class="string"><span class="delimiter">"</span><span class="content">job name</span><span class="delimiter">"</span></span>) <i class="conum" data-value="1"></i><b>(1)</b>
     .withRunContext(ClientRunContexts.copyCurrent()) <i class="conum" data-value="2"></i><b>(2)</b>
@@ -2509,11 +2501,9 @@ Jobs.newInput()
         <div class="content">
          <pre class="CodeRay highlight"><code data-lang="java">IExecutionSemaphore semaphore = Jobs.newExecutionSemaphore(<span class="integer">5</span>); <i class="conum" data-value="1"></i><b>(1)</b>
 <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">0</span>; i &lt; <span class="integer">100</span>; i++) {
-  Jobs.schedule(<span class="keyword">new</span> IRunnable() { <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-      <span class="comment">// doing something</span>
-    }
+  <i class="conum" data-value="2"></i><b>(2)</b>
+  Jobs.schedule(() -&gt; {
+    <span class="comment">// doing something</span>
   }, Jobs.newInput()
       .withName(<span class="string"><span class="delimiter">"</span><span class="content">job-{}</span><span class="delimiter">"</span></span>, i)
       .withExecutionSemaphore(semaphore)); <i class="conum" data-value="3"></i><b>(3)</b>
@@ -2898,12 +2888,9 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
     .andMatchEventType(JobEventType.JOB_STATE_CHANGED)
     .andMatchState(<span class="predefined-type">JobState</span>.RUNNING)
     .andMatch(<span class="keyword">new</span> SessionJobEventFilter(ISession.CURRENT.get()))
-    .toFilter(), <span class="keyword">new</span> IJobListener() {
-      <span class="annotation">@Override</span>
-      <span class="directive">public</span> <span class="type">void</span> changed(JobEvent event) {
-        IFuture&lt;?&gt; future = event.getData().getFuture(); <i class="conum" data-value="2"></i><b>(2)</b>
-        <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">"</span><span class="content">Job commences execution: </span><span class="delimiter">"</span></span> + future.getJobInput().getName());
-      }
+    .toFilter(), event -&gt; {
+      IFuture&lt;?&gt; future = event.getData().getFuture(); <i class="conum" data-value="2"></i><b>(2)</b>
+      <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">"</span><span class="content">Job commences execution: </span><span class="delimiter">"</span></span> + future.getJobInput().getName());
     });</code></pre>
        </div>
       </div>
@@ -2932,12 +2919,7 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
         <pre class="CodeRay highlight"><code data-lang="java">future.addListener(Jobs.newEventFilterBuilder()
     .andMatchEventType(JobEventType.JOB_STATE_CHANGED)
     .andMatchState(<span class="predefined-type">JobState</span>.RUNNING)
-    .toFilter(), <span class="keyword">new</span> IJobListener() {
-      <span class="annotation">@Override</span>
-      <span class="directive">public</span> <span class="type">void</span> changed(JobEvent event) {
-        <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">"</span><span class="content">Job commences execution</span><span class="delimiter">"</span></span>);
-      }
-    });</code></pre>
+    .toFilter(), event -&gt; <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">"</span><span class="content">Job commences execution</span><span class="delimiter">"</span></span>));</code></pre>
        </div>
       </div>
      </div>
@@ -2965,12 +2947,9 @@ future.cancel(<span class="predefined-constant">false</span>);</code></pre>
          Listing 35. Examples of how to await done state on a future
         </div>
         <div class="content">
-         <pre class="CodeRay highlight"><code data-lang="java">IFuture&lt;<span class="predefined-type">String</span>&gt; future = Jobs.schedule(<span class="keyword">new</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">String</span>&gt;() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="predefined-type">String</span> call() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// doing something</span>
-    <span class="keyword">return</span> <span class="string"><span class="delimiter">"</span><span class="content">computation result</span><span class="delimiter">"</span></span>;
-  }
+         <pre class="CodeRay highlight"><code data-lang="java">IFuture&lt;<span class="predefined-type">String</span>&gt; future = Jobs.schedule(() -&gt; {
+  <span class="comment">// doing something</span>
+  <span class="keyword">return</span> <span class="string"><span class="delimiter">"</span><span class="content">computation result</span><span class="delimiter">"</span></span>;
 }, Jobs.newInput());
 <span class="comment">// Wait until done without consuming the result</span>
 future.awaitDone(); <i class="conum" data-value="1"></i><b>(1)</b>
@@ -3021,11 +3000,8 @@ result = future.awaitDoneAndGet(<span class="integer">10</span>, <span class="pr
          Listing 36. Example of when-done callback
         </div>
         <div class="content">
-         <pre class="CodeRay highlight"><code data-lang="java">future.whenDone(<span class="keyword">new</span> IDoneHandler&lt;<span class="predefined-type">String</span>&gt;() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> onDone(DoneEvent&lt;<span class="predefined-type">String</span>&gt; event) {
-    <span class="comment">// invoked upon entering done state.</span>
-  }
+         <pre class="CodeRay highlight"><code data-lang="java">future.whenDone(event -&gt; {
+  <span class="comment">// invoked upon entering done state.</span>
 }, ClientRunContexts.copyCurrent());</code></pre>
         </div>
        </div>
@@ -3043,12 +3019,9 @@ result = future.awaitDoneAndGet(<span class="integer">10</span>, <span class="pr
          Listing 37. Examples of how to await finished state on a future
         </div>
         <div class="content">
-         <pre class="CodeRay highlight"><code data-lang="java">IFuture&lt;<span class="predefined-type">String</span>&gt; future = Jobs.schedule(<span class="keyword">new</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">String</span>&gt;() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="predefined-type">String</span> call() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// doing something</span>
-    <span class="keyword">return</span> <span class="string"><span class="delimiter">"</span><span class="content">computation result</span><span class="delimiter">"</span></span>;
-  }
+         <pre class="CodeRay highlight"><code data-lang="java">IFuture&lt;<span class="predefined-type">String</span>&gt; future = Jobs.schedule(() -&gt; {
+  <span class="comment">// doing something</span>
+  <span class="keyword">return</span> <span class="string"><span class="delimiter">"</span><span class="content">computation result</span><span class="delimiter">"</span></span>;
 }, Jobs.newInput());
 <span class="comment">// Wait until finished</span>
 future.awaitFinished(<span class="integer">10</span>, <span class="predefined-type">TimeUnit</span>.SECONDS);</code></pre>
@@ -3174,12 +3147,9 @@ future.awaitDone();</code></pre>
 <span class="comment">// Schedule a long running operation.</span>
 IFuture&lt;<span class="predefined-type">Void</span>&gt; future = Jobs.schedule(<span class="keyword">new</span> LongRunningOperation(), Jobs.newInput());
 <span class="comment">// Register done callback to unblock the condition.</span>
-future.whenDone(<span class="keyword">new</span> IDoneHandler&lt;<span class="predefined-type">Void</span>&gt;() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> onDone(DoneEvent&lt;<span class="predefined-type">Void</span>&gt; event) {
-    <span class="comment">// Let the waiting job re-acquire a permit and continue execution.</span>
-    operationCompleted.setBlocking(<span class="predefined-constant">false</span>);
-  }
+future.whenDone(event -&gt; {
+  <span class="comment">// Let the waiting job re-acquire a permit and continue execution.</span>
+  operationCompleted.setBlocking(<span class="predefined-constant">false</span>);
 }, <span class="predefined-constant">null</span>);
 <span class="comment">// Wait until done. Thereby, the permit of the current job is released for the time while waiting.</span>
 operationCompleted.waitForUninterruptibly();</code></pre>
@@ -3245,11 +3215,9 @@ operationCompleted.waitForUninterruptibly();</code></pre>
         Listing 40. Running work in model thread
        </div>
        <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="java">ModelJobs.schedule(<span class="keyword">new</span> IRunnable() { <i class="conum" data-value="1"></i><b>(1)</b>
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// doing something in model thread</span>
-  }
+        <pre class="CodeRay highlight"><code data-lang="java"><i class="conum" data-value="1"></i><b>(1)</b>
+ModelJobs.schedule(() -&gt; {
+  <span class="comment">// doing something in model thread</span>
 }, ModelJobs.newInput(ClientRunContexts.copyCurrent()) <i class="conum" data-value="2"></i><b>(2)</b>
     .withName(<span class="string"><span class="delimiter">"</span><span class="content">Doing something in model thread</span><span class="delimiter">"</span></span>));</code></pre>
        </div>
@@ -3358,11 +3326,8 @@ ModelJobs.yield();</code></pre>
         Listing 41. Schedule a one-shot job
        </div>
        <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// doing something</span>
-  }
+        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(() -&gt; {
+  <span class="comment">// doing something</span>
 }, Jobs.newInput()
     .withName(<span class="string"><span class="delimiter">"</span><span class="content">Running once</span><span class="delimiter">"</span></span>)
     .withRunContext(ClientRunContexts.copyCurrent()));</code></pre>
@@ -3373,11 +3338,8 @@ ModelJobs.yield();</code></pre>
         Listing 42. Schedule a job with a delay
        </div>
        <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// doing something</span>
-  }
+        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(() -&gt; {
+  <span class="comment">// doing something</span>
 }, Jobs.newInput()
     .withName(<span class="string"><span class="delimiter">"</span><span class="content">Running in 10 seconds</span><span class="delimiter">"</span></span>)
     .withRunContext(ClientRunContexts.copyCurrent())
@@ -3390,11 +3352,8 @@ ModelJobs.yield();</code></pre>
         Listing 43. Schedule a repetitive job at a fixed rate
        </div>
        <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// doing something</span>
-  }
+        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(() -&gt; {
+  <span class="comment">// doing something</span>
 }, Jobs.newInput()
     .withName(<span class="string"><span class="delimiter">"</span><span class="content">Running every minute</span><span class="delimiter">"</span></span>)
     .withRunContext(ClientRunContexts.copyCurrent())
@@ -3432,11 +3391,8 @@ ModelJobs.yield();</code></pre>
         Listing 44. Schedule a repetitive job which runs 60 times at every minute
        </div>
        <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// doing something</span>
-  }
+        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(() -&gt; {
+  <span class="comment">// doing something</span>
 }, Jobs.newInput()
     .withName(<span class="string"><span class="delimiter">"</span><span class="content">Running every minute for total 60 times</span><span class="delimiter">"</span></span>)
     .withRunContext(ClientRunContexts.copyCurrent())
@@ -3474,11 +3430,8 @@ ModelJobs.yield();</code></pre>
         Listing 45. Schedule a repetitive job at a fixed delay
        </div>
        <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// doing something</span>
-  }
+        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(() -&gt; {
+  <span class="comment">// doing something</span>
 }, Jobs.newInput()
     .withName(<span class="string"><span class="delimiter">"</span><span class="content">Running forever with a delay of 1 minute between the termination of the previous and the next execution</span><span class="delimiter">"</span></span>)
     .withRunContext(ClientRunContexts.copyCurrent())
@@ -3506,11 +3459,8 @@ ModelJobs.yield();</code></pre>
         Listing 46. Schedule a repetitive job which runs 60 times, but waits 1 minute between the termination of the previous and the commencement of the next execution
        </div>
        <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// doing something</span>
-  }
+        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(() -&gt; {
+  <span class="comment">// doing something</span>
 }, Jobs.newInput()
     .withName(<span class="string"><span class="delimiter">"</span><span class="content">Running 60 times with a delay of 1 minute between the termination of the previous and the next execution</span><span class="delimiter">"</span></span>)
     .withRunContext(ClientRunContexts.copyCurrent())
@@ -3538,11 +3488,8 @@ ModelJobs.yield();</code></pre>
         Listing 47. Running at 10:15am every Monday, Tuesday, Wednesday, Thursday and Friday
        </div>
        <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// doing something</span>
-  }
+        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(() -&gt; {
+  <span class="comment">// doing something</span>
 }, Jobs.newInput()
     .withName(<span class="string"><span class="delimiter">"</span><span class="content">Running at 10:15am every Monday, Tuesday, Wednesday, Thursday and Friday</span><span class="delimiter">"</span></span>)
     .withRunContext(ClientRunContexts.copyCurrent())
@@ -3565,11 +3512,8 @@ ModelJobs.yield();</code></pre>
         Listing 48. Running every minute starting at 14:00 and ending at 14:05, every day
        </div>
        <div class="content">
-        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// doing something</span>
-  }
+        <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(() -&gt; {
+  <span class="comment">// doing something</span>
 }, Jobs.newInput()
     .withName(<span class="string"><span class="delimiter">"</span><span class="content">Running every minute starting at 14:00 and ending at 14:05, every day</span><span class="delimiter">"</span></span>)
     .withRunContext(ClientRunContexts.copyCurrent())
@@ -3594,11 +3538,8 @@ ModelJobs.yield();</code></pre>
        <div class="content">
         <pre class="CodeRay highlight"><code data-lang="java">IExecutionSemaphore semaphore = Jobs.newExecutionSemaphore(<span class="integer">5</span>); <i class="conum" data-value="1"></i><b>(1)</b>
 <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">0</span>; i &lt; <span class="integer">100</span>; i++) {
-  Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-      <span class="comment">// doing something</span>
-    }
+  Jobs.schedule(() -&gt; {
+    <span class="comment">// doing something</span>
   }, Jobs.newInput()
       .withName(<span class="string"><span class="delimiter">"</span><span class="content">job-{}</span><span class="delimiter">"</span></span>, i)
       .withExecutionSemaphore(semaphore)); <i class="conum" data-value="2"></i><b>(2)</b>
@@ -3660,12 +3601,9 @@ ModelJobs.yield();</code></pre>
 <span class="comment">// Schedule a long running operation.</span>
 IFuture&lt;<span class="predefined-type">Void</span>&gt; future = Jobs.schedule(<span class="keyword">new</span> LongRunningOperation(), Jobs.newInput());
 <span class="comment">// Register done callback to unblock the condition.</span>
-future.whenDone(<span class="keyword">new</span> IDoneHandler&lt;<span class="predefined-type">Void</span>&gt;() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> onDone(DoneEvent&lt;<span class="predefined-type">Void</span>&gt; event) {
-    <span class="comment">// Let the waiting job re-acquire a permit and continue execution.</span>
-    operationCompleted.setBlocking(<span class="predefined-constant">false</span>);
-  }
+future.whenDone(event -&gt; {
+  <span class="comment">// Let the waiting job re-acquire a permit and continue execution.</span>
+  operationCompleted.setBlocking(<span class="predefined-constant">false</span>);
 }, <span class="predefined-constant">null</span>);
 <span class="comment">// Wait until done. Thereby, the permit of the current job is released for the time while waiting.</span>
 operationCompleted.waitForUninterruptibly();</code></pre>
@@ -3703,16 +3641,14 @@ operationCompleted.waitForUninterruptibly();</code></pre>
         <pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Subject</span> subject = <span class="keyword">new</span> <span class="predefined-type">Subject</span>(); <i class="conum" data-value="1"></i><b>(1)</b>
 subject.getPrincipals().add(<span class="keyword">new</span> SimplePrincipal(<span class="string"><span class="delimiter">"</span><span class="content">john</span><span class="delimiter">"</span></span>));
 subject.setReadOnly();
+<i class="conum" data-value="2"></i><b>(2)</b>
 RunContexts.empty()
     .withSubject(subject)
     .withLocale(<span class="predefined-type">Locale</span>.US)
-    .run(<span class="keyword">new</span> IRunnable() { <i class="conum" data-value="2"></i><b>(2)</b>
-      <span class="annotation">@Override</span>
-      <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-        <span class="comment">// run some code </span><i class="conum" data-value="3"></i><b>(3)</b>
-        <span class="predefined-type">System</span>.out.println(NlsLocale.CURRENT.get()); <span class="comment">// &gt; Locale.US</span>
-        <span class="predefined-type">System</span>.out.println(<span class="predefined-type">Subject</span>.getSubject(<span class="predefined-type">AccessController</span>.getContext())); <span class="comment">// &gt; john</span>
-      }
+    .run(() -&gt; {
+      <span class="comment">// run some code </span><i class="conum" data-value="3"></i><b>(3)</b>
+      <span class="predefined-type">System</span>.out.println(NlsLocale.CURRENT.get()); <span class="comment">// &gt; Locale.US</span>
+      <span class="predefined-type">System</span>.out.println(<span class="predefined-type">Subject</span>.getSubject(<span class="predefined-type">AccessController</span>.getContext())); <span class="comment">// &gt; john</span>
     });</code></pre>
        </div>
       </div>
@@ -3745,11 +3681,8 @@ RunContexts.empty()
        <div class="content">
         <pre class="CodeRay highlight"><code data-lang="java">RunContexts.copyCurrent()
     .withLocale(<span class="predefined-type">Locale</span>.US)
-    .run(<span class="keyword">new</span> IRunnable() {
-      <span class="annotation">@Override</span>
-      <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-        <span class="comment">// run some code</span>
-      }
+    .run(() -&gt; {
+      <span class="comment">// run some code</span>
     });</code></pre>
        </div>
       </div>
@@ -4152,16 +4085,13 @@ cs.reloadCodeType(UiThemeCodeType.class);
         <div class="content">
          <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
 <span class="directive">public</span> <span class="type">void</span> handleNotification(<span class="directive">final</span> MessageNotification notification) {
-  ModelJobs.schedule(<span class="keyword">new</span> IRunnable() {
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-      UserNodePage userPage = getUserNodePage();
-      <span class="predefined-type">String</span> buddy = notification.getSenderName();
-      <span class="keyword">if</span> (userPage != <span class="predefined-constant">null</span>) {
-        ChatForm form = userPage.getChatForm(buddy);
-        <span class="keyword">if</span> (form != <span class="predefined-constant">null</span>) {
-          form.getHistoryField().addMessage(<span class="predefined-constant">false</span>, buddy, form.getUserName(), <span class="keyword">new</span> <span class="predefined-type">Date</span>(), notification.getMessage());
-        }
+  ModelJobs.schedule(() -&gt; {
+    UserNodePage userPage = getUserNodePage();
+    <span class="predefined-type">String</span> buddy = notification.getSenderName();
+    <span class="keyword">if</span> (userPage != <span class="predefined-constant">null</span>) {
+      ChatForm form = userPage.getChatForm(buddy);
+      <span class="keyword">if</span> (form != <span class="predefined-constant">null</span>) {
+        form.getHistoryField().addMessage(<span class="predefined-constant">false</span>, buddy, form.getUserName(), <span class="keyword">new</span> <span class="predefined-type">Date</span>(), notification.getMessage());
       }
     }
   }, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
@@ -4296,12 +4226,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
          Listing 61. Register extension for NameField
         </div>
         <div class="content">
-         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(<span class="keyword">new</span> IRunnable() {
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    BEANS.get(IExtensionRegistry.class).register(NameFieldExtension.class);
-  }
-}, Jobs.newInput()
+         <pre class="CodeRay highlight"><code data-lang="java">Jobs.schedule(() -&gt; BEANS.get(IExtensionRegistry.class).register(NameFieldExtension.class), Jobs.newInput()
     .withRunContext(ClientRunContexts.copyCurrent())
     .withName(<span class="string"><span class="delimiter">"</span><span class="content">register extension</span><span class="delimiter">"</span></span>));</code></pre>
         </div>
@@ -4329,7 +4254,7 @@ cs.reloadCodeType(UiThemeCodeType.class);
        <div class="content">
         <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/** * Extension for the MainBox of the PersonForm */</span>
 <span class="annotation">@Data</span>(PersonFormMainBoxExtensionData.class)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">PersonFormMainBoxExtension</span> <span class="directive">extends</span> AbstractGroupBoxExtension&lt;PersonForm.MainBox&gt; {
+<span class="directive">public</span> <span class="type">class</span> <span class="class">PersonFormMainBoxExtension</span> <span class="directive">extends</span> AbstractGroupBoxExtension&lt;MainBox&gt; {
   <span class="directive">public</span> PersonFormMainBoxExtension(MainBox ownerBox) {
     <span class="local-variable">super</span>(ownerBox);
   }
@@ -4420,7 +4345,7 @@ c.getSalary().setValue(<span class="keyword">new</span> <span class="predefined-
   <span class="directive">public</span> <span class="type">void</span> testMethod() {
     MessageBoxes.create().withHeader(<span class="string"><span class="delimiter">"</span><span class="content">Extension method test</span><span class="delimiter">"</span></span>).withBody(<span class="string"><span class="delimiter">"</span><span class="content">A method from the form extension was called</span><span class="delimiter">"</span></span>).show();
   }
-  <span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">NewFormHandlerExtension</span> <span class="directive">extends</span> AbstractFormHandlerExtension&lt;PersonForm.NewHandler&gt; {
+  <span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">NewFormHandlerExtension</span> <span class="directive">extends</span> AbstractFormHandlerExtension&lt;NewHandler&gt; {
     <span class="directive">public</span> NewFormHandlerExtension(NewHandler owner) {
       <span class="local-variable">super</span>(owner);
     }
@@ -5966,7 +5891,7 @@ protected void execInitField() {
     portName = <span class="string"><span class="delimiter">"</span><span class="content">PingWebServicePort</span><span class="delimiter">"</span></span>)
 <span class="annotation">@MTOM</span>
 <span class="annotation">@HandlerChain</span>(file = <span class="string"><span class="delimiter">"</span><span class="content">PingWebServiceEntryPoint_handler-chain.xml</span><span class="delimiter">"</span></span>)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">PingWebServiceEntryPoint</span> <span class="directive">implements</span> org.eclipse.scout.docs.snippets.JaxWsSnippet.PingWebServicePortType {</code></pre>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">PingWebServiceEntryPoint</span> <span class="directive">implements</span> PingWebServicePortType {</code></pre>
         </div>
        </div>
       </div>
@@ -6780,8 +6705,9 @@ port.ping(<span class="string"><span class="delimiter">"</span><span class="cont
        <h4 id="PingWebServicePortType.java"><a class="anchor" href="#PingWebServicePortType.java"></a>16.8.2. PingWebServicePortType.java</h4>
        <div class="listingblock">
         <div class="content">
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@WebService</span>(name = <span class="string"><span class="delimiter">"</span><span class="content">PingWebServicePortType</span><span class="delimiter">"</span></span>, targetNamespace = <span class="string"><span class="delimiter">"</span><span class="content">http://scout.eclipse.org/docs/ws/PingWebService/</span><span class="delimiter">"</span></span>)
-<span class="annotation">@SOAPBinding</span>(parameterStyle = SOAPBinding.ParameterStyle.BARE)
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@FunctionalInterface</span>
+<span class="annotation">@WebService</span>(name = <span class="string"><span class="delimiter">"</span><span class="content">PingWebServicePortType</span><span class="delimiter">"</span></span>, targetNamespace = <span class="string"><span class="delimiter">"</span><span class="content">http://scout.eclipse.org/docs/ws/PingWebService/</span><span class="delimiter">"</span></span>)
+<span class="annotation">@SOAPBinding</span>(parameterStyle = ParameterStyle.BARE)
 <span class="directive">public</span> <span class="type">interface</span> <span class="class">PingWebServicePortType</span> {
   <span class="annotation">@WebMethod</span>(action = <span class="string"><span class="delimiter">"</span><span class="content">http://scout.eclipse.org/docs/ws/PingWebService/ping</span><span class="delimiter">"</span></span>)
   <span class="annotation">@WebResult</span>(name = <span class="string"><span class="delimiter">"</span><span class="content">pingResponse</span><span class="delimiter">"</span></span>, targetNamespace = <span class="string"><span class="delimiter">"</span><span class="content">http://scout.eclipse.org/docs/ws/PingWebService/</span><span class="delimiter">"</span></span>, partName = <span class="string"><span class="delimiter">"</span><span class="content">parameters</span><span class="delimiter">"</span></span>)

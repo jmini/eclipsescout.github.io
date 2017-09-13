@@ -2472,7 +2472,7 @@ scout.application.version=1.0.0-SNAPSHOT
         </div>
         <div class="content">
          <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@PageData</span>(PersonTablePageData.class)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">PersonTablePage</span> <span class="directive">extends</span> AbstractPageWithTable&lt;PersonTablePage.Table&gt; {
+<span class="directive">public</span> <span class="type">class</span> <span class="class">PersonTablePage</span> <span class="directive">extends</span> AbstractPageWithTable&lt;Table&gt; {
   <span class="annotation">@Override</span>
   <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredTitle() {
     <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Persons</span><span class="delimiter">"</span></span>); <i class="conum" data-value="1"></i><b>(1)</b>
@@ -2795,7 +2795,7 @@ scout.application.version=1.0.0-SNAPSHOT
         </div>
         <div class="content">
          <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@PageData</span>(OrganizationTablePageData.class)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">OrganizationTablePage</span> <span class="directive">extends</span> AbstractPageWithTable&lt;OrganizationTablePage.Table&gt; {
+<span class="directive">public</span> <span class="type">class</span> <span class="class">OrganizationTablePage</span> <span class="directive">extends</span> AbstractPageWithTable&lt;Table&gt; {
   <span class="annotation">@Override</span>
   <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredTitle() {
     <span class="keyword">return</span> TEXTS.get(<span class="string"><span class="delimiter">"</span><span class="content">Organizations</span><span class="delimiter">"</span></span>); <i class="conum" data-value="1"></i><b>(1)</b>
@@ -3235,15 +3235,12 @@ contacts.superuser=system</code></pre>
   <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">Logger</span> LOG = LoggerFactory.getLogger(DatabaseSetupService.class);
   <span class="annotation">@PostConstruct</span>
   <span class="directive">public</span> <span class="type">void</span> autoCreateDatabase() {
-    <span class="keyword">if</span> (CONFIG.getPropertyValue(DatabaseProperties.DatabaseAutoCreateProperty.class)) {
+    <span class="keyword">if</span> (CONFIG.getPropertyValue(DatabaseAutoCreateProperty.class)) {
       <span class="keyword">try</span> {
         RunContext context = BEANS.get(SuperUserRunContextProducer.class).produce();
-        IRunnable runnable = <span class="keyword">new</span> IRunnable() {
-          <span class="annotation">@Override</span>
-          <span class="directive">public</span> <span class="type">void</span> run() <span class="directive">throws</span> <span class="exception">Exception</span> {
-            createOrganizationTable();
-            createPersonTable();
-          }
+        IRunnable runnable = () -&gt; {
+          createOrganizationTable();
+          createPersonTable();
         };
         context.run(runnable);
       }
@@ -3256,7 +3253,7 @@ contacts.superuser=system</code></pre>
     <span class="keyword">if</span> (!getExistingTables().contains(<span class="string"><span class="delimiter">"</span><span class="content">ORGANIZATION</span><span class="delimiter">"</span></span>)) {
       SQL.insert(SQLs.ORGANIZATION_CREATE_TABLE);
       LOG.info(<span class="string"><span class="delimiter">"</span><span class="content">Database table 'ORGANIZATION' created</span><span class="delimiter">"</span></span>);
-      <span class="keyword">if</span> (CONFIG.getPropertyValue(DatabaseProperties.DatabaseAutoPopulateProperty.class)) {
+      <span class="keyword">if</span> (CONFIG.getPropertyValue(DatabaseAutoPopulateProperty.class)) {
         SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE + SQLs.ORGANIZATION_VALUES_01);
         SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE + SQLs.ORGANIZATION_VALUES_02);
         LOG.info(<span class="string"><span class="delimiter">"</span><span class="content">Database table 'ORGANIZATION' populated with sample data</span><span class="delimiter">"</span></span>);
@@ -3267,7 +3264,7 @@ contacts.superuser=system</code></pre>
     <span class="keyword">if</span> (!getExistingTables().contains(<span class="string"><span class="delimiter">"</span><span class="content">PERSON</span><span class="delimiter">"</span></span>)) {
       SQL.insert(SQLs.PERSON_CREATE_TABLE);
       LOG.info(<span class="string"><span class="delimiter">"</span><span class="content">Database table 'PERSON' created</span><span class="delimiter">"</span></span>);
-      <span class="keyword">if</span> (CONFIG.getPropertyValue(DatabaseProperties.DatabaseAutoPopulateProperty.class)) {
+      <span class="keyword">if</span> (CONFIG.getPropertyValue(DatabaseAutoPopulateProperty.class)) {
         SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_01);
         SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_02);
         LOG.info(<span class="string"><span class="delimiter">"</span><span class="content">Database table 'PERSON' populated with sample data</span><span class="delimiter">"</span></span>);
@@ -3636,7 +3633,7 @@ contacts.superuser=system</code></pre>
          Listing 26. Add getConfiguredDisplayHint and the methods related to the person&#x2019;s primary key.
         </div>
         <div class="content">
-         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@FormData</span>(value = PersonFormData.class, sdkCommand = FormData.SdkCommand.CREATE) <i class="conum" data-value="1"></i><b>(1)</b>
+         <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@FormData</span>(value = PersonFormData.class, sdkCommand = SdkCommand.CREATE) <i class="conum" data-value="1"></i><b>(1)</b>
 <span class="directive">public</span> <span class="type">class</span> <span class="class">PersonForm</span> <span class="directive">extends</span> AbstractForm {
   <span class="comment">// represents the person's primary key</span>
   <span class="directive">private</span> <span class="predefined-type">String</span> personId;
@@ -3761,7 +3758,7 @@ contacts.superuser=system</code></pre>
         </div>
         <div class="content">
          <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@PageData</span>(PersonTablePageData.class)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">PersonTablePage</span> <span class="directive">extends</span> AbstractPageWithTable&lt;PersonTablePage.Table&gt; {
+<span class="directive">public</span> <span class="type">class</span> <span class="class">PersonTablePage</span> <span class="directive">extends</span> AbstractPageWithTable&lt;Table&gt; {
   <span class="directive">public</span> <span class="type">class</span> <span class="class">Table</span> <span class="directive">extends</span> AbstractTable {
     <span class="annotation">@Override</span>
     <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> IMenu&gt; getConfiguredDefaultMenu() { <i class="conum" data-value="1"></i><b>(1)</b>
@@ -4742,8 +4739,8 @@ contacts.superuser=system</code></pre>
         </div>
         <div class="content">
          <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@FormData</span>(value = AbstractUrlImageFieldData.class, <i class="conum" data-value="1"></i><b>(1)</b>
-    sdkCommand = FormData.SdkCommand.CREATE,
-    defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
+    sdkCommand = SdkCommand.CREATE,
+    defaultSubtypeSdkCommand = DefaultSubtypeSdkCommand.CREATE)
 <span class="directive">public</span> <span class="type">class</span> <span class="class">AbstractUrlImageField</span> <span class="directive">extends</span> AbstractImageField {
   <span class="directive">private</span> <span class="predefined-type">String</span> url; <i class="conum" data-value="2"></i><b>(2)</b>
   <span class="annotation">@FormData</span> <i class="conum" data-value="2"></i><b>(2)</b>
@@ -5574,7 +5571,7 @@ contacts.superuser=system</code></pre>
         </div>
         <div class="content">
          <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@PageData</span>(PersonTablePageData.class)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">PersonTablePage</span> <span class="directive">extends</span> AbstractPageWithTable&lt;PersonTablePage.Table&gt; {
+<span class="directive">public</span> <span class="type">class</span> <span class="class">PersonTablePage</span> <span class="directive">extends</span> AbstractPageWithTable&lt;Table&gt; {
   <span class="directive">private</span> <span class="predefined-type">String</span> organizationId; <i class="conum" data-value="1"></i><b>(1)</b>
   <span class="directive">public</span> <span class="predefined-type">String</span> getOrganizationId() {
     <span class="keyword">return</span> organizationId;
@@ -5702,7 +5699,7 @@ contacts.superuser=system</code></pre>
         </div>
         <div class="content">
          <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@PageData</span>(OrganizationTablePageData.class)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">OrganizationTablePage</span> <span class="directive">extends</span> AbstractPageWithTable&lt;OrganizationTablePage.Table&gt; {
+<span class="directive">public</span> <span class="type">class</span> <span class="class">OrganizationTablePage</span> <span class="directive">extends</span> AbstractPageWithTable&lt;Table&gt; {
   <span class="annotation">@Override</span>
   <span class="directive">protected</span> IPage&lt;?&gt; execCreateChildPage(ITableRow row) {
     OrganizationNodePage childPage = <span class="keyword">new</span> OrganizationNodePage();
