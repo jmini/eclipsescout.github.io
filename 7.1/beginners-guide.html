@@ -1602,9 +1602,6 @@ table.CodeRay td.code>pre{padding:0}
      </div>
      <div class="sect2">
       <h3 id="sec-sdk_nls"><a class="anchor" href="#sec-sdk_nls"></a>3.6. Scout NLS Tooling</h3>
-      <div class="paragraph">
-       <p>bla</p>
-      </div>
       <div class="sect3">
        <h4 id="sec-add_text_entry"><a class="anchor" href="#sec-add_text_entry"></a>3.6.1. Adding a new Translated Text Entry</h4>
        <div class="paragraph">
@@ -1786,11 +1783,23 @@ table.CodeRay td.code>pre{padding:0}
           <div class="ulist">
            <ul>
             <li> <p><code>Texts.properties</code> is the default language</p> </li>
-            <li> <p><code>Texts_de.properties</code> is for german</p> </li>
-            <li> <p><code>Texts_fr_BE</code> will be for french in Belgium</p> </li>
+            <li> <p><code>Texts_de.properties</code> is for German</p> </li>
+            <li> <p><code>Texts_fr_BE</code> will be for French in Belgium</p> </li>
            </ul>
           </div> </li>
         </ul>
+       </div>
+      </div>
+      <div class="sect3">
+       <h4 id="find-missing-nls-keys"><a class="anchor" href="#find-missing-nls-keys"></a>3.6.5. Find missing NLS Keys</h4>
+       <div class="paragraph">
+        <p>If NLS keys are used in the code that do not exist in a properties, file an ugly placeholder is displayed to the user. To find such missing translations the Menu <code>Scout &#x2192; Search missing text keys&#x2026;&#x200b;</code> may be handy. The result is listed in the Eclipse <code>Search</code> view.</p>
+       </div>
+       <div class="paragraph">
+        <p>The search also takes the scope of each NLS key into account. So that the key is considered to be available there must be a <code>TextProviderService</code> with that key on the classpath of that module.</p>
+       </div>
+       <div class="paragraph">
+        <p>Reported false positives can be suppressed using the following comment at the end of the corresponding line: <code>NO-NLS-CHECK</code>. Matches on that line are then not reported in future searches anymore.</p>
        </div>
       </div>
      </div>
