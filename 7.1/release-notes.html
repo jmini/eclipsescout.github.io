@@ -539,6 +539,7 @@ table.CodeRay td.code>pre{padding:0}
        <li><a href="#obtaining-the-latest-version">Obtaining the Latest Version</a></li>
       </ul> </li>
      <li><a href="#java-8-required">Java 8 required</a></li>
+     <li><a href="#new-sdk-feature-in-eclipse-search-for-missing-nls-keys">New SDK Feature in Eclipse: Search for missing NLS keys</a></li>
     </ul>
    </div>
   </div>
@@ -640,6 +641,20 @@ table.CodeRay td.code>pre{padding:0}
     <div class="sectionbody">
      <div class="paragraph">
       <p>The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout <em>Photon</em>, a Java 8 (or newer) runtime is required.</p>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="new-sdk-feature-in-eclipse-search-for-missing-nls-keys"><a class="anchor" href="#new-sdk-feature-in-eclipse-search-for-missing-nls-keys"></a>New SDK Feature in Eclipse: Search for missing NLS keys</h2>
+    <div class="sectionbody">
+     <div class="paragraph">
+      <p>If NLS keys are used in the code that do not exist in a properties file, an ugly placeholder is displayed to the user. To find such missing translations the new Menu <code>Scout &#x2192; Search missing text keys&#x2026;&#x200b;</code> may be handy. The result is listed in the Eclipse <code>Search</code> view.</p>
+     </div>
+     <div class="paragraph">
+      <p>The search also takes the scope of each NLS key into account. So that the key is considered to be available there must be a <code>TextProviderService</code> with that key on the classpath of that module.</p>
+     </div>
+     <div class="paragraph">
+      <p>Reported false positives can be suppressed using the following comment at the end of the corresponding line: <code>NO-NLS-CHECK</code>. Matches on that line are then not reported in future searches anymore.</p>
      </div>
      <div class="admonitionblock tip">
       <table>
