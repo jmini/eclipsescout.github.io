@@ -559,6 +559,7 @@ table.CodeRay td.code>pre{padding:0}
      <li><a href="#sorting-of-filter-table-since-7-0-100">Sorting of Filter Table (since 7.0.100)</a></li>
      <li><a href="#auto-optimize-column-width-since-7-0-100">Auto Optimize Column Width (since 7.0.100)</a></li>
      <li><a href="#new-property-for-request-timeout-since-7-0-100">New Property for Request Timeout (since 7.0.100)</a></li>
+     <li><a href="#minor-changes-for-http-abstraction-properties-since-7-0-100">Minor Changes for HTTP Abstraction Properties (since 7.0.100)</a></li>
     </ul>
    </div>
   </div>
@@ -602,24 +603,7 @@ table.CodeRay td.code>pre{padding:0}
          <li> <p><a href="#sorting-of-filter-table-since-7-0-100"><em>Sorting of Filter Table (since 7.0.100)</em></a></p> </li>
          <li> <p><a href="#auto-optimize-column-width-since-7-0-100"><em>Auto Optimize Column Width (since 7.0.100)</em></a></p> </li>
          <li> <p><a href="#new-property-for-request-timeout-since-7-0-100"><em>New Property for Request Timeout (since 7.0.100)</em></a></p> </li>
-        </ul>
-       </div>
-       <div class="ulist">
-        <ul>
-         <li> <p>Minor changes for HTTP abstraction properties.</p>
-          <div class="ulist">
-           <ul>
-            <li> <p>Existing configuration property classes have been bundled in two <code>org.eclipse.scout.rt.shared.http.HttpConfigurationProperties</code> and <code>org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnelConfigurationProperties</code> classes.</p> </li>
-            <li> <p>The configuration property <code>org.eclipse.scout.rt.servicetunnel.apache_connection_time_to_live</code> has been removed (<code>scout.http.apache_connection_time_to_live</code> is used instead).</p> </li>
-            <li> <p>New configuration properties have been added:</p>
-             <div class="ulist">
-              <ul>
-               <li> <p><code>scout.http.apache_keep_alive</code> (possible values: true/false), whether to use keep-alive connections. If property is not set the system property <code>http.keepAlive</code> is evaluated, if this system property is also not set true will be used as a last resort.</p> </li>
-               <li> <p><code>scout.http.apache_retry_post</code> (possible values: true/false), whether to retry HTTP POST requests. If not property is not set the system property <code>sun.net.http.retryPost</code> is evaluated, if this system property is also not set true will be used as a last resort.</p> </li>
-              </ul>
-             </div> </li>
-           </ul>
-          </div> </li>
+         <li> <p><a href="#minor-changes-for-http-abstraction-properties-since-7-0-100"><em>Minor Changes for HTTP Abstraction Properties (since 7.0.100)</em></a></p> </li>
         </ul>
        </div>
       </div>
@@ -971,6 +955,24 @@ table.CodeRay td.code>pre{padding:0}
     <div class="sectionbody">
      <div class="paragraph">
       <p>Every ui request schedules a model job to process the user interaction and waits for this job and other scheduled model jobs to complete. During that time the ui is blocked but the user may abort the processing manually by clicking cancel. If the user does not cancel it and it takes too long to complete the model jobs are now aborted automatically to free resources. The default is set to 1 hour but you may configure it by using the new property <code>scout.ui.model.jobs.await.timeout</code> (the unit is seconds). After the abortion a message box is displayed to the user saying the request timed out.</p>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="minor-changes-for-http-abstraction-properties-since-7-0-100"><a class="anchor" href="#minor-changes-for-http-abstraction-properties-since-7-0-100"></a>Minor Changes for HTTP Abstraction Properties (since 7.0.100)</h2>
+    <div class="sectionbody">
+     <div class="ulist">
+      <ul>
+       <li> <p>Existing configuration property classes have been bundled in two <code>org.eclipse.scout.rt.shared.http.HttpConfigurationProperties</code> and <code>org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnelConfigurationProperties</code> classes.</p> </li>
+       <li> <p>The configuration property <code>org.eclipse.scout.rt.servicetunnel.apache_connection_time_to_live</code> has been removed (<code>scout.http.apache_connection_time_to_live</code> is used instead).</p> </li>
+       <li> <p>New configuration properties have been added:</p>
+        <div class="ulist">
+         <ul>
+          <li> <p><code>scout.http.apache_keep_alive</code> (possible values: true/false), whether to use keep-alive connections. If property is not set the system property <code>http.keepAlive</code> is evaluated, if this system property is also not set true will be used as a last resort.</p> </li>
+          <li> <p><code>scout.http.apache_retry_post</code> (possible values: true/false), whether to retry HTTP POST requests. If not property is not set the system property <code>sun.net.http.retryPost</code> is evaluated, if this system property is also not set true will be used as a last resort.</p> </li>
+         </ul>
+        </div> </li>
+      </ul>
      </div>
      <div class="admonitionblock tip">
       <table>
