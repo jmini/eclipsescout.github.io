@@ -2243,12 +2243,20 @@ table.CodeRay td.code>pre{padding:0}
     <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredIconId() {
       <span class="keyword">return</span> AbstractIcons.Gear;
     }
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;OptionsForm&gt; getConfiguredForm() {
+      <span class="keyword">return</span> OptionsForm.class;
+    }
   }
   <span class="annotation">@Order</span>(<span class="integer">30</span>)
   <span class="directive">public</span> <span class="type">class</span> <span class="class">UserMenu</span> <span class="directive">extends</span> AbstractFormMenu&lt;UserForm&gt; { <i class="conum" data-value="2"></i><b>(2)</b>
     <span class="annotation">@Override</span>
     <span class="directive">protected</span> <span class="predefined-type">String</span> getConfiguredIconId() {
       <span class="keyword">return</span> AbstractIcons.Person;
+    }
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="predefined-type">Class</span>&lt;UserForm&gt; getConfiguredForm() {
+      <span class="keyword">return</span> UserForm.class;
     }
   }
 }</code></pre>
